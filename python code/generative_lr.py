@@ -82,7 +82,7 @@ Final self-check (before emitting):
 
 """
 
-def run_gpt_on_txt_files(folder_path, output_folder="/home/nata20034/workspace/llm_to_IR/chatGPT_api2/llm3_i/iii"):
+def run_gpt_on_txt_files(folder_path, output_folder="./"):
     os.makedirs(output_folder, exist_ok=True)
 
     for filename in os.listdir(folder_path):
@@ -100,7 +100,7 @@ def run_gpt_on_txt_files(folder_path, output_folder="/home/nata20034/workspace/l
                 model="gpt-5",   # gpt-5 사용
                 input=[
                     {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": file_content + error + "Convert it to IR in a way that the error does not occur."}
+                    {"role": "user", "content": file_content }
                 ]
             )
 
@@ -122,6 +122,6 @@ def run_gpt_on_txt_files(folder_path, output_folder="/home/nata20034/workspace/l
     print(f"\n모든 결과가 {output_folder} 폴더에 개별 .ll 파일로 저장되었습니다.")
 
 if __name__ == "__main__":
-    folder = "/home/nata20034/workspace/ida_disassemble/llm3_i"
+    folder = "/mnt/c/Users/EMSEC/Desktop/sieun/converet_to_IR_with_GPT/ida_disassemble/O0/original/1"
     error= """  """
     run_gpt_on_txt_files(folder)

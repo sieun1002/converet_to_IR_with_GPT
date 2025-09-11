@@ -4,7 +4,7 @@ import openai
 
 openai.api_key = ""
 
-def run_gpt_on_txt_files(folder_path, system_prompt, output_json="/home/nata20034/workspace/function_list/gpt/enc/enc_function.json"):
+def run_gpt_on_txt_files(folder_path, system_prompt, output_json="..//function_list/gpt/enc/enc_function.json"):
     results = {}
 
     for filename in os.listdir(folder_path):
@@ -17,7 +17,7 @@ def run_gpt_on_txt_files(folder_path, system_prompt, output_json="/home/nata2003
             print(f"Processing {filename} ...")
 
             response = openai.ChatCompletion.create(
-                model="gpt-5",   # 모델 이름 변경 가능
+                model="gpt-5",   
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": file_content}
@@ -37,7 +37,7 @@ def run_gpt_on_txt_files(folder_path, system_prompt, output_json="/home/nata2003
     print(f"\n✅ 모든 결과가 {output_json} 파일에 저장되었습니다.")
 
 if __name__ == "__main__":
-    folder = "/home/nata20034/workspace/function_list/ida/enc"  # txt 파일이 저장된 폴더 경로
+    folder = "../function_list/ida/enc"  # txt 파일이 저장된 폴더 경로
     system_prompt = '''Role
 Receive an IDA function list and select only the minimal set of internal functions required to emit IR. Output must be a JSON array of function names only—no extra text.
 
