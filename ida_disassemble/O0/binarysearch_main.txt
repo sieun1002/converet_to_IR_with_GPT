@@ -1,0 +1,68 @@
+; Function: main
+; Start: 0x1214, End: 0x132F
+
+0x00001214: endbr64
+0x00001218: push    rbp
+0x00001219: mov     rbp, rsp
+0x0000121C: sub     rsp, 60h
+0x00001220: mov     rax, fs:28h
+0x00001229: mov     [rbp+var_8], rax
+0x0000122D: xor     eax, eax
+0x0000122F: mov     [rbp+var_30], 0FFFFFFFBh
+0x00001236: mov     [rbp+var_2C], 0FFFFFFFFh
+0x0000123D: mov     [rbp+var_28], 0
+0x00001244: mov     [rbp+var_24], 2
+0x0000124B: mov     [rbp+var_20], 2
+0x00001252: mov     [rbp+var_1C], 3
+0x00001259: mov     [rbp+var_18], 7
+0x00001260: mov     [rbp+var_14], 9
+0x00001267: mov     [rbp+var_10], 0Ch
+0x0000126E: mov     [rbp+var_58], 9
+0x00001276: mov     [rbp+var_3C], 2
+0x0000127D: mov     [rbp+var_38], 5
+0x00001284: mov     [rbp+var_34], 0FFFFFFFBh
+0x0000128B: mov     [rbp+var_50], 3
+0x00001293: mov     [rbp+var_60], 0
+0x0000129B: jmp     short loc_130A
+loc_129D:
+0x0000129D: mov     rax, [rbp+var_60]
+0x000012A1: mov     edx, [rbp+rax*4+var_3C]
+0x000012A5: mov     rcx, [rbp+var_58]
+0x000012A9: lea     rax, [rbp+var_30]
+0x000012AD: mov     rsi, rcx
+0x000012B0: mov     rdi, rax
+0x000012B3: call    binary_search
+0x000012B8: mov     [rbp+var_48], rax
+0x000012BC: cmp     [rbp+var_48], 0
+0x000012C1: js      short loc_12E7
+0x000012C3: mov     rax, [rbp+var_60]
+0x000012C7: mov     eax, [rbp+rax*4+var_3C]
+0x000012CB: mov     rdx, [rbp+var_48]
+0x000012CF: mov     esi, eax
+0x000012D1: lea     rax, format; "key %d -> index %ld\n"
+0x000012D8: mov     rdi, rax; format
+0x000012DB: mov     eax, 0
+0x000012E0: call    _printf
+0x000012E5: jmp     short loc_1305
+loc_12E7:
+0x000012E7: mov     rax, [rbp+var_60]
+0x000012EB: mov     eax, [rbp+rax*4+var_3C]
+0x000012EF: mov     esi, eax
+0x000012F1: lea     rax, aKeyDNotFound; "key %d -> not found\n"
+0x000012F8: mov     rdi, rax; format
+0x000012FB: mov     eax, 0
+0x00001300: call    _printf
+loc_1305:
+0x00001305: add     [rbp+var_60], 1
+loc_130A:
+0x0000130A: mov     rax, [rbp+var_60]
+0x0000130E: cmp     rax, [rbp+var_50]
+0x00001312: jb      short loc_129D
+0x00001314: mov     eax, 0
+0x00001319: mov     rdx, [rbp+var_8]
+0x0000131D: sub     rdx, fs:28h
+0x00001326: jz      short locret_132D
+0x00001328: call    ___stack_chk_fail
+locret_132D:
+0x0000132D: leave
+0x0000132E: retn

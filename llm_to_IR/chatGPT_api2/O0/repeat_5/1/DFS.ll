@@ -1,0 +1,101 @@
+; ModuleID = 'main'
+target triple = "x86_64-unknown-linux-gnu"
+
+; Symbol: main  ; Address: 0x14AE
+; Intent: Build a 7x7 adjacency matrix for an undirected graph, run DFS preorder from node 0, and print the traversal (confidence=0.95). Evidence: 7*7 zero init and specific A[row*n+col]=1 writes; call dfs(adj,n,start,out,out_len) and print with "%zu%s".
+
+; Only the needed extern declarations:
+declare void @dfs(i32*, i64, i64, i64*, i64*)
+declare i32 @printf(i8*, ...)
+declare i32 @putchar(i32)
+
+@.str_hdr = private unnamed_addr constant [24 x i8] c"DFS preorder from %zu: \00"
+@.str_pair = private unnamed_addr constant [6 x i8] c"%zu%s\00"
+@.str_space = private unnamed_addr constant [2 x i8] c" \00"
+@.str_empty = private unnamed_addr constant [1 x i8] c"\00"
+
+define dso_local i32 @main(i32 %argc, i8** %argv) local_unnamed_addr {
+entry:
+  ; locals
+  %adj = alloca [49 x i32], align 16
+  %out = alloca [7 x i64], align 16
+  %out_len = alloca i64, align 8
+
+  ; n = 7, start = 0
+  %adj.base = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 0
+  %adj.i8 = bitcast i32* %adj.base to i8*
+  call void @llvm.memset.p0i8.i64(i8* %adj.i8, i8 0, i64 196, i1 false)
+
+  ; set adjacency matrix entries to 1
+  %p1 = getelementptr inbounds i32, i32* %adj.base, i64 1
+  store i32 1, i32* %p1, align 4
+  %p7 = getelementptr inbounds i32, i32* %adj.base, i64 7
+  store i32 1, i32* %p7, align 4
+  %p2 = getelementptr inbounds i32, i32* %adj.base, i64 2
+  store i32 1, i32* %p2, align 4
+  %p14 = getelementptr inbounds i32, i32* %adj.base, i64 14
+  store i32 1, i32* %p14, align 4
+  %p10 = getelementptr inbounds i32, i32* %adj.base, i64 10
+  store i32 1, i32* %p10, align 4
+  %p22 = getelementptr inbounds i32, i32* %adj.base, i64 22
+  store i32 1, i32* %p22, align 4
+  %p11 = getelementptr inbounds i32, i32* %adj.base, i64 11
+  store i32 1, i32* %p11, align 4
+  %p29 = getelementptr inbounds i32, i32* %adj.base, i64 29
+  store i32 1, i32* %p29, align 4
+  %p19 = getelementptr inbounds i32, i32* %adj.base, i64 19
+  store i32 1, i32* %p19, align 4
+  %p37 = getelementptr inbounds i32, i32* %adj.base, i64 37
+  store i32 1, i32* %p37, align 4
+  %p33 = getelementptr inbounds i32, i32* %adj.base, i64 33
+  store i32 1, i32* %p33, align 4
+  %p39 = getelementptr inbounds i32, i32* %adj.base, i64 39
+  store i32 1, i32* %p39, align 4
+  %p41 = getelementptr inbounds i32, i32* %adj.base, i64 41
+  store i32 1, i32* %p41, align 4
+  %p47 = getelementptr inbounds i32, i32* %adj.base, i64 47
+  store i32 1, i32* %p47, align 4
+
+  ; out_len = 0
+  store i64 0, i64* %out_len, align 8
+
+  ; call dfs(adj, 7, 0, out, &out_len)
+  %out.base = getelementptr inbounds [7 x i64], [7 x i64]* %out, i64 0, i64 0
+  call void @dfs(i32* %adj.base, i64 7, i64 0, i64* %out.base, i64* %out_len)
+
+  ; printf("DFS preorder from %zu: ", 0)
+  %fmt_hdr = getelementptr inbounds [24 x i8], [24 x i8]* @.str_hdr, i64 0, i64 0
+  %call_hdr = call i32 (i8*, ...) @printf(i8* %fmt_hdr, i64 0)
+
+  ; loop over out[0..out_len)
+  %len0 = load i64, i64* %out_len, align 8
+  br label %loop
+
+loop:
+  %i = phi i64 [ 0, %entry ], [ %i.next, %body ]
+  %len = phi i64 [ %len0, %entry ], [ %len, %body ]
+  %cmp = icmp ult i64 %i, %len
+  br i1 %cmp, label %body, label %done
+
+body:
+  %i1 = add i64 %i, 1
+  %has_more = icmp ult i64 %i1, %len
+  %space.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str_space, i64 0, i64 0
+  %empty.ptr = getelementptr inbounds [1 x i8], [1 x i8]* @.str_empty, i64 0, i64 0
+  %sep = select i1 %has_more, i8* %space.ptr, i8* %empty.ptr
+
+  %val.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %out, i64 0, i64 %i
+  %val = load i64, i64* %val.ptr, align 8
+
+  %fmt_pair = getelementptr inbounds [6 x i8], [6 x i8]* @.str_pair, i64 0, i64 0
+  %call_it = call i32 (i8*, ...) @printf(i8* %fmt_pair, i64 %val, i8* %sep)
+
+  %i.next = add i64 %i, 1
+  br label %loop
+
+done:
+  %nl = call i32 @putchar(i32 10)
+  ret i32 0
+}
+
+declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1 immarg) nounwind

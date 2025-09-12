@@ -1,0 +1,32 @@
+; Function: linear_search
+; Start: 0x1189, End: 0x11D7
+
+0x00001189: endbr64
+0x0000118D: push    rbp
+0x0000118E: mov     rbp, rsp
+0x00001191: mov     [rbp+var_18], rdi
+0x00001195: mov     [rbp+var_1C], esi
+0x00001198: mov     [rbp+var_20], edx
+0x0000119B: mov     [rbp+var_4], 0
+0x000011A2: jmp     short loc_11C8
+loc_11A4:
+0x000011A4: mov     eax, [rbp+var_4]
+0x000011A7: cdqe
+0x000011A9: lea     rdx, ds:0[rax*4]
+0x000011B1: mov     rax, [rbp+var_18]
+0x000011B5: add     rax, rdx
+0x000011B8: mov     eax, [rax]
+0x000011BA: cmp     [rbp+var_20], eax
+0x000011BD: jnz     short loc_11C4
+0x000011BF: mov     eax, [rbp+var_4]
+0x000011C2: jmp     short loc_11D5
+loc_11C4:
+0x000011C4: add     [rbp+var_4], 1
+loc_11C8:
+0x000011C8: mov     eax, [rbp+var_4]
+0x000011CB: cmp     eax, [rbp+var_1C]
+0x000011CE: jl      short loc_11A4
+0x000011D0: mov     eax, 0FFFFFFFFh
+loc_11D5:
+0x000011D5: pop     rbp
+0x000011D6: retn

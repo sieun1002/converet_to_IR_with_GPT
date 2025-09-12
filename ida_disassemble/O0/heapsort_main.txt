@@ -1,0 +1,75 @@
+; Function: main
+; Start: 0x144B, End: 0x1585
+
+0x0000144B: endbr64
+0x0000144F: push    rbp
+0x00001450: mov     rbp, rsp
+0x00001453: sub     rsp, 50h
+0x00001457: mov     rax, fs:28h
+0x00001460: mov     [rbp+var_8], rax
+0x00001464: xor     eax, eax
+0x00001466: mov     [rbp+var_30], 7
+0x0000146D: mov     [rbp+var_2C], 3
+0x00001474: mov     [rbp+var_28], 9
+0x0000147B: mov     [rbp+var_24], 1
+0x00001482: mov     [rbp+var_20], 4
+0x00001489: mov     [rbp+var_1C], 8
+0x00001490: mov     [rbp+var_18], 2
+0x00001497: mov     [rbp+var_14], 6
+0x0000149E: mov     [rbp+var_10], 5
+0x000014A5: mov     [rbp+var_38], 9
+0x000014AD: lea     rax, format
+0x000014B4: mov     rdi, rax; format
+0x000014B7: mov     eax, 0
+0x000014BC: call    _printf
+0x000014C1: mov     [rbp+var_48], 0
+0x000014C9: jmp     short loc_14EE
+loc_14CB:
+0x000014CB: mov     rax, [rbp+var_48]
+0x000014CF: mov     eax, [rbp+rax*4+var_30]
+0x000014D3: mov     esi, eax
+0x000014D5: lea     rax, aD; "%d "
+0x000014DC: mov     rdi, rax; format
+0x000014DF: mov     eax, 0
+0x000014E4: call    _printf
+0x000014E9: add     [rbp+var_48], 1
+loc_14EE:
+0x000014EE: mov     rax, [rbp+var_48]
+0x000014F2: cmp     rax, [rbp+var_38]
+0x000014F6: jb      short loc_14CB
+0x000014F8: mov     edi, 0Ah; c
+0x000014FD: call    _putchar
+0x00001502: mov     rdx, [rbp+var_38]
+0x00001506: lea     rax, [rbp+var_30]
+0x0000150A: mov     rsi, rdx
+0x0000150D: mov     rdi, rax
+0x00001510: call    heap_sort
+0x00001515: lea     rax, byte_2011
+0x0000151C: mov     rdi, rax; format
+0x0000151F: mov     eax, 0
+0x00001524: call    _printf
+0x00001529: mov     [rbp+var_40], 0
+0x00001531: jmp     short loc_1556
+loc_1533:
+0x00001533: mov     rax, [rbp+var_40]
+0x00001537: mov     eax, [rbp+rax*4+var_30]
+0x0000153B: mov     esi, eax
+0x0000153D: lea     rax, aD; "%d "
+0x00001544: mov     rdi, rax; format
+0x00001547: mov     eax, 0
+0x0000154C: call    _printf
+0x00001551: add     [rbp+var_40], 1
+loc_1556:
+0x00001556: mov     rax, [rbp+var_40]
+0x0000155A: cmp     rax, [rbp+var_38]
+0x0000155E: jb      short loc_1533
+0x00001560: mov     edi, 0Ah; c
+0x00001565: call    _putchar
+0x0000156A: mov     eax, 0
+0x0000156F: mov     rdx, [rbp+var_8]
+0x00001573: sub     rdx, fs:28h
+0x0000157C: jz      short locret_1583
+0x0000157E: call    ___stack_chk_fail
+locret_1583:
+0x00001583: leave
+0x00001584: retn

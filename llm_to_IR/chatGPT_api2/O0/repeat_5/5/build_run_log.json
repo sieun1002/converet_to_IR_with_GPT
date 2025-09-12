@@ -1,0 +1,475 @@
+{
+  "round": "5",
+  "round_dir": "../../llm_to_IR/chatGPT_api2/O0/repeat_5/5",
+  "started_at": "2025-09-12T08:29:32",
+  "pairs_built": [
+    {
+      "program": "BFS",
+      "files": {
+        "base_ll": "BFS.ll",
+        "main_ll": "BFS_main.ll",
+        "base_bc": "BFS.bc",
+        "main_bc": "BFS_main.bc",
+        "linked_bc": "BFS.bc",
+        "exe": "BFS"
+      },
+      "started_at": "2025-09-12T08:29:32",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 BFS.ll -o BFS.bc",
+          "start_time": "2025-09-12T08:29:32",
+          "elapsed_sec": 0.01279,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(base)"
+        },
+        {
+          "cmd": "llvm-as-14 BFS_main.ll -o BFS_main.bc",
+          "start_time": "2025-09-12T08:29:32",
+          "elapsed_sec": 0.012109,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(main)"
+        },
+        {
+          "cmd": "llvm-link-14 BFS_main.bc BFS.bc -o BFS.bc",
+          "start_time": "2025-09-12T08:29:32",
+          "elapsed_sec": 0.011322,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-link"
+        },
+        {
+          "cmd": "clang-14 -O0 BFS.bc -o BFS",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 1.06832,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/BFS-4b69c0.o: in function `main':\nllvm-link:(.text+0xdb): undefined reference to `_printf'\n/usr/bin/ld: llvm-link:(.text+0x138): undefined reference to `_printf'\n/usr/bin/ld: llvm-link:(.text+0x155): undefined reference to `_putchar'\n/usr/bin/ld: llvm-link:(.text+0x189): undefined reference to `_printf'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
+          "success": false,
+          "name": "clang-link"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:34",
+      "run": null
+    },
+    {
+      "program": "DFS",
+      "files": {
+        "base_ll": "DFS.ll",
+        "main_ll": "DFS_main.ll",
+        "base_bc": "DFS.bc",
+        "main_bc": "DFS_main.bc",
+        "linked_bc": "DFS.bc",
+        "exe": "DFS"
+      },
+      "started_at": "2025-09-12T08:29:34",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 DFS.ll -o DFS.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.024585,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(base)"
+        },
+        {
+          "cmd": "llvm-as-14 DFS_main.ll -o DFS_main.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.026485,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(main)"
+        },
+        {
+          "cmd": "llvm-link-14 DFS_main.bc DFS.bc -o DFS.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.023436,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-link"
+        },
+        {
+          "cmd": "clang-14 -O0 DFS.bc -o DFS",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.451529,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n",
+          "success": true,
+          "name": "clang-link"
+        },
+        {
+          "cmd": "./DFS",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.000832,
+          "returncode": 0,
+          "stdout": "DFS preorder from 0: 0 1 3 4 5 2\n",
+          "stderr": "",
+          "success": true,
+          "name": "run"
+        }
+      ],
+      "success": true,
+      "ended_at": "2025-09-12T08:29:34",
+      "run": {
+        "stdout": "DFS preorder from 0: 0 1 3 4 5 2\n",
+        "stderr": "",
+        "returncode": 0,
+        "elapsed_sec": 0.000832,
+        "success": true
+      }
+    },
+    {
+      "program": "binarysearch",
+      "files": {
+        "base_ll": "binarysearch.ll",
+        "main_ll": "binarysearch_main.ll",
+        "base_bc": "binarysearch.bc",
+        "main_bc": "binarysearch_main.bc",
+        "linked_bc": "binarysearch.bc",
+        "exe": "binarysearch"
+      },
+      "started_at": "2025-09-12T08:29:34",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 binarysearch.ll -o binarysearch.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.013776,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(base)"
+        },
+        {
+          "cmd": "llvm-as-14 binarysearch_main.ll -o binarysearch_main.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.013144,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(main)"
+        },
+        {
+          "cmd": "llvm-link-14 binarysearch_main.bc binarysearch.bc -o binarysearch.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.012624,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-link"
+        },
+        {
+          "cmd": "clang-14 -O0 binarysearch.bc -o binarysearch",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.290544,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/binarysearch-2b477b.o: in function `main':\nllvm-link:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: llvm-link:(.text+0x102): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
+          "success": false,
+          "name": "clang-link"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:34",
+      "run": null
+    },
+    {
+      "program": "bubblesort",
+      "files": {
+        "base_ll": "bubblesort.ll",
+        "main_ll": "bubblesort_main.ll",
+        "base_bc": "bubblesort.bc",
+        "main_bc": "bubblesort_main.bc",
+        "linked_bc": "bubblesort.bc",
+        "exe": "bubblesort"
+      },
+      "started_at": "2025-09-12T08:29:34",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 bubblesort.ll -o bubblesort.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.015874,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(base)"
+        },
+        {
+          "cmd": "llvm-as-14 bubblesort_main.ll -o bubblesort_main.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.013538,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(main)"
+        },
+        {
+          "cmd": "llvm-link-14 bubblesort_main.bc bubblesort.bc -o bubblesort.bc",
+          "start_time": "2025-09-12T08:29:34",
+          "elapsed_sec": 0.013467,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-link"
+        },
+        {
+          "cmd": "clang-14 -O0 bubblesort.bc -o bubblesort",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.395637,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/bubblesort-f30ee1.o: in function `main':\nllvm-link:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: llvm-link:(.text+0xcf): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
+          "success": false,
+          "name": "clang-link"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:35",
+      "run": null
+    },
+    {
+      "program": "heapsort",
+      "files": {
+        "base_ll": "heapsort.ll",
+        "main_ll": "heapsort_main.ll",
+        "base_bc": "heapsort.bc",
+        "main_bc": "heapsort_main.bc",
+        "linked_bc": "heapsort.bc",
+        "exe": "heapsort"
+      },
+      "started_at": "2025-09-12T08:29:35",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 heapsort.ll -o heapsort.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.012258,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "llvm-as-14: heapsort.ll:63:14: error: expected instruction opcode\n  %j1.next = %k1\n             ^\n",
+          "success": false,
+          "name": "llvm-as(base)"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:35",
+      "run": null
+    },
+    {
+      "program": "insertionsort",
+      "files": {
+        "base_ll": "insertionsort.ll",
+        "main_ll": "insertionsort_main.ll",
+        "base_bc": "insertionsort.bc",
+        "main_bc": "insertionsort_main.bc",
+        "linked_bc": "insertionsort.bc",
+        "exe": "insertionsort"
+      },
+      "started_at": "2025-09-12T08:29:35",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 insertionsort.ll -o insertionsort.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.011356,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(base)"
+        },
+        {
+          "cmd": "llvm-as-14 insertionsort_main.ll -o insertionsort_main.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.011386,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(main)"
+        },
+        {
+          "cmd": "llvm-link-14 insertionsort_main.bc insertionsort.bc -o insertionsort.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.011774,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-link"
+        },
+        {
+          "cmd": "clang-14 -O0 insertionsort.bc -o insertionsort",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.329461,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/insertionsort-9a7234.o: in function `main':\nllvm-link:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: llvm-link:(.text+0xc9): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
+          "success": false,
+          "name": "clang-link"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:35",
+      "run": null
+    },
+    {
+      "program": "linearsearch",
+      "files": {
+        "base_ll": "linearsearch.ll",
+        "main_ll": "linearsearch_main.ll",
+        "base_bc": "linearsearch.bc",
+        "main_bc": "linearsearch_main.bc",
+        "linked_bc": "linearsearch.bc",
+        "exe": "linearsearch"
+      },
+      "started_at": "2025-09-12T08:29:35",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 linearsearch.ll -o linearsearch.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.012655,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(base)"
+        },
+        {
+          "cmd": "llvm-as-14 linearsearch_main.ll -o linearsearch_main.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.019086,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-as(main)"
+        },
+        {
+          "cmd": "llvm-link-14 linearsearch_main.bc linearsearch.bc -o linearsearch.bc",
+          "start_time": "2025-09-12T08:29:35",
+          "elapsed_sec": 0.012588,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "success": true,
+          "name": "llvm-link"
+        },
+        {
+          "cmd": "clang-14 -O0 linearsearch.bc -o linearsearch",
+          "start_time": "2025-09-12T08:29:36",
+          "elapsed_sec": 0.481237,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch-7c16f9.o: in function `main':\nllvm-link:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: llvm-link:(.text+0x82): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
+          "success": false,
+          "name": "clang-link"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:36",
+      "run": null
+    },
+    {
+      "program": "mergesort",
+      "files": {
+        "base_ll": "mergesort.ll",
+        "main_ll": "mergesort_main.ll",
+        "base_bc": "mergesort.bc",
+        "main_bc": "mergesort_main.bc",
+        "linked_bc": "mergesort.bc",
+        "exe": "mergesort"
+      },
+      "started_at": "2025-09-12T08:29:36",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 mergesort.ll -o mergesort.bc",
+          "start_time": "2025-09-12T08:29:36",
+          "elapsed_sec": 0.023616,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "llvm-as-14: mergesort.ll:83:17: error: expected instruction opcode\n  %j.phi.keep = %j.phi\n                ^\n",
+          "success": false,
+          "name": "llvm-as(base)"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:36",
+      "run": null
+    },
+    {
+      "program": "quicksort",
+      "files": {
+        "base_ll": "quicksort.ll",
+        "main_ll": "quicksort_main.ll",
+        "base_bc": "quicksort.bc",
+        "main_bc": "quicksort_main.bc",
+        "linked_bc": "quicksort.bc",
+        "exe": "quicksort"
+      },
+      "started_at": "2025-09-12T08:29:36",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 quicksort.ll -o quicksort.bc",
+          "start_time": "2025-09-12T08:29:36",
+          "elapsed_sec": 0.022108,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "llvm-as-14: quicksort.ll:78:12: error: expected instruction opcode\n  %i_fin = %i.stop\n           ^\n",
+          "success": false,
+          "name": "llvm-as(base)"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:36",
+      "run": null
+    },
+    {
+      "program": "selectionsort",
+      "files": {
+        "base_ll": "selectionsort.ll",
+        "main_ll": "selectionsort_main.ll",
+        "base_bc": "selectionsort.bc",
+        "main_bc": "selectionsort_main.bc",
+        "linked_bc": "selectionsort.bc",
+        "exe": "selectionsort"
+      },
+      "started_at": "2025-09-12T08:29:36",
+      "steps": [
+        {
+          "cmd": "llvm-as-14 selectionsort.ll -o selectionsort.bc",
+          "start_time": "2025-09-12T08:29:36",
+          "elapsed_sec": 0.023771,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "llvm-as-14: selectionsort.ll:20:15: error: expected instruction opcode\n  %min.init = %i\n              ^\n",
+          "success": false,
+          "name": "llvm-as(base)"
+        }
+      ],
+      "success": false,
+      "ended_at": "2025-09-12T08:29:36",
+      "run": null
+    }
+  ],
+  "orphans": [],
+  "ended_at": null
+}

@@ -1,0 +1,60 @@
+; Function: insertion_sort
+; Start: 0x1189, End: 0x1247
+
+0x00001189: endbr64
+0x0000118D: push    rbp
+0x0000118E: mov     rbp, rsp
+0x00001191: mov     [rbp+var_28], rdi
+0x00001195: mov     [rbp+var_30], rsi
+0x00001199: mov     [rbp+var_10], 1
+0x000011A1: jmp     loc_1235
+loc_11A6:
+0x000011A6: mov     rax, [rbp+var_10]
+0x000011AA: lea     rdx, ds:0[rax*4]
+0x000011B2: mov     rax, [rbp+var_28]
+0x000011B6: add     rax, rdx
+0x000011B9: mov     eax, [rax]
+0x000011BB: mov     [rbp+var_14], eax
+0x000011BE: mov     rax, [rbp+var_10]
+0x000011C2: mov     [rbp+var_8], rax
+0x000011C6: jmp     short loc_11F7
+loc_11C8:
+0x000011C8: mov     rax, [rbp+var_8]
+0x000011CC: shl     rax, 2
+0x000011D0: lea     rdx, [rax-4]
+0x000011D4: mov     rax, [rbp+var_28]
+0x000011D8: add     rax, rdx
+0x000011DB: mov     rdx, [rbp+var_8]
+0x000011DF: lea     rcx, ds:0[rdx*4]
+0x000011E7: mov     rdx, [rbp+var_28]
+0x000011EB: add     rdx, rcx
+0x000011EE: mov     eax, [rax]
+0x000011F0: mov     [rdx], eax
+0x000011F2: sub     [rbp+var_8], 1
+loc_11F7:
+0x000011F7: cmp     [rbp+var_8], 0
+0x000011FC: jz      short loc_1218
+0x000011FE: mov     rax, [rbp+var_8]
+0x00001202: shl     rax, 2
+0x00001206: lea     rdx, [rax-4]
+0x0000120A: mov     rax, [rbp+var_28]
+0x0000120E: add     rax, rdx
+0x00001211: mov     eax, [rax]
+0x00001213: cmp     [rbp+var_14], eax
+0x00001216: jl      short loc_11C8
+loc_1218:
+0x00001218: mov     rax, [rbp+var_8]
+0x0000121C: lea     rdx, ds:0[rax*4]
+0x00001224: mov     rax, [rbp+var_28]
+0x00001228: add     rdx, rax
+0x0000122B: mov     eax, [rbp+var_14]
+0x0000122E: mov     [rdx], eax
+0x00001230: add     [rbp+var_10], 1
+loc_1235:
+0x00001235: mov     rax, [rbp+var_10]
+0x00001239: cmp     rax, [rbp+var_30]
+0x0000123D: jb      loc_11A6
+0x00001243: nop
+0x00001244: nop
+0x00001245: pop     rbp
+0x00001246: retn

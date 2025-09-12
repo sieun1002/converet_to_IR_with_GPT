@@ -1,0 +1,55 @@
+; Function: main
+; Start: 0x1325, End: 0x140A
+
+0x00001325: endbr64
+0x00001329: push    rbp
+0x0000132A: mov     rbp, rsp
+0x0000132D: sub     rsp, 40h
+0x00001331: mov     rax, fs:28h
+0x0000133A: mov     [rbp+var_8], rax
+0x0000133E: xor     eax, eax
+0x00001340: mov     [rbp+var_30], 9
+0x00001347: mov     [rbp+var_2C], 1
+0x0000134E: mov     [rbp+var_28], 5
+0x00001355: mov     [rbp+var_24], 3
+0x0000135C: mov     [rbp+var_20], 7
+0x00001363: mov     [rbp+var_1C], 2
+0x0000136A: mov     [rbp+var_18], 8
+0x00001371: mov     [rbp+var_14], 6
+0x00001378: mov     [rbp+var_10], 4
+0x0000137F: mov     [rbp+var_C], 0
+0x00001386: mov     [rbp+var_38], 0Ah
+0x0000138E: cmp     [rbp+var_38], 1
+0x00001393: jbe     short loc_13AE
+0x00001395: mov     rax, [rbp+var_38]
+0x00001399: lea     rdx, [rax-1]
+0x0000139D: lea     rax, [rbp+var_30]
+0x000013A1: mov     esi, 0
+0x000013A6: mov     rdi, rax
+0x000013A9: call    quick_sort
+loc_13AE:
+0x000013AE: mov     [rbp+var_40], 0
+0x000013B6: jmp     short loc_13DB
+loc_13B8:
+0x000013B8: mov     rax, [rbp+var_40]
+0x000013BC: mov     eax, [rbp+rax*4+var_30]
+0x000013C0: mov     esi, eax
+0x000013C2: lea     rax, format; "%d "
+0x000013C9: mov     rdi, rax; format
+0x000013CC: mov     eax, 0
+0x000013D1: call    _printf
+0x000013D6: add     [rbp+var_40], 1
+loc_13DB:
+0x000013DB: mov     rax, [rbp+var_40]
+0x000013DF: cmp     rax, [rbp+var_38]
+0x000013E3: jb      short loc_13B8
+0x000013E5: mov     edi, 0Ah; c
+0x000013EA: call    _putchar
+0x000013EF: mov     eax, 0
+0x000013F4: mov     rdx, [rbp+var_8]
+0x000013F8: sub     rdx, fs:28h
+0x00001401: jz      short locret_1408
+0x00001403: call    ___stack_chk_fail
+locret_1408:
+0x00001408: leave
+0x00001409: retn

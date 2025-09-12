@@ -1,0 +1,76 @@
+; Function: selection_sort
+; Start: 0x1169, End: 0x124D
+
+0x00001169: endbr64
+0x0000116D: push    rbp
+0x0000116E: mov     rbp, rsp
+0x00001171: mov     [rbp+var_18], rdi
+0x00001175: mov     [rbp+var_1C], esi
+0x00001178: mov     [rbp+var_10], 0
+0x0000117F: jmp     loc_123A
+loc_1184:
+0x00001184: mov     eax, [rbp+var_10]
+0x00001187: mov     [rbp+var_8], eax
+0x0000118A: mov     eax, [rbp+var_10]
+0x0000118D: add     eax, 1
+0x00001190: mov     [rbp+var_C], eax
+0x00001193: jmp     short loc_11CF
+loc_1195:
+0x00001195: mov     eax, [rbp+var_C]
+0x00001198: cdqe
+0x0000119A: lea     rdx, ds:0[rax*4]
+0x000011A2: mov     rax, [rbp+var_18]
+0x000011A6: add     rax, rdx
+0x000011A9: mov     edx, [rax]
+0x000011AB: mov     eax, [rbp+var_8]
+0x000011AE: cdqe
+0x000011B0: lea     rcx, ds:0[rax*4]
+0x000011B8: mov     rax, [rbp+var_18]
+0x000011BC: add     rax, rcx
+0x000011BF: mov     eax, [rax]
+0x000011C1: cmp     edx, eax
+0x000011C3: jge     short loc_11CB
+0x000011C5: mov     eax, [rbp+var_C]
+0x000011C8: mov     [rbp+var_8], eax
+loc_11CB:
+0x000011CB: add     [rbp+var_C], 1
+loc_11CF:
+0x000011CF: mov     eax, [rbp+var_C]
+0x000011D2: cmp     eax, [rbp+var_1C]
+0x000011D5: jl      short loc_1195
+0x000011D7: mov     eax, [rbp+var_10]
+0x000011DA: cdqe
+0x000011DC: lea     rdx, ds:0[rax*4]
+0x000011E4: mov     rax, [rbp+var_18]
+0x000011E8: add     rax, rdx
+0x000011EB: mov     eax, [rax]
+0x000011ED: mov     [rbp+var_4], eax
+0x000011F0: mov     eax, [rbp+var_8]
+0x000011F3: cdqe
+0x000011F5: lea     rdx, ds:0[rax*4]
+0x000011FD: mov     rax, [rbp+var_18]
+0x00001201: add     rax, rdx
+0x00001204: mov     edx, [rbp+var_10]
+0x00001207: movsxd  rdx, edx
+0x0000120A: lea     rcx, ds:0[rdx*4]
+0x00001212: mov     rdx, [rbp+var_18]
+0x00001216: add     rdx, rcx
+0x00001219: mov     eax, [rax]
+0x0000121B: mov     [rdx], eax
+0x0000121D: mov     eax, [rbp+var_8]
+0x00001220: cdqe
+0x00001222: lea     rdx, ds:0[rax*4]
+0x0000122A: mov     rax, [rbp+var_18]
+0x0000122E: add     rdx, rax
+0x00001231: mov     eax, [rbp+var_4]
+0x00001234: mov     [rdx], eax
+0x00001236: add     [rbp+var_10], 1
+loc_123A:
+0x0000123A: mov     eax, [rbp+var_1C]
+0x0000123D: sub     eax, 1
+0x00001240: cmp     [rbp+var_10], eax
+0x00001243: jl      loc_1184
+0x00001249: nop
+0x0000124A: nop
+0x0000124B: pop     rbp
+0x0000124C: retn

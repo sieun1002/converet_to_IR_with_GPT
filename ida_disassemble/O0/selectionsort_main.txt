@@ -1,0 +1,49 @@
+; Function: main
+; Start: 0x124D, End: 0x1306
+
+0x0000124D: endbr64
+0x00001251: push    rbp
+0x00001252: mov     rbp, rsp
+0x00001255: sub     rsp, 30h
+0x00001259: mov     rax, fs:28h
+0x00001262: mov     [rbp+var_8], rax
+0x00001266: xor     eax, eax
+0x00001268: mov     [rbp+var_20], 1Dh
+0x0000126F: mov     [rbp+var_1C], 0Ah
+0x00001276: mov     [rbp+var_18], 0Eh
+0x0000127D: mov     [rbp+var_14], 25h ; '%'
+0x00001284: mov     [rbp+var_10], 0Dh
+0x0000128B: mov     [rbp+var_24], 5
+0x00001292: mov     edx, [rbp+var_24]
+0x00001295: lea     rax, [rbp+var_20]
+0x00001299: mov     esi, edx
+0x0000129B: mov     rdi, rax
+0x0000129E: call    selection_sort
+0x000012A3: lea     rax, format; "Sorted array: "
+0x000012AA: mov     rdi, rax; format
+0x000012AD: mov     eax, 0
+0x000012B2: call    _printf
+0x000012B7: mov     [rbp+var_28], 0
+0x000012BE: jmp     short loc_12E3
+loc_12C0:
+0x000012C0: mov     eax, [rbp+var_28]
+0x000012C3: cdqe
+0x000012C5: mov     eax, [rbp+rax*4+var_20]
+0x000012C9: mov     esi, eax
+0x000012CB: lea     rax, aD; "%d "
+0x000012D2: mov     rdi, rax; format
+0x000012D5: mov     eax, 0
+0x000012DA: call    _printf
+0x000012DF: add     [rbp+var_28], 1
+loc_12E3:
+0x000012E3: mov     eax, [rbp+var_28]
+0x000012E6: cmp     eax, [rbp+var_24]
+0x000012E9: jl      short loc_12C0
+0x000012EB: mov     eax, 0
+0x000012F0: mov     rdx, [rbp+var_8]
+0x000012F4: sub     rdx, fs:28h
+0x000012FD: jz      short locret_1304
+0x000012FF: call    ___stack_chk_fail
+locret_1304:
+0x00001304: leave
+0x00001305: retn

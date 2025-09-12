@@ -1,0 +1,146 @@
+; Function: main
+; Start: 0x13DD, End: 0x16D9
+
+0x000013DD: endbr64
+0x000013E1: push    rbp
+0x000013E2: mov     rbp, rsp
+0x000013E5: sub     rsp, 160h
+0x000013EC: mov     rax, fs:28h
+0x000013F5: mov     [rbp+var_8], rax
+0x000013F9: xor     eax, eax
+0x000013FB: mov     [rbp+var_140], 7
+0x00001406: lea     rdx, [rbp+var_D0]
+0x0000140D: mov     eax, 0
+0x00001412: mov     ecx, 18h
+0x00001417: mov     rdi, rdx
+0x0000141A: rep stosq
+0x0000141D: mov     rdx, rdi
+0x00001420: mov     [rdx], eax
+0x00001422: add     rdx, 4
+0x00001426: mov     [rbp+var_CC], 1
+0x00001430: mov     rax, [rbp+var_140]
+0x00001437: mov     [rbp+rax*4+var_D0], 1
+0x00001442: mov     [rbp+var_C8], 1
+0x0000144C: mov     rax, [rbp+var_140]
+0x00001453: add     rax, rax
+0x00001456: mov     [rbp+rax*4+var_D0], 1
+0x00001461: mov     rax, [rbp+var_140]
+0x00001468: add     rax, 3
+0x0000146C: mov     [rbp+rax*4+var_D0], 1
+0x00001477: mov     rdx, [rbp+var_140]
+0x0000147E: mov     rax, rdx
+0x00001481: add     rax, rax
+0x00001484: add     rax, rdx
+0x00001487: add     rax, 1
+0x0000148B: mov     [rbp+rax*4+var_D0], 1
+0x00001496: mov     rax, [rbp+var_140]
+0x0000149D: add     rax, 4
+0x000014A1: mov     [rbp+rax*4+var_D0], 1
+0x000014AC: mov     rax, [rbp+var_140]
+0x000014B3: shl     rax, 2
+0x000014B7: add     rax, 1
+0x000014BB: mov     [rbp+rax*4+var_D0], 1
+0x000014C6: mov     rax, [rbp+var_140]
+0x000014CD: add     rax, rax
+0x000014D0: add     rax, 5
+0x000014D4: mov     [rbp+rax*4+var_D0], 1
+0x000014DF: mov     rdx, [rbp+var_140]
+0x000014E6: mov     rax, rdx
+0x000014E9: shl     rax, 2
+0x000014ED: add     rax, rdx
+0x000014F0: add     rax, 2
+0x000014F4: mov     [rbp+rax*4+var_D0], 1
+0x000014FF: mov     rax, [rbp+var_140]
+0x00001506: shl     rax, 2
+0x0000150A: add     rax, 5
+0x0000150E: mov     [rbp+rax*4+var_D0], 1
+0x00001519: mov     rdx, [rbp+var_140]
+0x00001520: mov     rax, rdx
+0x00001523: shl     rax, 2
+0x00001527: add     rax, rdx
+0x0000152A: add     rax, 4
+0x0000152E: mov     [rbp+rax*4+var_D0], 1
+0x00001539: mov     rdx, [rbp+var_140]
+0x00001540: mov     rax, rdx
+0x00001543: shl     rax, 2
+0x00001547: add     rax, rdx
+0x0000154A: add     rax, 6
+0x0000154E: mov     [rbp+rax*4+var_D0], 1
+0x00001559: mov     rdx, [rbp+var_140]
+0x00001560: mov     rax, rdx
+0x00001563: add     rax, rax
+0x00001566: add     rax, rdx
+0x00001569: add     rax, rax
+0x0000156C: add     rax, 5
+0x00001570: mov     [rbp+rax*4+var_D0], 1
+0x0000157B: mov     [rbp+var_138], 0
+0x00001586: mov     [rbp+var_158], 0
+0x00001591: lea     r8, [rbp+var_158]
+0x00001598: lea     rdi, [rbp+var_110]
+0x0000159F: lea     rcx, [rbp+var_130]
+0x000015A6: mov     rdx, [rbp+var_138]
+0x000015AD: mov     rsi, [rbp+var_140]
+0x000015B4: lea     rax, [rbp+var_D0]
+0x000015BB: mov     r9, r8
+0x000015BE: mov     r8, rdi
+0x000015C1: mov     rdi, rax
+0x000015C4: call    bfs
+0x000015C9: mov     rax, [rbp+var_138]
+0x000015D0: mov     rsi, rax
+0x000015D3: lea     rax, format; "BFS order from %zu: "
+0x000015DA: mov     rdi, rax; format
+0x000015DD: mov     eax, 0
+0x000015E2: call    _printf
+0x000015E7: mov     [rbp+var_150], 0
+0x000015F2: jmp     short loc_164C
+loc_15F4:
+0x000015F4: mov     rax, [rbp+var_150]
+0x000015FB: lea     rdx, [rax+1]
+0x000015FF: mov     rax, [rbp+var_158]
+0x00001606: cmp     rdx, rax
+0x00001609: jnb     short loc_1614
+0x0000160B: lea     rax, asc_2019; " "
+0x00001612: jmp     short loc_161B
+loc_1614:
+0x00001614: lea     rax, unk_201B
+loc_161B:
+0x0000161B: mov     rdx, [rbp+var_150]
+0x00001622: mov     rcx, [rbp+rdx*8+var_110]
+0x0000162A: mov     rdx, rax
+0x0000162D: mov     rsi, rcx
+0x00001630: lea     rax, aZuS; "%zu%s"
+0x00001637: mov     rdi, rax; format
+0x0000163A: mov     eax, 0
+0x0000163F: call    _printf
+0x00001644: add     [rbp+var_150], 1
+loc_164C:
+0x0000164C: mov     rax, [rbp+var_158]
+0x00001653: cmp     [rbp+var_150], rax
+0x0000165A: jb      short loc_15F4
+0x0000165C: mov     edi, 0Ah; c
+0x00001661: call    _putchar
+0x00001666: mov     [rbp+var_148], 0
+0x00001671: jmp     short loc_16AE
+loc_1673:
+0x00001673: mov     rax, [rbp+var_148]
+0x0000167A: mov     ecx, [rbp+rax*4+var_130]
+0x00001681: mov     rdx, [rbp+var_148]
+0x00001688: mov     rax, [rbp+var_138]
+0x0000168F: mov     rsi, rax
+0x00001692: lea     rax, aDistZuZuD; "dist(%zu -> %zu) = %d\n"
+0x00001699: mov     rdi, rax; format
+0x0000169C: mov     eax, 0
+0x000016A1: call    _printf
+0x000016A6: add     [rbp+var_148], 1
+loc_16AE:
+0x000016AE: mov     rax, [rbp+var_148]
+0x000016B5: cmp     rax, [rbp+var_140]
+0x000016BC: jb      short loc_1673
+0x000016BE: mov     eax, 0
+0x000016C3: mov     rdx, [rbp+var_8]
+0x000016C7: sub     rdx, fs:28h
+0x000016D0: jz      short locret_16D7
+0x000016D2: call    ___stack_chk_fail
+locret_16D7:
+0x000016D7: leave
+0x000016D8: retn

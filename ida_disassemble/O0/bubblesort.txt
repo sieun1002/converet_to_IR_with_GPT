@@ -1,0 +1,79 @@
+; Function: bubble_sort
+; Start: 0x1189, End: 0x128B
+
+0x00001189: endbr64
+0x0000118D: push    rbp
+0x0000118E: mov     rbp, rsp
+0x00001191: mov     [rbp+var_28], rdi
+0x00001195: mov     [rbp+var_30], rsi
+0x00001199: cmp     [rbp+var_30], 1
+0x0000119E: jbe     loc_1285
+0x000011A4: mov     rax, [rbp+var_30]
+0x000011A8: mov     [rbp+var_18], rax
+0x000011AC: jmp     loc_1278
+loc_11B1:
+0x000011B1: mov     [rbp+var_10], 0
+0x000011B9: mov     [rbp+var_8], 1
+0x000011C1: jmp     loc_125B
+loc_11C6:
+0x000011C6: mov     rax, [rbp+var_8]
+0x000011CA: shl     rax, 2
+0x000011CE: lea     rdx, [rax-4]
+0x000011D2: mov     rax, [rbp+var_28]
+0x000011D6: add     rax, rdx
+0x000011D9: mov     edx, [rax]
+0x000011DB: mov     rax, [rbp+var_8]
+0x000011DF: lea     rcx, ds:0[rax*4]
+0x000011E7: mov     rax, [rbp+var_28]
+0x000011EB: add     rax, rcx
+0x000011EE: mov     eax, [rax]
+0x000011F0: cmp     edx, eax
+0x000011F2: jle     short loc_1256
+0x000011F4: mov     rax, [rbp+var_8]
+0x000011F8: shl     rax, 2
+0x000011FC: lea     rdx, [rax-4]
+0x00001200: mov     rax, [rbp+var_28]
+0x00001204: add     rax, rdx
+0x00001207: mov     eax, [rax]
+0x00001209: mov     [rbp+var_1C], eax
+0x0000120C: mov     rax, [rbp+var_8]
+0x00001210: lea     rdx, ds:0[rax*4]
+0x00001218: mov     rax, [rbp+var_28]
+0x0000121C: add     rax, rdx
+0x0000121F: mov     rdx, [rbp+var_8]
+0x00001223: shl     rdx, 2
+0x00001227: lea     rcx, [rdx-4]
+0x0000122B: mov     rdx, [rbp+var_28]
+0x0000122F: add     rdx, rcx
+0x00001232: mov     eax, [rax]
+0x00001234: mov     [rdx], eax
+0x00001236: mov     rax, [rbp+var_8]
+0x0000123A: lea     rdx, ds:0[rax*4]
+0x00001242: mov     rax, [rbp+var_28]
+0x00001246: add     rdx, rax
+0x00001249: mov     eax, [rbp+var_1C]
+0x0000124C: mov     [rdx], eax
+0x0000124E: mov     rax, [rbp+var_8]
+0x00001252: mov     [rbp+var_10], rax
+loc_1256:
+0x00001256: add     [rbp+var_8], 1
+loc_125B:
+0x0000125B: mov     rax, [rbp+var_8]
+0x0000125F: cmp     rax, [rbp+var_18]
+0x00001263: jb      loc_11C6
+0x00001269: cmp     [rbp+var_10], 0
+0x0000126E: jz      short loc_1288
+0x00001270: mov     rax, [rbp+var_10]
+0x00001274: mov     [rbp+var_18], rax
+loc_1278:
+0x00001278: cmp     [rbp+var_18], 1
+0x0000127D: ja      loc_11B1
+0x00001283: jmp     short loc_1289
+loc_1285:
+0x00001285: nop
+0x00001286: jmp     short loc_1289
+loc_1288:
+0x00001288: nop
+loc_1289:
+0x00001289: pop     rbp
+0x0000128A: retn
