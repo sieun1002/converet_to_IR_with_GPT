@@ -1,0 +1,35 @@
+; ModuleID = 'main'
+target triple = "x86_64-unknown-linux-gnu"
+
+; Symbol: main ; Address: 0x1747
+; Intent: DES test vector encryption and print result (confidence=0.90). Evidence: DES-like constants, format "%016llX", expected ciphertext string.
+; Preconditions: none
+; Postconditions: prints two lines to stdout
+
+; Only the necessary external declarations:
+declare i64 @des_encrypt(i64, i64)
+declare i32 @_printf(i8*, ...)
+declare i32 @_puts(i8*)
+
+@format = private unnamed_addr constant [21 x i8] c"Ciphertext: %016llX\0A\00", align 1
+@s = private unnamed_addr constant [29 x i8] c"Ciphertext: 85E813540F0AB405\00", align 1
+
+define dso_local i32 @main() local_unnamed_addr {
+entry:
+  ; constants
+  %pt = add i64 0, 0x123456789ABCDEF
+  %key = add i64 0, 0x133457799BBCDFF1
+
+  ; des_encrypt(plaintext, key)
+  %ct = call i64 @des_encrypt(i64 %pt, i64 %key)
+
+  ; printf("Ciphertext: %016llX\n", ct)
+  %fmtptr = getelementptr inbounds [21 x i8], [21 x i8]* @format, i64 0, i64 0
+  %_ = call i32 (i8*, ...) @_printf(i8* %fmtptr, i64 %ct)
+
+  ; puts("Ciphertext: 85E813540F0AB405")
+  %sptr = getelementptr inbounds [29 x i8], [29 x i8]* @s, i64 0, i64 0
+  %__ = call i32 @_puts(i8* %sptr)
+
+  ret i32 0
+}

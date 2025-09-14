@@ -1,0 +1,158 @@
+; Function: key_expansion
+; Start: 0x15A0, End: 0x178A
+
+0x000015A0: endbr64
+0x000015A4: push    rbp
+0x000015A5: mov     rbp, rsp
+0x000015A8: sub     rsp, 30h
+0x000015AC: mov     [rbp+var_28], rdi
+0x000015B0: mov     [rbp+var_30], rsi
+0x000015B4: mov     [rbp+var_C], 0
+0x000015BB: jmp     short loc_15E0
+loc_15BD:
+0x000015BD: mov     eax, [rbp+var_C]
+0x000015C0: movsxd  rdx, eax
+0x000015C3: mov     rax, [rbp+var_28]
+0x000015C7: add     rax, rdx
+0x000015CA: mov     edx, [rbp+var_C]
+0x000015CD: movsxd  rcx, edx
+0x000015D0: mov     rdx, [rbp+var_30]
+0x000015D4: add     rdx, rcx
+0x000015D7: movzx   eax, byte ptr [rax]
+0x000015DA: mov     [rdx], al
+0x000015DC: add     [rbp+var_C], 1
+loc_15E0:
+0x000015E0: cmp     [rbp+var_C], 0Fh
+0x000015E4: jle     short loc_15BD
+0x000015E6: mov     [rbp+var_8], 10h
+0x000015ED: mov     [rbp+var_4], 0
+0x000015F4: jmp     loc_1779
+loc_15F9:
+0x000015F9: mov     eax, [rbp+var_8]
+0x000015FC: cdqe
+0x000015FE: lea     rdx, [rax-4]
+0x00001602: mov     rax, [rbp+var_30]
+0x00001606: add     rax, rdx
+0x00001609: movzx   eax, byte ptr [rax]
+0x0000160C: mov     [rbp+var_11], al
+0x0000160F: mov     eax, [rbp+var_8]
+0x00001612: cdqe
+0x00001614: lea     rdx, [rax-3]
+0x00001618: mov     rax, [rbp+var_30]
+0x0000161C: add     rax, rdx
+0x0000161F: movzx   eax, byte ptr [rax]
+0x00001622: mov     [rbp+var_10], al
+0x00001625: mov     eax, [rbp+var_8]
+0x00001628: cdqe
+0x0000162A: lea     rdx, [rax-2]
+0x0000162E: mov     rax, [rbp+var_30]
+0x00001632: add     rax, rdx
+0x00001635: movzx   eax, byte ptr [rax]
+0x00001638: mov     [rbp+var_F], al
+0x0000163B: mov     eax, [rbp+var_8]
+0x0000163E: cdqe
+0x00001640: lea     rdx, [rax-1]
+0x00001644: mov     rax, [rbp+var_30]
+0x00001648: add     rax, rdx
+0x0000164B: movzx   eax, byte ptr [rax]
+0x0000164E: mov     [rbp+var_E], al
+0x00001651: mov     eax, [rbp+var_8]
+0x00001654: and     eax, 0Fh
+0x00001657: test    eax, eax
+0x00001659: jnz     short loc_16CC
+0x0000165B: movzx   eax, [rbp+var_11]
+0x0000165F: mov     [rbp+var_D], al
+0x00001662: movzx   eax, [rbp+var_10]
+0x00001666: mov     [rbp+var_11], al
+0x00001669: movzx   eax, [rbp+var_F]
+0x0000166D: mov     [rbp+var_10], al
+0x00001670: movzx   eax, [rbp+var_E]
+0x00001674: mov     [rbp+var_F], al
+0x00001677: movzx   eax, [rbp+var_D]
+0x0000167B: mov     [rbp+var_E], al
+0x0000167E: movzx   eax, [rbp+var_11]
+0x00001682: mov     edi, eax
+0x00001684: call    sbox_lookup
+0x00001689: mov     [rbp+var_11], al
+0x0000168C: movzx   eax, [rbp+var_10]
+0x00001690: mov     edi, eax
+0x00001692: call    sbox_lookup
+0x00001697: mov     [rbp+var_10], al
+0x0000169A: movzx   eax, [rbp+var_F]
+0x0000169E: mov     edi, eax
+0x000016A0: call    sbox_lookup
+0x000016A5: mov     [rbp+var_F], al
+0x000016A8: movzx   eax, [rbp+var_E]
+0x000016AC: mov     edi, eax
+0x000016AE: call    sbox_lookup
+0x000016B3: mov     [rbp+var_E], al
+0x000016B6: mov     eax, [rbp+var_4]
+0x000016B9: lea     edx, [rax+1]
+0x000016BC: mov     [rbp+var_4], edx
+0x000016BF: movzx   eax, al
+0x000016C2: mov     edi, eax
+0x000016C4: call    rcon
+0x000016C9: xor     [rbp+var_11], al
+loc_16CC:
+0x000016CC: mov     eax, [rbp+var_8]
+0x000016CF: sub     eax, 10h
+0x000016D2: movsxd  rdx, eax
+0x000016D5: mov     rax, [rbp+var_30]
+0x000016D9: add     rax, rdx
+0x000016DC: movzx   eax, byte ptr [rax]
+0x000016DF: mov     edx, [rbp+var_8]
+0x000016E2: movsxd  rcx, edx
+0x000016E5: mov     rdx, [rbp+var_30]
+0x000016E9: add     rdx, rcx
+0x000016EC: xor     al, [rbp+var_11]
+0x000016EF: mov     [rdx], al
+0x000016F1: mov     eax, [rbp+var_8]
+0x000016F4: sub     eax, 10h
+0x000016F7: cdqe
+0x000016F9: lea     rdx, [rax+1]
+0x000016FD: mov     rax, [rbp+var_30]
+0x00001701: add     rax, rdx
+0x00001704: movzx   eax, byte ptr [rax]
+0x00001707: mov     edx, [rbp+var_8]
+0x0000170A: movsxd  rdx, edx
+0x0000170D: lea     rcx, [rdx+1]
+0x00001711: mov     rdx, [rbp+var_30]
+0x00001715: add     rdx, rcx
+0x00001718: xor     al, [rbp+var_10]
+0x0000171B: mov     [rdx], al
+0x0000171D: mov     eax, [rbp+var_8]
+0x00001720: sub     eax, 10h
+0x00001723: cdqe
+0x00001725: lea     rdx, [rax+2]
+0x00001729: mov     rax, [rbp+var_30]
+0x0000172D: add     rax, rdx
+0x00001730: movzx   eax, byte ptr [rax]
+0x00001733: mov     edx, [rbp+var_8]
+0x00001736: movsxd  rdx, edx
+0x00001739: lea     rcx, [rdx+2]
+0x0000173D: mov     rdx, [rbp+var_30]
+0x00001741: add     rdx, rcx
+0x00001744: xor     al, [rbp+var_F]
+0x00001747: mov     [rdx], al
+0x00001749: mov     eax, [rbp+var_8]
+0x0000174C: sub     eax, 10h
+0x0000174F: cdqe
+0x00001751: lea     rdx, [rax+3]
+0x00001755: mov     rax, [rbp+var_30]
+0x00001759: add     rax, rdx
+0x0000175C: movzx   eax, byte ptr [rax]
+0x0000175F: mov     edx, [rbp+var_8]
+0x00001762: movsxd  rdx, edx
+0x00001765: lea     rcx, [rdx+3]
+0x00001769: mov     rdx, [rbp+var_30]
+0x0000176D: add     rdx, rcx
+0x00001770: xor     al, [rbp+var_E]
+0x00001773: mov     [rdx], al
+0x00001775: add     [rbp+var_8], 4
+loc_1779:
+0x00001779: cmp     [rbp+var_8], 0AFh
+0x00001780: jle     loc_15F9
+0x00001786: nop
+0x00001787: nop
+0x00001788: leave
+0x00001789: retn

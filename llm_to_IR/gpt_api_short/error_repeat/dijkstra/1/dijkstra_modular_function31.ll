@@ -1,0 +1,100 @@
+; ModuleID = 'read_graph'
+target triple = "x86_64-unknown-linux-gnu"
+
+; Symbol: read_graph ; Address: 0x401230
+; Intent: Read graph size, edges, and a start vertex from stdin; initialize graph and add edges. (confidence=0.85). Evidence: scanf patterns "%d %d", "%d %d %d", "%d"; range checks; calls to init_graph and add_edge.
+; Preconditions: graph != NULL; n_ptr != NULL; start_ptr != NULL; stdin provides well-formed integers.
+; Postconditions: On success returns 0, initializes graph with n in (0,100], m >= 0 edges (u,v,w) with 0 <= u,v < n, and sets start in [0,n); on failure returns -1.
+
+@.str = private unnamed_addr constant [5 x i8] c"%d %d\00", align 1
+@.str.1 = private unnamed_addr constant [8 x i8] c"%d %d %d\00", align 1
+@.str.2 = private unnamed_addr constant [3 x i8] c"%d\00", align 1
+
+; Only the necessary external declarations:
+declare i32 @___isoc99_scanf(i8*, ...)
+declare void @init_graph(i8*, i32)
+declare void @add_edge(i8*, i32, i32, i32, i32)
+
+define dso_local i32 @read_graph(i8* %graph, i32* %n_ptr, i32* %start_ptr) local_unnamed_addr {
+entry:
+  %m = alloca i32, align 4
+  %i = alloca i32, align 4
+  %u = alloca i32, align 4
+  %v = alloca i32, align 4
+  %w = alloca i32, align 4
+
+  ; scanf("%d %d", n_ptr, &m)
+  %fmt0 = getelementptr inbounds [5 x i8], [5 x i8]* @.str, i64 0, i64 0
+  %sc0 = call i32 (i8*, ...) @___isoc99_scanf(i8* %fmt0, i32* %n_ptr, i32* %m)
+  %ok2 = icmp eq i32 %sc0, 2
+  br i1 %ok2, label %check_bounds, label %fail
+
+check_bounds:
+  %n0 = load i32, i32* %n_ptr, align 4
+  %n_pos = icmp sgt i32 %n0, 0
+  %n_le_100 = icmp sle i32 %n0, 100
+  %n_ok = and i1 %n_pos, %n_le_100
+  %m0 = load i32, i32* %m, align 4
+  %m_nonneg = icmp sge i32 %m0, 0
+  %hdr_ok = and i1 %n_ok, %m_nonneg
+  br i1 %hdr_ok, label %init, label %fail
+
+init:
+  call void @init_graph(i8* %graph, i32 %n0)
+  store i32 0, i32* %i, align 4
+  br label %loop
+
+loop:
+  %i1 = load i32, i32* %i, align 4
+  %m1 = load i32, i32* %m, align 4
+  %done = icmp sge i32 %i1, %m1
+  br i1 %done, label %after_loop, label %edge_read
+
+edge_read:
+  ; scanf("%d %d %d", &u, &v, &w)
+  %fmt1 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.1, i64 0, i64 0
+  %sc1 = call i32 (i8*, ...) @___isoc99_scanf(i8* %fmt1, i32* %u, i32* %v, i32* %w)
+  %ok3 = icmp eq i32 %sc1, 3
+  br i1 %ok3, label %check_uv, label %fail
+
+check_uv:
+  %u0 = load i32, i32* %u, align 4
+  %v0 = load i32, i32* %v, align 4
+  %u_ge0 = icmp sge i32 %u0, 0
+  %v_ge0 = icmp sge i32 %v0, 0
+  %n1 = load i32, i32* %n_ptr, align 4
+  %u_lt_n = icmp slt i32 %u0, %n1
+  %v_lt_n = icmp slt i32 %v0, %n1
+  %u_ok = and i1 %u_ge0, %u_lt_n
+  %v_ok = and i1 %v_ge0, %v_lt_n
+  %uv_ok = and i1 %u_ok, %v_ok
+  br i1 %uv_ok, label %add, label %fail
+
+add:
+  %w0 = load i32, i32* %w, align 4
+  call void @add_edge(i8* %graph, i32 %u0, i32 %v0, i32 %w0, i32 1)
+  %i2 = add nsw i32 %i1, 1
+  store i32 %i2, i32* %i, align 4
+  br label %loop
+
+after_loop:
+  ; scanf("%d", start_ptr)
+  %fmt2 = getelementptr inbounds [3 x i8], [3 x i8]* @.str.2, i64 0, i64 0
+  %sc2 = call i32 (i8*, ...) @___isoc99_scanf(i8* %fmt2, i32* %start_ptr)
+  %ok1 = icmp eq i32 %sc2, 1
+  br i1 %ok1, label %check_start, label %fail
+
+check_start:
+  %s0 = load i32, i32* %start_ptr, align 4
+  %s_ge0 = icmp sge i32 %s0, 0
+  %n2 = load i32, i32* %n_ptr, align 4
+  %s_lt_n = icmp slt i32 %s0, %n2
+  %s_ok = and i1 %s_ge0, %s_lt_n
+  br i1 %s_ok, label %success, label %fail
+
+success:
+  ret i32 0
+
+fail:
+  ret i32 -1
+}

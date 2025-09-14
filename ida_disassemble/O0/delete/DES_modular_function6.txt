@@ -1,0 +1,74 @@
+; Function: des_encrypt
+; Start: 0x1468, End: 0x15CB
+
+0x00001468: endbr64
+0x0000146C: push    rbp
+0x0000146D: mov     rbp, rsp
+0x00001470: sub     rsp, 0D0h
+0x00001477: mov     [rbp+var_C8], rdi
+0x0000147E: mov     [rbp+var_D0], rsi
+0x00001485: mov     rax, fs:28h
+0x0000148E: mov     [rbp+var_8], rax
+0x00001492: xor     eax, eax
+0x00001494: lea     rdx, [rbp+var_90]
+0x0000149B: mov     rax, [rbp+var_D0]
+0x000014A2: mov     rsi, rdx
+0x000014A5: mov     rdi, rax
+0x000014A8: call    key_schedule
+0x000014AD: mov     rax, [rbp+var_C8]
+0x000014B4: mov     ecx, 40h ; '@'
+0x000014B9: mov     edx, 40h ; '@'
+0x000014BE: lea     rsi, unk_2020
+0x000014C5: mov     rdi, rax
+0x000014C8: call    permute
+0x000014CD: mov     [rbp+var_A8], rax
+0x000014D4: mov     rax, [rbp+var_A8]
+0x000014DB: shr     rax, 20h
+0x000014DF: mov     [rbp+var_C0], eax
+0x000014E5: mov     rax, [rbp+var_A8]
+0x000014EC: mov     [rbp+var_BC], eax
+0x000014F2: mov     [rbp+var_B8], 0
+0x000014FC: jmp     short loc_1561
+loc_14FE:
+0x000014FE: mov     eax, [rbp+var_B8]
+0x00001504: cdqe
+0x00001506: mov     rdx, [rbp+rax*8+var_90]
+0x0000150E: mov     eax, [rbp+var_BC]
+0x00001514: mov     rsi, rdx
+0x00001517: mov     edi, eax
+0x00001519: call    feistel
+0x0000151E: mov     [rbp+var_B4], eax
+0x00001524: mov     eax, [rbp+var_BC]
+0x0000152A: mov     [rbp+var_B0], eax
+0x00001530: mov     eax, [rbp+var_C0]
+0x00001536: xor     eax, [rbp+var_B4]
+0x0000153C: mov     [rbp+var_AC], eax
+0x00001542: mov     eax, [rbp+var_B0]
+0x00001548: mov     [rbp+var_C0], eax
+0x0000154E: mov     eax, [rbp+var_AC]
+0x00001554: mov     [rbp+var_BC], eax
+0x0000155A: add     [rbp+var_B8], 1
+loc_1561:
+0x00001561: cmp     [rbp+var_B8], 0Fh
+0x00001568: jle     short loc_14FE
+0x0000156A: mov     eax, [rbp+var_BC]
+0x00001570: shl     rax, 20h
+0x00001574: mov     rdx, rax
+0x00001577: mov     eax, [rbp+var_C0]
+0x0000157D: or      rax, rdx
+0x00001580: mov     [rbp+var_A0], rax
+0x00001587: mov     rax, [rbp+var_A0]
+0x0000158E: mov     ecx, 40h ; '@'
+0x00001593: mov     edx, 40h ; '@'
+0x00001598: lea     rsi, FP
+0x0000159F: mov     rdi, rax
+0x000015A2: call    permute
+0x000015A7: mov     [rbp+var_98], rax
+0x000015AE: mov     rax, [rbp+var_98]
+0x000015B5: mov     rdx, [rbp+var_8]
+0x000015B9: sub     rdx, fs:28h
+0x000015C2: jz      short locret_15C9
+0x000015C4: call    ___stack_chk_fail
+locret_15C9:
+0x000015C9: leave
+0x000015CA: retn

@@ -1,0 +1,175 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 161,
+      "ir_len": 15934,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_function1.ll:78:13: error: expected instruction opcode\n  %t0.rot = %t1.init\n            ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@sbox_1 = external constant [256 x i8], align 16\n@rcon_0 = external constant [256 x i8], align 16\n\ndefine void @aes128_encrypt",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_function1.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 183,
+      "ir_len": 15791,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_function2.ll:205:3: error: multiple definition of local value named 'v1'\n  %v1  = load i8, i8* %p1, align 1\n  ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@sbox_1 = external constant [256 x i8], align 16\n@rcon_0 = external constant [256 x i8], align 16\n\ndefine void @aes128_encrypt",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_function2.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 1978,
+      "ir_len": 15327,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %rconi.pass = phi i32 [ %rconi.phi, %expand_loop ]\nlabel %expand_loop\nlabel %after_subword\nInstruction does not dominate all uses!\n  %rconi.phi = phi i32 [ %rconi.next, %do_subword ], [ %rconi,",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@sbox_1 = external constant [256 x i8], align 16\n@rcon_0 = external constant [256 x i8], align 16\n\ndefine void @aes128_encrypt",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_function3.ll"
+    },
+    {
+      "filename": "DES_modular_function3.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 206,
+      "ir_len": 1903,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/DES_modular_function31.ll:62:16: error: expected type\n  %call = call dso_local i64 @permute(i64 %res64, i8* %p.ptr, i32 32, i32 32)\n               ^\n",
+      "ir_preview": "; ModuleID = 'sboxes_p.ll'\nsource_filename = \"sboxes_p\"\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@SBOX = external dso_local constant [512 x i8]\n@P    = external dso_local constant [32 x i8]\n\ndeclar",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/DES_modular_function31.ll"
+    },
+    {
+      "filename": "DES_single_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 298,
+      "ir_len": 9098,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single_function1.ll:59:83: error: expected type\n  %sh.ptr = getelementptr inbounds [16 x i32], [16 x i32]* @SHIFTS_6, i64 0, i64 (zext i32 %rk.i to i64)\n                                                                                  ^\n",
+      "ir_preview": "; External tables (sizes inferred from usage)\n@PC1_7   = external constant [56 x i32], align 4\n@SHIFTS_6 = external constant [16 x i32], align 4\n@PC2_5   = external constant [48 x i32], align 4\n@IP_4 ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single_function1.ll"
+    },
+    {
+      "filename": "DES_single_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 153,
+      "ir_len": 8460,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single_function2.ll:224:13: error: expected instruction opcode\n  %L.next = %R\n            ^\n",
+      "ir_preview": "@PC1_7 = external constant [56 x i32], align 4\n@SHIFTS_6 = external constant [16 x i32], align 4\n@PC2_5 = external constant [48 x i32], align 4\n@IP_4 = external constant [64 x i32], align 4\n@E_3 = ext",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single_function2.ll"
+    },
+    {
+      "filename": "insertionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 155,
+      "ir_len": 1807,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/insertionsort_function1.ll:17:13: error: expected instruction opcode\n  %j.init = %i\n            ^\n",
+      "ir_preview": "; ModuleID = 'insertion_sort.ll'\nsource_filename = \"insertion_sort\"\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\ndefine dso_local void @insertion_sort(i32* %arr, i64 %len) {\nentry:\n  br label %for.cond",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/insertionsort_function1.ll"
+    },
+    {
+      "filename": "mergesort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 147,
+      "ir_len": 5317,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/mergesort_function1.ll:33:11: error: expected instruction opcode\n  %left = %i\n          ^\n",
+      "ir_preview": "; ModuleID = 'merge_sort.ll'\nsource_filename = \"merge_sort\"\n\ndeclare noalias i8* @malloc(i64)\ndeclare void @free(i8*)\ndeclare i8* @memcpy(i8*, i8*, i64)\n\ndefine void @merge_sort(i32* %dest, i64 %n) {\n",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/mergesort_function1.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 152,
+      "ir_len": 4376,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/quicksort_function1.ll:15:13: error: expected instruction opcode\n  %i.init = %lo\n            ^\n",
+      "ir_preview": "; ModuleID = 'quick_sort.ll'\nsource_filename = \"quick_sort\"\n\ndefine dso_local void @quick_sort(i32* %arr, i64 %low, i64 %high) {\nentry:\n  br label %outer.cond\n\nouter.cond:                             ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/quicksort_function1.ll"
+    },
+    {
+      "filename": "AES128_modular_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 203,
+      "ir_len": 2382,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_modular_main1.ll:22:13: error: floating point constant invalid for type\n  store i64 0xA6D2AE2816157E2B, i64* %key0, align 16\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\nsource_filename = \"recovered\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str_header = private unnamed_addr constant [13 x i8] c\"Ciphertext: \\00\", align 1\n@.str_hex = private unn",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_modular_main1.ll"
+    },
+    {
+      "filename": "AES128_single_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 288,
+      "ir_len": 2639,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_main1.ll:5:48: error: constant expression type mismatch: got type '[5 x i8]' but expected '[4 x i8]'\n@.fmt = private unnamed_addr constant [4 x i8] c\"%02x\\00\", align 1\n                                               ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main.ll'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str = private unnamed_addr constant [13 x i8] c\"Ciphertext: \\00\", align 1\n@.fmt = private unnamed_addr constant [4 x i8] ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_main1.ll"
+    },
+    {
+      "filename": "AES128_single_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 203,
+      "ir_len": 2639,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_main2.ll:22:13: error: floating point constant invalid for type\n  store i64 0xA6D2AE2816157E2B, i64* %key64, align 16\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main.ll'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str = private unnamed_addr constant [13 x i8] c\"Ciphertext: \\00\", align 1\n@.fmt = private unnamed_addr constant [5 x i8] ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/AES128_single_main2.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 213,
+      "ir_len": 5894,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/BFS_main1.ll:88:34: error: expected type\n  %fmt1 = getelementptr inbounds ([21 x i8], [21 x i8]* @.str.bfs, i64 0, i64 0\n                                 ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\nsource_filename = \"recovered.c\"\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str.bfs   = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align 1\n@.str.pai",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/BFS_main1.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 214,
+      "ir_len": 5607,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/BFS_main2.ll:85:34: error: expected type\n  %fmt1 = getelementptr inbounds ([21 x i8], [21 x i8]* @.str.bfs, i64 0, i64 0)\n                                 ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\nsource_filename = \"recovered.c\"\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str.bfs   = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align 1\n@.str.pai",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/BFS_main2.ll"
+    },
+    {
+      "filename": "DES_modular_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 255,
+      "ir_len": 897,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/DES_modular_main1.ll:16:39: error: floating point constant invalid for type\n  %cipher = call i64 @des_encrypt(i64 0x0123456789ABCDEF, i64 0x133457799BBCDFF1)\n                                      ^\n",
+      "ir_preview": "; ModuleID = 'main.ll'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [21 x i8] c\"Ciphertext: %016llX\\0A\\00\", align 1\n@.str.1 = private unnamed_addr constant [29 x i8] c\"",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/DES_modular_main1.ll"
+    },
+    {
+      "filename": "DES_single__main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 247,
+      "ir_len": 755,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single__main1.ll:14:35: error: floating point constant invalid for type\n  %ct = call i64 @des_encrypt(i64 0x0123456789ABCDEF, i64 0x133457799BBCDFF1)\n                                  ^\n",
+      "ir_preview": "; ModuleID = 'module.ll'\nsource_filename = \"module\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [21 x i8] c\"Ciphertext: %016llX\\0A\\00\", align 1\n@.str.1 = private unnam",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single__main1.ll"
+    },
+    {
+      "filename": "DES_single__main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 216,
+      "ir_len": 755,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single__main2.ll:15:33: error: expected type\n  %fmt = getelementptr inbounds ([21 x i8], [21 x i8]* @.str, i64 0, i64 0)\n                                ^\n",
+      "ir_preview": "; ModuleID = 'module.ll'\nsource_filename = \"module\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [21 x i8] c\"Ciphertext: %016llX\\0A\\00\", align 1\n@.str.1 = private unnam",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_query/error_repeat/1/DES_single__main2.ll"
+    }
+  ]
+}

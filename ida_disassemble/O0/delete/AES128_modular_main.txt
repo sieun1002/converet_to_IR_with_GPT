@@ -1,0 +1,57 @@
+; Function: main
+; Start: 0x1935, End: 0x1A1D
+
+0x00001935: endbr64
+0x00001939: push    rbp
+0x0000193A: mov     rbp, rsp
+0x0000193D: sub     rsp, 50h
+0x00001941: mov     rax, fs:28h
+0x0000194A: mov     [rbp+var_8], rax
+0x0000194E: xor     eax, eax
+0x00001950: mov     rax, 0A6D2AE2816157E2Bh
+0x0000195A: mov     rdx, 3C4FCF098815F7ABh
+0x00001964: mov     [rbp+var_40], rax
+0x00001968: mov     [rbp+var_38], rdx
+0x0000196C: mov     rax, 8D305A88A8F64332h
+0x00001976: mov     rdx, 340737E0A2983131h
+0x00001980: mov     [rbp+var_30], rax
+0x00001984: mov     [rbp+var_28], rdx
+0x00001988: lea     rdx, [rbp+var_40]
+0x0000198C: lea     rcx, [rbp+var_30]
+0x00001990: lea     rax, [rbp+var_20]
+0x00001994: mov     rsi, rcx
+0x00001997: mov     rdi, rax
+0x0000199A: call    aes128_encrypt
+0x0000199F: lea     rax, format; "Ciphertext: "
+0x000019A6: mov     rdi, rax; format
+0x000019A9: mov     eax, 0
+0x000019AE: call    _printf
+0x000019B3: mov     [rbp+var_44], 0
+0x000019BA: jmp     short loc_19E3
+loc_19BC:
+0x000019BC: mov     eax, [rbp+var_44]
+0x000019BF: cdqe
+0x000019C1: movzx   eax, [rbp+rax+var_20]
+0x000019C6: movzx   eax, al
+0x000019C9: mov     esi, eax
+0x000019CB: lea     rax, a02x; "%02x"
+0x000019D2: mov     rdi, rax; format
+0x000019D5: mov     eax, 0
+0x000019DA: call    _printf
+0x000019DF: add     [rbp+var_44], 1
+loc_19E3:
+0x000019E3: cmp     [rbp+var_44], 0Fh
+0x000019E7: jle     short loc_19BC
+0x000019E9: mov     edi, 0Ah; c
+0x000019EE: call    _putchar
+0x000019F3: lea     rax, s; "Ciphertext: 3925841d02dc09fbdc118597196"...
+0x000019FA: mov     rdi, rax; s
+0x000019FD: call    _puts
+0x00001A02: mov     eax, 0
+0x00001A07: mov     rdx, [rbp+var_8]
+0x00001A0B: sub     rdx, fs:28h
+0x00001A14: jz      short locret_1A1B
+0x00001A16: call    ___stack_chk_fail
+locret_1A1B:
+0x00001A1B: leave
+0x00001A1C: retn

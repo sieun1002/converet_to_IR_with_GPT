@@ -1,0 +1,122 @@
+; ModuleID = 'heap_sort'
+target triple = "x86_64-unknown-linux-gnu"
+
+define dso_local void @heap_sort(i32* nocapture %arr, i64 %n) local_unnamed_addr {
+entry:
+  %cond0 = icmp ule i64 %n, 1
+  %half = lshr i64 %n, 1
+  br i1 %cond0, label %ret, label %build.loop
+
+build.loop:
+  %i.phi = phi i64 [ %half, %entry ], [ %i.dec, %build.after.sift ]
+  %i.cond = icmp ugt i64 %i.phi, 0
+  br i1 %i.cond, label %build.body, label %build.end
+
+build.body:
+  %idx = add i64 %i.phi, -1
+  br label %build.sift
+
+build.sift:
+  %cur = phi i64 [ %idx, %build.body ], [ %next.cur, %build.sift.swap.done ]
+  %cur2 = add i64 %cur, %cur
+  %left = add i64 %cur2, 1
+  %left.in.range = icmp ult i64 %left, %n
+  br i1 %left.in.range, label %build.choose, label %build.sift.end
+
+build.choose:
+  %right = add i64 %left, 1
+  %right.in.range = icmp ult i64 %right, %n
+  %left.ptr = getelementptr inbounds i32, i32* %arr, i64 %left
+  %left.val = load i32, i32* %left.ptr, align 4
+  %right.ptr = getelementptr inbounds i32, i32* %arr, i64 %right
+  %right.val = load i32, i32* %right.ptr, align 4
+  %right.gt.left = icmp sgt i32 %right.val, %left.val
+  %choose.right = and i1 %right.in.range, %right.gt.left
+  %child = select i1 %choose.right, i64 %right, i64 %left
+  br label %build.compare
+
+build.compare:
+  %cur.ptr = getelementptr inbounds i32, i32* %arr, i64 %cur
+  %cur.val = load i32, i32* %cur.ptr, align 4
+  %child.ptr = getelementptr inbounds i32, i32* %arr, i64 %child
+  %child.val = load i32, i32* %child.ptr, align 4
+  %cur.ge.child = icmp sge i32 %cur.val, %child.val
+  br i1 %cur.ge.child, label %build.sift.end, label %build.sift.swap
+
+build.sift.swap:
+  %next.cur = phi i64 [ %child, %build.compare ]
+  store i32 %child.val, i32* %cur.ptr, align 4
+  store i32 %cur.val, i32* %child.ptr, align 4
+  br label %build.sift.swap.done
+
+build.sift.swap.done:
+  br label %build.sift
+
+build.sift.end:
+  br label %build.after.sift
+
+build.after.sift:
+  %i.dec = add i64 %i.phi, -1
+  br label %build.loop
+
+build.end:
+  %j.init = add i64 %n, -1
+  br label %outer.loop
+
+outer.loop:
+  %j = phi i64 [ %j.init, %build.end ], [ %j.dec, %outer.after.sift ]
+  %j.cond = icmp ugt i64 %j, 0
+  br i1 %j.cond, label %outer.body, label %ret
+
+outer.body:
+  %root.ptr = getelementptr inbounds i32, i32* %arr, i64 0
+  %root.val = load i32, i32* %root.ptr, align 4
+  %j.ptr = getelementptr inbounds i32, i32* %arr, i64 %j
+  %j.val = load i32, i32* %j.ptr, align 4
+  store i32 %j.val, i32* %root.ptr, align 4
+  store i32 %root.val, i32* %j.ptr, align 4
+  br label %sift.loop
+
+sift.loop:
+  %cur2.phi = phi i64 [ 0, %outer.body ], [ %cur2.next, %sift.swap.done ]
+  %cur2.twice = add i64 %cur2.phi, %cur2.phi
+  %left2 = add i64 %cur2.twice, 1
+  %left2.in.range = icmp ult i64 %left2, %j
+  br i1 %left2.in.range, label %sift.choose, label %outer.after.sift
+
+sift.choose:
+  %right2 = add i64 %left2, 1
+  %right2.in.range = icmp ult i64 %right2, %j
+  %left2.ptr = getelementptr inbounds i32, i32* %arr, i64 %left2
+  %left2.val = load i32, i32* %left2.ptr, align 4
+  %right2.ptr = getelementptr inbounds i32, i32* %arr, i64 %right2
+  %right2.val = load i32, i32* %right2.ptr, align 4
+  %right2.gt.left2 = icmp sgt i32 %right2.val, %left2.val
+  %choose.right2 = and i1 %right2.in.range, %right2.gt.left2
+  %child2 = select i1 %choose.right2, i64 %right2, i64 %left2
+  br label %sift.compare
+
+sift.compare:
+  %cur2.ptr = getelementptr inbounds i32, i32* %arr, i64 %cur2.phi
+  %cur2.val = load i32, i32* %cur2.ptr, align 4
+  %child2.ptr = getelementptr inbounds i32, i32* %arr, i64 %child2
+  %child2.val = load i32, i32* %child2.ptr, align 4
+  %cur2.ge.child2 = icmp sge i32 %cur2.val, %child2.val
+  br i1 %cur2.ge.child2, label %outer.after.sift, label %sift.swap
+
+sift.swap:
+  %cur2.next = phi i64 [ %child2, %sift.compare ]
+  store i32 %child2.val, i32* %cur2.ptr, align 4
+  store i32 %cur2.val, i32* %child2.ptr, align 4
+  br label %sift.swap.done
+
+sift.swap.done:
+  br label %sift.loop
+
+outer.after.sift:
+  %j.dec = add i64 %j, -1
+  br label %outer.loop
+
+ret:
+  ret void
+}

@@ -1,0 +1,37 @@
+; Function: init_graph
+; Start: 0x401130, End: 0x4011A1
+
+0x00401130: push    rbp
+0x00401131: mov     rbp, rsp
+0x00401134: mov     [rbp+var_8], rdi
+0x00401138: mov     [rbp+var_C], esi
+0x0040113B: mov     [rbp+var_10], 0
+loc_401142:
+0x00401142: mov     eax, [rbp+var_10]
+0x00401145: cmp     eax, [rbp+var_C]
+0x00401148: jge     loc_40119F
+0x0040114E: mov     [rbp+var_14], 0
+loc_401155:
+0x00401155: mov     eax, [rbp+var_14]
+0x00401158: cmp     eax, [rbp+var_C]
+0x0040115B: jge     loc_40118C
+0x00401161: mov     rax, [rbp+var_8]
+0x00401165: movsxd  rcx, [rbp+var_10]
+0x00401169: imul    rcx, 190h
+0x00401170: add     rax, rcx
+0x00401173: movsxd  rcx, [rbp+var_14]
+0x00401177: mov     dword ptr [rax+rcx*4], 0
+0x0040117E: mov     eax, [rbp+var_14]
+0x00401181: add     eax, 1
+0x00401184: mov     [rbp+var_14], eax
+0x00401187: jmp     loc_401155
+loc_40118C:
+0x0040118C: jmp     $+5
+loc_401191:
+0x00401191: mov     eax, [rbp+var_10]
+0x00401194: add     eax, 1
+0x00401197: mov     [rbp+var_10], eax
+0x0040119A: jmp     loc_401142
+loc_40119F:
+0x0040119F: pop     rbp
+0x004011A0: retn

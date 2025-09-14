@@ -1,0 +1,42 @@
+; Function: permute
+; Start: 0x1189, End: 0x1205
+
+0x00001189: push    rbp
+0x0000118A: mov     rbp, rsp
+0x0000118D: mov     [rbp+var_28], rdi
+0x00001191: mov     [rbp+var_30], rsi
+0x00001195: mov     [rbp+var_34], edx
+0x00001198: mov     [rbp+var_38], ecx
+0x0000119B: mov     [rbp+var_10], 0
+0x000011A3: mov     [rbp+var_1C], 0
+0x000011AA: jmp     short loc_11F7
+loc_11AC:
+0x000011AC: mov     eax, [rbp+var_1C]
+0x000011AF: cdqe
+0x000011B1: lea     rdx, ds:0[rax*4]
+0x000011B9: mov     rax, [rbp+var_30]
+0x000011BD: add     rax, rdx
+0x000011C0: mov     eax, [rax]
+0x000011C2: mov     [rbp+var_18], eax
+0x000011C5: mov     eax, [rbp+var_38]
+0x000011C8: sub     eax, [rbp+var_18]
+0x000011CB: mov     [rbp+var_14], eax
+0x000011CE: mov     eax, [rbp+var_14]
+0x000011D1: mov     rdx, [rbp+var_28]
+0x000011D5: mov     ecx, eax
+0x000011D7: shr     rdx, cl
+0x000011DA: mov     rax, rdx
+0x000011DD: and     eax, 1
+0x000011E0: mov     [rbp+var_8], rax
+0x000011E4: mov     rax, [rbp+var_10]
+0x000011E8: add     rax, rax
+0x000011EB: or      rax, [rbp+var_8]
+0x000011EF: mov     [rbp+var_10], rax
+0x000011F3: add     [rbp+var_1C], 1
+loc_11F7:
+0x000011F7: mov     eax, [rbp+var_1C]
+0x000011FA: cmp     eax, [rbp+var_34]
+0x000011FD: jl      short loc_11AC
+0x000011FF: mov     rax, [rbp+var_10]
+0x00001203: pop     rbp
+0x00001204: retn

@@ -1,0 +1,34 @@
+; Function: _sub_bytes
+; Start: 0x1274, End: 0x12CA
+
+0x00001274: endbr64
+0x00001278: push    rbp
+0x00001279: mov     rbp, rsp
+0x0000127C: push    rbx
+0x0000127D: sub     rsp, 18h
+0x00001281: mov     [rbp+var_20], rdi
+0x00001285: mov     [rbp+var_C], 0
+0x0000128C: jmp     short loc_12BC
+loc_128E:
+0x0000128E: mov     eax, [rbp+var_C]
+0x00001291: movsxd  rdx, eax
+0x00001294: mov     rax, [rbp+var_20]
+0x00001298: add     rax, rdx
+0x0000129B: movzx   eax, byte ptr [rax]
+0x0000129E: movzx   eax, al
+0x000012A1: mov     edx, [rbp+var_C]
+0x000012A4: movsxd  rcx, edx
+0x000012A7: mov     rdx, [rbp+var_20]
+0x000012AB: lea     rbx, [rcx+rdx]
+0x000012AF: mov     edi, eax
+0x000012B1: call    sbox_lookup
+0x000012B6: mov     [rbx], al
+0x000012B8: add     [rbp+var_C], 1
+loc_12BC:
+0x000012BC: cmp     [rbp+var_C], 0Fh
+0x000012C0: jle     short loc_128E
+0x000012C2: nop
+0x000012C3: nop
+0x000012C4: mov     rbx, [rbp+var_8]
+0x000012C8: leave
+0x000012C9: retn

@@ -1,0 +1,83 @@
+{
+  "entries": [
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/7/DFS_function.ll:61:20: error: invalid cast opcode for cast from 'i64' to 'i64'\n  %n_bytes = trunc i64 %n to i64\n                   ^\n1 error generated."
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/7/binarysearch_function.ll:18:6: error: expected '=' after instruction id\n  %10val = load i32, i32* %9, align 4\n     ^\n1 error generated."
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "dijkstra_modular.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "dijkstra_single_func.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/7/dijkstra_single_func_main.ll:5:49: error: constant expression type mismatch: got type '[9 x i8]' but expected '[8 x i8]'\n@.str3 = private unnamed_addr constant [8 x i8] c\"%d %d %d\\00\", align 1\n                                                ^\n1 error generated."
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace, preprocessed source, and associated run script.\nStack dump:\n0.\tProgram arguments: /usr/lib/llvm-14/bin/clang -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name heapsort_function.ll -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb \"-fcoverage-compilation-dir=/home/nata20034/workspace/convert_to_IR_with_LLM/python code/evaluation\" -resource-dir /usr/lib/llvm-14/lib/clang/14.0.0 -O0 \"-fdebug-compilation-dir=/home/nata20034/workspace/convert_to_IR_with_LLM/python code/evaluation\" -ferror-limit 19 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o /tmp/heapsort_function-f024a9.o -x ir /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/7/heapsort_function.ll\n1.\tCode generation\n2.\tRunning pass 'Function Pass Manager' on module '/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/7/heapsort_function.ll'.\n3.\tRunning pass 'X86 DAG->DAG Instruction Selection' on function '@heap_sort'\n #0 0x00007974d283fd01 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe3fd01)\n #1 0x00007974d283da3e llvm::sys::RunSignalHandlers() (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe3da3e)\n #2 0x00007974d2840236 (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe40236)\n #3 0x00007974d1242520 (/lib/x86_64-linux-gnu/libc.so.6+0x42520)\n #4 0x00007974d2f03390 llvm::FastISel::handlePHINodesInSuccessorBlocks(llvm::BasicBlock const*) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1503390)\n #5 0x00007974d2f02a79 llvm::FastISel::selectInstruction(llvm::Instruction const*) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1502a79)\n #6 0x00007974d305725b llvm::SelectionDAGISel::SelectAllBasicBlocks(llvm::Function const&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x165725b)\n #7 0x00007974d3055557 llvm::SelectionDAGISel::runOnMachineFunction(llvm::MachineFunction&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1655557)\n #8 0x00007974d4ff7a0d (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x35f7a0d)\n #9 0x00007974d2bc628e llvm::MachineFunctionPass::runOnFunction(llvm::Function&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x11c628e)\n#10 0x00007974d297a390 llvm::FPPassManager::runOnFunction(llvm::Function&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf7a390)\n#11 0x00007974d2981983 llvm::FPPassManager::runOnModule(llvm::Module&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf81983)\n#12 0x00007974d297af36 llvm::legacy::PassManagerImpl::run(llvm::Module&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf7af36)\n#13 0x00007974d9c57201 clang::EmitBackendOutput(clang::DiagnosticsEngine&, clang::HeaderSearchOptions const&, clang::CodeGenOptions const&, clang::TargetOptions const&, clang::LangOptions const&, llvm::StringRef, llvm::Module*, clang::BackendAction, std::unique_ptr<llvm::raw_pwrite_stream, std::default_delete<llvm::raw_pwrite_stream> >) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x1857201)\n#14 0x00007974d9f791e0 clang::CodeGenAction::ExecuteAction() (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x1b791e0)\n#15 0x00007974da914b57 clang::FrontendAction::Execute() (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x2514b57)\n#16 0x00007974da86c3a6 clang::CompilerInstance::ExecuteAction(clang::FrontendAction&) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x246c3a6)\n#17 0x00007974da98e45b clang::ExecuteCompilerInvocation(clang::CompilerInstance*) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x258e45b)\n#18 0x000000000041328b cc1_main(llvm::ArrayRef<char const*>, char const*, void*) (/usr/lib/llvm-14/bin/clang+0x41328b)\n#19 0x00000000004114bc (/usr/lib/llvm-14/bin/clang+0x4114bc)\n#20 0x0000000000411307 main (/usr/lib/llvm-14/bin/clang+0x411307)\n#21 0x00007974d1229d90 __libc_start_call_main ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n#22 0x00007974d1229e40 call_init ./csu/../csu/libc-start.c:128:20\n#23 0x00007974d1229e40 __libc_start_main ./csu/../csu/libc-start.c:379:5\n#24 0x000000000040e3b5 _start (/usr/lib/llvm-14/bin/clang+0x40e3b5)\nclang: error: unable to execute command: Segmentation fault (core dumped)\nclang: error: clang frontend command failed due to signal (use -v to see invocation)\nUbuntu clang version 14.0.0-1ubuntu1.1\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\nclang: note: diagnostic msg: Error generating preprocessed source(s) - no preprocessable inputs."
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/usr/bin/ld: /tmp/insertionsort_main-5bc247.o: in function `main':\ninsertionsort_main.ll:(.text+0x8): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: insertionsort_main.ll:(.text+0xd3): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/7/linearsearch_function.ll:14:27: error: expected value token\n  %eq = icmp eq i32 %val, i32 %key\n                          ^\n1 error generated."
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/selectionsort_main-884229.o: in function `main':\nselectionsort_main.ll:(.text+0x8): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: selectionsort_main.ll:(.text+0xc6): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    }
+  ]
+}

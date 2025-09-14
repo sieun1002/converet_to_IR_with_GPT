@@ -1,0 +1,136 @@
+{
+  "entries": [
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\nPLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace, preprocessed source, and associated run script.\nStack dump:\n0.\tProgram arguments: /usr/lib/llvm-14/bin/clang -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name DFS_main.ll -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb \"-fcoverage-compilation-dir=/home/nata20034/workspace/convert_to_IR_with_LLM/python code/evaluation\" -resource-dir /usr/lib/llvm-14/lib/clang/14.0.0 -O0 \"-fdebug-compilation-dir=/home/nata20034/workspace/convert_to_IR_with_LLM/python code/evaluation\" -ferror-limit 19 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o /tmp/DFS_main-075ad3.o -x ir /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/DFS_main.ll\n1.\tCode generation\n2.\tRunning pass 'Function Pass Manager' on module '/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/DFS_main.ll'.\n3.\tRunning pass 'X86 DAG->DAG Instruction Selection' on function '@dfs'\n #0 0x00007edd6d03fd01 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe3fd01)\n #1 0x00007edd6d03da3e llvm::sys::RunSignalHandlers() (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe3da3e)\n #2 0x00007edd6d040236 (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe40236)\n #3 0x00007edd6ba42520 (/lib/x86_64-linux-gnu/libc.so.6+0x42520)\n #4 0x00007edd6d703390 llvm::FastISel::handlePHINodesInSuccessorBlocks(llvm::BasicBlock const*) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1503390)\n #5 0x00007edd6d702a79 llvm::FastISel::selectInstruction(llvm::Instruction const*) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1502a79)\n #6 0x00007edd6d85725b llvm::SelectionDAGISel::SelectAllBasicBlocks(llvm::Function const&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x165725b)\n #7 0x00007edd6d855557 llvm::SelectionDAGISel::runOnMachineFunction(llvm::MachineFunction&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1655557)\n #8 0x00007edd6f7f7a0d (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x35f7a0d)\n #9 0x00007edd6d3c628e llvm::MachineFunctionPass::runOnFunction(llvm::Function&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x11c628e)\n#10 0x00007edd6d17a390 llvm::FPPassManager::runOnFunction(llvm::Function&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf7a390)\n#11 0x00007edd6d181983 llvm::FPPassManager::runOnModule(llvm::Module&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf81983)\n#12 0x00007edd6d17af36 llvm::legacy::PassManagerImpl::run(llvm::Module&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf7af36)\n#13 0x00007edd74457201 clang::EmitBackendOutput(clang::DiagnosticsEngine&, clang::HeaderSearchOptions const&, clang::CodeGenOptions const&, clang::TargetOptions const&, clang::LangOptions const&, llvm::StringRef, llvm::Module*, clang::BackendAction, std::unique_ptr<llvm::raw_pwrite_stream, std::default_delete<llvm::raw_pwrite_stream> >) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x1857201)\n#14 0x00007edd747791e0 clang::CodeGenAction::ExecuteAction() (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x1b791e0)\n#15 0x00007edd75114b57 clang::FrontendAction::Execute() (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x2514b57)\n#16 0x00007edd7506c3a6 clang::CompilerInstance::ExecuteAction(clang::FrontendAction&) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x246c3a6)\n#17 0x00007edd7518e45b clang::ExecuteCompilerInvocation(clang::CompilerInstance*) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x258e45b)\n#18 0x000000000041328b cc1_main(llvm::ArrayRef<char const*>, char const*, void*) (/usr/lib/llvm-14/bin/clang+0x41328b)\n#19 0x00000000004114bc (/usr/lib/llvm-14/bin/clang+0x4114bc)\n#20 0x0000000000411307 main (/usr/lib/llvm-14/bin/clang+0x411307)\n#21 0x00007edd6ba29d90 __libc_start_call_main ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n#22 0x00007edd6ba29e40 call_init ./csu/../csu/libc-start.c:128:20\n#23 0x00007edd6ba29e40 __libc_start_main ./csu/../csu/libc-start.c:379:5\n#24 0x000000000040e3b5 _start (/usr/lib/llvm-14/bin/clang+0x40e3b5)\nclang: error: unable to execute command: Segmentation fault (core dumped)\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/DFS_function.ll:6:52: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.str_fmt = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\", align 1\n                                                   ^\n1 error generated.\nclang: error: clang frontend command failed due to signal (use -v to see invocation)\nUbuntu clang version 14.0.0-1ubuntu1.1\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\nclang: note: diagnostic msg: Error generating preprocessed source(s) - no preprocessable inputs."
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/heapsort_main-3a7b47.o: in function `main':\nrecovered.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered.ll:(.text+0x5e): undefined reference to `format'\n/usr/bin/ld: recovered.ll:(.text+0xcc): undefined reference to `byte_2011'\n/usr/bin/ld: recovered.ll:(.text+0x128): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/insertionsort_function.ll:9:21: error: expected value token\n  %i = phi i64 [ 1, entry ], [ %i.next, %for.latch ]\n                    ^\n1 error generated."
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch_main-d8ecdf.o: in function `main':\nbinary_to_ir:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: binary_to_ir:(.text+0x92): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/quicksort_function.ll:16:14: error: expected instruction opcode\n  %i.start = %lo.cur\n             ^\n1 error generated."
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/selectionsort_main.ll:5:56: error: constant expression type mismatch: got type '[15 x i8]' but expected '[16 x i8]'\n@.str.sorted = private unnamed_addr constant [16 x i8] c\"Sorted array: \\00\", align 1\n                                                       ^\n1 error generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated."
+    },
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\nPLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace, preprocessed source, and associated run script.\nStack dump:\n0.\tProgram arguments: /usr/lib/llvm-14/bin/clang -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name DFS_main.ll -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb \"-fcoverage-compilation-dir=/home/nata20034/workspace/convert_to_IR_with_LLM/python code/evaluation\" -resource-dir /usr/lib/llvm-14/lib/clang/14.0.0 -O0 \"-fdebug-compilation-dir=/home/nata20034/workspace/convert_to_IR_with_LLM/python code/evaluation\" -ferror-limit 19 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o /tmp/DFS_main-b2eaf9.o -x ir /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/DFS_main.ll\n1.\tCode generation\n2.\tRunning pass 'Function Pass Manager' on module '/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/DFS_main.ll'.\n3.\tRunning pass 'X86 DAG->DAG Instruction Selection' on function '@dfs'\n #0 0x000079312a23fd01 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe3fd01)\n #1 0x000079312a23da3e llvm::sys::RunSignalHandlers() (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe3da3e)\n #2 0x000079312a240236 (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xe40236)\n #3 0x0000793128c42520 (/lib/x86_64-linux-gnu/libc.so.6+0x42520)\n #4 0x000079312a903390 llvm::FastISel::handlePHINodesInSuccessorBlocks(llvm::BasicBlock const*) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1503390)\n #5 0x000079312a902a79 llvm::FastISel::selectInstruction(llvm::Instruction const*) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1502a79)\n #6 0x000079312aa5725b llvm::SelectionDAGISel::SelectAllBasicBlocks(llvm::Function const&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x165725b)\n #7 0x000079312aa55557 llvm::SelectionDAGISel::runOnMachineFunction(llvm::MachineFunction&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x1655557)\n #8 0x000079312c9f7a0d (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x35f7a0d)\n #9 0x000079312a5c628e llvm::MachineFunctionPass::runOnFunction(llvm::Function&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0x11c628e)\n#10 0x000079312a37a390 llvm::FPPassManager::runOnFunction(llvm::Function&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf7a390)\n#11 0x000079312a381983 llvm::FPPassManager::runOnModule(llvm::Module&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf81983)\n#12 0x000079312a37af36 llvm::legacy::PassManagerImpl::run(llvm::Module&) (/lib/x86_64-linux-gnu/libLLVM-14.so.1+0xf7af36)\n#13 0x0000793131657201 clang::EmitBackendOutput(clang::DiagnosticsEngine&, clang::HeaderSearchOptions const&, clang::CodeGenOptions const&, clang::TargetOptions const&, clang::LangOptions const&, llvm::StringRef, llvm::Module*, clang::BackendAction, std::unique_ptr<llvm::raw_pwrite_stream, std::default_delete<llvm::raw_pwrite_stream> >) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x1857201)\n#14 0x00007931319791e0 clang::CodeGenAction::ExecuteAction() (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x1b791e0)\n#15 0x0000793132314b57 clang::FrontendAction::Execute() (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x2514b57)\n#16 0x000079313226c3a6 clang::CompilerInstance::ExecuteAction(clang::FrontendAction&) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x246c3a6)\n#17 0x000079313238e45b clang::ExecuteCompilerInvocation(clang::CompilerInstance*) (/lib/x86_64-linux-gnu/libclang-cpp.so.14+0x258e45b)\n#18 0x000000000041328b cc1_main(llvm::ArrayRef<char const*>, char const*, void*) (/usr/lib/llvm-14/bin/clang+0x41328b)\n#19 0x00000000004114bc (/usr/lib/llvm-14/bin/clang+0x4114bc)\n#20 0x0000000000411307 main (/usr/lib/llvm-14/bin/clang+0x411307)\n#21 0x0000793128c29d90 __libc_start_call_main ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n#22 0x0000793128c29e40 call_init ./csu/../csu/libc-start.c:128:20\n#23 0x0000793128c29e40 __libc_start_main ./csu/../csu/libc-start.c:379:5\n#24 0x000000000040e3b5 _start (/usr/lib/llvm-14/bin/clang+0x40e3b5)\nclang: error: unable to execute command: Segmentation fault (core dumped)\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/DFS_function.ll:6:52: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.str_fmt = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\", align 1\n                                                   ^\n1 error generated.\nclang: error: clang frontend command failed due to signal (use -v to see invocation)\nUbuntu clang version 14.0.0-1ubuntu1.1\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\nclang: note: diagnostic msg: Error generating preprocessed source(s) - no preprocessable inputs."
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/heapsort_main-0631ce.o: in function `main':\nrecovered.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered.ll:(.text+0x5e): undefined reference to `format'\n/usr/bin/ld: recovered.ll:(.text+0xcc): undefined reference to `byte_2011'\n/usr/bin/ld: recovered.ll:(.text+0x128): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/insertionsort_function.ll:9:21: error: expected value token\n  %i = phi i64 [ 1, entry ], [ %i.next, %for.latch ]\n                    ^\n1 error generated."
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch_main-541fdc.o: in function `main':\nbinary_to_ir:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: binary_to_ir:(.text+0x92): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/quicksort_function.ll:16:14: error: expected instruction opcode\n  %i.start = %lo.cur\n             ^\n1 error generated."
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/selectionsort_main.ll:5:56: error: constant expression type mismatch: got type '[15 x i8]' but expected '[16 x i8]'\n@.str.sorted = private unnamed_addr constant [16 x i8] c\"Sorted array: \\00\", align 1\n                                                       ^\n1 error generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated."
+    }
+  ]
+}

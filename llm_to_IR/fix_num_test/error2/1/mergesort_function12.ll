@@ -1,0 +1,129 @@
+; ModuleID = 'merge_sort.ll'
+source_filename = "merge_sort"
+
+declare noalias i8* @malloc(i64)
+declare void @free(i8*)
+declare i8* @memcpy(i8*, i8*, i64)
+
+define void @merge_sort(i32* %dest, i64 %n) {
+entry:
+  %cmp_n = icmp ule i64 %n, 1
+  br i1 %cmp_n, label %ret, label %alloc
+
+alloc:
+  %bytes = shl i64 %n, 2
+  %raw = call noalias i8* @malloc(i64 %bytes)
+  %tmp0 = bitcast i8* %raw to i32*
+  %isnull = icmp eq i32* %tmp0, null
+  br i1 %isnull, label %ret, label %outer_cond
+
+outer_cond:                                           ; preds = %alloc, %outer_latch
+  %w = phi i64 [ 1, %alloc ], [ %w2, %outer_latch ]
+  %src_phi = phi i32* [ %dest, %alloc ], [ %src2, %outer_latch ]
+  %tmp_phi = phi i32* [ %tmp0, %alloc ], [ %tmp2, %outer_latch ]
+  %cmp_w = icmp ult i64 %w, %n
+  br i1 %cmp_w, label %for_begin, label %after_outer
+
+for_begin:                                            ; preds = %outer_cond, %for_latch
+  %i = phi i64 [ 0, %outer_cond ], [ %i_next, %for_latch ]
+  %cond_i = icmp ult i64 %i, %n
+  br i1 %cond_i, label %merge_setup, label %for_end
+
+merge_setup:                                          ; preds = %for_begin
+  %mid_calc = add i64 %i, %w
+  %mid_lt_n = icmp ult i64 %mid_calc, %n
+  %mid = select i1 %mid_lt_n, i64 %mid_calc, i64 %n
+  %tw = shl i64 %w, 1
+  %right_calc = add i64 %i, %tw
+  %right_lt_n = icmp ult i64 %right_calc, %n
+  %right = select i1 %right_lt_n, i64 %right_calc, i64 %n
+  br label %inner_cond
+
+inner_cond:                                           ; preds = %merge_setup, %inner_body
+  %k_phi = phi i64 [ %i, %merge_setup ], [ %k_next, %inner_body ]
+  %l_phi = phi i64 [ %i, %merge_setup ], [ %l_next, %inner_body ]
+  %r_phi = phi i64 [ %mid,  %merge_setup ], [ %r_next, %inner_body ]
+  %k_lt_right = icmp ult i64 %k_phi, %right
+  br i1 %k_lt_right, label %choose, label %after_inner
+
+choose:                                               ; preds = %inner_cond
+  %l_lt_mid = icmp ult i64 %l_phi, %mid
+  br i1 %l_lt_mid, label %check_right, label %take_right_no_l
+
+check_right:                                          ; preds = %choose
+  %r_lt_right = icmp ult i64 %r_phi, %right
+  br i1 %r_lt_right, label %compare_lr, label %take_left_no_vals
+
+compare_lr:                                           ; preds = %check_right
+  %l_ptr = getelementptr inbounds i32, i32* %src_phi, i64 %l_phi
+  %l_val = load i32, i32* %l_ptr, align 4
+  %r_ptr = getelementptr inbounds i32, i32* %src_phi, i64 %r_phi
+  %r_val = load i32, i32* %r_ptr, align 4
+  %le = icmp sle i32 %l_val, %r_val
+  br i1 %le, label %take_left_with_vals, label %take_right_with_vals
+
+take_left_with_vals:                                  ; preds = %compare_lr
+  %l_inc1 = add i64 %l_phi, 1
+  br label %inner_body
+
+take_right_with_vals:                                 ; preds = %compare_lr
+  %r_inc1 = add i64 %r_phi, 1
+  br label %inner_body
+
+take_left_no_vals:                                    ; preds = %check_right
+  %l_ptr2 = getelementptr inbounds i32, i32* %src_phi, i64 %l_phi
+  %l_val2 = load i32, i32* %l_ptr2, align 4
+  %l_inc2 = add i64 %l_phi, 1
+  br label %inner_body
+
+take_right_no_l:                                      ; preds = %choose
+  %r_ptr2 = getelementptr inbounds i32, i32* %src_phi, i64 %r_phi
+  %r_val2 = load i32, i32* %r_ptr2, align 4
+  %r_inc2 = add i64 %r_phi, 1
+  br label %inner_body
+
+inner_body:                                           ; preds = %take_left_with_vals, %take_right_with_vals, %take_left_no_vals, %take_right_no_l
+  %val = phi i32 [ %l_val, %take_left_with_vals ], [ %r_val, %take_right_with_vals ], [ %l_val2, %take_left_no_vals ], [ %r_val2, %take_right_no_l ]
+  %l_next = phi i64 [ %l_inc1, %take_left_with_vals ], [ %l_phi, %take_right_with_vals ], [ %l_inc2, %take_left_no_vals ], [ %l_phi, %take_right_no_l ]
+  %r_next = phi i64 [ %r_phi, %take_left_with_vals ], [ %r_inc1, %take_right_with_vals ], [ %r_phi, %take_left_no_vals ], [ %r_inc2, %take_right_no_l ]
+  %out_ptr = getelementptr inbounds i32, i32* %tmp_phi, i64 %k_phi
+  store i32 %val, i32* %out_ptr, align 4
+  %k_next = add i64 %k_phi, 1
+  br label %inner_cond
+
+after_inner:                                          ; preds = %inner_cond
+  br label %for_latch
+
+for_latch:                                            ; preds = %after_inner
+  %tw2 = shl i64 %w, 1
+  %i_next = add i64 %i, %tw2
+  br label %for_begin
+
+for_end:                                              ; preds = %for_begin
+  %src2 = phi i32* [ %tmp_phi, %for_begin ]
+  %tmp2 = phi i32* [ %src_phi, %for_begin ]
+  %w2 = shl i64 %w, 1
+  br label %outer_latch
+
+outer_latch:                                          ; preds = %for_end
+  br label %outer_cond
+
+after_outer:                                          ; preds = %outer_cond
+  %src_final = phi i32* [ %src_phi, %outer_cond ]
+  %same = icmp eq i32* %src_final, %dest
+  br i1 %same, label %free_then_ret, label %do_copy
+
+do_copy:                                              ; preds = %after_outer
+  %bytes2 = shl i64 %n, 2
+  %dest_i8 = bitcast i32* %dest to i8*
+  %src_i8 = bitcast i32* %src_final to i8*
+  call i8* @memcpy(i8* %dest_i8, i8* %src_i8, i64 %bytes2)
+  br label %free_then_ret
+
+free_then_ret:                                        ; preds = %after_outer, %do_copy
+  call void @free(i8* %raw)
+  br label %ret
+
+ret:                                                  ; preds = %entry, %alloc, %free_then_ret
+  ret void
+}

@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "round": 1,
+    "start_time": "2025-09-14T03:29:22",
+    "input_folder": "/home/nata20034/workspace/convert_to_IR_with_LLM/fail_ir/gpt_api_query",
+    "output_dir": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/fix_num_test/error1/1",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 6,
+    "max_fix_attempts": 5,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_function.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/DFS_function1.ll",
+      "success": true,
+      "time": "2025-09-14T03:29:22"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_function.ll",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/error1/1/DFS_function1.ll:5:55: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.fmt_item   = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\"\n                                                      ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/DFS_function1.ll -o ../../llm_to_IR/fix_num_test/error1/1/DFS_function1.bc",
+      "start_time": "2025-09-14T03:29:22",
+      "end_time": "2025-09-14T03:29:22",
+      "elapsed_sec": 0.016659
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_function.ll",
+      "version": 2,
+      "request_id": "resp_0a64a54282cbacb50068c5b8028a448198b4faa7f7da0a555a",
+      "model": "gpt-5",
+      "start_time": "2025-09-14T03:29:22",
+      "end_time": "2025-09-14T03:30:27",
+      "elapsed_sec": 65.853833,
+      "usage": {
+        "input_tokens": 2645,
+        "output_tokens": 3673,
+        "total_tokens": 6318
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_function.ll",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/DFS_function2.ll",
+      "success": true,
+      "time": "2025-09-14T03:30:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_function.ll",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/DFS_function2.ll -o ../../llm_to_IR/fix_num_test/error1/1/DFS_function2.bc",
+      "start_time": "2025-09-14T03:30:27",
+      "end_time": "2025-09-14T03:30:28",
+      "elapsed_sec": 0.01431
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/heapsort_function1.ll",
+      "success": true,
+      "time": "2025-09-14T03:30:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.ll",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/error1/1/heapsort_function1.ll:64:13: error: expected instruction opcode\n  %k.next = %largest.idx\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/heapsort_function1.ll -o ../../llm_to_IR/fix_num_test/error1/1/heapsort_function1.bc",
+      "start_time": "2025-09-14T03:30:28",
+      "end_time": "2025-09-14T03:30:28",
+      "elapsed_sec": 0.011097
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.ll",
+      "version": 2,
+      "request_id": "resp_08afc977df7718080068c5b84438c8819baaf269dab954de27",
+      "model": "gpt-5",
+      "start_time": "2025-09-14T03:30:28",
+      "end_time": "2025-09-14T03:30:55",
+      "elapsed_sec": 27.413296,
+      "usage": {
+        "input_tokens": 2058,
+        "output_tokens": 2902,
+        "total_tokens": 4960
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.ll",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/heapsort_function2.ll",
+      "success": true,
+      "time": "2025-09-14T03:30:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.ll",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/heapsort_function2.ll -o ../../llm_to_IR/fix_num_test/error1/1/heapsort_function2.bc",
+      "start_time": "2025-09-14T03:30:55",
+      "end_time": "2025-09-14T03:30:55",
+      "elapsed_sec": 0.014437
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_function1.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/mergesort_function11.ll",
+      "success": true,
+      "time": "2025-09-14T03:30:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_function1.ll",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/error1/1/mergesort_function11.ll:33:11: error: expected instruction opcode\n  %left = %i\n          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/mergesort_function11.ll -o ../../llm_to_IR/fix_num_test/error1/1/mergesort_function11.bc",
+      "start_time": "2025-09-14T03:30:55",
+      "end_time": "2025-09-14T03:30:55",
+      "elapsed_sec": 0.011835
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_function1.ll",
+      "version": 2,
+      "request_id": "resp_0cc4a5ddedacdde90068c5b85fefbc819abc37f8eb3c2f9cf3",
+      "model": "gpt-5",
+      "start_time": "2025-09-14T03:30:55",
+      "end_time": "2025-09-14T03:31:37",
+      "elapsed_sec": 42.402517,
+      "usage": {
+        "input_tokens": 1912,
+        "output_tokens": 3922,
+        "total_tokens": 5834
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_function1.ll",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/mergesort_function12.ll",
+      "success": true,
+      "time": "2025-09-14T03:31:37"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_function1.ll",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/error1/1/mergesort_function12.ll:103:11: error: expected instruction opcode\n  %src2 = %tmp_phi\n          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/mergesort_function12.ll -o ../../llm_to_IR/fix_num_test/error1/1/mergesort_function12.bc",
+      "start_time": "2025-09-14T03:31:37",
+      "end_time": "2025-09-14T03:31:37",
+      "elapsed_sec": 0.015146
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_function1.ll",
+      "version": 3,
+      "request_id": "resp_0cff1f2e4a23a0870068c5b88a1b90819a92b7f8b138e63c77",
+      "model": "gpt-5",
+      "start_time": "2025-09-14T03:31:37",
+      "end_time": "2025-09-14T03:32:54",
+      "elapsed_sec": 76.288486,
+      "usage": {
+        "input_tokens": 1907,
+        "output_tokens": 4930,
+        "total_tokens": 6837
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_function1.ll",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/mergesort_function13.ll",
+      "success": true,
+      "time": "2025-09-14T03:32:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_function1.ll",
+      "version": 3,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/mergesort_function13.ll -o ../../llm_to_IR/fix_num_test/error1/1/mergesort_function13.bc",
+      "start_time": "2025-09-14T03:32:54",
+      "end_time": "2025-09-14T03:32:54",
+      "elapsed_sec": 0.014485
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function1.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/quicksort_function11.ll",
+      "success": true,
+      "time": "2025-09-14T03:32:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function1.ll",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/error1/1/quicksort_function11.ll:15:13: error: expected instruction opcode\n  %i.init = %lo\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/quicksort_function11.ll -o ../../llm_to_IR/fix_num_test/error1/1/quicksort_function11.bc",
+      "start_time": "2025-09-14T03:32:54",
+      "end_time": "2025-09-14T03:32:54",
+      "elapsed_sec": 0.010852
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function1.ll",
+      "version": 2,
+      "request_id": "resp_09752fbc7ca8ee5a0068c5b8d66d60819a8831b4be3ab6d7fe",
+      "model": "gpt-5",
+      "start_time": "2025-09-14T03:32:54",
+      "end_time": "2025-09-14T03:33:26",
+      "elapsed_sec": 32.746761,
+      "usage": {
+        "input_tokens": 1549,
+        "output_tokens": 3346,
+        "total_tokens": 4895
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function1.ll",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/fix_num_test/error1/1/quicksort_function12.ll",
+      "success": true,
+      "time": "2025-09-14T03:33:26"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function1.ll",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/error1/1/quicksort_function12.ll -o ../../llm_to_IR/fix_num_test/error1/1/quicksort_function12.bc",
+      "start_time": "2025-09-14T03:33:26",
+      "end_time": "2025-09-14T03:33:26",
+      "elapsed_sec": 0.013852
+    },
+    {
+      "phase": "round_complete",
+      "round": 1,
+      "end_time": "2025-09-14T03:33:26"
+    }
+  ]
+}

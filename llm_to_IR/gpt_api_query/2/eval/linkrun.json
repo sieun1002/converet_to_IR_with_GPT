@@ -1,0 +1,69 @@
+{
+  "entries": [
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/2/main/BFS_main.ll:8:54: error: constant expression type mismatch: got type '[23 x i8]' but expected '[24 x i8]'\n@.str.dist = private unnamed_addr constant [24 x i8] c\"dist(%zu -> %zu) = %d\\0A\\00\", align 1\n                                                     ^\n1 error generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated."
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/bubblesort_main-e3ade0.o: in function `main':\nmain:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: main:(.text+0xc1): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/2/main/heapsort_main.ll:56:1: error: expected instruction opcode\nloop1.cond:\n^\n1 error generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated."
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/2/quicksort_function.ll:15:13: error: expected instruction opcode\n  %i.init = %low.cur\n            ^\n1 error generated."
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/selectionsort_main-4671a9.o: in function `main':\nselectionsort_main.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: selectionsort_main.ll:(.text+0xa4): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    }
+  ]
+}

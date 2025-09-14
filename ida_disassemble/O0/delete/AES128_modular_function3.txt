@@ -1,0 +1,20 @@
+; Function: xtime
+; Start: 0x11EE, End: 0x121A
+
+0x000011EE: push    rbp
+0x000011EF: mov     rbp, rsp
+0x000011F2: mov     eax, edi
+0x000011F4: mov     [rbp+var_4], al
+0x000011F7: movzx   eax, [rbp+var_4]
+0x000011FB: lea     ecx, [rax+rax]
+0x000011FE: movzx   eax, [rbp+var_4]
+0x00001202: shr     al, 7
+0x00001205: mov     edx, eax
+0x00001207: mov     eax, edx
+0x00001209: add     eax, eax
+0x0000120B: add     eax, edx
+0x0000120D: lea     edx, ds:0[rax*8]
+0x00001214: add     eax, edx
+0x00001216: xor     eax, ecx
+0x00001218: pop     rbp
+0x00001219: retn

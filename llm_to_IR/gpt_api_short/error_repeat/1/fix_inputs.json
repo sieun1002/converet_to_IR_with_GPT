@@ -1,0 +1,225 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 152,
+      "ir_len": 22017,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function1.ll:86:11: error: expected instruction opcode\n  %t0.r = %t1\n          ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: aes128_encrypt ; Address: 0x11A9\n; Intent: AES-128 encrypt one 16-byte block (confidence=1.00). Evidence: sbox/rcon ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function1.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 200,
+      "ir_len": 20894,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function2.ll:144:1: error: expected instruction opcode\nkexp.next:                                        ; preds = %kexp.merge\n^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@sbox_1 = external global [256 x i8], align 16\n@rcon_0 = external global [256 x i8], align 16\n\ndefine dso_local void @aes128_e",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function2.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 229,
+      "ir_len": 20940,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function3.ll:161:3: error: multiple definition of local value named 'prk0'\n  %prk0 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %i0.z\n  ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@sbox_1 = external global [256 x i8], align 16\n@rcon_0 = external global [256 x i8], align 16\n\ndefine dso_local void @aes128_e",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function3.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 5,
+      "payload_order": "error_first_then_ir",
+      "error_len": 303,
+      "ir_len": 28650,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function4.ll:196:69: error: invalid use of function-local name\n  %s0  = load i8, i8* getelementptr inbounds ([16 x i8], [16 x i8]* %state, i64 0, i64 0), align 1\n                                                                   ",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@sbox_1 = external global [256 x i8], align 16\n@rcon_0 = external global [256 x i8], align 16\n\ndefine dso_local void @aes128_e",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_function4.ll"
+    },
+    {
+      "filename": "DES_modular_function3.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 203,
+      "ir_len": 2284,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/DES_modular_function31.ll:73:15: error: expected type\n  %res = call dso_local i64 @permute(i64 %acc64, i8* %Pptr, i32 32, i32 32)\n              ^\n",
+      "ir_preview": "; ModuleID = 'sboxes_p'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: sboxes_p ; Address: 0x123C\n; Intent: DES S-box substitution of 8x6-bit chunks then P-permutation (confidence=0.95). Eviden",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/DES_modular_function31.ll"
+    },
+    {
+      "filename": "DES_single_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 303,
+      "ir_len": 11557,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/DES_single_function1.ll:30:85: error: expected type\n  %pc1.idx.ptr = getelementptr inbounds [56 x i32], [56 x i32]* @PC1_7, i64 0, i64 (sext i32 %pc1.i to i64)\n                                                                                   ",
+      "ir_preview": "; ModuleID = 'des_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: des_encrypt ; Address: 0x1189\n; Intent: DES 64-bit block encryption with 64-bit key (16-round Feistel) (confidence=0.98",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/DES_single_function1.ll"
+    },
+    {
+      "filename": "DES_single_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 163,
+      "ir_len": 10670,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/DES_single_function2.ll:96:16: error: expected instruction opcode\n  %rk.C.next = %C.mask\n               ^\n",
+      "ir_preview": "; ModuleID = 'des_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@PC1_7   = external constant [56 x i32], align 4\n@SHIFTS_6 = external constant [16 x i32], align 4\n@PC2_5   = external constant [",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/DES_single_function2.ll"
+    },
+    {
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 423,
+      "ir_len": 4698,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %half = lshr i64 %n, 1\n  %i.phi = phi i64 [ %half, %entry ], [ %i.dec, %build.after.sift ]\nPHI nodes not grouped at top of basic block!\n  %next.cur = phi i64 [ %child, %build.compare ]\nlabel %build",
+      "ir_preview": "; ModuleID = 'heap_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: heap_sort ; Address: 0x1189\n; Intent: In-place heap sort of a 32-bit integer array (confidence=0.98). Evidence: heapify l",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/heapsort_function1.ll"
+    },
+    {
+      "filename": "mergesort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 155,
+      "ir_len": 4226,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/mergesort_function1.ll:45:11: error: expected instruction opcode\n  %left = %start.phi\n          ^\n",
+      "ir_preview": "; ModuleID = 'merge_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: merge_sort ; Address: 0x11E9\n; Intent: Stable iterative merge sort of 32-bit integers in ascending order (confidence=0.9",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/mergesort_function1.ll"
+    },
+    {
+      "filename": "mergesort_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 278,
+      "ir_len": 3842,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/mergesort_function2.ll:50:62: error: use of undefined value '%i.next.2'\n  %i = phi i64 [ %left, %setup ], [ %i.next, %take_left ], [ %i.next.2, %take_right ]\n                                                             ^\n",
+      "ir_preview": "; ModuleID = 'merge_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\ndeclare i8* @malloc(i64)\ndeclare void @free(i8*)\ndeclare i8* @memcpy(i8*, i8*, i64)\n\ndefine dso_local void @merge_sort(i32* nocapt",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/mergesort_function2.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 157,
+      "ir_len": 3585,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/quicksort_function1.ll:44:14: error: expected instruction opcode\n  %i_final = %i_cur\n             ^\n",
+      "ir_preview": "; ModuleID = 'quick_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: quick_sort ; Address: 0x1189\n; Intent: in-place quicksort on int array (confidence=0.98). Evidence: midpoint pivot, bidi",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/quicksort_function1.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 157,
+      "ir_len": 3186,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/quicksort_function2.ll:54:14: error: expected instruction opcode\n  %j_final = %j_cur\n             ^\n",
+      "ir_preview": "; ModuleID = 'quick_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\ndefine dso_local void @quick_sort(i32* nocapture %a, i64 %left, i64 %right) local_unnamed_addr {\nentry:\n  br label %tail_loop\n\ntai",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/quicksort_function2.ll"
+    },
+    {
+      "filename": "AES128_modular_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 294,
+      "ir_len": 3707,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_modular_main1.ll:10:50: error: constant expression type mismatch: got type '[5 x i8]' but expected '[4 x i8]'\n@.str.1 = private unnamed_addr constant [4 x i8] c\"%02x\\00\", align 1\n                                                 ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x1935\n; Intent: AES-128 single-block encrypt and print ciphertext (confidence=0.96). Evidence: constants matc",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_modular_main1.ll"
+    },
+    {
+      "filename": "AES128_modular_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 204,
+      "ir_len": 2906,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_modular_main2.ll:26:13: error: floating point constant invalid for type\n  store i64 0xA6D2AE2816157E2B, i64* %key64, align 16\n            ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str = private unnamed_addr constant [13 x i8] c\"Ciphertext: \\00\", align 1\n@.str.1 = private unnamed_addr constant [5 x i8] c\"%02x\\00\",",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_modular_main2.ll"
+    },
+    {
+      "filename": "AES128_single_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 203,
+      "ir_len": 2917,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_main1.ll:31:13: error: floating point constant invalid for type\n  store i64 0xA6D2AE2816157E2B, i64* %key64, align 16\n            ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x00001AA9\n; Intent: AES-128 encrypt test vector and print ciphertext (confidence=0.90). Evidence: calls aes12",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/AES128_single_main1.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 327,
+      "ir_len": 6076,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %zi = phi i64 [ 0, %entry ], [ %zi.next, %zero.loop ]\nlabel %zero.loop\nlabel %zero.body\nInstruction does not dominate all uses!\n  %zi.next = add nuw nsw i64 %zi, 1\n  %zi = phi i64 [ 0, %entry ]",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x13DD\n; Intent: Build a small graph, run BFS from node 0, and print the BFS order and distances (confidence=0",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/BFS_main1.ll"
+    },
+    {
+      "filename": "DES_single__main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 191,
+      "ir_len": 1197,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/DES_single__main1.ll:20:20: error: floating point constant invalid for type\n  %pt = add i64 0, 0x123456789ABCDEF\n                   ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x1747\n; Intent: DES test vector encryption and print result (confidence=0.90). Evidence: DES-like constants, ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/DES_single__main1.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 323,
+      "ir_len": 6829,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %i = phi i64 [ 0, %init_zero ], [ %i.next, %init_loop ]\nlabel %init_loop\nlabel %do_init\nInstruction does not dominate all uses!\n  %i.next = add nuw i64 %i, 1\n  %i = phi i64 [ 0, %init_zero ], [",
+      "ir_preview": "; ModuleID = 'dfs'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: dfs ; Address: 0x11C9\n; Intent: Depth-first search traversal on an adjacency matrix (confidence=0.86). Evidence: visited array ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/DFS_main1.ll"
+    },
+    {
+      "filename": "heapsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 516,
+      "ir_len": 3114,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %i = phi i64 [ 0, %entry ], [ %inc, %loop1 ]\nlabel %loop1\nlabel %body1\nInstruction does not dominate all uses!\n  %inc = add i64 %i, 1\n  %i = phi i64 [ 0, %entry ], [ %inc, %loop1 ]\nPHI node ent",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x144B\n; Intent: Print an int array, heap-sort it, then print it again (confidence=0.93). Evidence: call to he",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/heapsort_main1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 205,
+      "ir_len": 2769,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/insertionsort_main1.ll:17:1: error: expected '(' in function argument list\ndefine dso_local i32 @main(i32 %argc, i8** %argv) local_unnamed_addr {\n^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x1247\n; Intent: sort and print an array using insertion sort (confidence=0.88). Evidence: call to insertion_s",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/insertionsort_main1.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 258,
+      "ir_len": 3375,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/selectionsort_main1.ll:51:34: error: '@_printf' defined with type 'i32 (i8*, ...)*' but expected 'i32 (i8*)*'\n  %call.printf.header = call i32 @_printf(i8* %fmt.ptr)\n                                 ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main ; Address: 0x124D\n; Intent: Sort an array using selection_sort and print the sorted elements (confidence=0.82). Evidence:",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/selectionsort_main1.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 256,
+      "ir_len": 2777,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/selectionsort_main2.ll:35:34: error: '@printf' defined with type 'i32 (i8*, ...)*' but expected 'i32 (i8*)*'\n  %call.printf.header = call i32 @printf(i8* %fmt.ptr)\n                                 ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@format = private unnamed_addr constant [15 x i8] c\"Sorted array: \\00\", align 1\n@aD = private unnamed_addr constant [4 x i8] c\"%d \\00\", ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_short/error_repeat/1/selectionsort_main2.ll"
+    }
+  ]
+}

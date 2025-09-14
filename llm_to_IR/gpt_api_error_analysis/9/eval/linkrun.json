@@ -1,0 +1,82 @@
+{
+  "entries": [
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/9/BFS_function.ll:72:18: error: invalid cast opcode for cast from 'i32' to 'i32'\n  %du_ext = sext i32 %du_i32 to i32\n                 ^\n1 error generated."
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -24,
+      "errmsg": "[mismatch]\n--- cand ---\nDFS preorder from 0: 0\n\n--- ref ---\nDFS preorder from 0: 0 1 3 4 5 2 6"
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "dijkstra_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/usr/bin/ld: /tmp/dijkstra_modular_main-9efcd6.o: in function `main':\ndijkstra_modular_main.ll:(.text+0x4d): undefined reference to `stream'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "dijkstra_single_func.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -24,
+      "errmsg": "[mismatch]\n--- cand ---\nBefore: 7 3 9 1 4 8 2 6 5 \nAfter: 1 2 3 4 5 6 7 8 9 \n\n--- ref ---\n원본: 7 3 9 1 4 8 2 6 5 \n정렬 후: 1 2 3 4 5 6 7 8 9"
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/insertionsort_function-1c2b79.o: in function `insertion_sort':\ninsertionsort_function.ll:(.text+0x0): multiple definition of `insertion_sort'; /tmp/insertionsort_main-b5f58d.o:insertionsort_main.ll:(.text+0x0): first defined here\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/9/mergesort_function.ll:106:15: error: expected instruction opcode\n  %src.swap = %src.phi\n              ^\n1 error generated."
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+; Function: rotl28
+; Start: 0x1205, End: 0x123C
+
+0x00001205: push    rbp
+0x00001206: mov     rbp, rsp
+0x00001209: mov     [rbp+var_4], edi
+0x0000120C: mov     [rbp+var_8], esi
+0x0000120F: and     [rbp+var_4], 0FFFFFFFh
+0x00001216: mov     eax, [rbp+var_8]
+0x00001219: mov     edx, [rbp+var_4]
+0x0000121C: mov     esi, edx
+0x0000121E: mov     ecx, eax
+0x00001220: shl     esi, cl
+0x00001222: mov     eax, 1Ch
+0x00001227: sub     eax, [rbp+var_8]
+0x0000122A: mov     edx, [rbp+var_4]
+0x0000122D: mov     ecx, eax
+0x0000122F: shr     edx, cl
+0x00001231: mov     eax, edx
+0x00001233: or      eax, esi
+0x00001235: and     eax, 0FFFFFFFh
+0x0000123A: pop     rbp
+0x0000123B: retn

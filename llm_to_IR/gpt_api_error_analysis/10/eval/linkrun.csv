@@ -1,0 +1,13 @@
+file,parent,ok,err,errmsg
+BFS.ll,eval,False,-24,[mismatch]\n--- cand ---\nBFS order from 0: 0\ndist(0 -> 0) = 0\ndist(0 -> 1) = -1\ndist(0 -> 2) = -1\ndist(0 -> 3) = -1\ndist(0 -> 4) = -1\ndist(0 -> 5) = -1\ndist(0 -> 6) = -1\n\n--- ref ---\nBFS order from 0: 0 1 2 3 4 5 6\ndist(0 -> 0) = 0\ndist(0 -> 1) = 1\ndist(0 -> 2) = 1\ndist(0 -> 3) = 2\ndist(0 -> 4) = 2\ndist(0 -> 5) = 2\ndist(0 -> 6) = 3\n
+DFS.ll,eval,True,0
+binarysearch.ll,eval,True,0
+bubblesort.ll,eval,True,0
+dijkstra_modular.ll,eval,False,-20,"/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/10/dijkstra_modular_function3.ll:7:51: error: constant expression type mismatch: got type '[9 x i8]' but expected '[8 x i8]'\n@.str.3d = private unnamed_addr constant [8 x i8] c""%d %d %d\00"", align 1\n                                                  ^\n1 error generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated."
+dijkstra_single_func.ll,eval,True,0
+heapsort.ll,eval,False,-24,[mismatch]\n--- cand ---\nBefore: 7 3 9 1 4 8 2 6 5 \nAfter: 1 2 3 4 5 6 8 9 7 \n\n--- ref ---\n원본: 7 3 9 1 4 8 2 6 5 \n정렬 후: 1 2 3 4 5 6 7 8 9 \n
+insertionsort.ll,eval,True,0
+linearsearch.ll,eval,True,0
+mergesort.ll,eval,False,-20,"/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/10/mergesort_function.ll:93:21: error: invalid operand type for instruction\n  %srcSwapped = add i32* %tmpPhi, null\n                    ^\n1 error generated."
+quicksort.ll,eval,True,0
+selectionsort.ll,eval,True,0

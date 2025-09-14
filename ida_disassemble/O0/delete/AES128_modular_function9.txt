@@ -1,0 +1,98 @@
+; Function: aes128_encrypt
+; Start: 0x178A, End: 0x1935
+
+0x0000178A: endbr64
+0x0000178E: push    rbp
+0x0000178F: mov     rbp, rsp
+0x00001792: sub     rsp, 100h
+0x00001799: mov     [rbp+var_E8], rdi
+0x000017A0: mov     [rbp+var_F0], rsi
+0x000017A7: mov     [rbp+var_F8], rdx
+0x000017AE: mov     rax, fs:28h
+0x000017B7: mov     [rbp+var_8], rax
+0x000017BB: xor     eax, eax
+0x000017BD: mov     [rbp+var_DC], 0
+0x000017C7: jmp     short loc_17F5
+loc_17C9:
+0x000017C9: mov     eax, [rbp+var_DC]
+0x000017CF: movsxd  rdx, eax
+0x000017D2: mov     rax, [rbp+var_F0]
+0x000017D9: add     rax, rdx
+0x000017DC: movzx   edx, byte ptr [rax]
+0x000017DF: mov     eax, [rbp+var_DC]
+0x000017E5: cdqe
+0x000017E7: mov     [rbp+rax+var_D0], dl
+0x000017EE: add     [rbp+var_DC], 1
+loc_17F5:
+0x000017F5: cmp     [rbp+var_DC], 0Fh
+0x000017FC: jle     short loc_17C9
+0x000017FE: lea     rdx, [rbp+var_C0]
+0x00001805: mov     rax, [rbp+var_F8]
+0x0000180C: mov     rsi, rdx
+0x0000180F: mov     rdi, rax
+0x00001812: call    key_expansion
+0x00001817: lea     rdx, [rbp+var_C0]
+0x0000181E: lea     rax, [rbp+var_D0]
+0x00001825: mov     rsi, rdx
+0x00001828: mov     rdi, rax
+0x0000182B: call    add_round_key
+0x00001830: mov     [rbp+var_D8], 1
+0x0000183A: jmp     short loc_1897
+loc_183C:
+0x0000183C: lea     rax, [rbp+var_D0]
+0x00001843: mov     rdi, rax
+0x00001846: call    _sub_bytes
+0x0000184B: lea     rax, [rbp+var_D0]
+0x00001852: mov     rdi, rax
+0x00001855: call    shift_rows
+0x0000185A: lea     rax, [rbp+var_D0]
+0x00001861: mov     rdi, rax
+0x00001864: call    mix_columns
+0x00001869: mov     eax, [rbp+var_D8]
+0x0000186F: shl     eax, 4
+0x00001872: cdqe
+0x00001874: lea     rdx, [rbp+var_C0]
+0x0000187B: add     rdx, rax
+0x0000187E: lea     rax, [rbp+var_D0]
+0x00001885: mov     rsi, rdx
+0x00001888: mov     rdi, rax
+0x0000188B: call    add_round_key
+0x00001890: add     [rbp+var_D8], 1
+loc_1897:
+0x00001897: cmp     [rbp+var_D8], 9
+0x0000189E: jle     short loc_183C
+0x000018A0: lea     rax, [rbp+var_D0]
+0x000018A7: mov     rdi, rax
+0x000018AA: call    _sub_bytes
+0x000018AF: lea     rax, [rbp+var_D0]
+0x000018B6: mov     rdi, rax
+0x000018B9: call    shift_rows
+0x000018BE: lea     rax, [rbp+var_C0]
+0x000018C5: add     rax, 0A0h
+0x000018CB: lea     rdx, [rbp+var_D0]
+0x000018D2: mov     rsi, rax
+0x000018D5: mov     rdi, rdx
+0x000018D8: call    add_round_key
+0x000018DD: mov     [rbp+var_D4], 0
+0x000018E7: jmp     short loc_1915
+loc_18E9:
+0x000018E9: mov     eax, [rbp+var_D4]
+0x000018EF: movsxd  rdx, eax
+0x000018F2: mov     rax, [rbp+var_E8]
+0x000018F9: add     rdx, rax
+0x000018FC: mov     eax, [rbp+var_D4]
+0x00001902: cdqe
+0x00001904: movzx   eax, [rbp+rax+var_D0]
+0x0000190C: mov     [rdx], al
+0x0000190E: add     [rbp+var_D4], 1
+loc_1915:
+0x00001915: cmp     [rbp+var_D4], 0Fh
+0x0000191C: jle     short loc_18E9
+0x0000191E: nop
+0x0000191F: mov     rax, [rbp+var_8]
+0x00001923: sub     rax, fs:28h
+0x0000192C: jz      short locret_1933
+0x0000192E: call    ___stack_chk_fail
+locret_1933:
+0x00001933: leave
+0x00001934: retn

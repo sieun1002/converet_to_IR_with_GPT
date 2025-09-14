@@ -1,0 +1,41 @@
+; Function: min_index
+; Start: 0x4013C0, End: 0x401442
+
+0x004013C0: push    rbp
+0x004013C1: mov     rbp, rsp
+0x004013C4: mov     [rbp+var_8], rdi
+0x004013C8: mov     [rbp+var_10], rsi
+0x004013CC: mov     [rbp+var_14], edx
+0x004013CF: mov     [rbp+var_18], 0FFFFFFFFh
+0x004013D6: mov     [rbp+var_1C], 7FFFFFFFh
+0x004013DD: mov     [rbp+var_20], 0
+loc_4013E4:
+0x004013E4: mov     eax, [rbp+var_20]
+0x004013E7: cmp     eax, [rbp+var_14]
+0x004013EA: jge     loc_40143D
+0x004013F0: mov     rax, [rbp+var_10]
+0x004013F4: movsxd  rcx, [rbp+var_20]
+0x004013F8: cmp     dword ptr [rax+rcx*4], 0
+0x004013FC: jnz     loc_40142A
+0x00401402: mov     rax, [rbp+var_8]
+0x00401406: movsxd  rcx, [rbp+var_20]
+0x0040140A: mov     eax, [rax+rcx*4]
+0x0040140D: cmp     eax, [rbp+var_1C]
+0x00401410: jge     loc_40142A
+0x00401416: mov     rax, [rbp+var_8]
+0x0040141A: movsxd  rcx, [rbp+var_20]
+0x0040141E: mov     eax, [rax+rcx*4]
+0x00401421: mov     [rbp+var_1C], eax
+0x00401424: mov     eax, [rbp+var_20]
+0x00401427: mov     [rbp+var_18], eax
+loc_40142A:
+0x0040142A: jmp     $+5
+loc_40142F:
+0x0040142F: mov     eax, [rbp+var_20]
+0x00401432: add     eax, 1
+0x00401435: mov     [rbp+var_20], eax
+0x00401438: jmp     loc_4013E4
+loc_40143D:
+0x0040143D: mov     eax, [rbp+var_18]
+0x00401440: pop     rbp
+0x00401441: retn

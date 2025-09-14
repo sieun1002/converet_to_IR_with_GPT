@@ -1,0 +1,58 @@
+; Function: main
+; Start: 0x401420, End: 0x401539
+
+0x00401420: push    rbp
+0x00401421: mov     rbp, rsp
+0x00401424: sub     rsp, 9C70h
+0x0040142B: mov     [rbp+var_4], 0
+0x00401432: mov     rdi, (offset aDDD+3); "%d %d"
+0x0040143C: lea     rsi, [rbp+var_8]
+0x00401440: lea     rdx, [rbp+var_C]
+0x00401444: mov     al, 0
+0x00401446: call    ___isoc99_scanf
+0x0040144B: lea     rdi, [rbp+s]; s
+0x00401452: xor     esi, esi; c
+0x00401454: mov     edx, 9C40h; n
+0x00401459: call    _memset
+0x0040145E: mov     [rbp+var_9C54], 0
+loc_401468:
+0x00401468: mov     eax, [rbp+var_9C54]
+0x0040146E: cmp     eax, [rbp+var_C]
+0x00401471: jge     loc_401501
+0x00401477: mov     rdi, offset aDDD; "%d %d %d"
+0x00401481: lea     rsi, [rbp+var_9C58]
+0x00401488: lea     rdx, [rbp+var_9C5C]
+0x0040148F: lea     rcx, [rbp+var_9C60]
+0x00401496: mov     al, 0
+0x00401498: call    ___isoc99_scanf
+0x0040149D: mov     edx, [rbp+var_9C60]
+0x004014A3: movsxd  rcx, [rbp+var_9C58]
+0x004014AA: lea     rax, [rbp+s]
+0x004014B1: imul    rcx, 190h
+0x004014B8: add     rax, rcx
+0x004014BB: movsxd  rcx, [rbp+var_9C5C]
+0x004014C2: mov     [rax+rcx*4], edx
+0x004014C5: mov     edx, [rbp+var_9C60]
+0x004014CB: movsxd  rcx, [rbp+var_9C5C]
+0x004014D2: lea     rax, [rbp+s]
+0x004014D9: imul    rcx, 190h
+0x004014E0: add     rax, rcx
+0x004014E3: movsxd  rcx, [rbp+var_9C58]
+0x004014EA: mov     [rax+rcx*4], edx
+0x004014ED: mov     eax, [rbp+var_9C54]
+0x004014F3: add     eax, 1
+0x004014F6: mov     [rbp+var_9C54], eax
+0x004014FC: jmp     loc_401468
+loc_401501:
+0x00401501: mov     rdi, 402029h
+0x0040150B: lea     rsi, [rbp+var_9C64]
+0x00401512: mov     al, 0
+0x00401514: call    ___isoc99_scanf
+0x00401519: lea     rdi, [rbp+s]
+0x00401520: mov     esi, [rbp+var_8]
+0x00401523: mov     edx, [rbp+var_9C64]
+0x00401529: call    dijkstra
+0x0040152E: xor     eax, eax
+0x00401530: add     rsp, 9C70h
+0x00401537: pop     rbp
+0x00401538: retn

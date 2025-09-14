@@ -1,0 +1,115 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 154,
+      "ir_len": 19739,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function1.ll:86:11: error: expected instruction opcode\n  %t0.r = %t1.in\n          ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: aes128_encrypt  ; Address: 0x11A9\n; Intent: AES-128 block encryption with key expansion (confidence=0.95). Evidence:",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function1.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 181,
+      "ir_len": 18666,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function2.ll:211:3: error: multiple definition of local value named 'v3'\n  %v3 = load i8, i8* %p3, align 1\n  ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@rcon_0 = external constant [256 x i8]\n@sbox_1 = external constant [256 x i8]\n\ndefine dso_local void @aes128_encrypt(i8* %out,",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function2.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 263,
+      "ir_len": 18672,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function3.ll:326:58: error: use of undefined value '%fsub.next'\n  %i.fsub = phi i32 [ 0, %final.entry ], [ %i.fsub.next, %fsub.next ]\n                                                         ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@rcon_0 = external constant [256 x i8]\n@sbox_1 = external constant [256 x i8]\n\ndefine dso_local void @aes128_encrypt(i8* %out,",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function3.ll"
+    },
+    {
+      "filename": "AES128_single_function.txt",
+      "version": 5,
+      "payload_order": "error_first_then_ir",
+      "error_len": 255,
+      "ir_len": 18672,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function4.ll:188:55: error: use of undefined value '%sub.next'\n  %i.sub = phi i32 [ 0, %round.body ], [ %i.sub.next, %sub.next ]\n                                                      ^\n",
+      "ir_preview": "; ModuleID = 'aes128_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@rcon_0 = external constant [256 x i8]\n@sbox_1 = external constant [256 x i8]\n\ndefine dso_local void @aes128_encrypt(i8* %out,",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_function4.ll"
+    },
+    {
+      "filename": "BFS_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 337,
+      "ir_len": 4482,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %v = phi i64 [ 0, %dequeue ], [ %v_next, %v_latch ]\nInstruction does not dominate all uses!\n  %tail_inc = add i64 %tail_cur, 1\n  %tail_next_mux = select i1 %en",
+      "ir_preview": "; ModuleID = 'bfs'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: bfs  ; Address: 0x11C9\n; Intent: Breadth-first search over an adjacency matrix; fills distances and visit order (confidence=0.9",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/BFS_function1.ll"
+    },
+    {
+      "filename": "DES_modular_function6.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 153,
+      "ir_len": 2510,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/DES_modular_function61.ll:43:13: error: expected instruction opcode\n  %L.next = %R\n            ^\n",
+      "ir_preview": "; ModuleID = 'des_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: des_encrypt  ; Address: 0x1468\n; Intent: DES block encryption (64-bit block) with key schedule, 16-round Feistel, and i",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/DES_modular_function61.ll"
+    },
+    {
+      "filename": "DES_single_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 156,
+      "ir_len": 11669,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/DES_single_function1.ll:259:12: error: expected instruction opcode\n  %f.out = %acc32.p\n           ^\n",
+      "ir_preview": "; ModuleID = 'des_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: des_encrypt  ; Address: 0x1189\n; Intent: DES encrypt one 64-bit block with a 64-bit key (confidence=0.98). Evidence: DE",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/DES_single_function1.ll"
+    },
+    {
+      "filename": "DES_single_function.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 156,
+      "ir_len": 10698,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/DES_single_function2.ll:242:13: error: expected instruction opcode\n  %L.next = %R.enc\n            ^\n",
+      "ir_preview": "; ModuleID = 'des_encrypt'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@PC1_7 = external global i32\n@SHIFTS_6 = external global i32\n@PC2_5 = external global i32\n@IP_4 = external global i32\n@E_3 = exte",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/DES_single_function2.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 167,
+      "ir_len": 3573,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/quicksort_function1.ll:92:18: error: expected instruction opcode\n  %l.next.left = %i.scan.i\n                 ^\n",
+      "ir_preview": "; ModuleID = 'quick_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: quick_sort  ; Address: 0x1189\n; Intent: In-place quicksort of a 32-bit int array (ascending), Hoare-style partition with",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/quicksort_function1.ll"
+    },
+    {
+      "filename": "AES128_modular_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 205,
+      "ir_len": 3656,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_modular_main1.ll:37:13: error: floating point constant invalid for type\n  store i64 0xA6D2AE2816157E2B, i64* %key_i64, align 16\n            ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main  ; Address: 0x1935\n; Intent: AES-128 encrypt known test vector and print ciphertext (confidence=0.95). Evidence: aes128_e",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_modular_main1.ll"
+    },
+    {
+      "filename": "AES128_single_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 292,
+      "ir_len": 2649,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_main1.ll:10:50: error: constant expression type mismatch: got type '[5 x i8]' but expected '[4 x i8]'\n@.str.1 = private unnamed_addr constant [4 x i8] c\"%02x\\00\", align 1\n                                                 ^\n",
+      "ir_preview": "; ModuleID = 'main'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: main  ; Address: 0x1AA9\n; Intent: AES-128 encrypt a fixed plaintext with a fixed key, print ciphertext bytes and a known refer",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/1/AES128_single_main1.ll"
+    }
+  ]
+}

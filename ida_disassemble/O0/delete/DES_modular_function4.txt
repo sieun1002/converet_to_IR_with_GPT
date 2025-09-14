@@ -1,0 +1,23 @@
+; Function: feistel
+; Start: 0x1316, End: 0x135F
+
+0x00001316: push    rbp
+0x00001317: mov     rbp, rsp
+0x0000131A: sub     rsp, 20h
+0x0000131E: mov     [rbp+var_14], edi
+0x00001321: mov     [rbp+var_20], rsi
+0x00001325: mov     eax, [rbp+var_14]
+0x00001328: mov     ecx, 20h ; ' '
+0x0000132D: mov     edx, 30h ; '0'
+0x00001332: lea     rsi, E
+0x00001339: mov     rdi, rax
+0x0000133C: call    permute
+0x00001341: mov     [rbp+var_10], rax
+0x00001345: mov     rax, [rbp+var_10]
+0x00001349: xor     rax, [rbp+var_20]
+0x0000134D: mov     [rbp+var_8], rax
+0x00001351: mov     rax, [rbp+var_8]
+0x00001355: mov     rdi, rax
+0x00001358: call    sboxes_p
+0x0000135D: leave
+0x0000135E: retn

@@ -1,0 +1,29 @@
+; Function: main
+; Start: 0x1747, End: 0x17B7
+
+0x00001747: endbr64
+0x0000174B: push    rbp
+0x0000174C: mov     rbp, rsp
+0x0000174F: sub     rsp, 20h
+0x00001753: mov     rax, 133457799BBCDFF1h
+0x0000175D: mov     [rbp+var_18], rax
+0x00001761: mov     rax, 123456789ABCDEFh
+0x0000176B: mov     [rbp+var_10], rax
+0x0000176F: mov     rdx, [rbp+var_18]
+0x00001773: mov     rax, [rbp+var_10]
+0x00001777: mov     rsi, rdx
+0x0000177A: mov     rdi, rax
+0x0000177D: call    des_encrypt
+0x00001782: mov     [rbp+var_8], rax
+0x00001786: mov     rax, [rbp+var_8]
+0x0000178A: mov     rsi, rax
+0x0000178D: lea     rax, format; "Ciphertext: %016llX\n"
+0x00001794: mov     rdi, rax; format
+0x00001797: mov     eax, 0
+0x0000179C: call    _printf
+0x000017A1: lea     rax, s; "Ciphertext: 85E813540F0AB405"
+0x000017A8: mov     rdi, rax; s
+0x000017AB: call    _puts
+0x000017B0: mov     eax, 0
+0x000017B5: leave
+0x000017B6: retn

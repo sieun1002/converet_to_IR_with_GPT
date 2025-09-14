@@ -1,0 +1,13 @@
+file,parent,ok,err,errmsg
+BFS.ll,eval,True,0
+DFS.ll,eval,False,-20,"warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/10/DFS_function.ll:113:71: error: invalid use of function-local name\n  call void @dfs(i32* getelementptr inbounds ([48 x i32], [48 x i32]* %adj, i64 0, i64 0),\n                                                                      ^\n1 error generated."
+binarysearch.ll,eval,False,-20,/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/10/binarysearch_main.ll:51:1: error: expected instruction opcode\nloop.cond:\n^\n1 error generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.
+bubblesort.ll,eval,True,0
+dijkstra_modular.ll,eval,False,-20,warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/dijkstra_modular_main-c15332.o: in function `main':\nrecovered.c:(.text+0x4a): undefined reference to `byte_40202C'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)
+dijkstra_single_func.ll,eval,True,0
+heapsort.ll,eval,False,-24,[mismatch]\n--- cand ---\nBefore: 7 3 9 1 4 8 2 6 5 \nAfter: 1 2 3 4 5 6 7 8 9 \n\n--- ref ---\n원본: 7 3 9 1 4 8 2 6 5 \n정렬 후: 1 2 3 4 5 6 7 8 9 \n
+insertionsort.ll,eval,False,-20,warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/insertionsort_main-dc44b9.o: in function `main':\nrecovered:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered:(.text+0xd2): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)
+linearsearch.ll,eval,False,-20,"/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/10/linearsearch_main.ll:8:46: error: constant expression type mismatch: got type '[18 x i8]' but expected '[19 x i8]'\n@s = private unnamed_addr constant [19 x i8] c""Element not found\00"", align 1\n                                             ^\n1 error generated."
+mergesort.ll,eval,True,0
+quicksort.ll,eval,True,0
+selectionsort.ll,eval,True,0

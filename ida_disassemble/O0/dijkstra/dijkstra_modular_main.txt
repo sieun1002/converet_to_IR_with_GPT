@@ -1,0 +1,34 @@
+; Function: main
+; Start: 0x4016D0, End: 0x40175F
+
+0x004016D0: push    rbp
+0x004016D1: mov     rbp, rsp
+0x004016D4: sub     rsp, 9DE0h
+0x004016DB: mov     [rbp+var_4], 0
+0x004016E2: lea     rdi, [rbp+var_9C50]
+0x004016E9: lea     rsi, [rbp+var_8]
+0x004016ED: lea     rdx, [rbp+var_C]
+0x004016F1: call    read_graph
+0x004016F6: cmp     eax, 0
+0x004016F9: jz      loc_401724
+0x004016FF: mov     rdi, ds:__bss_start; stream
+0x00401707: mov     rsi, offset byte_40202C; format
+0x00401711: mov     al, 0
+0x00401713: call    _fprintf
+0x00401718: mov     [rbp+var_4], 1
+0x0040171F: jmp     loc_401753
+loc_401724:
+0x00401724: lea     rdi, [rbp+var_9C50]
+0x0040172B: mov     esi, [rbp+var_8]
+0x0040172E: mov     edx, [rbp+var_C]
+0x00401731: lea     rcx, [rbp+var_9DE0]
+0x00401738: call    dijkstra
+0x0040173D: lea     rdi, [rbp+var_9DE0]
+0x00401744: mov     esi, [rbp+var_8]
+0x00401747: call    print_distances
+0x0040174C: mov     [rbp+var_4], 0
+loc_401753:
+0x00401753: mov     eax, [rbp+var_4]
+0x00401756: add     rsp, 9DE0h
+0x0040175D: pop     rbp
+0x0040175E: retn

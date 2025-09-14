@@ -1,0 +1,474 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; PHI node entries do not match predecessors!
+;   %rconi.pass = phi i32 [ %rconi.phi, %expand_loop ]
+; label %expand_loop
+; label %after_subword
+; Instruction does not dominate all uses!
+;   %rconi.phi = phi i32 [ %rconi.next, %do_subword ], [ %rconi, %no_subword ]
+;   %rconi.pass = phi i32 [ %rconi.phi, %expand_loop ]
+; PHI node entries do not match predecessors!
+;   %j0 = phi i32 [ 0, %ark0 ], [ %j0.inc, %ark0.loop ]
+; label %ark0.loop
+; label %ark0.body
+; Instruction does not dominate all uses!
+;   %j0.inc = add nuw nsw i32 %j0, 1
+;   %j0 = phi i32 [ 0, %ark0 ], [ %j0.inc, %ark0.loop ]
+; PHI node entries do not match predecessors!
+;   %si = phi i32 [ 0, %round_subbytes ], [ %si.inc, %sb.loop ]
+; label %sb.loop
+; label %sb.body
+; Instruction does not dominate all uses!
+;   %si.inc = add nuw nsw i32 %si, 1
+;   %si = phi i32 [ 0, %round_subbytes ], [ %si.inc, %sb.loop ]
+; PHI node entries do not match predecessors!
+;   %jj = phi i32 [ 0, %ark_round ], [ %jj.inc, %ark.loop ]
+; label %ark.loop
+; label %ark.body
+; Instruction does not dominate all uses!
+;   %jj.inc = add nuw nsw i32 %jj, 1
+;   %jj = phi i32 [ 0, %ark_round ], [ %jj.inc, %ark.loop ]
+; PHI node entries do not match predecessors!
+;   %fi = phi i32 [ 0, %final_round ], [ %fi.inc, %fsb.loop ]
+; label %fsb.loop
+; label %fsb.body
+; Instruction does not dominate all uses!
+;   %fi.inc = add nuw nsw i32 %fi, 1
+;   %fi = phi i32 [ 0, %final_round ], [ %fi.inc, %fsb.loop ]
+; PHI node entries do not match predecessors!
+;   %fj = phi i32 [ 0, %final_ark ], [ %fj.inc, %fark.loop ]
+; label %fark.loop
+; label %fark.body
+; Instruction does not dominate all uses!
+;   %fj.inc = add nuw nsw i32 %fj, 1
+;   %fj = phi i32 [ 0, %final_ark ], [ %fj.inc, %fark.loop ]
+; PHI node entries do not match predecessors!
+;   %oi = phi i32 [ 0, %store_out ], [ %oi.inc, %out.loop ]
+; label %out.loop
+; label %out.body
+; Instruction does not dominate all uses!
+;   %oi.inc = add nuw nsw i32 %oi, 1
+;   %oi = phi i32 [ 0, %store_out ], [ %oi.inc, %out.loop ]
+; === ERROR LOG END ===
+
+; ModuleID = 'aes128_encrypt'
+target triple = "x86_64-unknown-linux-gnu"
+
+@sbox_1 = external constant [256 x i8], align 16
+@rcon_0 = external constant [256 x i8], align 16
+
+define void @aes128_encrypt(i8* nocapture %out, i8* nocapture readonly %in, i8* nocapture readonly %key) local_unnamed_addr {
+entry:
+  %state = alloca [16 x i8], align 16
+  %rk = alloca [176 x i8], align 16
+  br label %copy_in
+
+copy_in:
+  %i = phi i32 [ 0, %entry ], [ %inc_i, %copy_in.body ]
+  %cmp_i = icmp sle i32 %i, 15
+  br i1 %cmp_i, label %copy_in.body, label %copy_key
+
+copy_in.body:
+  %i64 = zext i32 %i to i64
+  %pin = getelementptr inbounds i8, i8* %in, i64 %i64
+  %b = load i8, i8* %pin, align 1
+  %pstate = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %i64
+  store i8 %b, i8* %pstate, align 1
+  %inc_i = add nuw nsw i32 %i, 1
+  br label %copy_in
+
+copy_key:
+  %k = phi i32 [ 0, %copy_in ], [ %inc_k, %copy_key.body ]
+  %cmp_k = icmp sle i32 %k, 15
+  br i1 %cmp_k, label %copy_key.body, label %expand_init
+
+copy_key.body:
+  %k64 = zext i32 %k to i64
+  %pkey = getelementptr inbounds i8, i8* %key, i64 %k64
+  %kb = load i8, i8* %pkey, align 1
+  %prk0 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %k64
+  store i8 %kb, i8* %prk0, align 1
+  %inc_k = add nuw nsw i32 %k, 1
+  br label %copy_key
+
+expand_init:
+  %idx = phi i32 [ 16, %copy_key ], [ %idx2.next, %expand_next ]
+  %rconi = phi i32 [ 0, %copy_key ], [ %rconi.pass, %expand_next ]
+  %cmp_idx = icmp sle i32 %idx, 175
+  br i1 %cmp_idx, label %expand_loop, label %ark0
+
+expand_loop:
+  %m4 = add nsw i32 %idx, -4
+  %m3 = add nsw i32 %idx, -3
+  %m2 = add nsw i32 %idx, -2
+  %m1 = add nsw i32 %idx, -1
+  %m4_64 = sext i32 %m4 to i64
+  %m3_64 = sext i32 %m3 to i64
+  %m2_64 = sext i32 %m2 to i64
+  %m1_64 = sext i32 %m1 to i64
+  %prk_m4 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m4_64
+  %prk_m3 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m3_64
+  %prk_m2 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m2_64
+  %prk_m1 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m1_64
+  %t0.init = load i8, i8* %prk_m4, align 1
+  %t1.init = load i8, i8* %prk_m3, align 1
+  %t2.init = load i8, i8* %prk_m2, align 1
+  %t3.init = load i8, i8* %prk_m1, align 1
+  %and = and i32 %idx, 15
+  %isblock = icmp eq i32 %and, 0
+  br i1 %isblock, label %do_subword, label %no_subword
+
+do_subword:
+  %t0.rot = add i8 %t1.init, 0
+  %t1.rot = add i8 %t2.init, 0
+  %t2.rot = add i8 %t3.init, 0
+  %t3.rot = add i8 %t0.init, 0
+  %t0.idx = zext i8 %t0.rot to i64
+  %t1.idx = zext i8 %t1.rot to i64
+  %t2.idx = zext i8 %t2.rot to i64
+  %t3.idx = zext i8 %t3.rot to i64
+  %psbox0 = getelementptr inbounds [256 x i8], [256 x i8]* @sbox_1, i64 0, i64 %t0.idx
+  %psbox1 = getelementptr inbounds [256 x i8], [256 x i8]* @sbox_1, i64 0, i64 %t1.idx
+  %psbox2 = getelementptr inbounds [256 x i8], [256 x i8]* @sbox_1, i64 0, i64 %t2.idx
+  %psbox3 = getelementptr inbounds [256 x i8], [256 x i8]* @sbox_1, i64 0, i64 %t3.idx
+  %t0.sub = load i8, i8* %psbox0, align 1
+  %t1.sub = load i8, i8* %psbox1, align 1
+  %t2.sub = load i8, i8* %psbox2, align 1
+  %t3.sub = load i8, i8* %psbox3, align 1
+  %rconi64 = zext i32 %rconi to i64
+  %prcon = getelementptr inbounds [256 x i8], [256 x i8]* @rcon_0, i64 0, i64 %rconi64
+  %rc = load i8, i8* %prcon, align 1
+  %t0.rc = xor i8 %t0.sub, %rc
+  %rconi.next = add nuw nsw i32 %rconi, 1
+  br label %after_subword
+
+no_subword:
+  br label %after_subword
+
+after_subword:
+  %t0.sel = phi i8 [ %t0.rc, %do_subword ], [ %t0.init, %no_subword ]
+  %t1.sel = phi i8 [ %t1.sub, %do_subword ], [ %t1.init, %no_subword ]
+  %t2.sel = phi i8 [ %t2.sub, %do_subword ], [ %t2.init, %no_subword ]
+  %t3.sel = phi i8 [ %t3.sub, %do_subword ], [ %t3.init, %no_subword ]
+  %rconi.phi = phi i32 [ %rconi.next, %do_subword ], [ %rconi, %no_subword ]
+  %m16 = add nsw i32 %idx, -16
+  %m15 = add nsw i32 %m16, 1
+  %m14 = add nsw i32 %m16, 2
+  %m13 = add nsw i32 %m16, 3
+  %m16_64 = sext i32 %m16 to i64
+  %m15_64 = sext i32 %m15 to i64
+  %m14_64 = sext i32 %m14 to i64
+  %m13_64 = sext i32 %m13 to i64
+  %prk_m16 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m16_64
+  %prk_m15 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m15_64
+  %prk_m14 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m14_64
+  %prk_m13 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %m13_64
+  %w0 = load i8, i8* %prk_m16, align 1
+  %w1 = load i8, i8* %prk_m15, align 1
+  %w2 = load i8, i8* %prk_m14, align 1
+  %w3 = load i8, i8* %prk_m13, align 1
+  %v0 = xor i8 %w0, %t0.sel
+  %v1 = xor i8 %w1, %t1.sel
+  %v2 = xor i8 %w2, %t2.sel
+  %v3 = xor i8 %w3, %t3.sel
+  %idx64 = sext i32 %idx to i64
+  %idx1 = add nsw i32 %idx, 1
+  %idx2 = add nsw i32 %idx, 2
+  %idx3 = add nsw i32 %idx, 3
+  %idx1_64 = sext i32 %idx1 to i64
+  %idx2_64 = sext i32 %idx2 to i64
+  %idx3_64 = sext i32 %idx3 to i64
+  %prk_i0 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %idx64
+  %prk_i1 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %idx1_64
+  %prk_i2 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %idx2_64
+  %prk_i3 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %idx3_64
+  store i8 %v0, i8* %prk_i0, align 1
+  store i8 %v1, i8* %prk_i1, align 1
+  store i8 %v2, i8* %prk_i2, align 1
+  store i8 %v3, i8* %prk_i3, align 1
+  br label %expand_next
+
+expand_next:
+  %rconi.pass = phi i32 [ %rconi.phi, %expand_loop ]
+  %idx2.next = add nsw i32 %idx, 4
+  br label %expand_init
+
+ark0:
+  br label %ark0.loop
+
+ark0.loop:
+  %j0 = phi i32 [ 0, %ark0 ], [ %j0.inc, %ark0.loop ]
+  %cmp0 = icmp sle i32 %j0, 15
+  br i1 %cmp0, label %ark0.body, label %rounds_init
+
+ark0.body:
+  %j0_64 = zext i32 %j0 to i64
+  %pst0 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %j0_64
+  %stb0 = load i8, i8* %pst0, align 1
+  %prk0_1 = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %j0_64
+  %rkb0 = load i8, i8* %prk0_1, align 1
+  %x0 = xor i8 %stb0, %rkb0
+  store i8 %x0, i8* %pst0, align 1
+  %j0.inc = add nuw nsw i32 %j0, 1
+  br label %ark0.loop
+
+rounds_init:
+  br label %rounds
+
+rounds:
+  %round = phi i32 [ 1, %rounds_init ], [ %round.next, %rounds_end ]
+  %cmp_round = icmp sle i32 %round, 9
+  br i1 %cmp_round, label %round_subbytes, label %final_round
+
+round_subbytes:
+  br label %sb.loop
+
+sb.loop:
+  %si = phi i32 [ 0, %round_subbytes ], [ %si.inc, %sb.loop ]
+  %si.cmp = icmp sle i32 %si, 15
+  br i1 %si.cmp, label %sb.body, label %shiftrows
+
+sb.body:
+  %si64 = zext i32 %si to i64
+  %pst = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %si64
+  %sv = load i8, i8* %pst, align 1
+  %sidx = zext i8 %sv to i64
+  %psb = getelementptr inbounds [256 x i8], [256 x i8]* @sbox_1, i64 0, i64 %sidx
+  %sbv = load i8, i8* %psb, align 1
+  store i8 %sbv, i8* %pst, align 1
+  %si.inc = add nuw nsw i32 %si, 1
+  br label %sb.loop
+
+shiftrows:
+  %p1  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 1
+  %p5  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 5
+  %p9  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 9
+  %p13 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 13
+  %sr1  = load i8, i8* %p1, align 1
+  %sr5  = load i8, i8* %p5, align 1
+  %sr9  = load i8, i8* %p9, align 1
+  %sr13 = load i8, i8* %p13, align 1
+  store i8 %sr5,  i8* %p1,  align 1
+  store i8 %sr9,  i8* %p5,  align 1
+  store i8 %sr13, i8* %p9,  align 1
+  store i8 %sr1,  i8* %p13, align 1
+  %p2  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 2
+  %p6  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 6
+  %p10 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 10
+  %p14 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 14
+  %sr2  = load i8, i8* %p2, align 1
+  %sr6  = load i8, i8* %p6, align 1
+  %sr10 = load i8, i8* %p10, align 1
+  %sr14 = load i8, i8* %p14, align 1
+  store i8 %sr10, i8* %p2,  align 1
+  store i8 %sr14, i8* %p6,  align 1
+  store i8 %sr2,  i8* %p10, align 1
+  store i8 %sr6,  i8* %p14, align 1
+  %p3  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 3
+  %p7  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 7
+  %p11 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 11
+  %p15 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 15
+  %sr3  = load i8, i8* %p3,  align 1
+  %sr7  = load i8, i8* %p7,  align 1
+  %sr11 = load i8, i8* %p11, align 1
+  %sr15 = load i8, i8* %p15, align 1
+  store i8 %sr15, i8* %p3,  align 1
+  store i8 %sr3,  i8* %p7,  align 1
+  store i8 %sr7,  i8* %p11, align 1
+  store i8 %sr11, i8* %p15, align 1
+  br label %mixcols
+
+mixcols:
+  br label %mc.loop
+
+mc.loop:
+  %col = phi i32 [ 0, %mixcols ], [ %col.inc, %mc.loop.end ]
+  %col.cmp = icmp sle i32 %col, 3
+  br i1 %col.cmp, label %mc.body, label %ark_round
+
+mc.body:
+  %base = shl i32 %col, 2
+  %b0i = zext i32 %base to i64
+  %b1 = add nuw nsw i32 %base, 1
+  %b2 = add nuw nsw i32 %base, 2
+  %b3 = add nuw nsw i32 %base, 3
+  %b1i = zext i32 %b1 to i64
+  %b2i = zext i32 %b2 to i64
+  %b3i = zext i32 %b3 to i64
+  %pb0 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %b0i
+  %pb1 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %b1i
+  %pb2 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %b2i
+  %pb3 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %b3i
+  %a = load i8, i8* %pb0, align 1
+  %b8 = load i8, i8* %pb1, align 1
+  %c = load i8, i8* %pb2, align 1
+  %d = load i8, i8* %pb3, align 1
+  %t.ab = xor i8 %a, %b8
+  %t.cd = xor i8 %c, %d
+  %t.all = xor i8 %t.ab, %t.cd
+  %ab.msb = and i8 %t.ab, -128
+  %ab.shl = shl i8 %t.ab, 1
+  %ab.msb.nz = icmp ne i8 %ab.msb, 0
+  %ab.rc = select i1 %ab.msb.nz, i8 27, i8 0
+  %ab.xt = xor i8 %ab.shl, %ab.rc
+  %bc = xor i8 %b8, %c
+  %bc.msb = and i8 %bc, -128
+  %bc.shl = shl i8 %bc, 1
+  %bc.msb.nz = icmp ne i8 %bc.msb, 0
+  %bc.rc = select i1 %bc.msb.nz, i8 27, i8 0
+  %bc.xt = xor i8 %bc.shl, %bc.rc
+  %cd = xor i8 %c, %d
+  %cd.msb = and i8 %cd, -128
+  %cd.shl = shl i8 %cd, 1
+  %cd.msb.nz = icmp ne i8 %cd.msb, 0
+  %cd.rc = select i1 %cd.msb.nz, i8 27, i8 0
+  %cd.xt = xor i8 %cd.shl, %cd.rc
+  %da = xor i8 %d, %a
+  %da.msb = and i8 %da, -128
+  %da.shl = shl i8 %da, 1
+  %da.msb.nz = icmp ne i8 %da.msb, 0
+  %da.rc = select i1 %da.msb.nz, i8 27, i8 0
+  %da.xt = xor i8 %da.shl, %da.rc
+  %n0 = xor i8 %a, %ab.xt
+  %n0f = xor i8 %n0, %t.all
+  %n1 = xor i8 %b8, %bc.xt
+  %n1f = xor i8 %n1, %t.all
+  %n2 = xor i8 %c, %cd.xt
+  %n2f = xor i8 %n2, %t.all
+  %n3 = xor i8 %d, %da.xt
+  %n3f = xor i8 %n3, %t.all
+  store i8 %n0f, i8* %pb0, align 1
+  store i8 %n1f, i8* %pb1, align 1
+  store i8 %n2f, i8* %pb2, align 1
+  store i8 %n3f, i8* %pb3, align 1
+  br label %mc.loop.end
+
+mc.loop.end:
+  %col.inc = add nuw nsw i32 %col, 1
+  br label %mc.loop
+
+ark_round:
+  br label %ark.loop
+
+ark.loop:
+  %jj = phi i32 [ 0, %ark_round ], [ %jj.inc, %ark.loop ]
+  %jj.cmp = icmp sle i32 %jj, 15
+  br i1 %jj.cmp, label %ark.body, label %rounds_end
+
+ark.body:
+  %off = mul nuw nsw i32 %round, 16
+  %rkidx = add nuw nsw i32 %off, %jj
+  %rkidx64 = zext i32 %rkidx to i64
+  %jj64 = zext i32 %jj to i64
+  %pstj = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %jj64
+  %stj = load i8, i8* %pstj, align 1
+  %prkj = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %rkidx64
+  %rkj = load i8, i8* %prkj, align 1
+  %xj = xor i8 %stj, %rkj
+  store i8 %xj, i8* %pstj, align 1
+  %jj.inc = add nuw nsw i32 %jj, 1
+  br label %ark.loop
+
+rounds_end:
+  %round.next = add nuw nsw i32 %round, 1
+  br label %rounds
+
+final_round:
+  br label %fsb.loop
+
+fsb.loop:
+  %fi = phi i32 [ 0, %final_round ], [ %fi.inc, %fsb.loop ]
+  %fi.cmp = icmp sle i32 %fi, 15
+  br i1 %fi.cmp, label %fsb.body, label %fshiftrows
+
+fsb.body:
+  %fi64 = zext i32 %fi to i64
+  %pfst = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %fi64
+  %fsv = load i8, i8* %pfst, align 1
+  %fsidx = zext i8 %fsv to i64
+  %fpsb = getelementptr inbounds [256 x i8], [256 x i8]* @sbox_1, i64 0, i64 %fsidx
+  %fsbv = load i8, i8* %fpsb, align 1
+  store i8 %fsbv, i8* %pfst, align 1
+  %fi.inc = add nuw nsw i32 %fi, 1
+  br label %fsb.loop
+
+fshiftrows:
+  %fp1  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 1
+  %fp5  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 5
+  %fp9  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 9
+  %fp13 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 13
+  %fv1  = load i8, i8* %fp1, align 1
+  %fv5  = load i8, i8* %fp5, align 1
+  %fv9  = load i8, i8* %fp9, align 1
+  %fv13 = load i8, i8* %fp13, align 1
+  store i8 %fv5,  i8* %fp1,  align 1
+  store i8 %fv9,  i8* %fp5,  align 1
+  store i8 %fv13, i8* %fp9,  align 1
+  store i8 %fv1,  i8* %fp13, align 1
+  %fp2  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 2
+  %fp6  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 6
+  %fp10 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 10
+  %fp14 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 14
+  %fv2  = load i8, i8* %fp2,  align 1
+  %fv6  = load i8, i8* %fp6,  align 1
+  %fv10 = load i8, i8* %fp10, align 1
+  %fv14 = load i8, i8* %fp14, align 1
+  store i8 %fv10, i8* %fp2,  align 1
+  store i8 %fv14, i8* %fp6,  align 1
+  store i8 %fv2,  i8* %fp10, align 1
+  store i8 %fv6,  i8* %fp14, align 1
+  %fp3  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 3
+  %fp7  = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 7
+  %fp11 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 11
+  %fp15 = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 15
+  %fv3  = load i8, i8* %fp3,  align 1
+  %fv7  = load i8, i8* %fp7,  align 1
+  %fv11 = load i8, i8* %fp11, align 1
+  %fv15 = load i8, i8* %fp15, align 1
+  store i8 %fv15, i8* %fp3,  align 1
+  store i8 %fv3,  i8* %fp7,  align 1
+  store i8 %fv7,  i8* %fp11, align 1
+  store i8 %fv11, i8* %fp15, align 1
+  br label %final_ark
+
+final_ark:
+  br label %fark.loop
+
+fark.loop:
+  %fj = phi i32 [ 0, %final_ark ], [ %fj.inc, %fark.loop ]
+  %fj.cmp = icmp sle i32 %fj, 15
+  br i1 %fj.cmp, label %fark.body, label %store_out
+
+fark.body:
+  %fbase = add nuw nsw i32 160, %fj
+  %fbase64 = zext i32 %fbase to i64
+  %fj64 = zext i32 %fj to i64
+  %pfstj = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %fj64
+  %fstj = load i8, i8* %pfstj, align 1
+  %prkjf = getelementptr inbounds [176 x i8], [176 x i8]* %rk, i64 0, i64 %fbase64
+  %frkj = load i8, i8* %prkjf, align 1
+  %fx = xor i8 %fstj, %frkj
+  store i8 %fx, i8* %pfstj, align 1
+  %fj.inc = add nuw nsw i32 %fj, 1
+  br label %fark.loop
+
+store_out:
+  br label %out.loop
+
+out.loop:
+  %oi = phi i32 [ 0, %store_out ], [ %oi.inc, %out.loop ]
+  %oi.cmp = icmp sle i32 %oi, 15
+  br i1 %oi.cmp, label %out.body, label %ret
+
+out.body:
+  %oi64 = zext i32 %oi to i64
+  %pso = getelementptr inbounds [16 x i8], [16 x i8]* %state, i64 0, i64 %oi64
+  %ob = load i8, i8* %pso, align 1
+  %pout = getelementptr inbounds i8, i8* %out, i64 %oi64
+  store i8 %ob, i8* %pout, align 1
+  %oi.inc = add nuw nsw i32 %oi, 1
+  br label %out.loop
+
+ret:
+  ret void
+}

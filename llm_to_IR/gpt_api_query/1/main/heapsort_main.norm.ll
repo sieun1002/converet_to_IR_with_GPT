@@ -1,0 +1,169 @@
+; ModuleID = '/home/nata20034/workspace/convert_to_IR_with_LLM/original/ll/heapsort_main.ll'
+source_filename = "../original/src/heapsort.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@__const.main.arr = external hidden unnamed_addr constant [9 x i32], align 16
+@.str = external hidden unnamed_addr constant [9 x i8], align 1
+@.str.1 = external hidden unnamed_addr constant [4 x i8], align 1
+@.str.2 = external hidden unnamed_addr constant [2 x i8], align 1
+@.str.3 = external hidden unnamed_addr constant [13 x i8], align 1
+
+; Function Attrs: noinline nounwind optnone uwtable
+declare dso_local void @heap_sort(i32* noundef, i64 noundef) #0
+
+; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 !dbg !10 {
+entry:
+  %retval = alloca i32, align 4
+  %arr = alloca [9 x i32], align 16
+  %n = alloca i64, align 8
+  %i = alloca i64, align 8
+  %i4 = alloca i64, align 8
+  store i32 0, i32* %retval, align 4
+  call void @llvm.dbg.declare(metadata [9 x i32]* %arr, metadata !15, metadata !DIExpression()), !dbg !19
+  %0 = bitcast [9 x i32]* %arr to i8*, !dbg !19
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 16 %0, i8* align 16 bitcast ([9 x i32]* @__const.main.arr to i8*), i64 36, i1 false), !dbg !19
+  call void @llvm.dbg.declare(metadata i64* %n, metadata !20, metadata !DIExpression()), !dbg !24
+  store i64 9, i64* %n, align 8, !dbg !24
+  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([9 x i8], [9 x i8]* @.str, i64 0, i64 0)), !dbg !25
+  call void @llvm.dbg.declare(metadata i64* %i, metadata !26, metadata !DIExpression()), !dbg !28
+  store i64 0, i64* %i, align 8, !dbg !28
+  br label %for.cond, !dbg !29
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %1 = load i64, i64* %i, align 8, !dbg !30
+  %2 = load i64, i64* %n, align 8, !dbg !32
+  %cmp = icmp ult i64 %1, %2, !dbg !33
+  br i1 %cmp, label %for.body, label %for.end, !dbg !34
+
+for.body:                                         ; preds = %for.cond
+  %3 = load i64, i64* %i, align 8, !dbg !35
+  %arrayidx = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 %3, !dbg !36
+  %4 = load i32, i32* %arrayidx, align 4, !dbg !36
+  %call1 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i32 noundef %4), !dbg !37
+  br label %for.inc, !dbg !37
+
+for.inc:                                          ; preds = %for.body
+  %5 = load i64, i64* %i, align 8, !dbg !38
+  %inc = add i64 %5, 1, !dbg !38
+  store i64 %inc, i64* %i, align 8, !dbg !38
+  br label %for.cond, !dbg !39, !llvm.loop !40
+
+for.end:                                          ; preds = %for.cond
+  %call2 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([2 x i8], [2 x i8]* @.str.2, i64 0, i64 0)), !dbg !43
+  %arraydecay = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 0, !dbg !44
+  %6 = load i64, i64* %n, align 8, !dbg !45
+  call void @heap_sort(i32* noundef %arraydecay, i64 noundef %6), !dbg !46
+  %call3 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str.3, i64 0, i64 0)), !dbg !47
+  call void @llvm.dbg.declare(metadata i64* %i4, metadata !48, metadata !DIExpression()), !dbg !50
+  store i64 0, i64* %i4, align 8, !dbg !50
+  br label %for.cond5, !dbg !51
+
+for.cond5:                                        ; preds = %for.inc10, %for.end
+  %7 = load i64, i64* %i4, align 8, !dbg !52
+  %8 = load i64, i64* %n, align 8, !dbg !54
+  %cmp6 = icmp ult i64 %7, %8, !dbg !55
+  br i1 %cmp6, label %for.body7, label %for.end12, !dbg !56
+
+for.body7:                                        ; preds = %for.cond5
+  %9 = load i64, i64* %i4, align 8, !dbg !57
+  %arrayidx8 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 %9, !dbg !58
+  %10 = load i32, i32* %arrayidx8, align 4, !dbg !58
+  %call9 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1, i64 0, i64 0), i32 noundef %10), !dbg !59
+  br label %for.inc10, !dbg !59
+
+for.inc10:                                        ; preds = %for.body7
+  %11 = load i64, i64* %i4, align 8, !dbg !60
+  %inc11 = add i64 %11, 1, !dbg !60
+  store i64 %inc11, i64* %i4, align 8, !dbg !60
+  br label %for.cond5, !dbg !61, !llvm.loop !62
+
+for.end12:                                        ; preds = %for.cond5
+  %call13 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([2 x i8], [2 x i8]* @.str.2, i64 0, i64 0)), !dbg !64
+  ret i32 0, !dbg !65
+}
+
+; Function Attrs: argmemonly nofree nounwind willreturn
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i64, i1 immarg) #2
+
+declare i32 @printf(i8* noundef, ...) #3
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #2 = { argmemonly nofree nounwind willreturn }
+attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5, !6, !7, !8}
+!llvm.ident = !{!9}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Ubuntu clang version 14.0.0-1ubuntu1.1", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "../original/src/heapsort.c", directory: "/home/nata20034/workspace/convert_to_IR_with_LLM/IR_Test", checksumkind: CSK_MD5, checksum: "46ea0de099a65ce5a3d77aedcde86428")
+!2 = !{i32 7, !"Dwarf Version", i32 5}
+!3 = !{i32 2, !"Debug Info Version", i32 3}
+!4 = !{i32 1, !"wchar_size", i32 4}
+!5 = !{i32 7, !"PIC Level", i32 2}
+!6 = !{i32 7, !"PIE Level", i32 2}
+!7 = !{i32 7, !"uwtable", i32 1}
+!8 = !{i32 7, !"frame-pointer", i32 2}
+!9 = !{!"Ubuntu clang version 14.0.0-1ubuntu1.1"}
+!10 = distinct !DISubprogram(name: "main", scope: !1, file: !1, line: 35, type: !11, scopeLine: 35, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !14)
+!11 = !DISubroutineType(types: !12)
+!12 = !{!13}
+!13 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!14 = !{}
+!15 = !DILocalVariable(name: "arr", scope: !10, file: !1, line: 36, type: !16)
+!16 = !DICompositeType(tag: DW_TAG_array_type, baseType: !13, size: 288, elements: !17)
+!17 = !{!18}
+!18 = !DISubrange(count: 9)
+!19 = !DILocation(line: 36, column: 9, scope: !10)
+!20 = !DILocalVariable(name: "n", scope: !10, file: !1, line: 37, type: !21)
+!21 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !22, line: 46, baseType: !23)
+!22 = !DIFile(filename: "/usr/lib/llvm-14/lib/clang/14.0.0/include/stddef.h", directory: "", checksumkind: CSK_MD5, checksum: "2499dd2361b915724b073282bea3a7bc")
+!23 = !DIBasicType(name: "unsigned long", size: 64, encoding: DW_ATE_unsigned)
+!24 = !DILocation(line: 37, column: 12, scope: !10)
+!25 = !DILocation(line: 39, column: 5, scope: !10)
+!26 = !DILocalVariable(name: "i", scope: !27, file: !1, line: 40, type: !21)
+!27 = distinct !DILexicalBlock(scope: !10, file: !1, line: 40, column: 5)
+!28 = !DILocation(line: 40, column: 17, scope: !27)
+!29 = !DILocation(line: 40, column: 10, scope: !27)
+!30 = !DILocation(line: 40, column: 24, scope: !31)
+!31 = distinct !DILexicalBlock(scope: !27, file: !1, line: 40, column: 5)
+!32 = !DILocation(line: 40, column: 28, scope: !31)
+!33 = !DILocation(line: 40, column: 26, scope: !31)
+!34 = !DILocation(line: 40, column: 5, scope: !27)
+!35 = !DILocation(line: 40, column: 54, scope: !31)
+!36 = !DILocation(line: 40, column: 50, scope: !31)
+!37 = !DILocation(line: 40, column: 36, scope: !31)
+!38 = !DILocation(line: 40, column: 32, scope: !31)
+!39 = !DILocation(line: 40, column: 5, scope: !31)
+!40 = distinct !{!40, !34, !41, !42}
+!41 = !DILocation(line: 40, column: 56, scope: !27)
+!42 = !{!"llvm.loop.mustprogress"}
+!43 = !DILocation(line: 41, column: 5, scope: !10)
+!44 = !DILocation(line: 43, column: 15, scope: !10)
+!45 = !DILocation(line: 43, column: 20, scope: !10)
+!46 = !DILocation(line: 43, column: 5, scope: !10)
+!47 = !DILocation(line: 45, column: 5, scope: !10)
+!48 = !DILocalVariable(name: "i", scope: !49, file: !1, line: 46, type: !21)
+!49 = distinct !DILexicalBlock(scope: !10, file: !1, line: 46, column: 5)
+!50 = !DILocation(line: 46, column: 17, scope: !49)
+!51 = !DILocation(line: 46, column: 10, scope: !49)
+!52 = !DILocation(line: 46, column: 24, scope: !53)
+!53 = distinct !DILexicalBlock(scope: !49, file: !1, line: 46, column: 5)
+!54 = !DILocation(line: 46, column: 28, scope: !53)
+!55 = !DILocation(line: 46, column: 26, scope: !53)
+!56 = !DILocation(line: 46, column: 5, scope: !49)
+!57 = !DILocation(line: 46, column: 54, scope: !53)
+!58 = !DILocation(line: 46, column: 50, scope: !53)
+!59 = !DILocation(line: 46, column: 36, scope: !53)
+!60 = !DILocation(line: 46, column: 32, scope: !53)
+!61 = !DILocation(line: 46, column: 5, scope: !53)
+!62 = distinct !{!62, !56, !63, !42}
+!63 = !DILocation(line: 46, column: 56, scope: !49)
+!64 = !DILocation(line: 47, column: 5, scope: !10)
+!65 = !DILocation(line: 49, column: 5, scope: !10)

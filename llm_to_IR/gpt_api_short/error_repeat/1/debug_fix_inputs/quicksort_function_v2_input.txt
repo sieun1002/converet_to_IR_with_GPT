@@ -1,0 +1,119 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_short/error_repeat/1/quicksort_function1.ll:44:14: error: expected instruction opcode
+;   %i_final = %i_cur
+;              ^
+; === ERROR LOG END ===
+
+; ModuleID = 'quick_sort'
+target triple = "x86_64-unknown-linux-gnu"
+
+; Symbol: quick_sort ; Address: 0x1189
+; Intent: in-place quicksort on int array (confidence=0.98). Evidence: midpoint pivot, bidirectional partition, tail-recursive smaller-partition recursion
+; Preconditions: a != null; indices left/right are valid inclusive bounds within the array
+; Postconditions: subarray a[left..right] sorted ascending (non-stable), in ascending order
+
+define dso_local void @quick_sort(i32* nocapture %a, i64 %left, i64 %right) local_unnamed_addr {
+entry:
+  br label %tail_loop
+
+tail_loop:                                            ; loop over remaining subrange
+  %l = phi i64 [ %left, %entry ], [ %left_next_phi, %loop_update ]
+  %r = phi i64 [ %right, %entry ], [ %right_next_phi, %loop_update ]
+  %cmp_lr = icmp slt i64 %l, %r
+  br i1 %cmp_lr, label %part_init, label %exit
+
+part_init:
+  %delta = sub i64 %r, %l
+  %half = sdiv i64 %delta, 2
+  %mid = add i64 %l, %half
+  %pivot_ptr = getelementptr inbounds i32, i32* %a, i64 %mid
+  %pivot = load i32, i32* %pivot_ptr, align 4
+  br label %partition_loop
+
+partition_loop:
+  %i = phi i64 [ %l, %part_init ], [ %i_plus1, %do_swap ]
+  %j = phi i64 [ %r, %part_init ], [ %j_minus1, %do_swap ]
+  br label %i_scan
+
+i_scan:
+  %i_cur = phi i64 [ %i, %partition_loop ], [ %i_inc, %i_scan_inc ]
+  %ptr_i = getelementptr inbounds i32, i32* %a, i64 %i_cur
+  %val_i = load i32, i32* %ptr_i, align 4
+  %cmp_i = icmp sgt i32 %pivot, %val_i
+  br i1 %cmp_i, label %i_scan_inc, label %i_scan_done
+
+i_scan_inc:
+  %i_inc = add nsw i64 %i_cur, 1
+  br label %i_scan
+
+i_scan_done:
+  %i_final = %i_cur
+  br label %j_scan
+
+j_scan:
+  %j_cur = phi i64 [ %j, %i_scan_done ], [ %j_dec, %j_scan_dec ]
+  %ptr_j = getelementptr inbounds i32, i32* %a, i64 %j_cur
+  %val_j = load i32, i32* %ptr_j, align 4
+  %cmp_j = icmp slt i32 %pivot, %val_j
+  br i1 %cmp_j, label %j_scan_dec, label %j_scan_done
+
+j_scan_dec:
+  %j_dec = add nsw i64 %j_cur, -1
+  br label %j_scan
+
+j_scan_done:
+  %j_final = %j_cur
+  %cmp_ij = icmp sle i64 %i_final, %j_final
+  br i1 %cmp_ij, label %do_swap, label %after_partition
+
+do_swap:
+  %ptr_i2 = getelementptr inbounds i32, i32* %a, i64 %i_final
+  %ptr_j2 = getelementptr inbounds i32, i32* %a, i64 %j_final
+  %tmp = load i32, i32* %ptr_i2, align 4
+  %valj2 = load i32, i32* %ptr_j2, align 4
+  store i32 %valj2, i32* %ptr_i2, align 4
+  store i32 %tmp, i32* %ptr_j2, align 4
+  %i_plus1 = add nsw i64 %i_final, 1
+  %j_minus1 = add nsw i64 %j_final, -1
+  br label %partition_loop
+
+after_partition:
+  %left_span = sub nsw i64 %j_final, %l
+  %right_span = sub nsw i64 %r, %i_final
+  %left_ge_right = icmp sge i64 %left_span, %right_span
+  br i1 %left_ge_right, label %right_case, label %left_case
+
+left_case:
+  %do_left = icmp slt i64 %l, %j_final
+  br i1 %do_left, label %recur_left, label %after_left_recur
+
+recur_left:
+  call void @quick_sort(i32* %a, i64 %l, i64 %j_final)
+  br label %after_left_recur
+
+after_left_recur:
+  %left_next = %i_final
+  %right_next = %r
+  br label %loop_update
+
+right_case:
+  %do_right = icmp slt i64 %i_final, %r
+  br i1 %do_right, label %recur_right, label %after_right_recur
+
+recur_right:
+  call void @quick_sort(i32* %a, i64 %i_final, i64 %r)
+  br label %after_right_recur
+
+after_right_recur:
+  %left_next2 = %l
+  %right_next2 = %j_final
+  br label %loop_update
+
+loop_update:
+  %left_next_phi = phi i64 [ %left_next, %after_left_recur ], [ %left_next2, %after_right_recur ]
+  %right_next_phi = phi i64 [ %right_next, %after_left_recur ], [ %right_next2, %after_right_recur ]
+  br label %tail_loop
+
+exit:
+  ret void
+}

@@ -1,0 +1,206 @@
+{
+  "entries": [
+    {
+      "file": "AES128_single.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/AES128_single_function.ll:86:10: error: expected instruction opcode\n  %rt0 = %t1\n         ^\n1 error generated."
+    },
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DES_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/DES_modular_function3-5b80f3.o: in function `sboxes_p':\nsboxes_p:(.text+0x73): undefined reference to `SBOX'\n/usr/bin/ld: sboxes_p:(.text+0x9d): undefined reference to `P'\n/usr/bin/ld: /tmp/DES_modular_function4-333213.o: in function `feistel':\nfeistel:(.text+0xc): undefined reference to `E'\n/usr/bin/ld: /tmp/DES_modular_function5-9b43e6.o: in function `key_schedule':\nkey_schedule.ll:(.text+0xc): undefined reference to `PC1'\n/usr/bin/ld: key_schedule.ll:(.text+0x59): undefined reference to `SHIFTS'\n/usr/bin/ld: key_schedule.ll:(.text+0x9c): undefined reference to `PC2'\n/usr/bin/ld: /tmp/DES_modular_function6-d685b8.o: in function `des_encrypt':\nDES_modular_function6.ll:(.text+0x30): undefined reference to `unk_2020'\n/usr/bin/ld: DES_modular_function6.ll:(.text+0xbe): undefined reference to `FP'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "DES_single.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/DES_single_function.ll:77:13: error: expected instruction opcode\n  %C.next = %C.masked\n            ^\n1 error generated."
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/bubblesort_main-cfcba6.o: in function `main':\nrecovered:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered:(.text+0xdb): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/heapsort_function.ll:59:17: error: expected instruction opcode\n  %childAfter = %childIdx\n                ^\n1 error generated."
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch_main-33608f.o: in function `main':\nlinearsearch_main.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: linearsearch_main.ll:(.text+0x82): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "AES128_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/main/AES128_modular_main.ll:5:52: error: constant expression type mismatch: got type '[5 x i8]' but expected '[4 x i8]'\n@.str.hex = private unnamed_addr constant [4 x i8] c\"%02x\\00\", align 1\n                                                   ^\n1 error generated."
+    },
+    {
+      "file": "DES_single_.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/main/DES_single__main.ll:17:13: error: floating point constant invalid for type\n  store i64 0x133457799BBCDFF1, i64* %var18, align 8\n            ^\n1 error generated."
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/mergesort_function.ll:112:15: error: expected instruction opcode\n  %src.next = %buf.cur\n              ^\n1 error generated."
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/quicksort_main-1d7683.o: in function `main':\ndecompiled.c:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: decompiled.c:(.text+0xe9): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/selectionsort_main-0d1ff4.o: in function `main':\nselectionsort_main.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: selectionsort_main.ll:(.text+0xa9): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "AES128_single.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/AES128_single_function.ll:86:10: error: expected instruction opcode\n  %rt0 = %t1\n         ^\n1 error generated."
+    },
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DES_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/DES_modular_function3-c347c5.o: in function `sboxes_p':\nsboxes_p:(.text+0x73): undefined reference to `SBOX'\n/usr/bin/ld: sboxes_p:(.text+0x9d): undefined reference to `P'\n/usr/bin/ld: /tmp/DES_modular_function4-664720.o: in function `feistel':\nfeistel:(.text+0xc): undefined reference to `E'\n/usr/bin/ld: /tmp/DES_modular_function5-6b6954.o: in function `key_schedule':\nkey_schedule.ll:(.text+0xc): undefined reference to `PC1'\n/usr/bin/ld: key_schedule.ll:(.text+0x59): undefined reference to `SHIFTS'\n/usr/bin/ld: key_schedule.ll:(.text+0x9c): undefined reference to `PC2'\n/usr/bin/ld: /tmp/DES_modular_function6-3fbce3.o: in function `des_encrypt':\nDES_modular_function6.ll:(.text+0x30): undefined reference to `unk_2020'\n/usr/bin/ld: DES_modular_function6.ll:(.text+0xbe): undefined reference to `FP'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "DES_single.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/DES_single_function.ll:77:13: error: expected instruction opcode\n  %C.next = %C.masked\n            ^\n1 error generated."
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/bubblesort_main-124db1.o: in function `main':\nrecovered:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered:(.text+0xdb): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/heapsort_function.ll:59:17: error: expected instruction opcode\n  %childAfter = %childIdx\n                ^\n1 error generated."
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch_main-46cff7.o: in function `main':\nlinearsearch_main.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: linearsearch_main.ll:(.text+0x82): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "AES128_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/main/AES128_modular_main.ll:5:52: error: constant expression type mismatch: got type '[5 x i8]' but expected '[4 x i8]'\n@.str.hex = private unnamed_addr constant [4 x i8] c\"%02x\\00\", align 1\n                                                   ^\n1 error generated."
+    },
+    {
+      "file": "DES_single_.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/main/DES_single__main.ll:17:13: error: floating point constant invalid for type\n  store i64 0x133457799BBCDFF1, i64* %var18, align 8\n            ^\n1 error generated."
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/5/mergesort_function.ll:112:15: error: expected instruction opcode\n  %src.next = %buf.cur\n              ^\n1 error generated."
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/quicksort_main-f734db.o: in function `main':\ndecompiled.c:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: decompiled.c:(.text+0xe9): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/selectionsort_main-d4bf9f.o: in function `main':\nselectionsort_main.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: selectionsort_main.ll:(.text+0xa9): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    }
+  ]
+}

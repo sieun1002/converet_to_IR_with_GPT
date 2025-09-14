@@ -1,0 +1,129 @@
+{
+  "entries": [
+    {
+      "file": "BFS_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DFS_function.ll",
+      "parent": "4",
+      "ok": false,
+      "err": 1,
+      "errmsg": "cand normalize failed: opt-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/DFS_function.ll:6:52: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.str_fmt = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\", align 1\n                                                   ^"
+    },
+    {
+      "file": "binarysearch_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "insertionsort_function.ll",
+      "parent": "4",
+      "ok": false,
+      "err": 1,
+      "errmsg": "cand normalize failed: opt-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/insertionsort_function.ll:9:21: error: expected value token\n  %i = phi i64 [ 1, entry ], [ %i.next, %for.latch ]\n                    ^"
+    },
+    {
+      "file": "linearsearch_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "BFS_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "DFS_main.ll",
+      "parent": "main",
+      "ok": false,
+      "err": 1,
+      "errmsg": "cand normalize failed: PHINode should have one entry for each predecessor of its parent basic block!\n  %i0 = phi i64 [ 0, %allocs ]\nopt-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/DFS_main.ll: error: input module is broken!"
+    },
+    {
+      "file": "binarysearch_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "insertionsort_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "linearsearch_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "mergesort_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort_main.ll",
+      "parent": "main",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "selectionsort_main.ll",
+      "parent": "main",
+      "ok": false,
+      "err": 1,
+      "errmsg": "cand normalize failed: opt-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/main/selectionsort_main.ll:5:56: error: constant expression type mismatch: got type '[15 x i8]' but expected '[16 x i8]'\n@.str.sorted = private unnamed_addr constant [16 x i8] c\"Sorted array: \\00\", align 1\n                                                       ^"
+    },
+    {
+      "file": "mergesort_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort_function.ll",
+      "parent": "4",
+      "ok": false,
+      "err": 1,
+      "errmsg": "cand normalize failed: opt-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/4/quicksort_function.ll:16:14: error: expected instruction opcode\n  %i.start = %lo.cur\n             ^"
+    },
+    {
+      "file": "selectionsort_function.ll",
+      "parent": "4",
+      "ok": true,
+      "err": 0
+    }
+  ]
+}

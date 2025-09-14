@@ -1,0 +1,13 @@
+file,parent,ok,err,errmsg
+BFS.ll,eval,True,0
+DFS.ll,eval,False,-20,"warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/1/DFS_function.ll:4:50: error: constant expression type mismatch: got type '[24 x i8]' but expected '[25 x i8]'\n@.str0 = private unnamed_addr constant [25 x i8] c""DFS preorder from %zu: \00"", align 1\n                                                 ^\n1 error generated."
+binarysearch.ll,eval,True,0
+bubblesort.ll,eval,True,0
+dijkstra_modular.ll,eval,True,0
+dijkstra_single_func.ll,eval,True,0
+heapsort.ll,eval,False,-24,[mismatch]\n--- cand ---\nBefore:7 3 9 1 4 8 2 6 5 \nAfter:1 2 3 4 5 6 7 8 9 \n\n--- ref ---\n원본: 7 3 9 1 4 8 2 6 5 \n정렬 후: 1 2 3 4 5 6 7 8 9 \n
+insertionsort.ll,eval,True,0
+linearsearch.ll,eval,True,0
+mergesort.ll,eval,False,-20,/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/1/mergesort_function.ll:78:15: error: expected instruction opcode\n  %j.pass.s = %j.phi\n              ^\n1 error generated.
+quicksort.ll,eval,False,-20,/usr/bin/ld: /tmp/quicksort_function-18d677.o: in function `quick_sort':\nquicksort_function.ll:(.text+0x0): multiple definition of `quick_sort'; /tmp/quicksort_main-78d74e.o:quicksort_main.ll:(.text+0x0): first defined here\nclang: error: linker command failed with exit code 1 (use -v to see invocation)
+selectionsort.ll,eval,True,0

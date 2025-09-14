@@ -1,0 +1,472 @@
+; Function: aes128_encrypt
+; Start: 0x11A9, End: 0x1AA9
+
+0x000011A9: endbr64
+0x000011AD: push    rbp
+0x000011AE: mov     rbp, rsp
+0x000011B1: sub     rsp, 140h
+0x000011B8: mov     [rbp+var_128], rdi
+0x000011BF: mov     [rbp+var_130], rsi
+0x000011C6: mov     [rbp+var_138], rdx
+0x000011CD: mov     rax, fs:28h
+0x000011D6: mov     [rbp+var_8], rax
+0x000011DA: xor     eax, eax
+0x000011DC: mov     [rbp+var_110], 0
+0x000011E6: jmp     short loc_1214
+loc_11E8:
+0x000011E8: mov     eax, [rbp+var_110]
+0x000011EE: movsxd  rdx, eax
+0x000011F1: mov     rax, [rbp+var_130]
+0x000011F8: add     rax, rdx
+0x000011FB: movzx   edx, byte ptr [rax]
+0x000011FE: mov     eax, [rbp+var_110]
+0x00001204: cdqe
+0x00001206: mov     [rbp+rax+var_D0], dl
+0x0000120D: add     [rbp+var_110], 1
+loc_1214:
+0x00001214: cmp     [rbp+var_110], 0Fh
+0x0000121B: jle     short loc_11E8
+0x0000121D: mov     [rbp+var_10C], 0
+0x00001227: jmp     short loc_1255
+loc_1229:
+0x00001229: mov     eax, [rbp+var_10C]
+0x0000122F: movsxd  rdx, eax
+0x00001232: mov     rax, [rbp+var_138]
+0x00001239: add     rax, rdx
+0x0000123C: movzx   edx, byte ptr [rax]
+0x0000123F: mov     eax, [rbp+var_10C]
+0x00001245: cdqe
+0x00001247: mov     [rbp+rax+var_C0], dl
+0x0000124E: add     [rbp+var_10C], 1
+loc_1255:
+0x00001255: cmp     [rbp+var_10C], 0Fh
+0x0000125C: jle     short loc_1229
+0x0000125E: mov     [rbp+var_108], 10h
+0x00001268: mov     [rbp+var_104], 0
+0x00001272: jmp     loc_1472
+loc_1277:
+0x00001277: mov     eax, [rbp+var_108]
+0x0000127D: sub     eax, 4
+0x00001280: cdqe
+0x00001282: movzx   eax, [rbp+rax+var_C0]
+0x0000128A: mov     [rbp+var_120], al
+0x00001290: mov     eax, [rbp+var_108]
+0x00001296: sub     eax, 3
+0x00001299: cdqe
+0x0000129B: movzx   eax, [rbp+rax+var_C0]
+0x000012A3: mov     [rbp+var_11F], al
+0x000012A9: mov     eax, [rbp+var_108]
+0x000012AF: sub     eax, 2
+0x000012B2: cdqe
+0x000012B4: movzx   eax, [rbp+rax+var_C0]
+0x000012BC: mov     [rbp+var_11E], al
+0x000012C2: mov     eax, [rbp+var_108]
+0x000012C8: sub     eax, 1
+0x000012CB: cdqe
+0x000012CD: movzx   eax, [rbp+rax+var_C0]
+0x000012D5: mov     [rbp+var_11D], al
+0x000012DB: mov     eax, [rbp+var_108]
+0x000012E1: and     eax, 0Fh
+0x000012E4: test    eax, eax
+0x000012E6: jnz     loc_13B7
+0x000012EC: movzx   eax, [rbp+var_120]
+0x000012F3: mov     [rbp+var_111], al
+0x000012F9: movzx   eax, [rbp+var_11F]
+0x00001300: mov     [rbp+var_120], al
+0x00001306: movzx   eax, [rbp+var_11E]
+0x0000130D: mov     [rbp+var_11F], al
+0x00001313: movzx   eax, [rbp+var_11D]
+0x0000131A: mov     [rbp+var_11E], al
+0x00001320: movzx   eax, [rbp+var_111]
+0x00001327: mov     [rbp+var_11D], al
+0x0000132D: movzx   eax, [rbp+var_120]
+0x00001334: cdqe
+0x00001336: lea     rdx, sbox_1
+0x0000133D: movzx   eax, byte ptr [rax+rdx]
+0x00001341: mov     [rbp+var_120], al
+0x00001347: movzx   eax, [rbp+var_11F]
+0x0000134E: cdqe
+0x00001350: lea     rdx, sbox_1
+0x00001357: movzx   eax, byte ptr [rax+rdx]
+0x0000135B: mov     [rbp+var_11F], al
+0x00001361: movzx   eax, [rbp+var_11E]
+0x00001368: cdqe
+0x0000136A: lea     rdx, sbox_1
+0x00001371: movzx   eax, byte ptr [rax+rdx]
+0x00001375: mov     [rbp+var_11E], al
+0x0000137B: movzx   eax, [rbp+var_11D]
+0x00001382: cdqe
+0x00001384: lea     rdx, sbox_1
+0x0000138B: movzx   eax, byte ptr [rax+rdx]
+0x0000138F: mov     [rbp+var_11D], al
+0x00001395: mov     eax, [rbp+var_104]
+0x0000139B: lea     edx, [rax+1]
+0x0000139E: mov     [rbp+var_104], edx
+0x000013A4: cdqe
+0x000013A6: lea     rdx, rcon_0
+0x000013AD: movzx   eax, byte ptr [rax+rdx]
+0x000013B1: xor     [rbp+var_120], al
+loc_13B7:
+0x000013B7: mov     eax, [rbp+var_108]
+0x000013BD: sub     eax, 10h
+0x000013C0: cdqe
+0x000013C2: movzx   eax, [rbp+rax+var_C0]
+0x000013CA: xor     al, [rbp+var_120]
+0x000013D0: mov     edx, eax
+0x000013D2: mov     eax, [rbp+var_108]
+0x000013D8: cdqe
+0x000013DA: mov     [rbp+rax+var_C0], dl
+0x000013E1: mov     eax, [rbp+var_108]
+0x000013E7: sub     eax, 0Fh
+0x000013EA: cdqe
+0x000013EC: movzx   eax, [rbp+rax+var_C0]
+0x000013F4: mov     edx, [rbp+var_108]
+0x000013FA: lea     ecx, [rdx+1]
+0x000013FD: xor     al, [rbp+var_11F]
+0x00001403: mov     edx, eax
+0x00001405: movsxd  rax, ecx
+0x00001408: mov     [rbp+rax+var_C0], dl
+0x0000140F: mov     eax, [rbp+var_108]
+0x00001415: sub     eax, 0Eh
+0x00001418: cdqe
+0x0000141A: movzx   eax, [rbp+rax+var_C0]
+0x00001422: mov     edx, [rbp+var_108]
+0x00001428: lea     ecx, [rdx+2]
+0x0000142B: xor     al, [rbp+var_11E]
+0x00001431: mov     edx, eax
+0x00001433: movsxd  rax, ecx
+0x00001436: mov     [rbp+rax+var_C0], dl
+0x0000143D: mov     eax, [rbp+var_108]
+0x00001443: sub     eax, 0Dh
+0x00001446: cdqe
+0x00001448: movzx   eax, [rbp+rax+var_C0]
+0x00001450: mov     edx, [rbp+var_108]
+0x00001456: lea     ecx, [rdx+3]
+0x00001459: xor     al, [rbp+var_11D]
+0x0000145F: mov     edx, eax
+0x00001461: movsxd  rax, ecx
+0x00001464: mov     [rbp+rax+var_C0], dl
+0x0000146B: add     [rbp+var_108], 4
+loc_1472:
+0x00001472: cmp     [rbp+var_108], 0AFh
+0x0000147C: jle     loc_1277
+0x00001482: mov     [rbp+var_100], 0
+0x0000148C: jmp     short loc_14C6
+loc_148E:
+0x0000148E: mov     eax, [rbp+var_100]
+0x00001494: cdqe
+0x00001496: movzx   edx, [rbp+rax+var_D0]
+0x0000149E: mov     eax, [rbp+var_100]
+0x000014A4: cdqe
+0x000014A6: movzx   eax, [rbp+rax+var_C0]
+0x000014AE: xor     edx, eax
+0x000014B0: mov     eax, [rbp+var_100]
+0x000014B6: cdqe
+0x000014B8: mov     [rbp+rax+var_D0], dl
+0x000014BF: add     [rbp+var_100], 1
+loc_14C6:
+0x000014C6: cmp     [rbp+var_100], 0Fh
+0x000014CD: jle     short loc_148E
+0x000014CF: mov     [rbp+var_FC], 1
+0x000014D9: jmp     loc_18D7
+loc_14DE:
+0x000014DE: mov     [rbp+var_F8], 0
+0x000014E8: jmp     short loc_1520
+loc_14EA:
+0x000014EA: mov     eax, [rbp+var_F8]
+0x000014F0: cdqe
+0x000014F2: movzx   eax, [rbp+rax+var_D0]
+0x000014FA: movzx   eax, al
+0x000014FD: cdqe
+0x000014FF: lea     rdx, sbox_1
+0x00001506: movzx   edx, byte ptr [rax+rdx]
+0x0000150A: mov     eax, [rbp+var_F8]
+0x00001510: cdqe
+0x00001512: mov     [rbp+rax+var_D0], dl
+0x00001519: add     [rbp+var_F8], 1
+loc_1520:
+0x00001520: cmp     [rbp+var_F8], 0Fh
+0x00001527: jle     short loc_14EA
+0x00001529: movzx   eax, [rbp+var_CF]
+0x00001530: mov     [rbp+var_11B], al
+0x00001536: movzx   eax, [rbp+var_CB]
+0x0000153D: mov     [rbp+var_CF], al
+0x00001543: movzx   eax, [rbp+var_C7]
+0x0000154A: mov     [rbp+var_CB], al
+0x00001550: movzx   eax, [rbp+var_C3]
+0x00001557: mov     [rbp+var_C7], al
+0x0000155D: movzx   eax, [rbp+var_11B]
+0x00001564: mov     [rbp+var_C3], al
+0x0000156A: movzx   eax, [rbp+var_CE]
+0x00001571: mov     [rbp+var_11B], al
+0x00001577: movzx   eax, [rbp+var_C6]
+0x0000157E: mov     [rbp+var_CE], al
+0x00001584: movzx   eax, [rbp+var_11B]
+0x0000158B: mov     [rbp+var_C6], al
+0x00001591: movzx   eax, [rbp+var_CA]
+0x00001598: mov     [rbp+var_11B], al
+0x0000159E: movzx   eax, [rbp+var_C2]
+0x000015A5: mov     [rbp+var_CA], al
+0x000015AB: movzx   eax, [rbp+var_11B]
+0x000015B2: mov     [rbp+var_C2], al
+0x000015B8: movzx   eax, [rbp+var_CD]
+0x000015BF: mov     [rbp+var_11B], al
+0x000015C5: movzx   eax, [rbp+var_C1]
+0x000015CC: mov     [rbp+var_CD], al
+0x000015D2: movzx   eax, [rbp+var_C5]
+0x000015D9: mov     [rbp+var_C1], al
+0x000015DF: movzx   eax, [rbp+var_C9]
+0x000015E6: mov     [rbp+var_C5], al
+0x000015EC: movzx   eax, [rbp+var_11B]
+0x000015F3: mov     [rbp+var_C9], al
+0x000015F9: mov     [rbp+var_F4], 0
+0x00001603: jmp     loc_1867
+loc_1608:
+0x00001608: mov     eax, [rbp+var_F4]
+0x0000160E: shl     eax, 2
+0x00001611: mov     [rbp+var_E0], eax
+0x00001617: mov     eax, [rbp+var_F4]
+0x0000161D: shl     eax, 2
+0x00001620: add     eax, 1
+0x00001623: mov     [rbp+var_DC], eax
+0x00001629: mov     eax, [rbp+var_F4]
+0x0000162F: shl     eax, 2
+0x00001632: add     eax, 2
+0x00001635: mov     [rbp+var_D8], eax
+0x0000163B: mov     eax, [rbp+var_F4]
+0x00001641: shl     eax, 2
+0x00001644: add     eax, 3
+0x00001647: mov     [rbp+var_D4], eax
+0x0000164D: mov     eax, [rbp+var_E0]
+0x00001653: cdqe
+0x00001655: movzx   eax, [rbp+rax+var_D0]
+0x0000165D: mov     [rbp+var_11A], al
+0x00001663: mov     eax, [rbp+var_DC]
+0x00001669: cdqe
+0x0000166B: movzx   eax, [rbp+rax+var_D0]
+0x00001673: mov     [rbp+var_119], al
+0x00001679: mov     eax, [rbp+var_D8]
+0x0000167F: cdqe
+0x00001681: movzx   eax, [rbp+rax+var_D0]
+0x00001689: mov     [rbp+var_118], al
+0x0000168F: mov     eax, [rbp+var_D4]
+0x00001695: cdqe
+0x00001697: movzx   eax, [rbp+rax+var_D0]
+0x0000169F: mov     [rbp+var_117], al
+0x000016A5: movzx   eax, [rbp+var_11A]
+0x000016AC: xor     al, [rbp+var_119]
+0x000016B2: xor     al, [rbp+var_118]
+0x000016B8: xor     al, [rbp+var_117]
+0x000016BE: mov     [rbp+var_116], al
+0x000016C4: movzx   eax, [rbp+var_11A]
+0x000016CB: mov     [rbp+var_115], al
+0x000016D1: movzx   eax, [rbp+var_119]
+0x000016D8: mov     [rbp+var_114], al
+0x000016DE: movzx   eax, [rbp+var_118]
+0x000016E5: mov     [rbp+var_113], al
+0x000016EB: movzx   eax, [rbp+var_117]
+0x000016F2: mov     [rbp+var_112], al
+0x000016F8: mov     eax, [rbp+var_E0]
+0x000016FE: cdqe
+0x00001700: movzx   edx, [rbp+rax+var_D0]
+0x00001708: movzx   eax, [rbp+var_115]
+0x0000170F: xor     al, [rbp+var_114]
+0x00001715: lea     esi, [rax+rax]
+0x00001718: movzx   eax, [rbp+var_115]
+0x0000171F: xor     al, [rbp+var_114]
+0x00001725: shr     al, 7
+0x00001728: mov     ecx, eax
+0x0000172A: mov     eax, ecx
+0x0000172C: add     eax, eax
+0x0000172E: add     eax, ecx
+0x00001730: lea     ecx, ds:0[rax*8]
+0x00001737: add     eax, ecx
+0x00001739: xor     eax, esi
+0x0000173B: xor     al, [rbp+var_116]
+0x00001741: xor     edx, eax
+0x00001743: mov     eax, [rbp+var_E0]
+0x00001749: cdqe
+0x0000174B: mov     [rbp+rax+var_D0], dl
+0x00001752: mov     eax, [rbp+var_DC]
+0x00001758: cdqe
+0x0000175A: movzx   edx, [rbp+rax+var_D0]
+0x00001762: movzx   eax, [rbp+var_114]
+0x00001769: xor     al, [rbp+var_113]
+0x0000176F: lea     esi, [rax+rax]
+0x00001772: movzx   eax, [rbp+var_114]
+0x00001779: xor     al, [rbp+var_113]
+0x0000177F: shr     al, 7
+0x00001782: mov     ecx, eax
+0x00001784: mov     eax, ecx
+0x00001786: add     eax, eax
+0x00001788: add     eax, ecx
+0x0000178A: lea     ecx, ds:0[rax*8]
+0x00001791: add     eax, ecx
+0x00001793: xor     eax, esi
+0x00001795: xor     al, [rbp+var_116]
+0x0000179B: xor     edx, eax
+0x0000179D: mov     eax, [rbp+var_DC]
+0x000017A3: cdqe
+0x000017A5: mov     [rbp+rax+var_D0], dl
+0x000017AC: mov     eax, [rbp+var_D8]
+0x000017B2: cdqe
+0x000017B4: movzx   edx, [rbp+rax+var_D0]
+0x000017BC: movzx   eax, [rbp+var_113]
+0x000017C3: xor     al, [rbp+var_112]
+0x000017C9: lea     esi, [rax+rax]
+0x000017CC: movzx   eax, [rbp+var_113]
+0x000017D3: xor     al, [rbp+var_112]
+0x000017D9: shr     al, 7
+0x000017DC: mov     ecx, eax
+0x000017DE: mov     eax, ecx
+0x000017E0: add     eax, eax
+0x000017E2: add     eax, ecx
+0x000017E4: lea     ecx, ds:0[rax*8]
+0x000017EB: add     eax, ecx
+0x000017ED: xor     eax, esi
+0x000017EF: xor     al, [rbp+var_116]
+0x000017F5: xor     edx, eax
+0x000017F7: mov     eax, [rbp+var_D8]
+0x000017FD: cdqe
+0x000017FF: mov     [rbp+rax+var_D0], dl
+0x00001806: mov     eax, [rbp+var_D4]
+0x0000180C: cdqe
+0x0000180E: movzx   edx, [rbp+rax+var_D0]
+0x00001816: movzx   eax, [rbp+var_112]
+0x0000181D: xor     al, [rbp+var_115]
+0x00001823: lea     esi, [rax+rax]
+0x00001826: movzx   eax, [rbp+var_112]
+0x0000182D: xor     al, [rbp+var_115]
+0x00001833: shr     al, 7
+0x00001836: mov     ecx, eax
+0x00001838: mov     eax, ecx
+0x0000183A: add     eax, eax
+0x0000183C: add     eax, ecx
+0x0000183E: lea     ecx, ds:0[rax*8]
+0x00001845: add     eax, ecx
+0x00001847: xor     eax, esi
+0x00001849: xor     al, [rbp+var_116]
+0x0000184F: xor     edx, eax
+0x00001851: mov     eax, [rbp+var_D4]
+0x00001857: cdqe
+0x00001859: mov     [rbp+rax+var_D0], dl
+0x00001860: add     [rbp+var_F4], 1
+loc_1867:
+0x00001867: cmp     [rbp+var_F4], 3
+0x0000186E: jle     loc_1608
+0x00001874: mov     [rbp+var_F0], 0
+0x0000187E: jmp     short loc_18C7
+loc_1880:
+0x00001880: mov     eax, [rbp+var_F0]
+0x00001886: cdqe
+0x00001888: movzx   ecx, [rbp+rax+var_D0]
+0x00001890: mov     eax, [rbp+var_FC]
+0x00001896: shl     eax, 4
+0x00001899: mov     edx, eax
+0x0000189B: mov     eax, [rbp+var_F0]
+0x000018A1: add     eax, edx
+0x000018A3: cdqe
+0x000018A5: movzx   eax, [rbp+rax+var_C0]
+0x000018AD: xor     ecx, eax
+0x000018AF: mov     edx, ecx
+0x000018B1: mov     eax, [rbp+var_F0]
+0x000018B7: cdqe
+0x000018B9: mov     [rbp+rax+var_D0], dl
+0x000018C0: add     [rbp+var_F0], 1
+loc_18C7:
+0x000018C7: cmp     [rbp+var_F0], 0Fh
+0x000018CE: jle     short loc_1880
+0x000018D0: add     [rbp+var_FC], 1
+loc_18D7:
+0x000018D7: cmp     [rbp+var_FC], 9
+0x000018DE: jle     loc_14DE
+0x000018E4: mov     [rbp+var_EC], 0
+0x000018EE: jmp     short loc_1926
+loc_18F0:
+0x000018F0: mov     eax, [rbp+var_EC]
+0x000018F6: cdqe
+0x000018F8: movzx   eax, [rbp+rax+var_D0]
+0x00001900: movzx   eax, al
+0x00001903: cdqe
+0x00001905: lea     rdx, sbox_1
+0x0000190C: movzx   edx, byte ptr [rax+rdx]
+0x00001910: mov     eax, [rbp+var_EC]
+0x00001916: cdqe
+0x00001918: mov     [rbp+rax+var_D0], dl
+0x0000191F: add     [rbp+var_EC], 1
+loc_1926:
+0x00001926: cmp     [rbp+var_EC], 0Fh
+0x0000192D: jle     short loc_18F0
+0x0000192F: movzx   eax, [rbp+var_CF]
+0x00001936: mov     [rbp+var_11C], al
+0x0000193C: movzx   eax, [rbp+var_CB]
+0x00001943: mov     [rbp+var_CF], al
+0x00001949: movzx   eax, [rbp+var_C7]
+0x00001950: mov     [rbp+var_CB], al
+0x00001956: movzx   eax, [rbp+var_C3]
+0x0000195D: mov     [rbp+var_C7], al
+0x00001963: movzx   eax, [rbp+var_11C]
+0x0000196A: mov     [rbp+var_C3], al
+0x00001970: movzx   eax, [rbp+var_CE]
+0x00001977: mov     [rbp+var_11C], al
+0x0000197D: movzx   eax, [rbp+var_C6]
+0x00001984: mov     [rbp+var_CE], al
+0x0000198A: movzx   eax, [rbp+var_11C]
+0x00001991: mov     [rbp+var_C6], al
+0x00001997: movzx   eax, [rbp+var_CA]
+0x0000199E: mov     [rbp+var_11C], al
+0x000019A4: movzx   eax, [rbp+var_C2]
+0x000019AB: mov     [rbp+var_CA], al
+0x000019B1: movzx   eax, [rbp+var_11C]
+0x000019B8: mov     [rbp+var_C2], al
+0x000019BE: movzx   eax, [rbp+var_CD]
+0x000019C5: mov     [rbp+var_11C], al
+0x000019CB: movzx   eax, [rbp+var_C1]
+0x000019D2: mov     [rbp+var_CD], al
+0x000019D8: movzx   eax, [rbp+var_C5]
+0x000019DF: mov     [rbp+var_C1], al
+0x000019E5: movzx   eax, [rbp+var_C9]
+0x000019EC: mov     [rbp+var_C5], al
+0x000019F2: movzx   eax, [rbp+var_11C]
+0x000019F9: mov     [rbp+var_C9], al
+0x000019FF: mov     [rbp+var_E8], 0
+0x00001A09: jmp     short loc_1A48
+loc_1A0B:
+0x00001A0B: mov     eax, [rbp+var_E8]
+0x00001A11: cdqe
+0x00001A13: movzx   edx, [rbp+rax+var_D0]
+0x00001A1B: mov     eax, [rbp+var_E8]
+0x00001A21: add     eax, 0A0h
+0x00001A26: cdqe
+0x00001A28: movzx   eax, [rbp+rax+var_C0]
+0x00001A30: xor     edx, eax
+0x00001A32: mov     eax, [rbp+var_E8]
+0x00001A38: cdqe
+0x00001A3A: mov     [rbp+rax+var_D0], dl
+0x00001A41: add     [rbp+var_E8], 1
+loc_1A48:
+0x00001A48: cmp     [rbp+var_E8], 0Fh
+0x00001A4F: jle     short loc_1A0B
+0x00001A51: mov     [rbp+var_E4], 0
+0x00001A5B: jmp     short loc_1A89
+loc_1A5D:
+0x00001A5D: mov     eax, [rbp+var_E4]
+0x00001A63: movsxd  rdx, eax
+0x00001A66: mov     rax, [rbp+var_128]
+0x00001A6D: add     rdx, rax
+0x00001A70: mov     eax, [rbp+var_E4]
+0x00001A76: cdqe
+0x00001A78: movzx   eax, [rbp+rax+var_D0]
+0x00001A80: mov     [rdx], al
+0x00001A82: add     [rbp+var_E4], 1
+loc_1A89:
+0x00001A89: cmp     [rbp+var_E4], 0Fh
+0x00001A90: jle     short loc_1A5D
+0x00001A92: nop
+0x00001A93: mov     rax, [rbp+var_8]
+0x00001A97: sub     rax, fs:28h
+0x00001AA0: jz      short locret_1AA7
+0x00001AA2: call    ___stack_chk_fail
+locret_1AA7:
+0x00001AA7: leave
+0x00001AA8: retn

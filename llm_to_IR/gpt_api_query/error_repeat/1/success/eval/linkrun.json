@@ -1,0 +1,102 @@
+{
+  "entries": [
+    {
+      "file": "AES128_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/AES128_modular_function11-88c656.o: warning: relocation against `SBOX_1' in read-only section `.text'\n/usr/bin/ld: /tmp/AES128_modular_function11-88c656.o: in function `sbox_lookup':\nsbox.ll:(.text+0xb): undefined reference to `SBOX_1'\n/usr/bin/ld: /tmp/AES128_modular_function21-0993c9.o: in function `rcon':\nAES128_modular_function21.ll:(.text+0x1b): undefined reference to `RCON_0'\n/usr/bin/ld: /tmp/AES128_modular_function91-a5ee20.o: in function `aes128_encrypt':\naes128_encrypt:(.text+0x19): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: aes128_encrypt:(.text+0x159): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: warning: creating DT_TEXTREL in a PIE\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "AES128_single.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/AES128_single_function4-09445c.o: in function `aes128_encrypt':\nAES128_single_function4.ll:(.text+0x141): undefined reference to `sbox_1'\n/usr/bin/ld: AES128_single_function4.ll:(.text+0x14c): undefined reference to `sbox_1'\n/usr/bin/ld: AES128_single_function4.ll:(.text+0x157): undefined reference to `sbox_1'\n/usr/bin/ld: AES128_single_function4.ll:(.text+0x161): undefined reference to `sbox_1'\n/usr/bin/ld: AES128_single_function4.ll:(.text+0x172): undefined reference to `rcon_0'\n/usr/bin/ld: AES128_single_function4.ll:(.text+0x2fe): undefined reference to `sbox_1'\n/usr/bin/ld: AES128_single_function4.ll:(.text+0x658): undefined reference to `sbox_1'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/BFS_main3-2fda11.o: in function `main':\nrecovered.c:(.text+0xa): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered.c:(.text+0x1f2): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "DES_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/DES_modular_function32-afb99c.o: warning: relocation against `P' in read-only section `.text'\n/usr/bin/ld: /tmp/DES_modular_function32-afb99c.o: in function `sboxes_p':\nsboxes_p:(.text+0x7e): undefined reference to `SBOX'\n/usr/bin/ld: sboxes_p:(.text+0xa5): undefined reference to `P'\n/usr/bin/ld: /tmp/DES_modular_function41-77cd6c.o: in function `feistel':\nfeistel.ll:(.text+0xc): undefined reference to `E'\n/usr/bin/ld: /tmp/DES_modular_function51-ee3861.o: in function `key_schedule':\nDES_modular_function51.ll:(.text+0xc): undefined reference to `PC1'\n/usr/bin/ld: DES_modular_function51.ll:(.text+0x74): undefined reference to `SHIFTS'\n/usr/bin/ld: DES_modular_function51.ll:(.text+0xbc): undefined reference to `PC2'\n/usr/bin/ld: /tmp/DES_modular_function61-0dd7f4.o: in function `des_encrypt':\ndes_module:(.text+0x15): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: des_module:(.text+0x45): undefined reference to `unk_2020'\n/usr/bin/ld: des_module:(.text+0xd0): undefined reference to `FP'\n/usr/bin/ld: des_module:(.text+0xe8): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: warning: creating DT_TEXTREL in a PIE\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "DES_single_.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "/usr/bin/ld: /tmp/DES_single__main3-cef7c1.o: in function `main':\nmodule:(.text+0x16): undefined reference to `des_encrypt'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "DES_single.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /lib/x86_64-linux-gnu/Scrt1.o: in function `_start':\n(.text+0x1b): undefined reference to `main'\n/usr/bin/ld: /tmp/DES_single_function3-048a8e.o: in function `des_encrypt':\nDES_single_function3.ll:(.text+0x77): undefined reference to `PC1_7'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x134): undefined reference to `SHIFTS_6'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x1de): undefined reference to `PC2_5'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x2a4): undefined reference to `IP_4'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x35d): undefined reference to `E_3'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x417): undefined reference to `SBOX_2'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x47d): undefined reference to `P_1'\n/usr/bin/ld: DES_single_function3.ll:(.text+0x535): undefined reference to `FP_0'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/heapsort_main1-b4760e.o: in function `main':\nheapsort_main1.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: heapsort_main1.ll:(.text+0x136): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/insertionsort_main1-2cf55e.o: in function `main':\nrecovered.ll:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: recovered.ll:(.text+0xde): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    }
+  ]
+}

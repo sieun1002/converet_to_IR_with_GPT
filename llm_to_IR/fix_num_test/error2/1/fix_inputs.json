@@ -1,0 +1,45 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_function.ll",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 274,
+      "ir_len": 5659,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/DFS_function1.ll:5:55: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.fmt_item   = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\"\n                                                      ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.fmt_header = private unnamed_addr constant [24 x i8] c\"DFS preorder from %zu: \\00\"\n@.fmt_item   = private unnamed_addr constant",
+      "prev_ll_path": "../../llm_to_IR/fix_num_test/1/DFS_function1.ll"
+    },
+    {
+      "filename": "heapsort_function.ll",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 146,
+      "ir_len": 5211,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/heapsort_function1.ll:64:13: error: expected instruction opcode\n  %k.next = %largest.idx\n            ^\n",
+      "ir_preview": "; ModuleID = 'heap_sort'\nsource_filename = \"heap_sort.ll\"\n\ndefine void @heap_sort(i32* nocapture %a, i64 %n) local_unnamed_addr {\nentry:\n  %cmp.n.le1 = icmp ule i64 %n, 1\n  br i1 %cmp.n.le1, label %re",
+      "prev_ll_path": "../../llm_to_IR/fix_num_test/1/heapsort_function1.ll"
+    },
+    {
+      "filename": "mergesort_function1.ll",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 134,
+      "ir_len": 5317,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/mergesort_function11.ll:33:11: error: expected instruction opcode\n  %left = %i\n          ^\n",
+      "ir_preview": "; ModuleID = 'merge_sort.ll'\nsource_filename = \"merge_sort\"\n\ndeclare noalias i8* @malloc(i64)\ndeclare void @free(i8*)\ndeclare i8* @memcpy(i8*, i8*, i64)\n\ndefine void @merge_sort(i32* %dest, i64 %n) {\n",
+      "prev_ll_path": "../../llm_to_IR/fix_num_test/1/mergesort_function11.ll"
+    },
+    {
+      "filename": "quicksort_function1.ll",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 139,
+      "ir_len": 4376,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/quicksort_function11.ll:15:13: error: expected instruction opcode\n  %i.init = %lo\n            ^\n",
+      "ir_preview": "; ModuleID = 'quick_sort.ll'\nsource_filename = \"quick_sort\"\n\ndefine dso_local void @quick_sort(i32* %arr, i64 %low, i64 %high) {\nentry:\n  br label %outer.cond\n\nouter.cond:                             ",
+      "prev_ll_path": "../../llm_to_IR/fix_num_test/1/quicksort_function11.ll"
+    }
+  ]
+}

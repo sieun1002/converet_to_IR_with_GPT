@@ -1,0 +1,36 @@
+; Function: add_round_key
+; Start: 0x121A, End: 0x1274
+
+0x0000121A: endbr64
+0x0000121E: push    rbp
+0x0000121F: mov     rbp, rsp
+0x00001222: mov     [rbp+var_18], rdi
+0x00001226: mov     [rbp+var_20], rsi
+0x0000122A: mov     [rbp+var_4], 0
+0x00001231: jmp     short loc_126A
+loc_1233:
+0x00001233: mov     eax, [rbp+var_4]
+0x00001236: movsxd  rdx, eax
+0x00001239: mov     rax, [rbp+var_18]
+0x0000123D: add     rax, rdx
+0x00001240: movzx   esi, byte ptr [rax]
+0x00001243: mov     eax, [rbp+var_4]
+0x00001246: movsxd  rdx, eax
+0x00001249: mov     rax, [rbp+var_20]
+0x0000124D: add     rax, rdx
+0x00001250: movzx   ecx, byte ptr [rax]
+0x00001253: mov     eax, [rbp+var_4]
+0x00001256: movsxd  rdx, eax
+0x00001259: mov     rax, [rbp+var_18]
+0x0000125D: add     rax, rdx
+0x00001260: xor     esi, ecx
+0x00001262: mov     edx, esi
+0x00001264: mov     [rax], dl
+0x00001266: add     [rbp+var_4], 1
+loc_126A:
+0x0000126A: cmp     [rbp+var_4], 0Fh
+0x0000126E: jle     short loc_1233
+0x00001270: nop
+0x00001271: nop
+0x00001272: pop     rbp
+0x00001273: retn

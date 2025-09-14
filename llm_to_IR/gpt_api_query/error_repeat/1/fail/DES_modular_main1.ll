@@ -1,0 +1,27 @@
+; ModuleID = 'main.ll'
+target triple = "x86_64-pc-linux-gnu"
+
+@.str = private unnamed_addr constant [21 x i8] c"Ciphertext: %016llX\0A\00", align 1
+@.str.1 = private unnamed_addr constant [29 x i8] c"Ciphertext: 85E813540F0AB405\00", align 1
+
+declare i64 @des_encrypt(i64, i64)
+declare i32 @printf(i8*, ...)
+declare i32 @puts(i8*)
+
+define i32 @main(i32 %argc, i8** %argv) {
+entry:
+  ; constants from disassembly
+  ; rdi = 0x0123456789ABCDEF (plaintext)
+  ; rsi = 0x133457799BBCDFF1 (key)
+  %cipher = call i64 @des_encrypt(i64 0x0123456789ABCDEF, i64 0x133457799BBCDFF1)
+
+  ; printf("Ciphertext: %016llX\n", cipher)
+  %fmt = getelementptr inbounds [21 x i8], [21 x i8]* @.str, i64 0, i64 0
+  call i32 (i8*, ...) @printf(i8* %fmt, i64 %cipher)
+
+  ; puts("Ciphertext: 85E813540F0AB405")
+  %s = getelementptr inbounds [29 x i8], [29 x i8]* @.str.1, i64 0, i64 0
+  call i32 @puts(i8* %s)
+
+  ret i32 0
+}

@@ -1,0 +1,266 @@
+; ModuleID = 'des_encrypt'
+target triple = "x86_64-unknown-linux-gnu"
+
+@PC1_7   = external constant [56 x i32], align 4
+@SHIFTS_6 = external constant [16 x i32], align 4
+@PC2_5   = external constant [48 x i32], align 4
+@IP_4    = external constant [64 x i32], align 4
+@E_3     = external constant [48 x i32], align 4
+@SBOX_2  = external constant [512 x i8], align 1
+@P_1     = external constant [32 x i32], align 4
+@FP_0    = external constant [64 x i32], align 4
+
+define dso_local i64 @des_encrypt(i64 %block, i64 %key) local_unnamed_addr {
+entry:
+  br label %pc1.loop
+
+pc1.loop:                                           ; preds = %pc1.body, %entry
+  %pc1.i = phi i32 [ 0, %entry ], [ %pc1.i.next, %pc1.body ]
+  %pc1.acc = phi i64 [ 0, %entry ], [ %pc1.acc.next, %pc1.body ]
+  %pc1.cond = icmp sle i32 %pc1.i, 55
+  br i1 %pc1.cond, label %pc1.body, label %pc1.end
+
+pc1.body:                                           ; preds = %pc1.loop
+  %pc1.i.z = zext i32 %pc1.i to i64
+  %pc1.idx.ptr = getelementptr inbounds [56 x i32], [56 x i32]* @PC1_7, i64 0, i64 %pc1.i.z
+  %pc1.idx = load i32, i32* %pc1.idx.ptr, align 4
+  %pc1.shift.tmp = sub i32 64, %pc1.idx
+  %pc1.shift = zext i32 %pc1.shift.tmp to i64
+  %pc1.sh = lshr i64 %key, %pc1.shift
+  %pc1.bit = and i64 %pc1.sh, 1
+  %pc1.acc.shl = shl i64 %pc1.acc, 1
+  %pc1.acc.next = or i64 %pc1.acc.shl, %pc1.bit
+  %pc1.i.next = add i32 %pc1.i, 1
+  br label %pc1.loop
+
+pc1.end:                                            ; preds = %pc1.loop
+  %pc1.acc.final = phi i64 [ %pc1.acc, %pc1.loop ]
+  %C64.shift = lshr i64 %pc1.acc.final, 28
+  %C32.tr = trunc i64 %C64.shift to i32
+  %C = and i32 %C32.tr, 268435455
+  %D32.tr = trunc i64 %pc1.acc.final to i32
+  %D = and i32 %D32.tr, 268435455
+  %subkeys = alloca [16 x i64], align 8
+  br label %rk.loop
+
+rk.loop:                                            ; preds = %rk.body.end, %pc1.end
+  %rk.i = phi i32 [ 0, %pc1.end ], [ %rk.i.next, %rk.body.end ]
+  %rk.C = phi i32 [ %C, %pc1.end ], [ %rk.C.next, %rk.body.end ]
+  %rk.D = phi i32 [ %D, %pc1.end ], [ %rk.D.next, %rk.body.end ]
+  %rk.cond = icmp sle i32 %rk.i, 15
+  br i1 %rk.cond, label %rk.body, label %rk.end
+
+rk.body:                                            ; preds = %rk.loop
+  %rk.i.z = zext i32 %rk.i to i64
+  %sh.ptr = getelementptr inbounds [16 x i32], [16 x i32]* @SHIFTS_6, i64 0, i64 %rk.i.z
+  %sh.val = load i32, i32* %sh.ptr, align 4
+  %C.shl = shl i32 %rk.C, %sh.val
+  %sh.inv = sub i32 28, %sh.val
+  %C.shr = lshr i32 %rk.C, %sh.inv
+  %C.rot = or i32 %C.shl, %C.shr
+  %C.mask = and i32 %C.rot, 268435455
+  %D.shl = shl i32 %rk.D, %sh.val
+  %D.shr = lshr i32 %rk.D, %sh.inv
+  %D.rot = or i32 %D.shl, %D.shr
+  %D.mask = and i32 %D.rot, 268435455
+  %C.z = zext i32 %C.mask to i64
+  %D.z = zext i32 %D.mask to i64
+  %C.shl56 = shl i64 %C.z, 28
+  %CD56 = or i64 %C.shl56, %D.z
+  br label %pc2.loop
+
+pc2.loop:                                           ; preds = %pc2.body, %rk.body
+  %pc2.j = phi i32 [ 0, %rk.body ], [ %pc2.j.next, %pc2.body ]
+  %pc2.acc = phi i64 [ 0, %rk.body ], [ %pc2.acc.next, %pc2.body ]
+  %pc2.cond = icmp sle i32 %pc2.j, 47
+  br i1 %pc2.cond, label %pc2.body, label %pc2.end
+
+pc2.body:                                           ; preds = %pc2.loop
+  %pc2.j.z = zext i32 %pc2.j to i64
+  %pc2.idx.ptr = getelementptr inbounds [48 x i32], [48 x i32]* @PC2_5, i64 0, i64 %pc2.j.z
+  %pc2.idx = load i32, i32* %pc2.idx.ptr, align 4
+  %pc2.shift.tmp = sub i32 56, %pc2.idx
+  %pc2.shift = zext i32 %pc2.shift.tmp to i64
+  %pc2.sh = lshr i64 %CD56, %pc2.shift
+  %pc2.bit = and i64 %pc2.sh, 1
+  %pc2.acc.shl = shl i64 %pc2.acc, 1
+  %pc2.acc.next = or i64 %pc2.acc.shl, %pc2.bit
+  %pc2.j.next = add i32 %pc2.j, 1
+  br label %pc2.loop
+
+pc2.end:                                            ; preds = %pc2.loop
+  %subkey = phi i64 [ %pc2.acc, %pc2.loop ]
+  %rk.i.z2 = zext i32 %rk.i to i64
+  %subkeys.i.ptr = getelementptr inbounds [16 x i64], [16 x i64]* %subkeys, i64 0, i64 %rk.i.z2
+  store i64 %subkey, i64* %subkeys.i.ptr, align 8
+  %rk.C.next = %C.mask
+  %rk.D.next = %D.mask
+  br label %rk.body.end
+
+rk.body.end:                                        ; preds = %pc2.end
+  %rk.i.next = add i32 %rk.i, 1
+  br label %rk.loop
+
+rk.end:                                             ; preds = %rk.loop
+  br label %ip.loop
+
+ip.loop:                                            ; preds = %ip.body, %rk.end
+  %ip.i = phi i32 [ 0, %rk.end ], [ %ip.i.next, %ip.body ]
+  %ip.acc = phi i64 [ 0, %rk.end ], [ %ip.acc.next, %ip.body ]
+  %ip.cond = icmp sle i32 %ip.i, 63
+  br i1 %ip.cond, label %ip.body, label %ip.end
+
+ip.body:                                            ; preds = %ip.loop
+  %ip.i.z = zext i32 %ip.i to i64
+  %ip.idx.ptr = getelementptr inbounds [64 x i32], [64 x i32]* @IP_4, i64 0, i64 %ip.i.z
+  %ip.idx = load i32, i32* %ip.idx.ptr, align 4
+  %ip.shift.tmp = sub i32 64, %ip.idx
+  %ip.shift = zext i32 %ip.shift.tmp to i64
+  %ip.sh = lshr i64 %block, %ip.shift
+  %ip.bit = and i64 %ip.sh, 1
+  %ip.acc.shl = shl i64 %ip.acc, 1
+  %ip.acc.next = or i64 %ip.acc.shl, %ip.bit
+  %ip.i.next = add i32 %ip.i, 1
+  br label %ip.loop
+
+ip.end:                                             ; preds = %ip.loop
+  %ip.acc.final = phi i64 [ %ip.acc, %ip.loop ]
+  %L64 = lshr i64 %ip.acc.final, 32
+  %L = trunc i64 %L64 to i32
+  %R = trunc i64 %ip.acc.final to i32
+  br label %round.loop
+
+round.loop:                                         ; preds = %round.body.end, %ip.end
+  %r.i = phi i32 [ 0, %ip.end ], [ %r.i.next, %round.body.end ]
+  %r.L = phi i32 [ %L, %ip.end ], [ %r.L.next, %round.body.end ]
+  %r.R = phi i32 [ %R, %ip.end ], [ %r.R.next, %round.body.end ]
+  %r.cond = icmp sle i32 %r.i, 15
+  br i1 %r.cond, label %round.body, label %round.end
+
+round.body:                                         ; preds = %round.loop
+  br label %e.loop
+
+e.loop:                                             ; preds = %e.body, %round.body
+  %e.j = phi i32 [ 0, %round.body ], [ %e.j.next, %e.body ]
+  %e.acc = phi i64 [ 0, %round.body ], [ %e.acc.next, %e.body ]
+  %e.cond = icmp sle i32 %e.j, 47
+  br i1 %e.cond, label %e.body, label %e.end
+
+e.body:                                             ; preds = %e.loop
+  %e.j.z = zext i32 %e.j to i64
+  %e.idx.ptr = getelementptr inbounds [48 x i32], [48 x i32]* @E_3, i64 0, i64 %e.j.z
+  %e.idx = load i32, i32* %e.idx.ptr, align 4
+  %e.shift.tmp = sub i32 32, %e.idx
+  %e.bit32.shr = lshr i32 %r.R, %e.shift.tmp
+  %e.bit32 = and i32 %e.bit32.shr, 1
+  %e.bit64 = zext i32 %e.bit32 to i64
+  %e.acc.shl = shl i64 %e.acc, 1
+  %e.acc.next = or i64 %e.acc.shl, %e.bit64
+  %e.j.next = add i32 %e.j, 1
+  br label %e.loop
+
+e.end:                                              ; preds = %e.loop
+  %E_R = phi i64 [ %e.acc, %e.loop ]
+  %r.i.z = zext i32 %r.i to i64
+  %subkey.ptr = getelementptr inbounds [16 x i64], [16 x i64]* %subkeys, i64 0, i64 %r.i.z
+  %K = load i64, i64* %subkey.ptr, align 8
+  %A0 = xor i64 %K, %E_R
+  br label %s.loop
+
+s.loop:                                             ; preds = %s.body, %e.end
+  %s.t = phi i32 [ 0, %e.end ], [ %s.t.next, %s.body ]
+  %s.acc = phi i32 [ 0, %e.end ], [ %s.acc.next, %s.body ]
+  %s.cond = icmp sle i32 %s.t, 7
+  br i1 %s.cond, label %s.body, label %s.end
+
+s.body:                                             ; preds = %s.loop
+  %t.mul6 = mul i32 %s.t, 6
+  %t.sh = sub i32 42, %t.mul6
+  %t.sh64 = zext i32 %t.sh to i64
+  %chunk.sh = lshr i64 %A0, %t.sh64
+  %chunk6 = and i64 %chunk.sh, 63
+  %chunk6.tr = trunc i64 %chunk6 to i32
+  %row_hi = lshr i32 %chunk6.tr, 4
+  %row_hi2 = and i32 %row_hi, 2
+  %row_lo = and i32 %chunk6.tr, 1
+  %row = or i32 %row_hi2, %row_lo
+  %chunk6_shr1 = lshr i32 %chunk6.tr, 1
+  %col = and i32 %chunk6_shr1, 15
+  %row.shl4 = shl i32 %row, 4
+  %s.idx6 = add i32 %row.shl4, %col
+  %t.shl6 = shl i32 %s.t, 6
+  %s.off32 = add i32 %t.shl6, %s.idx6
+  %s.off64 = zext i32 %s.off32 to i64
+  %s.ptr = getelementptr inbounds [512 x i8], [512 x i8]* @SBOX_2, i64 0, i64 %s.off64
+  %s.val8 = load i8, i8* %s.ptr, align 1
+  %s.val32 = zext i8 %s.val8 to i32
+  %s.acc.shl = shl i32 %s.acc, 4
+  %s.acc.next = or i32 %s.acc.shl, %s.val32
+  %s.t.next = add i32 %s.t, 1
+  br label %s.loop
+
+s.end:                                              ; preds = %s.loop
+  %sbox.out = phi i32 [ %s.acc, %s.loop ]
+  br label %p.loop
+
+p.loop:                                             ; preds = %p.body, %s.end
+  %p.k = phi i32 [ 0, %s.end ], [ %p.k.next, %p.body ]
+  %p.acc = phi i32 [ 0, %s.end ], [ %p.acc.next, %p.body ]
+  %p.cond = icmp sle i32 %p.k, 31
+  br i1 %p.cond, label %p.body, label %p.end
+
+p.body:                                             ; preds = %p.loop
+  %p.k.z = zext i32 %p.k to i64
+  %p.idx.ptr = getelementptr inbounds [32 x i32], [32 x i32]* @P_1, i64 0, i64 %p.k.z
+  %p.idx = load i32, i32* %p.idx.ptr, align 4
+  %p.shift.tmp = sub i32 32, %p.idx
+  %p.bit32.shr = lshr i32 %sbox.out, %p.shift.tmp
+  %p.bit32 = and i32 %p.bit32.shr, 1
+  %p.acc.shl = shl i32 %p.acc, 1
+  %p.acc.next = or i32 %p.acc.shl, %p.bit32
+  %p.k.next = add i32 %p.k, 1
+  br label %p.loop
+
+p.end:                                              ; preds = %p.loop
+  %f.out = phi i32 [ %p.acc, %p.loop ]
+  %newR.xor = xor i32 %r.L, %f.out
+  %r.L.next = or i32 %r.R, 0
+  %r.R.next = or i32 %newR.xor, 0
+  br label %round.body.end
+
+round.body.end:                                     ; preds = %p.end
+  %r.i.next = add i32 %r.i, 1
+  br label %round.loop
+
+round.end:                                          ; preds = %round.loop
+  %L.final = phi i32 [ %r.L, %round.loop ]
+  %R.final = phi i32 [ %r.R, %round.loop ]
+  %R64 = zext i32 %R.final to i64
+  %R64.shl = shl i64 %R64, 32
+  %L64.z = zext i32 %L.final to i64
+  %preoutput = or i64 %R64.shl, %L64.z
+  br label %fp.loop
+
+fp.loop:                                            ; preds = %fp.body, %round.end
+  %fp.i = phi i32 [ 0, %round.end ], [ %fp.i.next, %fp.body ]
+  %fp.acc = phi i64 [ 0, %round.end ], [ %fp.acc.next, %fp.body ]
+  %fp.cond = icmp sle i32 %fp.i, 63
+  br i1 %fp.cond, label %fp.body, label %fp.end
+
+fp.body:                                            ; preds = %fp.loop
+  %fp.i.z = zext i32 %fp.i to i64
+  %fp.idx.ptr = getelementptr inbounds [64 x i32], [64 x i32]* @FP_0, i64 0, i64 %fp.i.z
+  %fp.idx = load i32, i32* %fp.idx.ptr, align 4
+  %fp.shift.tmp = sub i32 64, %fp.idx
+  %fp.shift = zext i32 %fp.shift.tmp to i64
+  %fp.sh = lshr i64 %preoutput, %fp.shift
+  %fp.bit = and i64 %fp.sh, 1
+  %fp.acc.shl = shl i64 %fp.acc, 1
+  %fp.acc.next = or i64 %fp.acc.shl, %fp.bit
+  %fp.i.next = add i32 %fp.i, 1
+  br label %fp.loop
+
+fp.end:                                             ; preds = %fp.loop
+  %cipher = phi i64 [ %fp.acc, %fp.loop ]
+  ret i64 %cipher
+}

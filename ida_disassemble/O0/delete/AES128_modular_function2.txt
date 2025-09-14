@@ -1,0 +1,19 @@
+; Function: rcon
+; Start: 0x11C5, End: 0x11EE
+
+0x000011C5: push    rbp
+0x000011C6: mov     rbp, rsp
+0x000011C9: mov     eax, edi
+0x000011CB: mov     [rbp+var_4], al
+0x000011CE: cmp     [rbp+var_4], 9
+0x000011D2: ja      short loc_11E7
+0x000011D4: movzx   eax, [rbp+var_4]
+0x000011D8: cdqe
+0x000011DA: lea     rdx, RCON_0
+0x000011E1: movzx   eax, byte ptr [rax+rdx]
+0x000011E5: jmp     short loc_11EC
+loc_11E7:
+0x000011E7: mov     eax, 0
+loc_11EC:
+0x000011EC: pop     rbp
+0x000011ED: retn

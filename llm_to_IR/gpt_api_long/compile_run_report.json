@@ -1,0 +1,302 @@
+{
+  "root": "/home/nata20034/workspace/convert_to_IR_with_LLM/test_code/llm_to_IR/gpt_api_long",
+  "started_at": "2025-09-12T16:12:53",
+  "rounds": [
+    {
+      "round": "1",
+      "round_dir": "/home/nata20034/workspace/convert_to_IR_with_LLM/test_code/llm_to_IR/gpt_api_long/1",
+      "started_at": "2025-09-12T16:12:53",
+      "pairs_built": [
+        {
+          "program": "BFS",
+          "files": {
+            "input_main_ll": "BFS_main.ll",
+            "input_base_ll": "BFS_function.ll",
+            "merged_ll": "BFS.ll",
+            "exe": "BFS"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 BFS_main.ll BFS_function.ll -S -o BFS.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.020288,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: BFS_main.ll:82:31: error: '@_printf' defined with type 'i32 (i8*, ...)*' but expected 'i32 (i8*, i64)*'\n  %call.printf.bfs = call i32 @_printf(i8* %fmt.bfs, i64 0)\n                              ^\nllvm-link-14: error:  loading file 'BFS_main.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "DFS",
+          "files": {
+            "input_main_ll": "DFS_main.ll",
+            "input_base_ll": "DFS_function.ll",
+            "merged_ll": "DFS.ll",
+            "exe": "DFS"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 DFS_main.ll DFS_function.ll -S -o DFS.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.010455,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: DFS_main.ll:35:17: error: expected instruction opcode\n  %nextidx_i8 = %p2\n                ^\nllvm-link-14: error:  loading file 'DFS_main.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "binarysearch",
+          "files": {
+            "input_main_ll": "binarysearch_main.ll",
+            "input_base_ll": "binarysearch_function.ll",
+            "merged_ll": "binarysearch.ll",
+            "exe": "binarysearch"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 binarysearch_main.ll binarysearch_function.ll -S -o binarysearch.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.012995,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: binarysearch_function.ll:29:14: error: expected instruction opcode\n  %hi.next = %mid\n             ^\nllvm-link-14: error:  loading file 'binarysearch_function.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "bubblesort",
+          "files": {
+            "input_main_ll": "bubblesort_main.ll",
+            "input_base_ll": "bubblesort_function.ll",
+            "merged_ll": "bubblesort.ll",
+            "exe": "bubblesort"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 bubblesort_main.ll bubblesort_function.ll -S -o bubblesort.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.012227,
+              "returncode": 0,
+              "stdout": "",
+              "stderr": "",
+              "success": true,
+              "name": "llvm-link(-S to .ll)"
+            },
+            {
+              "cmd": "clang-14 -O0 bubblesort.ll -o bubblesort",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.374718,
+              "returncode": 0,
+              "stdout": "",
+              "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n",
+              "success": true,
+              "name": "clang-link(from .ll)"
+            },
+            {
+              "cmd": "./bubblesort",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.001164,
+              "returncode": 0,
+              "stdout": "0 1 2 3 4 5 6 7 8 9 \n",
+              "stderr": "",
+              "success": true,
+              "name": "run"
+            }
+          ],
+          "success": true,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": {
+            "stdout": "0 1 2 3 4 5 6 7 8 9 \n",
+            "stderr": "",
+            "returncode": 0,
+            "elapsed_sec": 0.001164,
+            "success": true
+          }
+        },
+        {
+          "program": "heapsort",
+          "files": {
+            "input_main_ll": "heapsort_main.ll",
+            "input_base_ll": "heapsort_function.ll",
+            "merged_ll": "heapsort.ll",
+            "exe": "heapsort"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 heapsort_main.ll heapsort_function.ll -S -o heapsort.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.010554,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: heapsort_function.ll:48:20: error: expected instruction opcode\n  %largest_idx_r = %right\n                   ^\nllvm-link-14: error:  loading file 'heapsort_function.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "insertionsort",
+          "files": {
+            "input_main_ll": "insertionsort_main.ll",
+            "input_base_ll": "insertionsort_function.ll",
+            "merged_ll": "insertionsort.ll",
+            "exe": "insertionsort"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 insertionsort_main.ll insertionsort_function.ll -S -o insertionsort.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.010403,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: insertionsort_function.ll:14:21: error: expected value token\n  %i = phi i64 [ 1, entry ], [ %i.next, %for.inc ]\n                    ^\nllvm-link-14: error:  loading file 'insertionsort_function.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "linearsearch",
+          "files": {
+            "input_main_ll": "linearsearch_main.ll",
+            "input_base_ll": "linearsearch_function.ll",
+            "merged_ll": "linearsearch.ll",
+            "exe": "linearsearch"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 linearsearch_main.ll linearsearch_function.ll -S -o linearsearch.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.010309,
+              "returncode": 0,
+              "stdout": "",
+              "stderr": "",
+              "success": true,
+              "name": "llvm-link(-S to .ll)"
+            },
+            {
+              "cmd": "clang-14 -O0 linearsearch.ll -o linearsearch",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.263892,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch-3d0773.o: in function `main':\nllvm-link:(.text+0x7): undefined reference to `__stack_chk_guard'\n/usr/bin/ld: llvm-link:(.text+0x85): undefined reference to `__stack_chk_guard'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
+              "success": false,
+              "name": "clang-link(from .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "mergesort",
+          "files": {
+            "input_main_ll": "mergesort_main.ll",
+            "input_base_ll": "mergesort_function.ll",
+            "merged_ll": "mergesort.ll",
+            "exe": "mergesort"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 mergesort_main.ll mergesort_function.ll -S -o mergesort.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.009702,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: mergesort_function.ll:42:11: error: expected instruction opcode\n  %left = %i\n          ^\nllvm-link-14: error:  loading file 'mergesort_function.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "quicksort",
+          "files": {
+            "input_main_ll": "quicksort_main.ll",
+            "input_base_ll": "quicksort_function.ll",
+            "merged_ll": "quicksort.ll",
+            "exe": "quicksort"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 quicksort_main.ll quicksort_function.ll -S -o quicksort.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.010649,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "PHINode should have one entry for each predecessor of its parent basic block!\n  %R.sl = phi i64 [ %high.cur, %part_init ], [ %R2, %do_swap ]\nPHI node entries do not match predecessors!\n  %R.cur = phi i64 [ %R.sl, %to_scanR ], [ %R.dec, %scanR ]\nlabel %scanR\nlabel %scanR.dec\nInstruction does not dominate all uses!\n  %R.dec = add nsw i64 %R.cur, -1\n  %R.cur = phi i64 [ %R.sl, %to_scanR ], [ %R.dec, %scanR ]\nllvm-link-14: error: linked module is broken!\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        },
+        {
+          "program": "selectionsort",
+          "files": {
+            "input_main_ll": "selectionsort_main.ll",
+            "input_base_ll": "selectionsort_function.ll",
+            "merged_ll": "selectionsort.ll",
+            "exe": "selectionsort"
+          },
+          "started_at": "2025-09-12T16:12:53",
+          "steps": [
+            {
+              "cmd": "llvm-link-14 selectionsort_main.ll selectionsort_function.ll -S -o selectionsort.ll",
+              "start_time": "2025-09-12T16:12:53",
+              "elapsed_sec": 0.009607,
+              "returncode": 1,
+              "stdout": "",
+              "stderr": "llvm-link-14: selectionsort_main.ll:35:31: error: '@_printf' defined with type 'i32 (i8*, ...)*' but expected 'i32 (i8*)*'\n  %call_printf_hdr = call i32 @_printf(i8* %fmt)\n                              ^\nllvm-link-14: error:  loading file 'selectionsort_main.ll'\n",
+              "success": false,
+              "name": "llvm-link(-S to .ll)"
+            }
+          ],
+          "success": false,
+          "ended_at": "2025-09-12T16:12:53",
+          "run": null
+        }
+      ],
+      "orphans": [],
+      "ended_at": "2025-09-12T16:12:53"
+    }
+  ],
+  "ended_at": "2025-09-12T16:12:53"
+}

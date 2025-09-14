@@ -1,0 +1,41 @@
+; Function: print_distances
+; Start: 0x401640, End: 0x4016C8
+
+0x00401640: push    rbp
+0x00401641: mov     rbp, rsp
+0x00401644: sub     rsp, 10h
+0x00401648: mov     [rbp+var_8], rdi
+0x0040164C: mov     [rbp+var_C], esi
+0x0040164F: mov     [rbp+var_10], 0
+loc_401656:
+0x00401656: mov     eax, [rbp+var_10]
+0x00401659: cmp     eax, [rbp+var_C]
+0x0040165C: jge     loc_4016C2
+0x00401662: mov     rax, [rbp+var_8]
+0x00401666: movsxd  rcx, [rbp+var_10]
+0x0040166A: cmp     dword ptr [rax+rcx*4], 7FFFFFFFh
+0x00401671: jnz     loc_401690
+0x00401677: mov     esi, [rbp+var_10]
+0x0040167A: mov     rdi, offset format; "dist[%d] = INF\n"
+0x00401684: mov     al, 0
+0x00401686: call    _printf
+0x0040168B: jmp     loc_4016AF
+loc_401690:
+0x00401690: mov     esi, [rbp+var_10]
+0x00401693: mov     rax, [rbp+var_8]
+0x00401697: movsxd  rcx, [rbp+var_10]
+0x0040169B: mov     edx, [rax+rcx*4]
+0x0040169E: mov     rdi, offset aDistDD; "dist[%d] = %d\n"
+0x004016A8: mov     al, 0
+0x004016AA: call    _printf
+loc_4016AF:
+0x004016AF: jmp     $+5
+loc_4016B4:
+0x004016B4: mov     eax, [rbp+var_10]
+0x004016B7: add     eax, 1
+0x004016BA: mov     [rbp+var_10], eax
+0x004016BD: jmp     loc_401656
+loc_4016C2:
+0x004016C2: add     rsp, 10h
+0x004016C6: pop     rbp
+0x004016C7: retn

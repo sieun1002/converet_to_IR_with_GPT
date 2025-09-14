@@ -1,0 +1,57 @@
+; Function: main
+; Start: 0x1AA9, End: 0x1B91
+
+0x00001AA9: endbr64
+0x00001AAD: push    rbp
+0x00001AAE: mov     rbp, rsp
+0x00001AB1: sub     rsp, 50h
+0x00001AB5: mov     rax, fs:28h
+0x00001ABE: mov     [rbp+var_8], rax
+0x00001AC2: xor     eax, eax
+0x00001AC4: mov     rax, 0A6D2AE2816157E2Bh
+0x00001ACE: mov     rdx, 3C4FCF098815F7ABh
+0x00001AD8: mov     [rbp+var_40], rax
+0x00001ADC: mov     [rbp+var_38], rdx
+0x00001AE0: mov     rax, 8D305A88A8F64332h
+0x00001AEA: mov     rdx, 340737E0A2983131h
+0x00001AF4: mov     [rbp+var_30], rax
+0x00001AF8: mov     [rbp+var_28], rdx
+0x00001AFC: lea     rdx, [rbp+var_40]
+0x00001B00: lea     rcx, [rbp+var_30]
+0x00001B04: lea     rax, [rbp+var_20]
+0x00001B08: mov     rsi, rcx
+0x00001B0B: mov     rdi, rax
+0x00001B0E: call    aes128_encrypt
+0x00001B13: lea     rax, format; "Ciphertext: "
+0x00001B1A: mov     rdi, rax; format
+0x00001B1D: mov     eax, 0
+0x00001B22: call    _printf
+0x00001B27: mov     [rbp+var_44], 0
+0x00001B2E: jmp     short loc_1B57
+loc_1B30:
+0x00001B30: mov     eax, [rbp+var_44]
+0x00001B33: cdqe
+0x00001B35: movzx   eax, [rbp+rax+var_20]
+0x00001B3A: movzx   eax, al
+0x00001B3D: mov     esi, eax
+0x00001B3F: lea     rax, a02x; "%02x"
+0x00001B46: mov     rdi, rax; format
+0x00001B49: mov     eax, 0
+0x00001B4E: call    _printf
+0x00001B53: add     [rbp+var_44], 1
+loc_1B57:
+0x00001B57: cmp     [rbp+var_44], 0Fh
+0x00001B5B: jle     short loc_1B30
+0x00001B5D: mov     edi, 0Ah; c
+0x00001B62: call    _putchar
+0x00001B67: lea     rax, s; "Ciphertext: 3925841d02dc09fbdc118597196"...
+0x00001B6E: mov     rdi, rax; s
+0x00001B71: call    _puts
+0x00001B76: mov     eax, 0
+0x00001B7B: mov     rdx, [rbp+var_8]
+0x00001B7F: sub     rdx, fs:28h
+0x00001B88: jz      short locret_1B8F
+0x00001B8A: call    ___stack_chk_fail
+locret_1B8F:
+0x00001B8F: leave
+0x00001B90: retn

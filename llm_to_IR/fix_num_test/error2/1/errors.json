@@ -1,0 +1,61 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_function.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/1/DFS_function1.ll",
+      "bc_path": "../../llm_to_IR/fix_num_test/1/DFS_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/DFS_function1.ll:5:55: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.fmt_item   = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\"\n                                                      ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/1/DFS_function1.ll -o ../../llm_to_IR/fix_num_test/1/DFS_function1.bc",
+      "start_time": "2025-09-14T03:17:20",
+      "end_time": "2025-09-14T03:17:20",
+      "elapsed_sec": 0.016343
+    },
+    {
+      "filename": "heapsort_function.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/1/heapsort_function1.ll",
+      "bc_path": "../../llm_to_IR/fix_num_test/1/heapsort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/heapsort_function1.ll:64:13: error: expected instruction opcode\n  %k.next = %largest.idx\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/1/heapsort_function1.ll -o ../../llm_to_IR/fix_num_test/1/heapsort_function1.bc",
+      "start_time": "2025-09-14T03:19:18",
+      "end_time": "2025-09-14T03:19:18",
+      "elapsed_sec": 0.012275
+    },
+    {
+      "filename": "mergesort_function1.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/1/mergesort_function11.ll",
+      "bc_path": "../../llm_to_IR/fix_num_test/1/mergesort_function11.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/mergesort_function11.ll:33:11: error: expected instruction opcode\n  %left = %i\n          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/1/mergesort_function11.ll -o ../../llm_to_IR/fix_num_test/1/mergesort_function11.bc",
+      "start_time": "2025-09-14T03:20:20",
+      "end_time": "2025-09-14T03:20:20",
+      "elapsed_sec": 0.014025
+    },
+    {
+      "filename": "quicksort_function1.ll",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/fix_num_test/1/quicksort_function11.ll",
+      "bc_path": "../../llm_to_IR/fix_num_test/1/quicksort_function11.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/fix_num_test/1/quicksort_function11.ll:15:13: error: expected instruction opcode\n  %i.init = %lo\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/fix_num_test/1/quicksort_function11.ll -o ../../llm_to_IR/fix_num_test/1/quicksort_function11.bc",
+      "start_time": "2025-09-14T03:21:33",
+      "end_time": "2025-09-14T03:21:33",
+      "elapsed_sec": 0.011947
+    }
+  ]
+}

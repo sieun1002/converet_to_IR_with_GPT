@@ -1,0 +1,74 @@
+; Function: key_schedule
+; Start: 0x135F, End: 0x1468
+
+0x0000135F: endbr64
+0x00001363: push    rbp
+0x00001364: mov     rbp, rsp
+0x00001367: push    rbx
+0x00001368: sub     rsp, 30h
+0x0000136C: mov     [rbp+var_30], rdi
+0x00001370: mov     [rbp+var_38], rsi
+0x00001374: mov     rax, [rbp+var_30]
+0x00001378: mov     ecx, 40h ; '@'
+0x0000137D: mov     edx, 38h ; '8'
+0x00001382: lea     rsi, PC1
+0x00001389: mov     rdi, rax
+0x0000138C: call    permute
+0x00001391: mov     [rbp+var_18], rax
+0x00001395: mov     rax, [rbp+var_18]
+0x00001399: shr     rax, 1Ch
+0x0000139D: and     eax, 0FFFFFFFh
+0x000013A2: mov     [rbp+var_24], eax
+0x000013A5: mov     rax, [rbp+var_18]
+0x000013A9: and     eax, 0FFFFFFFh
+0x000013AE: mov     [rbp+var_20], eax
+0x000013B1: mov     [rbp+var_1C], 0
+0x000013B8: jmp     loc_1456
+loc_13BD:
+0x000013BD: mov     eax, [rbp+var_1C]
+0x000013C0: cdqe
+0x000013C2: lea     rdx, ds:0[rax*4]
+0x000013CA: lea     rax, SHIFTS
+0x000013D1: mov     edx, [rdx+rax]
+0x000013D4: mov     eax, [rbp+var_24]
+0x000013D7: mov     esi, edx
+0x000013D9: mov     edi, eax
+0x000013DB: call    rotl28
+0x000013E0: mov     [rbp+var_24], eax
+0x000013E3: mov     eax, [rbp+var_1C]
+0x000013E6: cdqe
+0x000013E8: lea     rdx, ds:0[rax*4]
+0x000013F0: lea     rax, SHIFTS
+0x000013F7: mov     edx, [rdx+rax]
+0x000013FA: mov     eax, [rbp+var_20]
+0x000013FD: mov     esi, edx
+0x000013FF: mov     edi, eax
+0x00001401: call    rotl28
+0x00001406: mov     [rbp+var_20], eax
+0x00001409: mov     eax, [rbp+var_24]
+0x0000140C: shl     rax, 1Ch
+0x00001410: mov     rdx, rax
+0x00001413: mov     eax, [rbp+var_20]
+0x00001416: or      rax, rdx
+0x00001419: mov     [rbp+var_10], rax
+0x0000141D: mov     eax, [rbp+var_1C]
+0x00001420: cdqe
+0x00001422: lea     rdx, ds:0[rax*8]
+0x0000142A: mov     rax, [rbp+var_38]
+0x0000142E: lea     rbx, [rdx+rax]
+0x00001432: mov     rax, [rbp+var_10]
+0x00001436: mov     ecx, 38h ; '8'
+0x0000143B: mov     edx, 30h ; '0'
+0x00001440: lea     rsi, PC2
+0x00001447: mov     rdi, rax
+0x0000144A: call    permute
+0x0000144F: mov     [rbx], rax
+0x00001452: add     [rbp+var_1C], 1
+loc_1456:
+0x00001456: cmp     [rbp+var_1C], 0Fh
+0x0000145A: jle     loc_13BD
+0x00001460: nop
+0x00001461: nop
+0x00001462: mov     rbx, [rbp+var_8]
+0x00001466: leave
+0x00001467: retn

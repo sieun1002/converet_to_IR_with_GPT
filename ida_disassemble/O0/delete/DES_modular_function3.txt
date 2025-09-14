@@ -1,0 +1,71 @@
+; Function: sboxes_p
+; Start: 0x123C, End: 0x1316
+
+0x0000123C: endbr64
+0x00001240: push    rbp
+0x00001241: mov     rbp, rsp
+0x00001244: sub     rsp, 28h
+0x00001248: mov     [rbp+var_28], rdi
+0x0000124C: mov     [rbp+var_14], 0
+0x00001253: mov     [rbp+var_10], 0
+0x0000125A: jmp     loc_12EE
+loc_125F:
+0x0000125F: mov     edx, [rbp+var_10]
+0x00001262: mov     eax, edx
+0x00001264: shl     edx, 2
+0x00001267: sub     eax, edx
+0x00001269: add     eax, eax
+0x0000126B: add     eax, 2Ah ; '*'
+0x0000126E: mov     [rbp+var_C], eax
+0x00001271: mov     eax, [rbp+var_C]
+0x00001274: mov     rdx, [rbp+var_28]
+0x00001278: mov     ecx, eax
+0x0000127A: shr     rdx, cl
+0x0000127D: mov     rax, rdx
+0x00001280: and     eax, 3Fh
+0x00001283: mov     [rbp+var_16], al
+0x00001286: movzx   eax, [rbp+var_16]
+0x0000128A: sar     eax, 4
+0x0000128D: and     eax, 2
+0x00001290: mov     edx, eax
+0x00001292: movzx   eax, [rbp+var_16]
+0x00001296: and     eax, 1
+0x00001299: or      eax, edx
+0x0000129B: mov     [rbp+var_8], eax
+0x0000129E: movzx   eax, [rbp+var_16]
+0x000012A2: shr     al, 1
+0x000012A4: movzx   eax, al
+0x000012A7: and     eax, 0Fh
+0x000012AA: mov     [rbp+var_4], eax
+0x000012AD: mov     eax, [rbp+var_8]
+0x000012B0: shl     eax, 4
+0x000012B3: mov     edx, eax
+0x000012B5: mov     eax, [rbp+var_4]
+0x000012B8: add     eax, edx
+0x000012BA: cdqe
+0x000012BC: mov     edx, [rbp+var_10]
+0x000012BF: movsxd  rdx, edx
+0x000012C2: shl     rdx, 6
+0x000012C6: add     rdx, rax
+0x000012C9: lea     rax, SBOX
+0x000012D0: add     rax, rdx
+0x000012D3: movzx   eax, byte ptr [rax]
+0x000012D6: mov     [rbp+var_15], al
+0x000012D9: mov     eax, [rbp+var_14]
+0x000012DC: shl     eax, 4
+0x000012DF: mov     edx, eax
+0x000012E1: movzx   eax, [rbp+var_15]
+0x000012E5: or      eax, edx
+0x000012E7: mov     [rbp+var_14], eax
+0x000012EA: add     [rbp+var_10], 1
+loc_12EE:
+0x000012EE: cmp     [rbp+var_10], 7
+0x000012F2: jle     loc_125F
+0x000012F8: mov     eax, [rbp+var_14]
+0x000012FB: mov     ecx, 20h ; ' '
+0x00001300: mov     edx, 20h ; ' '
+0x00001305: lea     rsi, P
+0x0000130C: mov     rdi, rax
+0x0000130F: call    permute
+0x00001314: leave
+0x00001315: retn

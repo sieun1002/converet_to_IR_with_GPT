@@ -1,0 +1,80 @@
+{
+  "entries": [
+    {
+      "file": "BFS.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -24,
+      "errmsg": "[mismatch]\n--- cand ---\nBFS order from 0: 0\ndist(0 -> 0) = 0\ndist(0 -> 1) = -1\ndist(0 -> 2) = -1\ndist(0 -> 3) = -1\ndist(0 -> 4) = -1\ndist(0 -> 5) = -1\ndist(0 -> 6) = -1\n\n--- ref ---\nBFS order from 0: 0 1 2 3 4 5 6\ndist(0 -> 0) = 0\ndist(0 -> 1) = 1\ndist(0 -> 2) = 1\ndist(0 -> 3) = 2\ndist(0 -> 4) = 2\ndist(0 -> 5) = 2\ndist(0 -> 6) = 3"
+    },
+    {
+      "file": "DFS.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "binarysearch.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "bubblesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "dijkstra_modular.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/dijkstra_modular_main-9d67e2.o: in function `main':\ndijkstra_modular_main.ll:(.text+0x53): undefined reference to `byte_40202C'\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "dijkstra_single_func.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "heapsort.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -24,
+      "errmsg": "[mismatch]\n--- cand ---\nBefore: 7 3 9 1 4 8 2 6 5 \nAfter: 1 2 3 4 5 6 7 8 9 \n\n--- ref ---\n원본: 7 3 9 1 4 8 2 6 5 \n정렬 후: 1 2 3 4 5 6 7 8 9"
+    },
+    {
+      "file": "insertionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "linearsearch.ll",
+      "parent": "eval",
+      "ok": false,
+      "err": -20,
+      "errmsg": "warning: overriding the module target triple with x86_64-pc-linux-gnu [-Woverride-module]\n1 warning generated.\n/usr/bin/ld: /tmp/linearsearch_function-9ac335.o: in function `linear_search':\nlinear_search:(.text+0x0): multiple definition of `linear_search'; /tmp/linearsearch_main-3898fa.o:linearsearch_main.ll:(.text+0x0): first defined here\nclang: error: linker command failed with exit code 1 (use -v to see invocation)"
+    },
+    {
+      "file": "mergesort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "quicksort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    },
+    {
+      "file": "selectionsort.ll",
+      "parent": "eval",
+      "ok": true,
+      "err": 0
+    }
+  ]
+}

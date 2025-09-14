@@ -1,0 +1,25 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "AES128_modular_function8.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 176,
+      "ir_len": 4275,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_long/ase_modualr_error_repeat/1/AES128_modular_function81.ll:118:14: error: expected instruction opcode\n  %rc.next = %rc.out\n             ^\n",
+      "ir_preview": "; ModuleID = 'key_expansion'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n; Symbol: key_expansion  ; Address: 0x15A0\n; Intent: AES-128 key expansion (confidence=0.95). Evidence: copies 16-byte key; use",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/ase_modualr_error_repeat/1/AES128_modular_function81.ll"
+    },
+    {
+      "filename": "AES128_modular_function8.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 191,
+      "ir_len": 3970,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %rc.out = phi i32 [ %rc.inc, %special ], [ %rc, %no.special ]\nlabel %after.special\n",
+      "ir_preview": "; ModuleID = 'key_expansion'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\ndeclare zeroext i8 @sbox_lookup(i32) local_unnamed_addr\ndeclare zeroext i8 @rcon(i32) local_unnamed_addr\n\ndefine dso_local void",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_long/ase_modualr_error_repeat/1/AES128_modular_function82.ll"
+    }
+  ]
+}

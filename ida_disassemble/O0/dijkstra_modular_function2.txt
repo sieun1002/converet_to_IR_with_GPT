@@ -1,0 +1,36 @@
+; Function: add_edge
+; Start: 0x4011B0, End: 0x401222
+
+0x004011B0: push    rbp
+0x004011B1: mov     rbp, rsp
+0x004011B4: mov     [rbp+var_8], rdi
+0x004011B8: mov     [rbp+var_C], esi
+0x004011BB: mov     [rbp+var_10], edx
+0x004011BE: mov     [rbp+var_14], ecx
+0x004011C1: mov     [rbp+var_18], r8d
+0x004011C5: cmp     [rbp+var_C], 0
+0x004011C9: jl      loc_4011D9
+0x004011CF: cmp     [rbp+var_10], 0
+0x004011D3: jge     loc_4011DE
+loc_4011D9:
+0x004011D9: jmp     loc_401220
+loc_4011DE:
+0x004011DE: mov     edx, [rbp+var_14]
+0x004011E1: mov     rax, [rbp+var_8]
+0x004011E5: movsxd  rcx, [rbp+var_C]
+0x004011E9: imul    rcx, 190h
+0x004011F0: add     rax, rcx
+0x004011F3: movsxd  rcx, [rbp+var_10]
+0x004011F7: mov     [rax+rcx*4], edx
+0x004011FA: cmp     [rbp+var_18], 0
+0x004011FE: jz      loc_401220
+0x00401204: mov     edx, [rbp+var_14]
+0x00401207: mov     rax, [rbp+var_8]
+0x0040120B: movsxd  rcx, [rbp+var_10]
+0x0040120F: imul    rcx, 190h
+0x00401216: add     rax, rcx
+0x00401219: movsxd  rcx, [rbp+var_C]
+0x0040121D: mov     [rax+rcx*4], edx
+loc_401220:
+0x00401220: pop     rbp
+0x00401221: retn

@@ -1,0 +1,13 @@
+; Function: sbox_lookup
+; Start: 0x11A9, End: 0x11C5
+
+0x000011A9: push    rbp
+0x000011AA: mov     rbp, rsp
+0x000011AD: mov     eax, edi
+0x000011AF: mov     [rbp+var_4], al
+0x000011B2: movzx   eax, [rbp+var_4]
+0x000011B6: cdqe
+0x000011B8: lea     rdx, SBOX_1
+0x000011BF: movzx   eax, byte ptr [rax+rdx]
+0x000011C3: pop     rbp
+0x000011C4: retn

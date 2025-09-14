@@ -1,0 +1,151 @@
+; Function: dijkstra
+; Start: 0x401120, End: 0x40141C
+
+0x00401120: push    rbp
+0x00401121: mov     rbp, rsp
+0x00401124: sub     rsp, 350h
+0x0040112B: mov     [rbp+var_8], rdi
+0x0040112F: mov     [rbp+var_C], esi
+0x00401132: mov     [rbp+var_10], edx
+0x00401135: mov     [rbp+var_334], 0
+loc_40113F:
+0x0040113F: mov     eax, [rbp+var_334]
+0x00401145: cmp     eax, [rbp+var_C]
+0x00401148: jge     loc_401186
+0x0040114E: movsxd  rax, [rbp+var_334]
+0x00401155: mov     [rbp+rax*4+var_1A0], 7FFFFFFFh
+0x00401160: movsxd  rax, [rbp+var_334]
+0x00401167: mov     [rbp+rax*4+var_330], 0
+0x00401172: mov     eax, [rbp+var_334]
+0x00401178: add     eax, 1
+0x0040117B: mov     [rbp+var_334], eax
+0x00401181: jmp     loc_40113F
+loc_401186:
+0x00401186: movsxd  rax, [rbp+var_10]
+0x0040118A: mov     [rbp+rax*4+var_1A0], 0
+0x00401195: mov     [rbp+var_338], 0
+loc_40119F:
+0x0040119F: mov     eax, [rbp+var_338]
+0x004011A5: mov     ecx, [rbp+var_C]
+0x004011A8: sub     ecx, 1
+0x004011AB: cmp     eax, ecx
+0x004011AD: jge     loc_401388
+0x004011B3: mov     [rbp+var_33C], 0FFFFFFFFh
+0x004011BD: mov     [rbp+var_340], 7FFFFFFFh
+0x004011C7: mov     [rbp+var_344], 0
+loc_4011D1:
+0x004011D1: mov     eax, [rbp+var_344]
+0x004011D7: cmp     eax, [rbp+var_C]
+0x004011DA: jge     loc_401248
+0x004011E0: movsxd  rax, [rbp+var_344]
+0x004011E7: cmp     [rbp+rax*4+var_330], 0
+0x004011EF: jnz     loc_40122F
+0x004011F5: movsxd  rax, [rbp+var_344]
+0x004011FC: mov     eax, [rbp+rax*4+var_1A0]
+0x00401203: cmp     eax, [rbp+var_340]
+0x00401209: jge     loc_40122F
+0x0040120F: movsxd  rax, [rbp+var_344]
+0x00401216: mov     eax, [rbp+rax*4+var_1A0]
+0x0040121D: mov     [rbp+var_340], eax
+0x00401223: mov     eax, [rbp+var_344]
+0x00401229: mov     [rbp+var_33C], eax
+loc_40122F:
+0x0040122F: jmp     $+5
+loc_401234:
+0x00401234: mov     eax, [rbp+var_344]
+0x0040123A: add     eax, 1
+0x0040123D: mov     [rbp+var_344], eax
+0x00401243: jmp     loc_4011D1
+loc_401248:
+0x00401248: cmp     [rbp+var_33C], 0FFFFFFFFh
+0x0040124F: jnz     loc_40125A
+0x00401255: jmp     loc_401388
+loc_40125A:
+0x0040125A: movsxd  rax, [rbp+var_33C]
+0x00401261: mov     [rbp+rax*4+var_330], 1
+0x0040126C: mov     [rbp+var_348], 0
+loc_401276:
+0x00401276: mov     eax, [rbp+var_348]
+0x0040127C: cmp     eax, [rbp+var_C]
+0x0040127F: jge     loc_40136F
+0x00401285: mov     rax, [rbp+var_8]
+0x00401289: movsxd  rcx, [rbp+var_33C]
+0x00401290: imul    rcx, 190h
+0x00401297: add     rax, rcx
+0x0040129A: movsxd  rcx, [rbp+var_348]
+0x004012A1: cmp     dword ptr [rax+rcx*4], 0
+0x004012A5: jz      loc_401356
+0x004012AB: movsxd  rax, [rbp+var_348]
+0x004012B2: cmp     [rbp+rax*4+var_330], 0
+0x004012BA: jnz     loc_401356
+0x004012C0: movsxd  rax, [rbp+var_33C]
+0x004012C7: cmp     [rbp+rax*4+var_1A0], 7FFFFFFFh
+0x004012D2: jz      loc_401356
+0x004012D8: movsxd  rax, [rbp+var_348]
+0x004012DF: mov     eax, [rbp+rax*4+var_1A0]
+0x004012E6: movsxd  rcx, [rbp+var_33C]
+0x004012ED: mov     ecx, [rbp+rcx*4+var_1A0]
+0x004012F4: mov     rdx, [rbp+var_8]
+0x004012F8: movsxd  rsi, [rbp+var_33C]
+0x004012FF: imul    rsi, 190h
+0x00401306: add     rdx, rsi
+0x00401309: movsxd  rsi, [rbp+var_348]
+0x00401310: add     ecx, [rdx+rsi*4]
+0x00401313: cmp     eax, ecx
+0x00401315: jle     loc_401356
+0x0040131B: movsxd  rax, [rbp+var_33C]
+0x00401322: mov     ecx, [rbp+rax*4+var_1A0]
+0x00401329: mov     rax, [rbp+var_8]
+0x0040132D: movsxd  rdx, [rbp+var_33C]
+0x00401334: imul    rdx, 190h
+0x0040133B: add     rax, rdx
+0x0040133E: movsxd  rdx, [rbp+var_348]
+0x00401345: add     ecx, [rax+rdx*4]
+0x00401348: movsxd  rax, [rbp+var_348]
+0x0040134F: mov     [rbp+rax*4+var_1A0], ecx
+loc_401356:
+0x00401356: jmp     $+5
+loc_40135B:
+0x0040135B: mov     eax, [rbp+var_348]
+0x00401361: add     eax, 1
+0x00401364: mov     [rbp+var_348], eax
+0x0040136A: jmp     loc_401276
+loc_40136F:
+0x0040136F: jmp     $+5
+loc_401374:
+0x00401374: mov     eax, [rbp+var_338]
+0x0040137A: add     eax, 1
+0x0040137D: mov     [rbp+var_338], eax
+0x00401383: jmp     loc_40119F
+loc_401388:
+0x00401388: mov     [rbp+var_34C], 0
+loc_401392:
+0x00401392: mov     eax, [rbp+var_34C]
+0x00401398: cmp     eax, [rbp+var_C]
+0x0040139B: jge     loc_401413
+0x004013A1: movsxd  rax, [rbp+var_34C]
+0x004013A8: cmp     [rbp+rax*4+var_1A0], 7FFFFFFFh
+0x004013B3: jnz     loc_4013D5
+0x004013B9: mov     esi, [rbp+var_34C]
+0x004013BF: mov     rdi, offset format; "dist[%d] = INF\n"
+0x004013C9: mov     al, 0
+0x004013CB: call    _printf
+0x004013D0: jmp     loc_4013FA
+loc_4013D5:
+0x004013D5: mov     esi, [rbp+var_34C]
+0x004013DB: movsxd  rax, [rbp+var_34C]
+0x004013E2: mov     edx, [rbp+rax*4+var_1A0]
+0x004013E9: mov     rdi, offset aDistDD; "dist[%d] = %d\n"
+0x004013F3: mov     al, 0
+0x004013F5: call    _printf
+loc_4013FA:
+0x004013FA: jmp     $+5
+loc_4013FF:
+0x004013FF: mov     eax, [rbp+var_34C]
+0x00401405: add     eax, 1
+0x00401408: mov     [rbp+var_34C], eax
+0x0040140E: jmp     loc_401392
+loc_401413:
+0x00401413: add     rsp, 350h
+0x0040141A: pop     rbp
+0x0040141B: retn

@@ -1,0 +1,115 @@
+; ModuleID = 'bfs'
+target triple = "x86_64-unknown-linux-gnu"
+
+declare noalias i8* @malloc(i64)
+declare void @free(i8*)
+
+define dso_local void @bfs(i32* %adj, i64 %n, i64 %start, i32* %dist, i64* %out, i64* %out_count) local_unnamed_addr {
+entry:
+  %n_is_zero = icmp eq i64 %n, 0
+  br i1 %n_is_zero, label %early_zero, label %check_start
+
+check_start:
+  %start_in_range = icmp ult i64 %start, %n
+  br i1 %start_in_range, label %init_dist_loop, label %early_zero
+
+early_zero:
+  store i64 0, i64* %out_count, align 8
+  ret void
+
+init_dist_loop:
+  br label %dist_loop
+
+dist_loop:
+  %i = phi i64 [ 0, %init_dist_loop ], [ %i_next, %dist_loop_body_end ]
+  %i_lt_n = icmp ult i64 %i, %n
+  br i1 %i_lt_n, label %dist_loop_body, label %after_dist_init
+
+dist_loop_body:
+  %dist_i_ptr = getelementptr inbounds i32, i32* %dist, i64 %i
+  store i32 -1, i32* %dist_i_ptr, align 4
+  br label %dist_loop_body_end
+
+dist_loop_body_end:
+  %i_next = add i64 %i, 1
+  br label %dist_loop
+
+after_dist_init:
+  %size = shl i64 %n, 3
+  %raw = call noalias i8* @malloc(i64 %size)
+  %q = bitcast i8* %raw to i64*
+  %isnull = icmp eq i64* %q, null
+  br i1 %isnull, label %early_zero, label %init_queue
+
+init_queue:
+  %dist_start_ptr = getelementptr inbounds i32, i32* %dist, i64 %start
+  store i32 0, i32* %dist_start_ptr, align 4
+  store i64 0, i64* %out_count, align 8
+  %q0 = getelementptr inbounds i64, i64* %q, i64 0
+  store i64 %start, i64* %q0, align 8
+  br label %bfs_outer
+
+bfs_outer:
+  %head = phi i64 [ 0, %init_queue ], [ %head_next2, %after_inner ]
+  %tail = phi i64 [ 1, %init_queue ], [ %tail_after, %after_inner ]
+  %has_items = icmp ult i64 %head, %tail
+  br i1 %has_items, label %dequeue, label %after_outer
+
+dequeue:
+  %q_head_ptr = getelementptr inbounds i64, i64* %q, i64 %head
+  %u = load i64, i64* %q_head_ptr, align 8
+  %head_next2 = add i64 %head, 1
+  %old_count = load i64, i64* %out_count, align 8
+  %old_count_plus = add i64 %old_count, 1
+  store i64 %old_count_plus, i64* %out_count, align 8
+  %out_pos_ptr = getelementptr inbounds i64, i64* %out, i64 %old_count
+  store i64 %u, i64* %out_pos_ptr, align 8
+  br label %v_cond
+
+v_cond:
+  %v = phi i64 [ 0, %dequeue ], [ %v_next, %v_latch ]
+  %tail_cur = phi i64 [ %tail, %dequeue ], [ %tail_after_step, %v_latch ]
+  %v_lt_n = icmp ult i64 %v, %n
+  br i1 %v_lt_n, label %v_body, label %after_inner
+
+v_body:
+  %mul = mul i64 %u, %n
+  %idx = add i64 %mul, %v
+  %adj_ptr = getelementptr inbounds i32, i32* %adj, i64 %idx
+  %adj_val = load i32, i32* %adj_ptr, align 4
+  %adj_is_zero = icmp eq i32 %adj_val, 0
+  br i1 %adj_is_zero, label %v_noedge, label %check_unvisited
+
+v_noedge:
+  br label %v_latch
+
+check_unvisited:
+  %dist_v_ptr = getelementptr inbounds i32, i32* %dist, i64 %v
+  %dist_v = load i32, i32* %dist_v_ptr, align 4
+  %is_unvisited = icmp eq i32 %dist_v, -1
+  br i1 %is_unvisited, label %visit_neighbor, label %v_latch
+
+visit_neighbor:
+  %dist_u_ptr = getelementptr inbounds i32, i32* %dist, i64 %u
+  %dist_u = load i32, i32* %dist_u_ptr, align 4
+  %dist_u_plus = add i32 %dist_u, 1
+  store i32 %dist_u_plus, i32* %dist_v_ptr, align 4
+  %q_tail_ptr = getelementptr inbounds i64, i64* %q, i64 %tail_cur
+  store i64 %v, i64* %q_tail_ptr, align 8
+  %tail_inc = add i64 %tail_cur, 1
+  br label %v_latch
+
+v_latch:
+  %tail_after_step = phi i64 [ %tail_cur, %v_noedge ], [ %tail_cur, %check_unvisited ], [ %tail_inc, %visit_neighbor ]
+  %v_next = add i64 %v, 1
+  br label %v_cond
+
+after_inner:
+  %tail_after = phi i64 [ %tail_cur, %v_cond ]
+  br label %bfs_outer
+
+after_outer:
+  %q_as_i8 = bitcast i64* %q to i8*
+  call void @free(i8* %q_as_i8)
+  ret void
+}

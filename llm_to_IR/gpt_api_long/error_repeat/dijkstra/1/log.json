@@ -1,0 +1,412 @@
+{
+  "meta": {
+    "round": 1,
+    "start_time": "2025-09-13T18:40:04",
+    "input_folder": "/home/nata20034/workspace/convert_to_IR_with_LLM/ida_disassemble/O0/djkstra",
+    "output_dir": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_long/error_repeat/dijkstra/1",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 5,
+    "max_fix_attempts": 4,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call_retry_fail",
+      "filename": "dijkstra_modular_function1.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:38:20",
+      "end_time": "2025-09-13T18:38:51",
+      "elapsed_sec": 31.678294,
+      "usage": null,
+      "attempt": 1,
+      "retries": 0,
+      "error": "Request timed out.",
+      "success": false,
+      "backoff_sec": 2.0
+    },
+    {
+      "phase": "gpt_call_retry_fail",
+      "filename": "dijkstra_modular_function1.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:38:53",
+      "end_time": "2025-09-13T18:39:25",
+      "elapsed_sec": 31.406125,
+      "usage": null,
+      "attempt": 2,
+      "retries": 1,
+      "error": "Request timed out.",
+      "success": false,
+      "backoff_sec": 3.0
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_function1.txt",
+      "version": 1,
+      "request_id": "resp_06289d4848cbb6590068c53bf5ea64819babafb24b2eddf2d7",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:40:04",
+      "end_time": "2025-09-13T18:40:34",
+      "elapsed_sec": 29.869099,
+      "usage": {
+        "input_tokens": 1663,
+        "output_tokens": 2598,
+        "total_tokens": 4261
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_function1.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function11.ll",
+      "success": true,
+      "time": "2025-09-13T18:40:34"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_function1.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function11.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function11.bc",
+      "start_time": "2025-09-13T18:40:34",
+      "end_time": "2025-09-13T18:40:34",
+      "elapsed_sec": 0.016873
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_function2.txt",
+      "version": 1,
+      "request_id": "resp_02ec978302c571e30068c53c1301d4819aa04e259f543f8a31",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:40:34",
+      "end_time": "2025-09-13T18:41:28",
+      "elapsed_sec": 53.480344,
+      "usage": {
+        "input_tokens": 1702,
+        "output_tokens": 2433,
+        "total_tokens": 4135
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_function2.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function21.ll",
+      "success": true,
+      "time": "2025-09-13T18:41:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_function2.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function21.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function21.bc",
+      "start_time": "2025-09-13T18:41:28",
+      "end_time": "2025-09-13T18:41:28",
+      "elapsed_sec": 0.01404
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_function3.txt",
+      "version": 1,
+      "request_id": "resp_05d465df4818e8cc0068c53c488ab081979663c4ff39628d44",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:41:28",
+      "end_time": "2025-09-13T18:42:45",
+      "elapsed_sec": 76.997491,
+      "usage": {
+        "input_tokens": 2758,
+        "output_tokens": 4662,
+        "total_tokens": 7420
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_function3.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function31.ll",
+      "success": true,
+      "time": "2025-09-13T18:42:45"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_function3.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function31.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function31.bc",
+      "start_time": "2025-09-13T18:42:45",
+      "end_time": "2025-09-13T18:42:45",
+      "elapsed_sec": 0.01295
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_function4.txt",
+      "version": 1,
+      "request_id": "resp_07d86103f45ce2b20068c53c958a648198af6d4bcee72515a8",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:42:45",
+      "end_time": "2025-09-13T18:43:22",
+      "elapsed_sec": 37.424053,
+      "usage": {
+        "input_tokens": 1793,
+        "output_tokens": 2624,
+        "total_tokens": 4417
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_function4.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function41.ll",
+      "success": true,
+      "time": "2025-09-13T18:43:22"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_function4.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function41.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function41.bc",
+      "start_time": "2025-09-13T18:43:22",
+      "end_time": "2025-09-13T18:43:22",
+      "elapsed_sec": 0.013773
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_function5.txt",
+      "version": 1,
+      "request_id": "resp_0379a2f9e670fb9c0068c53cbaf684819bbd80dac52a86429b",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:43:22",
+      "end_time": "2025-09-13T18:45:17",
+      "elapsed_sec": 114.588702,
+      "usage": {
+        "input_tokens": 2907,
+        "output_tokens": 5359,
+        "total_tokens": 8266
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_function5.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function51.ll",
+      "success": true,
+      "time": "2025-09-13T18:45:17"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_function5.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function51.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function51.bc",
+      "start_time": "2025-09-13T18:45:17",
+      "end_time": "2025-09-13T18:45:17",
+      "elapsed_sec": 0.013264
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_function6.txt",
+      "version": 1,
+      "request_id": "resp_05fbfd930ba29c7b0068c53d2d94b881968de4bce8c5ea8c7b",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:45:17",
+      "end_time": "2025-09-13T18:45:47",
+      "elapsed_sec": 29.869984,
+      "usage": {
+        "input_tokens": 1743,
+        "output_tokens": 2736,
+        "total_tokens": 4479
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_function6.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function61.ll",
+      "success": true,
+      "time": "2025-09-13T18:45:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_function6.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function61.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_function61.bc",
+      "start_time": "2025-09-13T18:45:47",
+      "end_time": "2025-09-13T18:45:47",
+      "elapsed_sec": 0.012916
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_modular_main.txt",
+      "version": 1,
+      "request_id": "resp_0c00812045157cc40068c53d4bd3b8819692d743091ecae8d4",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:45:47",
+      "end_time": "2025-09-13T18:46:49",
+      "elapsed_sec": 62.16911,
+      "usage": {
+        "input_tokens": 1648,
+        "output_tokens": 7102,
+        "total_tokens": 8750
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_modular_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_main1.ll",
+      "success": true,
+      "time": "2025-09-13T18:46:49"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_modular_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_main1.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_modular_main1.bc",
+      "start_time": "2025-09-13T18:46:49",
+      "end_time": "2025-09-13T18:46:49",
+      "elapsed_sec": 0.011336
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_single_func_function.txt",
+      "version": 1,
+      "request_id": "resp_048729928ab549660068c53d89abac8193b4c34938885cbab8",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:46:49",
+      "end_time": "2025-09-13T18:49:37",
+      "elapsed_sec": 168.447891,
+      "usage": {
+        "input_tokens": 3661,
+        "output_tokens": 7737,
+        "total_tokens": 11398
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_single_func_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_single_func_function1.ll",
+      "success": true,
+      "time": "2025-09-13T18:49:37"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_single_func_function.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_single_func_function1.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_single_func_function1.bc",
+      "start_time": "2025-09-13T18:49:37",
+      "end_time": "2025-09-13T18:49:37",
+      "elapsed_sec": 0.01367
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "dijkstra_single_func_main.txt",
+      "version": 1,
+      "request_id": "resp_0cf9acbcd4d60c770068c53e32203c819983aaa69e6d5380e6",
+      "model": "gpt-5",
+      "start_time": "2025-09-13T18:49:37",
+      "end_time": "2025-09-13T18:51:47",
+      "elapsed_sec": 129.53877,
+      "usage": {
+        "input_tokens": 2093,
+        "output_tokens": 7197,
+        "total_tokens": 9290
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "dijkstra_single_func_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_single_func_main1.ll",
+      "success": true,
+      "time": "2025-09-13T18:51:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "dijkstra_single_func_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_single_func_main1.ll -o ../../llm_to_IR/gpt_api_long/error_repeat/dijkstra/1/dijkstra_single_func_main1.bc",
+      "start_time": "2025-09-13T18:51:47",
+      "end_time": "2025-09-13T18:51:47",
+      "elapsed_sec": 0.014319
+    },
+    {
+      "phase": "round_complete",
+      "round": 1,
+      "end_time": "2025-09-13T18:51:47"
+    }
+  ]
+}
