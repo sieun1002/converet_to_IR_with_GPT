@@ -86,10 +86,10 @@ def main():
     # 사용자가 직접 설정
     ref_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/original/ll"
     mcsema_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/mcsema/ll/O0"
-    llm_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/10"
+    llm_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/integration/bc/6"
 
-    out_norm_root = "./similarity/10"
-    out_json_file = "./similarity/10/similarity.json"   # JSON 저장 경로
+    out_norm_root = "./similarity_inte/6"
+    out_json_file = "./similarity_inte/6/similarity.json"   # JSON 저장 경로
 
     all_results = []
 
