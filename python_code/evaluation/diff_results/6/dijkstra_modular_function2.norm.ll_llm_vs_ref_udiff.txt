@@ -1,0 +1,154 @@
+--- ref.ll
++++ dijkstra_modular_function2.norm.ll_llm_vs_ref.ll
+@@ -1,126 +1,30 @@
+-; ModuleID = '/home/nata20034/workspace/convert_to_IR_with_LLM/original/ll/dijkstra_modular_function2.ll'
+-source_filename = "dijkstra_modular.c"
+-target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+-target triple = "x86_64-pc-linux-gnu"
++; ModuleID = '/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/6/dijkstra_modular_function2.ll'
++source_filename = "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_error_analysis/6/dijkstra_modular_function2.ll"
+ 
+-; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
+-declare void @llvm.dbg.declare(metadata, metadata, metadata) #0
++define void @add_edge(i32* %base, i32 %i, i32 %j, i32 %val, i32 %sym) {
++entry:
++  %cmp_i_neg = icmp slt i32 %i, 0
++  %cmp_j_neg = icmp slt i32 %j, 0
++  %or.cond = select i1 %cmp_i_neg, i1 true, i1 %cmp_j_neg
++  br i1 %or.cond, label %ret, label %store_main
+ 
+-; Function Attrs: noinline nounwind optnone uwtable
+-define dso_local void @add_edge([100 x i32]* noundef %graph, i32 noundef %u, i32 noundef %v, i32 noundef %w, i32 noundef %undirected) #1 !dbg !10 {
+-entry:
+-  %graph.addr = alloca [100 x i32]*, align 8
+-  %u.addr = alloca i32, align 4
+-  %v.addr = alloca i32, align 4
+-  %w.addr = alloca i32, align 4
+-  %undirected.addr = alloca i32, align 4
+-  store [100 x i32]* %graph, [100 x i32]** %graph.addr, align 8
+-  call void @llvm.dbg.declare(metadata [100 x i32]** %graph.addr, metadata !19, metadata !DIExpression()), !dbg !20
+-  store i32 %u, i32* %u.addr, align 4
+-  call void @llvm.dbg.declare(metadata i32* %u.addr, metadata !21, metadata !DIExpression()), !dbg !22
+-  store i32 %v, i32* %v.addr, align 4
+-  call void @llvm.dbg.declare(metadata i32* %v.addr, metadata !23, metadata !DIExpression()), !dbg !24
+-  store i32 %w, i32* %w.addr, align 4
+-  call void @llvm.dbg.declare(metadata i32* %w.addr, metadata !25, metadata !DIExpression()), !dbg !26
+-  store i32 %undirected, i32* %undirected.addr, align 4
+-  call void @llvm.dbg.declare(metadata i32* %undirected.addr, metadata !27, metadata !DIExpression()), !dbg !28
+-  %0 = load i32, i32* %u.addr, align 4, !dbg !29
+-  %cmp = icmp slt i32 %0, 0, !dbg !31
+-  br i1 %cmp, label %if.then, label %lor.lhs.false, !dbg !32
++store_main:                                       ; preds = %entry
++  %i64 = sext i32 %i to i64
++  %j64 = sext i32 %j to i64
++  %row_off = mul nsw i64 %i64, 100
++  %idx = add nsw i64 %row_off, %j64
++  %ptr = getelementptr inbounds i32, i32* %base, i64 %idx
++  store i32 %val, i32* %ptr, align 4
++  %sym_is_zero = icmp eq i32 %sym, 0
++  br i1 %sym_is_zero, label %ret, label %store_sym
+ 
+-lor.lhs.false:                                    ; preds = %entry
+-  %1 = load i32, i32* %v.addr, align 4, !dbg !33
+-  %cmp1 = icmp slt i32 %1, 0, !dbg !34
+-  br i1 %cmp1, label %if.then, label %if.end, !dbg !35
++store_sym:                                        ; preds = %store_main
++  %row_off2 = mul nsw i64 %j64, 100
++  %idx2 = add nsw i64 %row_off2, %i64
++  %ptr2 = getelementptr inbounds i32, i32* %base, i64 %idx2
++  store i32 %val, i32* %ptr2, align 4
++  br label %ret
+ 
+-if.then:                                          ; preds = %lor.lhs.false, %entry
+-  br label %if.end9, !dbg !36
+-
+-if.end:                                           ; preds = %lor.lhs.false
+-  %2 = load i32, i32* %w.addr, align 4, !dbg !37
+-  %3 = load [100 x i32]*, [100 x i32]** %graph.addr, align 8, !dbg !38
+-  %4 = load i32, i32* %u.addr, align 4, !dbg !39
+-  %idxprom = sext i32 %4 to i64, !dbg !38
+-  %arrayidx = getelementptr inbounds [100 x i32], [100 x i32]* %3, i64 %idxprom, !dbg !38
+-  %5 = load i32, i32* %v.addr, align 4, !dbg !40
+-  %idxprom2 = sext i32 %5 to i64, !dbg !38
+-  %arrayidx3 = getelementptr inbounds [100 x i32], [100 x i32]* %arrayidx, i64 0, i64 %idxprom2, !dbg !38
+-  store i32 %2, i32* %arrayidx3, align 4, !dbg !41
+-  %6 = load i32, i32* %undirected.addr, align 4, !dbg !42
+-  %tobool = icmp ne i32 %6, 0, !dbg !42
+-  br i1 %tobool, label %if.then4, label %if.end9, !dbg !44
+-
+-if.then4:                                         ; preds = %if.end
+-  %7 = load i32, i32* %w.addr, align 4, !dbg !45
+-  %8 = load [100 x i32]*, [100 x i32]** %graph.addr, align 8, !dbg !46
+-  %9 = load i32, i32* %v.addr, align 4, !dbg !47
+-  %idxprom5 = sext i32 %9 to i64, !dbg !46
+-  %arrayidx6 = getelementptr inbounds [100 x i32], [100 x i32]* %8, i64 %idxprom5, !dbg !46
+-  %10 = load i32, i32* %u.addr, align 4, !dbg !48
+-  %idxprom7 = sext i32 %10 to i64, !dbg !46
+-  %arrayidx8 = getelementptr inbounds [100 x i32], [100 x i32]* %arrayidx6, i64 0, i64 %idxprom7, !dbg !46
+-  store i32 %7, i32* %arrayidx8, align 4, !dbg !49
+-  br label %if.end9, !dbg !46
+-
+-if.end9:                                          ; preds = %if.then4, %if.end, %if.then
+-  ret void, !dbg !50
++ret:                                              ; preds = %store_sym, %store_main, %entry
++  ret void
+ }
+-
+-attributes #0 = { nofree nosync nounwind readnone speculatable willreturn }
+-attributes #1 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+-
+-!llvm.dbg.cu = !{!0}
+-!llvm.module.flags = !{!2, !3, !4, !5, !6, !7, !8}
+-!llvm.ident = !{!9}
+-
+-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Ubuntu clang version 14.0.0-1ubuntu1.1", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
+-!1 = !DIFile(filename: "dijkstra_modular.c", directory: "/home/nata20034/workspace/convert_to_IR_with_LLM/original/src", checksumkind: CSK_MD5, checksum: "47bf6ecccd84048d194510cb254a0651")
+-!2 = !{i32 7, !"Dwarf Version", i32 5}
+-!3 = !{i32 2, !"Debug Info Version", i32 3}
+-!4 = !{i32 1, !"wchar_size", i32 4}
+-!5 = !{i32 7, !"PIC Level", i32 2}
+-!6 = !{i32 7, !"PIE Level", i32 2}
+-!7 = !{i32 7, !"uwtable", i32 1}
+-!8 = !{i32 7, !"frame-pointer", i32 2}
+-!9 = !{!"Ubuntu clang version 14.0.0-1ubuntu1.1"}
+-!10 = distinct !DISubprogram(name: "add_edge", scope: !1, file: !1, line: 17, type: !11, scopeLine: 17, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !18)
+-!11 = !DISubroutineType(types: !12)
+-!12 = !{null, !13, !15, !15, !15, !15}
+-!13 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !14, size: 64)
+-!14 = !DICompositeType(tag: DW_TAG_array_type, baseType: !15, size: 3200, elements: !16)
+-!15 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+-!16 = !{!17}
+-!17 = !DISubrange(count: 100)
+-!18 = !{}
+-!19 = !DILocalVariable(name: "graph", arg: 1, scope: !10, file: !1, line: 17, type: !13)
+-!20 = !DILocation(line: 17, column: 19, scope: !10)
+-!21 = !DILocalVariable(name: "u", arg: 2, scope: !10, file: !1, line: 17, type: !15)
+-!22 = !DILocation(line: 17, column: 40, scope: !10)
+-!23 = !DILocalVariable(name: "v", arg: 3, scope: !10, file: !1, line: 17, type: !15)
+-!24 = !DILocation(line: 17, column: 47, scope: !10)
+-!25 = !DILocalVariable(name: "w", arg: 4, scope: !10, file: !1, line: 17, type: !15)
+-!26 = !DILocation(line: 17, column: 54, scope: !10)
+-!27 = !DILocalVariable(name: "undirected", arg: 5, scope: !10, file: !1, line: 17, type: !15)
+-!28 = !DILocation(line: 17, column: 61, scope: !10)
+-!29 = !DILocation(line: 18, column: 9, scope: !30)
+-!30 = distinct !DILexicalBlock(scope: !10, file: !1, line: 18, column: 9)
+-!31 = !DILocation(line: 18, column: 11, scope: !30)
+-!32 = !DILocation(line: 18, column: 15, scope: !30)
+-!33 = !DILocation(line: 18, column: 18, scope: !30)
+-!34 = !DILocation(line: 18, column: 20, scope: !30)
+-!35 = !DILocation(line: 18, column: 9, scope: !10)
+-!36 = !DILocation(line: 18, column: 25, scope: !30)
+-!37 = !DILocation(line: 19, column: 19, scope: !10)
+-!38 = !DILocation(line: 19, column: 5, scope: !10)
+-!39 = !DILocation(line: 19, column: 11, scope: !10)
+-!40 = !DILocation(line: 19, column: 14, scope: !10)
+-!41 = !DILocation(line: 19, column: 17, scope: !10)
+-!42 = !DILocation(line: 20, column: 9, scope: !43)
+-!43 = distinct !DILexicalBlock(scope: !10, file: !1, line: 20, column: 9)
+-!44 = !DILocation(line: 20, column: 9, scope: !10)
+-!45 = !DILocation(line: 20, column: 35, scope: !43)
+-!46 = !DILocation(line: 20, column: 21, scope: !43)
+-!47 = !DILocation(line: 20, column: 27, scope: !43)
+-!48 = !DILocation(line: 20, column: 30, scope: !43)
+-!49 = !DILocation(line: 20, column: 33, scope: !43)
+-!50 = !DILocation(line: 21, column: 1, scope: !10)

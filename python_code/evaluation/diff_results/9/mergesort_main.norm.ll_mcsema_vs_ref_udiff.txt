@@ -1,0 +1,178 @@
+--- ref.ll
++++ mergesort_main.norm.ll_mcsema_vs_ref.ll
+@@ -1,124 +1,59 @@
+-; ModuleID = '/home/nata20034/workspace/convert_to_IR_with_LLM/original/ll/mergesort_main.ll'
+-source_filename = "../original/src/mergesort.c"
++; ModuleID = '/home/nata20034/workspace/convert_to_IR_with_LLM/mcsema/ll/O0/mergesort_main.ll'
++source_filename = "llvm-link"
+ target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+-target triple = "x86_64-pc-linux-gnu"
++target triple = "x86_64-pc-linux-gnu-elf"
+ 
+-@__const.main.a = external hidden unnamed_addr constant [10 x i32], align 16
+-@.str = external hidden unnamed_addr constant [4 x i8], align 1
+-@.str.1 = external hidden unnamed_addr constant [2 x i8], align 1
++%struct.State = type { %struct.ArchState, [32 x %union.VectorReg], %struct.ArithFlags, %union.anon, %struct.Segments, %struct.AddressSpace, %struct.GPR, %struct.X87Stack, %struct.MMX, %struct.FPUStatusFlags, %union.anon, %union.FPU, %struct.SegmentCaches }
++%struct.ArchState = type { i32, i32, %union.anon }
++%union.VectorReg = type { %union.vec512_t }
++%union.vec512_t = type { %struct.uint64v8_t }
++%struct.uint64v8_t = type { [8 x i64] }
++%struct.ArithFlags = type { i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8 }
++%struct.Segments = type { i16, %union.SegmentSelector, i16, %union.SegmentSelector, i16, %union.SegmentSelector, i16, %union.SegmentSelector, i16, %union.SegmentSelector, i16, %union.SegmentSelector }
++%union.SegmentSelector = type { i16 }
++%struct.AddressSpace = type { i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg }
++%struct.Reg = type { %union.anon }
++%struct.GPR = type { i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg, i64, %struct.Reg }
++%struct.X87Stack = type { [8 x %struct.anon.3] }
++%struct.anon.3 = type { [6 x i8], %struct.float80_t }
++%struct.float80_t = type { [10 x i8] }
++%struct.MMX = type { [8 x %struct.anon.4] }
++%struct.anon.4 = type { i64, %union.vec64_t }
++%union.vec64_t = type { %struct.uint64v1_t }
++%struct.uint64v1_t = type { [1 x i64] }
++%struct.FPUStatusFlags = type { i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, i8, [4 x i8] }
++%union.anon = type { i64 }
++%union.FPU = type { %struct.anon.13 }
++%struct.anon.13 = type { %struct.FpuFXSAVE, [96 x i8] }
++%struct.FpuFXSAVE = type { %union.SegmentSelector, %union.SegmentSelector, %union.FPUAbridgedTagWord, i8, i16, i32, %union.SegmentSelector, i16, i32, %union.SegmentSelector, i16, %union.FPUControlStatus, %union.FPUControlStatus, [8 x %struct.FPUStackElem], [16 x %union.vec128_t] }
++%union.FPUAbridgedTagWord = type { i8 }
++%union.FPUControlStatus = type { i32 }
++%struct.FPUStackElem = type { %union.anon.11, [6 x i8] }
++%union.anon.11 = type { %struct.float80_t }
++%union.vec128_t = type { %struct.uint128v1_t }
++%struct.uint128v1_t = type { [1 x i128] }
++%struct.SegmentCaches = type { %struct.SegmentShadow, %struct.SegmentShadow, %struct.SegmentShadow, %struct.SegmentShadow, %struct.SegmentShadow, %struct.SegmentShadow }
++%struct.SegmentShadow = type { %union.anon, i32, i32 }
++%struct.Memory = type opaque
+ 
+-; Function Attrs: noinline nounwind optnone uwtable
+-define dso_local i32 @main() #0 !dbg !13 {
+-entry:
+-  %retval = alloca i32, align 4
+-  %a = alloca [10 x i32], align 16
+-  %n = alloca i64, align 8
+-  %i = alloca i64, align 8
+-  store i32 0, i32* %retval, align 4
+-  call void @llvm.dbg.declare(metadata [10 x i32]* %a, metadata !17, metadata !DIExpression()), !dbg !21
+-  %0 = bitcast [10 x i32]* %a to i8*, !dbg !21
+-  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 16 %0, i8* align 16 bitcast ([10 x i32]* @__const.main.a to i8*), i64 40, i1 false), !dbg !21
+-  call void @llvm.dbg.declare(metadata i64* %n, metadata !22, metadata !DIExpression()), !dbg !26
+-  store i64 10, i64* %n, align 8, !dbg !26
+-  %arraydecay = getelementptr inbounds [10 x i32], [10 x i32]* %a, i64 0, i64 0, !dbg !27
+-  %1 = load i64, i64* %n, align 8, !dbg !28
+-  call void @merge_sort(i32* noundef %arraydecay, i64 noundef %1), !dbg !29
+-  call void @llvm.dbg.declare(metadata i64* %i, metadata !30, metadata !DIExpression()), !dbg !32
+-  store i64 0, i64* %i, align 8, !dbg !32
+-  br label %for.cond, !dbg !33
++@0 = external hidden constant %struct.Memory* (%struct.State*, i64, %struct.Memory*)*
++@1 = external hidden constant void ()*
+ 
+-for.cond:                                         ; preds = %for.inc, %entry
+-  %2 = load i64, i64* %i, align 8, !dbg !34
+-  %3 = load i64, i64* %n, align 8, !dbg !36
+-  %cmp = icmp ult i64 %2, %3, !dbg !37
+-  br i1 %cmp, label %for.body, label %for.end, !dbg !38
+-
+-for.body:                                         ; preds = %for.cond
+-  %4 = load i64, i64* %i, align 8, !dbg !39
+-  %arrayidx = getelementptr inbounds [10 x i32], [10 x i32]* %a, i64 0, i64 %4, !dbg !41
+-  %5 = load i32, i32* %arrayidx, align 4, !dbg !41
+-  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i64 0, i64 0), i32 noundef %5), !dbg !42
+-  br label %for.inc, !dbg !43
+-
+-for.inc:                                          ; preds = %for.body
+-  %6 = load i64, i64* %i, align 8, !dbg !44
+-  %inc = add i64 %6, 1, !dbg !44
+-  store i64 %inc, i64* %i, align 8, !dbg !44
+-  br label %for.cond, !dbg !45, !llvm.loop !46
+-
+-for.end:                                          ; preds = %for.cond
+-  %call1 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([2 x i8], [2 x i8]* @.str.1, i64 0, i64 0)), !dbg !49
+-  ret i32 0, !dbg !50
++; Function Attrs: naked nobuiltin noinline
++define dllexport x86_64_sysvcc i32 @main(i32 %param0, i8** %param1, i8** %param2) #0 !remill.function.type !4 {
++  call void asm sideeffect "pushq $0;pushq $$0x13f7;jmpq *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i64, %struct.Memory*)** nonnull elementtype(%struct.Memory* (%struct.State*, i64, %struct.Memory*)*) @0, void ()** nonnull elementtype(void ()*) @1) #1
++  ret i32 undef
+ }
+ 
+-; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
+-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
++attributes #0 = { naked nobuiltin noinline }
++attributes #1 = { nounwind }
+ 
+-; Function Attrs: argmemonly nofree nounwind willreturn
+-declare void @llvm.memcpy.p0i8.p0i8.i64(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i64, i1 immarg) #2
++!llvm.ident = !{!0, !0, !0}
++!llvm.module.flags = !{!1, !2, !3}
++!llvm.dbg.cu = !{}
+ 
+-; Function Attrs: noinline nounwind optnone uwtable
+-declare hidden void @merge_sort(i32* noundef, i64 noundef) #0
+-
+-declare i32 @printf(i8* noundef, ...) #3
+-
+-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+-attributes #1 = { nofree nosync nounwind readnone speculatable willreturn }
+-attributes #2 = { argmemonly nofree nounwind willreturn }
+-attributes #3 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+-
+-!llvm.dbg.cu = !{!0}
+-!llvm.module.flags = !{!5, !6, !7, !8, !9, !10, !11}
+-!llvm.ident = !{!12}
+-
+-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Ubuntu clang version 14.0.0-1ubuntu1.1", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !2, splitDebugInlining: false, nameTableKind: None)
+-!1 = !DIFile(filename: "../original/src/mergesort.c", directory: "/home/nata20034/workspace/convert_to_IR_with_LLM/IR_Test", checksumkind: CSK_MD5, checksum: "e5c7704c5e402a79506634451abb1d09")
+-!2 = !{!3}
+-!3 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !4, size: 64)
+-!4 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+-!5 = !{i32 7, !"Dwarf Version", i32 5}
+-!6 = !{i32 2, !"Debug Info Version", i32 3}
+-!7 = !{i32 1, !"wchar_size", i32 4}
+-!8 = !{i32 7, !"PIC Level", i32 2}
+-!9 = !{i32 7, !"PIE Level", i32 2}
+-!10 = !{i32 7, !"uwtable", i32 1}
+-!11 = !{i32 7, !"frame-pointer", i32 2}
+-!12 = !{!"Ubuntu clang version 14.0.0-1ubuntu1.1"}
+-!13 = distinct !DISubprogram(name: "main", scope: !1, file: !1, line: 42, type: !14, scopeLine: 42, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !16)
+-!14 = !DISubroutineType(types: !15)
+-!15 = !{!4}
+-!16 = !{}
+-!17 = !DILocalVariable(name: "a", scope: !13, file: !1, line: 43, type: !18)
+-!18 = !DICompositeType(tag: DW_TAG_array_type, baseType: !4, size: 320, elements: !19)
+-!19 = !{!20}
+-!20 = !DISubrange(count: 10)
+-!21 = !DILocation(line: 43, column: 9, scope: !13)
+-!22 = !DILocalVariable(name: "n", scope: !13, file: !1, line: 44, type: !23)
+-!23 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !24, line: 46, baseType: !25)
+-!24 = !DIFile(filename: "/usr/lib/llvm-14/lib/clang/14.0.0/include/stddef.h", directory: "", checksumkind: CSK_MD5, checksum: "2499dd2361b915724b073282bea3a7bc")
+-!25 = !DIBasicType(name: "unsigned long", size: 64, encoding: DW_ATE_unsigned)
+-!26 = !DILocation(line: 44, column: 12, scope: !13)
+-!27 = !DILocation(line: 46, column: 16, scope: !13)
+-!28 = !DILocation(line: 46, column: 19, scope: !13)
+-!29 = !DILocation(line: 46, column: 5, scope: !13)
+-!30 = !DILocalVariable(name: "i", scope: !31, file: !1, line: 48, type: !23)
+-!31 = distinct !DILexicalBlock(scope: !13, file: !1, line: 48, column: 5)
+-!32 = !DILocation(line: 48, column: 17, scope: !31)
+-!33 = !DILocation(line: 48, column: 10, scope: !31)
+-!34 = !DILocation(line: 48, column: 24, scope: !35)
+-!35 = distinct !DILexicalBlock(scope: !31, file: !1, line: 48, column: 5)
+-!36 = !DILocation(line: 48, column: 28, scope: !35)
+-!37 = !DILocation(line: 48, column: 26, scope: !35)
+-!38 = !DILocation(line: 48, column: 5, scope: !31)
+-!39 = !DILocation(line: 49, column: 25, scope: !40)
+-!40 = distinct !DILexicalBlock(scope: !35, file: !1, line: 48, column: 36)
+-!41 = !DILocation(line: 49, column: 23, scope: !40)
+-!42 = !DILocation(line: 49, column: 9, scope: !40)
+-!43 = !DILocation(line: 50, column: 5, scope: !40)
+-!44 = !DILocation(line: 48, column: 31, scope: !35)
+-!45 = !DILocation(line: 48, column: 5, scope: !35)
+-!46 = distinct !{!46, !38, !47, !48}
+-!47 = !DILocation(line: 50, column: 5, scope: !31)
+-!48 = !{!"llvm.loop.mustprogress"}
+-!49 = !DILocation(line: 51, column: 5, scope: !13)
+-!50 = !DILocation(line: 52, column: 5, scope: !13)
++!0 = !{!"clang version 9.0.1 (https://github.com/trailofbits/vcpkg.git 4592a93cc4ca82f1963dba08413c43639662d7ae)"}
++!1 = !{i32 1, !"wchar_size", i32 4}
++!2 = !{i32 2, !"Dwarf Version", i32 4}
++!3 = !{i32 2, !"Debug Info Version", i32 3}
++!4 = !{!"base.entrypoint"}
