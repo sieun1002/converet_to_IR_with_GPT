@@ -1,0 +1,36 @@
+; Function: sub_1400025B0
+; Start: 0x1400025b0, End: 0x140002630
+
+0x1400025b0: mov     rdx, cs:off_1400043A0
+0x1400025b7: xor     eax, eax
+0x1400025b9: cmp     word ptr [rdx], 5A4Dh
+0x1400025be: jnz     short locret_1400025D0
+0x1400025c0: movsxd  r8, dword ptr [rdx+3Ch]
+0x1400025c4: add     r8, rdx
+0x1400025c7: cmp     dword ptr [r8], 4550h
+0x1400025ce: jz      short loc_1400025D8
+0x1400025d0: retn
+0x1400025d8: cmp     word ptr [r8+18h], 20Bh
+0x1400025df: jnz     short locret_1400025D0
+0x1400025e1: movzx   r9d, word ptr [r8+6]
+0x1400025e6: test    r9w, r9w
+0x1400025ea: jz      short locret_1400025D0
+0x1400025ec: movzx   eax, word ptr [r8+14h]
+0x1400025f1: sub     rcx, rdx
+0x1400025f4: lea     edx, [r9-1]
+0x1400025f8: lea     rdx, [rdx+rdx*4]
+0x1400025fc: lea     rax, [r8+rax+18h]
+0x140002601: lea     r9, [rax+rdx*8+28h]
+0x140002606: nop     word ptr [rax+rax+00000000h]
+0x140002610: mov     r8d, [rax+0Ch]
+0x140002614: mov     rdx, r8
+0x140002617: cmp     rcx, r8
+0x14000261a: jb      short loc_140002624
+0x14000261c: add     edx, [rax+8]
+0x14000261f: cmp     rcx, rdx
+0x140002622: jb      short locret_1400025D0
+0x140002624: add     rax, 28h ; '('
+0x140002628: cmp     rax, r9
+0x14000262b: jnz     short loc_140002610
+0x14000262d: xor     eax, eax
+0x14000262f: retn

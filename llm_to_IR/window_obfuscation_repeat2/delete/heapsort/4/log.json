@@ -1,0 +1,4787 @@
+{
+  "meta": {
+    "round": 4,
+    "start_time": "2025-09-26T06:48:09",
+    "input_folder": "/home/nata20034/workspace/convert_to_IR_with_LLM/ida_disassemble/window/O0/Obfuscation",
+    "output_dir": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 5,
+    "max_fix_attempts": 4,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function1.txt",
+      "version": 1,
+      "request_id": "resp_68d5b899f9f08198913e80e4e6b07b8a02e3f6a898c7ae80",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T06:48:09",
+      "end_time": "2025-09-26T06:52:32",
+      "elapsed_sec": 262.8937,
+      "usage": {
+        "input_tokens": 4103,
+        "output_tokens": 15467,
+        "total_tokens": 19570
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function1.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function11.ll",
+      "success": true,
+      "time": "2025-09-26T06:52:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function1.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function11.ll:49:46: error: atomicrmw xchg operand must be an integer or floating point type\n  %oldv = atomicrmw xchg i8** %lockaddr_ptr, i8* null monotonic\n                                             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function11.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function11.bc",
+      "start_time": "2025-09-26T06:52:32",
+      "end_time": "2025-09-26T06:52:32",
+      "elapsed_sec": 0.012681
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_import_function1.txt",
+      "version": 2,
+      "request_id": "resp_68d5b9a0e854819aa35840ce726aed730b09a51b50d7e524",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T06:52:32",
+      "end_time": "2025-09-26T06:53:10",
+      "elapsed_sec": 37.929229,
+      "usage": {
+        "input_tokens": 979,
+        "output_tokens": 3243,
+        "total_tokens": 4222
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function1.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function12.ll",
+      "success": true,
+      "time": "2025-09-26T06:53:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function1.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function12.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function12.bc",
+      "start_time": "2025-09-26T06:53:10",
+      "end_time": "2025-09-26T06:53:10",
+      "elapsed_sec": 0.014709
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function10.txt",
+      "version": 1,
+      "request_id": "resp_68d5b9c6df30819490e4a4fd7c6ee709013b9f7e06702de5",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T06:53:10",
+      "end_time": "2025-09-26T06:54:21",
+      "elapsed_sec": 70.873832,
+      "usage": {
+        "input_tokens": 959,
+        "output_tokens": 5508,
+        "total_tokens": 6467
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function10.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function101.ll",
+      "success": true,
+      "time": "2025-09-26T06:54:21"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function10.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function101.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function101.bc",
+      "start_time": "2025-09-26T06:54:21",
+      "end_time": "2025-09-26T06:54:21",
+      "elapsed_sec": 0.017192
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function11.txt",
+      "version": 1,
+      "request_id": "resp_68d5ba0d82c4819ab2f6089721ecb27105a2156ddc5a6f13",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T06:54:21",
+      "end_time": "2025-09-26T06:57:11",
+      "elapsed_sec": 170.405395,
+      "usage": {
+        "input_tokens": 927,
+        "output_tokens": 9532,
+        "total_tokens": 10459
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function11.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function111.ll",
+      "success": true,
+      "time": "2025-09-26T06:57:11"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function11.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function111.ll:46:12: error: expected instruction opcode\n  %curr2 = %curr\n           ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function111.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function111.bc",
+      "start_time": "2025-09-26T06:57:11",
+      "end_time": "2025-09-26T06:57:11",
+      "elapsed_sec": 0.013036
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_import_function11.txt",
+      "version": 2,
+      "request_id": "resp_68d5bab82bbc819bb20abba16b1170b50fc70ad8cbce1068",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T06:57:11",
+      "end_time": "2025-09-26T06:57:53",
+      "elapsed_sec": 42.49605,
+      "usage": {
+        "input_tokens": 1160,
+        "output_tokens": 3050,
+        "total_tokens": 4210
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function11.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function112.ll",
+      "success": true,
+      "time": "2025-09-26T06:57:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function11.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function112.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function112.bc",
+      "start_time": "2025-09-26T06:57:53",
+      "end_time": "2025-09-26T06:57:53",
+      "elapsed_sec": 0.011936
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function12.txt",
+      "version": 1,
+      "request_id": "resp_68d5bae2bd5081958f16b8d910a61d1f03530d4c2e2795b2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T06:57:53",
+      "end_time": "2025-09-26T07:01:41",
+      "elapsed_sec": 227.330589,
+      "usage": {
+        "input_tokens": 1269,
+        "output_tokens": 11379,
+        "total_tokens": 12648
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function12.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function121.ll",
+      "success": true,
+      "time": "2025-09-26T07:01:41"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function12.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function121.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function121.bc",
+      "start_time": "2025-09-26T07:01:41",
+      "end_time": "2025-09-26T07:01:41",
+      "elapsed_sec": 0.144717
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function13.txt",
+      "version": 1,
+      "request_id": "resp_68d5bbc61d7c819bb2990a0402290d5f070908e442816c7c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:01:41",
+      "end_time": "2025-09-26T07:03:38",
+      "elapsed_sec": 116.630547,
+      "usage": {
+        "input_tokens": 1099,
+        "output_tokens": 7322,
+        "total_tokens": 8421
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function13.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function131.ll",
+      "success": true,
+      "time": "2025-09-26T07:03:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function13.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function131.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function131.bc",
+      "start_time": "2025-09-26T07:03:38",
+      "end_time": "2025-09-26T07:03:38",
+      "elapsed_sec": 0.017494
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function14.txt",
+      "version": 1,
+      "request_id": "resp_68d5bc3adf788196a27fa3c4d9c2588905a7932c2102eb51",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:03:38",
+      "end_time": "2025-09-26T07:04:42",
+      "elapsed_sec": 63.88957,
+      "usage": {
+        "input_tokens": 933,
+        "output_tokens": 5717,
+        "total_tokens": 6650
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function14.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function141.ll",
+      "success": true,
+      "time": "2025-09-26T07:04:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function14.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function141.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function141.bc",
+      "start_time": "2025-09-26T07:04:42",
+      "end_time": "2025-09-26T07:04:42",
+      "elapsed_sec": 0.01207
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function2.txt",
+      "version": 1,
+      "request_id": "resp_68d5bc7a6fa0819597ec6cf2ae71fe010b8ed1783c2d2c78",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:04:42",
+      "end_time": "2025-09-26T07:07:47",
+      "elapsed_sec": 185.375571,
+      "usage": {
+        "input_tokens": 3747,
+        "output_tokens": 8603,
+        "total_tokens": 12350
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function2.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function21.ll",
+      "success": true,
+      "time": "2025-09-26T07:07:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function2.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function21.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function21.bc",
+      "start_time": "2025-09-26T07:07:47",
+      "end_time": "2025-09-26T07:07:47",
+      "elapsed_sec": 0.018871
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function3.txt",
+      "version": 1,
+      "request_id": "resp_68d5bd33d6e8819b84496919da45c1630fea3dc31bad63f8",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:07:47",
+      "end_time": "2025-09-26T07:09:24",
+      "elapsed_sec": 96.741004,
+      "usage": {
+        "input_tokens": 1329,
+        "output_tokens": 7397,
+        "total_tokens": 8726
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function3.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function31.ll",
+      "success": true,
+      "time": "2025-09-26T07:09:24"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function3.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function31.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function31.bc",
+      "start_time": "2025-09-26T07:09:24",
+      "end_time": "2025-09-26T07:09:24",
+      "elapsed_sec": 0.012785
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function4.txt",
+      "version": 1,
+      "request_id": "resp_68d5bd949300819a8c9c88990a286a5e0a6cfc958eacb4d4",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:09:24",
+      "end_time": "2025-09-26T07:09:44",
+      "elapsed_sec": 20.715103,
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 1594,
+        "total_tokens": 2030
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function4.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function41.ll",
+      "success": true,
+      "time": "2025-09-26T07:09:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function4.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function41.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function41.bc",
+      "start_time": "2025-09-26T07:09:44",
+      "end_time": "2025-09-26T07:09:44",
+      "elapsed_sec": 0.013736
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function5.txt",
+      "version": 1,
+      "request_id": "resp_68d5bda999588198bec18a8b313ee7d60e3854b73b827d11",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:09:44",
+      "end_time": "2025-09-26T07:11:10",
+      "elapsed_sec": 85.480051,
+      "usage": {
+        "input_tokens": 918,
+        "output_tokens": 4315,
+        "total_tokens": 5233
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function5.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function51.ll",
+      "success": true,
+      "time": "2025-09-26T07:11:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function5.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function51.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function51.bc",
+      "start_time": "2025-09-26T07:11:10",
+      "end_time": "2025-09-26T07:11:10",
+      "elapsed_sec": 0.01386
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function6.txt",
+      "version": 1,
+      "request_id": "resp_68d5bdff2a648194b9264f6e3219b8040d49433116338e85",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:11:10",
+      "end_time": "2025-09-26T07:12:36",
+      "elapsed_sec": 85.871322,
+      "usage": {
+        "input_tokens": 1447,
+        "output_tokens": 6275,
+        "total_tokens": 7722
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function6.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function61.ll",
+      "success": true,
+      "time": "2025-09-26T07:12:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function6.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function61.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function61.bc",
+      "start_time": "2025-09-26T07:12:36",
+      "end_time": "2025-09-26T07:12:36",
+      "elapsed_sec": 0.013476
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function7.txt",
+      "version": 1,
+      "request_id": "resp_68d5be54f528819b9f9f4c530fabcbbf070292a7852084a6",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:12:36",
+      "end_time": "2025-09-26T07:18:17",
+      "elapsed_sec": 341.097396,
+      "usage": {
+        "input_tokens": 1962,
+        "output_tokens": 18360,
+        "total_tokens": 20322
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function7.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function71.ll",
+      "success": true,
+      "time": "2025-09-26T07:18:17"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function7.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function71.ll:32:31: error: '%p.cur' defined with type 'i8*' but expected 'i8**'\n  %start.ptr = load i8*, i8** %p.cur, align 8\n                              ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function71.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function71.bc",
+      "start_time": "2025-09-26T07:18:17",
+      "end_time": "2025-09-26T07:18:17",
+      "elapsed_sec": 0.014263
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_import_function7.txt",
+      "version": 2,
+      "request_id": "resp_68d5bfa9d908819ba6776856926173860c72a6aa5674ee39",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:18:17",
+      "end_time": "2025-09-26T07:20:55",
+      "elapsed_sec": 158.121039,
+      "usage": {
+        "input_tokens": 2719,
+        "output_tokens": 9219,
+        "total_tokens": 11938
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function7.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function72.ll",
+      "success": true,
+      "time": "2025-09-26T07:20:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function7.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function72.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function72.bc",
+      "start_time": "2025-09-26T07:20:55",
+      "end_time": "2025-09-26T07:20:55",
+      "elapsed_sec": 0.012526
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function8.txt",
+      "version": 1,
+      "request_id": "resp_68d5c047ff108196b717a2ac42aed32c0115c86a7363b30a",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:20:55",
+      "end_time": "2025-09-26T07:22:44",
+      "elapsed_sec": 109.37757,
+      "usage": {
+        "input_tokens": 4245,
+        "output_tokens": 5720,
+        "total_tokens": 9965
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function8.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function81.ll",
+      "success": true,
+      "time": "2025-09-26T07:22:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function8.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function81.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function81.bc",
+      "start_time": "2025-09-26T07:22:44",
+      "end_time": "2025-09-26T07:22:44",
+      "elapsed_sec": 0.0143
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_import_function9.txt",
+      "version": 1,
+      "request_id": "resp_68d5c0b56868819bbf11dfe101f03f3b04f7d5ef213821e3",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:22:44",
+      "end_time": "2025-09-26T07:27:00",
+      "elapsed_sec": 255.560649,
+      "usage": {
+        "input_tokens": 2392,
+        "output_tokens": 12730,
+        "total_tokens": 15122
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function9.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function91.ll",
+      "success": true,
+      "time": "2025-09-26T07:27:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function9.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %r_d0 = call i64 @sub_140002B68(i32 8, i32 0)\n  %fp8 = inttoptr i64 %r_d0 to void (i32)*\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function91.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function91.bc",
+      "start_time": "2025-09-26T07:27:00",
+      "end_time": "2025-09-26T07:27:00",
+      "elapsed_sec": 0.014091
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_import_function9.txt",
+      "version": 2,
+      "request_id": "resp_68d5c1b4f9248190a97bd0864d89eda80299d608a551eadd",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:27:00",
+      "end_time": "2025-09-26T07:28:12",
+      "elapsed_sec": 71.960331,
+      "usage": {
+        "input_tokens": 2316,
+        "output_tokens": 3329,
+        "total_tokens": 5645
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_import_function9.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function92.ll",
+      "success": true,
+      "time": "2025-09-26T07:28:12"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_import_function9.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function92.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function92.bc",
+      "start_time": "2025-09-26T07:28:12",
+      "end_time": "2025-09-26T07:28:12",
+      "elapsed_sec": 0.012477
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_integration_function1.txt",
+      "version": 1,
+      "request_id": "resp_68d5c1fd3d54819a9cdf9aba135bc6fc04ae0cb9322351cf",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:28:12",
+      "end_time": "2025-09-26T07:29:04",
+      "elapsed_sec": 51.892139,
+      "usage": {
+        "input_tokens": 4121,
+        "output_tokens": 2470,
+        "total_tokens": 6591
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_integration_function1.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function11.ll",
+      "success": true,
+      "time": "2025-09-26T07:29:04"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_integration_function1.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function11.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function11.bc",
+      "start_time": "2025-09-26T07:29:04",
+      "end_time": "2025-09-26T07:29:04",
+      "elapsed_sec": 0.011746
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_integration_function2.txt",
+      "version": 1,
+      "request_id": "resp_68d5c230dd14819b9ee0f4ca2ef7b5b705b6baaf00ce45bc",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:29:04",
+      "end_time": "2025-09-26T07:29:35",
+      "elapsed_sec": 30.774867,
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 1891,
+        "total_tokens": 2327
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_integration_function2.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function21.ll",
+      "success": true,
+      "time": "2025-09-26T07:29:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_integration_function2.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function21.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function21.bc",
+      "start_time": "2025-09-26T07:29:35",
+      "end_time": "2025-09-26T07:29:35",
+      "elapsed_sec": 0.019346
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_integration_function3.txt",
+      "version": 1,
+      "request_id": "resp_68d5c24ff82c8190824c19d9b5ca9d360e4fef7f6227b8b9",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:29:35",
+      "end_time": "2025-09-26T07:30:51",
+      "elapsed_sec": 75.951005,
+      "usage": {
+        "input_tokens": 918,
+        "output_tokens": 5509,
+        "total_tokens": 6427
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_integration_function3.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function31.ll",
+      "success": true,
+      "time": "2025-09-26T07:30:51"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_integration_function3.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function31.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_integration_function31.bc",
+      "start_time": "2025-09-26T07:30:51",
+      "end_time": "2025-09-26T07:30:51",
+      "elapsed_sec": 0.011995
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function1.txt",
+      "version": 1,
+      "request_id": "resp_68d5c29bdc10819ab3a7103222e2ef4507f7dc3b25b50ad6",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:30:51",
+      "end_time": "2025-09-26T07:31:03",
+      "elapsed_sec": 12.316107,
+      "usage": {
+        "input_tokens": 349,
+        "output_tokens": 782,
+        "total_tokens": 1131
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function1.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function11.ll",
+      "success": true,
+      "time": "2025-09-26T07:31:03"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function1.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function11.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function11.bc",
+      "start_time": "2025-09-26T07:31:03",
+      "end_time": "2025-09-26T07:31:03",
+      "elapsed_sec": 0.011452
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function10.txt",
+      "version": 1,
+      "request_id": "resp_68d5c2a7f8b481998ea104ef90a8acfd0510495e298956e1",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:31:03",
+      "end_time": "2025-09-26T07:31:17",
+      "elapsed_sec": 13.829881,
+      "usage": {
+        "input_tokens": 365,
+        "output_tokens": 887,
+        "total_tokens": 1252
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function10.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function101.ll",
+      "success": true,
+      "time": "2025-09-26T07:31:17"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function10.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function101.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function101.bc",
+      "start_time": "2025-09-26T07:31:17",
+      "end_time": "2025-09-26T07:31:17",
+      "elapsed_sec": 0.015521
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function11.txt",
+      "version": 1,
+      "request_id": "resp_68d5c2b62a7c8197b92387e98f6cc0a807bbf3e41496524c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:31:17",
+      "end_time": "2025-09-26T07:31:46",
+      "elapsed_sec": 28.71703,
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 2108,
+        "total_tokens": 2544
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function11.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function111.ll",
+      "success": true,
+      "time": "2025-09-26T07:31:46"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function11.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function111.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function111.bc",
+      "start_time": "2025-09-26T07:31:46",
+      "end_time": "2025-09-26T07:31:46",
+      "elapsed_sec": 0.012119
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function12.txt",
+      "version": 1,
+      "request_id": "resp_68d5c2d2de44819ab317b084fd559336082800fce85fe065",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:31:46",
+      "end_time": "2025-09-26T07:33:19",
+      "elapsed_sec": 93.447885,
+      "usage": {
+        "input_tokens": 918,
+        "output_tokens": 8626,
+        "total_tokens": 9544
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function12.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function121.ll",
+      "success": true,
+      "time": "2025-09-26T07:33:19"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function12.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function121.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function121.bc",
+      "start_time": "2025-09-26T07:33:19",
+      "end_time": "2025-09-26T07:33:19",
+      "elapsed_sec": 0.016613
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function13.txt",
+      "version": 1,
+      "request_id": "resp_68d5c3300978819bbcfefd05e9434da40b95377e5c7b828a",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:33:19",
+      "end_time": "2025-09-26T07:33:30",
+      "elapsed_sec": 10.465215,
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 692,
+        "total_tokens": 1067
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function13.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function131.ll",
+      "success": true,
+      "time": "2025-09-26T07:33:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function13.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function131.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function131.bc",
+      "start_time": "2025-09-26T07:33:30",
+      "end_time": "2025-09-26T07:33:30",
+      "elapsed_sec": 0.012442
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function14.txt",
+      "version": 1,
+      "request_id": "resp_68d5c33ac700819ba7da6c97a40c54780bdeed4d36067a05",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:33:30",
+      "end_time": "2025-09-26T07:34:51",
+      "elapsed_sec": 81.415743,
+      "usage": {
+        "input_tokens": 1451,
+        "output_tokens": 7840,
+        "total_tokens": 9291
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function14.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function141.ll",
+      "success": true,
+      "time": "2025-09-26T07:34:51"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function14.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function141.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function141.bc",
+      "start_time": "2025-09-26T07:34:51",
+      "end_time": "2025-09-26T07:34:51",
+      "elapsed_sec": 0.012633
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function15.txt",
+      "version": 1,
+      "request_id": "resp_68d5c38c4a548195be1433d6da0b4e90014cfa16d7a18018",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:34:51",
+      "end_time": "2025-09-26T07:35:52",
+      "elapsed_sec": 60.803541,
+      "usage": {
+        "input_tokens": 744,
+        "output_tokens": 5191,
+        "total_tokens": 5935
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function15.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function151.ll",
+      "success": true,
+      "time": "2025-09-26T07:35:52"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function15.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function151.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function151.bc",
+      "start_time": "2025-09-26T07:35:52",
+      "end_time": "2025-09-26T07:35:52",
+      "elapsed_sec": 0.015225
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function16.txt",
+      "version": 1,
+      "request_id": "resp_68d5c3c90d208198aa22c0dcb97248b50d6ae59bb5f7995c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:35:52",
+      "end_time": "2025-09-26T07:40:43",
+      "elapsed_sec": 291.391311,
+      "usage": {
+        "input_tokens": 1926,
+        "output_tokens": 15703,
+        "total_tokens": 17629
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function16.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function161.ll",
+      "success": true,
+      "time": "2025-09-26T07:40:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function16.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function161.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function161.bc",
+      "start_time": "2025-09-26T07:40:43",
+      "end_time": "2025-09-26T07:40:43",
+      "elapsed_sec": 0.012538
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function17.txt",
+      "version": 1,
+      "request_id": "resp_68d5c4ec7ba4819996b322f5d7144e1f0fee48cd00df01cf",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:40:43",
+      "end_time": "2025-09-26T07:42:59",
+      "elapsed_sec": 135.979568,
+      "usage": {
+        "input_tokens": 4230,
+        "output_tokens": 8028,
+        "total_tokens": 12258
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function17.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function171.ll",
+      "success": true,
+      "time": "2025-09-26T07:42:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function17.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function171.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function171.bc",
+      "start_time": "2025-09-26T07:42:59",
+      "end_time": "2025-09-26T07:42:59",
+      "elapsed_sec": 0.013407
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function18.txt",
+      "version": 1,
+      "request_id": "resp_68d5c5747ef8819bb43727dd547aed690ac4c569bce92886",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:42:59",
+      "end_time": "2025-09-26T07:44:41",
+      "elapsed_sec": 101.394577,
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 6375,
+        "total_tokens": 6993
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function18.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function181.ll",
+      "success": true,
+      "time": "2025-09-26T07:44:41"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function18.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function181.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function181.bc",
+      "start_time": "2025-09-26T07:44:41",
+      "end_time": "2025-09-26T07:44:41",
+      "elapsed_sec": 0.011333
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function19.txt",
+      "version": 1,
+      "request_id": "resp_68d5c5d99d3c8199b379e35b40201e66022776ef57cf9394",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:44:41",
+      "end_time": "2025-09-26T07:45:15",
+      "elapsed_sec": 34.781536,
+      "usage": {
+        "input_tokens": 382,
+        "output_tokens": 2464,
+        "total_tokens": 2846
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function19.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function191.ll",
+      "success": true,
+      "time": "2025-09-26T07:45:15"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function19.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function191.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function191.bc",
+      "start_time": "2025-09-26T07:45:15",
+      "end_time": "2025-09-26T07:45:16",
+      "elapsed_sec": 0.012418
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 1,
+      "request_id": "resp_68d5c5fcc44c819384e1a2185eea798b090768fcb3fd7a64",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:45:16",
+      "end_time": "2025-09-26T07:51:43",
+      "elapsed_sec": 387.407057,
+      "usage": {
+        "input_tokens": 4047,
+        "output_tokens": 21583,
+        "total_tokens": 25630
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.ll",
+      "success": true,
+      "time": "2025-09-26T07:51:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.ll:6:9: warning: ptr type is only supported in -opaque-pointers mode\ndeclare ptr @SetUnhandledExceptionFilter(ptr)\n        ^\nllvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.ll:6:9: error: expected type\ndeclare ptr @SetUnhandledExceptionFilter(ptr)\n        ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.bc",
+      "start_time": "2025-09-26T07:51:43",
+      "end_time": "2025-09-26T07:51:43",
+      "elapsed_sec": 0.109622
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 2,
+      "request_id": "resp_68d5c78047788198ad7bffed8321f1d90d7212262649de26",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:51:43",
+      "end_time": "2025-09-26T07:57:14",
+      "elapsed_sec": 331.185099,
+      "usage": {
+        "input_tokens": 5348,
+        "output_tokens": 15651,
+        "total_tokens": 20999
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function22.ll",
+      "success": true,
+      "time": "2025-09-26T07:57:14"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function22.ll:65:35: error: '@off_140004450' defined with type 'i8****' but expected 'i8***'\n  %lockaddrptr = load i8**, i8*** @off_140004450\n                                  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function22.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function22.bc",
+      "start_time": "2025-09-26T07:57:14",
+      "end_time": "2025-09-26T07:57:14",
+      "elapsed_sec": 0.025948
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 3,
+      "request_id": "resp_68d5c8cb87d08197ac57561591bdabb008bf94d2eb541937",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T07:57:14",
+      "end_time": "2025-09-26T08:01:43",
+      "elapsed_sec": 268.502413,
+      "usage": {
+        "input_tokens": 6032,
+        "output_tokens": 11173,
+        "total_tokens": 17205
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 3,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function23.ll",
+      "success": true,
+      "time": "2025-09-26T08:01:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function23.ll:65:35: error: '@off_140004450' defined with type 'i8****' but expected 'i8***'\n  %lockaddrptr = load i8**, i8*** @off_140004450\n                                  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function23.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function23.bc",
+      "start_time": "2025-09-26T08:01:43",
+      "end_time": "2025-09-26T08:01:43",
+      "elapsed_sec": 0.012669
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 4,
+      "request_id": "resp_68d5c9d822508193ad64a98ed47837c70a602b9c593cacd5",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:01:43",
+      "end_time": "2025-09-26T08:06:03",
+      "elapsed_sec": 260.052611,
+      "usage": {
+        "input_tokens": 6032,
+        "output_tokens": 10388,
+        "total_tokens": 16420
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 4,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function24.ll",
+      "success": true,
+      "time": "2025-09-26T08:06:03"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function24.ll:65:38: error: '@off_140004450' defined with type 'i8*****' but expected 'i8****'\n  %lockaddrpptr = load i8***, i8**** @off_140004450\n                                     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function24.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function24.bc",
+      "start_time": "2025-09-26T08:06:03",
+      "end_time": "2025-09-26T08:06:03",
+      "elapsed_sec": 0.014742
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 5,
+      "request_id": "resp_68d5cadbd704819ab4bbaa5dee9f47230ea5ce260e2c9e9a",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:06:03",
+      "end_time": "2025-09-26T08:10:25",
+      "elapsed_sec": 261.724352,
+      "usage": {
+        "input_tokens": 6081,
+        "output_tokens": 13908,
+        "total_tokens": 19989
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 5,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function25.ll",
+      "success": true,
+      "time": "2025-09-26T08:10:25"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function25.ll:330:46: error: atomicrmw xchg operand must be an integer or floating point type\n  %oldx = atomicrmw xchg i8** %lockaddrptr2, i8* null monotonic\n                                             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function25.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function25.bc",
+      "start_time": "2025-09-26T08:10:25",
+      "end_time": "2025-09-26T08:10:25",
+      "elapsed_sec": 0.018324
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "heapsort_mutation_function2.txt",
+      "last_version": 5,
+      "fix_attempts": 4,
+      "time": "2025-09-26T08:10:25"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function20.txt",
+      "version": 1,
+      "request_id": "resp_68d5cbe1ef24819584ecefc73737ca110b6737da432f07b2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:10:25",
+      "end_time": "2025-09-26T08:11:17",
+      "elapsed_sec": 52.148429,
+      "usage": {
+        "input_tokens": 875,
+        "output_tokens": 3960,
+        "total_tokens": 4835
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function20.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function201.ll",
+      "success": true,
+      "time": "2025-09-26T08:11:17"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function20.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function201.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function201.bc",
+      "start_time": "2025-09-26T08:11:17",
+      "end_time": "2025-09-26T08:11:17",
+      "elapsed_sec": 0.024467
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function21.txt",
+      "version": 1,
+      "request_id": "resp_68d5cc16179c8197aa7bc49f090d956f07e2616fdbfc62f2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:11:17",
+      "end_time": "2025-09-26T08:12:32",
+      "elapsed_sec": 74.958468,
+      "usage": {
+        "input_tokens": 927,
+        "output_tokens": 5358,
+        "total_tokens": 6285
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function21.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function211.ll",
+      "success": true,
+      "time": "2025-09-26T08:12:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function21.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function211.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function211.bc",
+      "start_time": "2025-09-26T08:12:32",
+      "end_time": "2025-09-26T08:12:32",
+      "elapsed_sec": 0.012032
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function22.txt",
+      "version": 1,
+      "request_id": "resp_68d5cc610d048199ae90538517e9b8ea0501ee0343a79b2b",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:12:32",
+      "end_time": "2025-09-26T08:14:47",
+      "elapsed_sec": 135.280034,
+      "usage": {
+        "input_tokens": 950,
+        "output_tokens": 8680,
+        "total_tokens": 9630
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function22.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function221.ll",
+      "success": true,
+      "time": "2025-09-26T08:14:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function22.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function221.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function221.bc",
+      "start_time": "2025-09-26T08:14:47",
+      "end_time": "2025-09-26T08:14:47",
+      "elapsed_sec": 0.015011
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function23.txt",
+      "version": 1,
+      "request_id": "resp_68d5cce866708197b9f7d917a0bf6574063609a8f467a37e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:14:47",
+      "end_time": "2025-09-26T08:17:08",
+      "elapsed_sec": 140.659777,
+      "usage": {
+        "input_tokens": 1264,
+        "output_tokens": 8068,
+        "total_tokens": 9332
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function23.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function231.ll",
+      "success": true,
+      "time": "2025-09-26T08:17:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function23.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function231.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function231.bc",
+      "start_time": "2025-09-26T08:17:08",
+      "end_time": "2025-09-26T08:17:08",
+      "elapsed_sec": 0.011359
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function24.txt",
+      "version": 1,
+      "request_id": "resp_68d5cd74c890819a9e318fa60b75ce0d024eb1b1db4082bb",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:17:08",
+      "end_time": "2025-09-26T08:17:31",
+      "elapsed_sec": 23.144865,
+      "usage": {
+        "input_tokens": 372,
+        "output_tokens": 1114,
+        "total_tokens": 1486
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function24.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function241.ll",
+      "success": true,
+      "time": "2025-09-26T08:17:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function24.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function241.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function241.bc",
+      "start_time": "2025-09-26T08:17:31",
+      "end_time": "2025-09-26T08:17:31",
+      "elapsed_sec": 0.013571
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function25.txt",
+      "version": 1,
+      "request_id": "resp_68d5cd8bf26c8199bdfedac0ad0fe0410fe3d0382ad0a23d",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:17:31",
+      "end_time": "2025-09-26T08:18:14",
+      "elapsed_sec": 43.313135,
+      "usage": {
+        "input_tokens": 556,
+        "output_tokens": 2668,
+        "total_tokens": 3224
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function25.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function251.ll",
+      "success": true,
+      "time": "2025-09-26T08:18:14"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function25.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function251.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function251.bc",
+      "start_time": "2025-09-26T08:18:14",
+      "end_time": "2025-09-26T08:18:14",
+      "elapsed_sec": 0.013198
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function26.txt",
+      "version": 1,
+      "request_id": "resp_68d5cdb740c8819a97c6c93531c65599080f9e5cb25324f8",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:18:14",
+      "end_time": "2025-09-26T08:19:47",
+      "elapsed_sec": 92.996172,
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 6147,
+        "total_tokens": 6904
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function26.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function261.ll",
+      "success": true,
+      "time": "2025-09-26T08:19:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function26.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function261.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function261.bc",
+      "start_time": "2025-09-26T08:19:47",
+      "end_time": "2025-09-26T08:19:47",
+      "elapsed_sec": 0.012726
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function27.txt",
+      "version": 1,
+      "request_id": "resp_68d5ce14484c819ab4213f65c9dd613b0a075763b26f40ee",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:19:47",
+      "end_time": "2025-09-26T08:21:21",
+      "elapsed_sec": 93.58688,
+      "usage": {
+        "input_tokens": 1099,
+        "output_tokens": 5665,
+        "total_tokens": 6764
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function27.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function271.ll",
+      "success": true,
+      "time": "2025-09-26T08:21:21"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function27.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function271.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function271.bc",
+      "start_time": "2025-09-26T08:21:21",
+      "end_time": "2025-09-26T08:21:21",
+      "elapsed_sec": 0.014234
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function28.txt",
+      "version": 1,
+      "request_id": "resp_68d5ce722eb08198bdc777f3e8e37f3f0e7babded001cbd8",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:21:21",
+      "end_time": "2025-09-26T08:23:19",
+      "elapsed_sec": 117.625777,
+      "usage": {
+        "input_tokens": 933,
+        "output_tokens": 8355,
+        "total_tokens": 9288
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function28.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function281.ll",
+      "success": true,
+      "time": "2025-09-26T08:23:19"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function28.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function281.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function281.bc",
+      "start_time": "2025-09-26T08:23:19",
+      "end_time": "2025-09-26T08:23:19",
+      "elapsed_sec": 0.013965
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function29.txt",
+      "version": 1,
+      "request_id": "resp_68d5cee7d1108198870165189085fc460a603b47cc800c0e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:23:19",
+      "end_time": "2025-09-26T08:24:00",
+      "elapsed_sec": 41.161149,
+      "usage": {
+        "input_tokens": 625,
+        "output_tokens": 3031,
+        "total_tokens": 3656
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function29.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function291.ll",
+      "success": true,
+      "time": "2025-09-26T08:24:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function29.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function291.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function291.bc",
+      "start_time": "2025-09-26T08:24:00",
+      "end_time": "2025-09-26T08:24:00",
+      "elapsed_sec": 0.013543
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 1,
+      "request_id": "resp_68d5cf1121c8819a9ed9507347e4a4a30bfdc64ae3e835af",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:24:00",
+      "end_time": "2025-09-26T08:28:40",
+      "elapsed_sec": 280.506755,
+      "usage": {
+        "input_tokens": 2404,
+        "output_tokens": 13299,
+        "total_tokens": 15703
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function31.ll",
+      "success": true,
+      "time": "2025-09-26T08:28:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function31.ll:23:3: error: instruction expected to be numbered '%0'\n  %1 = load i8**, i8*** %rbx, align 8\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function31.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function31.bc",
+      "start_time": "2025-09-26T08:28:40",
+      "end_time": "2025-09-26T08:28:40",
+      "elapsed_sec": 0.123156
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 2,
+      "request_id": "resp_68d5d029ae008199912b86465102dd7704f5df023a33929f",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:28:40",
+      "end_time": "2025-09-26T08:30:59",
+      "elapsed_sec": 138.463065,
+      "usage": {
+        "input_tokens": 2575,
+        "output_tokens": 7610,
+        "total_tokens": 10185
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function32.ll",
+      "success": true,
+      "time": "2025-09-26T08:30:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function32.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function32.bc",
+      "start_time": "2025-09-26T08:30:59",
+      "end_time": "2025-09-26T08:30:59",
+      "elapsed_sec": 0.019276
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function30.txt",
+      "version": 1,
+      "request_id": "resp_68d5d0b42d9c819ab68947ddb6a2b04a02ab3ce8967780f2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:30:59",
+      "end_time": "2025-09-26T08:32:44",
+      "elapsed_sec": 104.616827,
+      "usage": {
+        "input_tokens": 944,
+        "output_tokens": 6734,
+        "total_tokens": 7678
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function30.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function301.ll",
+      "success": true,
+      "time": "2025-09-26T08:32:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function30.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function301.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function301.bc",
+      "start_time": "2025-09-26T08:32:44",
+      "end_time": "2025-09-26T08:32:44",
+      "elapsed_sec": 0.015127
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function31.txt",
+      "version": 1,
+      "request_id": "resp_68d5d11ccd508198855bcd5b53fdb2ca05683cff90f8e76c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:32:44",
+      "end_time": "2025-09-26T08:33:48",
+      "elapsed_sec": 64.262916,
+      "usage": {
+        "input_tokens": 587,
+        "output_tokens": 3149,
+        "total_tokens": 3736
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function31.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function311.ll",
+      "success": true,
+      "time": "2025-09-26T08:33:48"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function31.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function311.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function311.bc",
+      "start_time": "2025-09-26T08:33:48",
+      "end_time": "2025-09-26T08:33:48",
+      "elapsed_sec": 0.014153
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function32.txt",
+      "version": 1,
+      "request_id": "resp_68d5d15cd3088198b1ef42f287ec305707235f1930a1bec9",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:33:48",
+      "end_time": "2025-09-26T08:35:29",
+      "elapsed_sec": 101.046026,
+      "usage": {
+        "input_tokens": 1034,
+        "output_tokens": 7150,
+        "total_tokens": 8184
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function32.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function321.ll",
+      "success": true,
+      "time": "2025-09-26T08:35:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function32.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function321.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function321.bc",
+      "start_time": "2025-09-26T08:35:29",
+      "end_time": "2025-09-26T08:35:29",
+      "elapsed_sec": 0.104523
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function33.txt",
+      "version": 1,
+      "request_id": "resp_68d5d1c1fafc8199b2c563bdc8824b7f06c829371e48b282",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:35:29",
+      "end_time": "2025-09-26T08:38:54",
+      "elapsed_sec": 205.13809,
+      "usage": {
+        "input_tokens": 1318,
+        "output_tokens": 10298,
+        "total_tokens": 11616
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function33.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function331.ll",
+      "success": true,
+      "time": "2025-09-26T08:38:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function33.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function331.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function331.bc",
+      "start_time": "2025-09-26T08:38:54",
+      "end_time": "2025-09-26T08:38:54",
+      "elapsed_sec": 0.017377
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function34.txt",
+      "version": 1,
+      "request_id": "resp_68d5d28f740c819bb49bd8ed2be172860755fdf6cb8c6c9e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:38:54",
+      "end_time": "2025-09-26T08:40:42",
+      "elapsed_sec": 107.565279,
+      "usage": {
+        "input_tokens": 595,
+        "output_tokens": 6311,
+        "total_tokens": 6906
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function34.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function341.ll",
+      "success": true,
+      "time": "2025-09-26T08:40:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function34.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function341.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function341.bc",
+      "start_time": "2025-09-26T08:40:42",
+      "end_time": "2025-09-26T08:40:42",
+      "elapsed_sec": 0.013222
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function35.txt",
+      "version": 1,
+      "request_id": "resp_68d5d2fb0f488198b41746c3611fc99007813d728acbd79d",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:40:42",
+      "end_time": "2025-09-26T08:41:24",
+      "elapsed_sec": 42.147075,
+      "usage": {
+        "input_tokens": 613,
+        "output_tokens": 2464,
+        "total_tokens": 3077
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function35.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function351.ll",
+      "success": true,
+      "time": "2025-09-26T08:41:24"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function35.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function351.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function351.bc",
+      "start_time": "2025-09-26T08:41:24",
+      "end_time": "2025-09-26T08:41:24",
+      "elapsed_sec": 0.014143
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function36.txt",
+      "version": 1,
+      "request_id": "resp_68d5d3253b688199ae0a7f527af62cc2042a005b5f371396",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:41:24",
+      "end_time": "2025-09-26T08:42:46",
+      "elapsed_sec": 81.977995,
+      "usage": {
+        "input_tokens": 752,
+        "output_tokens": 4709,
+        "total_tokens": 5461
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function36.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function361.ll",
+      "success": true,
+      "time": "2025-09-26T08:42:46"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function36.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function361.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function361.bc",
+      "start_time": "2025-09-26T08:42:46",
+      "end_time": "2025-09-26T08:42:46",
+      "elapsed_sec": 0.015546
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function37.txt",
+      "version": 1,
+      "request_id": "resp_68d5d376f4bc8199bb4f0af5a086ca8108d24cfd8f4db9c2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:42:46",
+      "end_time": "2025-09-26T08:43:32",
+      "elapsed_sec": 45.684345,
+      "usage": {
+        "input_tokens": 719,
+        "output_tokens": 3533,
+        "total_tokens": 4252
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function37.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function371.ll",
+      "success": true,
+      "time": "2025-09-26T08:43:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function37.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function371.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function371.bc",
+      "start_time": "2025-09-26T08:43:32",
+      "end_time": "2025-09-26T08:43:32",
+      "elapsed_sec": 0.014434
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function38.txt",
+      "version": 1,
+      "request_id": "resp_68d5d3a4f2888199b04a2cdff7f7b3d9082e995f061e925c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:43:32",
+      "end_time": "2025-09-26T08:43:55",
+      "elapsed_sec": 23.006385,
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 1405,
+        "total_tokens": 1780
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function38.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function381.ll",
+      "success": true,
+      "time": "2025-09-26T08:43:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function38.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function381.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function381.bc",
+      "start_time": "2025-09-26T08:43:55",
+      "end_time": "2025-09-26T08:43:55",
+      "elapsed_sec": 0.011384
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function39.txt",
+      "version": 1,
+      "request_id": "resp_68d5d3bc06648190ac139d40cec250fa070c08afa8b0dda1",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:43:55",
+      "end_time": "2025-09-26T08:44:43",
+      "elapsed_sec": 47.8918,
+      "usage": {
+        "input_tokens": 396,
+        "output_tokens": 3315,
+        "total_tokens": 3711
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function39.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function391.ll",
+      "success": true,
+      "time": "2025-09-26T08:44:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function39.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function391.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function391.bc",
+      "start_time": "2025-09-26T08:44:43",
+      "end_time": "2025-09-26T08:44:43",
+      "elapsed_sec": 0.013094
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 1,
+      "request_id": "resp_68d5d3eb9de8819baed2e11eeef135480f45ccbc05bd0e5a",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:44:43",
+      "end_time": "2025-09-26T08:47:26",
+      "elapsed_sec": 163.148211,
+      "usage": {
+        "input_tokens": 2496,
+        "output_tokens": 13145,
+        "total_tokens": 15641
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function41.ll",
+      "success": true,
+      "time": "2025-09-26T08:47:26"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function41.ll:28:28: error: floating point constant invalid for type\n  %masked = and i32 %code, 0x20FFFFFF\n                           ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function41.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function41.bc",
+      "start_time": "2025-09-26T08:47:26",
+      "end_time": "2025-09-26T08:47:26",
+      "elapsed_sec": 0.016595
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 2,
+      "request_id": "resp_68d5d48f2a18819684e80f44476e2ae100209de408114812",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:47:26",
+      "end_time": "2025-09-26T08:50:17",
+      "elapsed_sec": 170.676201,
+      "usage": {
+        "input_tokens": 3185,
+        "output_tokens": 6616,
+        "total_tokens": 9801
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function42.ll",
+      "success": true,
+      "time": "2025-09-26T08:50:17"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function42.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function42.bc",
+      "start_time": "2025-09-26T08:50:17",
+      "end_time": "2025-09-26T08:50:17",
+      "elapsed_sec": 0.013797
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function40.txt",
+      "version": 1,
+      "request_id": "resp_68d5d539d64c8193a5eeb38b9a7f51fa0e537dcae4c21df8",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:50:17",
+      "end_time": "2025-09-26T08:51:36",
+      "elapsed_sec": 78.978873,
+      "usage": {
+        "input_tokens": 531,
+        "output_tokens": 3516,
+        "total_tokens": 4047
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function40.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function401.ll",
+      "success": true,
+      "time": "2025-09-26T08:51:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function40.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function401.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function401.bc",
+      "start_time": "2025-09-26T08:51:36",
+      "end_time": "2025-09-26T08:51:36",
+      "elapsed_sec": 0.012583
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function41.txt",
+      "version": 1,
+      "request_id": "resp_68d5d588ceac8198b733fa57c690f83e0a610b1119a001bd",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:51:36",
+      "end_time": "2025-09-26T08:52:45",
+      "elapsed_sec": 69.261108,
+      "usage": {
+        "input_tokens": 825,
+        "output_tokens": 4269,
+        "total_tokens": 5094
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function41.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function411.ll",
+      "success": true,
+      "time": "2025-09-26T08:52:45"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function41.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function411.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function411.bc",
+      "start_time": "2025-09-26T08:52:45",
+      "end_time": "2025-09-26T08:52:45",
+      "elapsed_sec": 0.011842
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function5.txt",
+      "version": 1,
+      "request_id": "resp_68d5d5ce1c448199aae87e5c8024040b092977c97f9de921",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:52:45",
+      "end_time": "2025-09-26T08:53:08",
+      "elapsed_sec": 22.665869,
+      "usage": {
+        "input_tokens": 376,
+        "output_tokens": 2968,
+        "total_tokens": 3344
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function5.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function51.ll",
+      "success": true,
+      "time": "2025-09-26T08:53:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function5.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function51.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function51.bc",
+      "start_time": "2025-09-26T08:53:08",
+      "end_time": "2025-09-26T08:53:08",
+      "elapsed_sec": 0.016859
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function6.txt",
+      "version": 1,
+      "request_id": "resp_68d5d5e4edb4819698347e801483822a06e5e2a08bfc38b6",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:53:08",
+      "end_time": "2025-09-26T08:53:25",
+      "elapsed_sec": 17.807224,
+      "usage": {
+        "input_tokens": 349,
+        "output_tokens": 1047,
+        "total_tokens": 1396
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function6.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function61.ll",
+      "success": true,
+      "time": "2025-09-26T08:53:25"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function6.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function61.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function61.bc",
+      "start_time": "2025-09-26T08:53:25",
+      "end_time": "2025-09-26T08:53:25",
+      "elapsed_sec": 0.010407
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function7.txt",
+      "version": 1,
+      "request_id": "resp_68d5d5f6a41c819aa873f1914384cc5e098308bc57e28082",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:53:25",
+      "end_time": "2025-09-26T08:54:43",
+      "elapsed_sec": 77.232926,
+      "usage": {
+        "input_tokens": 607,
+        "output_tokens": 5653,
+        "total_tokens": 6260
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function7.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function71.ll",
+      "success": true,
+      "time": "2025-09-26T08:54:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function7.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function71.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function71.bc",
+      "start_time": "2025-09-26T08:54:43",
+      "end_time": "2025-09-26T08:54:43",
+      "elapsed_sec": 0.011561
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function8.txt",
+      "version": 1,
+      "request_id": "resp_68d5d643a7848197ab51b2cff16fdf250ddda8f5303830b1",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:54:43",
+      "end_time": "2025-09-26T08:56:40",
+      "elapsed_sec": 117.178347,
+      "usage": {
+        "input_tokens": 944,
+        "output_tokens": 9518,
+        "total_tokens": 10462
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function8.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function81.ll",
+      "success": true,
+      "time": "2025-09-26T08:56:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function8.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function81.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function81.bc",
+      "start_time": "2025-09-26T08:56:40",
+      "end_time": "2025-09-26T08:56:40",
+      "elapsed_sec": 0.011482
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_mutation_function9.txt",
+      "version": 1,
+      "request_id": "resp_68d5d6b931a08195b5ed1a0a3ce256470783b93162caa0ed",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:56:40",
+      "end_time": "2025-09-26T08:57:23",
+      "elapsed_sec": 43.356967,
+      "usage": {
+        "input_tokens": 452,
+        "output_tokens": 1975,
+        "total_tokens": 2427
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_mutation_function9.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function91.ll",
+      "success": true,
+      "time": "2025-09-26T08:57:23"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_mutation_function9.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function91.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function91.bc",
+      "start_time": "2025-09-26T08:57:23",
+      "end_time": "2025-09-26T08:57:23",
+      "elapsed_sec": 0.011376
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function1.txt",
+      "version": 1,
+      "request_id": "resp_68d5d6e45d7081999d86250bdb43e69c0a0b0fefc07de05b",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:57:23",
+      "end_time": "2025-09-26T08:57:35",
+      "elapsed_sec": 11.228009,
+      "usage": {
+        "input_tokens": 349,
+        "output_tokens": 741,
+        "total_tokens": 1090
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function1.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function11.ll",
+      "success": true,
+      "time": "2025-09-26T08:57:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function1.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function11.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function11.bc",
+      "start_time": "2025-09-26T08:57:35",
+      "end_time": "2025-09-26T08:57:35",
+      "elapsed_sec": 0.010607
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function10.txt",
+      "version": 1,
+      "request_id": "resp_68d5d6efc4f88198a6656753db3ed680091d0d4bf77f6a5c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:57:35",
+      "end_time": "2025-09-26T08:59:11",
+      "elapsed_sec": 96.19571,
+      "usage": {
+        "input_tokens": 944,
+        "output_tokens": 7907,
+        "total_tokens": 8851
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function10.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function101.ll",
+      "success": true,
+      "time": "2025-09-26T08:59:11"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function10.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function101.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function101.bc",
+      "start_time": "2025-09-26T08:59:11",
+      "end_time": "2025-09-26T08:59:11",
+      "elapsed_sec": 0.012601
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function11.txt",
+      "version": 1,
+      "request_id": "resp_68d5d74fb79c819ab46720e12fe6c42903a33e97d69811ea",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:59:11",
+      "end_time": "2025-09-26T08:59:38",
+      "elapsed_sec": 27.616171,
+      "usage": {
+        "input_tokens": 452,
+        "output_tokens": 1872,
+        "total_tokens": 2324
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function11.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function111.ll",
+      "success": true,
+      "time": "2025-09-26T08:59:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function11.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function111.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function111.bc",
+      "start_time": "2025-09-26T08:59:38",
+      "end_time": "2025-09-26T08:59:38",
+      "elapsed_sec": 0.012407
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function12.txt",
+      "version": 1,
+      "request_id": "resp_68d5d76b5aa881988d39417ce518d1b20645bf068aa35da4",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:59:38",
+      "end_time": "2025-09-26T08:59:50",
+      "elapsed_sec": 11.514229,
+      "usage": {
+        "input_tokens": 365,
+        "output_tokens": 802,
+        "total_tokens": 1167
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function12.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function121.ll",
+      "success": true,
+      "time": "2025-09-26T08:59:50"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function12.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function121.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function121.bc",
+      "start_time": "2025-09-26T08:59:50",
+      "end_time": "2025-09-26T08:59:50",
+      "elapsed_sec": 0.012034
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function13.txt",
+      "version": 1,
+      "request_id": "resp_68d5d776ea58819ab71545cd93301ef601746878f218fe77",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T08:59:50",
+      "end_time": "2025-09-26T09:00:23",
+      "elapsed_sec": 32.972863,
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 2363,
+        "total_tokens": 2799
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function13.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function131.ll",
+      "success": true,
+      "time": "2025-09-26T09:00:23"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function13.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function131.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function131.bc",
+      "start_time": "2025-09-26T09:00:23",
+      "end_time": "2025-09-26T09:00:23",
+      "elapsed_sec": 0.012168
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function14.txt",
+      "version": 1,
+      "request_id": "resp_68d5d7982dcc819aae21fe9f60699392023c62cc95358016",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:00:23",
+      "end_time": "2025-09-26T09:01:31",
+      "elapsed_sec": 68.422697,
+      "usage": {
+        "input_tokens": 918,
+        "output_tokens": 5904,
+        "total_tokens": 6822
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function14.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function141.ll",
+      "success": true,
+      "time": "2025-09-26T09:01:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function14.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function141.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function141.bc",
+      "start_time": "2025-09-26T09:01:31",
+      "end_time": "2025-09-26T09:01:31",
+      "elapsed_sec": 0.01267
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function15.txt",
+      "version": 1,
+      "request_id": "resp_68d5d7dc5e70819ba61919c84597c728072b1d4de44b0d3e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:01:31",
+      "end_time": "2025-09-26T09:01:38",
+      "elapsed_sec": 6.331562,
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 499,
+        "total_tokens": 874
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function15.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function151.ll",
+      "success": true,
+      "time": "2025-09-26T09:01:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function15.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function151.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function151.bc",
+      "start_time": "2025-09-26T09:01:38",
+      "end_time": "2025-09-26T09:01:38",
+      "elapsed_sec": 0.015272
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function16.txt",
+      "version": 1,
+      "request_id": "resp_68d5d7e302208199b5401664f0b9da8e0915b869b3258893",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:01:38",
+      "end_time": "2025-09-26T09:02:29",
+      "elapsed_sec": 51.256652,
+      "usage": {
+        "input_tokens": 1451,
+        "output_tokens": 6524,
+        "total_tokens": 7975
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function16.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function161.ll",
+      "success": true,
+      "time": "2025-09-26T09:02:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function16.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function161.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function161.bc",
+      "start_time": "2025-09-26T09:02:29",
+      "end_time": "2025-09-26T09:02:29",
+      "elapsed_sec": 0.011043
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function17.txt",
+      "version": 1,
+      "request_id": "resp_68d5d8164d208198935cb44eb139c26008956c8e76318103",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:02:29",
+      "end_time": "2025-09-26T09:03:25",
+      "elapsed_sec": 55.851716,
+      "usage": {
+        "input_tokens": 744,
+        "output_tokens": 5987,
+        "total_tokens": 6731
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function17.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function171.ll",
+      "success": true,
+      "time": "2025-09-26T09:03:25"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function17.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function171.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function171.bc",
+      "start_time": "2025-09-26T09:03:25",
+      "end_time": "2025-09-26T09:03:25",
+      "elapsed_sec": 0.013941
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 1,
+      "request_id": "resp_68d5d84dea50819a898b5e0b2b07856c06d5b33ca3a31cb3",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:03:25",
+      "end_time": "2025-09-26T09:05:03",
+      "elapsed_sec": 98.369062,
+      "usage": {
+        "input_tokens": 1926,
+        "output_tokens": 16005,
+        "total_tokens": 17931
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function181.ll",
+      "success": true,
+      "time": "2025-09-26T09:05:03"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function181.ll:44:6: error: expected '=' after instruction id\n  %14load = load i8*, i8** %13, align 8\n     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function181.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function181.bc",
+      "start_time": "2025-09-26T09:05:03",
+      "end_time": "2025-09-26T09:05:03",
+      "elapsed_sec": 0.011285
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 2,
+      "request_id": "resp_68d5d8b0b5fc81939748dda57048a2c60de09ad9b66b0fe2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:05:03",
+      "end_time": "2025-09-26T09:06:03",
+      "elapsed_sec": 59.658919,
+      "usage": {
+        "input_tokens": 2910,
+        "output_tokens": 6294,
+        "total_tokens": 9204
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function182.ll",
+      "success": true,
+      "time": "2025-09-26T09:06:03"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function182.ll:7:60: error: constant expression type mismatch: got type '[39 x i8]' but expected '[40 x i8]'\n@aVirtualprotect = private unnamed_addr constant [40 x i8] c\"  VirtualProtect failed with code 0x%x\\00\", align 1\n                                                           ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function182.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function182.bc",
+      "start_time": "2025-09-26T09:06:03",
+      "end_time": "2025-09-26T09:06:03",
+      "elapsed_sec": 0.012718
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 3,
+      "request_id": "resp_68d5d8ec0234819889f048f3410c634c0f84b2af94627965",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:06:03",
+      "end_time": "2025-09-26T09:06:51",
+      "elapsed_sec": 47.79233,
+      "usage": {
+        "input_tokens": 2957,
+        "output_tokens": 5398,
+        "total_tokens": 8355
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 3,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function183.ll",
+      "success": true,
+      "time": "2025-09-26T09:06:51"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function18.txt",
+      "version": 3,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function183.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function183.bc",
+      "start_time": "2025-09-26T09:06:51",
+      "end_time": "2025-09-26T09:06:51",
+      "elapsed_sec": 0.012649
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function19.txt",
+      "version": 1,
+      "request_id": "resp_68d5d91c1320819a8363359bd64381790caf5cdb4950d1db",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:06:51",
+      "end_time": "2025-09-26T09:07:44",
+      "elapsed_sec": 53.464995,
+      "usage": {
+        "input_tokens": 4230,
+        "output_tokens": 6017,
+        "total_tokens": 10247
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function19.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function191.ll",
+      "success": true,
+      "time": "2025-09-26T09:07:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function19.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function191.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function191.bc",
+      "start_time": "2025-09-26T09:07:44",
+      "end_time": "2025-09-26T09:07:44",
+      "elapsed_sec": 0.011375
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 1,
+      "request_id": "resp_68d5d951a57c819084eb206b28a94c51041f2d9e1a02f839",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:07:44",
+      "end_time": "2025-09-26T09:10:27",
+      "elapsed_sec": 162.550426,
+      "usage": {
+        "input_tokens": 4047,
+        "output_tokens": 18705,
+        "total_tokens": 22752
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function21.ll",
+      "success": true,
+      "time": "2025-09-26T09:10:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function21.ll:64:26: error: expected value token\n  %oldpair = cmpxchg i8**, i8** %lockpp, i8* null, i8* %selfslot monotonic monotonic\n                         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function21.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function21.bc",
+      "start_time": "2025-09-26T09:10:27",
+      "end_time": "2025-09-26T09:10:27",
+      "elapsed_sec": 0.021065
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 2,
+      "request_id": "resp_68d5d9f3f2088197857ad12f30618fb408713d3b6c2a6cfe",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:10:27",
+      "end_time": "2025-09-26T09:12:33",
+      "elapsed_sec": 126.317419,
+      "usage": {
+        "input_tokens": 4727,
+        "output_tokens": 12636,
+        "total_tokens": 17363
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function22.ll",
+      "success": true,
+      "time": "2025-09-26T09:12:33"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function22.ll:277:32: error: atomicrmw xchg operand must be an integer or floating point type\n  atomicrmw xchg i8** %lockpp, i8* null monotonic\n                               ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function22.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function22.bc",
+      "start_time": "2025-09-26T09:12:33",
+      "end_time": "2025-09-26T09:12:33",
+      "elapsed_sec": 0.011909
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 3,
+      "request_id": "resp_68d5da728f6c81999bea6ba28e990f53032e0e104cc731f1",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:12:33",
+      "end_time": "2025-09-26T09:13:46",
+      "elapsed_sec": 72.847323,
+      "usage": {
+        "input_tokens": 4607,
+        "output_tokens": 8400,
+        "total_tokens": 13007
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 3,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function23.ll",
+      "success": true,
+      "time": "2025-09-26T09:13:46"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function2.txt",
+      "version": 3,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function23.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function23.bc",
+      "start_time": "2025-09-26T09:13:46",
+      "end_time": "2025-09-26T09:13:46",
+      "elapsed_sec": 0.013065
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function20.txt",
+      "version": 1,
+      "request_id": "resp_68d5dabb2cec8197b0dfa532bb5db047003c73b8eb8d4d16",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:13:46",
+      "end_time": "2025-09-26T09:14:27",
+      "elapsed_sec": 40.57816,
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 5911,
+        "total_tokens": 6529
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function20.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function201.ll",
+      "success": true,
+      "time": "2025-09-26T09:14:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function20.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function201.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function201.bc",
+      "start_time": "2025-09-26T09:14:27",
+      "end_time": "2025-09-26T09:14:27",
+      "elapsed_sec": 0.013269
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function21.txt",
+      "version": 1,
+      "request_id": "resp_68d5dae3c6e481999fbddb2da9932f1206aa53dc8f419890",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:14:27",
+      "end_time": "2025-09-26T09:14:44",
+      "elapsed_sec": 17.459792,
+      "usage": {
+        "input_tokens": 382,
+        "output_tokens": 2468,
+        "total_tokens": 2850
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function21.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function211.ll",
+      "success": true,
+      "time": "2025-09-26T09:14:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function21.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function211.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function211.bc",
+      "start_time": "2025-09-26T09:14:44",
+      "end_time": "2025-09-26T09:14:44",
+      "elapsed_sec": 0.011674
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function22.txt",
+      "version": 1,
+      "request_id": "resp_68d5daf588d8819aa267afd4ba04346d0feb411f45b19c75",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:14:44",
+      "end_time": "2025-09-26T09:15:19",
+      "elapsed_sec": 34.987358,
+      "usage": {
+        "input_tokens": 875,
+        "output_tokens": 5467,
+        "total_tokens": 6342
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function22.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function221.ll",
+      "success": true,
+      "time": "2025-09-26T09:15:19"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function22.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function221.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function221.bc",
+      "start_time": "2025-09-26T09:15:19",
+      "end_time": "2025-09-26T09:15:19",
+      "elapsed_sec": 0.020329
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function23.txt",
+      "version": 1,
+      "request_id": "resp_68d5db185114819a92feb1c3954191000c5f7906ccc5e89c",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:15:19",
+      "end_time": "2025-09-26T09:16:02",
+      "elapsed_sec": 42.889157,
+      "usage": {
+        "input_tokens": 927,
+        "output_tokens": 4955,
+        "total_tokens": 5882
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function23.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function231.ll",
+      "success": true,
+      "time": "2025-09-26T09:16:02"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function23.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function231.ll:12:29: error: dso_location and DLL-StorageClass mismatch\ndeclare dso_local dllimport noalias i8* @calloc(i64, i64)\n                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function231.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function231.bc",
+      "start_time": "2025-09-26T09:16:02",
+      "end_time": "2025-09-26T09:16:02",
+      "elapsed_sec": 0.011295
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function23.txt",
+      "version": 2,
+      "request_id": "resp_68d5db433b688199bc75ff87e67592490a7d8c321d559d5d",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:16:02",
+      "end_time": "2025-09-26T09:16:12",
+      "elapsed_sec": 9.472116,
+      "usage": {
+        "input_tokens": 1080,
+        "output_tokens": 1554,
+        "total_tokens": 2634
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function23.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function232.ll",
+      "success": true,
+      "time": "2025-09-26T09:16:12"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function23.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function232.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function232.bc",
+      "start_time": "2025-09-26T09:16:12",
+      "end_time": "2025-09-26T09:16:12",
+      "elapsed_sec": 0.011731
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function24.txt",
+      "version": 1,
+      "request_id": "resp_68d5db4cc488819995883a57ebbfd58f01cd58f069e29644",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:16:12",
+      "end_time": "2025-09-26T09:16:54",
+      "elapsed_sec": 42.527936,
+      "usage": {
+        "input_tokens": 950,
+        "output_tokens": 5033,
+        "total_tokens": 5983
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function24.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function241.ll",
+      "success": true,
+      "time": "2025-09-26T09:16:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function24.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function241.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function241.bc",
+      "start_time": "2025-09-26T09:16:54",
+      "end_time": "2025-09-26T09:16:54",
+      "elapsed_sec": 0.012747
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function25.txt",
+      "version": 1,
+      "request_id": "resp_68d5db77532c81988b1c8542bfcd6e6c09aa027d923d3e3f",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:16:54",
+      "end_time": "2025-09-26T09:17:30",
+      "elapsed_sec": 35.786317,
+      "usage": {
+        "input_tokens": 1264,
+        "output_tokens": 5597,
+        "total_tokens": 6861
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function25.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function251.ll",
+      "success": true,
+      "time": "2025-09-26T09:17:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function25.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function251.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function251.bc",
+      "start_time": "2025-09-26T09:17:30",
+      "end_time": "2025-09-26T09:17:30",
+      "elapsed_sec": 0.012914
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function26.txt",
+      "version": 1,
+      "request_id": "resp_68d5db9b205c819994b180ae73f0088604e7dea2e42a4b7d",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:17:30",
+      "end_time": "2025-09-26T09:17:39",
+      "elapsed_sec": 9.236149,
+      "usage": {
+        "input_tokens": 372,
+        "output_tokens": 1017,
+        "total_tokens": 1389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function26.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function261.ll",
+      "success": true,
+      "time": "2025-09-26T09:17:39"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function26.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function261.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function261.bc",
+      "start_time": "2025-09-26T09:17:39",
+      "end_time": "2025-09-26T09:17:39",
+      "elapsed_sec": 0.011692
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function27.txt",
+      "version": 1,
+      "request_id": "resp_68d5dba464ac8199bf1326f0980cf15a0e09855dcbfdf3c3",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:17:39",
+      "end_time": "2025-09-26T09:18:01",
+      "elapsed_sec": 21.117274,
+      "usage": {
+        "input_tokens": 556,
+        "output_tokens": 2379,
+        "total_tokens": 2935
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function27.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function271.ll",
+      "success": true,
+      "time": "2025-09-26T09:18:01"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function27.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function271.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function271.bc",
+      "start_time": "2025-09-26T09:18:01",
+      "end_time": "2025-09-26T09:18:01",
+      "elapsed_sec": 0.012379
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function28.txt",
+      "version": 1,
+      "request_id": "resp_68d5dbb986c8819b829dd3fca4758a650c2d7fa20e59be3e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:18:01",
+      "end_time": "2025-09-26T09:18:40",
+      "elapsed_sec": 39.589356,
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 5904,
+        "total_tokens": 6661
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function28.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function281.ll",
+      "success": true,
+      "time": "2025-09-26T09:18:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function28.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function281.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function281.bc",
+      "start_time": "2025-09-26T09:18:40",
+      "end_time": "2025-09-26T09:18:40",
+      "elapsed_sec": 0.011542
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function29.txt",
+      "version": 1,
+      "request_id": "resp_68d5de3a3fac819997dc3dee7cc4028f0b0aaa9de44a4036",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:18:40",
+      "end_time": "2025-09-26T09:29:22",
+      "elapsed_sec": 641.67446,
+      "usage": {
+        "input_tokens": 1099,
+        "output_tokens": 5727,
+        "total_tokens": 6826
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function29.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function291.ll",
+      "success": true,
+      "time": "2025-09-26T09:29:22"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function29.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function291.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function291.bc",
+      "start_time": "2025-09-26T09:29:22",
+      "end_time": "2025-09-26T09:29:22",
+      "elapsed_sec": 0.171678
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function3.txt",
+      "version": 1,
+      "request_id": "resp_68d5de636318819b8648a59d857714a803cdd7a58af3afaf",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:29:22",
+      "end_time": "2025-09-26T09:31:52",
+      "elapsed_sec": 149.809463,
+      "usage": {
+        "input_tokens": 2404,
+        "output_tokens": 14467,
+        "total_tokens": 16871
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function3.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function31.ll",
+      "success": true,
+      "time": "2025-09-26T09:31:52"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function3.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function31.ll:25:27: error: floating point constant invalid for type\n  %masked = and i32 %eax, 0x20FFFFFF\n                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function31.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function31.bc",
+      "start_time": "2025-09-26T09:31:52",
+      "end_time": "2025-09-26T09:31:52",
+      "elapsed_sec": 0.015893
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function3.txt",
+      "version": 2,
+      "request_id": "resp_68d5def941888198ac94f1407a9ca6460756354ab01fa549",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:31:52",
+      "end_time": "2025-09-26T09:32:59",
+      "elapsed_sec": 66.821201,
+      "usage": {
+        "input_tokens": 2906,
+        "output_tokens": 5727,
+        "total_tokens": 8633
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function3.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function32.ll",
+      "success": true,
+      "time": "2025-09-26T09:32:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function3.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function32.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function32.bc",
+      "start_time": "2025-09-26T09:32:59",
+      "end_time": "2025-09-26T09:32:59",
+      "elapsed_sec": 0.024932
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function30.txt",
+      "version": 1,
+      "request_id": "resp_68d5df3bb958819abefd9e52cf0c05a202d43c4f321c4280",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:32:59",
+      "end_time": "2025-09-26T09:33:57",
+      "elapsed_sec": 58.472099,
+      "usage": {
+        "input_tokens": 933,
+        "output_tokens": 8193,
+        "total_tokens": 9126
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function30.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function301.ll",
+      "success": true,
+      "time": "2025-09-26T09:33:57"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function30.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function301.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function301.bc",
+      "start_time": "2025-09-26T09:33:57",
+      "end_time": "2025-09-26T09:33:57",
+      "elapsed_sec": 0.014446
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function31.txt",
+      "version": 1,
+      "request_id": "resp_68d5df76747481988bc82cfecb6e2300088268ff9aed36f7",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:33:57",
+      "end_time": "2025-09-26T09:34:40",
+      "elapsed_sec": 42.878675,
+      "usage": {
+        "input_tokens": 625,
+        "output_tokens": 4022,
+        "total_tokens": 4647
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function31.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function311.ll",
+      "success": true,
+      "time": "2025-09-26T09:34:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function31.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function311.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function311.bc",
+      "start_time": "2025-09-26T09:34:40",
+      "end_time": "2025-09-26T09:34:40",
+      "elapsed_sec": 0.012976
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function32.txt",
+      "version": 1,
+      "request_id": "resp_68d5dfa173e4819b99594c7e358bb57c0b088fb3f3d47edd",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:34:40",
+      "end_time": "2025-09-26T09:35:58",
+      "elapsed_sec": 78.083232,
+      "usage": {
+        "input_tokens": 944,
+        "output_tokens": 6625,
+        "total_tokens": 7569
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function32.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function321.ll",
+      "success": true,
+      "time": "2025-09-26T09:35:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function32.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function321.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function321.bc",
+      "start_time": "2025-09-26T09:35:58",
+      "end_time": "2025-09-26T09:35:58",
+      "elapsed_sec": 0.012116
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function33.txt",
+      "version": 1,
+      "request_id": "resp_68d5dfefcdc08198a82f6ded6b534be5040f58b7b7050997",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:35:58",
+      "end_time": "2025-09-26T09:36:32",
+      "elapsed_sec": 34.082668,
+      "usage": {
+        "input_tokens": 587,
+        "output_tokens": 3499,
+        "total_tokens": 4086
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function33.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function331.ll",
+      "success": true,
+      "time": "2025-09-26T09:36:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function33.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function331.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function331.bc",
+      "start_time": "2025-09-26T09:36:32",
+      "end_time": "2025-09-26T09:36:33",
+      "elapsed_sec": 0.014434
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function34.txt",
+      "version": 1,
+      "request_id": "resp_68d5e011842c819390f5abbf11dbf4450edf4980d51ff537",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:36:33",
+      "end_time": "2025-09-26T09:37:32",
+      "elapsed_sec": 59.789786,
+      "usage": {
+        "input_tokens": 1034,
+        "output_tokens": 6768,
+        "total_tokens": 7802
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function34.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function341.ll",
+      "success": true,
+      "time": "2025-09-26T09:37:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function34.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function341.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function341.bc",
+      "start_time": "2025-09-26T09:37:32",
+      "end_time": "2025-09-26T09:37:32",
+      "elapsed_sec": 0.012078
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function35.txt",
+      "version": 1,
+      "request_id": "resp_68d5e04e64748196bd5487b3ae75a3b6002eba5adfa49737",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:37:32",
+      "end_time": "2025-09-26T09:40:21",
+      "elapsed_sec": 168.170573,
+      "usage": {
+        "input_tokens": 1318,
+        "output_tokens": 9043,
+        "total_tokens": 10361
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function35.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function351.ll",
+      "success": true,
+      "time": "2025-09-26T09:40:21"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function35.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function351.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function351.bc",
+      "start_time": "2025-09-26T09:40:21",
+      "end_time": "2025-09-26T09:40:21",
+      "elapsed_sec": 0.128446
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function36.txt",
+      "version": 1,
+      "request_id": "resp_68d5e0f5b530819bbecdbd7e6a7c61500d97a0085e990776",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:40:21",
+      "end_time": "2025-09-26T09:40:49",
+      "elapsed_sec": 28.414946,
+      "usage": {
+        "input_tokens": 595,
+        "output_tokens": 3094,
+        "total_tokens": 3689
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function36.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function361.ll",
+      "success": true,
+      "time": "2025-09-26T09:40:49"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function36.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function361.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function361.bc",
+      "start_time": "2025-09-26T09:40:49",
+      "end_time": "2025-09-26T09:40:49",
+      "elapsed_sec": 0.019201
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function37.txt",
+      "version": 1,
+      "request_id": "resp_68d5e11252d48198bf8c7ba5a084524f07f44327f1d277d3",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:40:49",
+      "end_time": "2025-09-26T09:41:08",
+      "elapsed_sec": 18.545863,
+      "usage": {
+        "input_tokens": 613,
+        "output_tokens": 1914,
+        "total_tokens": 2527
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function37.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function371.ll",
+      "success": true,
+      "time": "2025-09-26T09:41:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function37.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function371.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function371.bc",
+      "start_time": "2025-09-26T09:41:08",
+      "end_time": "2025-09-26T09:41:08",
+      "elapsed_sec": 0.033037
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function38.txt",
+      "version": 1,
+      "request_id": "resp_68d5e124afe8819aa863c91644b0236308091fc8e0849b44",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:41:08",
+      "end_time": "2025-09-26T09:42:16",
+      "elapsed_sec": 68.210821,
+      "usage": {
+        "input_tokens": 752,
+        "output_tokens": 7360,
+        "total_tokens": 8112
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function38.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function381.ll",
+      "success": true,
+      "time": "2025-09-26T09:42:16"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function38.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function381.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function381.bc",
+      "start_time": "2025-09-26T09:42:16",
+      "end_time": "2025-09-26T09:42:16",
+      "elapsed_sec": 0.1364
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function39.txt",
+      "version": 1,
+      "request_id": "resp_68d5e169127c81988cb5438351a448850483d9d8fd42696e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:42:16",
+      "end_time": "2025-09-26T09:42:55",
+      "elapsed_sec": 38.881781,
+      "usage": {
+        "input_tokens": 719,
+        "output_tokens": 4282,
+        "total_tokens": 5001
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function39.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function391.ll",
+      "success": true,
+      "time": "2025-09-26T09:42:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function39.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function391.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function391.bc",
+      "start_time": "2025-09-26T09:42:55",
+      "end_time": "2025-09-26T09:42:55",
+      "elapsed_sec": 0.035455
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function4.txt",
+      "version": 1,
+      "request_id": "resp_68d5e1906680819ab8f0de4e2ffc2526044b0cc33cc8e23e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:42:55",
+      "end_time": "2025-09-26T09:45:46",
+      "elapsed_sec": 170.532875,
+      "usage": {
+        "input_tokens": 2496,
+        "output_tokens": 15538,
+        "total_tokens": 18034
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function4.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function41.ll",
+      "success": true,
+      "time": "2025-09-26T09:45:46"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function4.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function41.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function41.bc",
+      "start_time": "2025-09-26T09:45:46",
+      "end_time": "2025-09-26T09:45:46",
+      "elapsed_sec": 0.018641
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function40.txt",
+      "version": 1,
+      "request_id": "resp_68d5e23af558819589d265c93d97f7440d0abc4a6f5b93b5",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:45:46",
+      "end_time": "2025-09-26T09:46:02",
+      "elapsed_sec": 16.211648,
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 1540,
+        "total_tokens": 1915
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function40.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function401.ll",
+      "success": true,
+      "time": "2025-09-26T09:46:02"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function40.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function401.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function401.bc",
+      "start_time": "2025-09-26T09:46:02",
+      "end_time": "2025-09-26T09:46:02",
+      "elapsed_sec": 0.016489
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function41.txt",
+      "version": 1,
+      "request_id": "resp_68d5e24b293081988aeb4ccc7148acca01da41db4b5a7bec",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:46:02",
+      "end_time": "2025-09-26T09:46:24",
+      "elapsed_sec": 22.410019,
+      "usage": {
+        "input_tokens": 396,
+        "output_tokens": 2047,
+        "total_tokens": 2443
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function41.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function411.ll",
+      "success": true,
+      "time": "2025-09-26T09:46:24"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function41.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function411.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function411.bc",
+      "start_time": "2025-09-26T09:46:24",
+      "end_time": "2025-09-26T09:46:24",
+      "elapsed_sec": 0.016464
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function42.txt",
+      "version": 1,
+      "request_id": "resp_68d5e261620c819aa22d37a2d8f63e660d49e5ce44cf0988",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:46:25",
+      "end_time": "2025-09-26T09:46:54",
+      "elapsed_sec": 29.840026,
+      "usage": {
+        "input_tokens": 531,
+        "output_tokens": 2591,
+        "total_tokens": 3122
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function42.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function421.ll",
+      "success": true,
+      "time": "2025-09-26T09:46:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function42.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function421.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function421.bc",
+      "start_time": "2025-09-26T09:46:54",
+      "end_time": "2025-09-26T09:46:54",
+      "elapsed_sec": 0.015467
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function43.txt",
+      "version": 1,
+      "request_id": "resp_68d5e27f47808197b5535c61abf81db90b66fc728c8e6591",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:46:54",
+      "end_time": "2025-09-26T09:46:58",
+      "elapsed_sec": 3.924148,
+      "usage": {
+        "input_tokens": 317,
+        "output_tokens": 190,
+        "total_tokens": 507
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function43.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function431.ll",
+      "success": true,
+      "time": "2025-09-26T09:46:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function43.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function431.ll:1:1: error: expected top-level entity\nPlease provide:\n^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function431.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function431.bc",
+      "start_time": "2025-09-26T09:46:58",
+      "end_time": "2025-09-26T09:46:58",
+      "elapsed_sec": 0.016437
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function43.txt",
+      "version": 2,
+      "request_id": "resp_68d5e28348e4819090005b82c026b00905b5807bd91c804e",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:46:58",
+      "end_time": "2025-09-26T09:47:06",
+      "elapsed_sec": 7.194118,
+      "usage": {
+        "input_tokens": 453,
+        "output_tokens": 778,
+        "total_tokens": 1231
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function43.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function432.ll",
+      "success": true,
+      "time": "2025-09-26T09:47:06"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function43.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function432.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function432.bc",
+      "start_time": "2025-09-26T09:47:06",
+      "end_time": "2025-09-26T09:47:06",
+      "elapsed_sec": 0.025249
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function5.txt",
+      "version": 1,
+      "request_id": "resp_68d5e28a7cfc81959732d135def1aad60529bb13ad8becd5",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:47:06",
+      "end_time": "2025-09-26T09:47:20",
+      "elapsed_sec": 14.410402,
+      "usage": {
+        "input_tokens": 376,
+        "output_tokens": 1560,
+        "total_tokens": 1936
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function5.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function51.ll",
+      "success": true,
+      "time": "2025-09-26T09:47:20"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function5.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function51.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function51.bc",
+      "start_time": "2025-09-26T09:47:20",
+      "end_time": "2025-09-26T09:47:20",
+      "elapsed_sec": 0.01392
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function6.txt",
+      "version": 1,
+      "request_id": "resp_68d5e29939248198add3a81b370aa2450da2b2932b8266af",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:47:20",
+      "end_time": "2025-09-26T09:47:28",
+      "elapsed_sec": 8.119331,
+      "usage": {
+        "input_tokens": 349,
+        "output_tokens": 791,
+        "total_tokens": 1140
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function6.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function61.ll",
+      "success": true,
+      "time": "2025-09-26T09:47:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function6.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function61.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function61.bc",
+      "start_time": "2025-09-26T09:47:28",
+      "end_time": "2025-09-26T09:47:28",
+      "elapsed_sec": 0.015235
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function7.txt",
+      "version": 1,
+      "request_id": "resp_68d5e2a14734819ab6f6d55041c21fd20db433430ef34f72",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:47:28",
+      "end_time": "2025-09-26T09:49:23",
+      "elapsed_sec": 114.57241,
+      "usage": {
+        "input_tokens": 3747,
+        "output_tokens": 10214,
+        "total_tokens": 13961
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function7.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function71.ll",
+      "success": true,
+      "time": "2025-09-26T09:49:23"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function7.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function71.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function71.bc",
+      "start_time": "2025-09-26T09:49:23",
+      "end_time": "2025-09-26T09:49:23",
+      "elapsed_sec": 0.159224
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function8.txt",
+      "version": 1,
+      "request_id": "resp_68d5e3147b688195a81e1c9740839ecb0f8fcd6e95aa83c6",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:49:23",
+      "end_time": "2025-09-26T09:50:21",
+      "elapsed_sec": 58.070866,
+      "usage": {
+        "input_tokens": 1325,
+        "output_tokens": 6027,
+        "total_tokens": 7352
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function8.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function81.ll",
+      "success": true,
+      "time": "2025-09-26T09:50:21"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function8.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function81.ll:18:67: error: invalid use of function-local name\n  store i32 7, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 0), align 4\n                                                                  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function81.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function81.bc",
+      "start_time": "2025-09-26T09:50:21",
+      "end_time": "2025-09-26T09:50:21",
+      "elapsed_sec": 0.014844
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_resource_function8.txt",
+      "version": 2,
+      "request_id": "resp_68d5e34e8610819ba9d2d22290b96574061f99759c3505e2",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:50:21",
+      "end_time": "2025-09-26T09:50:44",
+      "elapsed_sec": 22.663882,
+      "usage": {
+        "input_tokens": 1854,
+        "output_tokens": 2716,
+        "total_tokens": 4570
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function8.txt",
+      "version": 2,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function82.ll",
+      "success": true,
+      "time": "2025-09-26T09:50:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function8.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function82.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function82.bc",
+      "start_time": "2025-09-26T09:50:44",
+      "end_time": "2025-09-26T09:50:44",
+      "elapsed_sec": 0.014975
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_resource_function9.txt",
+      "version": 1,
+      "request_id": "resp_68d5e364f47c819b97240ce600e7892701b826c268f07277",
+      "model": "gpt-5",
+      "start_time": "2025-09-26T09:50:44",
+      "end_time": "2025-09-26T09:51:46",
+      "elapsed_sec": 62.133678,
+      "usage": {
+        "input_tokens": 607,
+        "output_tokens": 6497,
+        "total_tokens": 7104
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_resource_function9.txt",
+      "version": 1,
+      "ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function91.ll",
+      "success": true,
+      "time": "2025-09-26T09:51:46"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_resource_function9.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function91.ll -o /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function91.bc",
+      "start_time": "2025-09-26T09:51:46",
+      "end_time": "2025-09-26T09:51:46",
+      "elapsed_sec": 0.012762
+    },
+    {
+      "phase": "round_complete",
+      "round": 4,
+      "end_time": "2025-09-26T09:51:46"
+    }
+  ]
+}

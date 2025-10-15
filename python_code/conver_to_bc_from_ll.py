@@ -28,7 +28,7 @@ def ll_to_bc(input_dir: str, output_dir: str, tool: str = "llvm-as-14"):
 
 if __name__ == "__main__":
     # 입력 폴더와 출력 폴더를 직접 적어주세요
-    INPUT_DIR = "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/dijkstra/5"   # 변환할 .ll 파일들이 있는 폴더
-    OUTPUT_DIR = "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/gpt_api_query/dijkstra/5/bc"  # 변환된 .bc 파일 저장 폴더
+    INPUT_DIR = "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_gpt_api_error_analysis_modify_prompt/1"   # 변환할 .ll 파일들이 있는 폴더
+    OUTPUT_DIR = "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_gpt_api_error_analysis_modify_prompt/1/bc"  # 변환된 .bc 파일 저장 폴더
 
     ll_to_bc(INPUT_DIR, OUTPUT_DIR)

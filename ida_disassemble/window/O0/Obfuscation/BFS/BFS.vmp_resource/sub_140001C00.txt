@@ -1,0 +1,90 @@
+; Function: sub_140001C00
+; Start: 0x140001c00, End: 0x140001d61
+
+0x140001c00: push    rdi
+0x140001c01: push    rsi
+0x140001c02: push    rbx
+0x140001c03: sub     rsp, 50h
+0x140001c07: movsxd  rsi, cs:dword_1400070A4
+0x140001c0e: mov     rbx, rcx
+0x140001c11: test    esi, esi
+0x140001c13: jle     loc_140001D30
+0x140001c19: mov     rax, cs:qword_1400070A8
+0x140001c20: xor     r9d, r9d
+0x140001c23: add     rax, 18h
+0x140001c27: nop     word ptr [rax+rax+00000000h]
+0x140001c30: mov     r8, [rax]
+0x140001c33: cmp     rbx, r8
+0x140001c36: jb      short loc_140001C4B
+0x140001c38: mov     rdx, [rax+8]
+0x140001c3c: mov     edx, [rdx+8]
+0x140001c3f: add     r8, rdx
+0x140001c42: cmp     rbx, r8
+0x140001c45: jb      loc_140001CD5
+0x140001c4b: add     r9d, 1
+0x140001c4f: add     rax, 28h ; '('
+0x140001c53: cmp     r9d, esi
+0x140001c56: jnz     short loc_140001C30
+0x140001c58: mov     rcx, rbx
+0x140001c5b: call    sub_1400026F0
+0x140001c60: mov     rdi, rax
+0x140001c63: test    rax, rax
+0x140001c66: jz      loc_140001D52
+0x140001c6c: mov     rax, cs:qword_1400070A8
+0x140001c73: lea     rbx, [rsi+rsi*4]
+0x140001c77: shl     rbx, 3
+0x140001c7b: add     rax, rbx
+0x140001c7e: mov     [rax+20h], rdi
+0x140001c82: mov     dword ptr [rax], 0
+0x140001c88: call    sub_140002830
+0x140001c8d: mov     edx, [rdi+0Ch]
+0x140001c90: mov     r8d, 30h ; '0'; dwLength
+0x140001c96: lea     rcx, [rax+rdx]; lpAddress
+0x140001c9a: mov     rax, cs:qword_1400070A8
+0x140001ca1: lea     rdx, [rsp+68h+Buffer]; lpBuffer
+0x140001ca6: mov     [rax+rbx+18h], rcx
+0x140001cab: call    cs:__imp_VirtualQuery
+0x140001cb1: test    rax, rax
+0x140001cb4: jz      loc_140001D37
+0x140001cba: mov     eax, [rsp+68h+Buffer.Protect]
+0x140001cbe: lea     edx, [rax-4]
+0x140001cc1: and     edx, 0FFFFFFFBh
+0x140001cc4: jz      short loc_140001CCE
+0x140001cc6: lea     edx, [rax-40h]
+0x140001cc9: and     edx, 0FFFFFFBFh
+0x140001ccc: jnz     short loc_140001CE0
+0x140001cce: add     cs:dword_1400070A4, 1
+0x140001cd5: add     rsp, 50h
+0x140001cd9: pop     rbx
+0x140001cda: pop     rsi
+0x140001cdb: pop     rdi
+0x140001cdc: retn
+0x140001cdd: align 20h
+0x140001ce0: cmp     eax, 2
+0x140001ce3: mov     rcx, [rsp+68h+Buffer.BaseAddress]; lpAddress
+0x140001ce8: mov     rdx, [rsp+68h+Buffer.RegionSize]; dwSize
+0x140001ced: mov     r8d, 40h ; '@'
+0x140001cf3: mov     eax, 4
+0x140001cf8: cmovz   r8d, eax; flNewProtect
+0x140001cfc: add     rbx, cs:qword_1400070A8
+0x140001d03: mov     [rbx+8], rcx
+0x140001d07: mov     r9, rbx; lpflOldProtect
+0x140001d0a: mov     [rbx+10h], rdx
+0x140001d0e: call    cs:__imp_VirtualProtect
+0x140001d14: test    eax, eax
+0x140001d16: jnz     short loc_140001CCE
+0x140001d18: call    cs:__imp_GetLastError
+0x140001d1e: lea     rcx, aVirtualprotect; "  VirtualProtect failed with code 0x%x"
+0x140001d25: mov     edx, eax
+0x140001d27: call    sub_140001BA0
+0x140001d2c: align 10h
+0x140001d30: xor     esi, esi
+0x140001d32: jmp     loc_140001C58
+0x140001d37: mov     rax, cs:qword_1400070A8
+0x140001d3e: mov     edx, [rdi+8]
+0x140001d41: lea     rcx, aVirtualqueryFa; "  VirtualQuery failed for %d bytes at a"...
+0x140001d48: mov     r8, [rax+rbx+18h]
+0x140001d4d: call    sub_140001BA0
+0x140001d52: mov     rdx, rbx
+0x140001d55: lea     rcx, aAddressPHasNoI; "Address %p has no image-section"
+0x140001d5c: call    sub_140001BA0

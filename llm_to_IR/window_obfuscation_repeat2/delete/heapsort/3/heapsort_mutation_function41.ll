@@ -1,0 +1,184 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-p270:32:32-p271:32:32-i64:64-f80:128-n8:16:32:64-S128"
+
+@off_140004400 = external global i32*
+@qword_1400070D0 = external global i8*
+
+declare void @sub_140001010()
+declare i8* @signal(i32, i8*)
+declare void @sub_1400024E0()
+
+define void @start() {
+entry:
+  %p0 = load i32*, i32** @off_140004400, align 8
+  store i32 0, i32* %p0, align 4
+  call void @sub_140001010()
+  ret void
+}
+
+define i32 @TopLevelExceptionFilter(i8* %arg) {
+entry:
+  %pp = bitcast i8* %arg to i8**
+  %exrec_ptr = load i8*, i8** %pp, align 8
+  %excode_ptr = bitcast i8* %exrec_ptr to i32*
+  %eax_val = load i32, i32* %excode_ptr, align 4
+  %andmask = and i32 %eax_val, 553648127
+  %cmpmagic = icmp eq i32 %andmask, 541602883
+  br i1 %cmpmagic, label %check_flags, label %after_magic
+
+check_flags: ; loc_140002130
+  %flags_ptr = getelementptr i8, i8* %exrec_ptr, i32 4
+  %flags_b = load i8, i8* %flags_ptr, align 1
+  %flags_and = and i8 %flags_b, 1
+  %flags_nz = icmp ne i8 %flags_and, 0
+  br i1 %flags_nz, label %after_magic, label %ret_minus1
+
+after_magic: ; loc_1400020A1 path begins
+  %cmp_ja = icmp ugt i32 %eax_val, 3221225622
+  br i1 %cmp_ja, label %fallback_0EF, label %cmp_le_8B
+
+cmp_le_8B: ; loc_140002110 group
+  %cmp_jbe = icmp ule i32 %eax_val, 3221225611
+  br i1 %cmp_jbe, label %block_110, label %range_8C_96
+
+block_110:
+  %is_segv = icmp eq i32 %eax_val, 3221225477
+  br i1 %is_segv, label %case_1C0, label %gt_5
+
+gt_5:
+  %ja_150 = icmp ugt i32 %eax_val, 3221225477
+  br i1 %ja_150, label %block_150, label %check_80000002
+
+check_80000002:
+  %is_80000002 = icmp eq i32 %eax_val, 2147483650
+  br i1 %is_80000002, label %ret_minus1, label %fallback_0EF
+
+block_150:
+  %is_c0000008 = icmp eq i32 %eax_val, 3221225480
+  br i1 %is_c0000008, label %ret_minus1, label %check_c000001d
+
+check_c000001d:
+  %is_c000001d = icmp eq i32 %eax_val, 3221225501
+  br i1 %is_c000001d, label %case_15E, label %fallback_0EF
+
+range_8C_96:
+  ; Explicit mapping for the cases indicated by the assembly comments
+  %is_c0000092 = icmp eq i32 %eax_val, 3221225618
+  %is_c0000095 = icmp eq i32 %eax_val, 3221225621
+  %need_default = or i1 %is_c0000092, %is_c0000095
+  br i1 %need_default, label %ret_minus1, label %check_more_fpe
+
+check_more_fpe:
+  %is_c0000096 = icmp eq i32 %eax_val, 3221225622
+  br i1 %is_c0000096, label %case_15E, label %check_divzero
+
+check_divzero:
+  %is_c0000094 = icmp eq i32 %eax_val, 3221225620
+  br i1 %is_c0000094, label %case_190, label %check_group_d0
+
+check_group_d0:
+  %is_c000008d = icmp eq i32 %eax_val, 3221225613
+  %is_c000008e = icmp eq i32 %eax_val, 3221225614
+  %is_c000008f = icmp eq i32 %eax_val, 3221225615
+  %is_c0000090 = icmp eq i32 %eax_val, 3221225616
+  %is_c0000091 = icmp eq i32 %eax_val, 3221225617
+  %is_c0000093 = icmp eq i32 %eax_val, 3221225619
+  %or1 = or i1 %is_c000008d, %is_c000008e
+  %or2 = or i1 %is_c000008f, %is_c0000090
+  %or3 = or i1 %is_c0000091, %is_c0000093
+  %or12 = or i1 %or1, %or2
+  %or123 = or i1 %or12, %or3
+  br i1 %or123, label %case_0D0, label %ret_minus1
+
+; loc_1400020D0 - SIGFPE group A
+case_0D0:
+  %sigfpe_dfl_0 = call i8* @signal(i32 8, i8* null)
+  %is_one_0 = icmp eq i8* %sigfpe_dfl_0, inttoptr (i64 1 to i8*)
+  br i1 %is_one_0, label %case_224, label %test_sigfpe_0
+
+test_sigfpe_0: ; loc_1400020E6
+  %is_nonnull_0 = icmp ne i8* %sigfpe_dfl_0, null
+  br i1 %is_nonnull_0, label %call_handler_fpe_8, label %fallback_0EF
+
+; loc_140002190 - SIGFPE group B (divide by zero)
+case_190:
+  %sigfpe_dfl_1 = call i8* @signal(i32 8, i8* null)
+  %is_one_1 = icmp eq i8* %sigfpe_dfl_1, inttoptr (i64 1 to i8*)
+  br i1 %is_one_1, label %set_sigfpe_ign, label %test_sigfpe_1
+
+test_sigfpe_1:
+  %is_nonnull_1 = icmp ne i8* %sigfpe_dfl_1, null
+  br i1 %is_nonnull_1, label %call_handler_fpe_8, label %fallback_0EF
+
+set_sigfpe_ign: ; loc_1400021A6 and then default
+  %tmp_ign1 = call i8* @signal(i32 8, i8* inttoptr (i64 1 to i8*))
+  br label %ret_minus1
+
+; loc_14000215E - SIGILL
+case_15E:
+  %sigill_dfl = call i8* @signal(i32 4, i8* null)
+  %is_one_ill = icmp eq i8* %sigill_dfl, inttoptr (i64 1 to i8*)
+  br i1 %is_one_ill, label %set_sigill_ign, label %check_sigill_null
+
+check_sigill_null:
+  %is_null_ill = icmp eq i8* %sigill_dfl, null
+  br i1 %is_null_ill, label %fallback_0EF, label %call_handler_ill_4
+
+set_sigill_ign: ; loc_140002210 then default
+  %tmp_ign2 = call i8* @signal(i32 4, i8* inttoptr (i64 1 to i8*))
+  br label %ret_minus1
+
+call_handler_ill_4:
+  %ill_fp = bitcast i8* %sigill_dfl to void (i32)*
+  call void %ill_fp(i32 4)
+  br label %ret_minus1
+
+; loc_1400021C0 - SIGSEGV
+case_1C0:
+  %sigsegv_dfl = call i8* @signal(i32 11, i8* null)
+  %is_one_segv = icmp eq i8* %sigsegv_dfl, inttoptr (i64 1 to i8*)
+  br i1 %is_one_segv, label %set_sigsegv_ign, label %check_sigsegv_null
+
+check_sigsegv_null:
+  %is_null_segv = icmp eq i8* %sigsegv_dfl, null
+  br i1 %is_null_segv, label %fallback_0EF, label %call_handler_segv_11
+
+set_sigsegv_ign: ; loc_1400021FC then default
+  %tmp_ign3 = call i8* @signal(i32 11, i8* inttoptr (i64 1 to i8*))
+  br label %ret_minus1
+
+call_handler_segv_11:
+  %segv_fp = bitcast i8* %sigsegv_dfl to void (i32)*
+  call void %segv_fp(i32 11)
+  br label %ret_minus1
+
+; loc_1400021F0 - call previous handler with SIGFPE
+call_handler_fpe_8:
+  %fpe_fp = bitcast i8* %sigfpe_dfl_0 to void (i32)*
+  call void %fpe_fp(i32 8)
+  br label %ret_minus1
+
+; loc_140002224 - set SIGFPE to IGN and call sub_1400024E0, then default return
+case_224:
+  %tmp_ign4 = call i8* @signal(i32 8, i8* inttoptr (i64 1 to i8*))
+  call void @sub_1400024E0()
+  br label %ret_minus1
+
+; loc_1400020EF - fallback to user filter
+fallback_0EF:
+  %pf_ptr = load i8*, i8** @qword_1400070D0, align 8
+  %is_null_pf = icmp eq i8* %pf_ptr, null
+  br i1 %is_null_pf, label %ret_zero, label %tail_to_pf
+
+tail_to_pf:
+  %cb = bitcast i8* %pf_ptr to i32 (i8*)*
+  %rv = call i32 %cb(i8* %arg)
+  ret i32 %rv
+
+ret_zero: ; loc_140002140
+  ret i32 0
+
+ret_minus1: ; def_1400020C7
+  ret i32 -1
+}

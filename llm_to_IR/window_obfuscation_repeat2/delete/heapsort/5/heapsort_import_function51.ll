@@ -1,0 +1,59 @@
+; ModuleID = 'module'
+source_filename = "module"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004370 = external global i32*
+@unk_140004BE0 = global [1 x i8] zeroinitializer, align 1
+
+declare void @sub_1400023D0(i8*, i32, i8*)
+
+define void @TlsCallback_1(i8* %DllHandle, i32 %Reason, i8* %Reserved) {
+entry:
+  %p = load i32*, i32** @off_140004370, align 8
+  %v = load i32, i32* %p, align 4
+  %cmp = icmp eq i32 %v, 2
+  br i1 %cmp, label %check_reason, label %store_two
+
+store_two:
+  store i32 2, i32* %p, align 4
+  br label %check_reason
+
+check_reason:
+  %is_two = icmp eq i32 %Reason, 2
+  br i1 %is_two, label %reason2, label %check_reason1
+
+check_reason1:
+  %is_one = icmp eq i32 %Reason, 1
+  br i1 %is_one, label %tailjmp, label %ret
+
+reason2:
+  %baseptr = bitcast [1 x i8]* @unk_140004BE0 to i8*
+  %start = bitcast i8* %baseptr to i8*
+  %end = bitcast i8* %baseptr to i8*
+  %eq = icmp eq i8* %start, %end
+  br i1 %eq, label %ret, label %loop
+
+loop:
+  %cur = phi i8* [ %start, %reason2 ], [ %next, %loop_inc ]
+  %pp = bitcast i8* %cur to (void (i8*, i32, i8*)**) 
+  %fn = load void (i8*, i32, i8*)*, void (i8*, i32, i8*)** %pp, align 8
+  %isnull = icmp eq void (i8*, i32, i8*)* %fn, null
+  br i1 %isnull, label %loop_inc, label %docall
+
+docall:
+  call void %fn(i8* %DllHandle, i32 %Reason, i8* %Reserved)
+  br label %loop_inc
+
+loop_inc:
+  %next = getelementptr i8, i8* %cur, i64 8
+  %cont = icmp ne i8* %next, %end
+  br i1 %cont, label %loop, label %ret
+
+tailjmp:
+  tail call void @sub_1400023D0(i8* %DllHandle, i32 %Reason, i8* %Reserved)
+  ret void
+
+ret:
+  ret void
+}

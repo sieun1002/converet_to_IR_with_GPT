@@ -1,0 +1,11 @@
+; Function: start
+; Start: 0x140001400, End: 0x14000141d
+
+0x140001400: sub     rsp, 28h
+0x140001404: mov     rax, cs:off_140004420
+0x14000140b: mov     dword ptr [rax], 0
+0x140001411: call    sub_140001010
+0x140001416: nop
+0x140001417: nop
+0x140001418: add     rsp, 28h
+0x14000141c: retn

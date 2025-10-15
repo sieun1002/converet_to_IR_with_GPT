@@ -1,0 +1,56 @@
+; Function: sub_140002370
+; Start: 0x140002370, End: 0x140002472
+
+0x140002370: sub     rsp, 38h
+0x140002374: cmp     edx, 2
+0x140002377: jz      loc_140002438
+0x14000237d: ja      short loc_1400023A8
+0x14000237f: test    edx, edx
+0x140002381: jz      short loc_1400023C0
+0x140002383: mov     eax, cs:dword_1400070E8
+0x140002389: test    eax, eax
+0x14000238b: jz      loc_140002460
+0x140002391: mov     cs:dword_1400070E8, 1
+0x14000239b: mov     eax, 1
+0x1400023a0: add     rsp, 38h
+0x1400023a4: retn
+0x1400023a8: cmp     edx, 3
+0x1400023ab: jnz     short loc_14000239B
+0x1400023ad: mov     eax, cs:dword_1400070E8
+0x1400023b3: test    eax, eax
+0x1400023b5: jz      short loc_14000239B
+0x1400023b7: call    sub_1400021E0
+0x1400023bc: jmp     short loc_14000239B
+0x1400023c0: mov     eax, cs:dword_1400070E8
+0x1400023c6: test    eax, eax
+0x1400023c8: jnz     loc_140002450
+0x1400023ce: mov     eax, cs:dword_1400070E8
+0x1400023d4: cmp     eax, 1
+0x1400023d7: jnz     short loc_14000239B
+0x1400023d9: mov     rax, cs:qword_1400070E0
+0x1400023e0: test    rax, rax
+0x1400023e3: jz      short loc_14000240B
+0x1400023e5: nop     word ptr [rax+rax+00000000h]
+0x1400023f0: mov     rcx, rax
+0x1400023f3: mov     rax, [rax+10h]
+0x1400023f7: mov     [rsp+38h+var_10], rax
+0x1400023fc: call    sub_140002B40
+0x140002401: mov     rax, [rsp+38h+var_10]
+0x140002406: test    rax, rax
+0x140002409: jnz     short loc_1400023F0
+0x14000240b: lea     rcx, unk_140007100
+0x140002412: mov     cs:qword_1400070E0, 0
+0x14000241d: mov     cs:dword_1400070E8, 0
+0x140002427: call    sub_14001553E
+0x14000242c: pop     rcx
+0x14000242d: jmp     loc_14000239B
+0x140002438: call    sub_140002480
+0x14000243d: mov     eax, 1
+0x140002442: add     rsp, 38h
+0x140002446: retn
+0x140002450: call    sub_1400021E0
+0x140002455: jmp     loc_1400023CE
+0x140002460: lea     rcx, unk_140007100
+0x140002467: push    rax
+0x140002468: call    sub_140310D2E
+0x14000246d: jmp     loc_140002391

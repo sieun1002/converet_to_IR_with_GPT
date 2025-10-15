@@ -1,0 +1,124 @@
+; ModuleID = 'pe_utils'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+
+@off_1400043A0 = external global i8*, align 8
+
+define i8* @sub_140002820(i32 %index) local_unnamed_addr {
+entry:
+  %base_ptr = load i8*, i8** @off_1400043A0, align 8
+  %mz_ptr = bitcast i8* %base_ptr to i16*
+  %mz = load i16, i16* %mz_ptr, align 1
+  %is_mz = icmp eq i16 %mz, 23117
+  br i1 %is_mz, label %check_pe, label %ret_null
+
+check_pe:                                            ; preds = %entry
+  %e_lfanew_ptr = getelementptr i8, i8* %base_ptr, i64 60
+  %e_lfanew_i32p = bitcast i8* %e_lfanew_ptr to i32*
+  %e_lfanew_i32 = load i32, i32* %e_lfanew_i32p, align 1
+  %e_lfanew = sext i32 %e_lfanew_i32 to i64
+  %nt = getelementptr i8, i8* %base_ptr, i64 %e_lfanew
+  %sigp = bitcast i8* %nt to i32*
+  %sig = load i32, i32* %sigp, align 1
+  %is_pe = icmp eq i32 %sig, 17744
+  br i1 %is_pe, label %check_opt, label %ret_null
+
+check_opt:                                           ; preds = %check_pe
+  %magic_ptr = getelementptr i8, i8* %nt, i64 24
+  %magic_p2 = bitcast i8* %magic_ptr to i16*
+  %magic = load i16, i16* %magic_p2, align 1
+  %is_64 = icmp eq i16 %magic, 523
+  br i1 %is_64, label %after_magic, label %ret_null
+
+after_magic:                                         ; preds = %check_opt
+  %imp_ptr = getelementptr i8, i8* %nt, i64 144
+  %imp_p32 = bitcast i8* %imp_ptr to i32*
+  %imp_rva = load i32, i32* %imp_p32, align 1
+  %imp_rva_is_zero = icmp eq i32 %imp_rva, 0
+  br i1 %imp_rva_is_zero, label %ret_null, label %check_sections
+
+check_sections:                                      ; preds = %after_magic
+  %numsec_ptr = getelementptr i8, i8* %nt, i64 6
+  %numsec_p16 = bitcast i8* %numsec_ptr to i16*
+  %numsec16 = load i16, i16* %numsec_p16, align 1
+  %numsec_zero = icmp eq i16 %numsec16, 0
+  br i1 %numsec_zero, label %ret_null, label %have_num
+
+have_num:                                            ; preds = %check_sections
+  %soh_ptr = getelementptr i8, i8* %nt, i64 20
+  %soh_p16 = bitcast i8* %soh_ptr to i16*
+  %soh16 = load i16, i16* %soh_p16, align 1
+  %opt_start = getelementptr i8, i8* %nt, i64 24
+  %soh64_ext = zext i16 %soh16 to i64
+  %first_section = getelementptr i8, i8* %opt_start, i64 %soh64_ext
+  %numsec64 = zext i16 %numsec16 to i64
+  %size_sections = mul nuw nsw i64 %numsec64, 40
+  %sections_end = getelementptr i8, i8* %first_section, i64 %size_sections
+  %rva64 = zext i32 %imp_rva to i64
+  br label %sec_loop
+
+sec_loop:                                            ; preds = %sec_loop_inc, %have_num
+  %cur = phi i8* [ %first_section, %have_num ], [ %next, %sec_loop_inc ]
+  %va_ptr_i8 = getelementptr i8, i8* %cur, i64 12
+  %va_ptr = bitcast i8* %va_ptr_i8 to i32*
+  %va = load i32, i32* %va_ptr, align 1
+  %va64 = zext i32 %va to i64
+  %rva_ge_va = icmp uge i64 %rva64, %va64
+  br i1 %rva_ge_va, label %check_upper, label %sec_loop_inc
+
+check_upper:                                         ; preds = %sec_loop
+  %vs_ptr_i8 = getelementptr i8, i8* %cur, i64 8
+  %vs_ptr = bitcast i8* %vs_ptr_i8 to i32*
+  %vs = load i32, i32* %vs_ptr, align 1
+  %sum = add i32 %vs, %va
+  %sum64 = zext i32 %sum to i64
+  %inrange = icmp ult i64 %rva64, %sum64
+  br i1 %inrange, label %found_section, label %sec_loop_inc
+
+sec_loop_inc:                                        ; preds = %check_upper, %sec_loop
+  %next = getelementptr i8, i8* %cur, i64 40
+  %done = icmp eq i8* %next, %sections_end
+  br i1 %done, label %ret_null, label %sec_loop
+
+found_section:                                       ; preds = %check_upper
+  %rva64_se = zext i32 %imp_rva to i64
+  %imp_va = getelementptr i8, i8* %base_ptr, i64 %rva64_se
+  br label %desc_loop_head
+
+desc_loop_head:                                      ; preds = %desc_loop_iter, %found_section
+  %p_cur = phi i8* [ %imp_va, %found_section ], [ %p_next, %desc_loop_iter ]
+  %ecx_cur = phi i32 [ %index, %found_section ], [ %ecx_next, %desc_loop_iter ]
+  %d1_ptr_i8 = getelementptr i8, i8* %p_cur, i64 4
+  %d1_ptr = bitcast i8* %d1_ptr_i8 to i32*
+  %d1 = load i32, i32* %d1_ptr, align 1
+  %d1_is_zero = icmp eq i32 %d1, 0
+  br i1 %d1_is_zero, label %check_d2, label %cont_ok
+
+check_d2:                                            ; preds = %desc_loop_head
+  %d2_ptr_i8 = getelementptr i8, i8* %p_cur, i64 12
+  %d2_ptr = bitcast i8* %d2_ptr_i8 to i32*
+  %d2 = load i32, i32* %d2_ptr, align 1
+  %d2_is_zero = icmp eq i32 %d2, 0
+  br i1 %d2_is_zero, label %ret_null, label %cont_ok
+
+cont_ok:                                             ; preds = %check_d2, %desc_loop_head
+  %ecx_pos = icmp sgt i32 %ecx_cur, 0
+  br i1 %ecx_pos, label %desc_loop_iter, label %return_name
+
+desc_loop_iter:                                      ; preds = %cont_ok
+  %ecx_dec = add nsw i32 %ecx_cur, -1
+  %p_next = getelementptr i8, i8* %p_cur, i64 20
+  %ecx_next = %ecx_dec
+  br label %desc_loop_head
+
+return_name:                                         ; preds = %cont_ok
+  %name_ptr_i8 = getelementptr i8, i8* %p_cur, i64 12
+  %name_ptr_p32 = bitcast i8* %name_ptr_i8 to i32*
+  %name_rva = load i32, i32* %name_ptr_p32, align 1
+  %name_rva64 = zext i32 %name_rva to i64
+  %name_va = getelementptr i8, i8* %base_ptr, i64 %name_rva64
+  ret i8* %name_va
+
+ret_null:                                            ; preds = %sec_loop_inc, %check_d2, %after_magic, %check_sections, %check_opt, %check_pe, %entry
+  ret i8* null
+}

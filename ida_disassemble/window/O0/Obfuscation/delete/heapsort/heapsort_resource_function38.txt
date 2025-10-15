@@ -1,0 +1,28 @@
+; Function: sub_140002960
+; Start: 0x140002960, End: 0x1400029B3
+
+0x140002960: push    rdi
+0x140002961: push    rsi
+0x140002962: push    rbx
+0x140002963: sub     rsp, 40h
+0x140002967: mov     rbx, rcx
+0x14000296A: lea     rsi, [rsp+58h+arg_8]
+0x14000296F: mov     ecx, 1; Ix
+0x140002974: mov     qword ptr [rsp+58h+arg_8], rdx
+0x140002979: mov     [rsp+58h+arg_10], r8
+0x14000297E: mov     [rsp+58h+arg_18], r9
+0x140002983: mov     [rsp+58h+var_20], rsi
+0x140002988: call    __acrt_iob_func
+0x14000298D: mov     rdi, rax
+0x140002990: call    sub_140002A10
+0x140002995: xor     r9d, r9d; Locale
+0x140002998: mov     r8, rbx; Format
+0x14000299B: mov     rdx, rdi; Stream
+0x14000299E: mov     rcx, [rax]; Options
+0x1400029A1: mov     [rsp+58h+ArgList], rsi; ArgList
+0x1400029A6: call    __stdio_common_vfprintf
+0x1400029AB: add     rsp, 40h
+0x1400029AF: pop     rbx
+0x1400029B0: pop     rsi
+0x1400029B1: pop     rdi
+0x1400029B2: retn

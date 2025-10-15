@@ -1,0 +1,41 @@
+; Function: TlsCallback_0
+; Start: 0x1400018e0, End: 0x14000195b
+
+0x1400018e0: push    rsi
+0x1400018e1: push    rbx
+0x1400018e2: sub     rsp, 28h
+0x1400018e6: mov     rax, cs:off_140004370
+0x1400018ed: cmp     dword ptr [rax], 2
+0x1400018f0: jz      short loc_1400018F8
+0x1400018f2: mov     dword ptr [rax], 2
+0x1400018f8: cmp     edx, 2
+0x1400018fb: jz      short loc_140001910
+0x1400018fd: cmp     edx, 1
+0x140001900: jz      short loc_140001950
+0x140001902: add     rsp, 28h
+0x140001906: pop     rbx
+0x140001907: pop     rsi
+0x140001908: retn
+0x140001909: align 10h
+0x140001910: lea     rbx, unk_140004BE0
+0x140001917: lea     rsi, unk_140004BE0
+0x14000191e: cmp     rbx, rsi
+0x140001921: jz      short loc_140001902
+0x140001923: xchg    ax, ax
+0x140001925: nop     word ptr [rax+rax+00000000h]
+0x140001930: mov     rax, [rbx]
+0x140001933: test    rax, rax
+0x140001936: jz      short loc_14000193A
+0x140001938: call    rax
+0x14000193a: add     rbx, 8
+0x14000193e: cmp     rbx, rsi
+0x140001941: jnz     short loc_140001930
+0x140001943: add     rsp, 28h
+0x140001947: pop     rbx
+0x140001948: pop     rsi
+0x140001949: retn
+0x14000194a: align 10h
+0x140001950: add     rsp, 28h
+0x140001954: pop     rbx
+0x140001955: pop     rsi
+0x140001956: jmp     sub_140002370

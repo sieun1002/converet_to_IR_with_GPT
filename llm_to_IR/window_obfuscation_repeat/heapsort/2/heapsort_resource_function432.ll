@@ -1,0 +1,161 @@
+; ModuleID = 'heapsort_fixed'
+source_filename = "heapsort_fixed.ll"
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+@.str.intspace = private unnamed_addr constant [4 x i8] c"%d \00", align 1
+@.str.newline  = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+
+declare dso_local dllimport i32 @printf(i8*, ...)
+
+define internal void @sift_down(i32* nocapture %arr, i32 %n, i32 %start) {
+entry:
+  br label %while
+
+while:                                            ; preds = %update, %entry
+  %i = phi i32 [ %start, %entry ], [ %i_next, %update ]
+  %i_shl = shl i32 %i, 1
+  %l = add nsw i32 %i_shl, 1
+  %l_ge_n = icmp sge i32 %l, %n
+  br i1 %l_ge_n, label %done, label %has_left
+
+has_left:                                         ; preds = %while
+  %r = add nsw i32 %l, 1
+  %r_lt_n = icmp slt i32 %r, %n
+  br i1 %r_lt_n, label %both, label %only_left
+
+only_left:                                        ; preds = %has_left
+  %l64_ol = sext i32 %l to i64
+  %pl_ol = getelementptr inbounds i32, i32* %arr, i64 %l64_ol
+  %vl_ol = load i32, i32* %pl_ol, align 4
+  br label %choose_l
+
+both:                                             ; preds = %has_left
+  %l64_b = sext i32 %l to i64
+  %r64_b = sext i32 %r to i64
+  %pl_b = getelementptr inbounds i32, i32* %arr, i64 %l64_b
+  %pr_b = getelementptr inbounds i32, i32* %arr, i64 %r64_b
+  %vl_b = load i32, i32* %pl_b, align 4
+  %vr_b = load i32, i32* %pr_b, align 4
+  %cmp_vr_gt = icmp sgt i32 %vr_b, %vl_b
+  br i1 %cmp_vr_gt, label %choose_r, label %choose_l
+
+choose_l:                                         ; preds = %both, %only_left
+  %childPtr_l = phi i32* [ %pl_ol, %only_left ], [ %pl_b, %both ]
+  %childVal_l = phi i32 [ %vl_ol, %only_left ], [ %vl_b, %both ]
+  %childIdx_l = phi i32 [ %l, %only_left ], [ %l, %both ]
+  br label %compare
+
+choose_r:                                         ; preds = %both
+  br label %compare
+
+compare:                                          ; preds = %choose_r, %choose_l
+  %childPtr = phi i32* [ %childPtr_l, %choose_l ], [ %pr_b, %choose_r ]
+  %childVal = phi i32 [ %childVal_l, %choose_l ], [ %vr_b, %choose_r ]
+  %childIdx = phi i32 [ %childIdx_l, %choose_l ], [ %r, %choose_r ]
+  %i64 = sext i32 %i to i64
+  %pi = getelementptr inbounds i32, i32* %arr, i64 %i64
+  %vi = load i32, i32* %pi, align 4
+  %cmp_child_gt = icmp sgt i32 %childVal, %vi
+  br i1 %cmp_child_gt, label %do_swap, label %done
+
+do_swap:                                          ; preds = %compare
+  store i32 %childVal, i32* %pi, align 4
+  store i32 %vi, i32* %childPtr, align 4
+  br label %update
+
+update:                                           ; preds = %do_swap
+  %i_next = phi i32 [ %childIdx, %do_swap ]
+  br label %while
+
+done:                                             ; preds = %compare, %while
+  ret void
+}
+
+define dso_local void @heapsort(i32* nocapture %arr, i32 %n) {
+entry:
+  %more1 = icmp sgt i32 %n, 1
+  br i1 %more1, label %do_heapify, label %ret
+
+do_heapify:                                       ; preds = %entry
+  %half = ashr i32 %n, 1
+  %start0 = add nsw i32 %half, -1
+  br label %heapify_loop
+
+heapify_loop:                                     ; preds = %heapify_iter, %do_heapify
+  %i = phi i32 [ %start0, %do_heapify ], [ %i_next, %heapify_iter ]
+  call void @sift_down(i32* %arr, i32 %n, i32 %i)
+  %i_next = add nsw i32 %i, -1
+  %cont = icmp sge i32 %i_next, 0
+  br i1 %cont, label %heapify_iter, label %sort_init
+
+heapify_iter:                                     ; preds = %heapify_loop
+  br label %heapify_loop
+
+sort_init:                                        ; preds = %heapify_loop
+  %i_start = add nsw i32 %n, -1
+  br label %sort_loop
+
+sort_loop:                                        ; preds = %after_sift, %sort_init
+  %i2 = phi i32 [ %i_start, %sort_init ], [ %i_next2, %after_sift ]
+  %i2_64 = sext i32 %i2 to i64
+  %p0 = getelementptr inbounds i32, i32* %arr, i64 0
+  %pi2 = getelementptr inbounds i32, i32* %arr, i64 %i2_64
+  %v0 = load i32, i32* %p0, align 4
+  %vi2 = load i32, i32* %pi2, align 4
+  store i32 %vi2, i32* %p0, align 4
+  store i32 %v0, i32* %pi2, align 4
+  call void @sift_down(i32* %arr, i32 %i2, i32 0)
+  br label %after_sift
+
+after_sift:                                       ; preds = %sort_loop
+  %i_next2 = add nsw i32 %i2, -1
+  %cond2 = icmp sgt i32 %i_next2, 0
+  br i1 %cond2, label %sort_loop, label %ret
+
+ret:                                              ; preds = %after_sift, %entry
+  ret void
+}
+
+define dso_local i32 @main() {
+entry:
+  %arr = alloca [8 x i32], align 16
+  %e0 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 0
+  store i32 12, i32* %e0, align 16
+  %e1 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 1
+  store i32 11, i32* %e1, align 4
+  %e2 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 2
+  store i32 13, i32* %e2, align 8
+  %e3 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 3
+  store i32 5, i32* %e3, align 4
+  %e4 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 4
+  store i32 6, i32* %e4, align 16
+  %e5 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 5
+  store i32 7, i32* %e5, align 4
+  %e6 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 6
+  store i32 3, i32* %e6, align 8
+  %e7 = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 7
+  store i32 17, i32* %e7, align 4
+  %base = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 0
+  call void @heapsort(i32* %base, i32 8)
+  br label %print_loop
+
+print_loop:                                       ; preds = %print_iter, %entry
+  %i = phi i32 [ 0, %entry ], [ %inc, %print_iter ]
+  %cmp = icmp slt i32 %i, 8
+  br i1 %cmp, label %print_iter, label %print_end
+
+print_iter:                                       ; preds = %print_loop
+  %i64 = sext i32 %i to i64
+  %pi = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 %i64
+  %val = load i32, i32* %pi, align 4
+  %fmtptr = getelementptr inbounds [4 x i8], [4 x i8]* @.str.intspace, i64 0, i64 0
+  %call = call i32 (i8*, ...) @printf(i8* %fmtptr, i32 %val)
+  %inc = add nsw i32 %i, 1
+  br label %print_loop
+
+print_end:                                        ; preds = %print_loop
+  %nlptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str.newline, i64 0, i64 0
+  %call2 = call i32 (i8*, ...) @printf(i8* %nlptr)
+  ret i32 0
+}

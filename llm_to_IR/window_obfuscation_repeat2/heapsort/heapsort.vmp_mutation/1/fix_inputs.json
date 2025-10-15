@@ -1,0 +1,45 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 287,
+      "ir_len": 10528,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll:281:42: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg = atomicrmw xchg i8** %lock_ptr, i8* null seq_cst\n                                         ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-i64:64-f80:128-n8:16:32:64-S128\"\n\n@off_140004450 = external global i8*\n@__imp_Sleep = external global void ",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll"
+    },
+    {
+      "filename": "sub_140001AD0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 368,
+      "ir_len": 7391,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll:11:61: error: constant expression type mismatch: got type '[39 x i8]' but expected '[40 x i8]'\n@aVirtualprotect = internal unnamed_addr constant [40 x i8] c\"  VirtualProtect failed with code 0x%",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = external global i32\n@qword_1400070A8 = external global i8*\n\n@__imp_VirtualQuery = external dllimport global i64 (i8*, ",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll"
+    },
+    {
+      "filename": "sub_1400027C0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 200,
+      "ir_len": 4662,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll:67:6: error: expected '=' after instruction id\n  %38load = load i32, i32* %37, align 4\n     ^\n",
+      "ir_preview": "; ModuleID = 'pe_utils'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_1400043A0 = external global i8*\n\ndefine i8* @sub_1400027C0(i32 %ecx) {\nentry:\n  %0 = load i8*, i8** @off_1400043A0\n  %1 = bitcast",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll"
+    },
+    {
+      "filename": "sub_1400027C0.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 199,
+      "ir_len": 3578,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll:68:3: error: instruction expected to be numbered '%38'\n  %39 = icmp ult i32 %18, %sec_va\n  ^\n",
+      "ir_preview": "; ModuleID = 'pe_utils'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_1400043A0 = external global i8*\n\ndefine i8* @sub_1400027C0(i32 %ecx) {\nentry:\n  %0 = load i8*, i8** @off_1400043A0\n  %1 = bitcast",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll"
+    }
+  ]
+}

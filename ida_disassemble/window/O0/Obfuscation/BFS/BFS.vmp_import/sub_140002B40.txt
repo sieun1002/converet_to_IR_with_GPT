@@ -1,0 +1,36 @@
+; Function: sub_140002B40
+; Start: 0x140002b40, End: 0x140002b9f
+
+0x140002b40: push    rbp
+0x140002b41: push    rdi
+0x140002b42: push    rsi
+0x140002b43: push    rbx
+0x140002b44: sub     rsp, 28h
+0x140002b48: mov     ebp, r9d
+0x140002b4b: mov     rsi, rdx
+0x140002b4e: mov     rbx, r8
+0x140002b51: mov     rdi, rcx
+0x140002b54: call    sub_140002C10
+0x140002b59: cmp     ebp, 1
+0x140002b5c: mov     ecx, 1
+0x140002b61: sbb     ecx, 0FFFFFFFFh
+0x140002b64: call    sub_140002BF8
+0x140002b69: call    sub_140002BE0
+0x140002b6e: mov     eax, [rax]
+0x140002b70: mov     [rdi], eax
+0x140002b72: call    loc_140002BE8
+0x140002b77: mov     rax, [rax]
+0x140002b7a: mov     [rsi], rax
+0x140002b7d: call    loc_140002CA0
+0x140002b82: mov     rax, [rax]
+0x140002b85: mov     [rbx], rax
+0x140002b88: mov     rax, [rsp+40h+arg_28]
+0x140002b8d: mov     ecx, [rax]
+0x140002b8f: call    sub_140002C80
+0x140002b94: xor     eax, eax
+0x140002b96: add     rsp, 28h
+0x140002b9a: pop     rbx
+0x140002b9b: pop     rsi
+0x140002b9c: pop     rdi
+0x140002b9d: pop     rbp
+0x140002b9e: retn

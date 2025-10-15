@@ -1,0 +1,167 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004400 = external global i32*
+@qword_1400070D0 = external global i32 (i8*)*
+
+declare void @sub_140001010()
+declare void @sub_1400024E0()
+declare void (i32)* @signal(i32, void (i32)*)
+
+define void @start() {
+entry:
+  %p = load i32*, i32** @off_140004400
+  store i32 0, i32* %p, align 4
+  call void @sub_140001010()
+  ret void
+}
+
+define i32 @TopLevelExceptionFilter(i8* %rcx) {
+entry:
+  %exrec_ptrptr = bitcast i8* %rcx to i8**
+  %exrec_ptr = load i8*, i8** %exrec_ptrptr, align 8
+  %codeptr = bitcast i8* %exrec_ptr to i32*
+  %code = load i32, i32* %codeptr, align 4
+  %masked = and i32 %code, 553648127
+  %is_ccg = icmp eq i32 %masked, 541541187
+  br i1 %is_ccg, label %check_flags, label %A1
+
+check_flags:
+  %flagbyteptr = getelementptr i8, i8* %exrec_ptr, i64 4
+  %flagbyte = load i8, i8* %flagbyteptr, align 1
+  %bitmask = and i8 %flagbyte, 1
+  %hasbit = icmp ne i8 %bitmask, 0
+  br i1 %hasbit, label %A1, label %def_ret
+
+A1:
+  %ugt_0096 = icmp ugt i32 %code, 3221225622
+  br i1 %ugt_0096, label %toExternal, label %A1_cont
+
+A1_cont:
+  %ule_008B = icmp ule i32 %code, 3221225611
+  br i1 %ule_008B, label %block2110, label %group
+
+block2110:
+  %eq_0005 = icmp eq i32 %code, 3221225477
+  br i1 %eq_0005, label %handle_SEGV, label %block2110_cont
+
+block2110_cont:
+  %ugt_0005 = icmp ugt i32 %code, 3221225477
+  br i1 %ugt_0005, label %block2150, label %check_80000002
+
+check_80000002:
+  %eq_80000002 = icmp eq i32 %code, 2147483650
+  br i1 %eq_80000002, label %def_ret, label %toExternal
+
+block2150:
+  %eq_0008 = icmp eq i32 %code, 3221225480
+  br i1 %eq_0008, label %def_ret, label %block2150_cont
+
+block2150_cont:
+  %eq_001D = icmp eq i32 %code, 3221225501
+  br i1 %eq_001D, label %handle_SIGILL, label %toExternal
+
+group:
+  %ge_008D = icmp uge i32 %code, 3221225613
+  %le_0091 = icmp ule i32 %code, 3221225617
+  %inrange = and i1 %ge_008D, %le_0091
+  %eq_0093 = icmp eq i32 %code, 3221225619
+  %sel20D0 = or i1 %inrange, %eq_0093
+  br i1 %sel20D0, label %handle_SIGFPE_common, label %group_cont
+
+group_cont:
+  %eq_0094 = icmp eq i32 %code, 3221225620
+  br i1 %eq_0094, label %handle_SIGFPE_divzero, label %check_0096
+
+check_0096:
+  %eq_0096 = icmp eq i32 %code, 3221225622
+  br i1 %eq_0096, label %handle_SIGILL, label %def_ret
+
+handle_SIGFPE_common:
+  %prev_fpe = call void (i32)* @signal(i32 8, void (i32)* null)
+  %sig_ign = icmp eq void (i32)* %prev_fpe, inttoptr (i64 1 to void (i32)*)
+  br i1 %sig_ign, label %fpe_ign_path, label %fpe_check_prev
+
+fpe_check_prev:
+  %prev_nonnull = icmp ne void (i32)* %prev_fpe, null
+  br i1 %prev_nonnull, label %call_prev_fpe, label %toExternal
+
+call_prev_fpe:
+  call void %prev_fpe(i32 8)
+  br label %def_ret
+
+fpe_ign_path:
+  %ign_handler = inttoptr (i64 1 to void (i32)*)
+  %tmp_sig = call void (i32)* @signal(i32 8, void (i32)* %ign_handler)
+  call void @sub_1400024E0()
+  br label %def_ret
+
+handle_SIGFPE_divzero:
+  %prev_div = call void (i32)* @signal(i32 8, void (i32)* null)
+  %is_ign_div = icmp eq void (i32)* %prev_div, inttoptr (i64 1 to void (i32)*)
+  br i1 %is_ign_div, label %div_set_ign, label %div_check_prev
+
+div_check_prev:
+  %prev_div_nonnull = icmp ne void (i32)* %prev_div, null
+  br i1 %prev_div_nonnull, label %call_prev_div, label %toExternal
+
+call_prev_div:
+  call void %prev_div(i32 8)
+  br label %def_ret
+
+div_set_ign:
+  %ign_handler2 = inttoptr (i64 1 to void (i32)*)
+  %tmp_sig2 = call void (i32)* @signal(i32 8, void (i32)* %ign_handler2)
+  br label %def_ret
+
+handle_SEGV:
+  %prev_segv = call void (i32)* @signal(i32 11, void (i32)* null)
+  %is_ign_segv = icmp eq void (i32)* %prev_segv, inttoptr (i64 1 to void (i32)*)
+  br i1 %is_ign_segv, label %segv_set_ign, label %segv_check_prev
+
+segv_check_prev:
+  %prev_segv_nonnull = icmp ne void (i32)* %prev_segv, null
+  br i1 %prev_segv_nonnull, label %call_prev_segv, label %toExternal
+
+call_prev_segv:
+  call void %prev_segv(i32 11)
+  br label %def_ret
+
+segv_set_ign:
+  %ign_handler3 = inttoptr (i64 1 to void (i32)*)
+  %tmp_sig3 = call void (i32)* @signal(i32 11, void (i32)* %ign_handler3)
+  br label %def_ret
+
+handle_SIGILL:
+  %prev_ill = call void (i32)* @signal(i32 4, void (i32)* null)
+  %is_ign_ill = icmp eq void (i32)* %prev_ill, inttoptr (i64 1 to void (i32)*)
+  br i1 %is_ign_ill, label %ill_set_ign, label %ill_check_prev
+
+ill_check_prev:
+  %prev_ill_nonnull = icmp ne void (i32)* %prev_ill, null
+  br i1 %prev_ill_nonnull, label %call_prev_ill, label %toExternal
+
+call_prev_ill:
+  call void %prev_ill(i32 4)
+  br label %def_ret
+
+ill_set_ign:
+  %ign_handler4 = inttoptr (i64 1 to void (i32)*)
+  %tmp_sig4 = call void (i32)* @signal(i32 4, void (i32)* %ign_handler4)
+  br label %def_ret
+
+toExternal:
+  %fptr = load i32 (i8*)*, i32 (i8*)** @qword_1400070D0, align 8
+  %hasf = icmp ne i32 (i8*)* %fptr, null
+  br i1 %hasf, label %tail, label %ret0
+
+ret0:
+  ret i32 0
+
+tail:
+  %res = call i32 %fptr(i8* %rcx)
+  ret i32 %res
+
+def_ret:
+  ret i32 -1
+}

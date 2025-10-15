@@ -1,0 +1,192 @@
+; Function: main
+; Start: 0x1400016FF, End: 0x140001AB2
+
+0x1400016FF: push    rbp
+0x140001700: sub     rsp, 180h
+0x140001707: lea     rbp, [rsp+80h]
+0x14000170F: call    __main
+0x140001714: mov     [rbp+100h+var_38], 6
+0x14000171F: mov     [rbp+100h+var_8], 0
+0x14000172A: jmp     short loc_140001743
+loc_14000172C:
+0x14000172C: mov     rax, [rbp+100h+var_8]
+0x140001733: mov     [rbp+rax*4+100h+var_E0], 0FFFFFFFFh
+0x14000173B: add     [rbp+100h+var_8], 1
+loc_140001743:
+0x140001743: mov     rax, [rbp+100h+var_38]
+0x14000174A: imul    rax, rax
+0x14000174E: cmp     [rbp+100h+var_8], rax
+0x140001755: jb      short loc_14000172C
+0x140001757: mov     [rbp+100h+var_10], 0
+0x140001762: jmp     short loc_140001787
+loc_140001764:
+0x140001764: mov     rax, [rbp+100h+var_38]
+0x14000176B: add     rax, 1
+0x14000176F: imul    rax, [rbp+100h+var_10]
+0x140001777: mov     [rbp+rax*4+100h+var_E0], 0
+0x14000177F: add     [rbp+100h+var_10], 1
+loc_140001787:
+0x140001787: mov     rax, [rbp+100h+var_10]
+0x14000178E: cmp     rax, [rbp+100h+var_38]
+0x140001795: jb      short loc_140001764
+0x140001797: mov     [rbp+100h+var_DC], 7
+0x14000179E: mov     rax, [rbp+100h+var_38]
+0x1400017A5: mov     [rbp+rax*4+100h+var_E0], 7
+0x1400017AD: mov     [rbp+100h+var_D8], 9
+0x1400017B4: mov     rax, [rbp+100h+var_38]
+0x1400017BB: add     rax, rax
+0x1400017BE: mov     [rbp+rax*4+100h+var_E0], 9
+0x1400017C6: mov     [rbp+100h+var_D4], 0Ah
+0x1400017CD: mov     rdx, [rbp+100h+var_38]
+0x1400017D4: mov     rax, rdx
+0x1400017D7: add     rax, rax
+0x1400017DA: add     rax, rdx
+0x1400017DD: mov     [rbp+rax*4+100h+var_E0], 0Ah
+0x1400017E5: mov     rax, [rbp+100h+var_38]
+0x1400017EC: add     rax, 3
+0x1400017F0: mov     [rbp+rax*4+100h+var_E0], 0Fh
+0x1400017F8: mov     rdx, [rbp+100h+var_38]
+0x1400017FF: mov     rax, rdx
+0x140001802: add     rax, rax
+0x140001805: add     rax, rdx
+0x140001808: add     rax, 1
+0x14000180C: mov     [rbp+rax*4+100h+var_E0], 0Fh
+0x140001814: mov     rax, [rbp+100h+var_38]
+0x14000181B: add     rax, rax
+0x14000181E: add     rax, 3
+0x140001822: mov     [rbp+rax*4+100h+var_E0], 0Bh
+0x14000182A: mov     rdx, [rbp+100h+var_38]
+0x140001831: mov     rax, rdx
+0x140001834: add     rax, rax
+0x140001837: add     rax, rdx
+0x14000183A: add     rax, 2
+0x14000183E: mov     [rbp+rax*4+100h+var_E0], 0Bh
+0x140001846: mov     rdx, [rbp+100h+var_38]
+0x14000184D: mov     rax, rdx
+0x140001850: add     rax, rax
+0x140001853: add     rax, rdx
+0x140001856: add     rax, 4
+0x14000185A: mov     [rbp+rax*4+100h+var_E0], 6
+0x140001862: mov     rax, [rbp+100h+var_38]
+0x140001869: shl     rax, 2
+0x14000186D: add     rax, 3
+0x140001871: mov     [rbp+rax*4+100h+var_E0], 6
+0x140001879: mov     rax, [rbp+100h+var_38]
+0x140001880: shl     rax, 2
+0x140001884: add     rax, 5
+0x140001888: mov     [rbp+rax*4+100h+var_E0], 9
+0x140001890: mov     rdx, [rbp+100h+var_38]
+0x140001897: mov     rax, rdx
+0x14000189A: shl     rax, 2
+0x14000189E: add     rax, rdx
+0x1400018A1: add     rax, 4
+0x1400018A5: mov     [rbp+rax*4+100h+var_E0], 9
+0x1400018AD: mov     [rbp+100h+var_40], 0
+0x1400018B8: mov     r9, rbp
+0x1400018BB: mov     r8, [rbp+100h+var_40]
+0x1400018C2: mov     rdx, [rbp+100h+var_38]
+0x1400018C9: lea     rax, [rbp+100h+var_E0]
+0x1400018CD: lea     rcx, [rbp+100h+var_120]
+0x1400018D1: mov     [rsp+180h+var_160], rcx
+0x1400018D6: mov     rcx, rax
+0x1400018D9: call    dijkstra
+0x1400018DE: mov     [rbp+100h+var_18], 0
+0x1400018E9: jmp     short loc_140001956
+loc_1400018EB:
+0x1400018EB: mov     rax, [rbp+100h+var_18]
+0x1400018F2: mov     eax, [rbp+rax*4+100h+var_100]
+0x1400018F6: cmp     eax, 3F3F3F3Eh
+0x1400018FB: jle     short loc_14000191F
+0x1400018FD: mov     rdx, [rbp+100h+var_18]
+0x140001904: mov     rax, [rbp+100h+var_40]
+0x14000190B: lea     rcx, _Format; "dist(%zu -> %zu) = INF\n"
+0x140001912: mov     r8, rdx
+0x140001915: mov     rdx, rax
+0x140001918: call    printf
+0x14000191D: jmp     short loc_14000194E
+loc_14000191F:
+0x14000191F: mov     rax, [rbp+100h+var_18]
+0x140001926: mov     r8d, [rbp+rax*4+100h+var_100]
+0x14000192B: mov     rdx, [rbp+100h+var_18]
+0x140001932: mov     rax, [rbp+100h+var_40]
+0x140001939: lea     rcx, aDistZuZuD; "dist(%zu -> %zu) = %d\n"
+0x140001940: mov     r9d, r8d
+0x140001943: mov     r8, rdx
+0x140001946: mov     rdx, rax
+0x140001949: call    printf
+loc_14000194E:
+0x14000194E: add     [rbp+100h+var_18], 1
+loc_140001956:
+0x140001956: mov     rax, [rbp+100h+var_18]
+0x14000195D: cmp     rax, [rbp+100h+var_38]
+0x140001964: jb      short loc_1400018EB
+0x140001966: mov     [rbp+100h+var_48], 5
+0x140001971: mov     rax, [rbp+100h+var_48]
+0x140001978: mov     eax, [rbp+rax*4+100h+var_100]
+0x14000197C: cmp     eax, 3F3F3F3Eh
+0x140001981: jle     short loc_1400019A8
+0x140001983: mov     rdx, [rbp+100h+var_48]
+0x14000198A: mov     rax, [rbp+100h+var_40]
+0x140001991: lea     rcx, aNoPathFromZuTo; "no path from %zu to %zu\n"
+0x140001998: mov     r8, rdx
+0x14000199B: mov     rdx, rax
+0x14000199E: call    printf
+0x1400019A3: jmp     loc_140001AA4
+loc_1400019A8:
+0x1400019A8: mov     [rbp+100h+var_20], 0
+0x1400019B3: mov     rax, [rbp+100h+var_48]
+0x1400019BA: mov     [rbp+100h+var_24], eax
+0x1400019C0: jmp     short loc_1400019F4
+loc_1400019C2:
+0x1400019C2: mov     rax, [rbp+100h+var_20]
+0x1400019C9: lea     rdx, [rax+1]
+0x1400019CD: mov     [rbp+100h+var_20], rdx
+0x1400019D4: mov     edx, [rbp+100h+var_24]
+0x1400019DA: movsxd  rdx, edx
+0x1400019DD: mov     [rbp+rax*8+100h+var_150], rdx
+0x1400019E2: mov     eax, [rbp+100h+var_24]
+0x1400019E8: cdqe
+0x1400019EA: mov     eax, [rbp+rax*4+100h+var_120]
+0x1400019EE: mov     [rbp+100h+var_24], eax
+loc_1400019F4:
+0x1400019F4: cmp     [rbp+100h+var_24], 0FFFFFFFFh
+0x1400019FB: jnz     short loc_1400019C2
+0x1400019FD: mov     rdx, [rbp+100h+var_48]
+0x140001A04: mov     rax, [rbp+100h+var_40]
+0x140001A0B: lea     rcx, aPathZuZu; "path %zu -> %zu:"
+0x140001A12: mov     r8, rdx
+0x140001A15: mov     rdx, rax
+0x140001A18: call    printf
+0x140001A1D: mov     [rbp+100h+var_30], 0
+0x140001A28: jmp     short loc_140001A8A
+loc_140001A2A:
+0x140001A2A: mov     rax, [rbp+100h+var_20]
+0x140001A31: sub     rax, [rbp+100h+var_30]
+0x140001A38: sub     rax, 1
+0x140001A3C: mov     rax, [rbp+rax*8+100h+var_150]
+0x140001A41: mov     [rbp+100h+var_50], rax
+0x140001A48: mov     rax, [rbp+100h+var_30]
+0x140001A4F: add     rax, 1
+0x140001A53: cmp     rax, [rbp+100h+var_20]
+0x140001A5A: jnb     short loc_140001A65
+0x140001A5C: lea     rax, asc_140004059; " ->"
+0x140001A63: jmp     short loc_140001A6C
+loc_140001A65:
+0x140001A65: lea     rax, unk_14000405D
+loc_140001A6C:
+0x140001A6C: mov     rdx, [rbp+100h+var_50]
+0x140001A73: lea     rcx, aZuS; " %zu%s"
+0x140001A7A: mov     r8, rax
+0x140001A7D: call    printf
+0x140001A82: add     [rbp+100h+var_30], 1
+loc_140001A8A:
+0x140001A8A: mov     rax, [rbp+100h+var_30]
+0x140001A91: cmp     rax, [rbp+100h+var_20]
+0x140001A98: jb      short loc_140001A2A
+0x140001A9A: mov     ecx, 0Ah; Character
+0x140001A9F: call    putchar
+loc_140001AA4:
+0x140001AA4: mov     eax, 0
+0x140001AA9: add     rsp, 180h
+0x140001AB0: pop     rbp
+0x140001AB1: retn

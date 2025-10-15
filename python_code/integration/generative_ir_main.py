@@ -7,11 +7,11 @@ from generative_ir import GPTRunner, _now_iso
 
 # ===== 사용자가 수정할 설정 =====
 PRINT = ("")
-SYSTEM_PROMPT_FILE = "../systemprompt/error_analysis2.txt"      # 또는 파일 경로 (있으면 우선)
-NUM_ROUNDS  = 10       # 반복 횟수
-START_INDEX = 1       # 시작 폴더 번호 (예: 6 -> 6,7,8,9,10)
-INPUT_FOLDER = "../../ida_disassemble/O0/"
-OUTPUT_ROOT  = "../../llm_to_IR/gpt_api_error_analysis2/"
+SYSTEM_PROMPT_FILE = "../systemprompt/window_error_analysis.txt"      # 또는 파일 경로 (있으면 우선)
+NUM_ROUNDS  = 5      # 반복 횟수
+START_INDEX = 6       # 시작 폴더 번호 (예: 6 -> 6,7,8,9,10)
+INPUT_FOLDER = "../../ida_disassemble/window/O0/heapsort"
+OUTPUT_ROOT  = "../../llm_to_IR/window_gpt_api_error_analysis_modify_prompt2/heapsort"
 
 API_KEY = os.getenv("OPENAI_API_KEY", "")
 MODEL = "gpt-5"

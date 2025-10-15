@@ -1,0 +1,89 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400010101.ll:15:3: error: Expected ordering on atomic instruction\n  %old = extractvalue { i8*, i1 } %cmpx, 0\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400010101.bc",
+      "start_time": "2025-09-27T21:44:19",
+      "end_time": "2025-09-27T21:44:19",
+      "elapsed_sec": 0.013116
+    },
+    {
+      "filename": "sub_140001C00.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140001C001.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140001C001.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140001C001.ll:7:58: error: constant expression type mismatch: got type '[39 x i8]' but expected '[40 x i8]'\n@.str_vprotect = private unnamed_addr constant [40 x i8] c\"  VirtualProtect failed with code 0x%x\\00\"\n                                                         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140001C001.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140001C001.bc",
+      "start_time": "2025-09-27T22:01:18",
+      "end_time": "2025-09-27T22:01:18",
+      "elapsed_sec": 0.013952
+    },
+    {
+      "filename": "sub_140002100.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021001.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021001.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021001.ll:11:38: error: '@qword_1400070B0' defined with type 'void (...)**' but expected 'void (...)*'\n  %fp = load void (...)*, void (...)*@qword_1400070B0, align 8\n                                     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021001.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021001.bc",
+      "start_time": "2025-09-27T22:09:03",
+      "end_time": "2025-09-27T22:09:03",
+      "elapsed_sec": 0.011375
+    },
+    {
+      "filename": "sub_140002100.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021002.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021002.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021002.ll:29:20: error: '%fp' defined with type 'void (...)*' but expected 'void (...)* (i8*)*'\n  call void (...)* %fp(i8* %obj_i8)\n                   ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021002.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400021002.bc",
+      "start_time": "2025-09-27T22:09:32",
+      "end_time": "2025-09-27T22:09:32",
+      "elapsed_sec": 0.013521
+    },
+    {
+      "filename": "sub_140002650.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400026501.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400026501.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400026501.ll:7:29: error: dso_location and DLL-StorageClass mismatch\ndeclare dso_local dllimport i64 @strlen(i8*)\n                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400026501.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400026501.bc",
+      "start_time": "2025-09-27T22:20:01",
+      "end_time": "2025-09-27T22:20:01",
+      "elapsed_sec": 0.012189
+    },
+    {
+      "filename": "sub_140002B10.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140002B101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140002B101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140002B101.ll:7:29: error: dso_location and DLL-StorageClass mismatch\ndeclare dso_local dllimport i8* @__acrt_iob_func(i32)\n                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140002B101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_140002B101.bc",
+      "start_time": "2025-09-27T22:40:07",
+      "end_time": "2025-09-27T22:40:07",
+      "elapsed_sec": 0.011183
+    }
+  ]
+}

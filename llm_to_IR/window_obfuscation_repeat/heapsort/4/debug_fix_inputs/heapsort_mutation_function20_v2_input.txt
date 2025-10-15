@@ -1,0 +1,57 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat/heapsort/4/heapsort_mutation_function201.ll:11:29: error: dso_location and DLL-StorageClass mismatch
+; declare dso_local dllimport void @EnterCriticalSection(%struct._RTL_CRITICAL_SECTION*)
+;                             ^
+; === ERROR LOG END ===
+
+; ModuleID: 'fixed_module'
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.Block = type { i32, i32, void (i8*)*, %struct.Block* }
+%struct._RTL_CRITICAL_SECTION = type opaque
+
+@Block = dso_local global %struct.Block* null, align 8
+@CriticalSection = external dso_local global %struct._RTL_CRITICAL_SECTION, align 8
+
+declare dso_local dllimport void @EnterCriticalSection(%struct._RTL_CRITICAL_SECTION*)
+declare dso_local dllimport void @LeaveCriticalSection(%struct._RTL_CRITICAL_SECTION*)
+declare dso_local dllimport i8* @TlsGetValue(i32)
+declare dso_local dllimport i32 @GetLastError()
+
+define dso_local void @sub_140002240() local_unnamed_addr {
+entry:
+  call void @EnterCriticalSection(%struct._RTL_CRITICAL_SECTION* @CriticalSection)
+  %blk0 = load %struct.Block*, %struct.Block** @Block, align 8
+  br label %loop.header
+
+loop.header:                                      ; preds = %loop.latch, %entry
+  %cur = phi %struct.Block* [ %blk0, %entry ], [ %next, %loop.latch ]
+  %cond = icmp ne %struct.Block* %cur, null
+  br i1 %cond, label %loop.body, label %leave
+
+loop.body:                                        ; preds = %loop.header
+  %tlsidxptr = getelementptr inbounds %struct.Block, %struct.Block* %cur, i32 0, i32 0
+  %tlsidx = load i32, i32* %tlsidxptr, align 4
+  %tlsval = call i8* @TlsGetValue(i32 %tlsidx)
+  %last = call i32 @GetLastError()
+  %cmp1 = icmp ne i8* %tlsval, null
+  %cmp2 = icmp eq i32 %last, 0
+  %ok = and i1 %cmp1, %cmp2
+  br i1 %ok, label %callfn, label %loop.latch
+
+callfn:                                           ; preds = %loop.body
+  %fnptrptr = getelementptr inbounds %struct.Block, %struct.Block* %cur, i32 0, i32 2
+  %fn = load void (i8*)*, void (i8*)** %fnptrptr, align 8
+  call void %fn(i8* %tlsval)
+  br label %loop.latch
+
+loop.latch:                                       ; preds = %callfn, %loop.body
+  %nextptr = getelementptr inbounds %struct.Block, %struct.Block* %cur, i32 0, i32 3
+  %next = load %struct.Block*, %struct.Block** %nextptr, align 8
+  br label %loop.header
+
+leave:                                            ; preds = %loop.header
+  call void @LeaveCriticalSection(%struct._RTL_CRITICAL_SECTION* @CriticalSection)
+  ret void
+}

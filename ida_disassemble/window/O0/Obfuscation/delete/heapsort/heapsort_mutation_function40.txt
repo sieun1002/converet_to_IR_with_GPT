@@ -1,0 +1,14 @@
+; Function: sub_140002A30
+; Start: 0x140002A30, End: 0x140002A5D
+
+0x140002A30: push    rbx
+0x140002A31: sub     rsp, 20h
+0x140002A35: mov     ebx, ecx
+0x140002A37: mov     ecx, 2; Ix
+0x140002A3C: call    __acrt_iob_func
+0x140002A41: mov     r8d, ebx
+0x140002A44: lea     rdx, aRuntimeErrorD; "runtime error %d\n"
+0x140002A4B: mov     rcx, rax; Stream
+0x140002A4E: call    sub_1400029C0
+0x140002A53: mov     ecx, 0FFh; Code
+0x140002A58: call    _exit

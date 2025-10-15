@@ -84,12 +84,14 @@ def compare_ir(ref_stats: Dict[str, int], cand_stats: Dict[str, int]) -> Dict[st
 # ========== 실행 예시 ==========
 def main():
     # 사용자가 직접 설정
-    ref_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/original/ll"
-    mcsema_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/mcsema/ll/O0"
-    llm_dir = "/home/nata20034/workspace/convert_to_IR_with_LLM/integration/bc/6"
+    ref_dir = "/home/nata20034/workspace/cfg/ida"
+    mcsema_dir = "/home/nata20034/workspace/cfg/degpt"
+    llm_dir = "/home/nata20034/workspace/cfg/ida"
 
-    out_norm_root = "./similarity_inte/6"
-    out_json_file = "./similarity_inte/6/similarity.json"   # JSON 저장 경로
+    # llm_dir = "/home/nata20034/workspace/cfg/llm"
+
+    out_norm_root = "./similarity"
+    out_json_file = "./similarity/degpt2.json"   # JSON 저장 경로
 
     all_results = []
 
@@ -118,11 +120,11 @@ def main():
         llm_vs_ref = compare_ir(ref_stats, llm_stats)
 
         # 출력
-        print("  mcsema vs ref")
+        print("  degpt vs ref")
         for k, v in mcsema_vs_ref.items():
             print(f"    {k}: {v}")
 
-        print("  llm vs ref")
+        print("  ida vs ref")
         for k, v in llm_vs_ref.items():
             print(f"    {k}: {v}")
 

@@ -1,0 +1,28 @@
+; Function: sub_140002900
+; Start: 0x140002900, End: 0x140002953
+
+0x140002900: push    rdi
+0x140002901: push    rsi
+0x140002902: push    rbx
+0x140002903: sub     rsp, 40h
+0x140002907: mov     rbx, rcx
+0x14000290a: lea     rsi, [rsp+58h+arg_8]
+0x14000290f: mov     ecx, 1
+0x140002914: mov     [rsp+58h+arg_8], rdx
+0x140002919: mov     [rsp+58h+arg_10], r8
+0x14000291e: mov     [rsp+58h+arg_18], r9
+0x140002923: mov     [rsp+58h+var_20], rsi
+0x140002928: call    sub_140002A70
+0x14000292d: mov     rdi, rax
+0x140002930: call    sub_1400029B0
+0x140002935: xor     r9d, r9d
+0x140002938: mov     r8, rbx
+0x14000293b: mov     rdx, rdi
+0x14000293e: mov     rcx, [rax]
+0x140002941: mov     [rsp+58h+var_38], rsi
+0x140002946: call    sub_140002A88
+0x14000294b: add     rsp, 40h
+0x14000294f: pop     rbx
+0x140002950: pop     rsi
+0x140002951: pop     rdi
+0x140002952: retn

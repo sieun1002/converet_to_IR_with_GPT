@@ -1,0 +1,13 @@
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004420 = external global i32*, align 8
+
+declare void @sub_140001010()
+
+define void @sub_140001400() {
+entry:
+  %0 = load i32*, i32** @off_140004420, align 8
+  store i32 0, i32* %0, align 4
+  call void @sub_140001010()
+  ret void
+}

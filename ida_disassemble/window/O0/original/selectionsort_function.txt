@@ -1,0 +1,77 @@
+; Function: selection_sort
+; Start: 0x140001450, End: 0x140001538
+
+0x140001450: push    rbp
+0x140001451: mov     rbp, rsp
+0x140001454: sub     rsp, 10h
+0x140001458: mov     [rbp+arg_0], rcx
+0x14000145C: mov     [rbp+arg_8], edx
+0x14000145F: mov     [rbp+var_4], 0
+0x140001466: jmp     loc_140001521
+loc_14000146B:
+0x14000146B: mov     eax, [rbp+var_4]
+0x14000146E: mov     [rbp+var_C], eax
+0x140001471: mov     eax, [rbp+var_4]
+0x140001474: add     eax, 1
+0x140001477: mov     [rbp+var_8], eax
+0x14000147A: jmp     short loc_1400014B6
+loc_14000147C:
+0x14000147C: mov     eax, [rbp+var_8]
+0x14000147F: cdqe
+0x140001481: lea     rdx, ds:0[rax*4]
+0x140001489: mov     rax, [rbp+arg_0]
+0x14000148D: add     rax, rdx
+0x140001490: mov     edx, [rax]
+0x140001492: mov     eax, [rbp+var_C]
+0x140001495: cdqe
+0x140001497: lea     rcx, ds:0[rax*4]
+0x14000149F: mov     rax, [rbp+arg_0]
+0x1400014A3: add     rax, rcx
+0x1400014A6: mov     eax, [rax]
+0x1400014A8: cmp     edx, eax
+0x1400014AA: jge     short loc_1400014B2
+0x1400014AC: mov     eax, [rbp+var_8]
+0x1400014AF: mov     [rbp+var_C], eax
+loc_1400014B2:
+0x1400014B2: add     [rbp+var_8], 1
+loc_1400014B6:
+0x1400014B6: mov     eax, [rbp+var_8]
+0x1400014B9: cmp     eax, [rbp+arg_8]
+0x1400014BC: jl      short loc_14000147C
+0x1400014BE: mov     eax, [rbp+var_4]
+0x1400014C1: cdqe
+0x1400014C3: lea     rdx, ds:0[rax*4]
+0x1400014CB: mov     rax, [rbp+arg_0]
+0x1400014CF: add     rax, rdx
+0x1400014D2: mov     eax, [rax]
+0x1400014D4: mov     [rbp+var_10], eax
+0x1400014D7: mov     eax, [rbp+var_C]
+0x1400014DA: cdqe
+0x1400014DC: lea     rdx, ds:0[rax*4]
+0x1400014E4: mov     rax, [rbp+arg_0]
+0x1400014E8: add     rax, rdx
+0x1400014EB: mov     edx, [rbp+var_4]
+0x1400014EE: movsxd  rdx, edx
+0x1400014F1: lea     rcx, ds:0[rdx*4]
+0x1400014F9: mov     rdx, [rbp+arg_0]
+0x1400014FD: add     rdx, rcx
+0x140001500: mov     eax, [rax]
+0x140001502: mov     [rdx], eax
+0x140001504: mov     eax, [rbp+var_C]
+0x140001507: cdqe
+0x140001509: lea     rdx, ds:0[rax*4]
+0x140001511: mov     rax, [rbp+arg_0]
+0x140001515: add     rdx, rax
+0x140001518: mov     eax, [rbp+var_10]
+0x14000151B: mov     [rdx], eax
+0x14000151D: add     [rbp+var_4], 1
+loc_140001521:
+0x140001521: mov     eax, [rbp+arg_8]
+0x140001524: sub     eax, 1
+0x140001527: cmp     [rbp+var_4], eax
+0x14000152A: jl      loc_14000146B
+0x140001530: nop
+0x140001531: nop
+0x140001532: add     rsp, 10h
+0x140001536: pop     rbp
+0x140001537: retn

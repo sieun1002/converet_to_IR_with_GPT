@@ -1,0 +1,34 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+
+%struct.S = type { i32, i32, i64, [2 x double], double }
+
+@qword_1400070B0 = external global void (...)*, align 8
+
+define dso_local void @sub_140002100(i32 %ecx, i64 %rdx, double %d2, double %d3, double %dstack) {
+entry:
+  %fp = load void (...)*, void (...)*@qword_1400070B0, align 8
+  %isnull = icmp eq void (...)* %fp, null
+  br i1 %isnull, label %ret, label %call
+
+call:
+  %obj = alloca %struct.S, align 8
+  %fld0 = getelementptr inbounds %struct.S, %struct.S* %obj, i32 0, i32 0
+  store i32 %ecx, i32* %fld0, align 4
+  %fld2 = getelementptr inbounds %struct.S, %struct.S* %obj, i32 0, i32 2
+  store i64 %rdx, i64* %fld2, align 8
+  %vec = getelementptr inbounds %struct.S, %struct.S* %obj, i32 0, i32 3
+  %vec0 = getelementptr inbounds [2 x double], [2 x double]* %vec, i32 0, i32 0
+  store double %d2, double* %vec0, align 8
+  %vec1 = getelementptr inbounds [2 x double], [2 x double]* %vec, i32 0, i32 1
+  store double %d3, double* %vec1, align 8
+  %fld4 = getelementptr inbounds %struct.S, %struct.S* %obj, i32 0, i32 4
+  store double %dstack, double* %fld4, align 8
+  %obj_i8 = bitcast %struct.S* %obj to i8*
+  call void (...)* %fp(i8* %obj_i8)
+  br label %ret
+
+ret:
+  ret void
+}

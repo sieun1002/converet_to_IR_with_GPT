@@ -1,0 +1,37 @@
+; Function: main
+; Start: 0x1400014A3, End: 0x14000152C
+
+0x1400014A3: push    rbp
+0x1400014A4: mov     rbp, rsp
+0x1400014A7: sub     rsp, 40h
+0x1400014AB: call    __main
+0x1400014B0: mov     [rbp+var_20], 5
+0x1400014B7: mov     [rbp+var_1C], 3
+0x1400014BE: mov     [rbp+var_18], 8
+0x1400014C5: mov     [rbp+var_14], 4
+0x1400014CC: mov     [rbp+var_10], 2
+0x1400014D3: mov     [rbp+var_4], 5
+0x1400014DA: mov     [rbp+var_8], 4
+0x1400014E1: mov     ecx, [rbp+var_8]
+0x1400014E4: mov     edx, [rbp+var_4]
+0x1400014E7: lea     rax, [rbp+var_20]
+0x1400014EB: mov     r8d, ecx
+0x1400014EE: mov     rcx, rax
+0x1400014F1: call    linear_search
+0x1400014F6: mov     [rbp+var_C], eax
+0x1400014F9: cmp     [rbp+var_C], 0FFFFFFFFh
+0x1400014FD: jz      short loc_140001512
+0x1400014FF: mov     eax, [rbp+var_C]
+0x140001502: lea     rcx, _Format; "Element found at index %d\n"
+0x140001509: mov     edx, eax
+0x14000150B: call    printf
+0x140001510: jmp     short loc_140001521
+loc_140001512:
+0x140001512: lea     rax, Buffer; "Element not found"
+0x140001519: mov     rcx, rax; Buffer
+0x14000151C: call    puts
+loc_140001521:
+0x140001521: mov     eax, 0
+0x140001526: add     rsp, 40h
+0x14000152A: pop     rbp
+0x14000152B: retn

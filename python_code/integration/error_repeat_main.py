@@ -15,14 +15,14 @@ GENERATE_MODEL = "gpt-5"
 FIX_MODEL      = "gpt-5"
 
 GENERATE_SYSTEM_PROMPT      = ""
-GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/short.txt"
+GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/error2.txt"
 
 FIX_SYSTEM_PROMPT      = ""
-FIX_SYSTEM_PROMPT_FILE = "../systemprompt/error.txt"
+FIX_SYSTEM_PROMPT_FILE = "../systemprompt/error2.txt"
 
 # 입력/출력
-INPUT_FOLDER_TXT = "/home/nata20034/workspace/convert_to_IR_with_LLM/ida_disassemble/O0/djkstra"               # 디스어셈블리 .txt 폴더
-OUTPUT_ROOT      = "../../llm_to_IR/gpt_api_short/error_repeat/dijkstra"       # 라운드 루트
+INPUT_FOLDER_TXT = "../../ida_disassemble/window/O0/Obfuscation/heapsort/heapsort.vmp_integration/"               # 디스어셈블리 .txt 폴더
+OUTPUT_ROOT      = "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_integration/"       # 라운드 루트
 
 NUM_ROUNDS  = 1
 START_INDEX = 1
@@ -33,8 +33,8 @@ AS_BIN = "llvm-as-14"   # assemble 바이너리 경로
 ASSEMBLE_TIMEOUT_SEC = 60
 
 # 시도/버전 제한
-MAX_IR_VERSIONS  = 5    # total IR files per input (1..5)
-MAX_FIX_ATTEMPTS = 4    # fix 시도 최대 4
+MAX_IR_VERSIONS  = 10    # total IR files per input (1..5)
+MAX_FIX_ATTEMPTS = 9    # fix 시도 최대 4
 
 # Fix 입력 구성
 ERROR_FIRST = True                    # 에러가 먼저, 그 후 IR (요구사항)

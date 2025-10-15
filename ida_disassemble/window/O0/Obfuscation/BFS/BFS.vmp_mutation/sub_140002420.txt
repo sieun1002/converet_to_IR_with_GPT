@@ -1,0 +1,41 @@
+; Function: sub_140002420
+; Start: 0x140002420, End: 0x1400024a9
+
+0x140002420: sub     rsp, 28h
+0x140002424: mov     eax, cs:dword_1400070E8
+0x14000242a: test    eax, eax
+0x14000242c: jnz     short loc_140002438
+0x14000242e: xor     eax, eax
+0x140002430: add     rsp, 28h
+0x140002434: retn
+0x140002435: align 8
+0x140002438: mov     [rsp+28h+arg_0], ecx
+0x14000243c: lea     rcx, CriticalSection; lpCriticalSection
+0x140002443: call    cs:__imp_EnterCriticalSection
+0x140002449: mov     rcx, cs:Block
+0x140002450: test    rcx, rcx
+0x140002453: jz      short loc_140002483
+0x140002455: mov     edx, [rsp+28h+arg_0]
+0x140002459: xor     r8d, r8d
+0x14000245c: jmp     short loc_14000246B
+0x14000245e: align 20h
+0x140002460: mov     r8, rcx
+0x140002463: test    rax, rax
+0x140002466: jz      short loc_140002483
+0x140002468: mov     rcx, rax; Block
+0x14000246b: mov     eax, [rcx]
+0x14000246d: cmp     eax, edx
+0x14000246f: mov     rax, [rcx+10h]
+0x140002473: jnz     short loc_140002460
+0x140002475: test    r8, r8
+0x140002478: jz      short loc_1400024A0
+0x14000247a: mov     [r8+10h], rax
+0x14000247e: call    free
+0x140002483: lea     rcx, CriticalSection; lpCriticalSection
+0x14000248a: call    cs:__imp_LeaveCriticalSection
+0x140002490: xor     eax, eax
+0x140002492: add     rsp, 28h
+0x140002496: retn
+0x140002497: align 20h
+0x1400024a0: mov     cs:Block, rax
+0x1400024a7: jmp     short loc_14000247E

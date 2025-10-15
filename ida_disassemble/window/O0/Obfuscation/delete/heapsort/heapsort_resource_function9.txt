@@ -1,0 +1,21 @@
+; Function: sub_140001820
+; Start: 0x140001820, End: 0x140001862
+
+0x140001820: sub     rsp, 28h
+0x140001824: mov     rax, cs:off_140003000
+0x14000182B: mov     rax, [rax]
+0x14000182E: test    rax, rax
+0x140001831: jz      short loc_14000185D
+0x140001833: xchg    ax, ax
+0x140001835: nop     word ptr [rax+rax+00000000h]
+loc_140001840:
+0x140001840: call    rax
+0x140001842: mov     rax, cs:off_140003000
+0x140001849: lea     rdx, [rax+8]
+0x14000184D: mov     rax, [rax+8]
+0x140001851: mov     cs:off_140003000, rdx
+0x140001858: test    rax, rax
+0x14000185B: jnz     short loc_140001840
+loc_14000185D:
+0x14000185D: add     rsp, 28h
+0x140001861: retn

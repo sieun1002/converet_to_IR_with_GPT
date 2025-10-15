@@ -1,0 +1,36 @@
+; Function: sub_14000171D
+; Start: 0x14000171d, End: 0x1400017bb
+
+0x14000171d: push    rbp
+0x14000171e: mov     rbp, rsp
+0x140001721: sub     rsp, 60h
+0x140001725: call    sub_140001890
+0x14000172a: mov     [rbp+var_40], 7
+0x140001731: mov     [rbp+var_3C], 3
+0x140001738: mov     [rbp+var_38], 9
+0x14000173f: mov     [rbp+var_34], 1
+0x140001746: mov     [rbp+var_30], 4
+0x14000174d: mov     [rbp+var_2C], 8
+0x140001754: mov     [rbp+var_28], 2
+0x14000175b: mov     [rbp+var_24], 6
+0x140001762: mov     [rbp+var_20], 5
+0x140001769: mov     [rbp+var_10], 9
+0x140001771: mov     rdx, [rbp+var_10]
+0x140001775: lea     rax, [rbp+var_40]
+0x140001779: mov     rcx, rax
+0x14000177c: call    sub_140001450
+0x140001781: mov     [rbp+var_8], 0
+0x140001789: jmp     short loc_1400017A6
+0x14000178b: mov     rax, [rbp+var_8]
+0x14000178f: mov     eax, [rbp+rax*4+var_40]
+0x140001793: lea     rcx, unk_140004000
+0x14000179a: mov     edx, eax
+0x14000179c: call    sub_140002900
+0x1400017a1: add     [rbp+var_8], 1
+0x1400017a6: mov     rax, [rbp+var_8]
+0x1400017aa: cmp     rax, [rbp+var_10]
+0x1400017ae: jb      short loc_14000178B
+0x1400017b0: mov     eax, 0
+0x1400017b5: add     rsp, 60h
+0x1400017b9: pop     rbp
+0x1400017ba: retn

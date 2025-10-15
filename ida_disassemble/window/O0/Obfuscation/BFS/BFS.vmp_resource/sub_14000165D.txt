@@ -1,0 +1,130 @@
+; Function: sub_14000165D
+; Start: 0x14000165d, End: 0x1400018ec
+
+0x14000165d: push    rbp
+0x14000165e: push    rdi
+0x14000165f: sub     rsp, 198h
+0x140001666: lea     rbp, [rsp+80h]
+0x14000166e: call    sub_1400019C0
+0x140001673: mov     [rbp+120h+var_28], 7
+0x14000167e: lea     rdx, [rbp+120h+var_100]
+0x140001682: mov     eax, 0
+0x140001687: mov     ecx, 18h
+0x14000168c: mov     rdi, rdx
+0x14000168f: rep stosq
+0x140001692: mov     rdx, rdi
+0x140001695: mov     [rdx], eax
+0x140001697: add     rdx, 4
+0x14000169b: mov     [rbp+120h+var_FC], 1
+0x1400016a2: mov     rax, [rbp+120h+var_28]
+0x1400016a9: mov     [rbp+rax*4+120h+var_100], 1
+0x1400016b1: mov     [rbp+120h+var_F8], 1
+0x1400016b8: mov     rax, [rbp+120h+var_28]
+0x1400016bf: add     rax, rax
+0x1400016c2: mov     [rbp+rax*4+120h+var_100], 1
+0x1400016ca: mov     rax, [rbp+120h+var_28]
+0x1400016d1: add     rax, 3
+0x1400016d5: mov     [rbp+rax*4+120h+var_100], 1
+0x1400016dd: mov     rdx, [rbp+120h+var_28]
+0x1400016e4: mov     rax, rdx
+0x1400016e7: add     rax, rax
+0x1400016ea: add     rax, rdx
+0x1400016ed: add     rax, 1
+0x1400016f1: mov     [rbp+rax*4+120h+var_100], 1
+0x1400016f9: mov     rax, [rbp+120h+var_28]
+0x140001700: add     rax, 4
+0x140001704: mov     [rbp+rax*4+120h+var_100], 1
+0x14000170c: mov     rax, [rbp+120h+var_28]
+0x140001713: shl     rax, 2
+0x140001717: add     rax, 1
+0x14000171b: mov     [rbp+rax*4+120h+var_100], 1
+0x140001723: mov     rax, [rbp+120h+var_28]
+0x14000172a: add     rax, rax
+0x14000172d: add     rax, 5
+0x140001731: mov     [rbp+rax*4+120h+var_100], 1
+0x140001739: mov     rdx, [rbp+120h+var_28]
+0x140001740: mov     rax, rdx
+0x140001743: shl     rax, 2
+0x140001747: add     rax, rdx
+0x14000174a: add     rax, 2
+0x14000174e: mov     [rbp+rax*4+120h+var_100], 1
+0x140001756: mov     rax, [rbp+120h+var_28]
+0x14000175d: shl     rax, 2
+0x140001761: add     rax, 5
+0x140001765: mov     [rbp+rax*4+120h+var_100], 1
+0x14000176d: mov     rdx, [rbp+120h+var_28]
+0x140001774: mov     rax, rdx
+0x140001777: shl     rax, 2
+0x14000177b: add     rax, rdx
+0x14000177e: add     rax, 4
+0x140001782: mov     [rbp+rax*4+120h+var_100], 1
+0x14000178a: mov     rdx, [rbp+120h+var_28]
+0x140001791: mov     rax, rdx
+0x140001794: shl     rax, 2
+0x140001798: add     rax, rdx
+0x14000179b: add     rax, 6
+0x14000179f: mov     [rbp+rax*4+120h+var_100], 1
+0x1400017a7: mov     rdx, [rbp+120h+var_28]
+0x1400017ae: mov     rax, rdx
+0x1400017b1: add     rax, rax
+0x1400017b4: add     rax, rdx
+0x1400017b7: add     rax, rax
+0x1400017ba: add     rax, 5
+0x1400017be: mov     [rbp+rax*4+120h+var_100], 1
+0x1400017c6: mov     [rbp+120h+var_30], 0
+0x1400017d1: mov     [rbp+120h+var_168], 0
+0x1400017d9: mov     r9, rbp
+0x1400017dc: mov     r8, [rbp+120h+var_30]
+0x1400017e3: mov     rdx, [rbp+120h+var_28]
+0x1400017ea: lea     rax, [rbp+120h+var_100]
+0x1400017ee: lea     rcx, [rbp+120h+var_168]
+0x1400017f2: mov     [rsp+1A0h+var_178], rcx
+0x1400017f7: lea     rcx, [rbp+120h+var_160]
+0x1400017fb: mov     [rsp+1A0h+var_180], rcx
+0x140001800: mov     rcx, rax
+0x140001803: call    sub_140001450
+0x140001808: mov     rax, [rbp+120h+var_30]
+0x14000180f: lea     rcx, Format; "BFS order from %zu: "
+0x140001816: mov     rdx, rax
+0x140001819: call    sub_140002A40
+0x14000181e: mov     [rbp+120h+var_18], 0
+0x140001829: jmp     short loc_140001872
+0x14000182b: mov     rax, [rbp+120h+var_18]
+0x140001832: lea     rdx, [rax+1]
+0x140001836: mov     rax, [rbp+120h+var_168]
+0x14000183a: cmp     rdx, rax
+0x14000183d: jnb     short loc_140001848
+0x14000183f: lea     rax, asc_140004015; " "
+0x140001846: jmp     short loc_14000184F
+0x140001848: lea     rax, unk_140004017
+0x14000184f: mov     rdx, [rbp+120h+var_18]
+0x140001856: mov     rdx, [rbp+rdx*8+120h+var_160]
+0x14000185b: lea     rcx, aZuS; "%zu%s"
+0x140001862: mov     r8, rax
+0x140001865: call    sub_140002A40
+0x14000186a: add     [rbp+120h+var_18], 1
+0x140001872: mov     rax, [rbp+120h+var_168]
+0x140001876: cmp     [rbp+120h+var_18], rax
+0x14000187d: jb      short loc_14000182B
+0x14000187f: mov     ecx, 0Ah; Character
+0x140001884: call    putchar
+0x140001889: mov     [rbp+120h+var_20], 0
+0x140001894: jmp     short loc_1400018CD
+0x140001896: mov     rax, [rbp+120h+var_20]
+0x14000189d: mov     r8d, [rbp+rax*4+120h+var_120]
+0x1400018a2: mov     rdx, [rbp+120h+var_20]
+0x1400018a9: mov     rax, [rbp+120h+var_30]
+0x1400018b0: lea     rcx, aDistZuZuD; "dist(%zu -> %zu) = %d\n"
+0x1400018b7: mov     r9d, r8d
+0x1400018ba: mov     r8, rdx
+0x1400018bd: mov     rdx, rax
+0x1400018c0: call    sub_140002A40
+0x1400018c5: add     [rbp+120h+var_20], 1
+0x1400018cd: mov     rax, [rbp+120h+var_20]
+0x1400018d4: cmp     rax, [rbp+120h+var_28]
+0x1400018db: jb      short loc_140001896
+0x1400018dd: mov     eax, 0
+0x1400018e2: add     rsp, 198h
+0x1400018e9: pop     rdi
+0x1400018ea: pop     rbp
+0x1400018eb: retn

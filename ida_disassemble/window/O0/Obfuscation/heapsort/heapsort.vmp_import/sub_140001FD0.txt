@@ -1,0 +1,18 @@
+; Function: sub_140001FD0
+; Start: 0x140001fd0, End: 0x14000200e
+
+0x140001fd0: sub     rsp, 58h
+0x140001fd4: mov     rax, cs:qword_1400070B0
+0x140001fdb: test    rax, rax
+0x140001fde: jz      short loc_140002009
+0x140001fe0: movsd   xmm0, [rsp+58h+arg_20]
+0x140001fe9: unpcklpd xmm2, xmm3
+0x140001fed: mov     [rsp+58h+var_38], ecx
+0x140001ff1: lea     rcx, [rsp+58h+var_38]
+0x140001ff6: mov     [rsp+58h+var_30], rdx
+0x140001ffb: movups  [rsp+58h+var_28], xmm2
+0x140002000: movsd   [rsp+58h+var_18], xmm0
+0x140002006: call    rax ; qword_1400070B0
+0x140002008: nop
+0x140002009: add     rsp, 58h
+0x14000200d: retn

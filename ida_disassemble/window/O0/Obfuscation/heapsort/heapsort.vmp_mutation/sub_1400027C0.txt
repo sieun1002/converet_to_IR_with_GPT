@@ -1,0 +1,59 @@
+; Function: sub_1400027C0
+; Start: 0x1400027c0, End: 0x140002876
+
+0x1400027c0: mov     r11, cs:off_1400043A0
+0x1400027c7: xor     r8d, r8d
+0x1400027ca: cmp     word ptr [r11], 5A4Dh
+0x1400027d0: jnz     short loc_1400027E1
+0x1400027d2: movsxd  rdx, dword ptr [r11+3Ch]
+0x1400027d6: add     rdx, r11
+0x1400027d9: cmp     dword ptr [rdx], 4550h
+0x1400027df: jz      short loc_1400027E8
+0x1400027e1: mov     rax, r8
+0x1400027e4: retn
+0x1400027e5: align 8
+0x1400027e8: cmp     word ptr [rdx+18h], 20Bh
+0x1400027ee: jnz     short loc_1400027E1
+0x1400027f0: mov     eax, [rdx+90h]
+0x1400027f6: test    eax, eax
+0x1400027f8: jz      short loc_1400027E1
+0x1400027fa: movzx   r9d, word ptr [rdx+6]
+0x1400027ff: test    r9w, r9w
+0x140002803: jz      short loc_1400027E1
+0x140002805: movzx   r8d, word ptr [rdx+14h]
+0x14000280a: lea     rdx, [rdx+r8+18h]
+0x14000280f: lea     r8d, [r9-1]
+0x140002813: lea     r8, [r8+r8*4]
+0x140002817: lea     r10, [rdx+r8*8+28h]
+0x14000281c: nop     dword ptr [rax+00h]
+0x140002820: mov     r9d, [rdx+0Ch]
+0x140002824: mov     r8, r9
+0x140002827: cmp     rax, r9
+0x14000282a: jb      short loc_140002835
+0x14000282c: add     r8d, [rdx+8]
+0x140002830: cmp     rax, r8
+0x140002833: jb      short loc_140002848
+0x140002835: add     rdx, 28h ; '('
+0x140002839: cmp     r10, rdx
+0x14000283c: jnz     short loc_140002820
+0x14000283e: xor     r8d, r8d
+0x140002841: mov     rax, r8
+0x140002844: retn
+0x140002845: align 8
+0x140002848: add     rax, r11
+0x14000284b: jmp     short loc_140002857
+0x14000284d: align 10h
+0x140002850: sub     ecx, 1
+0x140002853: add     rax, 14h
+0x140002857: mov     r8d, [rax+4]
+0x14000285b: test    r8d, r8d
+0x14000285e: jnz     short loc_140002867
+0x140002860: mov     edx, [rax+0Ch]
+0x140002863: test    edx, edx
+0x140002865: jz      short loc_14000283E
+0x140002867: test    ecx, ecx
+0x140002869: jg      short loc_140002850
+0x14000286b: mov     r8d, [rax+0Ch]
+0x14000286f: add     r8, r11
+0x140002872: mov     rax, r8
+0x140002875: retn

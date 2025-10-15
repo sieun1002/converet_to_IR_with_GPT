@@ -1,0 +1,34 @@
+; ModuleID = 'recovered_module'
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.S = type { i32, i32, i8*, <2 x double>, double }
+
+@qword_1400070B0 = external dso_local global void (%struct.S*)*
+
+define dso_local void @sub_140002030(i32 %ecx, i8* %rdx, double %xmm2, double %xmm3, double %stack_dbl) {
+entry:
+  %cb = alloca %struct.S, align 16
+  %fp = load void (%struct.S*)*, void (%struct.S*)** @qword_1400070B0, align 8
+  %isnull = icmp eq void (%struct.S*)* %fp, null
+  br i1 %isnull, label %ret, label %prep
+
+prep:
+  %f0p = getelementptr inbounds %struct.S, %struct.S* %cb, i32 0, i32 0
+  store i32 %ecx, i32* %f0p, align 4
+  %padp = getelementptr inbounds %struct.S, %struct.S* %cb, i32 0, i32 1
+  store i32 0, i32* %padp, align 4
+  %ptrp = getelementptr inbounds %struct.S, %struct.S* %cb, i32 0, i32 2
+  store i8* %rdx, i8** %ptrp, align 8
+  %vecu = undef <2 x double>
+  %vec1 = insertelement <2 x double> %vecu, double %xmm2, i32 0
+  %vec2 = insertelement <2 x double> %vec1, double %xmm3, i32 1
+  %vecp = getelementptr inbounds %struct.S, %struct.S* %cb, i32 0, i32 3
+  store <2 x double> %vec2, <2 x double>* %vecp, align 16
+  %dblp = getelementptr inbounds %struct.S, %struct.S* %cb, i32 0, i32 4
+  store double %stack_dbl, double* %dblp, align 8
+  call void %fp(%struct.S* %cb)
+  br label %ret
+
+ret:
+  ret void
+}

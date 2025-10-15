@@ -4,13 +4,16 @@ import difflib
 import json
 
 # ========== 폴더 경로 직접 지정 ==========
-REF_DIR    = "/home/nata20034/workspace/convert_to_IR_with_LLM/python_code/evaluation/similarity_inte/5/ref"
-MCSEMA_DIR = "/home/nata20034/workspace/convert_to_IR_with_LLM/python_code/evaluation/similarity_inte/5/mcsema"
-LLM_DIR    = "/home/nata20034/workspace/convert_to_IR_with_LLM/python_code/evaluation/similarity_inte/5/llm"
+# REF_DIR    = "/home/nata20034/workspace/cfg/original"
+REF_DIR    = "/home/nata20034/workspace/cfg/ida"
+MCSEMA_DIR = "/home/nata20034/workspace/cfg/degpt"
+# LLM_DIR    = "/home/nata20034/workspace/cfg/ida"
+LLM_DIR    = "/home/nata20034/workspace/cfg/llm"
+
 
 # 결과 저장 경로
-OUT_DIFF_DIR = "./diff_results_integration/5"
-OUT_JSON_FILE = "./diff_results_integration/5/diff.json"
+OUT_DIFF_DIR = "./diff_results_DGPT/3"
+OUT_JSON_FILE = "./diff_results_DGPT/a.json"
 
 
 # ========== 비교 함수 ==========

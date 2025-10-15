@@ -1,0 +1,58 @@
+; Function: main
+; Start: 0x1400014FE, End: 0x1400015EB
+
+0x1400014FE: push    rbp
+0x1400014FF: mov     rbp, rsp
+0x140001502: sub     rsp, 70h
+0x140001506: call    __main
+0x14000150B: mov     [rbp+var_40], 0FFFFFFFBh
+0x140001512: mov     [rbp+var_3C], 0FFFFFFFFh
+0x140001519: mov     [rbp+var_38], 0
+0x140001520: mov     [rbp+var_34], 2
+0x140001527: mov     [rbp+var_30], 2
+0x14000152E: mov     [rbp+var_2C], 3
+0x140001535: mov     [rbp+var_28], 7
+0x14000153C: mov     [rbp+var_24], 9
+0x140001543: mov     [rbp+var_20], 0Ch
+0x14000154A: mov     [rbp+var_10], 9
+0x140001552: mov     [rbp+var_4C], 2
+0x140001559: mov     [rbp+var_48], 5
+0x140001560: mov     [rbp+var_44], 0FFFFFFFBh
+0x140001567: mov     [rbp+var_18], 3
+0x14000156F: mov     [rbp+var_8], 0
+0x140001577: jmp     short loc_1400015D6
+loc_140001579:
+0x140001579: mov     rax, [rbp+var_8]
+0x14000157D: mov     ecx, [rbp+rax*4+var_4C]
+0x140001581: mov     rdx, [rbp+var_10]
+0x140001585: lea     rax, [rbp+var_40]
+0x140001589: mov     r8d, ecx
+0x14000158C: mov     rcx, rax
+0x14000158F: call    binary_search
+0x140001594: mov     [rbp+var_1C], eax
+0x140001597: cmp     [rbp+var_1C], 0
+0x14000159B: js      short loc_1400015BB
+0x14000159D: mov     rax, [rbp+var_8]
+0x1400015A1: mov     eax, [rbp+rax*4+var_4C]
+0x1400015A5: mov     edx, [rbp+var_1C]
+0x1400015A8: lea     rcx, _Format; "key %d -> index %ld\n"
+0x1400015AF: mov     r8d, edx
+0x1400015B2: mov     edx, eax
+0x1400015B4: call    printf
+0x1400015B9: jmp     short loc_1400015D1
+loc_1400015BB:
+0x1400015BB: mov     rax, [rbp+var_8]
+0x1400015BF: mov     eax, [rbp+rax*4+var_4C]
+0x1400015C3: lea     rcx, aKeyDNotFound; "key %d -> not found\n"
+0x1400015CA: mov     edx, eax
+0x1400015CC: call    printf
+loc_1400015D1:
+0x1400015D1: add     [rbp+var_8], 1
+loc_1400015D6:
+0x1400015D6: mov     rax, [rbp+var_8]
+0x1400015DA: cmp     rax, [rbp+var_18]
+0x1400015DE: jb      short loc_140001579
+0x1400015E0: mov     eax, 0
+0x1400015E5: add     rsp, 70h
+0x1400015E9: pop     rbp
+0x1400015EA: retn

@@ -1,0 +1,1820 @@
+{
+  "meta": {
+    "round": 1,
+    "start_time": "2025-09-27T21:40:17",
+    "input_folder": "/home/nata20034/workspace/convert_to_IR_with_LLM/ida_disassemble/window/O0/Obfuscation/heapsort/heapsort.vmp_mutation",
+    "output_dir": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 5,
+    "max_fix_attempts": 4,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "Function.txt",
+      "version": 1,
+      "request_id": "resp_68d7db31ce30819aa10c9cea7bfc01dd04edbc01dba855ec",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:40:17",
+      "end_time": "2025-09-27T21:40:28",
+      "elapsed_sec": 10.495382,
+      "usage": {
+        "input_tokens": 349,
+        "output_tokens": 681,
+        "total_tokens": 1030
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "Function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/Function1.ll",
+      "success": true,
+      "time": "2025-09-27T21:40:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "Function.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/Function1.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/Function1.bc",
+      "start_time": "2025-09-27T21:40:28",
+      "end_time": "2025-09-27T21:40:28",
+      "elapsed_sec": 0.010773
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "Handler.txt",
+      "version": 1,
+      "request_id": "resp_68d7db3c0adc819b942409f85c6db64d03d375139cd4082d",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:40:28",
+      "end_time": "2025-09-27T21:40:34",
+      "elapsed_sec": 6.11567,
+      "usage": {
+        "input_tokens": 349,
+        "output_tokens": 303,
+        "total_tokens": 652
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "Handler.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/Handler1.ll",
+      "success": true,
+      "time": "2025-09-27T21:40:34"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "Handler.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/Handler1.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/Handler1.bc",
+      "start_time": "2025-09-27T21:40:34",
+      "end_time": "2025-09-27T21:40:34",
+      "elapsed_sec": 0.014398
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "TlsCallback_0.txt",
+      "version": 1,
+      "request_id": "resp_68d7db4231cc8199a805df2e4f20517c09bacb9a9cc8b16f",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:40:34",
+      "end_time": "2025-09-27T21:42:04",
+      "elapsed_sec": 89.726747,
+      "usage": {
+        "input_tokens": 898,
+        "output_tokens": 5100,
+        "total_tokens": 5998
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "TlsCallback_0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/TlsCallback_01.ll",
+      "success": true,
+      "time": "2025-09-27T21:42:04"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "TlsCallback_0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/TlsCallback_01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/TlsCallback_01.bc",
+      "start_time": "2025-09-27T21:42:04",
+      "end_time": "2025-09-27T21:42:04",
+      "elapsed_sec": 0.019081
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "TlsCallback_1.txt",
+      "version": 1,
+      "request_id": "resp_68d7db9c87fc81968c7a4a8a203d120b0cc852efdf88c2ba",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:42:04",
+      "end_time": "2025-09-27T21:42:32",
+      "elapsed_sec": 28.056336,
+      "usage": {
+        "input_tokens": 460,
+        "output_tokens": 1786,
+        "total_tokens": 2246
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "TlsCallback_1.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/TlsCallback_11.ll",
+      "success": true,
+      "time": "2025-09-27T21:42:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "TlsCallback_1.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/TlsCallback_11.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/TlsCallback_11.bc",
+      "start_time": "2025-09-27T21:42:32",
+      "end_time": "2025-09-27T21:42:32",
+      "elapsed_sec": 0.016415
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "start.txt",
+      "version": 1,
+      "request_id": "resp_68d7dbb8032c8199aefec12bfec406f803764f4a9144ae8a",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:42:32",
+      "end_time": "2025-09-27T21:42:57",
+      "elapsed_sec": 25.556698,
+      "usage": {
+        "input_tokens": 446,
+        "output_tokens": 1779,
+        "total_tokens": 2225
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "start.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/start1.ll",
+      "success": true,
+      "time": "2025-09-27T21:42:57"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "start.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/start1.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/start1.bc",
+      "start_time": "2025-09-27T21:42:57",
+      "end_time": "2025-09-27T21:42:57",
+      "elapsed_sec": 0.017552
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "request_id": "resp_68d7de2a2460819baaffeaa42dd1e83109777fe79e9325e1",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:42:57",
+      "end_time": "2025-09-27T22:00:42",
+      "elapsed_sec": 1064.970569,
+      "usage": {
+        "input_tokens": 3956,
+        "output_tokens": 20289,
+        "total_tokens": 24245
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll",
+      "success": true,
+      "time": "2025-09-27T22:00:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll:281:42: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg = atomicrmw xchg i8** %lock_ptr, i8* null seq_cst\n                                         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.bc",
+      "start_time": "2025-09-27T22:00:42",
+      "end_time": "2025-09-27T22:00:42",
+      "elapsed_sec": 0.013658
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "request_id": "resp_68d7dffaa0e4819ba29b748dd9f4a3520f6850a78c16a2e2",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:00:42",
+      "end_time": "2025-09-27T22:04:29",
+      "elapsed_sec": 226.112311,
+      "usage": {
+        "input_tokens": 4833,
+        "output_tokens": 7627,
+        "total_tokens": 12460
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010102.ll",
+      "success": true,
+      "time": "2025-09-27T22:04:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010102.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010102.bc",
+      "start_time": "2025-09-27T22:04:29",
+      "end_time": "2025-09-27T22:04:29",
+      "elapsed_sec": 0.012914
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400013E0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e0dcb77c819aa2deadf658aca6140e3d6c0e087c4bc2",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:04:29",
+      "end_time": "2025-09-27T22:04:57",
+      "elapsed_sec": 28.197586,
+      "usage": {
+        "input_tokens": 466,
+        "output_tokens": 1855,
+        "total_tokens": 2321
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400013E0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400013E01.ll",
+      "success": true,
+      "time": "2025-09-27T22:04:57"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400013E0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400013E01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400013E01.bc",
+      "start_time": "2025-09-27T22:04:57",
+      "end_time": "2025-09-27T22:04:57",
+      "elapsed_sec": 0.012063
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001430.txt",
+      "version": 1,
+      "request_id": "resp_68d7e0f8ea2c8199a61b783c733111720a83274609e11c45",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:04:57",
+      "end_time": "2025-09-27T22:05:42",
+      "elapsed_sec": 45.715984,
+      "usage": {
+        "input_tokens": 376,
+        "output_tokens": 1880,
+        "total_tokens": 2256
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001430.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400014301.ll",
+      "success": true,
+      "time": "2025-09-27T22:05:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001430.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400014301.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400014301.bc",
+      "start_time": "2025-09-27T22:05:42",
+      "end_time": "2025-09-27T22:05:42",
+      "elapsed_sec": 0.014777
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400017C0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e126ae44819aa4b8105ce211d3c20a8010ac4bef35c1",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:05:42",
+      "end_time": "2025-09-27T22:07:27",
+      "elapsed_sec": 104.865229,
+      "usage": {
+        "input_tokens": 620,
+        "output_tokens": 3816,
+        "total_tokens": 4436
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400017C0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400017C01.ll",
+      "success": true,
+      "time": "2025-09-27T22:07:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400017C0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400017C01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400017C01.bc",
+      "start_time": "2025-09-27T22:07:27",
+      "end_time": "2025-09-27T22:07:27",
+      "elapsed_sec": 0.011529
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001810.txt",
+      "version": 1,
+      "request_id": "resp_68d7e18f905c819a903a2890fa1a87c50a39700c5b97b4a9",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:07:27",
+      "end_time": "2025-09-27T22:09:29",
+      "elapsed_sec": 121.853668,
+      "usage": {
+        "input_tokens": 881,
+        "output_tokens": 7279,
+        "total_tokens": 8160
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001810.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018101.ll",
+      "success": true,
+      "time": "2025-09-27T22:09:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001810.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018101.bc",
+      "start_time": "2025-09-27T22:09:29",
+      "end_time": "2025-09-27T22:09:29",
+      "elapsed_sec": 0.013636
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001890.txt",
+      "version": 1,
+      "request_id": "resp_68d7e20976808193bfb9664034c77a7d016f220f4c0020dc",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:09:29",
+      "end_time": "2025-09-27T22:09:54",
+      "elapsed_sec": 24.529789,
+      "usage": {
+        "input_tokens": 452,
+        "output_tokens": 2079,
+        "total_tokens": 2531
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001890.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018901.ll",
+      "success": true,
+      "time": "2025-09-27T22:09:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001890.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018901.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018901.bc",
+      "start_time": "2025-09-27T22:09:54",
+      "end_time": "2025-09-27T22:09:54",
+      "elapsed_sec": 0.014568
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400018B0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e221fbb4819ba3296c026d016d1d0dff4e7b49983b9c",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:09:54",
+      "end_time": "2025-09-27T22:10:20",
+      "elapsed_sec": 26.437985,
+      "usage": {
+        "input_tokens": 375,
+        "output_tokens": 886,
+        "total_tokens": 1261
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400018B0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018B01.ll",
+      "success": true,
+      "time": "2025-09-27T22:10:20"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400018B0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018B01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400018B01.bc",
+      "start_time": "2025-09-27T22:10:20",
+      "end_time": "2025-09-27T22:10:20",
+      "elapsed_sec": 0.012888
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001960.txt",
+      "version": 1,
+      "request_id": "resp_68d7e23c75888198a63d76c84a7a50ae055a9814732ccd5c",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:10:20",
+      "end_time": "2025-09-27T22:10:39",
+      "elapsed_sec": 18.464324,
+      "usage": {
+        "input_tokens": 365,
+        "output_tokens": 857,
+        "total_tokens": 1222
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001960.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400019601.ll",
+      "success": true,
+      "time": "2025-09-27T22:10:39"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001960.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400019601.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400019601.bc",
+      "start_time": "2025-09-27T22:10:39",
+      "end_time": "2025-09-27T22:10:39",
+      "elapsed_sec": 0.012945
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001970.txt",
+      "version": 1,
+      "request_id": "resp_68d7e24eec6c8196be2fda505e3d227c08692f6da1b88e4e",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:10:39",
+      "end_time": "2025-09-27T22:12:10",
+      "elapsed_sec": 90.971173,
+      "usage": {
+        "input_tokens": 1445,
+        "output_tokens": 6012,
+        "total_tokens": 7457
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001970.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400019701.ll",
+      "success": true,
+      "time": "2025-09-27T22:12:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001970.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400019701.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400019701.bc",
+      "start_time": "2025-09-27T22:12:10",
+      "end_time": "2025-09-27T22:12:10",
+      "elapsed_sec": 0.012187
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001A70.txt",
+      "version": 1,
+      "request_id": "resp_68d7e2a9ec108197a4c7592a518465cf02abc93fd4faa6a6",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:12:10",
+      "end_time": "2025-09-27T22:13:12",
+      "elapsed_sec": 62.391547,
+      "usage": {
+        "input_tokens": 742,
+        "output_tokens": 4811,
+        "total_tokens": 5553
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001A70.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001A701.ll",
+      "success": true,
+      "time": "2025-09-27T22:13:12"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001A70.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001A701.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001A701.bc",
+      "start_time": "2025-09-27T22:13:12",
+      "end_time": "2025-09-27T22:13:12",
+      "elapsed_sec": 0.015064
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001AD0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e2e8538881999716929c63c9d6f90866ccee7e33ed42",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:13:12",
+      "end_time": "2025-09-27T22:18:13",
+      "elapsed_sec": 301.286827,
+      "usage": {
+        "input_tokens": 1886,
+        "output_tokens": 14285,
+        "total_tokens": 16171
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001AD0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll",
+      "success": true,
+      "time": "2025-09-27T22:18:13"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001AD0.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll:11:61: error: constant expression type mismatch: got type '[39 x i8]' but expected '[40 x i8]'\n@aVirtualprotect = internal unnamed_addr constant [40 x i8] c\"  VirtualProtect failed with code 0x%x\\00\"\n                                                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.bc",
+      "start_time": "2025-09-27T22:18:13",
+      "end_time": "2025-09-27T22:18:13",
+      "elapsed_sec": 0.011026
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_140001AD0.txt",
+      "version": 2,
+      "request_id": "resp_68d7e4159f088199830053a936430c530ebf115c11faf9c0",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:18:13",
+      "end_time": "2025-09-27T22:19:53",
+      "elapsed_sec": 99.724329,
+      "usage": {
+        "input_tokens": 3128,
+        "output_tokens": 4941,
+        "total_tokens": 8069
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001AD0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD02.ll",
+      "success": true,
+      "time": "2025-09-27T22:19:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001AD0.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD02.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD02.bc",
+      "start_time": "2025-09-27T22:19:53",
+      "end_time": "2025-09-27T22:19:53",
+      "elapsed_sec": 0.011976
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001C40.txt",
+      "version": 1,
+      "request_id": "resp_68d7e4796224819887f356099ead6459001f93f4ba48e299",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:19:53",
+      "end_time": "2025-09-27T22:22:00",
+      "elapsed_sec": 127.187151,
+      "usage": {
+        "input_tokens": 4144,
+        "output_tokens": 6604,
+        "total_tokens": 10748
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001C40.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001C401.ll",
+      "success": true,
+      "time": "2025-09-27T22:22:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001C40.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001C401.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001C401.bc",
+      "start_time": "2025-09-27T22:22:00",
+      "end_time": "2025-09-27T22:22:00",
+      "elapsed_sec": 0.011261
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001FD0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e4f893a8819a95809b3cc49d76c9018cdc9c99404135",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:22:00",
+      "end_time": "2025-09-27T22:24:04",
+      "elapsed_sec": 123.705708,
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 6424,
+        "total_tokens": 7042
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001FD0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001FD01.ll",
+      "success": true,
+      "time": "2025-09-27T22:24:04"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001FD0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001FD01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001FD01.bc",
+      "start_time": "2025-09-27T22:24:04",
+      "end_time": "2025-09-27T22:24:04",
+      "elapsed_sec": 0.013181
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002010.txt",
+      "version": 1,
+      "request_id": "resp_68d7e574476c819b93bf3892b73e82870bb0fabc59d8e203",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:24:04",
+      "end_time": "2025-09-27T22:24:50",
+      "elapsed_sec": 45.539942,
+      "usage": {
+        "input_tokens": 382,
+        "output_tokens": 2894,
+        "total_tokens": 3276
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400020101.ll",
+      "success": true,
+      "time": "2025-09-27T22:24:50"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002010.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400020101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400020101.bc",
+      "start_time": "2025-09-27T22:24:50",
+      "end_time": "2025-09-27T22:24:50",
+      "elapsed_sec": 0.011618
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400021E0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e5a1e0788190a213ce346c5c5b1305e98ff8141cbd46",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:24:50",
+      "end_time": "2025-09-27T22:25:59",
+      "elapsed_sec": 69.493968,
+      "usage": {
+        "input_tokens": 866,
+        "output_tokens": 4970,
+        "total_tokens": 5836
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400021E0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400021E01.ll",
+      "success": true,
+      "time": "2025-09-27T22:25:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400021E0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400021E01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400021E01.bc",
+      "start_time": "2025-09-27T22:25:59",
+      "end_time": "2025-09-27T22:25:59",
+      "elapsed_sec": 0.012409
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002250.txt",
+      "version": 1,
+      "request_id": "resp_68d7e5e75e188194a1a84559fa7d5b7807fbdc57ed03f8d6",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:25:59",
+      "end_time": "2025-09-27T22:27:45",
+      "elapsed_sec": 106.135273,
+      "usage": {
+        "input_tokens": 894,
+        "output_tokens": 4584,
+        "total_tokens": 5478
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002250.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400022501.ll",
+      "success": true,
+      "time": "2025-09-27T22:27:45"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002250.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400022501.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400022501.bc",
+      "start_time": "2025-09-27T22:27:45",
+      "end_time": "2025-09-27T22:27:45",
+      "elapsed_sec": 0.012252
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400022E0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e65186fc8196b67b7a580530894b034908896b8a756a",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:27:45",
+      "end_time": "2025-09-27T22:29:11",
+      "elapsed_sec": 85.950478,
+      "usage": {
+        "input_tokens": 939,
+        "output_tokens": 5993,
+        "total_tokens": 6932
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400022E0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400022E01.ll",
+      "success": true,
+      "time": "2025-09-27T22:29:11"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400022E0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400022E01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400022E01.bc",
+      "start_time": "2025-09-27T22:29:11",
+      "end_time": "2025-09-27T22:29:11",
+      "elapsed_sec": 0.015669
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002370.txt",
+      "version": 1,
+      "request_id": "resp_68d7e6a77c148199805e417e888fd97b0e2b43548c187a9d",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:29:11",
+      "end_time": "2025-09-27T22:31:53",
+      "elapsed_sec": 161.441255,
+      "usage": {
+        "input_tokens": 1258,
+        "output_tokens": 8965,
+        "total_tokens": 10223
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002370.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400023701.ll",
+      "success": true,
+      "time": "2025-09-27T22:31:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002370.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400023701.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400023701.bc",
+      "start_time": "2025-09-27T22:31:53",
+      "end_time": "2025-09-27T22:31:53",
+      "elapsed_sec": 0.012708
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002480.txt",
+      "version": 1,
+      "request_id": "resp_68d7e748f1bc819bbbc0ea4b296e8df90fab6a148e05d431",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:31:53",
+      "end_time": "2025-09-27T22:32:16",
+      "elapsed_sec": 22.858116,
+      "usage": {
+        "input_tokens": 362,
+        "output_tokens": 1202,
+        "total_tokens": 1564
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002480.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024801.ll",
+      "success": true,
+      "time": "2025-09-27T22:32:16"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002480.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024801.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024801.bc",
+      "start_time": "2025-09-27T22:32:16",
+      "end_time": "2025-09-27T22:32:16",
+      "elapsed_sec": 0.011357
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002490.txt",
+      "version": 1,
+      "request_id": "resp_68d7e75fd3ac8198ace4e749b71da77404ecbeaed72dd538",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:32:16",
+      "end_time": "2025-09-27T22:32:53",
+      "elapsed_sec": 37.124786,
+      "usage": {
+        "input_tokens": 560,
+        "output_tokens": 2542,
+        "total_tokens": 3102
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002490.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024901.ll",
+      "success": true,
+      "time": "2025-09-27T22:32:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002490.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024901.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024901.bc",
+      "start_time": "2025-09-27T22:32:53",
+      "end_time": "2025-09-27T22:32:53",
+      "elapsed_sec": 0.014194
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400024C0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e784fa8c8199aac66171bdcd38900ef535da39cecbdf",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:32:53",
+      "end_time": "2025-09-27T22:34:09",
+      "elapsed_sec": 75.982316,
+      "usage": {
+        "input_tokens": 758,
+        "output_tokens": 5680,
+        "total_tokens": 6438
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400024C0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024C01.ll",
+      "success": true,
+      "time": "2025-09-27T22:34:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400024C0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024C01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400024C01.bc",
+      "start_time": "2025-09-27T22:34:09",
+      "end_time": "2025-09-27T22:34:09",
+      "elapsed_sec": 0.012746
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002510.txt",
+      "version": 1,
+      "request_id": "resp_68d7e7d0faf4819785f155437bf42e5a06a17d57db628c4b",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:34:09",
+      "end_time": "2025-09-27T22:36:55",
+      "elapsed_sec": 166.729815,
+      "usage": {
+        "input_tokens": 1051,
+        "output_tokens": 6501,
+        "total_tokens": 7552
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002510.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400025101.ll",
+      "success": true,
+      "time": "2025-09-27T22:36:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002510.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400025101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400025101.bc",
+      "start_time": "2025-09-27T22:36:55",
+      "end_time": "2025-09-27T22:36:56",
+      "elapsed_sec": 0.016201
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400025B0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e877b8b08199891e05f7f8d5491a06ccf574cd70a502",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:36:56",
+      "end_time": "2025-09-27T22:38:44",
+      "elapsed_sec": 108.040445,
+      "usage": {
+        "input_tokens": 960,
+        "output_tokens": 6802,
+        "total_tokens": 7762
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400025B0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400025B01.ll",
+      "success": true,
+      "time": "2025-09-27T22:38:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400025B0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400025B01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400025B01.bc",
+      "start_time": "2025-09-27T22:38:44",
+      "end_time": "2025-09-27T22:38:44",
+      "elapsed_sec": 0.02244
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002630.txt",
+      "version": 1,
+      "request_id": "resp_68d7e8e3d0548195acb84626feeb47f50547dce732b6dbec",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:38:44",
+      "end_time": "2025-09-27T22:39:51",
+      "elapsed_sec": 67.009267,
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 3732,
+        "total_tokens": 4332
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002630.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026301.ll",
+      "success": true,
+      "time": "2025-09-27T22:39:51"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002630.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026301.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026301.bc",
+      "start_time": "2025-09-27T22:39:51",
+      "end_time": "2025-09-27T22:39:51",
+      "elapsed_sec": 0.017479
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002670.txt",
+      "version": 1,
+      "request_id": "resp_68d7e926d9b4819892ac961294f5a900062f58a64a9e8b60",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:39:51",
+      "end_time": "2025-09-27T22:41:25",
+      "elapsed_sec": 94.580029,
+      "usage": {
+        "input_tokens": 924,
+        "output_tokens": 6190,
+        "total_tokens": 7114
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002670.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026701.ll",
+      "success": true,
+      "time": "2025-09-27T22:41:25"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002670.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026701.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026701.bc",
+      "start_time": "2025-09-27T22:41:25",
+      "end_time": "2025-09-27T22:41:25",
+      "elapsed_sec": 0.013754
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400026F0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e9857ad08193b05acbfb39d590f307af5bd5bbb68529",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:41:25",
+      "end_time": "2025-09-27T22:42:13",
+      "elapsed_sec": 47.772509,
+      "usage": {
+        "input_tokens": 594,
+        "output_tokens": 2835,
+        "total_tokens": 3429
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400026F0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026F01.ll",
+      "success": true,
+      "time": "2025-09-27T22:42:13"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400026F0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026F01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400026F01.bc",
+      "start_time": "2025-09-27T22:42:13",
+      "end_time": "2025-09-27T22:42:13",
+      "elapsed_sec": 0.013536
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002730.txt",
+      "version": 1,
+      "request_id": "resp_68d7e9b53d808198b9aedd0b3edae1e3060279f7f3f75dba",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:42:13",
+      "end_time": "2025-09-27T22:43:26",
+      "elapsed_sec": 72.562556,
+      "usage": {
+        "input_tokens": 987,
+        "output_tokens": 6049,
+        "total_tokens": 7036
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002730.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027301.ll",
+      "success": true,
+      "time": "2025-09-27T22:43:26"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002730.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027301.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027301.bc",
+      "start_time": "2025-09-27T22:43:26",
+      "end_time": "2025-09-27T22:43:26",
+      "elapsed_sec": 0.025083
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400027C0.txt",
+      "version": 1,
+      "request_id": "resp_68d7e9fde3408194b0771398e8f4281702e5bc22f396a564",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:43:26",
+      "end_time": "2025-09-27T22:49:59",
+      "elapsed_sec": 393.142291,
+      "usage": {
+        "input_tokens": 1291,
+        "output_tokens": 11155,
+        "total_tokens": 12446
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400027C0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll",
+      "success": true,
+      "time": "2025-09-27T22:49:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400027C0.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll:67:6: error: expected '=' after instruction id\n  %38load = load i32, i32* %37, align 4\n     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.bc",
+      "start_time": "2025-09-27T22:49:59",
+      "end_time": "2025-09-27T22:49:59",
+      "elapsed_sec": 0.016145
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_1400027C0.txt",
+      "version": 2,
+      "request_id": "resp_68d7eb8702bc819aa759e964789feda00637f34bb18dbb1c",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:49:59",
+      "end_time": "2025-09-27T22:52:36",
+      "elapsed_sec": 157.640989,
+      "usage": {
+        "input_tokens": 2149,
+        "output_tokens": 4771,
+        "total_tokens": 6920
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400027C0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll",
+      "success": true,
+      "time": "2025-09-27T22:52:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400027C0.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll:68:3: error: instruction expected to be numbered '%38'\n  %39 = icmp ult i32 %18, %sec_va\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.bc",
+      "start_time": "2025-09-27T22:52:36",
+      "end_time": "2025-09-27T22:52:36",
+      "elapsed_sec": 0.014937
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_1400027C0.txt",
+      "version": 3,
+      "request_id": "resp_68d7ec24af80819081e51b201ce4381c0c66af3714b06365",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:52:36",
+      "end_time": "2025-09-27T22:54:01",
+      "elapsed_sec": 84.700528,
+      "usage": {
+        "input_tokens": 1972,
+        "output_tokens": 5607,
+        "total_tokens": 7579
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400027C0.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C03.ll",
+      "success": true,
+      "time": "2025-09-27T22:54:01"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400027C0.txt",
+      "version": 3,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C03.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C03.bc",
+      "start_time": "2025-09-27T22:54:01",
+      "end_time": "2025-09-27T22:54:01",
+      "elapsed_sec": 0.019744
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "request_id": "resp_68d7ec7969c8819989e29516842fd4a304e8dac1bbac5156",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:54:01",
+      "end_time": "2025-09-27T22:55:41",
+      "elapsed_sec": 99.962467,
+      "usage": {
+        "input_tokens": 582,
+        "output_tokens": 4945,
+        "total_tokens": 5527
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400028801.ll",
+      "success": true,
+      "time": "2025-09-27T22:55:41"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400028801.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400028801.bc",
+      "start_time": "2025-09-27T22:55:41",
+      "end_time": "2025-09-27T22:55:41",
+      "elapsed_sec": 0.020031
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400028C0.txt",
+      "version": 1,
+      "request_id": "resp_68d7ecdd65cc819b829a6a135cb9b8540778078f2789de3d",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:55:41",
+      "end_time": "2025-09-27T22:56:33",
+      "elapsed_sec": 51.480934,
+      "usage": {
+        "input_tokens": 646,
+        "output_tokens": 2681,
+        "total_tokens": 3327
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400028C0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400028C01.ll",
+      "success": true,
+      "time": "2025-09-27T22:56:33"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400028C0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400028C01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400028C01.bc",
+      "start_time": "2025-09-27T22:56:33",
+      "end_time": "2025-09-27T22:56:33",
+      "elapsed_sec": 0.014106
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002900.txt",
+      "version": 1,
+      "request_id": "resp_68d7ed111f248196b91f393e2b036e350c3bbfe35f83a072",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:56:33",
+      "end_time": "2025-09-27T22:58:01",
+      "elapsed_sec": 88.626796,
+      "usage": {
+        "input_tokens": 741,
+        "output_tokens": 4188,
+        "total_tokens": 4929
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002900.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029001.ll",
+      "success": true,
+      "time": "2025-09-27T22:58:01"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002900.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029001.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029001.bc",
+      "start_time": "2025-09-27T22:58:01",
+      "end_time": "2025-09-27T22:58:01",
+      "elapsed_sec": 0.013335
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002960.txt",
+      "version": 1,
+      "request_id": "resp_68d7ed698eb88198904d977dbbd304840fd734baede34f35",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:58:01",
+      "end_time": "2025-09-27T22:59:30",
+      "elapsed_sec": 89.083506,
+      "usage": {
+        "input_tokens": 697,
+        "output_tokens": 4751,
+        "total_tokens": 5448
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002960.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029601.ll",
+      "success": true,
+      "time": "2025-09-27T22:59:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002960.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029601.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029601.bc",
+      "start_time": "2025-09-27T22:59:30",
+      "end_time": "2025-09-27T22:59:30",
+      "elapsed_sec": 0.020219
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400029B0.txt",
+      "version": 1,
+      "request_id": "resp_68d7edc2aca481938316de3e2eb1411b003a26e0436a96cc",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T22:59:30",
+      "end_time": "2025-09-27T23:00:05",
+      "elapsed_sec": 34.307974,
+      "usage": {
+        "input_tokens": 380,
+        "output_tokens": 1932,
+        "total_tokens": 2312
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400029B0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029B01.ll",
+      "success": true,
+      "time": "2025-09-27T23:00:05"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400029B0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029B01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029B01.bc",
+      "start_time": "2025-09-27T23:00:05",
+      "end_time": "2025-09-27T23:00:05",
+      "elapsed_sec": 0.013217
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400029C0.txt",
+      "version": 1,
+      "request_id": "resp_68d7ede5002481999162038e95fcae7d03de23ec2c9d7bba",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T23:00:05",
+      "end_time": "2025-09-27T23:00:47",
+      "elapsed_sec": 42.606503,
+      "usage": {
+        "input_tokens": 398,
+        "output_tokens": 2989,
+        "total_tokens": 3387
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400029C0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029C01.ll",
+      "success": true,
+      "time": "2025-09-27T23:00:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400029C0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029C01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029C01.bc",
+      "start_time": "2025-09-27T23:00:47",
+      "end_time": "2025-09-27T23:00:47",
+      "elapsed_sec": 0.012682
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400029D0.txt",
+      "version": 1,
+      "request_id": "resp_68d7ee0fa1cc8198ab8eb4ce17625c80009334b5d9de3eda",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T23:00:47",
+      "end_time": "2025-09-27T23:01:24",
+      "elapsed_sec": 36.667477,
+      "usage": {
+        "input_tokens": 535,
+        "output_tokens": 2339,
+        "total_tokens": 2874
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400029D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029D01.ll",
+      "success": true,
+      "time": "2025-09-27T23:01:24"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400029D0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029D01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400029D01.bc",
+      "start_time": "2025-09-27T23:01:24",
+      "end_time": "2025-09-27T23:01:24",
+      "elapsed_sec": 0.014517
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002A00.txt",
+      "version": 1,
+      "request_id": "resp_68d7ee3453b8819a9c32bad2597ec9d30c29cf4906e97ed2",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T23:01:24",
+      "end_time": "2025-09-27T23:02:18",
+      "elapsed_sec": 53.72207,
+      "usage": {
+        "input_tokens": 840,
+        "output_tokens": 4063,
+        "total_tokens": 4903
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002A00.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140002A001.ll",
+      "success": true,
+      "time": "2025-09-27T23:02:18"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002A00.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140002A001.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140002A001.bc",
+      "start_time": "2025-09-27T23:02:18",
+      "end_time": "2025-09-27T23:02:18",
+      "elapsed_sec": 0.018914
+    },
+    {
+      "phase": "round_complete",
+      "round": 1,
+      "end_time": "2025-09-27T23:02:18"
+    }
+  ]
+}

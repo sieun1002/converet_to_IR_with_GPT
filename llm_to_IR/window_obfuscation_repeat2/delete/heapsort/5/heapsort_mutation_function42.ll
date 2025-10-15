@@ -1,0 +1,155 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.EXCEPTION_RECORD = type { i32, i32 }
+%struct.EXCEPTION_POINTERS = type { %struct.EXCEPTION_RECORD*, i8* }
+
+@off_140004400 = external global i32*
+@qword_1400070D0 = external global i8*
+
+declare void @sub_140001010()
+declare void @sub_1400024E0()
+declare i8* @signal(i32, i8*)
+
+define void @start() {
+entry:
+  %p = load i32*, i32** @off_140004400
+  store i32 0, i32* %p, align 4
+  call void @sub_140001010()
+  ret void
+}
+
+define i32 @TopLevelExceptionFilter(%struct.EXCEPTION_POINTERS* %p) {
+entry:
+  %er.ptr.ptr = getelementptr inbounds %struct.EXCEPTION_POINTERS, %struct.EXCEPTION_POINTERS* %p, i32 0, i32 0
+  %er = load %struct.EXCEPTION_RECORD*, %struct.EXCEPTION_RECORD** %er.ptr.ptr, align 8
+  %code.ptr = getelementptr inbounds %struct.EXCEPTION_RECORD, %struct.EXCEPTION_RECORD* %er, i32 0, i32 0
+  %code = load i32, i32* %code.ptr, align 4
+  %masked = and i32 %code, 553648127
+  %cmpgcc = icmp eq i32 %masked, 541802883
+  br i1 %cmpgcc, label %check_flags, label %cont_after_gcc
+
+check_flags:
+  %flags.ptr = getelementptr inbounds %struct.EXCEPTION_RECORD, %struct.EXCEPTION_RECORD* %er, i32 0, i32 1
+  %flags = load i32, i32* %flags.ptr, align 4
+  %flag1 = and i32 %flags, 1
+  %is_set = icmp ne i32 %flag1, 0
+  br i1 %is_set, label %cont_after_gcc, label %ret_minus1
+
+cont_after_gcc:
+  %cmp_hi = icmp ugt i32 %code, 3221225622
+  br i1 %cmp_hi, label %fallback, label %check_low_range
+
+check_low_range:
+  %cmp_ule_8B = icmp ule i32 %code, 3221225611
+  br i1 %cmp_ule_8B, label %block_110, label %switch_range
+
+block_110:
+  %is_segv = icmp eq i32 %code, 3221225477
+  br i1 %is_segv, label %handle_segv, label %block_110_next
+
+block_110_next:
+  %gt_0005 = icmp ugt i32 %code, 3221225477
+  br i1 %gt_0005, label %block_150, label %block_110_low
+
+block_110_low:
+  %is_80000002 = icmp eq i32 %code, 2147483650
+  br i1 %is_80000002, label %ret_minus1, label %fallback
+
+block_150:
+  %is_invalid_handle = icmp eq i32 %code, 3221225480
+  br i1 %is_invalid_handle, label %ret_minus1, label %block_150_next
+
+block_150_next:
+  %is_illegal_instr = icmp eq i32 %code, 3221225501
+  br i1 %is_illegal_instr, label %handle_illegal, label %fallback
+
+switch_range:
+  %is_int_div0 = icmp eq i32 %code, 3221225620
+  br i1 %is_int_div0, label %handle_fpe_div0, label %handle_fpe_general
+
+handle_fpe_general:
+  %sigret_g = call i8* @signal(i32 8, i8* null)
+  %sigret_g_is1 = icmp eq i8* %sigret_g, inttoptr (i64 1 to i8*)
+  br i1 %sigret_g_is1, label %fpe_set1_and_aux, label %fpe_general_test
+
+fpe_general_test:
+  %sigret_g_isnull = icmp eq i8* %sigret_g, null
+  br i1 %sigret_g_isnull, label %fallback, label %call_prev_handler_fpe
+
+call_prev_handler_fpe:
+  %sigret_phi = phi i8* [ %sigret_g, %fpe_general_test ], [ %sigret_d, %fpe_div0_test ]
+  %fpe_handler = bitcast i8* %sigret_phi to void (i32)*
+  call void %fpe_handler(i32 8)
+  br label %ret_minus1
+
+fpe_set1_and_aux:
+  %tmp_set1_g = call i8* @signal(i32 8, i8* inttoptr (i64 1 to i8*))
+  call void @sub_1400024E0()
+  br label %ret_minus1
+
+handle_fpe_div0:
+  %sigret_d = call i8* @signal(i32 8, i8* null)
+  %sigret_d_is1 = icmp eq i8* %sigret_d, inttoptr (i64 1 to i8*)
+  br i1 %sigret_d_is1, label %fpe_div0_set1, label %fpe_div0_test
+
+fpe_div0_test:
+  %sigret_d_isnull = icmp eq i8* %sigret_d, null
+  br i1 %sigret_d_isnull, label %fallback, label %call_prev_handler_fpe
+
+fpe_div0_set1:
+  %tmp_set1_d = call i8* @signal(i32 8, i8* inttoptr (i64 1 to i8*))
+  br label %ret_minus1
+
+handle_illegal:
+  %sigret_i = call i8* @signal(i32 4, i8* null)
+  %sigret_i_is1 = icmp eq i8* %sigret_i, inttoptr (i64 1 to i8*)
+  br i1 %sigret_i_is1, label %illegal_set1, label %illegal_test
+
+illegal_test:
+  %sigret_i_isnull = icmp eq i8* %sigret_i, null
+  br i1 %sigret_i_isnull, label %fallback, label %call_prev_handler_illegal
+
+call_prev_handler_illegal:
+  %ill_handler = bitcast i8* %sigret_i to void (i32)*
+  call void %ill_handler(i32 4)
+  br label %ret_minus1
+
+illegal_set1:
+  %tmp_set1_i = call i8* @signal(i32 4, i8* inttoptr (i64 1 to i8*))
+  br label %ret_minus1
+
+handle_segv:
+  %sigret_s = call i8* @signal(i32 11, i8* null)
+  %sigret_s_is1 = icmp eq i8* %sigret_s, inttoptr (i64 1 to i8*)
+  br i1 %sigret_s_is1, label %segv_set1, label %segv_test
+
+segv_test:
+  %sigret_s_isnull = icmp eq i8* %sigret_s, null
+  br i1 %sigret_s_isnull, label %fallback, label %call_prev_handler_segv
+
+call_prev_handler_segv:
+  %segv_handler = bitcast i8* %sigret_s to void (i32)*
+  call void %segv_handler(i32 11)
+  br label %ret_minus1
+
+segv_set1:
+  %tmp_set1_s = call i8* @signal(i32 11, i8* inttoptr (i64 1 to i8*))
+  br label %ret_minus1
+
+ret_minus1:
+  ret i32 -1
+
+fallback:
+  %prev = load i8*, i8** @qword_1400070D0, align 8
+  %prev_isnull = icmp eq i8* %prev, null
+  br i1 %prev_isnull, label %ret_zero, label %call_prev_filter
+
+ret_zero:
+  ret i32 0
+
+call_prev_filter:
+  %prev_fn = bitcast i8* %prev to i32 (%struct.EXCEPTION_POINTERS*)*
+  %res_prev = tail call i32 %prev_fn(%struct.EXCEPTION_POINTERS* %p)
+  ret i32 %res_prev
+}

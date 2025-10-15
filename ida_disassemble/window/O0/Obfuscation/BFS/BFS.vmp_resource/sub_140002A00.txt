@@ -1,0 +1,22 @@
+; Function: sub_140002A00
+; Start: 0x140002a00, End: 0x140002a33
+
+0x140002a00: push    rdi
+0x140002a01: push    rsi
+0x140002a02: push    rbx
+0x140002a03: sub     rsp, 30h
+0x140002a07: mov     rbx, rcx
+0x140002a0a: mov     rsi, rdx
+0x140002a0d: mov     rdi, r8
+0x140002a10: call    sub_140002AF0
+0x140002a15: xor     r9d, r9d; Locale
+0x140002a18: mov     r8, rsi; Format
+0x140002a1b: mov     rdx, rbx; Stream
+0x140002a1e: mov     rcx, [rax]; Options
+0x140002a21: mov     [rsp+48h+ArgList], rdi; ArgList
+0x140002a26: call    __stdio_common_vfprintf
+0x140002a2b: add     rsp, 30h
+0x140002a2f: pop     rbx
+0x140002a30: pop     rsi
+0x140002a31: pop     rdi
+0x140002a32: retn

@@ -1,0 +1,69 @@
+; ModuleID = 'fixed_module'
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.Node = type { i32, [12 x i8], %struct.Node* }
+
+@dword_1400070E8 = dso_local global i32 0
+@qword_1400070E0 = dso_local global %struct.Node* null
+@unk_140007100 = dso_local global [1 x i8] zeroinitializer
+
+declare dso_local void @loc_1400D766D(i8*)
+declare dso_local void @sub_1400E1987(i8*)
+declare dso_local void @sub_140002BB0()
+
+define dso_local i32 @sub_140002340(i32 %arg) {
+entry:
+  %flag = load i32, i32* @dword_1400070E8, align 4
+  %cmp0 = icmp eq i32 %flag, 0
+  br i1 %cmp0, label %ret_zero, label %acquire
+
+ret_zero:
+  ret i32 0
+
+acquire:
+  %lockptr = getelementptr inbounds [1 x i8], [1 x i8]* @unk_140007100, i64 0, i64 0
+  call void @loc_1400D766D(i8* %lockptr)
+  %head = load %struct.Node*, %struct.Node** @qword_1400070E0, align 8
+  %head_null = icmp eq %struct.Node* %head, null
+  br i1 %head_null, label %unlock_ret, label %loop
+
+loop:
+  %prev.phi = phi %struct.Node* [ null, %acquire ], [ %curr, %iter ]
+  %curr.phi = phi %struct.Node* [ %head, %acquire ], [ %next2, %iter ]
+  %keyptr = getelementptr inbounds %struct.Node, %struct.Node* %curr.phi, i64 0, i32 0
+  %key = load i32, i32* %keyptr, align 4
+  %eq = icmp eq i32 %key, %arg
+  br i1 %eq, label %found, label %iter
+
+iter:
+  %nextptr2 = getelementptr inbounds %struct.Node, %struct.Node* %curr.phi, i64 0, i32 2
+  %next2 = load %struct.Node*, %struct.Node** %nextptr2, align 8
+  %next_null = icmp eq %struct.Node* %next2, null
+  br i1 %next_null, label %unlock_ret, label %loop
+
+found:
+  %nextptr = getelementptr inbounds %struct.Node, %struct.Node* %curr.phi, i64 0, i32 2
+  %next = load %struct.Node*, %struct.Node** %nextptr, align 8
+  %is_head = icmp eq %struct.Node* %prev.phi, null
+  br i1 %is_head, label %remove_head, label %remove_nonhead
+
+remove_head:
+  store %struct.Node* %next, %struct.Node** @qword_1400070E0, align 8
+  call void @sub_140002BB0()
+  %lockptr2 = getelementptr inbounds [1 x i8], [1 x i8]* @unk_140007100, i64 0, i64 0
+  call void @sub_1400E1987(i8* %lockptr2)
+  ret i32 0
+
+remove_nonhead:
+  %prev_nextptr = getelementptr inbounds %struct.Node, %struct.Node* %prev.phi, i64 0, i32 2
+  store %struct.Node* %next, %struct.Node** %prev_nextptr, align 8
+  call void @sub_140002BB0()
+  %lockptr3 = getelementptr inbounds [1 x i8], [1 x i8]* @unk_140007100, i64 0, i64 0
+  call void @sub_1400E1987(i8* %lockptr3)
+  ret i32 0
+
+unlock_ret:
+  %lockptr4 = getelementptr inbounds [1 x i8], [1 x i8]* @unk_140007100, i64 0, i64 0
+  call void @sub_1400E1987(i8* %lockptr4)
+  ret i32 0
+}

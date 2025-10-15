@@ -1,0 +1,64 @@
+; ModuleID = 'fixed'
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+@g_target = internal global i32 0, align 4
+@off_140004400 = dso_local global i32* @g_target, align 8
+@qword_1400070D0 = dso_local global i32 (i8*)* null, align 8
+
+declare dllimport void (i32)* @signal(i32, void (i32)*)
+declare void @sub_140001010()
+declare void @sub_1400024E0()
+
+define dso_local i32 @start() {
+entry:
+  %p = load i32*, i32** @off_140004400, align 8
+  store i32 0, i32* %p, align 4
+  call void @sub_140001010()
+  ret i32 0
+}
+
+define dso_local i32 @TopLevelExceptionFilter(i8* %rec) {
+entry:
+  %exptr_ptr = bitcast i8* %rec to i8**
+  %exrec = load i8*, i8** %exptr_ptr, align 8
+  %excode_ptr = bitcast i8* %exrec to i32*
+  %excode = load i32, i32* %excode_ptr, align 4
+  %is_access = icmp eq i32 %excode, -1073741819
+  br i1 %is_access, label %case_segv, label %fallback
+
+case_segv:
+  %nullh = bitcast i8* null to void (i32)*
+  %h1 = call void (i32)* @signal(i32 11, void (i32)* %nullh)
+  %h1_int = ptrtoint void (i32)* %h1 to i64
+  %is_ign = icmp eq i64 %h1_int, 1
+  br i1 %is_ign, label %segv_set_ign, label %segv_check_null
+
+segv_set_ign:
+  %oneptr = inttoptr i64 1 to void (i32)*
+  %h2 = call void (i32)* @signal(i32 11, void (i32)* %oneptr)
+  br label %ret_m1
+
+segv_check_null:
+  %is_null = icmp eq void (i32)* %h1, null
+  br i1 %is_null, label %fallback, label %call_handler
+
+call_handler:
+  call void %h1(i32 11)
+  br label %ret_m1
+
+fallback:
+  %cb = load i32 (i8*)*, i32 (i8*)** @qword_1400070D0, align 8
+  %has_cb = icmp ne i32 (i8*)* %cb, null
+  br i1 %has_cb, label %tail, label %ret0
+
+tail:
+  %res = tail call i32 %cb(i8* %rec)
+  ret i32 %res
+
+ret0:
+  ret i32 0
+
+ret_m1:
+  ret i32 -1
+}

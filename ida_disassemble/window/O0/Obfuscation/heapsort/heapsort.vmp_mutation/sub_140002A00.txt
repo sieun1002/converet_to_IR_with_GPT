@@ -1,0 +1,36 @@
+; Function: sub_140002A00
+; Start: 0x140002a00, End: 0x140002a5f
+
+0x140002a00: push    rbp
+0x140002a01: push    rdi
+0x140002a02: push    rsi
+0x140002a03: push    rbx
+0x140002a04: sub     rsp, 28h
+0x140002a08: mov     ebp, r9d
+0x140002a0b: mov     rsi, rdx
+0x140002a0e: mov     rbx, r8
+0x140002a11: mov     rdi, rcx
+0x140002a14: call    _initialize_narrow_environment
+0x140002a19: cmp     ebp, 1
+0x140002a1c: mov     ecx, 1
+0x140002a21: sbb     ecx, 0FFFFFFFFh; mode
+0x140002a24: call    _configure_narrow_argv
+0x140002a29: call    __p___argc
+0x140002a2e: mov     eax, [rax]
+0x140002a30: mov     [rdi], eax
+0x140002a32: call    __p___argv
+0x140002a37: mov     rax, [rax]
+0x140002a3a: mov     [rsi], rax
+0x140002a3d: call    __p__environ
+0x140002a42: mov     rax, [rax]
+0x140002a45: mov     [rbx], rax
+0x140002a48: mov     rax, [rsp+48h+arg_20]
+0x140002a4d: mov     ecx, [rax]; NewMode
+0x140002a4f: call    _set_new_mode
+0x140002a54: xor     eax, eax
+0x140002a56: add     rsp, 28h
+0x140002a5a: pop     rbx
+0x140002a5b: pop     rsi
+0x140002a5c: pop     rdi
+0x140002a5d: pop     rbp
+0x140002a5e: retn

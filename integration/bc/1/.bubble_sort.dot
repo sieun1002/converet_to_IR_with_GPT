@@ -1,0 +1,32 @@
+digraph "CFG for 'bubble_sort' function" {
+	label="CFG for 'bubble_sort' function";
+
+	Node0x2234fac0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#b2ccfb70",label="{entry:\l  %cmp_n_le1 = icmp ule i64 %n, 1\l  br i1 %cmp_n_le1, label %return, label %init\l|{<s0>T|<s1>F}}"];
+	Node0x2234fac0:s0 -> Node0x2234fb10;
+	Node0x2234fac0:s1 -> Node0x2234fb80;
+	Node0x2234fb80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#93b5fe70",label="{init:                                             \l  br label %outer.header\l}"];
+	Node0x2234fb80 -> Node0x2234fca0;
+	Node0x2234fca0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ecd3c570",label="{outer.header:                                     \l  %bound = phi i64 [ %n, %init ], [ %last, %update.bound ]\l  %cond_outer = icmp ugt i64 %bound, 1\l  br i1 %cond_outer, label %outer.body, label %return\l|{<s0>T|<s1>F}}"];
+	Node0x2234fca0:s0 -> Node0x2234ff90;
+	Node0x2234fca0:s1 -> Node0x2234fb10;
+	Node0x2234ff90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ead5c970",label="{outer.body:                                       \l  br label %inner.header\l}"];
+	Node0x2234ff90 -> Node0x22350120;
+	Node0x22350120 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870",label="{inner.header:                                     \l  %i = phi i64 [ 1, %outer.body ], [ %i.next, %inner.latch ]\l  %last = phi i64 [ 0, %outer.body ], [ %last.updated, %inner.latch ]\l  %cond_inner = icmp ult i64 %i, %bound\l  br i1 %cond_inner, label %inner.body, label %after.inner\l|{<s0>T|<s1>F}}"];
+	Node0x22350120:s0 -> Node0x22350fc0;
+	Node0x22350120:s1 -> Node0x22351040;
+	Node0x22350fc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870",label="{inner.body:                                       \l  %im1 = add i64 %i, -1\l  %ptr_im1 = getelementptr inbounds i32, i32* %arr, i64 %im1\l  %a = load i32, i32* %ptr_im1, align 4\l  %ptr_i = getelementptr inbounds i32, i32* %arr, i64 %i\l  %b = load i32, i32* %ptr_i, align 4\l  %cmp_gt = icmp sgt i32 %a, %b\l  br i1 %cmp_gt, label %do.swap, label %no.swap\l|{<s0>T|<s1>F}}"];
+	Node0x22350fc0:s0 -> Node0x22351600;
+	Node0x22350fc0:s1 -> Node0x22351990;
+	Node0x22351600 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470",label="{do.swap:                                          \l  store i32 %b, i32* %ptr_im1, align 4\l  store i32 %a, i32* %ptr_i, align 4\l  br label %inner.latch\l}"];
+	Node0x22351600 -> Node0x22350260;
+	Node0x22351990 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470",label="{no.swap:                                          \l  br label %inner.latch\l}"];
+	Node0x22351990 -> Node0x22350260;
+	Node0x22350260 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870",label="{inner.latch:                                      \l  %last.updated = select i1 %cmp_gt, i64 %i, i64 %last\l  %i.next = add i64 %i, 1\l  br label %inner.header\l}"];
+	Node0x22350260 -> Node0x22350120;
+	Node0x22351040 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ead5c970",label="{after.inner:                                      \l  %had.swap = icmp ne i64 %last, 0\l  br i1 %had.swap, label %update.bound, label %return\l|{<s0>T|<s1>F}}"];
+	Node0x22351040:s0 -> Node0x2234fde0;
+	Node0x22351040:s1 -> Node0x2234fb10;
+	Node0x2234fde0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ead5c970",label="{update.bound:                                     \l  br label %outer.header\l}"];
+	Node0x2234fde0 -> Node0x2234fca0;
+	Node0x2234fb10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#b2ccfb70",label="{return:                                           \l  ret void\l}"];
+}

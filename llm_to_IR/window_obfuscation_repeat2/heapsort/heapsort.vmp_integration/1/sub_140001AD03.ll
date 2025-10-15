@@ -1,0 +1,185 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+@dword_1400070A4 = external global i32
+@qword_1400070A8 = external global i8*
+@qword_140008258 = external global i8*
+
+@aVirtualprotect = private unnamed_addr constant [39 x i8] c"  VirtualProtect failed with code 0x%x\00"
+@aVirtualqueryFa = private unnamed_addr constant [40 x i8] c"  VirtualQuery failed for %d bytes at a\00"
+@aAddressPHasNoI = private unnamed_addr constant [32 x i8] c"Address %p has no image-section\00"
+
+declare i8* @sub_1400025B0(i8*)
+declare i8* @sub_1400026F0()
+declare i8* @sub_1400D8EE3(i8*, ...)
+declare i32 @sub_1403EE80D(i8*, ...)
+declare void @sub_140001A70(i8*, ...)
+
+define void @sub_140001AD0(i8* %p) {
+entry:
+  %buf = alloca [64 x i8], align 8
+  %rdi_save = alloca i8*, align 8
+  %cnt_var = alloca i32, align 4
+  %cnt0 = load i32, i32* @dword_1400070A4
+  store i32 %cnt0, i32* %cnt_var
+  br label %check_count
+
+check_count:                                       ; preds = %entry
+  %cnt1 = load i32, i32* %cnt_var
+  %cmp_le = icmp sle i32 %cnt1, 0
+  br i1 %cmp_le, label %C00_setzero, label %loop_prep
+
+C00_setzero:                                       ; preds = %check_count
+  store i32 0, i32* %cnt_var
+  br label %B28_call
+
+loop_prep:                                         ; preds = %check_count
+  %base0 = load i8*, i8** @qword_1400070A8
+  %pos0 = getelementptr inbounds i8, i8* %base0, i64 24
+  %idx = alloca i32, align 4
+  store i32 0, i32* %idx
+  br label %loop
+
+loop:                                              ; preds = %cont_loop, %loop_prep
+  %idxv = load i32, i32* %idx
+  %cnt2 = load i32, i32* %cnt_var
+  %cmp_idx = icmp slt i32 %idxv, %cnt2
+  br i1 %cmp_idx, label %loop_body, label %B28_call
+
+loop_body:                                         ; preds = %loop
+  %idx64 = sext i32 %idxv to i64
+  %offset = mul i64 %idx64, 40
+  %pos_cur = getelementptr inbounds i8, i8* %pos0, i64 %offset
+  %start_ptrptr = bitcast i8* %pos_cur to i8**
+  %startp = load i8*, i8** %start_ptrptr
+  %p_int = ptrtoint i8* %p to i64
+  %start_int = ptrtoint i8* %startp to i64
+  %cmp_below = icmp ult i64 %p_int, %start_int
+  br i1 %cmp_below, label %cont_loop, label %check_end
+
+check_end:                                         ; preds = %loop_body
+  %pos_cur_p8 = getelementptr inbounds i8, i8* %pos_cur, i64 8
+  %ptrptr = bitcast i8* %pos_cur_p8 to i8**
+  %ptr = load i8*, i8** %ptrptr
+  %ptr_p8 = getelementptr inbounds i8, i8* %ptr, i64 8
+  %len32ptr = bitcast i8* %ptr_p8 to i32*
+  %len32 = load i32, i32* %len32ptr
+  %len64 = zext i32 %len32 to i64
+  %end_int = add i64 %start_int, %len64
+  %cmp_below2 = icmp ult i64 %p_int, %end_int
+  br i1 %cmp_below2, label %ret_end, label %cont_loop
+
+cont_loop:                                         ; preds = %check_end, %loop_body
+  %inc = add i32 %idxv, 1
+  store i32 %inc, i32* %idx
+  br label %loop
+
+ret_end:                                           ; preds = %check_end
+  ret void
+
+B28_call:                                          ; preds = %loop, %C00_setzero
+  %call1 = call i8* @sub_1400025B0(i8* %p)
+  store i8* %call1, i8** %rdi_save
+  %isnull = icmp eq i8* %call1, null
+  br i1 %isnull, label %C22_error_no_image, label %B3C_setup
+
+B3C_setup:                                         ; preds = %B28_call
+  %cnt3 = load i32, i32* %cnt_var
+  %tmp1 = mul i32 %cnt3, 5
+  %tmp1_64 = sext i32 %tmp1 to i64
+  %rbx_off = shl i64 %tmp1_64, 3
+  %base1 = load i8*, i8** @qword_1400070A8
+  %entry_ptr = getelementptr inbounds i8, i8* %base1, i64 %rbx_off
+  %entry_p20 = getelementptr inbounds i8, i8* %entry_ptr, i64 32
+  %entry_p20_ptr = bitcast i8* %entry_p20 to i8**
+  store i8* %call1, i8** %entry_p20_ptr
+  %entry_dword_ptr = bitcast i8* %entry_ptr to i32*
+  store i32 0, i32* %entry_dword_ptr
+  %call2 = call i8* @sub_1400026F0()
+  %rdi_loaded = load i8*, i8** %rdi_save
+  %rdi_p12 = getelementptr inbounds i8, i8* %rdi_loaded, i64 12
+  %rdi_p12_i32ptr = bitcast i8* %rdi_p12 to i32*
+  %len2 = load i32, i32* %rdi_p12_i32ptr
+  %len2_64 = zext i32 %len2 to i64
+  %rcx_ptr = getelementptr inbounds i8, i8* %call2, i64 %len2_64
+  %base2 = load i8*, i8** @qword_1400070A8
+  %entry2 = getelementptr inbounds i8, i8* %base2, i64 %rbx_off
+  %entry2_p18 = getelementptr inbounds i8, i8* %entry2, i64 24
+  %entry2_p18_ptr = bitcast i8* %entry2_p18 to i8**
+  store i8* %rcx_ptr, i8** %entry2_p18_ptr
+  %buf_i8 = getelementptr inbounds [64 x i8], [64 x i8]* %buf, i64 0, i64 0
+  %call3 = call i8* (i8*, ...) @sub_1400D8EE3(i8* %rcx_ptr, i8* %buf_i8, i32 48, i8* %base2)
+  %isnull2 = icmp eq i8* %call3, null
+  br i1 %isnull2, label %C07_vq_failed, label %B8A_check_flags
+
+B8A_check_flags:                                   ; preds = %B3C_setup
+  %var2C_ptr_i8 = getelementptr inbounds i8, i8* %buf_i8, i64 32
+  %var2C_ptr = bitcast i8* %var2C_ptr_i8 to i32*
+  %eax = load i32, i32* %var2C_ptr
+  %sub1 = add i32 %eax, -4
+  %and1 = and i32 %sub1, -5
+  %iszero1 = icmp eq i32 %and1, 0
+  br i1 %iszero1, label %B9E_inc_ret, label %B896_next
+
+B896_next:                                         ; preds = %B8A_check_flags
+  %sub2 = add i32 %eax, -64
+  %and2 = and i32 %sub2, -65
+  %iszero2 = icmp eq i32 %and2, 0
+  br i1 %iszero2, label %B9E_inc_ret, label %BB0_vprotect
+
+B9E_inc_ret:                                       ; preds = %B896_next, %B8A_check_flags, %BB0_vprotect
+  %oldcnt = load i32, i32* @dword_1400070A4
+  %newcnt = add i32 %oldcnt, 1
+  store i32 %newcnt, i32* @dword_1400070A4
+  ret void
+
+BB0_vprotect:                                      ; preds = %B896_next
+  %cmp_eax_2 = icmp eq i32 %eax, 2
+  %r8_sel = select i1 %cmp_eax_2, i32 4, i32 64
+  %var50_ptr = bitcast i8* %buf_i8 to i64*
+  %val50 = load i64, i64* %var50_ptr
+  %var38_ptr_i8 = getelementptr inbounds i8, i8* %buf_i8, i64 16
+  %var38_ptr = bitcast i8* %var38_ptr_i8 to i64*
+  %val38 = load i64, i64* %var38_ptr
+  %base3 = load i8*, i8** @qword_1400070A8
+  %entry3 = getelementptr inbounds i8, i8* %base3, i64 %rbx_off
+  %entry3_p8 = getelementptr inbounds i8, i8* %entry3, i64 8
+  %entry3_p8_ptr = bitcast i8* %entry3_p8 to i64*
+  store i64 %val50, i64* %entry3_p8_ptr
+  %entry3_p10 = getelementptr inbounds i8, i8* %entry3, i64 16
+  %entry3_p10_ptr = bitcast i8* %entry3_p10 to i64*
+  store i64 %val38, i64* %entry3_p10_ptr
+  %val50_ptr = inttoptr i64 %val50 to i8*
+  %val38_ptr = inttoptr i64 %val38 to i8*
+  %call4 = call i32 (i8*, ...) @sub_1403EE80D(i8* %val50_ptr, i8* %val38_ptr, i32 %r8_sel, i8* %entry3, i8* %entry3)
+  %nonzero = icmp ne i32 %call4, 0
+  br i1 %nonzero, label %B9E_inc_ret, label %BE8_fail_vprotect
+
+BE8_fail_vprotect:                                 ; preds = %BB0_vprotect
+  %gptr = load i8*, i8** @qword_140008258
+  %getlasterror = bitcast i8* %gptr to i32 ()*
+  %errcode = call i32 %getlasterror()
+  %fmt1_ptr = getelementptr inbounds [39 x i8], [39 x i8]* @aVirtualprotect, i64 0, i64 0
+  call void (i8*, ...) @sub_140001A70(i8* %fmt1_ptr, i32 %errcode)
+  store i32 0, i32* %cnt_var
+  br label %B28_call
+
+C07_vq_failed:                                     ; preds = %B3C_setup
+  %base4 = load i8*, i8** @qword_1400070A8
+  %rdi2 = load i8*, i8** %rdi_save
+  %rdi_p8 = getelementptr inbounds i8, i8* %rdi2, i64 8
+  %len3_ptr = bitcast i8* %rdi_p8 to i32*
+  %len3 = load i32, i32* %len3_ptr
+  %entry4 = getelementptr inbounds i8, i8* %base4, i64 %rbx_off
+  %entry4_p18 = getelementptr inbounds i8, i8* %entry4, i64 24
+  %entry4_p18_ptr = bitcast i8* %entry4_p18 to i8**
+  %r8val = load i8*, i8** %entry4_p18_ptr
+  %fmt2_ptr = getelementptr inbounds [40 x i8], [40 x i8]* @aVirtualqueryFa, i64 0, i64 0
+  call void (i8*, ...) @sub_140001A70(i8* %fmt2_ptr, i32 %len3, i8* %r8val)
+  br label %C22_error_no_image
+
+C22_error_no_image:                                ; preds = %C07_vq_failed, %B28_call
+  %fmt3_ptr = getelementptr inbounds [32 x i8], [32 x i8]* @aAddressPHasNoI, i64 0, i64 0
+  call void (i8*, ...) @sub_140001A70(i8* %fmt3_ptr, i8* %p)
+  ret void
+}

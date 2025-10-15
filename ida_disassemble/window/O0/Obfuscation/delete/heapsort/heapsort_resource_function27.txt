@@ -1,0 +1,17 @@
+; Function: sub_1400024F0
+; Start: 0x1400024F0, End: 0x14000251C
+
+0x1400024F0: xor     eax, eax
+0x1400024F2: cmp     word ptr [rcx], 5A4Dh
+0x1400024F7: jnz     short locret_140002508
+0x1400024F9: movsxd  rdx, dword ptr [rcx+3Ch]
+0x1400024FD: add     rcx, rdx
+0x140002500: cmp     dword ptr [rcx], 4550h
+0x140002506: jz      short loc_140002510
+locret_140002508:
+0x140002508: retn
+loc_140002510:
+0x140002510: xor     eax, eax
+0x140002512: cmp     word ptr [rcx+18h], 20Bh
+0x140002518: setz    al
+0x14000251B: retn

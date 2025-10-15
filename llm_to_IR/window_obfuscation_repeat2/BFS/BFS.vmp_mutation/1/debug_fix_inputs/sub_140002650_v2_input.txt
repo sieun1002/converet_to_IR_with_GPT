@@ -1,0 +1,82 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_mutation/1/sub_1400026501.ll:7:29: error: dso_location and DLL-StorageClass mismatch
+; declare dso_local dllimport i64 @strlen(i8*)
+;                             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'module'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+@off_1400043C0 = external dso_local global i8*
+
+declare dso_local dllimport i64 @strlen(i8*)
+declare dso_local dllimport i32 @strncmp(i8*, i8*, i64)
+
+define dso_local i8* @sub_140002650(i8* %str) {
+entry:
+  %len = call i64 @strlen(i8* %str)
+  %len_gt_8 = icmp ugt i64 %len, 8
+  br i1 %len_gt_8, label %fail, label %check_base
+
+check_base:
+  %base = load i8*, i8** @off_1400043C0
+  %base_i16ptr = bitcast i8* %base to i16*
+  %mz = load i16, i16* %base_i16ptr, align 1
+  %mz_ok = icmp eq i16 %mz, 23117
+  br i1 %mz_ok, label %pe_hdr, label %fail
+
+pe_hdr:
+  %e_lfanew_i8 = getelementptr i8, i8* %base, i64 60
+  %e_lfanew_ptr = bitcast i8* %e_lfanew_i8 to i32*
+  %e_lfanew = load i32, i32* %e_lfanew_ptr, align 1
+  %e_lfanew64 = sext i32 %e_lfanew to i64
+  %pe = getelementptr i8, i8* %base, i64 %e_lfanew64
+  %sig_ptr = bitcast i8* %pe to i32*
+  %sig = load i32, i32* %sig_ptr, align 1
+  %is_pe = icmp eq i32 %sig, 17744
+  br i1 %is_pe, label %check_magic, label %fail
+
+check_magic:
+  %magic_i8 = getelementptr i8, i8* %pe, i64 24
+  %magic_ptr = bitcast i8* %magic_i8 to i16*
+  %magic = load i16, i16* %magic_ptr, align 1
+  %is_pe32plus = icmp eq i16 %magic, 523
+  br i1 %is_pe32plus, label %check_numsec, label %fail
+
+check_numsec:
+  %numsec_i8 = getelementptr i8, i8* %pe, i64 6
+  %numsec_ptr = bitcast i8* %numsec_i8 to i16*
+  %numsec16 = load i16, i16* %numsec_ptr, align 1
+  %numsec_zero = icmp eq i16 %numsec16, 0
+  br i1 %numsec_zero, label %fail, label %prepare_loop
+
+prepare_loop:
+  %sizeopt_i8 = getelementptr i8, i8* %pe, i64 20
+  %sizeopt_ptr = bitcast i8* %sizeopt_i8 to i16*
+  %sizeopt16 = load i16, i16* %sizeopt_ptr, align 1
+  %sizeopt64 = zext i16 %sizeopt16 to i64
+  %first_sec_off = add i64 %sizeopt64, 24
+  %sec0 = getelementptr i8, i8* %pe, i64 %first_sec_off
+  %numsec32 = zext i16 %numsec16 to i32
+  br label %loop
+
+loop:
+  %i = phi i32 [ 0, %prepare_loop ], [ %i_next, %loop_continue ]
+  %cursec = phi i8* [ %sec0, %prepare_loop ], [ %next_sec, %loop_continue ]
+  %cmpres = call i32 @strncmp(i8* %cursec, i8* %str, i64 8)
+  %is_zero = icmp eq i32 %cmpres, 0
+  br i1 %is_zero, label %found, label %loop_continue
+
+loop_continue:
+  %i_next = add i32 %i, 1
+  %next_sec = getelementptr i8, i8* %cursec, i64 40
+  %cont = icmp ult i32 %i_next, %numsec32
+  br i1 %cont, label %loop, label %fail
+
+found:
+  ret i8* %cursec
+
+fail:
+  ret i8* null
+}

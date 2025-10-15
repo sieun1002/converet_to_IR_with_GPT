@@ -1,0 +1,61 @@
+; Function: sub_14000171D
+; Start: 0x14000171D, End: 0x14000181C
+
+0x14000171D: push    rbp
+0x14000171E: mov     rbp, rsp
+0x140001721: sub     rsp, 60h
+0x140001725: call    sub_1400018F0
+0x14000172A: mov     [rbp+var_40], 7
+0x140001731: mov     [rbp+var_3C], 3
+0x140001738: mov     [rbp+var_38], 9
+0x14000173F: mov     [rbp+var_34], 1
+0x140001746: mov     [rbp+var_30], 4
+0x14000174D: mov     [rbp+var_2C], 8
+0x140001754: mov     [rbp+var_28], 2
+0x14000175B: mov     [rbp+var_24], 6
+0x140001762: mov     [rbp+var_20], 5
+0x140001769: mov     [rbp+var_18], 9
+0x140001771: lea     rax, Format
+0x140001778: mov     rcx, rax; Format
+0x14000177B: call    sub_140002960
+0x140001780: mov     [rbp+var_8], 0
+0x140001788: jmp     short loc_1400017A5
+loc_14000178A:
+0x14000178A: mov     rax, [rbp+var_8]
+0x14000178E: mov     eax, [rbp+rax*4+var_40]
+0x140001792: lea     rcx, aD; "%d "
+0x140001799: mov     edx, eax
+0x14000179B: call    sub_140002960
+0x1400017A0: add     [rbp+var_8], 1
+loc_1400017A5:
+0x1400017A5: mov     rax, [rbp+var_8]
+0x1400017A9: cmp     rax, [rbp+var_18]
+0x1400017AD: jb      short loc_14000178A
+0x1400017AF: mov     ecx, 0Ah; Character
+0x1400017B4: call    putchar
+0x1400017B9: mov     rdx, [rbp+var_18]
+0x1400017BD: lea     rax, [rbp+var_40]
+0x1400017C1: mov     rcx, rax
+0x1400017C4: call    sub_140001450
+0x1400017C9: lea     rax, byte_14000400D
+0x1400017D0: mov     rcx, rax; Format
+0x1400017D3: call    sub_140002960
+0x1400017D8: mov     [rbp+var_10], 0
+0x1400017E0: jmp     short loc_1400017FD
+loc_1400017E2:
+0x1400017E2: mov     rax, [rbp+var_10]
+0x1400017E6: mov     eax, [rbp+rax*4+var_40]
+0x1400017EA: lea     rcx, aD; "%d "
+0x1400017F1: mov     edx, eax
+0x1400017F3: call    sub_140002960
+0x1400017F8: add     [rbp+var_10], 1
+loc_1400017FD:
+0x1400017FD: mov     rax, [rbp+var_10]
+0x140001801: cmp     rax, [rbp+var_18]
+0x140001805: jb      short loc_1400017E2
+0x140001807: mov     ecx, 0Ah; Character
+0x14000180C: call    putchar
+0x140001811: mov     eax, 0
+0x140001816: add     rsp, 60h
+0x14000181A: pop     rbp
+0x14000181B: retn

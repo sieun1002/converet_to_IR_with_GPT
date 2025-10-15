@@ -1,0 +1,73 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; PHI node entries do not match predecessors!
+;   %it = phi void ()** [ %begin_ptr, %thread_attach ], [ %next, %loop ]
+; label %loop
+; label %inc
+; Instruction does not dominate all uses!
+;   %next = getelementptr inbounds void ()*, void ()** %it, i64 1
+;   %it = phi void ()** [ %begin_ptr, %thread_attach ], [ %next, %loop ]
+; === ERROR LOG END ===
+
+; ModuleID = 'tls_callback_module'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-p270:32:32-p271:32:32-i64:64-f80:128-n8:16:32:64-S128"
+
+@off_140004370 = external dso_local global i32*, align 8
+@unk_140004BE0 = internal global [0 x void ()*] zeroinitializer, align 8
+
+declare dso_local void @sub_1400023D0()
+
+define dso_local void @TlsCallback_0(i8* %DllHandle, i32 %Reason, i8* %Reserved) local_unnamed_addr {
+entry:
+  %paddr = load i32*, i32** @off_140004370, align 8
+  %has_paddr = icmp ne i32* %paddr, null
+  br i1 %has_paddr, label %checkstore, label %afterflag
+
+checkstore:
+  %old = load i32, i32* %paddr, align 4
+  %cmpold = icmp eq i32 %old, 2
+  br i1 %cmpold, label %afterflag, label %setval
+
+setval:
+  store i32 2, i32* %paddr, align 4
+  br label %afterflag
+
+afterflag:
+  %is_thread_attach = icmp eq i32 %Reason, 2
+  br i1 %is_thread_attach, label %thread_attach, label %check_proc_attach
+
+thread_attach:
+  %begin_ptr = getelementptr inbounds [0 x void ()*], [0 x void ()*]* @unk_140004BE0, i64 0, i64 0
+  %end_ptr = getelementptr inbounds [0 x void ()*], [0 x void ()*]* @unk_140004BE0, i64 0, i64 0
+  br label %loop
+
+loop:
+  %it = phi void ()** [ %begin_ptr, %thread_attach ], [ %next, %loop ]
+  %cmpit = icmp eq void ()** %it, %end_ptr
+  br i1 %cmpit, label %ret, label %body
+
+body:
+  %fp = load void ()*, void ()** %it, align 8
+  %isnull = icmp eq void ()* %fp, null
+  br i1 %isnull, label %inc, label %call
+
+call:
+  call void %fp()
+  br label %inc
+
+inc:
+  %next = getelementptr inbounds void ()*, void ()** %it, i64 1
+  br label %loop
+
+check_proc_attach:
+  %is_proc_attach = icmp eq i32 %Reason, 1
+  br i1 %is_proc_attach, label %proc_attach, label %ret
+
+proc_attach:
+  tail call void @sub_1400023D0()
+  br label %ret
+
+ret:
+  ret void
+}

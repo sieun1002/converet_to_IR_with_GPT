@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "round": 1,
+    "start_time": "2025-09-27T21:40:38",
+    "input_folder": "/home/nata20034/workspace/convert_to_IR_with_LLM/ida_disassemble/window/O0/Obfuscation/heapsort/heapsort.vmp_resource",
+    "output_dir": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 5,
+    "max_fix_attempts": 4,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "TlsCallback_0.txt",
+      "version": 1,
+      "request_id": "resp_68d7db464f208198a03fe0495fdfa59e01d7567e1b50bc21",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:40:38",
+      "end_time": "2025-09-27T21:42:27",
+      "elapsed_sec": 109.453899,
+      "usage": {
+        "input_tokens": 898,
+        "output_tokens": 5038,
+        "total_tokens": 5936
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "TlsCallback_0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/TlsCallback_01.ll",
+      "success": true,
+      "time": "2025-09-27T21:42:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "TlsCallback_0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/TlsCallback_01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/TlsCallback_01.bc",
+      "start_time": "2025-09-27T21:42:27",
+      "end_time": "2025-09-27T21:42:27",
+      "elapsed_sec": 0.01736
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "TlsCallback_1.txt",
+      "version": 1,
+      "request_id": "resp_68d7dbb3819c819b8171071b6ef015e0069e832310b65555",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:42:27",
+      "end_time": "2025-09-27T21:43:09",
+      "elapsed_sec": 41.18193,
+      "usage": {
+        "input_tokens": 460,
+        "output_tokens": 1813,
+        "total_tokens": 2273
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "TlsCallback_1.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/TlsCallback_11.ll",
+      "success": true,
+      "time": "2025-09-27T21:43:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "TlsCallback_1.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/TlsCallback_11.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/TlsCallback_11.bc",
+      "start_time": "2025-09-27T21:43:09",
+      "end_time": "2025-09-27T21:43:09",
+      "elapsed_sec": 0.017763
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "start.txt",
+      "version": 1,
+      "request_id": "resp_68d7dbdcba2c8193b42096b5ad7c57b80b8226a1219622f5",
+      "model": "gpt-5",
+      "start_time": "2025-09-27T21:43:09",
+      "end_time": "2025-09-27T21:43:38",
+      "elapsed_sec": 29.51137,
+      "usage": {
+        "input_tokens": 446,
+        "output_tokens": 2296,
+        "total_tokens": 2742
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "start.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/start1.ll",
+      "success": true,
+      "time": "2025-09-27T21:43:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "start.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/start1.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_resource/1/start1.bc",
+      "start_time": "2025-09-27T21:43:38",
+      "end_time": "2025-09-27T21:43:38",
+      "elapsed_sec": 0.020242
+    },
+    {
+      "phase": "round_complete",
+      "round": 1,
+      "end_time": "2025-09-27T21:43:38"
+    }
+  ]
+}

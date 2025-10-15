@@ -1,0 +1,16 @@
+; Function: sub_140002490
+; Start: 0x140002490, End: 0x1400024bc
+
+0x140002490: xor     eax, eax
+0x140002492: cmp     word ptr [rcx], 5A4Dh
+0x140002497: jnz     short locret_1400024A8
+0x140002499: movsxd  rdx, dword ptr [rcx+3Ch]
+0x14000249d: add     rcx, rdx
+0x1400024a0: cmp     dword ptr [rcx], 4550h
+0x1400024a6: jz      short loc_1400024B0
+0x1400024a8: retn
+0x1400024a9: align 10h
+0x1400024b0: xor     eax, eax
+0x1400024b2: cmp     word ptr [rcx+18h], 20Bh
+0x1400024b8: setz    al
+0x1400024bb: retn

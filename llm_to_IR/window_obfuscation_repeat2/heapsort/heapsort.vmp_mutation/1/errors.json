@@ -1,0 +1,61 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll:281:42: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg = atomicrmw xchg i8** %lock_ptr, i8* null seq_cst\n                                         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400010101.bc",
+      "start_time": "2025-09-27T22:00:42",
+      "end_time": "2025-09-27T22:00:42",
+      "elapsed_sec": 0.013658
+    },
+    {
+      "filename": "sub_140001AD0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll:11:61: error: constant expression type mismatch: got type '[39 x i8]' but expected '[40 x i8]'\n@aVirtualprotect = internal unnamed_addr constant [40 x i8] c\"  VirtualProtect failed with code 0x%x\\00\"\n                                                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_140001AD01.bc",
+      "start_time": "2025-09-27T22:18:13",
+      "end_time": "2025-09-27T22:18:13",
+      "elapsed_sec": 0.011026
+    },
+    {
+      "filename": "sub_1400027C0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll:67:6: error: expected '=' after instruction id\n  %38load = load i32, i32* %37, align 4\n     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C01.bc",
+      "start_time": "2025-09-27T22:49:59",
+      "end_time": "2025-09-27T22:49:59",
+      "elapsed_sec": 0.016145
+    },
+    {
+      "filename": "sub_1400027C0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll:68:3: error: instruction expected to be numbered '%38'\n  %39 = icmp ult i32 %18, %sec_va\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.ll -o ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_mutation/1/sub_1400027C02.bc",
+      "start_time": "2025-09-27T22:52:36",
+      "end_time": "2025-09-27T22:52:36",
+      "elapsed_sec": 0.014937
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+; Function: sub_1400021E0
+; Start: 0x1400021e0, End: 0x14000224c
+
+0x1400021e0: push    rbp
+0x1400021e1: push    rdi
+0x1400021e2: push    rsi
+0x1400021e3: push    rbx
+0x1400021e4: sub     rsp, 28h
+0x1400021e8: lea     rcx, unk_140007100
+0x1400021ef: call    loc_14000B5E5
+0x1400021f4: cmp     eax, 0E41D8B48h
+0x1400021f9: add     [rax], r8b
+0x1400021fc: test    rbx, rbx
+0x1400021ff: jz      short loc_140002234
+0x140002201: pop     rbp
+0x140002202: call    loc_1403BD625
+0x140002207: scasb
+0x140002208: mov     rdi, cs:qword_140008258
+0x14000220f: nop
+0x140002210: mov     ecx, [rbx]
+0x140002212: call    rbp
+0x140002214: mov     rsi, rax
+0x140002217: call    rdi ; qword_140008258
+0x140002219: test    rsi, rsi
+0x14000221c: jz      short loc_14000222B
+0x14000221e: test    eax, eax
+0x140002220: jnz     short loc_14000222B
+0x140002222: mov     rax, [rbx+8]
+0x140002226: mov     rcx, rsi
+0x140002229: call    rax
+0x14000222b: mov     rbx, [rbx+10h]
+0x14000222f: test    rbx, rbx
+0x140002232: jnz     short loc_140002210
+0x140002234: lea     rcx, unk_140007100
+0x14000223b: add     rsp, 28h
+0x14000223f: pop     rbx
+0x140002240: pop     rsi
+0x140002241: pop     rdi
+0x140002242: pop     rbp
+0x140002243: call    loc_14001668F
+0x140002249: shl     dword ptr [rsi+0Fh], cl

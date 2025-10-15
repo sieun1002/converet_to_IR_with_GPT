@@ -1,0 +1,146 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_import/1/sub_1400014501.ll:19:17: error: expected instruction opcode
+;   %var10_init = %var8
+;                 ^
+; === ERROR LOG END ===
+
+; ModuleID = 'heap_sort_module'
+target triple = "x86_64-pc-windows-msvc"
+
+define void @sub_140001450(i32* %arr, i64 %n) {
+entry:
+  %cmp_le1 = icmp ule i64 %n, 1
+  br i1 %cmp_le1, label %exit, label %build_init
+
+build_init:
+  %half = lshr i64 %n, 1
+  br label %build_header
+
+build_header:
+  %var8 = phi i64 [ %half, %build_init ], [ %var8_next, %build_after_sift ]
+  %var8_nonzero = icmp ne i64 %var8, 0
+  br i1 %var8_nonzero, label %sift_entry, label %sort_init
+
+sift_entry:
+  %var10_init = %var8
+  br label %sift_header
+
+sift_header:
+  %var10 = phi i64 [ %var10_init, %sift_entry ], [ %var10_next, %do_swap_build ]
+  %twice = shl i64 %var10, 1
+  %left = add i64 %twice, 1
+  %has_left = icmp ult i64 %left, %n
+  br i1 %has_left, label %has_left_block, label %build_after_sift
+
+has_left_block:
+  %right = add i64 %left, 1
+  %has_right = icmp ult i64 %right, %n
+  %left_ptr = getelementptr inbounds i32, i32* %arr, i64 %left
+  %left_val = load i32, i32* %left_ptr, align 4
+  br i1 %has_right, label %load_right, label %choose_left
+
+load_right:
+  %right_ptr = getelementptr inbounds i32, i32* %arr, i64 %right
+  %right_val = load i32, i32* %right_ptr, align 4
+  %right_gt_left = icmp sgt i32 %right_val, %left_val
+  br i1 %right_gt_left, label %choose_right, label %choose_left
+
+choose_right:
+  %child_idx_r = %right
+  %child_val_r = %right_val
+  br label %child_chosen
+
+choose_left:
+  %child_idx_l = %left
+  %child_val_l = %left_val
+  br label %child_chosen
+
+child_chosen:
+  %child_idx = phi i64 [ %child_idx_r, %choose_right ], [ %child_idx_l, %choose_left ]
+  %child_val = phi i32 [ %child_val_r, %choose_right ], [ %child_val_l, %choose_left ]
+  %parent_ptr = getelementptr inbounds i32, i32* %arr, i64 %var10
+  %parent_val = load i32, i32* %parent_ptr, align 4
+  %parent_lt_child = icmp slt i32 %parent_val, %child_val
+  br i1 %parent_lt_child, label %do_swap_build, label %build_after_sift
+
+do_swap_build:
+  store i32 %child_val, i32* %parent_ptr, align 4
+  %child_ptr = getelementptr inbounds i32, i32* %arr, i64 %child_idx
+  store i32 %parent_val, i32* %child_ptr, align 4
+  %var10_next = %child_idx
+  br label %sift_header
+
+build_after_sift:
+  %var8_next = add i64 %var8, -1
+  br label %build_header
+
+sort_init:
+  %var20_init = add i64 %n, -1
+  br label %sort_header
+
+sort_header:
+  %var20 = phi i64 [ %var20_init, %sort_init ], [ %var20_next, %after_inner ]
+  %cont_sort = icmp ne i64 %var20, 0
+  br i1 %cont_sort, label %sort_body, label %exit
+
+sort_body:
+  %root_ptr = getelementptr inbounds i32, i32* %arr, i64 0
+  %root_val = load i32, i32* %root_ptr, align 4
+  %end_ptr = getelementptr inbounds i32, i32* %arr, i64 %var20
+  %end_val = load i32, i32* %end_ptr, align 4
+  store i32 %end_val, i32* %root_ptr, align 4
+  store i32 %root_val, i32* %end_ptr, align 4
+  br label %inner_header
+
+inner_header:
+  %var28 = phi i64 [ 0, %sort_body ], [ %var28_next, %inner_swap ]
+  %twice28 = shl i64 %var28, 1
+  %left28 = add i64 %twice28, 1
+  %has_left28 = icmp ult i64 %left28, %var20
+  br i1 %has_left28, label %has_left28_block, label %after_inner
+
+has_left28_block:
+  %right28 = add i64 %left28, 1
+  %has_right28 = icmp ult i64 %right28, %var20
+  %left28_ptr = getelementptr inbounds i32, i32* %arr, i64 %left28
+  %left28_val = load i32, i32* %left28_ptr, align 4
+  br i1 %has_right28, label %load_right28, label %choose_left28
+
+load_right28:
+  %right28_ptr = getelementptr inbounds i32, i32* %arr, i64 %right28
+  %right28_val = load i32, i32* %right28_ptr, align 4
+  %right_gt_left28 = icmp sgt i32 %right28_val, %left28_val
+  br i1 %right_gt_left28, label %choose_right28, label %choose_left28
+
+choose_right28:
+  %child28_idx_r = %right28
+  %child28_val_r = %right28_val
+  br label %child_chosen28
+
+choose_left28:
+  %child28_idx_l = %left28
+  %child28_val_l = %left28_val
+  br label %child_chosen28
+
+child_chosen28:
+  %child28_idx = phi i64 [ %child28_idx_r, %choose_right28 ], [ %child28_idx_l, %choose_left28 ]
+  %child28_val = phi i32 [ %child28_val_r, %choose_right28 ], [ %child28_val_l, %choose_left28 ]
+  %parent28_ptr = getelementptr inbounds i32, i32* %arr, i64 %var28
+  %parent28_val = load i32, i32* %parent28_ptr, align 4
+  %parent_lt_child28 = icmp slt i32 %parent28_val, %child28_val
+  br i1 %parent_lt_child28, label %inner_swap, label %after_inner
+
+inner_swap:
+  store i32 %child28_val, i32* %parent28_ptr, align 4
+  %child28_ptr = getelementptr inbounds i32, i32* %arr, i64 %child28_idx
+  store i32 %parent28_val, i32* %child28_ptr, align 4
+  %var28_next = %child28_idx
+  br label %inner_header
+
+after_inner:
+  %var20_next = add i64 %var20, -1
+  br label %sort_header
+
+exit:
+  ret void
+}

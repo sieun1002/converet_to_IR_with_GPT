@@ -1,0 +1,33 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001450.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.ll:33:19: error: '@sub_140002C90' defined with type 'i8* (...)*' but expected 'i8* (i64)*'\n  %raw = call i8* @sub_140002C90(i64 %sizeb)\n                  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.bc",
+      "start_time": "2025-09-27T21:44:30",
+      "end_time": "2025-09-27T21:44:30",
+      "elapsed_sec": 0.018389
+    },
+    {
+      "filename": "sub_140001450.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.ll:21:46: error: use of undefined value '%loop_set.body_end'\n  %i = phi i64 [ 0, %init_loop ], [ %i.next, %loop_set.body_end ]\n                                             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.bc",
+      "start_time": "2025-09-27T21:45:30",
+      "end_time": "2025-09-27T21:45:30",
+      "elapsed_sec": 0.036141
+    }
+  ]
+}

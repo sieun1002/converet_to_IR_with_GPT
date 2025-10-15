@@ -1,0 +1,81 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat/heapsort/5/heapsort_mutation_function271.ll:6:29: error: dso_location and DLL-StorageClass mismatch
+; declare dso_local dllimport i64 @strlen(i8* noundef)
+;                             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'pe_section_finder'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043A0 = external dso_local global i8*, align 8
+
+declare dso_local dllimport i64 @strlen(i8* noundef)
+declare dso_local dllimport i32 @strncmp(i8* noundef, i8* noundef, i64 noundef)
+
+define dso_local i8* @sub_140002570(i8* noundef %str) local_unnamed_addr {
+entry:
+  %len = call i64 @strlen(i8* noundef %str)
+  %len_ok = icmp ule i64 %len, 8
+  br i1 %len_ok, label %check_base, label %ret_null
+
+check_base:
+  %base = load i8*, i8** @off_1400043A0, align 8
+  %mz_ptr = bitcast i8* %base to i16*
+  %mz = load i16, i16* %mz_ptr, align 1
+  %is_mz = icmp eq i16 %mz, 23117
+  br i1 %is_mz, label %read_pe, label %ret_null
+
+read_pe:
+  %p3c_i8 = getelementptr inbounds i8, i8* %base, i64 60
+  %p3c_i32 = bitcast i8* %p3c_i8 to i32*
+  %e_lfanew32 = load i32, i32* %p3c_i32, align 1
+  %e_lfanew64 = sext i32 %e_lfanew32 to i64
+  %pehdr = getelementptr inbounds i8, i8* %base, i64 %e_lfanew64
+  %pe_sig_ptr = bitcast i8* %pehdr to i32*
+  %pe_sig = load i32, i32* %pe_sig_ptr, align 1
+  %is_pe = icmp eq i32 %pe_sig, 17744
+  br i1 %is_pe, label %check_optmagic, label %ret_null
+
+check_optmagic:
+  %optmagic_i8 = getelementptr inbounds i8, i8* %pehdr, i64 24
+  %optmagic_p = bitcast i8* %optmagic_i8 to i16*
+  %optmagic = load i16, i16* %optmagic_p, align 1
+  %is_20B = icmp eq i16 %optmagic, 523
+  br i1 %is_20B, label %check_numsec, label %ret_null
+
+check_numsec:
+  %numsec_i8 = getelementptr inbounds i8, i8* %pehdr, i64 6
+  %numsec_p = bitcast i8* %numsec_i8 to i16*
+  %numsec16 = load i16, i16* %numsec_p, align 1
+  %has_sections = icmp ne i16 %numsec16, 0
+  br i1 %has_sections, label %prep_loop, label %ret_null
+
+prep_loop:
+  %soh_i8 = getelementptr inbounds i8, i8* %pehdr, i64 20
+  %soh_p = bitcast i8* %soh_i8 to i16*
+  %soh16 = load i16, i16* %soh_p, align 1
+  %soh64 = zext i16 %soh16 to i64
+  %sect_off = add i64 %soh64, 24
+  %first_sec = getelementptr inbounds i8, i8* %pehdr, i64 %sect_off
+  %numsec32 = zext i16 %numsec16 to i32
+  br label %loop
+
+loop:
+  %i = phi i32 [ 0, %prep_loop ], [ %i.next, %loop_cont ]
+  %secptr = phi i8* [ %first_sec, %prep_loop ], [ %sec_next, %loop_cont ]
+  %cmpres = call i32 @strncmp(i8* noundef %secptr, i8* noundef %str, i64 noundef 8)
+  %is_eq = icmp eq i32 %cmpres, 0
+  br i1 %is_eq, label %found, label %loop_cont
+
+found:
+  ret i8* %secptr
+
+loop_cont:
+  %i.next = add i32 %i, 1
+  %sec_next = getelementptr inbounds i8, i8* %secptr, i64 40
+  %cont = icmp ult i32 %i.next, %numsec32
+  br i1 %cont, label %loop, label %ret_null
+
+ret_null:
+  ret i8* null
+}

@@ -1,0 +1,79 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+
+%struct._exception_like = type { i32, i32, ptr, double, double, double }
+
+@.str.fmt = private unnamed_addr constant [43 x i8] c"_matherr(): %s in %s(%g, %g)  (retval=%g)\0A\00", align 1
+@.str.msg.arg_sing = private unnamed_addr constant [21 x i8] c"argument singularity\00", align 1
+@.str.msg.arg_domain = private unnamed_addr constant [22 x i8] c"argument domain error\00", align 1
+@.str.msg.overflow_range = private unnamed_addr constant [22 x i8] c"overflow, range error\00", align 1
+@.str.msg.result_too_large = private unnamed_addr constant [24 x i8] c"the result is too large\00", align 1
+@.str.msg.total_loss = private unnamed_addr constant [27 x i8] c"total loss of significance\00", align 1
+@.str.msg.partial_loss = private unnamed_addr constant [29 x i8] c"partial loss of significance\00", align 1
+@.str.msg.unknown = private unnamed_addr constant [14 x i8] c"unknown error\00", align 1
+
+declare dso_local ptr @__acrt_iob_func(i32 noundef)
+declare dso_local i32 @fprintf(ptr noundef, ptr noundef, ...)
+
+define dso_local i32 @sub_1400019D0(ptr noundef %exc) local_unnamed_addr {
+entry:
+  %ex = bitcast ptr %exc to ptr %struct._exception_like
+  %typep = getelementptr inbounds %struct._exception_like, ptr %ex, i32 0, i32 0
+  %type = load i32, ptr %typep, align 4
+  br label %switch.start
+
+switch.start:
+  switch i32 %type, label %sw.default [
+    i32 1, label %sw.case1
+    i32 2, label %sw.case2
+    i32 3, label %sw.case3
+    i32 4, label %sw.case4
+    i32 5, label %sw.case5
+    i32 6, label %sw.case6
+    i32 0, label %sw.default
+  ]
+
+sw.case1:
+  %msg1 = getelementptr inbounds [22 x i8], ptr @.str.msg.arg_domain, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.case2:
+  %msg2 = getelementptr inbounds [21 x i8], ptr @.str.msg.arg_sing, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.case3:
+  %msg3 = getelementptr inbounds [22 x i8], ptr @.str.msg.overflow_range, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.case4:
+  %msg4 = getelementptr inbounds [24 x i8], ptr @.str.msg.result_too_large, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.case5:
+  %msg5 = getelementptr inbounds [27 x i8], ptr @.str.msg.total_loss, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.case6:
+  %msg6 = getelementptr inbounds [29 x i8], ptr @.str.msg.partial_loss, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.default:
+  %msgd = getelementptr inbounds [14 x i8], ptr @.str.msg.unknown, i32 0, i32 0
+  br label %sw.epilogue
+
+sw.epilogue:
+  %msg = phi ptr [ %msg1, %sw.case1 ], [ %msg2, %sw.case2 ], [ %msg3, %sw.case3 ], [ %msg4, %sw.case4 ], [ %msg5, %sw.case5 ], [ %msg6, %sw.case6 ], [ %msgd, %sw.default ]
+  %namep = getelementptr inbounds %struct._exception_like, ptr %ex, i32 0, i32 2
+  %name = load ptr, ptr %namep, align 8
+  %arg1p = getelementptr inbounds %struct._exception_like, ptr %ex, i32 0, i32 3
+  %arg1 = load double, ptr %arg1p, align 8
+  %arg2p = getelementptr inbounds %struct._exception_like, ptr %ex, i32 0, i32 4
+  %arg2 = load double, ptr %arg2p, align 8
+  %retvalp = getelementptr inbounds %struct._exception_like, ptr %ex, i32 0, i32 5
+  %retval = load double, ptr %retvalp, align 8
+  %file = call ptr @__acrt_iob_func(i32 noundef 2)
+  %fmt = getelementptr inbounds [43 x i8], ptr @.str.fmt, i32 0, i32 0
+  %call = call i32 (ptr, ptr, ...) @fprintf(ptr noundef %file, ptr noundef %fmt, ptr noundef %msg, ptr noundef %name, double %arg1, double %arg2, double %retval)
+  ret i32 0
+}

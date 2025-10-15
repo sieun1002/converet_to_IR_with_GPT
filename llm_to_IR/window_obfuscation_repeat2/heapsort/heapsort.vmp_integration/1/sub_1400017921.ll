@@ -1,0 +1,11 @@
+; ModuleID = 'fixed'
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+declare void @loc_1400350F8(...)
+
+define dso_local void @sub_140001792() {
+entry:
+  call void (...) @loc_1400350F8()
+  ret void
+}

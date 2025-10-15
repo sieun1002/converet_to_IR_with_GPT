@@ -1,0 +1,407 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/5/heapsort_resource_function21.ll:249:28: error: '@Last' defined with type 'i8***' but expected 'i8**'
+;   %last_p = load i8*, i8** @Last
+;                            ^
+; === ERROR LOG END ===
+
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+declare void @Sleep(i32)
+declare i8* @SetUnhandledExceptionFilter(i8*)
+declare i8* @_set_invalid_parameter_handler(i8*)
+declare void @_set_app_type(i32)
+declare i32* @__p__fmode()
+declare i32* @__p__commode()
+declare i32 @sub_140001910()
+declare i8** @sub_140002A20()
+declare void @sub_14000171D(i32, i8**, i8*)
+declare i32 @sub_140002A30(i32)
+declare void @_cexit()
+declare void @exit(i32)
+declare i32 @_configthreadlocale(i32)
+declare i32 @_initterm_e(i8*, i8*)
+declare void @_initterm(i8*, i8*)
+declare void @sub_1400024E0()
+declare void @sub_140001CA0()
+declare void @sub_1400018F0()
+declare i32 @sub_140002A60(i32*, i8***, i8**, i32, i32*)
+declare void @sub_140002070(void ()*)
+declare void @sub_1400019D0()
+declare i64 @strlen(i8*)
+declare i8* @malloc(i64)
+declare i8* @memcpy(i8*, i8*, i64)
+declare i32 @TopLevelExceptionFilter(i8*)
+declare void @Handler(i16*, i16*, i16*, i32, i64)
+
+@off_140004450 = external global i64**
+@off_140004460 = external global i32**
+@off_1400043D0 = external global i8**
+@off_1400043A0 = external global i8**
+@off_140004440 = external global i8***
+@off_140004410 = external global i32**
+@off_140004420 = external global i32**
+@off_140004430 = external global i32**
+@off_140004400 = external global i32**
+@off_1400044D0 = external global i32**
+@off_1400044B0 = external global i32**
+@off_140004380 = external global i32**
+@off_1400043E0 = external global i32**
+@Last = external global i8**
+@First = external global i8**
+@off_140004500 = external global i32**
+@off_1400044C0 = external global i32**
+@off_140004470 = external global i8**
+@off_140004480 = external global i8**
+@qword_140007010 = external global i8*
+@qword_140007018 = external global i8**
+@dword_140007020 = external global i32
+@dword_140007008 = external global i32
+@dword_140007004 = external global i32
+
+define dso_local i32 @sub_140001010() {
+entry:
+  %ret = alloca i32, align 4
+  store i32 0, i32* %ret
+  %tokenSlot = alloca i8, align 1
+  %lockptr_slot = alloca i64*, align 8
+  %var_4C = alloca i32, align 4
+  %var_5C = alloca i32, align 4
+  %var_78 = alloca i8*, align 8
+  %token_ptr = ptrtoint i8* %tokenSlot to i64
+  %lp_load = load i64**, i64*** @off_140004450
+  ; off_140004450 holds a pointer to the lock variable (i64*)
+  %lock_ptr_addr = load i64*, i64** %lp_load
+  store i64* %lock_ptr_addr, i64** %lockptr_slot
+  br label %lock_try
+
+lock_try:                                           ; 0x140001050
+  %lockptr1 = load i64*, i64** %lockptr_slot
+  %cmpxchg = cmpxchg i64* %lockptr1, i64 0, i64 %token_ptr seq_cst seq_cst
+  %old = extractvalue { i64, i1 } %cmpxchg, 0
+  %success = extractvalue { i64, i1 } %cmpxchg, 1
+  br i1 %success, label %lock_acquired, label %lock_failed
+
+lock_failed:                                        ; 0x140001040
+  %own_eq = icmp eq i64 %old, %token_ptr
+  br i1 %own_eq, label %owned_by_self, label %sleep_then_retry
+
+sleep_then_retry:
+  call void @Sleep(i32 1000)
+  br label %lock_try
+
+owned_by_self:                                      ; 0x140001100
+  br label %after_lock
+
+lock_acquired:
+  br label %after_lock
+
+after_lock:                                         ; 0x14000105C
+  %r14_flag = phi i32 [ 1, %owned_by_self ], [ 0, %lock_acquired ]
+  %st_pp = load i32**, i32*** @off_140004460
+  %st_p = load i32*, i32** %st_pp
+  %state1 = load i32, i32* %st_p
+  %is_one = icmp eq i32 %state1, 1
+  br i1 %is_one, label %L13C8, label %state_check2
+
+state_check2:
+  %state2 = load i32, i32* %st_p
+  %is_zero = icmp eq i32 %state2, 0
+  br i1 %is_zero, label %L1110, label %L107A
+
+L107A:                                              ; 0x14000107A
+  store i32 1, i32* @dword_140007004
+  br label %L1084
+
+L1110:                                              ; 0x140001110
+  store i32 1, i32* %st_p
+  call void @sub_140001CA0()
+  %toplevel_ptr = bitcast i32 (i8*)* @TopLevelExceptionFilter to i8*
+  %prev_filter = call i8* @SetUnhandledExceptionFilter(i8* %toplevel_ptr)
+  %pf_slot_pp = load i8***, i8**** @off_140004440
+  %pf_slot_p = load i8**, i8*** %pf_slot_pp
+  store i8* %prev_filter, i8** %pf_slot_p
+  %handler_ptr = bitcast void (i16*, i16*, i16*, i32, i64)* @Handler to i8*
+  call i8* @_set_invalid_parameter_handler(i8* %handler_ptr)
+  call void @sub_1400024E0()
+  %p410_pp = load i32**, i32*** @off_140004410
+  %p410 = load i32*, i32** %p410_pp
+  store i32 1, i32* %p410
+  %p420_pp = load i32**, i32*** @off_140004420
+  %p420 = load i32*, i32** %p420_pp
+  store i32 1, i32* %p420
+  %p430_pp = load i32**, i32*** @off_140004430
+  %p430 = load i32*, i32** %p430_pp
+  store i32 1, i32* %p430
+  %base_pp = load i8**, i8*** @off_1400043A0
+  %base_p = load i8*, i8** %base_pp
+  %mz_ptr = bitcast i8* %base_p to i16*
+  %mz = load i16, i16* %mz_ptr
+  %mz_ok = icmp eq i16 %mz, 23117                ; 0x5A4D
+  br i1 %mz_ok, label %pe_check, label %L1C0
+
+pe_check:
+  %e_lfanew_ptr = getelementptr i8, i8* %base_p, i64 60
+  %e_lfanew_p32 = bitcast i8* %e_lfanew_ptr to i32*
+  %e_lfanew = load i32, i32* %e_lfanew_p32
+  %e_lfanew_sext = sext i32 %e_lfanew to i64
+  %pehdr = getelementptr i8, i8* %base_p, i64 %e_lfanew_sext
+  %pe_sig_ptr = bitcast i8* %pehdr to i32*
+  %pe_sig = load i32, i32* %pe_sig_ptr
+  %is_pe = icmp eq i32 %pe_sig, 17744            ; 0x00004550
+  br i1 %is_pe, label %opt_magic, label %L1C0
+
+opt_magic:
+  %opt_magic_ptr = getelementptr i8, i8* %pehdr, i64 24
+  %opt_magic_p16 = bitcast i8* %opt_magic_ptr to i16*
+  %magic = load i16, i16* %opt_magic_p16
+  %is_pe32 = icmp eq i16 %magic, 267             ; 0x10B
+  br i1 %is_pe32, label %L3AA, label %check_pe64
+
+check_pe64:
+  %is_pe64 = icmp eq i16 %magic, 523             ; 0x20B
+  br i1 %is_pe64, label %pe64_branch, label %L1C0
+
+pe64_branch:
+  %opt_size_ptr64 = getelementptr i8, i8* %pehdr, i64 132
+  %opt_size_p64 = bitcast i8* %opt_size_ptr64 to i32*
+  %opt_size64 = load i32, i32* %opt_size_p64
+  %more64 = icmp ugt i32 %opt_size64, 14
+  br i1 %more64, label %pe64_has, label %L1C0
+
+pe64_has:
+  %field_ptr64 = getelementptr i8, i8* %pehdr, i64 248
+  %field_p64 = bitcast i8* %field_ptr64 to i32*
+  %field64 = load i32, i32* %field_p64
+  %nz64 = icmp ne i32 %field64, 0
+  %ecx_val64 = zext i1 %nz64 to i32
+  br label %L1C0_set
+
+L3AA:
+  %opt_size_ptr32 = getelementptr i8, i8* %pehdr, i64 116
+  %opt_size_p32 = bitcast i8* %opt_size_ptr32 to i32*
+  %opt_size32 = load i32, i32* %opt_size_p32
+  %more32 = icmp ugt i32 %opt_size32, 14
+  br i1 %more32, label %pe32_has, label %L1C0
+
+pe32_has:
+  %field_ptr32 = getelementptr i8, i8* %pehdr, i64 232
+  %field_p32 = bitcast i8* %field_ptr32 to i32*
+  %field32 = load i32, i32* %field_p32
+  %nz32 = icmp ne i32 %field32, 0
+  %ecx_val32 = zext i1 %nz32 to i32
+  br label %L1C0_set
+
+L1C0:
+  %zero_ecx = phi i32 [ 0, %check_pe64 ], [ 0, %pe64_branch ], [ 0, %pe_check ], [ 0, %opt_magic ], [ 0, %L1110 ], [ 0, %entry ]
+  br label %L1C0_join
+
+L1C0_set:
+  %ecx_merge = phi i32 [ %ecx_val32, %pe32_has ], [ %ecx_val64, %pe64_has ]
+  br label %L1C0_join
+
+L1C0_join:
+  %ecx_final = phi i32 [ %zero_ecx, %L1C0 ], [ %ecx_merge, %L1C0_set ]
+  store i32 %ecx_final, i32* @dword_140007008
+  %app_pp = load i32**, i32*** @off_140004400
+  %app_p = load i32*, i32** %app_pp
+  %app_val = load i32, i32* %app_p
+  %has_app = icmp ne i32 %app_val, 0
+  br i1 %has_app, label %L1338, label %L1E3
+
+L1338:
+  call void @_set_app_type(i32 2)
+  br label %L1E3
+
+L1E3:
+  %fmode_p = call i32* @__p__fmode()
+  %f_pp = load i32**, i32*** @off_1400044D0
+  %f_p = load i32*, i32** %f_pp
+  %f_val = load i32, i32* %f_p
+  store i32 %f_val, i32* %fmode_p
+  %commode_p = call i32* @__p__commode()
+  %c_pp = load i32**, i32*** @off_1400044B0
+  %c_p = load i32*, i32** %c_pp
+  %c_val = load i32, i32* %c_p
+  store i32 %c_val, i32* %commode_p
+  %r_sub1910 = call i32 @sub_140001910()
+  %neg1910 = icmp slt i32 %r_sub1910, 0
+  br i1 %neg1910, label %L1301, label %L1210
+
+L1210:
+  %p380_pp = load i32**, i32*** @off_140004380
+  %p380 = load i32*, i32** %p380_pp
+  %v380 = load i32, i32* %p380
+  %is1_380 = icmp eq i32 %v380, 1
+  br i1 %is1_380, label %L1399, label %L1220
+
+L1399:
+  call void @sub_140002070(void ()* @sub_1400019D0)
+  br label %L1220
+
+L1220:
+  %p3E0_pp = load i32**, i32*** @off_1400043E0
+  %p3E0 = load i32*, i32** %p3E0_pp
+  %v3E0 = load i32, i32* %p3E0
+  %is_m1 = icmp eq i32 %v3E0, -1
+  br i1 %is_m1, label %L138A, label %L1230
+
+L138A:
+  call i32 @_configthreadlocale(i32 -1)
+  br label %L1230
+
+L1230:
+  %last_p = load i8*, i8** @Last
+  %first_p = load i8*, i8** @First
+  %r_init_e = call i32 @_initterm_e(i8* %first_p, i8* %last_p)
+  %init_fail = icmp ne i32 %r_init_e, 0
+  br i1 %init_fail, label %L1380, label %L124B
+
+L1380:
+  store i32 255, i32* %ret
+  br label %L10E5
+
+L124B:
+  %p500_pp = load i32**, i32*** @off_140004500
+  %p500 = load i32*, i32** %p500_pp
+  %v500 = load i32, i32* %p500
+  store i32 %v500, i32* %var_4C
+  %var_4C_i8 = bitcast i32* %var_4C to i8*
+  store i8* %var_4C_i8, i8** %var_78
+  %p4C0_pp = load i32**, i32*** @off_1400044C0
+  %p4C0 = load i32*, i32** %p4C0_pp
+  %v4C0 = load i32, i32* %p4C0
+  %var_78_val = load i8*, i8** %var_78
+  %r2A60 = call i32 @sub_140002A60(i32* @dword_140007020, i8*** @qword_140007018, i8** @qword_140007010, i32 %v4C0, i32* %var_4C)
+  %neg2A60 = icmp slt i32 %r2A60, 0
+  br i1 %neg2A60, label %L1301, label %L128A
+
+L128A:
+  %argc_val = load i32, i32* @dword_140007020
+  %argc_sext = sext i32 %argc_val to i64
+  %argc_pos = icmp sgt i64 %argc_sext, 0
+  %argc_plus1 = add i64 %argc_sext, 1
+  %size_bytes = shl i64 %argc_plus1, 3
+  %arr_mem = call i8* @malloc(i64 %size_bytes)
+  %arr_isnull = icmp eq i8* %arr_mem, null
+  br i1 %arr_isnull, label %L1301, label %L12AA
+
+L12AA:
+  %argv_pp = load i8**, i8*** @qword_140007018
+  %new_argv = bitcast i8* %arr_mem to i8**
+  br i1 %argc_pos, label %L12B3, label %L134C
+
+L12B3:
+  %i = alloca i64, align 8
+  store i64 0, i64* %i
+  br label %L12E1
+
+L12C8:
+  %i_val2 = load i64, i64* %i
+  %src_ptr2_ptr = getelementptr i8*, i8** %argv_pp, i64 %i_val2
+  %src_ptr2 = load i8*, i8** %src_ptr2_ptr
+  %len2 = call i64 @strlen(i8* %src_ptr2)
+  %size2 = add i64 %len2, 1
+  %dst_ptr2 = getelementptr i8*, i8** %new_argv, i64 %i_val2
+  %dst2 = load i8*, i8** %dst_ptr2
+  %cpy2 = call i8* @memcpy(i8* %dst2, i8* %src_ptr2, i64 %size2)
+  %i_next2 = add i64 %i_val2, 1
+  store i64 %i_next2, i64* %i
+  %done2 = icmp eq i64 %i_next2, %argc_sext
+  br i1 %done2, label %L1347, label %L12E1
+
+L12E1:
+  %i_val = load i64, i64* %i
+  %src_ptr_ptr = getelementptr i8*, i8** %argv_pp, i64 %i_val
+  %src_ptr = load i8*, i8** %src_ptr_ptr
+  %len = call i64 @strlen(i8* %src_ptr)
+  %size = add i64 %len, 1
+  %dst = call i8* @malloc(i64 %size)
+  %dst_null = icmp eq i8* %dst, null
+  %dst_slot = getelementptr i8*, i8** %new_argv, i64 %i_val
+  store i8* %dst, i8** %dst_slot
+  br i1 %dst_null, label %L1301, label %L12C8
+
+L1347:
+  %term_slot_ptr = getelementptr i8*, i8** %new_argv, i64 %argc_sext
+  br label %L134C
+
+L134C:
+  store i8* null, i8** %term_slot_ptr
+  store i8** %new_argv, i8*** @qword_140007018
+  %first2 = load i8*, i8** @off_140004470
+  %last2 = load i8*, i8** @off_140004480
+  call void @_initterm(i8* %first2, i8* %last2)
+  call void @sub_1400018F0()
+  store i32 2, i32* %st_p
+  br label %L1084
+
+L1084:                                              ; 0x140001084
+  %r14_is_zero = icmp eq i32 %r14_flag, 0
+  br i1 %r14_is_zero, label %L1328, label %L108D
+
+L1328:                                              ; 0x140001328
+  %lockptr2 = load i64*, i64** %lockptr_slot
+  %ex = atomicrmw xchg i64* %lockptr2, i64 0 seq_cst
+  br label %L108D
+
+L108D:                                              ; 0x14000108D
+  %cb_tbl_p = load i8*, i8** @off_1400043D0
+  %cb_fp_p = bitcast i8* %cb_tbl_p to i8**
+  %cb_fp = load i8*, i8** %cb_fp_p
+  %cb_notnull = icmp ne i8* %cb_fp, null
+  br i1 %cb_notnull, label %L109C, label %L10A8
+
+L109C:
+  %cb_typed = bitcast i8* %cb_fp to void (i32, i32, i32)*
+  call void %cb_typed(i32 0, i32 2, i32 0)
+  br label %L10A8
+
+L10A8:                                              ; 0x1400010A8
+  %envpptrptr = call i8** @sub_140002A20()
+  %envp_val = load i8*, i8** @qword_140007010
+  store i8* %envp_val, i8** %envpptrptr
+  %argc_call = load i32, i32* @dword_140007020
+  %argv_ptr = load i8**, i8*** @qword_140007018
+  %envp_ptr = load i8*, i8** @qword_140007010
+  call void @sub_14000171D(i32 %argc_call, i8** %argv_ptr, i8* %envp_ptr)
+  %flag008 = load i32, i32* @dword_140007008
+  %is_zero008 = icmp eq i32 %flag008, 0
+  br i1 %is_zero008, label %L13D2, label %L10D7
+
+L10D7:
+  %flag004 = load i32, i32* @dword_140007004
+  %is_zero004 = icmp eq i32 %flag004, 0
+  br i1 %is_zero004, label %L1310, label %L10E5
+
+L1301:                                              ; 0x140001301
+  %r2A30_8 = call i32 @sub_140002A30(i32 8)
+  store i32 %r2A30_8, i32* %var_5C
+  call void @_cexit()
+  %rv = load i32, i32* %var_5C
+  store i32 %rv, i32* %ret
+  br label %L10E5
+
+L1310:                                              ; 0x140001310
+  store i32 %r2A60, i32* %var_5C
+  call void @_cexit()
+  %rv2 = load i32, i32* %var_5C
+  store i32 %rv2, i32* %ret
+  br label %L10E5
+
+L13C8:                                              ; 0x1400013C8
+  %r2A30_1F = call i32 @sub_140002A30(i32 31)
+  call void @exit(i32 %r2A30_1F)
+  unreachable
+
+L13D2:                                              ; 0x1400013D2
+  ; pass current eax (we don't have it explicitly; use ret as 0 default)
+  %ret_now = load i32, i32* %ret
+  call void @exit(i32 %ret_now)
+  unreachable
+
+L10E5:                                              ; 0x1400010E5 epilogue
+  %final = load i32, i32* %ret
+  ret i32 %final
+}

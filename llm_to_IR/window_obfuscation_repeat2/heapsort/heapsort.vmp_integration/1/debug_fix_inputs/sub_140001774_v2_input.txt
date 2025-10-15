@@ -1,0 +1,24 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_integration/1/sub_1400017741.ll:14:11: error: expected instruction opcode
+;   %rsi0 = undef i64
+;           ^
+; === ERROR LOG END ===
+
+; ModuleID = 'fixed'
+source_filename = "fixed"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+declare void @sub_1400FF159()
+
+define void @sub_140001774() {
+entry:
+  %v0 = add i64 0, 2140598521556283549
+  %v1 = trunc i64 %v0 to i32
+  %v2 = xor i32 %v1, 3602733833
+  %v3 = zext i32 %v2 to i64
+  %rsi0 = undef i64
+  %rsi1 = sub i64 %rsi0, 1322728395
+  call void @sub_1400FF159()
+  unreachable
+}

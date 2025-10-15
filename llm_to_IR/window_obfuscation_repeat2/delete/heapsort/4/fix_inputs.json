@@ -1,0 +1,185 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "heapsort_import_function1.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 329,
+      "ir_len": 1494,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function11.ll:49:46: error: atomicrmw xchg operand must be an integer or floating point type\n  %oldv = atomicrmw xchg i8** %lockaddr_ptr, i8* null monotonic\n                  ",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_140004450 = external global i8**          ; holds address of the lock variable (i8*)\n@qword_140008280 = external global i8*         ",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function11.ll"
+    },
+    {
+      "filename": "heapsort_import_function11.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 212,
+      "ir_len": 1836,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function111.ll:46:12: error: expected instruction opcode\n  %curr2 = %curr\n           ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070E8 = external global i32\n@qword_1400070E0 = external global i8*\n@unk_140007100 = external global i8\n\ndeclare void @loc_1400",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function111.ll"
+    },
+    {
+      "filename": "heapsort_import_function7.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 284,
+      "ir_len": 5193,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function71.ll:32:31: error: '%p.cur' defined with type 'i8*' but expected 'i8**'\n  %start.ptr = load i8*, i8** %p.cur, align 8\n                              ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = external global i32\n@qword_1400070A8 = external global i8*\n@qword_140008260 = external global i32 ()*\n\n@aVirtualprotec",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function71.ll"
+    },
+    {
+      "filename": "heapsort_import_function9.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 192,
+      "ir_len": 4868,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %r_d0 = call i64 @sub_140002B68(i32 8, i32 0)\n  %fp8 = inttoptr i64 %r_d0 to void (i32)*\n",
+      "ir_preview": "; ModuleID = 'm'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @sub_140002B68(i32 %ecx, i32 %edx)\ndeclare void @sub_1400024E0()\n\n@qword_1400070D0 = external global i32 (i8**)*\n\ndefine i32 @sub",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_import_function91.ll"
+    },
+    {
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 474,
+      "ir_len": 14130,
+      "error_preview": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.ll:6:9: warning: ptr type is only supported in -opaque-pointers mode\ndeclare ptr @SetUnhandledExceptionFilter(ptr)\n        ^\nllvm-as-14: /home/nata20034/workspace/convert_to_",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128\"\n\ndeclare void @Sleep(i32)\ndeclare ptr @Se",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function21.ll"
+    },
+    {
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 305,
+      "ir_len": 15447,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function22.ll:65:35: error: '@off_140004450' defined with type 'i8****' but expected 'i8***'\n  %lockaddrptr = load i8**, i8*** @off_140004450\n                               ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128\"\n\ndeclare void @Sleep(i32)\ndeclare i8* @Se",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function22.ll"
+    },
+    {
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 305,
+      "ir_len": 15447,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function23.ll:65:35: error: '@off_140004450' defined with type 'i8****' but expected 'i8***'\n  %lockaddrptr = load i8**, i8*** @off_140004450\n                               ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128\"\n\ndeclare void @Sleep(i32)\ndeclare i8* @Se",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function23.ll"
+    },
+    {
+      "filename": "heapsort_mutation_function2.txt",
+      "version": 5,
+      "payload_order": "error_first_then_ir",
+      "error_len": 313,
+      "ir_len": 15561,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function24.ll:65:38: error: '@off_140004450' defined with type 'i8*****' but expected 'i8****'\n  %lockaddrpptr = load i8***, i8**** @off_140004450\n                          ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128\"\n\ndeclare void @Sleep(i32)\ndeclare i8* @Se",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function24.ll"
+    },
+    {
+      "filename": "heapsort_mutation_function3.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 237,
+      "ir_len": 5300,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function31.ll:23:3: error: instruction expected to be numbered '%0'\n  %1 = load i8**, i8*** %rbx, align 8\n  ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_140004400 = external global i32*\n@qword_1400070D0 = external global i32 (i8**)*\n\ndeclare void @sub_140001010()\ndeclare i8* @signal(i",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function31.ll"
+    },
+    {
+      "filename": "heapsort_mutation_function4.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 263,
+      "ir_len": 6171,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function41.ll:28:28: error: floating point constant invalid for type\n  %masked = and i32 %code, 0x20FFFFFF\n                           ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_140004400 = external global i32*\n@qword_1400070D0 = external global i32 (i8*)*\n\ndeclare void @sub_140001010()\ndeclare void @sub_",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_mutation_function41.ll"
+    },
+    {
+      "filename": "heapsort_resource_function18.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 236,
+      "ir_len": 5525,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function181.ll:44:6: error: expected '=' after instruction id\n  %14load = load i8*, i8** %13, align 8\n     ^\n",
+      "ir_preview": "; ModuleID = 'fixed_module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = global i32 0, align 4\n@qword_1400070A8 = global i8* null, align 8\n\n@aVirtualprotect = private unnamed_addr cons",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function181.ll"
+    },
+    {
+      "filename": "heapsort_resource_function18.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 410,
+      "ir_len": 5570,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function182.ll:7:60: error: constant expression type mismatch: got type '[39 x i8]' but expected '[40 x i8]'\n@aVirtualprotect = private unnamed_addr constant [40 x i8] c\"  V",
+      "ir_preview": "; ModuleID = 'fixed_module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = global i32 0, align 4\n@qword_1400070A8 = global i8* null, align 8\n\n@aVirtualprotect = private unnamed_addr cons",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function182.ll"
+    },
+    {
+      "filename": "heapsort_resource_function2.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 288,
+      "ir_len": 10771,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function21.ll:64:26: error: expected value token\n  %oldpair = cmpxchg i8**, i8** %lockpp, i8* null, i8* %selfslot monotonic monotonic\n                         ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i8* @sub_140002A20()\ndeclare i32 @sub_14000171D(i32, i8**, i8*)\ndeclare void @sub_140001CA0()\ndeclare i32* @__p__fmode()\ndeclare ",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function21.ll"
+    },
+    {
+      "filename": "heapsort_resource_function2.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 304,
+      "ir_len": 10251,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function22.ll:277:32: error: atomicrmw xchg operand must be an integer or floating point type\n  atomicrmw xchg i8** %lockpp, i8* null monotonic\n                             ",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i8* @sub_140002A20()\ndeclare i32 @sub_14000171D(i32, i8**, i8*)\ndeclare void @sub_140001CA0()\ndeclare i32* @__p__fmode()\ndeclare ",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function22.ll"
+    },
+    {
+      "filename": "heapsort_resource_function23.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 287,
+      "ir_len": 2006,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function231.ll:12:29: error: dso_location and DLL-StorageClass mismatch\ndeclare dso_local dllimport noalias i8* @calloc(i64, i64)\n                            ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-p270:32:32-p271:32:32-i64:64-f80:128-n8:16:32:64-S128\"\n\n%struct._RTL_CRITICAL_SECTION = type opaque\n%struct.Nod",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function231.ll"
+    },
+    {
+      "filename": "heapsort_resource_function3.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 261,
+      "ir_len": 6899,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function31.ll:25:27: error: floating point constant invalid for type\n  %masked = and i32 %eax, 0x20FFFFFF\n                          ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\ntarget datalayout = \"e-m:w-i64:64-f80:128-n8:16:32:64-S128\"\n\n@off_140004400 = external global i32*\n@qword_1400070D0 = external global i32 ",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function31.ll"
+    },
+    {
+      "filename": "heapsort_resource_function43.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 198,
+      "ir_len": 208,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function431.ll:1:1: error: expected top-level entity\nPlease provide:\n^\n",
+      "ir_preview": "Please provide:\n- The LLVM IR module you’re trying to compile\n- The exact error logs from llvm-as/llc/opt or the linker\n\nI’ll fix the IR and return a single, compilable module matching x86_64-pc-windo",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function431.ll"
+    },
+    {
+      "filename": "heapsort_resource_function8.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 353,
+      "ir_len": 3182,
+      "error_preview": "llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function81.ll:18:67: error: invalid use of function-local name\n  store i32 7, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 0), align 4\n               ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@Format = dso_local constant [1 x i8] c\"\\00\", align 1\n@aD = dso_local constant [4 x i8] c\"%d \\00\", align 1\n@byte_14000400D = dso_loca",
+      "prev_ll_path": "/home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/4/heapsort_resource_function81.ll"
+    }
+  ]
+}

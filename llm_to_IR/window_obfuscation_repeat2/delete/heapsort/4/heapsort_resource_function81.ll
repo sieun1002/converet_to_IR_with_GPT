@@ -1,0 +1,78 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@Format = dso_local constant [1 x i8] c"\00", align 1
+@aD = dso_local constant [4 x i8] c"%d \00", align 1
+@byte_14000400D = dso_local constant [1 x i8] c"\00", align 1
+
+declare dso_local void @sub_1400018F0()
+declare dso_local i32 @sub_140002960(i8*, ...)
+declare dso_local void @sub_140001450(i32*, i64)
+declare dso_local i32 @putchar(i32)
+
+define dso_local i32 @sub_14000171D() {
+entry:
+  call void @sub_1400018F0()
+  %arr = alloca [9 x i32], align 16
+  %n = alloca i64, align 8
+  store i32 7, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 0), align 4
+  store i32 3, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 1), align 4
+  store i32 9, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 2), align 4
+  store i32 1, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 3), align 4
+  store i32 4, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 4), align 4
+  store i32 8, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 5), align 4
+  store i32 2, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 6), align 4
+  store i32 6, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 7), align 4
+  store i32 5, i32* getelementptr inbounds ([9 x i32], [9 x i32]* %arr, i64 0, i64 8), align 4
+  store i64 9, i64* %n, align 8
+  %fmt0 = getelementptr inbounds [1 x i8], [1 x i8]* @Format, i64 0, i64 0
+  %call0 = call i32 (i8*, ...) @sub_140002960(i8* %fmt0)
+  br label %loop1.cond
+
+loop1.cond:
+  %i1 = phi i64 [ 0, %entry ], [ %i1.next, %loop1.inc ]
+  %n.load1 = load i64, i64* %n, align 8
+  %cmp1 = icmp ult i64 %i1, %n.load1
+  br i1 %cmp1, label %loop1.body, label %after.loop1
+
+loop1.body:
+  %elem.ptr1 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 %i1
+  %elem1 = load i32, i32* %elem.ptr1, align 4
+  %fmtd = getelementptr inbounds [4 x i8], [4 x i8]* @aD, i64 0, i64 0
+  %call1 = call i32 (i8*, ...) @sub_140002960(i8* %fmtd, i32 %elem1)
+  br label %loop1.inc
+
+loop1.inc:
+  %i1.next = add i64 %i1, 1
+  br label %loop1.cond
+
+after.loop1:
+  %call2 = call i32 @putchar(i32 10)
+  %arr.first = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 0
+  %n.load2 = load i64, i64* %n, align 8
+  call void @sub_140001450(i32* %arr.first, i64 %n.load2)
+  %fmt1 = getelementptr inbounds [1 x i8], [1 x i8]* @byte_14000400D, i64 0, i64 0
+  %call3 = call i32 (i8*, ...) @sub_140002960(i8* %fmt1)
+  br label %loop2.cond
+
+loop2.cond:
+  %i2 = phi i64 [ 0, %after.loop1 ], [ %i2.next, %loop2.inc ]
+  %n.load3 = load i64, i64* %n, align 8
+  %cmp2 = icmp ult i64 %i2, %n.load3
+  br i1 %cmp2, label %loop2.body, label %after.loop2
+
+loop2.body:
+  %elem.ptr2 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 %i2
+  %elem2 = load i32, i32* %elem.ptr2, align 4
+  %fmtd2 = getelementptr inbounds [4 x i8], [4 x i8]* @aD, i64 0, i64 0
+  %call4 = call i32 (i8*, ...) @sub_140002960(i8* %fmtd2, i32 %elem2)
+  br label %loop2.inc
+
+loop2.inc:
+  %i2.next = add i64 %i2, 1
+  br label %loop2.cond
+
+after.loop2:
+  %call5 = call i32 @putchar(i32 10)
+  ret i32 0
+}

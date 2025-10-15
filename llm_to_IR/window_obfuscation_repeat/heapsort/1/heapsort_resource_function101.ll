@@ -1,0 +1,54 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004390 = external dso_local global i64*, align 8
+
+declare dso_local x86_64_win64cc i32 @j__crt_atexit(void ()*)
+declare dso_local void @sub_140001820()
+
+define dso_local x86_64_win64cc i32 @sub_140001870() {
+entry:
+  %p_ptr_ptr = load i64*, i64** @off_140004390, align 8
+  %first64 = load i64, i64* %p_ptr_ptr, align 8
+  %first32 = trunc i64 %first64 to i32
+  %is_neg1 = icmp eq i32 %first32, -1
+  br i1 %is_neg1, label %scan, label %have_count
+
+have_count:
+  %N0_zext = zext i32 %first32 to i64
+  br label %maybe_loop
+
+scan:
+  br label %scan.loop
+
+scan.loop:
+  %i = phi i64 [ 1, %scan ], [ %i.next, %scan.loop ]
+  %elem.ptr = getelementptr inbounds i64, i64* %p_ptr_ptr, i64 %i
+  %elem = load i64, i64* %elem.ptr, align 8
+  %is_nonzero = icmp ne i64 %elem, 0
+  %i.next = add i64 %i, 1
+  br i1 %is_nonzero, label %scan.loop, label %scan.exit
+
+scan.exit:
+  %N1_calc = sub i64 %i, 1
+  br label %maybe_loop
+
+maybe_loop:
+  %N = phi i64 [ %N0_zext, %have_count ], [ %N1_calc, %scan.exit ]
+  %N_is_zero = icmp eq i64 %N, 0
+  br i1 %N_is_zero, label %atexit, label %call_loop
+
+call_loop:
+  %idx = phi i64 [ %N, %maybe_loop ], [ %idx.next, %call_loop ]
+  %ptr_at_idx = getelementptr inbounds i64, i64* %p_ptr_ptr, i64 %idx
+  %val = load i64, i64* %ptr_at_idx, align 8
+  %func = inttoptr i64 %val to void ()*
+  call x86_64_win64cc void %func()
+  %idx.next = add i64 %idx, -1
+  %more = icmp ne i64 %idx.next, 0
+  br i1 %more, label %call_loop, label %atexit
+
+atexit:
+  %r = tail call x86_64_win64cc i32 @j__crt_atexit(void ()* @sub_140001820)
+  ret i32 %r
+}

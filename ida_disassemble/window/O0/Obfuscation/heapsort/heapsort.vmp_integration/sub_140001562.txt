@@ -1,0 +1,12 @@
+; Function: sub_140001562
+; Start: 0x140001562, End: 0x14000158d
+
+0x140001562: xor     r12d, 8C232F92h
+0x140001569: or      r12b, r12b
+0x14000156c: setnz   r12b
+0x140001570: setno   r12b
+0x140001574: shl     r12b, 0F4h
+0x140001578: mov     r12, [rsp+r12+var_8F35D0]
+0x140001580: jns     loc_1400F7E80
+0x140001586: syscall; Low latency system call
+0x140001588: call    sub_1400FD86C

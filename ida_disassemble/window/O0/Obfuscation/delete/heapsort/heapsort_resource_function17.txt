@@ -1,0 +1,25 @@
+; Function: sub_140001AD0
+; Start: 0x140001AD0, End: 0x140001B2D
+
+0x140001AD0: push    rsi
+0x140001AD1: push    rbx
+0x140001AD2: sub     rsp, 38h
+0x140001AD6: mov     rbx, rcx
+0x140001AD9: lea     rax, [rsp+48h+arg_8]
+0x140001ADE: mov     ecx, 2; Ix
+0x140001AE3: mov     [rsp+48h+arg_10], r8
+0x140001AE8: mov     [rsp+48h+arg_18], r9
+0x140001AED: mov     [rsp+48h+arg_8], rdx
+0x140001AF2: mov     [rsp+48h+ArgList], rax
+0x140001AF7: call    __acrt_iob_func
+0x140001AFC: lea     rdx, aMingwW64Runtim; "Mingw-w64 runtime failure:\n"
+0x140001B03: mov     rcx, rax; Stream
+0x140001B06: call    sub_1400029C0
+0x140001B0B: mov     rsi, [rsp+48h+ArgList]
+0x140001B10: mov     ecx, 2; Ix
+0x140001B15: call    __acrt_iob_func
+0x140001B1A: mov     rdx, rbx; Format
+0x140001B1D: mov     r8, rsi; ArgList
+0x140001B20: mov     rcx, rax; Stream
+0x140001B23: call    sub_140002920
+0x140001B28: call    abort

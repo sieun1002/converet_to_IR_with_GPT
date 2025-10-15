@@ -1,0 +1,73 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.exception = type { i32, i8*, double, double, double }
+
+@.str_sing = private unnamed_addr constant [21 x i8] c"argument singularity\00", align 1
+@.str_dom = private unnamed_addr constant [22 x i8] c"argument domain error\00", align 1
+@.str_partial = private unnamed_addr constant [29 x i8] c"partial loss of significance\00", align 1
+@.str_overflow = private unnamed_addr constant [21 x i8] c"overflow range error\00", align 1
+@.str_small = private unnamed_addr constant [24 x i8] c"the result is too small\00", align 1
+@.str_total = private unnamed_addr constant [27 x i8] c"total loss of significance\00", align 1
+@.str_unknown = private unnamed_addr constant [14 x i8] c"unknown error\00", align 1
+@.fmt = private unnamed_addr constant [43 x i8] c"_matherr(): %s in %s(%g, %g)  (retval=%g)\0A\00", align 1
+
+declare i8* @__acrt_iob_func(i32)
+declare i32 @sub_1400029C0(i8*, i8*, i8*, i8*, ...)
+
+define i32 @sub_1400019D0(%struct.exception* noundef %rec) local_unnamed_addr {
+entry:
+  %codeptr = getelementptr inbounds %struct.exception, %struct.exception* %rec, i32 0, i32 0
+  %code = load i32, i32* %codeptr, align 4
+  switch i32 %code, label %sw.default [
+    i32 1, label %case1
+    i32 2, label %case2
+    i32 3, label %case3
+    i32 4, label %case4
+    i32 5, label %case5
+    i32 6, label %case6
+    i32 0, label %sw.default
+  ]
+
+case1:
+  br label %load
+
+case2:
+  br label %load
+
+case3:
+  br label %load
+
+case4:
+  br label %load
+
+case5:
+  br label %load
+
+case6:
+  br label %load
+
+sw.default:
+  br label %load
+
+load:
+  %msg.sel = phi i8* [ getelementptr inbounds ([22 x i8], [22 x i8]* @.str_dom, i64 0, i64 0), %case1 ],
+                      [ getelementptr inbounds ([21 x i8], [21 x i8]* @.str_sing, i64 0, i64 0), %case2 ],
+                      [ getelementptr inbounds ([21 x i8], [21 x i8]* @.str_overflow, i64 0, i64 0), %case3 ],
+                      [ getelementptr inbounds ([24 x i8], [24 x i8]* @.str_small, i64 0, i64 0), %case4 ],
+                      [ getelementptr inbounds ([27 x i8], [27 x i8]* @.str_total, i64 0, i64 0), %case5 ],
+                      [ getelementptr inbounds ([29 x i8], [29 x i8]* @.str_partial, i64 0, i64 0), %case6 ],
+                      [ getelementptr inbounds ([14 x i8], [14 x i8]* @.str_unknown, i64 0, i64 0), %sw.default ]
+  %nameptr = getelementptr inbounds %struct.exception, %struct.exception* %rec, i32 0, i32 1
+  %name = load i8*, i8** %nameptr, align 8
+  %arg1ptr = getelementptr inbounds %struct.exception, %struct.exception* %rec, i32 0, i32 2
+  %arg1 = load double, double* %arg1ptr, align 8
+  %arg2ptr = getelementptr inbounds %struct.exception, %struct.exception* %rec, i32 0, i32 3
+  %arg2 = load double, double* %arg2ptr, align 8
+  %retvalptr = getelementptr inbounds %struct.exception, %struct.exception* %rec, i32 0, i32 4
+  %retval = load double, double* %retvalptr, align 8
+  %file = call i8* @__acrt_iob_func(i32 2)
+  %fmtptr = getelementptr inbounds [43 x i8], [43 x i8]* @.fmt, i64 0, i64 0
+  %call = call i32 (i8*, i8*, i8*, i8*, ...) @sub_1400029C0(i8* %file, i8* %fmtptr, i8* %msg.sel, i8* %name, double %arg1, double %arg2, double %retval)
+  ret i32 0
+}

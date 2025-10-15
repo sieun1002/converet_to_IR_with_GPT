@@ -1,0 +1,117 @@
+; Function: main
+; Start: 0x140001732, End: 0x140001963
+
+0x140001732: push    rbp
+0x140001733: push    rdi
+0x140001734: sub     rsp, 168h
+0x14000173B: lea     rbp, [rsp+80h]
+0x140001743: call    __main
+0x140001748: mov     [rbp+0F0h+var_20], 7
+0x140001753: mov     rdx, rbp
+0x140001756: mov     eax, 0
+0x14000175B: mov     ecx, 18h
+0x140001760: mov     rdi, rdx
+0x140001763: rep stosq
+0x140001766: mov     rdx, rdi
+0x140001769: mov     [rdx], eax
+0x14000176B: add     rdx, 4
+0x14000176F: mov     [rbp+0F0h+var_EC], 1
+0x140001776: mov     rax, [rbp+0F0h+var_20]
+0x14000177D: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x140001785: mov     [rbp+0F0h+var_E8], 1
+0x14000178C: mov     rax, [rbp+0F0h+var_20]
+0x140001793: add     rax, rax
+0x140001796: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x14000179E: mov     rax, [rbp+0F0h+var_20]
+0x1400017A5: add     rax, 3
+0x1400017A9: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x1400017B1: mov     rdx, [rbp+0F0h+var_20]
+0x1400017B8: mov     rax, rdx
+0x1400017BB: add     rax, rax
+0x1400017BE: add     rax, rdx
+0x1400017C1: add     rax, 1
+0x1400017C5: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x1400017CD: mov     rax, [rbp+0F0h+var_20]
+0x1400017D4: add     rax, 4
+0x1400017D8: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x1400017E0: mov     rax, [rbp+0F0h+var_20]
+0x1400017E7: shl     rax, 2
+0x1400017EB: add     rax, 1
+0x1400017EF: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x1400017F7: mov     rax, [rbp+0F0h+var_20]
+0x1400017FE: add     rax, rax
+0x140001801: add     rax, 5
+0x140001805: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x14000180D: mov     rdx, [rbp+0F0h+var_20]
+0x140001814: mov     rax, rdx
+0x140001817: shl     rax, 2
+0x14000181B: add     rax, rdx
+0x14000181E: add     rax, 2
+0x140001822: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x14000182A: mov     rax, [rbp+0F0h+var_20]
+0x140001831: shl     rax, 2
+0x140001835: add     rax, 5
+0x140001839: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x140001841: mov     rdx, [rbp+0F0h+var_20]
+0x140001848: mov     rax, rdx
+0x14000184B: shl     rax, 2
+0x14000184F: add     rax, rdx
+0x140001852: add     rax, 4
+0x140001856: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x14000185E: mov     rdx, [rbp+0F0h+var_20]
+0x140001865: mov     rax, rdx
+0x140001868: shl     rax, 2
+0x14000186C: add     rax, rdx
+0x14000186F: add     rax, 6
+0x140001873: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x14000187B: mov     rdx, [rbp+0F0h+var_20]
+0x140001882: mov     rax, rdx
+0x140001885: add     rax, rax
+0x140001888: add     rax, rdx
+0x14000188B: add     rax, rax
+0x14000188E: add     rax, 5
+0x140001892: mov     [rbp+rax*4+0F0h+var_F0], 1
+0x14000189A: mov     [rbp+0F0h+var_28], 0
+0x1400018A5: mov     [rbp+0F0h+var_138], 0
+0x1400018AD: lea     r9, [rbp+0F0h+var_130]
+0x1400018B1: mov     r8, [rbp+0F0h+var_28]
+0x1400018B8: mov     rdx, [rbp+0F0h+var_20]
+0x1400018BF: mov     rax, rbp
+0x1400018C2: lea     rcx, [rbp+0F0h+var_138]
+0x1400018C6: mov     [rsp+170h+var_150], rcx
+0x1400018CB: mov     rcx, rax
+0x1400018CE: call    dfs
+0x1400018D3: mov     rax, [rbp+0F0h+var_28]
+0x1400018DA: lea     rcx, _Format; "DFS preorder from %zu: "
+0x1400018E1: mov     rdx, rax
+0x1400018E4: call    printf
+0x1400018E9: mov     [rbp+0F0h+var_18], 0
+0x1400018F4: jmp     short loc_14000193D
+loc_1400018F6:
+0x1400018F6: mov     rax, [rbp+0F0h+var_18]
+0x1400018FD: lea     rdx, [rax+1]
+0x140001901: mov     rax, [rbp+0F0h+var_138]
+0x140001905: cmp     rdx, rax
+0x140001908: jnb     short loc_140001913
+0x14000190A: lea     rax, asc_140004018; " "
+0x140001911: jmp     short loc_14000191A
+loc_140001913:
+0x140001913: lea     rax, unk_14000401A
+loc_14000191A:
+0x14000191A: mov     rdx, [rbp+0F0h+var_18]
+0x140001921: mov     rdx, [rbp+rdx*8+0F0h+var_130]
+0x140001926: lea     rcx, aZuS; "%zu%s"
+0x14000192D: mov     r8, rax
+0x140001930: call    printf
+0x140001935: add     [rbp+0F0h+var_18], 1
+loc_14000193D:
+0x14000193D: mov     rax, [rbp+0F0h+var_138]
+0x140001941: cmp     [rbp+0F0h+var_18], rax
+0x140001948: jb      short loc_1400018F6
+0x14000194A: mov     ecx, 0Ah; Character
+0x14000194F: call    putchar
+0x140001954: mov     eax, 0
+0x140001959: add     rsp, 168h
+0x140001960: pop     rdi
+0x140001961: pop     rbp
+0x140001962: retn

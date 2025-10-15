@@ -1,0 +1,18 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_integration/1/sub_140002A881.ll:9:23: error: floating point constant invalid for type
+;   %ptr = inttoptr i64 0x13EE1E8529090 to i32*
+;                       ^
+; === ERROR LOG END ===
+
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+declare i32 @loc_140028911(...)
+
+define i32 @sub_140002A88() {
+entry:
+  %call = call i32 (...) @loc_140028911()
+  %ptr = inttoptr i64 0x13EE1E8529090 to i32*
+  %val = load i32, i32* %ptr, align 4
+  ret i32 %val
+}

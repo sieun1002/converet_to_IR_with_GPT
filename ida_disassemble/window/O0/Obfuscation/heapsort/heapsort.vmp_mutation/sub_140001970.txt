@@ -1,0 +1,58 @@
+; Function: sub_140001970
+; Start: 0x140001970, End: 0x140001a68
+
+0x140001970: push    rsi
+0x140001971: push    rbx
+0x140001972: sub     rsp, 78h
+0x140001976: movups  [rsp+88h+var_48], xmm6
+0x14000197b: movups  [rsp+88h+var_38], xmm7
+0x140001980: movups  [rsp+88h+var_28], xmm8
+0x140001986: cmp     dword ptr [rcx], 6; switch 7 cases
+0x140001989: ja      def_14000199F; jumptable 000000014000199F default case, case 0
+0x14000198f: mov     eax, [rcx]
+0x140001991: lea     rdx, jpt_14000199F
+0x140001998: movsxd  rax, ds:(jpt_14000199F - 1400041A4h)[rdx+rax*4]
+0x14000199c: add     rax, rdx
+0x14000199f: jmp     rax; switch jump
+0x1400019a1: align 8
+0x1400019a8: lea     rbx, aArgumentSingul; jumptable 000000014000199F case 2
+0x1400019af: movsd   xmm8, qword ptr [rcx+20h]
+0x1400019b5: movsd   xmm7, qword ptr [rcx+18h]
+0x1400019ba: movsd   xmm6, qword ptr [rcx+10h]
+0x1400019bf: mov     rsi, [rcx+8]
+0x1400019c3: mov     ecx, 2; Ix
+0x1400019c8: call    __acrt_iob_func
+0x1400019cd: movsd   [rsp+88h+var_58], xmm8
+0x1400019d4: mov     r8, rbx
+0x1400019d7: lea     rdx, aMatherrSInSGGR; "_matherr(): %s in %s(%g, %g)  (retval=%"...
+0x1400019de: movsd   [rsp+88h+var_60], xmm7
+0x1400019e4: mov     r9, rsi
+0x1400019e7: mov     rcx, rax; Stream
+0x1400019ea: movsd   [rsp+88h+var_68], xmm6
+0x1400019f0: call    sub_140002960
+0x1400019f5: nop
+0x1400019f6: movups  xmm6, [rsp+88h+var_48]
+0x1400019fb: movups  xmm7, [rsp+88h+var_38]
+0x140001a00: xor     eax, eax
+0x140001a02: movups  xmm8, [rsp+88h+var_28]
+0x140001a08: add     rsp, 78h
+0x140001a0c: pop     rbx
+0x140001a0d: pop     rsi
+0x140001a0e: retn
+0x140001a0f: align 10h
+0x140001a10: lea     rbx, aArgumentDomain; jumptable 000000014000199F case 1
+0x140001a17: jmp     short loc_1400019AF
+0x140001a19: align 20h
+0x140001a20: lea     rbx, aPartialLossOfS; jumptable 000000014000199F case 6
+0x140001a27: jmp     short loc_1400019AF
+0x140001a29: align 10h
+0x140001a30: lea     rbx, aOverflowRangeE; jumptable 000000014000199F case 3
+0x140001a37: jmp     loc_1400019AF
+0x140001a3c: align 20h
+0x140001a40: lea     rbx, aTheResultIsToo; jumptable 000000014000199F case 4
+0x140001a47: jmp     loc_1400019AF
+0x140001a4c: align 10h
+0x140001a50: lea     rbx, aTotalLossOfSig; jumptable 000000014000199F case 5
+0x140001a57: jmp     loc_1400019AF
+0x140001a5c: lea     rbx, aUnknownError; jumptable 000000014000199F default case, case 0
+0x140001a63: jmp     loc_1400019AF

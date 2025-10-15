@@ -1,0 +1,10 @@
+; Function: sub_1400018F0
+; Start: 0x1400018F0, End: 0x14000190F
+
+0x1400018F0: mov     eax, cs:dword_140007030
+0x1400018F6: test    eax, eax
+0x1400018F8: jz      short loc_140001900
+0x1400018FA: retn
+loc_140001900:
+0x140001900: mov     cs:dword_140007030, 1
+0x14000190A: jmp     sub_140001870

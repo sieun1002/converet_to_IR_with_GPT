@@ -1,0 +1,18 @@
+; Function: sub_1400029C0
+; Start: 0x1400029c0, End: 0x1400029f2
+
+0x1400029c0: push    rcx
+0x1400029c1: push    rax
+0x1400029c2: cmp     rax, 1000h
+0x1400029c8: lea     rcx, [rsp+10h+arg_0]
+0x1400029cd: jb      short loc_1400029E8
+0x1400029cf: sub     rcx, 1000h
+0x1400029d6: or      qword ptr [rcx], 0
+0x1400029da: sub     rax, 1000h
+0x1400029e0: cmp     rax, 1000h
+0x1400029e6: ja      short loc_1400029CF
+0x1400029e8: sub     rcx, rax
+0x1400029eb: or      qword ptr [rcx], 0
+0x1400029ef: pop     rax
+0x1400029f0: pop     rcx
+0x1400029f1: retn

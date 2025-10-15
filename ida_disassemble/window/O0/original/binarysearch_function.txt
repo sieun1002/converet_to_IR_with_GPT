@@ -1,0 +1,57 @@
+; Function: binary_search
+; Start: 0x140001450, End: 0x1400014FE
+
+0x140001450: push    rbp
+0x140001451: mov     rbp, rsp
+0x140001454: sub     rsp, 20h
+0x140001458: mov     [rbp+arg_0], rcx
+0x14000145C: mov     [rbp+arg_8], rdx
+0x140001460: mov     [rbp+arg_10], r8d
+0x140001464: mov     [rbp+var_8], 0
+0x14000146C: mov     rax, [rbp+arg_8]
+0x140001470: mov     [rbp+var_10], rax
+0x140001474: jmp     short loc_1400014BF
+loc_140001476:
+0x140001476: mov     rax, [rbp+var_10]
+0x14000147A: sub     rax, [rbp+var_8]
+0x14000147E: shr     rax, 1
+0x140001481: mov     rdx, rax
+0x140001484: mov     rax, [rbp+var_8]
+0x140001488: add     rax, rdx
+0x14000148B: mov     [rbp+var_18], rax
+0x14000148F: mov     rax, [rbp+var_18]
+0x140001493: lea     rdx, ds:0[rax*4]
+0x14000149B: mov     rax, [rbp+arg_0]
+0x14000149F: add     rax, rdx
+0x1400014A2: mov     eax, [rax]
+0x1400014A4: cmp     [rbp+arg_10], eax
+0x1400014A7: jle     short loc_1400014B7
+0x1400014A9: mov     rax, [rbp+var_18]
+0x1400014AD: add     rax, 1
+0x1400014B1: mov     [rbp+var_8], rax
+0x1400014B5: jmp     short loc_1400014BF
+loc_1400014B7:
+0x1400014B7: mov     rax, [rbp+var_18]
+0x1400014BB: mov     [rbp+var_10], rax
+loc_1400014BF:
+0x1400014BF: mov     rax, [rbp+var_8]
+0x1400014C3: cmp     rax, [rbp+var_10]
+0x1400014C7: jb      short loc_140001476
+0x1400014C9: mov     rax, [rbp+var_8]
+0x1400014CD: cmp     rax, [rbp+arg_8]
+0x1400014D1: jnb     short loc_1400014F3
+0x1400014D3: mov     rax, [rbp+var_8]
+0x1400014D7: lea     rdx, ds:0[rax*4]
+0x1400014DF: mov     rax, [rbp+arg_0]
+0x1400014E3: add     rax, rdx
+0x1400014E6: mov     eax, [rax]
+0x1400014E8: cmp     [rbp+arg_10], eax
+0x1400014EB: jnz     short loc_1400014F3
+0x1400014ED: mov     rax, [rbp+var_8]
+0x1400014F1: jmp     short loc_1400014F8
+loc_1400014F3:
+0x1400014F3: mov     eax, 0FFFFFFFFh
+loc_1400014F8:
+0x1400014F8: add     rsp, 20h
+0x1400014FC: pop     rbp
+0x1400014FD: retn

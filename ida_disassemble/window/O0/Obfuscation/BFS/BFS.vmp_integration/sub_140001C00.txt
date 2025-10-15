@@ -1,0 +1,58 @@
+; Function: sub_140001C00
+; Start: 0x140001c00, End: 0x140001d61
+
+0x140001c00: push    rdi
+0x140001c01: push    rsi
+0x140001c02: push    rbx
+0x140001c03: sub     rsp, 50h
+0x140001c07: movsxd  rsi, cs:dword_1400070A4
+0x140001c0e: mov     rbx, rcx
+0x140001c11: test    esi, esi
+0x140001c13: jle     loc_140001D30
+0x140001c19: mov     rax, cs:qword_1400070A8
+0x140001c20: xor     r9d, r9d
+0x140001c23: add     rax, 18h
+0x140001c27: nop     word ptr [rax+rax+00000000h]
+0x140001c30: mov     r8, [rax]
+0x140001c33: cmp     rbx, r8
+0x140001c36: jb      short loc_140001C4B
+0x140001c38: mov     rdx, [rax+8]
+0x140001c3c: mov     edx, [rdx+8]
+0x140001c3f: add     r8, rdx
+0x140001c42: cmp     rbx, r8
+0x140001c45: jb      loc_140001CD5
+0x140001c4b: add     r9d, 1
+0x140001c4f: add     rax, 28h ; '('
+0x140001c53: cmp     r9d, esi
+0x140001c56: jnz     short loc_140001C30
+0x140001c58: mov     rcx, rbx
+0x140001c5b: call    sub_1400026F0
+0x140001c60: mov     rdi, rax
+0x140001c63: test    rax, rax
+0x140001c66: jz      loc_140001D52
+0x140001c6c: mov     rax, cs:qword_1400070A8
+0x140001c73: lea     rbx, [rsi+rsi*4]
+0x140001c77: shl     rbx, 3
+0x140001c7b: add     rax, rbx
+0x140001c7e: mov     [rax+20h], rdi
+0x140001c82: mov     dword ptr [rax], 0
+0x140001c88: call    sub_140002830
+0x140001c8d: mov     edx, [rdi+0Ch]
+0x140001c90: mov     r8d, 30h ; '0'
+0x140001c96: lea     rcx, [rax+rdx]
+0x140001c9a: mov     rax, cs:qword_1400070A8
+0x140001ca1: lea     rdx, [rsp+68h+var_48]
+0x140001ca6: mov     [rax+rbx+18h], rcx
+0x140001cab: call    sub_14002C875
+0x140001cb0: mov     eax, 0FC08548h
+0x140001cb5: test    [rbp+0], bh
+0x140001cd5: add     rsp, 50h
+0x140001cd9: pop     rbx
+0x140001cda: pop     rsi
+0x140001cdb: pop     rdi
+0x140001cdc: retn
+0x140001d30: xor     esi, esi
+0x140001d32: jmp     loc_140001C58
+0x140001d52: mov     rdx, rbx
+0x140001d55: lea     rcx, aAddressPHasNoI; "Address %p has no image-section"
+0x140001d5c: call    sub_140001BA0

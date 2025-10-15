@@ -1,0 +1,75 @@
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004450 = external global i64*
+@off_140004460 = external global i32*
+@dword_140007004 = external global i32
+@off_1400043D0 = external global i8*
+@qword_140007010 = external global i8*
+@dword_140007020 = external global i32
+@qword_140007018 = external global i8**
+@dword_140007008 = external global i32
+@off_140004440 = external global i8*
+@off_140004410 = external global i32*
+@off_140004420 = external global i32*
+@off_140004430 = external global i32*
+@off_1400043A0 = external global i8*
+@off_140004400 = external global i32*
+@off_1400044D0 = external global i32*
+@off_1400044B0 = external global i32*
+@off_140004500 = external global i32*
+@off_1400044C0 = external global i32*
+@off_140004480 = external global i8*
+@off_140004470 = external global i8*
+@off_1400043E0 = external global i32*
+@First = external global i8*
+@Last = external global i8*
+@__imp_Sleep = external dllimport global void (i32)*
+@__imp_SetUnhandledExceptionFilter = external dllimport global i32 (i8*)*
+
+declare void @_cexit()
+declare void @exit(i32) noreturn
+declare void @_set_invalid_parameter_handler(i8*)
+declare void @sub_1400024E0()
+declare void @sub_140001CA0()
+declare void @sub_140002070(i8*)
+declare i32 @_set_app_type(i32)
+declare i32* @__p__fmode()
+declare i32* @__p__commode()
+declare i32 @sub_140001910()
+declare i32 @_initterm_e(i8**, i8**)
+declare i32 @sub_140002A60(i32*, i8***, i8**, i32, i32*)
+declare i8* @malloc(i64)
+declare i64 @strlen(i8*)
+declare i8* @memcpy(i8*, i8*, i64)
+declare i32 @_configthreadlocale(i32)
+declare void @_initterm(i8**, i8**)
+declare void @sub_1400018F0()
+declare i32 @sub_140002A30(i32)
+declare i64* @sub_140002A20()
+declare void @sub_14000171D(i32, i8*, i8*)
+declare void @sub_1400019D0()
+declare i32 @TopLevelExceptionFilter(i8*)
+
+define void @sub_140001010() {
+entry:
+  %lockptr.addr = load i64*, i64** @off_140004450
+  %cmpxchg0 = cmpxchg i64* %lockptr.addr, i64 0, i64 0 seq_cst
+  %old0 = extractvalue { i64, i1 } %cmpxchg0, 0
+  %succ0 = extractvalue { i64, i1 } %cmpxchg0, 1
+  br i1 %succ0, label %after_lock, label %check_owner
+
+check_owner:                                      ; preds = %entry
+  %is_same = icmp eq i64 %old0, 0
+  br i1 %is_same, label %after_lock, label %sleep_then_retry
+
+sleep_then_retry:                                 ; preds = %check_owner
+  %sleep.fp = load void (i32)*, void (i32)** @__imp_Sleep
+  call void %sleep.fp(i32 1000)
+  %cmpxchg1 = cmpxchg i64* %lockptr.addr, i64 0, i64 0 seq_cst
+  br label %after_lock
+
+after_lock:                                       ; preds = %sleep_then_retry, %check_owner, %entry
+  call void @_cexit()
+  ret void
+}

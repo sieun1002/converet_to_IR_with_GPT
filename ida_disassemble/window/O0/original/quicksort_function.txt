@@ -1,0 +1,131 @@
+; Function: quick_sort
+; Start: 0x140001450, End: 0x1400015CB
+
+0x140001450: push    rbp
+0x140001451: mov     rbp, rsp
+0x140001454: sub     rsp, 30h
+0x140001458: mov     [rbp+arg_0], rcx
+0x14000145C: mov     [rbp+arg_8], edx
+0x14000145F: mov     [rbp+arg_10], r8d
+0x140001463: jmp     loc_1400015B7
+loc_140001468:
+0x140001468: mov     eax, [rbp+arg_8]
+0x14000146B: mov     [rbp+var_4], eax
+0x14000146E: mov     eax, [rbp+arg_10]
+0x140001471: mov     [rbp+var_8], eax
+0x140001474: mov     eax, [rbp+arg_10]
+0x140001477: sub     eax, [rbp+arg_8]
+0x14000147A: mov     edx, eax
+0x14000147C: shr     edx, 1Fh
+0x14000147F: add     eax, edx
+0x140001481: sar     eax, 1
+0x140001483: mov     edx, eax
+0x140001485: mov     eax, [rbp+arg_8]
+0x140001488: add     eax, edx
+0x14000148A: cdqe
+0x14000148C: lea     rdx, ds:0[rax*4]
+0x140001494: mov     rax, [rbp+arg_0]
+0x140001498: add     rax, rdx
+0x14000149B: mov     eax, [rax]
+0x14000149D: mov     [rbp+var_C], eax
+0x1400014A0: jmp     short loc_1400014A6
+loc_1400014A2:
+0x1400014A2: add     [rbp+var_4], 1
+loc_1400014A6:
+0x1400014A6: mov     eax, [rbp+var_4]
+0x1400014A9: cdqe
+0x1400014AB: lea     rdx, ds:0[rax*4]
+0x1400014B3: mov     rax, [rbp+arg_0]
+0x1400014B7: add     rax, rdx
+0x1400014BA: mov     eax, [rax]
+0x1400014BC: cmp     [rbp+var_C], eax
+0x1400014BF: jg      short loc_1400014A2
+0x1400014C1: jmp     short loc_1400014C7
+loc_1400014C3:
+0x1400014C3: sub     [rbp+var_8], 1
+loc_1400014C7:
+0x1400014C7: mov     eax, [rbp+var_8]
+0x1400014CA: cdqe
+0x1400014CC: lea     rdx, ds:0[rax*4]
+0x1400014D4: mov     rax, [rbp+arg_0]
+0x1400014D8: add     rax, rdx
+0x1400014DB: mov     eax, [rax]
+0x1400014DD: cmp     [rbp+var_C], eax
+0x1400014E0: jl      short loc_1400014C3
+0x1400014E2: mov     eax, [rbp+var_4]
+0x1400014E5: cmp     eax, [rbp+var_8]
+0x1400014E8: jg      short loc_140001551
+0x1400014EA: mov     eax, [rbp+var_4]
+0x1400014ED: cdqe
+0x1400014EF: lea     rdx, ds:0[rax*4]
+0x1400014F7: mov     rax, [rbp+arg_0]
+0x1400014FB: add     rax, rdx
+0x1400014FE: mov     eax, [rax]
+0x140001500: mov     [rbp+var_10], eax
+0x140001503: mov     eax, [rbp+var_8]
+0x140001506: cdqe
+0x140001508: lea     rdx, ds:0[rax*4]
+0x140001510: mov     rax, [rbp+arg_0]
+0x140001514: add     rax, rdx
+0x140001517: mov     edx, [rbp+var_4]
+0x14000151A: movsxd  rdx, edx
+0x14000151D: lea     rcx, ds:0[rdx*4]
+0x140001525: mov     rdx, [rbp+arg_0]
+0x140001529: add     rdx, rcx
+0x14000152C: mov     eax, [rax]
+0x14000152E: mov     [rdx], eax
+0x140001530: mov     eax, [rbp+var_8]
+0x140001533: cdqe
+0x140001535: lea     rdx, ds:0[rax*4]
+0x14000153D: mov     rax, [rbp+arg_0]
+0x140001541: add     rdx, rax
+0x140001544: mov     eax, [rbp+var_10]
+0x140001547: mov     [rdx], eax
+0x140001549: add     [rbp+var_4], 1
+0x14000154D: sub     [rbp+var_8], 1
+loc_140001551:
+0x140001551: mov     eax, [rbp+var_4]
+0x140001554: cmp     eax, [rbp+var_8]
+0x140001557: jle     loc_1400014A6
+0x14000155D: mov     eax, [rbp+var_8]
+0x140001560: sub     eax, [rbp+arg_8]
+0x140001563: mov     edx, eax
+0x140001565: mov     eax, [rbp+arg_10]
+0x140001568: sub     eax, [rbp+var_4]
+0x14000156B: cmp     edx, eax
+0x14000156D: jge     short loc_140001594
+0x14000156F: mov     eax, [rbp+arg_8]
+0x140001572: cmp     eax, [rbp+var_8]
+0x140001575: jge     short loc_14000158C
+0x140001577: mov     ecx, [rbp+var_8]
+0x14000157A: mov     edx, [rbp+arg_8]
+0x14000157D: mov     rax, [rbp+arg_0]
+0x140001581: mov     r8d, ecx
+0x140001584: mov     rcx, rax
+0x140001587: call    quick_sort
+loc_14000158C:
+0x14000158C: mov     eax, [rbp+var_4]
+0x14000158F: mov     [rbp+arg_8], eax
+0x140001592: jmp     short loc_1400015B7
+loc_140001594:
+0x140001594: mov     eax, [rbp+var_4]
+0x140001597: cmp     eax, [rbp+arg_10]
+0x14000159A: jge     short loc_1400015B1
+0x14000159C: mov     ecx, [rbp+arg_10]
+0x14000159F: mov     edx, [rbp+var_4]
+0x1400015A2: mov     rax, [rbp+arg_0]
+0x1400015A6: mov     r8d, ecx
+0x1400015A9: mov     rcx, rax
+0x1400015AC: call    quick_sort
+loc_1400015B1:
+0x1400015B1: mov     eax, [rbp+var_8]
+0x1400015B4: mov     [rbp+arg_10], eax
+loc_1400015B7:
+0x1400015B7: mov     eax, [rbp+arg_8]
+0x1400015BA: cmp     eax, [rbp+arg_10]
+0x1400015BD: jl      loc_140001468
+0x1400015C3: nop
+0x1400015C4: nop
+0x1400015C5: add     rsp, 30h
+0x1400015C9: pop     rbp
+0x1400015CA: retn

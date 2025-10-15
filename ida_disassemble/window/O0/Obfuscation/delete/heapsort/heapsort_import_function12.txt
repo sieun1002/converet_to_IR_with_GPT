@@ -1,0 +1,62 @@
+; Function: sub_1400023D0
+; Start: 0x1400023D0, End: 0x1400024D7
+
+0x1400023D0: sub     rsp, 38h
+0x1400023D4: cmp     edx, 2
+0x1400023D7: jz      loc_140002498
+0x1400023DD: ja      short loc_140002408
+0x1400023DF: test    edx, edx
+0x1400023E1: jz      short loc_140002420
+0x1400023E3: mov     eax, cs:dword_1400070E8
+0x1400023E9: test    eax, eax
+0x1400023EB: jz      loc_1400024C0
+0x1400023F1: mov     cs:dword_1400070E8, 1
+loc_1400023FB:
+0x1400023FB: mov     eax, 1
+0x140002400: add     rsp, 38h
+0x140002404: retn
+loc_140002408:
+0x140002408: cmp     edx, 3
+0x14000240B: jnz     short loc_1400023FB
+0x14000240D: mov     eax, cs:dword_1400070E8
+0x140002413: test    eax, eax
+0x140002415: jz      short loc_1400023FB
+0x140002417: call    near ptr sub_140002240
+loc_140002420:
+0x140002420: mov     eax, cs:dword_1400070E8
+0x140002426: test    eax, eax
+0x140002428: jnz     loc_1400024B0
+0x14000242E: mov     eax, cs:dword_1400070E8
+0x140002434: cmp     eax, 1
+0x140002437: jnz     short loc_1400023FB
+0x140002439: mov     rax, cs:qword_1400070E0
+0x140002440: test    rax, rax
+0x140002443: jz      short loc_14000246B
+0x140002445: nop     word ptr [rax+rax+00000000h]
+loc_140002450:
+0x140002450: mov     rcx, rax
+0x140002453: mov     rax, [rax+10h]
+0x140002457: mov     [rsp+38h+var_10], rax
+0x14000245C: call    sub_140002BB0
+0x140002461: mov     rax, [rsp+38h+var_10]
+0x140002466: test    rax, rax
+0x140002469: jnz     short loc_140002450
+loc_14000246B:
+0x14000246B: lea     rcx, unk_140007100
+0x140002472: mov     cs:qword_1400070E0, 0
+0x14000247D: mov     cs:dword_1400070E8, 0
+0x140002487: call    sub_1403DDA29
+0x14000248C: push    rdx
+0x14000248D: jmp     loc_1400023FB
+loc_140002498:
+0x140002498: call    sub_1400024E0
+0x14000249D: mov     eax, 1
+0x1400024A2: add     rsp, 38h
+0x1400024A6: retn
+loc_1400024B0:
+0x1400024B0: call    near ptr sub_140002240
+loc_1400024C0:
+0x1400024C0: lea     rcx, unk_140007100
+0x1400024C7: call    sub_1400E06D5
+0x1400024CC: sub     eax, 0FFFF1FE9h
+0x1400024D1: call    qword ptr [rax-6F6F6F70h]

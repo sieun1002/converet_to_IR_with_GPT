@@ -1,0 +1,55 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 247,
+      "ir_len": 13648,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.ll:69:22: error: expected value token\n  %cmpx = cmpxchg i8*, i8** %lockptr_addr, i8* null, i8* %owner_token_fn monotonic monotonic\n                     ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare void @Sleep(i32)\ndeclare i8* @SetUnhandledExceptionFilter(i32 (i8*)*)\ndeclare void (i16*, i16*, i16*, i32, i64)* @_set_invalid_pa",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 295,
+      "ir_len": 13832,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.ll:318:50: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg_old = atomicrmw xchg i8** %lockptr_addr, i8* null monotonic\n                                                 ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare void @Sleep(i32)\ndeclare i8* @SetUnhandledExceptionFilter(i32 (i8*)*)\ndeclare void (i16*, i16*, i16*, i32, i64)* @_set_invalid_pa",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 185,
+      "ir_len": 12747,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %idx = phi i64 [ 0, %maybe_loop ], [ %idx.next, %loop_body_end ]\nlabel %loop\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare void @Sleep(i32)\ndeclare i8* @SetUnhandledExceptionFilter(i32 (i8*)*)\ndeclare void (i16*, i16*, i16*, i32, i64)* @_set_invalid_pa",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010103.ll"
+    },
+    {
+      "filename": "sub_140002A00.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 264,
+      "ir_len": 472,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.ll:5:29: error: dso_location and DLL-StorageClass mismatch\ndeclare dso_local dllimport i32 @__stdio_common_vfprintf(i64, i8*, i8*, i8*, i8*)\n                            ^\n",
+      "ir_preview": "; ModuleID = 'fixed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare dso_local i64* @sub_140002AF0()\ndeclare dso_local dllimport i32 @__stdio_common_vfprintf(i64, i8*, i8*, i8*, i8*)\n\ndefine dso_loc",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.ll"
+    },
+    {
+      "filename": "sub_140002A40.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 193,
+      "ir_len": 700,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nIntrinsic has incorrect argument type!\nvoid (i8**)* @llvm.va_start\nIntrinsic has incorrect argument type!\nvoid (i8**)* @llvm.va_end\n",
+      "ir_preview": "; ModuleID = 'module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i8* @__acrt_iob_func(i32)\ndeclare i32 @__stdio_common_vfprintf(i64, i8*, i8*, i8*, i8*)\ndeclare i64* @sub_140002AF0()\n\ndeclare v",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A401.ll"
+    }
+  ]
+}

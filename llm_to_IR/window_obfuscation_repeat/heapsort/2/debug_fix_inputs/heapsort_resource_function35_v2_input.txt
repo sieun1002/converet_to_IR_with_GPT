@@ -1,0 +1,133 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat/heapsort/2/heapsort_resource_function351.ll:93:68: error: use of undefined value '%after_decision'
+;   %cur_ptr = phi i8* [ %imp_va_ptr, %found_section ], [ %ptr_next, %after_decision ]
+;                                                                    ^
+; === ERROR LOG END ===
+
+; ModuleID = 'pe_import_name_resolver'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-p270:64:64-f80:128-n8:16:32:64-S128"
+
+@off_1400043A0 = external global i8*
+
+define dso_local i8* @sub_140002820(i32 %index) local_unnamed_addr {
+entry:
+  %baseptr = load i8*, i8** @off_1400043A0, align 8
+  %mzhdrptr = bitcast i8* %baseptr to i16*
+  %mzv = load i16, i16* %mzhdrptr, align 1
+  %mzok = icmp eq i16 %mzv, 23117
+  br i1 %mzok, label %check_pe, label %ret_null
+
+check_pe:
+  %e_lfanew_ptr = getelementptr i8, i8* %baseptr, i64 60
+  %e_lfanew_ptr32 = bitcast i8* %e_lfanew_ptr to i32*
+  %e_lfanew = load i32, i32* %e_lfanew_ptr32, align 1
+  %e_lfanew64 = zext i32 %e_lfanew to i64
+  %nt_hdr = getelementptr i8, i8* %baseptr, i64 %e_lfanew64
+  %pe_sig_ptr = bitcast i8* %nt_hdr to i32*
+  %pe_sig = load i32, i32* %pe_sig_ptr, align 1
+  %pe_ok = icmp eq i32 %pe_sig, 17744
+  br i1 %pe_ok, label %check_opt, label %ret_null
+
+check_opt:
+  %magic_ptr = getelementptr i8, i8* %nt_hdr, i64 24
+  %magic_ptr16 = bitcast i8* %magic_ptr to i16*
+  %magic = load i16, i16* %magic_ptr16, align 1
+  %is_pe32plus = icmp eq i16 %magic, 523
+  br i1 %is_pe32plus, label %load_import_dir, label %ret_null
+
+load_import_dir:
+  %imp_rva_ptr = getelementptr i8, i8* %nt_hdr, i64 144
+  %imp_rva_ptr32 = bitcast i8* %imp_rva_ptr to i32*
+  %imp_rva = load i32, i32* %imp_rva_ptr32, align 1
+  %imp_nonzero = icmp ne i32 %imp_rva, 0
+  br i1 %imp_nonzero, label %load_sections_header, label %ret_null
+
+load_sections_header:
+  %numsec_ptr = getelementptr i8, i8* %nt_hdr, i64 6
+  %numsec_ptr16 = bitcast i8* %numsec_ptr to i16*
+  %numsec16 = load i16, i16* %numsec_ptr16, align 1
+  %numsec_is_zero = icmp eq i16 %numsec16, 0
+  br i1 %numsec_is_zero, label %ret_null, label %have_numsec
+
+have_numsec:
+  %sizeopt_ptr = getelementptr i8, i8* %nt_hdr, i64 20
+  %sizeopt_ptr16 = bitcast i8* %sizeopt_ptr to i16*
+  %sizeopt16 = load i16, i16* %sizeopt_ptr16, align 1
+  %sizeopt32 = zext i16 %sizeopt16 to i32
+  %sizeopt64 = zext i32 %sizeopt32 to i64
+  %opt_start = getelementptr i8, i8* %nt_hdr, i64 24
+  %sect_headers = getelementptr i8, i8* %opt_start, i64 %sizeopt64
+  %numsec32 = zext i16 %numsec16 to i32
+  %numsec64 = zext i32 %numsec32 to i64
+  %sections_size = mul nuw i64 %numsec64, 40
+  %sect_end = getelementptr i8, i8* %sect_headers, i64 %sections_size
+  %imp_rva64 = zext i32 %imp_rva to i64
+  br label %sec_loop
+
+sec_loop:
+  %cur = phi i8* [ %sect_headers, %have_numsec ], [ %next, %sec_advance ]
+  %at_end = icmp eq i8* %cur, %sect_end
+  br i1 %at_end, label %ret_null, label %check_rva
+
+check_rva:
+  %virtaddr_ptr = getelementptr i8, i8* %cur, i64 12
+  %virtaddr32p = bitcast i8* %virtaddr_ptr to i32*
+  %virtaddr = load i32, i32* %virtaddr32p, align 1
+  %virtaddr64 = zext i32 %virtaddr to i64
+  %lt1 = icmp ult i64 %imp_rva64, %virtaddr64
+  br i1 %lt1, label %sec_advance, label %check_upper
+
+check_upper:
+  %vsize_ptr = getelementptr i8, i8* %cur, i64 8
+  %vsize32p = bitcast i8* %vsize_ptr to i32*
+  %vsize = load i32, i32* %vsize32p, align 1
+  %vsize64 = zext i32 %vsize to i64
+  %end_rva = add i64 %virtaddr64, %vsize64
+  %lt2 = icmp ult i64 %imp_rva64, %end_rva
+  br i1 %lt2, label %found_section, label %sec_advance
+
+sec_advance:
+  %next = getelementptr i8, i8* %cur, i64 40
+  br label %sec_loop
+
+found_section:
+  %imp_va_ptr = getelementptr i8, i8* %baseptr, i64 %imp_rva64
+  br label %desc_loop
+
+desc_loop:
+  %cur_ptr = phi i8* [ %imp_va_ptr, %found_section ], [ %ptr_next, %after_decision ]
+  %idx = phi i32 [ %index, %found_section ], [ %index1, %after_decision ]
+  %ts_ptr = getelementptr i8, i8* %cur_ptr, i64 4
+  %ts32p = bitcast i8* %ts_ptr to i32*
+  %ts = load i32, i32* %ts32p, align 1
+  %ts_zero = icmp eq i32 %ts, 0
+  br i1 %ts_zero, label %check_name_when_zero_ts, label %after_zero_check
+
+check_name_when_zero_ts:
+  %name_ptr_rva_ptr = getelementptr i8, i8* %cur_ptr, i64 12
+  %name_rva_p0 = bitcast i8* %name_ptr_rva_ptr to i32*
+  %name_rva0 = load i32, i32* %name_rva_p0, align 1
+  %name_is_zero = icmp eq i32 %name_rva0, 0
+  br i1 %name_is_zero, label %ret_null, label %after_zero_check
+
+after_zero_check:
+  %idx_pos = icmp sgt i32 %idx, 0
+  br i1 %idx_pos, label %decrement_and_continue, label %final_return
+
+decrement_and_continue:
+  %index1 = add nsw i32 %idx, -1
+  %ptr_next = getelementptr i8, i8* %cur_ptr, i64 20
+  br label %desc_loop
+
+final_return:
+  %name_rva_ptr2 = getelementptr i8, i8* %cur_ptr, i64 12
+  %name_rva_p2 = bitcast i8* %name_rva_ptr2 to i32*
+  %name_rva = load i32, i32* %name_rva_p2, align 1
+  %name_rva64 = zext i32 %name_rva to i64
+  %name_addr = getelementptr i8, i8* %baseptr, i64 %name_rva64
+  ret i8* %name_addr
+
+ret_null:
+  ret i8* null
+}

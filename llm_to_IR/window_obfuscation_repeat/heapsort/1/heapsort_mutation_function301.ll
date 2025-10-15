@@ -1,0 +1,77 @@
+; ModuleID = 'fixed_module'
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043A0 = external dso_local global i8*, align 8
+
+define dso_local i32 @sub_1400026D0(i64 %count) local_unnamed_addr {
+entry:
+  %base_ptr_ptr = load i8*, i8** @off_1400043A0, align 8
+  %mz_ptr = bitcast i8* %base_ptr_ptr to i16*
+  %mz = load i16, i16* %mz_ptr, align 2
+  %is_mz = icmp eq i16 %mz, 23117
+  br i1 %is_mz, label %check_pe, label %ret0
+
+check_pe:
+  %e_lfanew_ptr = getelementptr i8, i8* %base_ptr_ptr, i64 60
+  %e_lfanew_ptr32 = bitcast i8* %e_lfanew_ptr to i32*
+  %e_lfanew = load i32, i32* %e_lfanew_ptr32, align 4
+  %e_lfanew_sext = sext i32 %e_lfanew to i64
+  %pe_hdr = getelementptr i8, i8* %base_ptr_ptr, i64 %e_lfanew_sext
+  %sig_ptr = bitcast i8* %pe_hdr to i32*
+  %sig = load i32, i32* %sig_ptr, align 4
+  %is_pe = icmp eq i32 %sig, 17744
+  br i1 %is_pe, label %optmagic, label %ret0
+
+optmagic:
+  %optmagic_ptr = getelementptr i8, i8* %pe_hdr, i64 24
+  %optmagic_ptr16 = bitcast i8* %optmagic_ptr to i16*
+  %optmagic = load i16, i16* %optmagic_ptr16, align 2
+  %is_20b = icmp eq i16 %optmagic, 523
+  br i1 %is_20b, label %get_numsec, label %ret0
+
+get_numsec:
+  %numsec_ptr8 = getelementptr i8, i8* %pe_hdr, i64 6
+  %numsec_ptr = bitcast i8* %numsec_ptr8 to i16*
+  %numsec = load i16, i16* %numsec_ptr, align 2
+  %has_sections = icmp ne i16 %numsec, 0
+  br i1 %has_sections, label %calc_start, label %ret0
+
+calc_start:
+  %soh_ptr = getelementptr i8, i8* %pe_hdr, i64 20
+  %soh_ptr16 = bitcast i8* %soh_ptr to i16*
+  %soh = load i16, i16* %soh_ptr16, align 2
+  %soh_zext = zext i16 %soh to i64
+  %rax_start_off = add i64 %soh_zext, 24
+  %rax = getelementptr i8, i8* %pe_hdr, i64 %rax_start_off
+  %numsec_zext64 = zext i16 %numsec to i64
+  %size_total = mul i64 %numsec_zext64, 40
+  %rdx_end = getelementptr i8, i8* %rax, i64 %size_total
+  br label %loop
+
+loop:
+  %cur = phi i8* [ %rax, %calc_start ], [ %next, %advance ]
+  %cnt = phi i64 [ %count, %calc_start ], [ %cnt_for_advance, %advance ]
+  %char_ptr = getelementptr i8, i8* %cur, i64 39
+  %char = load i8, i8* %char_ptr, align 1
+  %masked = and i8 %char, 32
+  %is_set = icmp ne i8 %masked, 0
+  br i1 %is_set, label %check_cnt, label %advance
+
+check_cnt:
+  %is_cnt_zero = icmp eq i64 %cnt, 0
+  br i1 %is_cnt_zero, label %ret0, label %advance_with_dec
+
+advance_with_dec:
+  %cnt_dec = add i64 %cnt, -1
+  br label %advance
+
+advance:
+  %cnt_for_advance = phi i64 [ %cnt, %loop ], [ %cnt_dec, %advance_with_dec ]
+  %next = getelementptr i8, i8* %cur, i64 40
+  %cmp = icmp ne i8* %rdx_end, %next
+  br i1 %cmp, label %loop, label %ret0
+
+ret0:
+  ret i32 0
+}

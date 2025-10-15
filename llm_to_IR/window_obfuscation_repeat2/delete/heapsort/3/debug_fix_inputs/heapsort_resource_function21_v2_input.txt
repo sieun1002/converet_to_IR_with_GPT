@@ -1,0 +1,22 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/3/heapsort_resource_function211.ll:4:27: warning: ptr type is only supported in -opaque-pointers mode
+; @qword_1400070B0 = global ptr null, align 8
+;                           ^
+; llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/3/heapsort_resource_function211.ll:4:27: error: expected type
+; @qword_1400070B0 = global ptr null, align 8
+;                           ^
+; === ERROR LOG END ===
+
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+@qword_1400070B0 = global ptr null, align 8
+
+declare i32 @__setusermatherr(ptr)
+
+define i32 @sub_140002070(ptr %handler) {
+entry:
+  store ptr %handler, ptr @qword_1400070B0, align 8
+  %call = tail call i32 @__setusermatherr(ptr %handler)
+  ret i32 %call
+}

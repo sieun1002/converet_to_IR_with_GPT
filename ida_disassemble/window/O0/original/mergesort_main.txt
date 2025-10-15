@@ -1,0 +1,41 @@
+; Function: main
+; Start: 0x14000165E, End: 0x14000170D
+
+0x14000165E: push    rbp
+0x14000165F: mov     rbp, rsp
+0x140001662: sub     rsp, 60h
+0x140001666: call    __main
+0x14000166B: mov     [rbp+var_40], 9
+0x140001672: mov     [rbp+var_3C], 1
+0x140001679: mov     [rbp+var_38], 5
+0x140001680: mov     [rbp+var_34], 3
+0x140001687: mov     [rbp+var_30], 7
+0x14000168E: mov     [rbp+var_2C], 2
+0x140001695: mov     [rbp+var_28], 8
+0x14000169C: mov     [rbp+var_24], 6
+0x1400016A3: mov     [rbp+var_20], 4
+0x1400016AA: mov     [rbp+var_1C], 0
+0x1400016B1: mov     [rbp+var_10], 0Ah
+0x1400016B9: mov     rdx, [rbp+var_10]
+0x1400016BD: lea     rax, [rbp+var_40]
+0x1400016C1: mov     rcx, rax
+0x1400016C4: call    merge_sort
+0x1400016C9: mov     [rbp+var_8], 0
+0x1400016D1: jmp     short loc_1400016EE
+loc_1400016D3:
+0x1400016D3: mov     rax, [rbp+var_8]
+0x1400016D7: mov     eax, [rbp+rax*4+var_40]
+0x1400016DB: lea     rcx, _Format; "%d "
+0x1400016E2: mov     edx, eax
+0x1400016E4: call    printf
+0x1400016E9: add     [rbp+var_8], 1
+loc_1400016EE:
+0x1400016EE: mov     rax, [rbp+var_8]
+0x1400016F2: cmp     rax, [rbp+var_10]
+0x1400016F6: jb      short loc_1400016D3
+0x1400016F8: mov     ecx, 0Ah; Character
+0x1400016FD: call    putchar
+0x140001702: mov     eax, 0
+0x140001707: add     rsp, 60h
+0x14000170B: pop     rbp
+0x14000170C: retn

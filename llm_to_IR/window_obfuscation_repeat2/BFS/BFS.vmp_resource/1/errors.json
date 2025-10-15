@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.ll:69:22: error: expected value token\n  %cmpx = cmpxchg i8*, i8** %lockptr_addr, i8* null, i8* %owner_token_fn monotonic monotonic\n                     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010101.bc",
+      "start_time": "2025-09-27T22:10:05",
+      "end_time": "2025-09-27T22:10:05",
+      "elapsed_sec": 0.013207
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.ll:318:50: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg_old = atomicrmw xchg i8** %lockptr_addr, i8* null monotonic\n                                                 ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010102.bc",
+      "start_time": "2025-09-27T22:16:43",
+      "end_time": "2025-09-27T22:16:43",
+      "elapsed_sec": 0.014114
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010103.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010103.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %idx = phi i64 [ 0, %maybe_loop ], [ %idx.next, %loop_body_end ]\nlabel %loop\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010103.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_1400010103.bc",
+      "start_time": "2025-09-27T22:20:09",
+      "end_time": "2025-09-27T22:20:09",
+      "elapsed_sec": 0.012697
+    },
+    {
+      "filename": "sub_140002A00.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.ll:5:29: error: dso_location and DLL-StorageClass mismatch\ndeclare dso_local dllimport i32 @__stdio_common_vfprintf(i64, i8*, i8*, i8*, i8*)\n                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A001.bc",
+      "start_time": "2025-09-27T23:16:23",
+      "end_time": "2025-09-27T23:16:23",
+      "elapsed_sec": 0.012781
+    },
+    {
+      "filename": "sub_140002A40.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A401.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A401.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nIntrinsic has incorrect argument type!\nvoid (i8**)* @llvm.va_start\nIntrinsic has incorrect argument type!\nvoid (i8**)* @llvm.va_end\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A401.ll -o ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_resource/1/sub_140002A401.bc",
+      "start_time": "2025-09-27T23:17:54",
+      "end_time": "2025-09-27T23:17:54",
+      "elapsed_sec": 0.010815
+    }
+  ]
+}

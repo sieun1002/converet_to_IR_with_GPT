@@ -1,0 +1,171 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_integration/1/sub_1400020201.ll:71:38: error: '%rcx' defined with type 'i8**' but expected 'i8*'
+;   %calltc = call i32 %handler_fn(i8* %rcx)
+;                                      ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+
+declare i64 @sub_140002AF8(i32, i32)
+declare void @sub_140002480()
+
+@qword_1400070D0 = external global i32 (i8*)*
+
+define i32 @sub_140002020(i8** %rcx) {
+entry:
+  %rdxptr = load i8*, i8** %rcx, align 8
+  %codeptr = bitcast i8* %rdxptr to i32*
+  %code = load i32, i32* %codeptr, align 4
+  %masked = and i32 %code, 553648127
+  %cmp_magic = icmp eq i32 %masked, 541549635
+  br i1 %cmp_magic, label %block_d0, label %block_041
+
+block_d0:                                         ; preds = %entry
+  %byteptr = getelementptr i8, i8* %rdxptr, i64 4
+  %byte = load i8, i8* %byteptr, align 1
+  %flag = and i8 %byte, 1
+  %flagnz = icmp ne i8 %flag, 0
+  br i1 %flagnz, label %block_041, label %default_return
+
+block_041:                                        ; preds = %block_d0, %entry
+  %cmp_ja_96 = icmp ugt i32 %code, 3221225622
+  br i1 %cmp_ja_96, label %block_08F, label %block_after_ja96
+
+block_after_ja96:                                 ; preds = %block_041
+  %cmp_jbe_8B = icmp ule i32 %code, 3221225611
+  br i1 %cmp_jbe_8B, label %block_0B0, label %block_switch_region
+
+block_switch_region:                              ; preds = %block_after_ja96
+  %is_8D = icmp eq i32 %code, 3221225613
+  %is_8E = icmp eq i32 %code, 3221225614
+  %is_8F = icmp eq i32 %code, 3221225615
+  %is_90 = icmp eq i32 %code, 3221225616
+  %is_91 = icmp eq i32 %code, 3221225617
+  %is_93 = icmp eq i32 %code, 3221225619
+  %or1 = or i1 %is_8D, %is_8E
+  %or2 = or i1 %is_8F, %is_90
+  %or3 = or i1 %is_91, %is_93
+  %or12 = or i1 %or1, %or2
+  %is_group_070 = or i1 %or12, %or3
+  br i1 %is_group_070, label %block_070, label %block_check_others
+
+block_check_others:                               ; preds = %block_switch_region
+  %is_94 = icmp eq i32 %code, 3221225620
+  br i1 %is_94, label %block_130, label %block_check_96
+
+block_check_96:                                   ; preds = %block_check_others
+  %is_96 = icmp eq i32 %code, 3221225622
+  br i1 %is_96, label %block_0fe, label %default_return
+
+block_070:                                        ; preds = %block_switch_region
+  %call1 = call i64 @sub_140002AF8(i32 8, i32 0)
+  %eq1 = icmp eq i64 %call1, 1
+  br i1 %eq1, label %block_1C4, label %block_070_aftercmp
+
+block_070_aftercmp:                               ; preds = %block_070
+  %is_nonzero1 = icmp ne i64 %call1, 0
+  br i1 %is_nonzero1, label %block_190_from70, label %block_08F
+
+block_08F:                                        ; preds = %block_0fe_aftercmp, %block_0F0_check_1D, %block_check_80000002, %block_070_aftercmp, %block_after_ja96, %block_041, %block_130_post, %block_160_after
+  %handler_fn = load i32 (i8*)*, i32 (i8*)** @qword_1400070D0, align 8
+  %isnull_handler = icmp eq i32 (i8*)* %handler_fn, null
+  br i1 %isnull_handler, label %ret0, label %tailcall_block
+
+tailcall_block:                                   ; preds = %block_08F
+  %calltc = call i32 %handler_fn(i8* %rcx)
+  ret i32 %calltc
+
+ret0:                                             ; preds = %block_08F
+  ret i32 0
+
+block_0B0:                                        ; preds = %block_after_ja96
+  %is_0005 = icmp eq i32 %code, 3221225477
+  br i1 %is_0005, label %block_160, label %block_0B0_after
+
+block_0B0_after:                                  ; preds = %block_0B0
+  %ja_0005 = icmp ugt i32 %code, 3221225477
+  br i1 %ja_0005, label %block_0F0, label %block_check_80000002
+
+block_check_80000002:                             ; preds = %block_0B0_after
+  %is_80000002 = icmp eq i32 %code, 2147483650
+  br i1 %is_80000002, label %default_return, label %block_08F
+
+block_0F0:                                        ; preds = %block_0B0_after
+  %is_0008 = icmp eq i32 %code, 3221225480
+  br i1 %is_0008, label %default_return, label %block_0F0_check_1D
+
+block_0F0_check_1D:                               ; preds = %block_0F0
+  %is_001D = icmp eq i32 %code, 3221225501
+  br i1 %is_001D, label %block_0fe, label %block_08F
+
+block_0fe:                                        ; preds = %block_0F0_check_1D, %block_check_96
+  %call2 = call i64 @sub_140002AF8(i32 4, i32 0)
+  %eq2 = icmp eq i64 %call2, 1
+  br i1 %eq2, label %block_1B0, label %block_0fe_aftercmp
+
+block_0fe_aftercmp:                               ; preds = %block_0fe
+  %is_zero2 = icmp eq i64 %call2, 0
+  br i1 %is_zero2, label %block_08F, label %block_callptr_4
+
+block_callptr_4:                                  ; preds = %block_0fe_aftercmp
+  %fp2 = inttoptr i64 %call2 to void (i32)*
+  call void %fp2(i32 4)
+  br label %default_return
+
+block_130:                                        ; preds = %block_check_others
+  %call3 = call i64 @sub_140002AF8(i32 8, i32 0)
+  %eq3 = icmp eq i64 %call3, 1
+  br i1 %eq3, label %block_call_set_8, label %block_130_post
+
+block_130_post:                                   ; preds = %block_130
+  %is_nz3 = icmp ne i64 %call3, 0
+  br i1 %is_nz3, label %block_190_from130, label %block_08F
+
+block_call_set_8:                                 ; preds = %block_130
+  %callset8 = call i64 @sub_140002AF8(i32 8, i32 1)
+  br label %default_return
+
+block_160:                                        ; preds = %block_0B0
+  %call4 = call i64 @sub_140002AF8(i32 11, i32 0)
+  %eq4 = icmp eq i64 %call4, 1
+  br i1 %eq4, label %block_19C, label %block_160_after
+
+block_160_after:                                  ; preds = %block_160
+  %is_zero4 = icmp eq i64 %call4, 0
+  br i1 %is_zero4, label %block_08F, label %block_callptr_b
+
+block_callptr_b:                                  ; preds = %block_160_after
+  %fpb = inttoptr i64 %call4 to void (i32)*
+  call void %fpb(i32 11)
+  br label %default_return
+
+block_190_from70:                                 ; preds = %block_070_aftercmp
+  br label %block_190
+
+block_190_from130:                                ; preds = %block_130_post
+  br label %block_190
+
+block_190:                                        ; preds = %block_190_from130, %block_190_from70
+  %fp_phi = phi i64 [ %call1, %block_190_from70 ], [ %call3, %block_190_from130 ]
+  %fpp = inttoptr i64 %fp_phi to void (i32)*
+  call void %fpp(i32 8)
+  br label %default_return
+
+block_19C:                                        ; preds = %block_160
+  %callsetb = call i64 @sub_140002AF8(i32 11, i32 1)
+  br label %default_return
+
+block_1B0:                                        ; preds = %block_0fe
+  %callset4 = call i64 @sub_140002AF8(i32 4, i32 1)
+  br label %default_return
+
+block_1C4:                                        ; preds = %block_070
+  %callset8b = call i64 @sub_140002AF8(i32 8, i32 1)
+  call void @sub_140002480()
+  br label %default_return
+
+default_return:                                   ; preds = %block_1C4, %block_1B0, %block_19C, %block_190, %block_callptr_b, %block_callptr_4, %block_check_96, %block_0F0, %block_check_80000002, %block_d0
+  ret i32 -1
+}

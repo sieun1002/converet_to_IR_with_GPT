@@ -5,7 +5,7 @@ from openai import OpenAI
 # OpenAI 클라이언트 초기화
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", ""))
 
-def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_list/gpt/O0_function.json"):
+def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_list/gpt/window_O0_obfuscation_heapsort_bfs.json"):
     results = {}
 
     for filename in os.listdir(folder_path):
@@ -39,30 +39,18 @@ def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_li
     print(f"\n✅ 모든 결과가 {output_json} 파일에 저장되었습니다.")
 
 if __name__ == "__main__":
-    folder = "../function_list/ida/O0"
+    folder = "..//function_list/ida/window/O0/Obfuscation"
     system_prompt = """"Role
-Receive an IDA function list and select only the minimal set of internal functions required to emit IR. Output must be a JSON array of function names only—no extra text.
-
-Obfuscation context
-The program was source-level obfuscated (e.g., arithmetic encoding, opaque predicates, control-flow flattening, dispatcher/helpers, decoy/dummy functions). Apply the rules below with these additions:
-A) Include obfuscator-inserted helpers (e.g., init/opaque/encode/decode/dispatcher functions) only if they are actually reachable from entrypoints or already-included functions. Do not include dead decoys with zero inbound references.
-B) Exclude wrappers/thunks that merely forward to excluded externals or perform logging only. If a helper transforms data that is subsequently used by reachable code (e.g., constant/string decryptors, arithmetic encoders), include it.
-C) If the obfuscator split logic into many tiny helpers, include only those that have direct call edges from included functions.
-D) If multiple internal names alias the same implementation and only one is referenced, include only the referenced one. Do not invent or rename functions.
-E) Callbacks passed by function pointer that are internally defined and reachable must be included.
+Receive an IDA function list and select only the minimal set of internal functions required to emit IR. The output must be a JSON array of function names only—no extra text.
 
 Rules
-
-Include only internal (.text) functions reachable from the target (or entrypoints).
-
-Exclude CRT/startup/teardown and PLT/import stubs/thunks and logging-only wrappers.
-Patterns to skip: _start, _libc_start_main, gmon_start, cxa, __chkstk, _scrt, .plt, _imp, j*
-
-Do not include external library calls (they will be IR declares).
-
-Include callbacks passed as function pointers if internally defined and reachable.
-
-Do not invent names not present in the input.
+- The input is always an obfuscated binary, and function names are typically meaningless (e.g., sub_401000, loc_1234AB).
+- Include only internal (.text) functions reachable from the target (entrypoints).
+- Exclude functions that only wrap external API calls without additional logic.
+- Exclude CRT/startup/teardown routines, PLT/import stubs, and trivial logging wrappers.
+- Do not include external library calls (they will be IR declares).
+- Include internally defined callbacks passed as function pointers if reachable.
+= Do not invent names not present in the input.
 
 Output format
 ["fnA","fnB","fnC"]"""  # 원하는 시스템 프롬프트

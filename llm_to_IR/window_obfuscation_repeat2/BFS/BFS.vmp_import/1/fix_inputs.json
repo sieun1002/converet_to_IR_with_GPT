@@ -1,0 +1,25 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001450.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 247,
+      "ir_len": 4643,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.ll:33:19: error: '@sub_140002C90' defined with type 'i8* (...)*' but expected 'i8* (i64)*'\n  %raw = call i8* @sub_140002C90(i64 %sizeb)\n                  ^\n",
+      "ir_preview": "; ModuleID = 'reconstructed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i8* @sub_140002C90(...)\n\ndefine dso_local void @sub_140001450(i32* %arg0, i64 %arg8, i64 %arg10, i32* %arg18, i64* %arg20",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014501.ll"
+    },
+    {
+      "filename": "sub_140001450.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 265,
+      "ir_len": 4696,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.ll:21:46: error: use of undefined value '%loop_set.body_end'\n  %i = phi i64 [ 0, %init_loop ], [ %i.next, %loop_set.body_end ]\n                                             ^\n",
+      "ir_preview": "; ModuleID = 'reconstructed'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i8* @sub_140002C90(i64)\n\ndefine dso_local void @sub_140001450(i32* %arg0, i64 %arg8, i64 %arg10, i32* %arg18, i64* %arg20",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_repeat2/BFS/BFS.vmp_import/1/sub_1400014502.ll"
+    }
+  ]
+}

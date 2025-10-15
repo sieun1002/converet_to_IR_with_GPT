@@ -1,0 +1,10 @@
+; Function: TlsCallback_1
+; Start: 0x1400019f0, End: 0x140001a05
+
+0x1400019f0: cmp     edx, 3
+0x1400019f3: jz      short loc_140001A00
+0x1400019f5: test    edx, edx
+0x1400019f7: jz      short loc_140001A00
+0x1400019f9: retn
+0x1400019fa: align 20h
+0x140001a00: jmp     sub_1400024B0

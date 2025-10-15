@@ -1,0 +1,67 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: /home/nata20034/workspace/convert_to_IR_with_LLM/llm_to_IR/window_obfuscation_repeat2/heapsort/2/heapsort_mutation_function81.ll:18:19: error: expected instruction opcode
+;   %count_loaded = %first32
+;                   ^
+; === ERROR LOG END ===
+
+; ModuleID = 'fixed'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004390 = external global i64*
+
+declare i32 @j__crt_atexit(void ()*)
+declare void @sub_140001820()
+
+define i32 @sub_140001870() {
+entry:
+  %baseptr = load i64*, i64** @off_140004390, align 8
+  %firstq = load i64, i64* %baseptr, align 8
+  %first32 = trunc i64 %firstq to i32
+  %is_minus1 = icmp eq i32 %first32, -1
+  br i1 %is_minus1, label %scan.init, label %havecount
+
+havecount:
+  %count_loaded = %first32
+  br label %aftercount
+
+scan.init:
+  br label %scan.loop
+
+scan.loop:
+  %i = phi i32 [ 0, %scan.init ], [ %nexti, %scan.body ]
+  %nexti = add i32 %i, 1
+  %nexti64 = zext i32 %nexti to i64
+  %eltptr = getelementptr inbounds i64, i64* %baseptr, i64 %nexti64
+  %val = load i64, i64* %eltptr, align 8
+  %nz = icmp ne i64 %val, 0
+  br i1 %nz, label %scan.body, label %scan.exit
+
+scan.body:
+  br label %scan.loop
+
+scan.exit:
+  br label %aftercount
+
+aftercount:
+  %count = phi i32 [ %count_loaded, %havecount ], [ %i, %scan.exit ]
+  %iszero = icmp eq i32 %count, 0
+  br i1 %iszero, label %register, label %callloop.init
+
+callloop.init:
+  %cur.init = zext i32 %count to i64
+  br label %callloop
+
+callloop:
+  %cur = phi i64 [ %cur.init, %callloop.init ], [ %cur.dec, %callloop ]
+  %ptr = getelementptr inbounds i64, i64* %baseptr, i64 %cur
+  %faddr = load i64, i64* %ptr, align 8
+  %fptr = inttoptr i64 %faddr to void ()*
+  call void %fptr()
+  %cur.dec = add i64 %cur, -1
+  %cont = icmp ne i64 %cur.dec, 0
+  br i1 %cont, label %callloop, label %register
+
+register:
+  %ret = call i32 @j__crt_atexit(void ()* @sub_140001820)
+  ret i32 %ret
+}

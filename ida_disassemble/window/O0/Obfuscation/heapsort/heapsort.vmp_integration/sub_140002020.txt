@@ -1,0 +1,102 @@
+; Function: sub_140002020
+; Start: 0x140002020, End: 0x1400021dd
+
+0x140002020: push    rbx
+0x140002021: sub     rsp, 20h
+0x140002025: mov     rdx, [rcx]
+0x140002028: mov     eax, [rdx]
+0x14000202a: mov     rbx, rcx
+0x14000202d: mov     ecx, eax
+0x14000202f: and     ecx, 20FFFFFFh
+0x140002035: cmp     ecx, 20474343h
+0x14000203b: jz      loc_1400020D0
+0x140002041: cmp     eax, 0C0000096h
+0x140002046: ja      short loc_14000208F
+0x140002048: cmp     eax, 0C000008Bh
+0x14000204d: jbe     short loc_1400020B0
+0x14000204f: add     eax, 3FFFFF73h; switch 10 cases
+0x140002054: cmp     eax, 9
+0x140002057: ja      short def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x140002059: lea     rdx, jpt_140002067
+0x140002060: movsxd  rax, ds:(jpt_140002067 - 140004320h)[rdx+rax*4]
+0x140002064: add     rax, rdx
+0x140002067: jmp     rax; switch jump
+0x140002070: xor     edx, edx; jumptable 0000000140002067 cases -1073741683--1073741679,-1073741677
+0x140002072: mov     ecx, 8
+0x140002077: call    sub_140002AF8
+0x14000207c: cmp     rax, 1
+0x140002080: jz      loc_1400021C4
+0x140002086: test    rax, rax
+0x140002089: jnz     loc_140002190
+0x14000208f: mov     rax, cs:qword_1400070D0
+0x140002096: test    rax, rax
+0x140002099: jz      short loc_1400020E0
+0x14000209b: mov     rcx, rbx
+0x14000209e: add     rsp, 20h
+0x1400020a2: pop     rbx
+0x1400020a3: jmp     rax
+0x1400020b0: cmp     eax, 0C0000005h
+0x1400020b5: jz      loc_140002160
+0x1400020bb: ja      short loc_1400020F0
+0x1400020bd: cmp     eax, 80000002h
+0x1400020c2: jnz     short loc_14000208F
+0x1400020c4: mov     eax, 0FFFFFFFFh; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x1400020c9: add     rsp, 20h
+0x1400020cd: pop     rbx
+0x1400020ce: retn
+0x1400020d0: test    byte ptr [rdx+4], 1
+0x1400020d4: jnz     loc_140002041
+0x1400020da: jmp     short def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x1400020e0: xor     eax, eax
+0x1400020e2: add     rsp, 20h
+0x1400020e6: pop     rbx
+0x1400020e7: retn
+0x1400020f0: cmp     eax, 0C0000008h
+0x1400020f5: jz      short def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x1400020f7: cmp     eax, 0C000001Dh
+0x1400020fc: jnz     short loc_14000208F
+0x1400020fe: xor     edx, edx; jumptable 0000000140002067 case -1073741674
+0x140002100: mov     ecx, 4
+0x140002105: call    sub_140002AF8
+0x14000210a: cmp     rax, 1
+0x14000210e: jz      loc_1400021B0
+0x140002114: test    rax, rax
+0x140002117: jz      loc_14000208F
+0x14000211d: mov     ecx, 4
+0x140002122: call    rax
+0x140002124: jmp     short def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x140002130: xor     edx, edx; jumptable 0000000140002067 case -1073741676
+0x140002132: mov     ecx, 8
+0x140002137: call    sub_140002AF8
+0x14000213c: cmp     rax, 1
+0x140002140: jnz     loc_140002086
+0x140002146: mov     edx, 1
+0x14000214b: mov     ecx, 8
+0x140002150: call    sub_140002AF8
+0x140002155: jmp     def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x140002160: xor     edx, edx
+0x140002162: mov     ecx, 0Bh
+0x140002167: call    sub_140002AF8
+0x14000216c: cmp     rax, 1
+0x140002170: jz      short loc_14000219C
+0x140002172: test    rax, rax
+0x140002175: jz      loc_14000208F
+0x14000217b: mov     ecx, 0Bh
+0x140002180: call    rax
+0x140002182: jmp     def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x140002190: mov     ecx, 8
+0x140002195: call    rax
+0x140002197: jmp     def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x14000219c: mov     edx, 1
+0x1400021a1: mov     ecx, 0Bh
+0x1400021a6: call    sub_140002AF8
+0x1400021ab: jmp     def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x1400021b0: mov     edx, 1
+0x1400021b5: mov     ecx, 4
+0x1400021ba: call    sub_140002AF8
+0x1400021bf: jmp     def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675
+0x1400021c4: mov     edx, 1
+0x1400021c9: mov     ecx, 8
+0x1400021ce: call    sub_140002AF8
+0x1400021d3: call    sub_140002480
+0x1400021d8: jmp     def_140002067; jumptable 0000000140002067 default case, cases -1073741678,-1073741675

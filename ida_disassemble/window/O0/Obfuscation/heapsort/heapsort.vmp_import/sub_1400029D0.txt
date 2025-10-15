@@ -1,0 +1,15 @@
+; Function: sub_1400029D0
+; Start: 0x1400029d0, End: 0x1400029fe
+
+0x1400029d0: push    rbx
+0x1400029d1: sub     rsp, 20h
+0x1400029d5: mov     ebx, ecx
+0x1400029d7: mov     ecx, 2
+0x1400029dc: call    near ptr loc_140002A6D+3
+0x1400029e1: mov     r8d, ebx
+0x1400029e4: lea     rdx, aRuntimeErrorD; "runtime error %d\n"
+0x1400029eb: mov     rcx, rax
+0x1400029ee: call    sub_140002960
+0x1400029f3: mov     ecx, 0FFh
+0x1400029f8: call    sub_140002AB8
+0x1400029fd: nop

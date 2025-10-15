@@ -1,0 +1,160 @@
+; ModuleID = 'fixed_module'
+target triple = "x86_64-pc-windows-msvc"
+target datalayout = "e-m:w-i64:64-f80:128-n8:16:32:64-S128"
+
+%struct.MEMORY_BASIC_INFORMATION = type { i8*, i8*, i32, i32, i64, i32, i32, i32, i32 }
+
+@qword_1400070A8 = global i8* null, align 8
+@dword_1400070A4 = global i32 0, align 4
+@aVirtualprotect = private unnamed_addr constant [39 x i8] c"  VirtualProtect failed with code 0x%x\00", align 1
+@aVirtualqueryFa = private unnamed_addr constant [49 x i8] c"  VirtualQuery failed for %d bytes at address %p\00", align 1
+@aAddressPHasNoI = private unnamed_addr constant [32 x i8] c"Address %p has no image-section\00", align 1
+
+declare i8* @sub_140002610(i8* %addr)
+declare i8* @sub_140002750()
+declare void @sub_140001AD0(i8*, ...)
+
+declare dllimport i64 @VirtualQuery(i8* nocapture readonly, %struct.MEMORY_BASIC_INFORMATION* nocapture, i64)
+declare dllimport i32 @VirtualProtect(i8* nocapture, i64, i32, i32* nocapture)
+declare dllimport i32 @GetLastError()
+
+define void @sub_140001B30(i8* %addr) local_unnamed_addr {
+entry:
+  %cnt = load i32, i32* @dword_1400070A4, align 4
+  %pos = icmp sgt i32 %cnt, 0
+  br i1 %pos, label %has_entries, label %no_entries
+
+has_entries:
+  %base0 = load i8*, i8** @qword_1400070A8, align 8
+  %rax_start = getelementptr inbounds i8, i8* %base0, i64 24
+  br label %loop
+
+loop:
+  %entryptr = phi i8* [ %rax_start, %has_entries ], [ %nextptr, %not_in_range ]
+  %idx = phi i32 [ 0, %has_entries ], [ %idx_next, %not_in_range ]
+  %entry_base_ptr = bitcast i8* %entryptr to i8**
+  %entry_base = load i8*, i8** %entry_base_ptr, align 8
+  %addr_int = ptrtoint i8* %addr to i64
+  %base_int = ptrtoint i8* %entry_base to i64
+  %addr_below_base = icmp ult i64 %addr_int, %base_int
+  br i1 %addr_below_base, label %not_in_range, label %check_end
+
+check_end:
+  %hdrptr_ptr = getelementptr inbounds i8, i8* %entryptr, i64 8
+  %hdrptr_p = bitcast i8* %hdrptr_ptr to i8**
+  %hdrptr = load i8*, i8** %hdrptr_p, align 8
+  %size_ptr = getelementptr inbounds i8, i8* %hdrptr, i64 8
+  %size32_p = bitcast i8* %size_ptr to i32*
+  %size32 = load i32, i32* %size32_p, align 4
+  %size64 = zext i32 %size32 to i64
+  %endptr = getelementptr inbounds i8, i8* %entry_base, i64 %size64
+  %end_int = ptrtoint i8* %endptr to i64
+  %addr_below_end = icmp ult i64 %addr_int, %end_int
+  br i1 %addr_below_end, label %early_ret, label %not_in_range
+
+not_in_range:
+  %idx_next = add i32 %idx, 1
+  %cmp = icmp ne i32 %idx_next, %cnt
+  %nextptr = getelementptr inbounds i8, i8* %entryptr, i64 40
+  br i1 %cmp, label %loop, label %post_loop
+
+early_ret:
+  ret void
+
+post_loop:
+  br label %B88
+
+no_entries:
+  br label %B88
+
+B88:
+  %sel_cond = phi i1 [ true, %no_entries ], [ false, %post_loop ]
+  %cnt_from_global = phi i32 [ 0, %no_entries ], [ %cnt, %post_loop ]
+  %ins_index = select i1 %sel_cond, i32 0, i32 %cnt_from_global
+  %rdi = call i8* @sub_140002610(i8* %addr)
+  %isnull = icmp eq i8* %rdi, null
+  br i1 %isnull, label %C82, label %have_rdi
+
+C82:
+  %fmt3 = getelementptr inbounds [32 x i8], [32 x i8]* @aAddressPHasNoI, i64 0, i64 0
+  call void (i8*, ...) @sub_140001AD0(i8* %fmt3, i8* %addr)
+  ret void
+
+have_rdi:
+  %baseB = load i8*, i8** @qword_1400070A8, align 8
+  %idx64 = sext i32 %ins_index to i64
+  %mul5 = mul nsw i64 %idx64, 5
+  %offset = mul i64 %mul5, 8
+  %entryB = getelementptr inbounds i8, i8* %baseB, i64 %offset
+  %off20 = getelementptr inbounds i8, i8* %entryB, i64 32
+  %field20 = bitcast i8* %off20 to i8**
+  store i8* %rdi, i8** %field20, align 8
+  %field0 = bitcast i8* %entryB to i32*
+  store i32 0, i32* %field0, align 4
+  %rax2 = call i8* @sub_140002750()
+  %offC = getelementptr inbounds i8, i8* %rdi, i64 12
+  %pC = bitcast i8* %offC to i32*
+  %valC = load i32, i32* %pC, align 4
+  %valC64 = sext i32 %valC to i64
+  %rcx_addr = getelementptr inbounds i8, i8* %rax2, i64 %valC64
+  %entryB_off18 = getelementptr inbounds i8, i8* %entryB, i64 24
+  %g18p = bitcast i8* %entryB_off18 to i8**
+  store i8* %rcx_addr, i8** %g18p, align 8
+  %buf = alloca %struct.MEMORY_BASIC_INFORMATION, align 8
+  %vqres = call dllimport i64 @VirtualQuery(i8* %rcx_addr, %struct.MEMORY_BASIC_INFORMATION* %buf, i64 48)
+  %vqzero = icmp eq i64 %vqres, 0
+  br i1 %vqzero, label %C67, label %after_vq
+
+C67:
+  %fmt2 = getelementptr inbounds [49 x i8], [49 x i8]* @aVirtualqueryFa, i64 0, i64 0
+  %off8 = getelementptr inbounds i8, i8* %rdi, i64 8
+  %p8 = bitcast i8* %off8 to i32*
+  %val8 = load i32, i32* %p8, align 4
+  call void (i8*, ...) @sub_140001AD0(i8* %fmt2, i32 %val8, i8* %rcx_addr)
+  ret void
+
+after_vq:
+  %prot_ptr_outer = getelementptr inbounds %struct.MEMORY_BASIC_INFORMATION, %struct.MEMORY_BASIC_INFORMATION* %buf, i32 0, i32 6
+  %prot = load i32, i32* %prot_ptr_outer, align 4
+  %sub1 = add i32 %prot, -4
+  %mask1 = and i32 %sub1, -5
+  %iszero1 = icmp eq i32 %mask1, 0
+  br i1 %iszero1, label %BFE, label %check2
+
+check2:
+  %sub2 = add i32 %prot, -64
+  %mask2 = and i32 %sub2, -65
+  %iszero2 = icmp eq i32 %mask2, 0
+  br i1 %iszero2, label %BFE, label %C10
+
+BFE:
+  %oldcnt2 = load i32, i32* @dword_1400070A4, align 4
+  %inc = add i32 %oldcnt2, 1
+  store i32 %inc, i32* @dword_1400070A4, align 4
+  ret void
+
+C10:
+  %is2 = icmp eq i32 %prot, 2
+  %np_sel1 = select i1 %is2, i32 4, i32 64
+  %baseAddrPtr = getelementptr inbounds %struct.MEMORY_BASIC_INFORMATION, %struct.MEMORY_BASIC_INFORMATION* %buf, i32 0, i32 0
+  %baseAddr = load i8*, i8** %baseAddrPtr, align 8
+  %regionSizePtr = getelementptr inbounds %struct.MEMORY_BASIC_INFORMATION, %struct.MEMORY_BASIC_INFORMATION* %buf, i32 0, i32 4
+  %regionSize = load i64, i64* %regionSizePtr, align 8
+  %rbx2 = getelementptr inbounds i8, i8* %baseB, i64 %offset
+  %rbx2p8 = getelementptr inbounds i8, i8* %rbx2, i64 8
+  %rbx2p8p = bitcast i8* %rbx2p8 to i8**
+  store i8* %baseAddr, i8** %rbx2p8p, align 8
+  %rbx2p10 = getelementptr inbounds i8, i8* %rbx2, i64 16
+  %rbx2p10p = bitcast i8* %rbx2p10 to i64*
+  store i64 %regionSize, i64* %rbx2p10p, align 8
+  %oldprotptr = bitcast i8* %rbx2 to i32*
+  %vp_res = call dllimport i32 @VirtualProtect(i8* %baseAddr, i64 %regionSize, i32 %np_sel1, i32* %oldprotptr)
+  %vp_ok = icmp ne i32 %vp_res, 0
+  br i1 %vp_ok, label %BFE, label %VP_fail
+
+VP_fail:
+  %err = call dllimport i32 @GetLastError()
+  %fmt1 = getelementptr inbounds [39 x i8], [39 x i8]* @aVirtualprotect, i64 0, i64 0
+  call void (i8*, ...) @sub_140001AD0(i8* %fmt1, i32 %err)
+  ret void
+}
