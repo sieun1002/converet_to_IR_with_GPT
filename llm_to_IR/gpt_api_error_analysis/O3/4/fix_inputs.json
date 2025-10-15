@@ -1,0 +1,105 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 379,
+      "ir_len": 2227,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/BFS_main1.ll:1:1: error: expected top-level entity\nI can generate LLVM 14 IR for this function, but a few critical details are missing/ambiguous from the disassembly that affect type correctness, external symbols, and data layout. To satisfy th",
+      "ir_preview": "I can generate LLVM 14 IR for this function, but a few critical details are missing/ambiguous from the disassembly that affect type correctness, external symbols, and data layout. To satisfy the stric",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/BFS_main1.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 178,
+      "ir_len": 5541,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/DFS_main1.ll:145:21: error: found end of file when expecting more instructions\n  br label %print_nl\n                    ^\n",
+      "ir_preview": "; ModuleID = 'dfs_preorder.ll'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\n@.str_hdr = private unnamed_addr constant [24 x i8] c\"DFS preorder fro",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/DFS_main1.ll"
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 176,
+      "ir_len": 4158,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/bubblesort_main1.ll:59:20: error: expected instruction opcode\n  %lastSwap.next = %lastSwap.updated\n                   ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\nsource_filename = \"main_module\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = dso_local constant <4 x i3",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/bubblesort_main1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 173,
+      "ir_len": 4007,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %k = phi i32 [ 0, %outer.cond ]\n",
+      "ir_preview": "; ModuleID = 'main'\nsource_filename = \"main.ll\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@.nl = private unnamed_addr constant [2 x i8] c",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/insertionsort_main1.ll"
+    },
+    {
+      "filename": "linearsearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 130,
+      "ir_len": 501,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nAlias must point to a definition\ni32 (i32, i8*, ...)* @___printf_chk\n",
+      "ir_preview": "target datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str = private unnamed_addr constant [27 x i8] c\"Element found at index %d\\0A\\00\", align 1\n\ndec",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/linearsearch_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 223,
+      "ir_len": 7655,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/mergesort_main1.ll:61:40: error: expected '(' in binary constantexpr\n  %tmp.right = add nsw i32 %i.phi, mul i32 %width.phi, 2\n                                       ^\n",
+      "ir_preview": "; ModuleID = 'merged_sort_print'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.fmt_d = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@.fmt_nl = private unnamed_addr constant [2 x i8] c\"\\0A\\00\",",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/mergesort_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 615,
+      "ir_len": 7695,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %il.next = add nsw i32 %il.phi, 1\n  %il.sel = select i1 %is.from.left, i32 %il.next, i32 %il.phi\nInstruction does not dominate all uses!\n  %ir.next = add nsw i32 %ir.phi, 1\n  %ir.sel = select i1 %i",
+      "ir_preview": "; ModuleID = 'merged_sort_print'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.fmt_d = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@.fmt_nl = private unnamed_addr constant [2 x i8] c\"\\0A\\00\",",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/mergesort_main2.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 344,
+      "ir_len": 2392,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %j.cur = phi i64 [ %j0, %right.init ], [ %j.dec, %right.scan ]\nlabel %right.scan\nlabel %right.dec\nInstruction does not dominate all uses!\n  %j.dec = add nsw i64 %j.cur, -1\n  %j.cur = phi i64 [ ",
+      "ir_preview": "target triple = \"x86_64-pc-linux-gnu\"\n\ndefine dso_local void @quick_sort(i32* nocapture %arr, i64 %lo, i64 %hi) {\nentry:\n  %cmp0 = icmp sge i64 %lo, %hi\n  br i1 %cmp0, label %ret, label %compute_pivot",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/quicksort_function1.ll"
+    },
+    {
+      "filename": "quicksort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 298,
+      "ir_len": 2008,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/quicksort_main1.ll:33:79: error: '%i' defined with type 'i32' but expected 'i64'\n  %elem.ptr = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 %i\n                                                                              ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget datalayout = \"e-m:e-p270:32:32-p271:32:32-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [4 x i8] c\"%d ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/quicksort_main1.ll"
+    },
+    {
+      "filename": "quicksort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 279,
+      "ir_len": 2038,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/quicksort_main2.ll:37:26: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32)*'\n  %call.print = call i32 @__printf_chk(i32 2, i8* %fmt.ptr, i32 %val)\n                         ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget datalayout = \"e-m:e-p270:32:32-p271:32:32-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [4 x i8] c\"%d ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/4/quicksort_main2.ll"
+    }
+  ]
+}

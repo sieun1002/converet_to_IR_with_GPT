@@ -1,0 +1,217 @@
+; Function: main
+; Start: 0x10e0, End: 0x148c
+
+0x10e0: endbr64
+0x10e4: push    r14
+0x10e6: mov     ecx, 18h
+0x10eb: mov     esi, 1; size
+0x10f0: push    r13
+0x10f2: push    r12
+0x10f4: push    rbp
+0x10f5: push    rbx
+0x10f6: sub     rsp, 110h
+0x10fd: mov     rax, fs:28h
+0x1106: mov     [rsp+138h+var_30], rax
+0x110e: xor     eax, eax
+0x1110: lea     rdi, [rsp+138h+var_F8]
+0x1115: rep stosq
+0x1118: mov     rax, cs:qword_2028
+0x111f: mov     [rsp+138h+var_DC], 1
+0x1127: mov     [rsp+138h+var_C0], 1
+0x112f: mov     [rsp+138h+var_F4], rax
+0x1134: mov     [rsp+138h+var_A0], 1
+0x113f: mov     [rsp+138h+var_D0], rax
+0x1144: mov     [rsp+138h+var_84], 1
+0x114f: mov     dword ptr [rdi], 0
+0x1155: mov     edi, 1Ch; nmemb
+0x115a: mov     [rsp+138h+var_AC], 1
+0x1165: mov     [rsp+138h+var_64], 1
+0x1170: mov     [rsp+138h+var_74], 1
+0x117b: mov     [rsp+138h+var_5C], 1
+0x1186: mov     [rsp+138h+var_54], 1
+0x1191: mov     [rsp+138h+var_3C], 1
+0x119c: call    _calloc
+0x11a1: mov     esi, 1; size
+0x11a6: mov     edi, 38h ; '8'; nmemb
+0x11ab: mov     rbx, rax
+0x11ae: call    _calloc
+0x11b3: mov     edi, 38h ; '8'; size
+0x11b8: mov     r13, rax
+0x11bb: call    _malloc
+0x11c0: test    rbx, rbx
+0x11c3: mov     r12, rax
+0x11c6: setz    al
+0x11c9: test    r13, r13
+0x11cc: setz    dl
+0x11cf: or      al, dl
+0x11d1: jnz     loc_1455
+0x11d7: test    r12, r12
+0x11da: jz      loc_1455
+0x11e0: mov     qword ptr [r12], 0
+0x11e8: xor     edx, edx
+0x11ea: mov     ebp, 1
+0x11ef: mov     edi, 1
+0x11f4: mov     dword ptr [rbx], 1
+0x11fa: mov     [rsp+138h+var_138], 0
+0x1202: jmp     short loc_120D
+0x1204: align 8
+0x1208: mov     rdx, [r12+rdi*8-8]
+0x120d: lea     rcx, ds:0[rdx*8]
+0x1215: lea     r8, [r13+rcx+0]
+0x121a: mov     rax, [r8]
+0x121d: cmp     rax, 6
+0x1221: ja      loc_1412
+0x1227: sub     rcx, rdx
+0x122a: lea     rdx, [rax+rcx]
+0x122e: mov     r14d, [rsp+rdx*4+138h+var_F8]
+0x1233: test    r14d, r14d
+0x1236: jz      short loc_1248
+0x1238: lea     rsi, [rbx+rax*4]
+0x123c: mov     r11d, [rsi]
+0x123f: test    r11d, r11d
+0x1242: jz      loc_13EA
+0x1248: lea     rdx, [rax+1]
+0x124c: cmp     rax, 6
+0x1250: jz      loc_133D
+0x1256: lea     rsi, [rcx+rdx]
+0x125a: mov     r10d, [rsp+rsi*4+138h+var_F8]
+0x125f: test    r10d, r10d
+0x1262: jz      short loc_1274
+0x1264: lea     rsi, [rbx+rdx*4]
+0x1268: mov     r9d, [rsi]
+0x126b: test    r9d, r9d
+0x126e: jz      loc_13F0
+0x1274: lea     rdx, [rax+2]
+0x1278: cmp     rax, 5
+0x127c: jz      loc_133D
+0x1282: lea     rsi, [rcx+rdx]
+0x1286: mov     r14d, [rsp+rsi*4+138h+var_F8]
+0x128b: test    r14d, r14d
+0x128e: jz      short loc_12A0
+0x1290: lea     rsi, [rbx+rdx*4]
+0x1294: mov     r11d, [rsi]
+0x1297: test    r11d, r11d
+0x129a: jz      loc_13F0
+0x12a0: lea     rdx, [rax+3]
+0x12a4: cmp     rax, 4
+0x12a8: jz      loc_133D
+0x12ae: lea     rsi, [rcx+rdx]
+0x12b2: mov     r10d, [rsp+rsi*4+138h+var_F8]
+0x12b7: test    r10d, r10d
+0x12ba: jz      short loc_12CC
+0x12bc: lea     rsi, [rbx+rdx*4]
+0x12c0: mov     r9d, [rsi]
+0x12c3: test    r9d, r9d
+0x12c6: jz      loc_13F0
+0x12cc: lea     rdx, [rax+4]
+0x12d0: cmp     rax, 3
+0x12d4: jz      short loc_133D
+0x12d6: lea     rsi, [rcx+rdx]
+0x12da: mov     r14d, [rsp+rsi*4+138h+var_F8]
+0x12df: test    r14d, r14d
+0x12e2: jz      short loc_12F4
+0x12e4: lea     rsi, [rbx+rdx*4]
+0x12e8: mov     r11d, [rsi]
+0x12eb: test    r11d, r11d
+0x12ee: jz      loc_13F0
+0x12f4: lea     rdx, [rax+5]
+0x12f8: cmp     rax, 2
+0x12fc: jz      short loc_133D
+0x12fe: lea     rsi, [rcx+rdx]
+0x1302: mov     r10d, [rsp+rsi*4+138h+var_F8]
+0x1307: test    r10d, r10d
+0x130a: jz      short loc_131C
+0x130c: lea     rsi, [rbx+rdx*4]
+0x1310: mov     r9d, [rsi]
+0x1313: test    r9d, r9d
+0x1316: jz      loc_13F0
+0x131c: test    rax, rax
+0x131f: jnz     short loc_133D
+0x1321: mov     edx, [rsp+rcx*4+138h+var_E0]
+0x1325: test    edx, edx
+0x1327: jz      short loc_133D
+0x1329: mov     eax, [rbx+18h]
+0x132c: lea     rsi, [rbx+18h]
+0x1330: mov     edx, 6
+0x1335: test    eax, eax
+0x1337: jz      loc_13F0
+0x133d: sub     rdi, 1
+0x1341: test    rdi, rdi
+0x1344: jnz     loc_1208
+0x134a: mov     rdi, rbx; ptr
+0x134d: call    _free
+0x1352: mov     rdi, r13; ptr
+0x1355: call    _free
+0x135a: mov     rdi, r12; ptr
+0x135d: call    _free
+0x1362: xor     edx, edx
+0x1364: xor     eax, eax
+0x1366: lea     rsi, aDfsPreorderFro; "DFS preorder from %zu: "
+0x136d: mov     edi, 2
+0x1372: call    ___printf_chk
+0x1377: test    rbp, rbp
+0x137a: jz      short loc_13AE
+0x137c: mov     rdx, [rsp+138h+var_138]
+0x1380: lea     r12, aZuS; "%zu%s"
+0x1387: cmp     rbp, 1
+0x138b: jnz     loc_1421
+0x1391: nop     dword ptr [rax+00000000h]
+0x1398: lea     rcx, asc_2022+1; ""
+0x139f: mov     rsi, r12
+0x13a2: mov     edi, 2
+0x13a7: xor     eax, eax
+0x13a9: call    ___printf_chk
+0x13ae: xor     eax, eax
+0x13b0: lea     rsi, asc_2022; "\n"
+0x13b7: mov     edi, 2
+0x13bc: call    ___printf_chk
+0x13c1: mov     rax, [rsp+138h+var_30]
+0x13c9: sub     rax, fs:28h
+0x13d2: jnz     loc_1487
+0x13d8: add     rsp, 110h
+0x13df: xor     eax, eax
+0x13e1: pop     rbx
+0x13e2: pop     rbp
+0x13e3: pop     r12
+0x13e5: pop     r13
+0x13e7: pop     r14
+0x13e9: retn
+0x13ea: mov     rdx, rax
+0x13ed: nop     dword ptr [rax]
+0x13f0: lea     rax, [rdx+1]
+0x13f4: mov     [rsp+rbp*8+138h+var_138], rdx
+0x13f8: add     rbp, 1
+0x13fc: mov     [r12+rdi*8], rdx
+0x1400: add     rdi, 1
+0x1404: mov     [r8], rax
+0x1407: mov     dword ptr [rsi], 1
+0x140d: jmp     loc_1341
+0x1412: cmp     rax, 7
+0x1416: jnz     loc_1208
+0x141c: jmp     loc_133D
+0x1421: mov     ebx, 1
+0x1426: lea     r14, aDfsPreorderFro+16h; " "
+0x142d: mov     r13, rsp
+0x1430: mov     rcx, r14
+0x1433: mov     rsi, r12
+0x1436: mov     edi, 2
+0x143b: xor     eax, eax
+0x143d: call    ___printf_chk
+0x1442: add     rbx, 1
+0x1446: mov     rdx, [r13+rbx*8-8]
+0x144b: cmp     rbx, rbp
+0x144e: jnz     short loc_1430
+0x1450: jmp     loc_1398
+0x1455: mov     rdi, rbx; ptr
+0x1458: call    _free
+0x145d: mov     rdi, r13; ptr
+0x1460: call    _free
+0x1465: mov     rdi, r12; ptr
+0x1468: call    _free
+0x146d: xor     edx, edx
+0x146f: lea     rsi, aDfsPreorderFro; "DFS preorder from %zu: "
+0x1476: xor     eax, eax
+0x1478: mov     edi, 2
+0x147d: call    ___printf_chk
+0x1482: jmp     loc_13AE
+0x1487: call    ___stack_chk_fail

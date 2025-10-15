@@ -15,17 +15,17 @@ GENERATE_MODEL = "gpt-5"
 FIX_MODEL      = "gpt-5"
 
 GENERATE_SYSTEM_PROMPT      = ""
-GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/error2.txt"
+GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/error_analysis.txt"
 
 FIX_SYSTEM_PROMPT      = ""
 FIX_SYSTEM_PROMPT_FILE = "../systemprompt/error2.txt"
 
 # 입력/출력
-INPUT_FOLDER_TXT = "../../ida_disassemble/window/O0/Obfuscation/heapsort/heapsort.vmp_integration/"               # 디스어셈블리 .txt 폴더
-OUTPUT_ROOT      = "../../llm_to_IR/window_obfuscation_repeat2/heapsort/heapsort.vmp_integration/"       # 라운드 루트
+INPUT_FOLDER_TXT = "../../ida_disassemble/linux/O3/4"               # 디스어셈블리 .txt 폴더
+OUTPUT_ROOT      = "../../llm_to_IR/gpt_api_error_analysis/O3"       # 라운드 루트
 
 NUM_ROUNDS  = 1
-START_INDEX = 1
+START_INDEX = 4
 
 INPUT_EXT_TXT = ".txt"
 

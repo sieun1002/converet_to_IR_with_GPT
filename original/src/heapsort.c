@@ -36,13 +36,11 @@ int main(void) {
     int arr[] = {7, 3, 9, 1, 4, 8, 2, 6, 5};
     size_t n = sizeof(arr)/sizeof(arr[0]);
 
-    printf("원본: ");
     for (size_t i = 0; i < n; i++) printf("%d ", arr[i]);
     printf("\n");
 
     heap_sort(arr, n);
 
-    printf("정렬 후: ");
     for (size_t i = 0; i < n; i++) printf("%d ", arr[i]);
     printf("\n");
 

@@ -1,0 +1,15 @@
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [27 x i8] c"Element found at index %d\0A\00", align 1
+
+declare i32 @__printf_chk(i32, i8*, ...)
+
+@___printf_chk = alias i32 (i32, i8*, ...), i32 (i32, i8*, ...)* @__printf_chk
+
+define i32 @main() {
+entry:
+  %0 = getelementptr inbounds [27 x i8], [27 x i8]* @.str, i64 0, i64 0
+  %1 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %0, i32 3)
+  ret i32 0
+}

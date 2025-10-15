@@ -1,0 +1,51 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/4/quicksort_main2.ll:37:26: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32)*'
+;   %call.print = call i32 @__printf_chk(i32 2, i8* %fmt.ptr, i32 %val)
+;                          ^
+; === ERROR LOG END ===
+
+; ModuleID = 'main_module'
+target datalayout = "e-m:e-p270:32:32-p271:32:32-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@.str = private unnamed_addr constant [4 x i8] c"%d \00", align 1
+@.nl  = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+
+declare void @quick_sort(i32*, i32, i32)
+declare i32 @__printf_chk(i32, i8*, ...)
+
+define dso_local i32 @main() {
+entry:
+  %arr = alloca [10 x i32], align 16
+  %arr.vec0.ptr = bitcast [10 x i32]* %arr to <4 x i32>*
+  store <4 x i32> <i32 9, i32 1, i32 8, i32 2>, <4 x i32>* %arr.vec0.ptr, align 16
+  %arr.el4 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 4
+  %arr.vec1.ptr = bitcast i32* %arr.el4 to <4 x i32>*
+  store <4 x i32> <i32 7, i32 3, i32 6, i32 5>, <4 x i32>* %arr.vec1.ptr, align 16
+  %arr.el8 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 8
+  store i32 4, i32* %arr.el8, align 4
+  %arr.el9 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 9
+  store i32 0, i32* %arr.el9, align 4
+  %arr.base = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 0
+  call void @quick_sort(i32* %arr.base, i32 0, i32 9)
+  br label %loop.cond
+
+loop.cond:                                         ; preds = %loop.body, %entry
+  %i = phi i32 [ 0, %entry ], [ %i.next, %loop.body ]
+  %cmp = icmp slt i32 %i, 10
+  br i1 %cmp, label %loop.body, label %loop.end
+
+loop.body:                                         ; preds = %loop.cond
+  %i64 = sext i32 %i to i64
+  %elem.ptr = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 %i64
+  %val = load i32, i32* %elem.ptr, align 4
+  %fmt.ptr = getelementptr inbounds [4 x i8], [4 x i8]* @.str, i64 0, i64 0
+  %call.print = call i32 @__printf_chk(i32 2, i8* %fmt.ptr, i32 %val)
+  %i.next = add nsw i32 %i, 1
+  br label %loop.cond
+
+loop.end:                                          ; preds = %loop.cond
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.nl, i64 0, i64 0
+  %call.nl = call i32 @__printf_chk(i32 2, i8* %nl.ptr)
+  ret i32 0
+}

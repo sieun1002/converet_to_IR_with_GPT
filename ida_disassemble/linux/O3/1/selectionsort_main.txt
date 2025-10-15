@@ -1,0 +1,43 @@
+; Function: main
+; Start: 0x1080, End: 0x111a
+
+0x1080: endbr64
+0x1084: push    r12
+0x1086: mov     esi, 5
+0x108b: push    rbp
+0x108c: lea     rbp, aD; "%d "
+0x1093: push    rbx
+0x1094: sub     rsp, 20h
+0x1098: movdqa  xmm0, cs:xmmword_2020
+0x10a0: mov     rax, fs:28h
+0x10a9: mov     [rsp+38h+var_20], rax
+0x10ae: xor     eax, eax
+0x10b0: mov     rbx, rsp
+0x10b3: mov     [rsp+38h+var_28], 0Dh
+0x10bb: lea     r12, [rsp+38h+var_24]
+0x10c0: mov     rdi, rbx
+0x10c3: movaps  [rsp+38h+var_38], xmm0
+0x10c7: call    selection_sort
+0x10cc: lea     rsi, aSortedArray; "Sorted array: "
+0x10d3: mov     edi, 2
+0x10d8: xor     eax, eax
+0x10da: call    ___printf_chk
+0x10df: nop
+0x10e0: mov     edx, [rbx]
+0x10e2: mov     rsi, rbp
+0x10e5: mov     edi, 2
+0x10ea: xor     eax, eax
+0x10ec: add     rbx, 4
+0x10f0: call    ___printf_chk
+0x10f5: cmp     rbx, r12
+0x10f8: jnz     short loc_10E0
+0x10fa: mov     rax, [rsp+38h+var_20]
+0x10ff: sub     rax, fs:28h
+0x1108: jnz     short loc_1115
+0x110a: add     rsp, 20h
+0x110e: xor     eax, eax
+0x1110: pop     rbx
+0x1111: pop     rbp
+0x1112: pop     r12
+0x1114: retn
+0x1115: call    ___stack_chk_fail

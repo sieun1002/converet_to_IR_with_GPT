@@ -1,0 +1,225 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; Instruction does not dominate all uses!
+;   %il.next = add nsw i32 %il.phi, 1
+;   %il.sel = select i1 %is.from.left, i32 %il.next, i32 %il.phi
+; Instruction does not dominate all uses!
+;   %ir.next = add nsw i32 %ir.phi, 1
+;   %ir.sel = select i1 %is.from.left, i32 %ir.phi, i32 %ir.next
+; Instruction does not dominate all uses!
+;   %k.next = add nsw i32 %k.phi, 1
+;   %k.sel = select i1 %is.from.left, i32 %k.next, i32 %k.next.r
+; Instruction does not dominate all uses!
+;   %k.next.r = add nsw i32 %k.phi, 1
+;   %k.sel = select i1 %is.from.left, i32 %k.next, i32 %k.next.r
+; === ERROR LOG END ===
+
+; ModuleID = 'merged_sort_print'
+target triple = "x86_64-pc-linux-gnu"
+
+@.fmt_d = private unnamed_addr constant [4 x i8] c"%d \00", align 1
+@.fmt_nl = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+
+declare i8* @malloc(i64)
+declare void @free(i8*)
+declare i32 @__printf_chk(i32, i8*, ...)
+
+define i32 @main() local_unnamed_addr {
+entry:
+  %arr = alloca [10 x i32], align 16
+  %arr.base = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 0
+  store i32 9, i32* %arr.base, align 4
+  %elt1.ptr = getelementptr inbounds i32, i32* %arr.base, i64 1
+  store i32 8, i32* %elt1.ptr, align 4
+  %elt2.ptr = getelementptr inbounds i32, i32* %arr.base, i64 2
+  store i32 7, i32* %elt2.ptr, align 4
+  %elt3.ptr = getelementptr inbounds i32, i32* %arr.base, i64 3
+  store i32 6, i32* %elt3.ptr, align 4
+  %elt4.ptr = getelementptr inbounds i32, i32* %arr.base, i64 4
+  store i32 5, i32* %elt4.ptr, align 4
+  %elt5.ptr = getelementptr inbounds i32, i32* %arr.base, i64 5
+  store i32 4, i32* %elt5.ptr, align 4
+  %elt6.ptr = getelementptr inbounds i32, i32* %arr.base, i64 6
+  store i32 3, i32* %elt6.ptr, align 4
+  %elt7.ptr = getelementptr inbounds i32, i32* %arr.base, i64 7
+  store i32 2, i32* %elt7.ptr, align 4
+  %elt8.ptr = getelementptr inbounds i32, i32* %arr.base, i64 8
+  store i32 1, i32* %elt8.ptr, align 4
+  %elt9.ptr = getelementptr inbounds i32, i32* %arr.base, i64 9
+  store i32 0, i32* %elt9.ptr, align 4
+  %buf.raw = call i8* @malloc(i64 40)
+  %buf.isnull = icmp eq i8* %buf.raw, null
+  br i1 %buf.isnull, label %print_unsorted, label %sort_start
+
+sort_start:
+  %buf.i32 = bitcast i8* %buf.raw to i32*
+  br label %outer_loop
+
+outer_loop:
+  %src.phi = phi i32* [ %arr.base, %sort_start ], [ %src.next, %after_inner ]
+  %dst.phi = phi i32* [ %buf.i32, %sort_start ], [ %dst.next, %after_inner ]
+  %width.phi = phi i32 [ 1, %sort_start ], [ %width.next, %after_inner ]
+  %width.cmp = icmp slt i32 %width.phi, 10
+  br i1 %width.cmp, label %inner_init, label %after_sort
+
+inner_init:
+  br label %inner_loop
+
+inner_loop:
+  %i.phi = phi i32 [ 0, %inner_init ], [ %i.next, %merge_done ]
+  %i.cmp = icmp slt i32 %i.phi, 10
+  br i1 %i.cmp, label %do_merge, label %after_inner
+
+do_merge:
+  %left = add nsw i32 %i.phi, 0
+  %tmp.mid = add nsw i32 %i.phi, %width.phi
+  %mid = call i32 @llvm.smin.i32(i32 %tmp.mid, i32 10)
+  %two.w = shl i32 %width.phi, 1
+  %tmp.right2 = add nsw i32 %i.phi, %two.w
+  %right = call i32 @llvm.smin.i32(i32 %tmp.right2, i32 10)
+  %il = add nsw i32 %left, 0
+  %ir = add nsw i32 %mid, 0
+  %k = add nsw i32 %left, 0
+  br label %merge_main
+
+merge_main:
+  %il.phi = phi i32 [ %il, %do_merge ], [ %il.sel, %merge_main_tail ]
+  %ir.phi = phi i32 [ %ir, %do_merge ], [ %ir.sel, %merge_main_tail ]
+  %k.phi = phi i32 [ %k, %do_merge ], [ %k.sel, %merge_main_tail ]
+  %condL = icmp slt i32 %il.phi, %mid
+  %condR = icmp slt i32 %ir.phi, %right
+  %both = and i1 %condL, %condR
+  br i1 %both, label %merge_main_body, label %tails
+
+merge_main_body:
+  %il.idx64 = sext i32 %il.phi to i64
+  %src.il.ptr = getelementptr inbounds i32, i32* %src.phi, i64 %il.idx64
+  %valL = load i32, i32* %src.il.ptr, align 4
+  %ir.idx64 = sext i32 %ir.phi to i64
+  %src.ir.ptr = getelementptr inbounds i32, i32* %src.phi, i64 %ir.idx64
+  %valR = load i32, i32* %src.ir.ptr, align 4
+  %cmp.le = icmp sle i32 %valL, %valR
+  br i1 %cmp.le, label %take_left, label %take_right
+
+take_left:
+  %k.idx64.L = sext i32 %k.phi to i64
+  %dst.k.ptr.L = getelementptr inbounds i32, i32* %dst.phi, i64 %k.idx64.L
+  store i32 %valL, i32* %dst.k.ptr.L, align 4
+  %il.next = add nsw i32 %il.phi, 1
+  %k.next = add nsw i32 %k.phi, 1
+  br label %merge_main_tail
+
+take_right:
+  %k.idx64.R = sext i32 %k.phi to i64
+  %dst.k.ptr.R = getelementptr inbounds i32, i32* %dst.phi, i64 %k.idx64.R
+  store i32 %valR, i32* %dst.k.ptr.R, align 4
+  %ir.next = add nsw i32 %ir.phi, 1
+  %k.next.r = add nsw i32 %k.phi, 1
+  br label %merge_main_tail
+
+merge_main_tail:
+  %is.from.left = phi i1 [ true, %take_left ], [ false, %take_right ]
+  %il.sel = select i1 %is.from.left, i32 %il.next, i32 %il.phi
+  %ir.sel = select i1 %is.from.left, i32 %ir.phi, i32 %ir.next
+  %k.sel = select i1 %is.from.left, i32 %k.next, i32 %k.next.r
+  br label %merge_main
+
+tails:
+  %needLeft = icmp slt i32 %il.phi, %mid
+  br i1 %needLeft, label %copy_left, label %copy_right_check
+
+copy_left:
+  %moreL = icmp slt i32 %il.phi, %mid
+  br i1 %moreL, label %copy_left_body, label %merge_done
+
+copy_left_body:
+  %k.idx64.L2 = sext i32 %k.phi to i64
+  %dst.k.ptr.L2 = getelementptr inbounds i32, i32* %dst.phi, i64 %k.idx64.L2
+  %il.idx64.2 = sext i32 %il.phi to i64
+  %src.il.ptr2 = getelementptr inbounds i32, i32* %src.phi, i64 %il.idx64.2
+  %valL2 = load i32, i32* %src.il.ptr2, align 4
+  store i32 %valL2, i32* %dst.k.ptr.L2, align 4
+  %il.copyL = add nsw i32 %il.phi, 1
+  %k.copyL = add nsw i32 %k.phi, 1
+  br label %copy_left
+
+copy_right_check:
+  %needRight = icmp slt i32 %ir.phi, %right
+  br i1 %needRight, label %copy_right, label %merge_done
+
+copy_right:
+  %moreR = icmp slt i32 %ir.phi, %right
+  br i1 %moreR, label %copy_right_body, label %merge_done
+
+copy_right_body:
+  %k.idx64.R2 = sext i32 %k.phi to i64
+  %dst.k.ptr.R2 = getelementptr inbounds i32, i32* %dst.phi, i64 %k.idx64.R2
+  %ir.idx64.2 = sext i32 %ir.phi to i64
+  %src.ir.ptr2 = getelementptr inbounds i32, i32* %src.phi, i64 %ir.idx64.2
+  %valR2 = load i32, i32* %src.ir.ptr2, align 4
+  store i32 %valR2, i32* %dst.k.ptr.R2, align 4
+  %ir.copyR = add nsw i32 %ir.phi, 1
+  %k.copyR = add nsw i32 %k.phi, 1
+  br label %copy_right
+
+merge_done:
+  %i.next = add nsw i32 %i.phi, %two.w
+  br label %inner_loop
+
+after_inner:
+  %src.next = phi i32* [ %dst.phi, %inner_loop ]
+  %dst.next = phi i32* [ %src.phi, %inner_loop ]
+  %width.next = shl i32 %width.phi, 1
+  br label %outer_loop
+
+after_sort:
+  %need.copyback = icmp ne i32* %src.phi, %arr.base
+  br i1 %need.copyback, label %copyback_loop, label %free_and_print
+
+copyback_loop:
+  br label %copyback_loop.body
+
+copyback_loop.body:
+  %cb.idx = phi i32 [ 0, %copyback_loop ], [ %cb.next, %copyback_loop.body ]
+  %cb.idx64 = sext i32 %cb.idx to i64
+  %cb.ptr.src = getelementptr inbounds i32, i32* %src.phi, i64 %cb.idx64
+  %cb.val = load i32, i32* %cb.ptr.src, align 4
+  %cb.ptr.dst = getelementptr inbounds i32, i32* %arr.base, i64 %cb.idx64
+  store i32 %cb.val, i32* %cb.ptr.dst, align 4
+  %cb.next = add nsw i32 %cb.idx, 1
+  %cb.cont = icmp slt i32 %cb.next, 10
+  br i1 %cb.cont, label %copyback_loop.body, label %free_and_print
+
+free_and_print:
+  call void @free(i8* %buf.raw)
+  br label %print_sorted
+
+print_sorted:
+  %fmt.ptr = getelementptr inbounds [4 x i8], [4 x i8]* @.fmt_d, i64 0, i64 0
+  br label %print_loop
+
+print_unsorted:
+  %fmt.ptr.u = getelementptr inbounds [4 x i8], [4 x i8]* @.fmt_d, i64 0, i64 0
+  br label %print_loop
+
+print_loop:
+  %print.idx = phi i32 [ 0, %print_sorted ], [ 0, %print_unsorted ], [ %print.next, %print_body ]
+  %fmt.cur = phi i8* [ %fmt.ptr, %print_sorted ], [ %fmt.ptr.u, %print_unsorted ], [ %fmt.cur, %print_body ]
+  %print.cond = icmp slt i32 %print.idx, 10
+  br i1 %print.cond, label %print_body, label %print_nl
+
+print_body:
+  %print.idx64 = sext i32 %print.idx to i64
+  %elt.ptr = getelementptr inbounds i32, i32* %arr.base, i64 %print.idx64
+  %elt.val = load i32, i32* %elt.ptr, align 4
+  %printf.ret = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.cur, i32 %elt.val)
+  %print.next = add nsw i32 %print.idx, 1
+  br label %print_loop
+
+print_nl:
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.fmt_nl, i64 0, i64 0
+  %printf.nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  ret i32 0
+}
+
+declare i32 @llvm.smin.i32(i32, i32) nounwind readnone

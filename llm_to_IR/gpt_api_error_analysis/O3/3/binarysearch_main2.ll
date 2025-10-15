@@ -1,0 +1,86 @@
+; ModuleID = 'binsearch_demo'
+target triple = "x86_64-pc-linux-gnu"
+
+@.str.found = private unnamed_addr constant [21 x i8] c"key %d -> index %ld\0A\00", align 1
+@.str.not   = private unnamed_addr constant [21 x i8] c"key %d -> not found\0A\00", align 1
+
+@arr  = private unnamed_addr constant [9 x i32] [i32 -10, i32 -3, i32 0, i32 1, i32 2, i32 7, i32 8, i32 12, i32 20], align 16
+@keys = private unnamed_addr constant [3 x i32] [i32 -5, i32 7, i32 100], align 4
+
+declare i32 @__printf_chk(i32, i8*, ...)
+
+define i32 @main() {
+entry:
+  br label %loop
+
+loop:                                             ; preds = %after_print, %entry
+  %i = phi i64 [ 0, %entry ], [ %i.next, %after_print ]
+  %cmp.i.end = icmp uge i64 %i, 3
+  br i1 %cmp.i.end, label %ret, label %load_key
+
+load_key:                                         ; preds = %loop
+  %key.ptr = getelementptr inbounds [3 x i32], [3 x i32]* @keys, i64 0, i64 %i
+  %key = load i32, i32* %key.ptr, align 4
+  br label %bs.loop
+
+bs.loop:                                          ; preds = %bs.step2, %load_key
+  %low.phi = phi i32 [ 0, %load_key ], [ %newlow, %bs.step2 ]
+  %high.phi = phi i32 [ 9, %load_key ], [ %newhigh, %bs.step2 ]
+  %cont = icmp ult i32 %low.phi, %high.phi
+  br i1 %cont, label %bs.step, label %bs.end
+
+bs.step:                                          ; preds = %bs.loop
+  %high.z = zext i32 %high.phi to i64
+  %low.z = zext i32 %low.phi to i64
+  %diff = sub i64 %high.z, %low.z
+  %half = lshr i64 %diff, 1
+  %mid64 = add i64 %low.z, %half
+  %mid = trunc i64 %mid64 to i32
+  %mid.idx = zext i32 %mid to i64
+  %a.ptr = getelementptr inbounds [9 x i32], [9 x i32]* @arr, i64 0, i64 %mid.idx
+  %a.val = load i32, i32* %a.ptr, align 4
+  %gt = icmp sgt i32 %key, %a.val
+  br i1 %gt, label %take.right, label %take.left
+
+take.right:                                       ; preds = %bs.step
+  %mid.plus1 = add i32 %mid, 1
+  br label %bs.step2
+
+take.left:                                        ; preds = %bs.step
+  br label %bs.step2
+
+bs.step2:                                         ; preds = %take.left, %take.right
+  %newlow = phi i32 [ %mid.plus1, %take.right ], [ %low.phi, %take.left ]
+  %newhigh = phi i32 [ %high.phi, %take.right ], [ %mid, %take.left ]
+  br label %bs.loop
+
+bs.end:                                           ; preds = %bs.loop
+  %idx.candidate = phi i32 [ %low.phi, %bs.loop ]
+  %in.range = icmp ule i32 %idx.candidate, 8
+  br i1 %in.range, label %eq.check, label %print.not
+
+eq.check:                                         ; preds = %bs.end
+  %idx.candidate.z = zext i32 %idx.candidate to i64
+  %chk.ptr = getelementptr inbounds [9 x i32], [9 x i32]* @arr, i64 0, i64 %idx.candidate.z
+  %chk.val = load i32, i32* %chk.ptr, align 4
+  %is.eq = icmp eq i32 %chk.val, %key
+  br i1 %is.eq, label %print.found, label %print.not
+
+print.found:                                      ; preds = %eq.check
+  %fmt.found.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str.found, i64 0, i64 0
+  %idx.arg = zext i32 %idx.candidate to i64
+  %call.found = call i32 @__printf_chk(i32 2, i8* %fmt.found.ptr, i32 %key, i64 %idx.arg)
+  br label %after_print
+
+print.not:                                        ; preds = %eq.check, %bs.end
+  %fmt.not.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str.not, i64 0, i64 0
+  %call.not = call i32 @__printf_chk(i32 2, i8* %fmt.not.ptr, i32 %key)
+  br label %after_print
+
+after_print:                                      ; preds = %print.not, %print.found
+  %i.next = add i64 %i, 1
+  br label %loop
+
+ret:                                              ; preds = %loop
+  ret i32 0
+}

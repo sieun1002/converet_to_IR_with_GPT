@@ -1,0 +1,76 @@
+; ModuleID = 'binsearch_main.ll'
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@arr = internal constant [9 x i32] [i32 -5, i32 -3, i32 0, i32 1, i32 2, i32 4, i32 8, i32 13, i32 21], align 16
+@keys = internal constant [3 x i32] [i32 4, i32 12, i32 -5], align 4
+@fmt_found = private unnamed_addr constant [21 x i8] c"key %d -> index %ld\0A\00", align 1
+@fmt_not_found = private unnamed_addr constant [21 x i8] c"key %d -> not found\0A\00", align 1
+
+declare i32 @printf(i8* noundef, ...)
+
+define i32 @main() local_unnamed_addr {
+entry:
+  br label %keys.loop
+
+keys.loop:
+  %i = phi i64 [ 0, %entry ], [ %i.next, %after.print ]
+  %more = icmp ult i64 %i, 3
+  br i1 %more, label %key.body, label %ret
+
+key.body:
+  %key.ptr = getelementptr inbounds [3 x i32], [3 x i32]* @keys, i64 0, i64 %i
+  %key.val = load i32, i32* %key.ptr, align 4
+  br label %bs.cond
+
+bs.cond:
+  %low.phi = phi i64 [ 0, %key.body ], [ %mid.plus, %bs.update.low ], [ %low.copy, %bs.update.high ]
+  %high.phi = phi i64 [ 9, %key.body ], [ %high.copy, %bs.update.low ], [ %mid, %bs.update.high ]
+  %cmp.lh = icmp ult i64 %low.phi, %high.phi
+  br i1 %cmp.lh, label %bs.mid, label %bs.exit
+
+bs.mid:
+  %range = sub i64 %high.phi, %low.phi
+  %half = lshr i64 %range, 1
+  %mid = add i64 %low.phi, %half
+  %arr.elem.ptr = getelementptr inbounds [9 x i32], [9 x i32]* @arr, i64 0, i64 %mid
+  %arr.elem = load i32, i32* %arr.elem.ptr, align 4
+  %low.copy = add i64 %low.phi, 0
+  %high.copy = add i64 %high.phi, 0
+  %gt = icmp sgt i32 %key.val, %arr.elem
+  br i1 %gt, label %bs.update.low, label %bs.update.high
+
+bs.update.low:
+  %mid.plus = add i64 %mid, 1
+  br label %bs.cond
+
+bs.update.high:
+  br label %bs.cond
+
+bs.exit:
+  %in.bounds = icmp ule i64 %low.phi, 8
+  br i1 %in.bounds, label %check.equal, label %print.notfound
+
+check.equal:
+  %arr.low.ptr = getelementptr inbounds [9 x i32], [9 x i32]* @arr, i64 0, i64 %low.phi
+  %arr.low = load i32, i32* %arr.low.ptr, align 4
+  %eq = icmp eq i32 %arr.low, %key.val
+  br i1 %eq, label %print.found, label %print.notfound
+
+print.found:
+  %fmt1 = getelementptr inbounds [21 x i8], [21 x i8]* @fmt_found, i64 0, i64 0
+  %call1 = call i32 (i8*, ...) @printf(i8* %fmt1, i32 %key.val, i64 %low.phi)
+  br label %after.print
+
+print.notfound:
+  %fmt2 = getelementptr inbounds [21 x i8], [21 x i8]* @fmt_not_found, i64 0, i64 0
+  %call2 = call i32 (i8*, ...) @printf(i8* %fmt2, i32 %key.val)
+  br label %after.print
+
+after.print:
+  %i.next = add i64 %i, 1
+  br label %keys.loop
+
+ret:
+  ret i32 0
+}

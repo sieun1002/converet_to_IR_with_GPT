@@ -5,7 +5,7 @@ from openai import OpenAI
 # OpenAI 클라이언트 초기화
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", ""))
 
-def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_list/gpt/window_O0_obfuscation_heapsort_bfs.json"):
+def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_list/gpt/linux_O3.json"):
     results = {}
 
     for filename in os.listdir(folder_path):
@@ -39,7 +39,7 @@ def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_li
     print(f"\n✅ 모든 결과가 {output_json} 파일에 저장되었습니다.")
 
 if __name__ == "__main__":
-    folder = "..//function_list/ida/window/O0/Obfuscation"
+    folder = "..//function_list/ida/linux/O3"
     system_prompt = """"Role
 Receive an IDA function list and select only the minimal set of internal functions required to emit IR. The output must be a JSON array of function names only—no extra text.
 

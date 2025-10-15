@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.ll:15:22: error: expected type\n  %adj = alloca [7 x 7 x i32], align 16\n                     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.bc",
+      "start_time": "2025-10-15T20:23:22",
+      "end_time": "2025-10-15T20:23:22",
+      "elapsed_sec": 0.019292
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "LLVM ERROR: not a number, or does not fit in an unsigned int\n\nPLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.\nStack dump:\n0.\tProgram arguments: llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.bc\nStack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(_ZN4llvm3sys15PrintStackTraceERNS_11raw_ostreamEi+0x3a)[0x77dbe3caa98a]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(_ZN4llvm3sys17RunSignalHandlersEv+0xff)[0x77dbe3ca87df]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(+0xeaaec0)[0x77dbe3caaec0]\n/lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x77dbe2645330]\n/lib/x86_64-linux-gnu/libc.so.6(pthread_kill+0x11c)[0x77dbe269eb2c]\n/lib/x86_64-linux-gnu/libc.so.6(gsignal+0x1e)[0x77dbe264527e]\n/lib/x86_64-linux-gnu/libc.so.6(abort+0xdf)[0x77dbe26288ff]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(+0xdde9a5)[0x77dbe3bde9a5]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(+0xdddc47)[0x77dbe3bddc47]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(_ZN4llvm10DataLayout5resetENS_9StringRefE+0x33f)[0x77dbe3d49c6f]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(_ZN4llvm8LLParser21parseTargetDefinitionEv+0x18a)[0x77dbe6771e2a]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(_ZN4llvm8LLParser3RunEbNS_12function_refIFNS_8OptionalINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEENS_9StringRefEEEE+0xd1)[0x77dbe6770481]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(+0x39ac39d)[0x77dbe67ac39d]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(+0x39acb97)[0x77dbe67acb97]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(+0x39acd47)[0x77dbe67acd47]\n/lib/x86_64-linux-gnu/libLLVM-14.so.1(_ZN4llvm26parseAssemblyFileWithIndexENS_9StringRefERNS_12SMDiagnosticERNS_11LLVMContextEPNS_11SlotMappingENS_12function_refIFNS_8OptionalINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES0_EEE+0x25)[0x77dbe67acc15]\nllvm-as-14[0x404517]\n/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x77dbe262a1ca]\n/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x77dbe262a28b]\nllvm-as-14[0x403125]\n",
+      "returncode": -6,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.bc",
+      "start_time": "2025-10-15T20:30:31",
+      "end_time": "2025-10-15T20:30:31",
+      "elapsed_sec": 0.062117
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.ll:4:55: error: constant expression type mismatch: got type '[21 x i8]' but expected '[22 x i8]'\n@.str.found = private unnamed_addr constant [22 x i8] c\"key %d -> index %ld\\0A\\00\", align 1\n                                                      ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.bc",
+      "start_time": "2025-10-15T20:35:33",
+      "end_time": "2025-10-15T20:35:33",
+      "elapsed_sec": 0.021543
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.ll:72:26: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32, i64)*'\n  %call.found = call i32 @__printf_chk(i32 2, i8* %fmt.found.ptr, i32 %key, i64 %idx.arg)\n                         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.bc",
+      "start_time": "2025-10-15T20:36:18",
+      "end_time": "2025-10-15T20:36:18",
+      "elapsed_sec": 0.023829
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.ll:4:56: error: constant expression type mismatch: got type '[15 x i8]' but expected '[16 x i8]'\n@.str.sorted = private unnamed_addr constant [16 x i8] c\"Sorted array: \\00\", align 1\n                                                       ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.bc",
+      "start_time": "2025-10-15T21:01:42",
+      "end_time": "2025-10-15T21:01:42",
+      "elapsed_sec": 0.016299
+    }
+  ]
+}

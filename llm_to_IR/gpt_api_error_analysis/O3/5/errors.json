@@ -1,0 +1,19 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.ll:19:40: error: '@main' defined with type 'i32 ()*' but expected '[10 x i32]*'\n  %nbytes.const = ptrtoint [10 x i32]* @main to i64  ; dummy to enforce opcode usage, replaced below\n                                       ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.bc",
+      "start_time": "2025-10-15T20:54:57",
+      "end_time": "2025-10-15T20:54:57",
+      "elapsed_sec": 0.0171
+    }
+  ]
+}

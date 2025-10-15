@@ -1,0 +1,197 @@
+; Function: main
+; Start: 0x10c0, End: 0x1433
+
+0x10c0: endbr64
+0x10c4: push    r13
+0x10c6: mov     ecx, 18h
+0x10cb: pcmpeqd xmm0, xmm0
+0x10cf: push    r12
+0x10d1: push    rbp
+0x10d2: push    rbx
+0x10d3: sub     rsp, 138h
+0x10da: mov     rax, fs:28h
+0x10e3: mov     [rsp+158h+var_30], rax
+0x10eb: xor     eax, eax
+0x10ed: lea     rdi, [rsp+158h+var_F8]
+0x10f2: movaps  [rsp+158h+var_158], xmm0
+0x10f6: movups  [rsp+158h+var_158+0Ch], xmm0
+0x10fb: rep stosq
+0x10fe: mov     rax, cs:qword_2038
+0x1105: mov     [rsp+158h+var_DC], 1
+0x110d: mov     [rsp+158h+var_C0], 1
+0x1118: mov     [rsp+158h+var_F4], rax
+0x111d: mov     [rsp+158h+var_A0], 1
+0x1128: mov     [rsp+158h+var_D0], rax
+0x1130: mov     [rsp+158h+var_84], 1
+0x113b: mov     dword ptr [rdi], 0
+0x1141: mov     edi, 38h ; '8'; size
+0x1146: mov     [rsp+158h+var_AC], 1
+0x1151: mov     [rsp+158h+var_64], 1
+0x115c: mov     [rsp+158h+var_74], 1
+0x1167: mov     [rsp+158h+var_5C], 1
+0x1172: mov     [rsp+158h+var_54], 1
+0x117d: mov     [rsp+158h+var_3C], 1
+0x1188: call    _malloc
+0x118d: test    rax, rax
+0x1190: jz      loc_1414
+0x1196: mov     rdi, rax; ptr
+0x1199: mov     esi, 1
+0x119e: lea     r12, [rsp+158h+var_138]
+0x11a3: xor     ebx, ebx
+0x11a5: mov     qword ptr [rax], 0
+0x11ac: xor     eax, eax
+0x11ae: mov     dword ptr [rsp+158h+var_158], 0
+0x11b5: jmp     short loc_11D3
+0x11b7: align 20h
+0x11c0: mov     rdx, [rdi+rbx*8]
+0x11c4: lea     rax, ds:0[rdx*8]
+0x11cc: sub     rax, rdx
+0x11cf: mov     eax, [rsp+rax*4+158h+var_F8]
+0x11d3: add     rbx, 1
+0x11d7: mov     rdx, [rdi+rbx*8-8]
+0x11dc: mov     [r12+rbx*8-8], rdx
+0x11e1: test    eax, eax
+0x11e3: jz      short loc_1200
+0x11e5: cmp     dword ptr [rsp+158h+var_158], 0FFFFFFFFh
+0x11e9: jnz     short loc_1200
+0x11eb: mov     eax, dword ptr [rsp+rdx*4+158h+var_158]
+0x11ee: mov     qword ptr [rdi+rsi*8], 0
+0x11f6: add     rsi, 1
+0x11fa: add     eax, 1
+0x11fd: mov     dword ptr [rsp+158h+var_158], eax
+0x1200: lea     rcx, ds:0[rdx*8]
+0x1208: sub     rcx, rdx
+0x120b: mov     r11d, dword ptr [rsp+rcx*4+158h+var_F4]
+0x1210: lea     rax, ds:0[rcx*4]
+0x1218: test    r11d, r11d
+0x121b: jz      short loc_1240
+0x121d: cmp     dword ptr [rsp+158h+var_158+4], 0FFFFFFFFh
+0x1222: jnz     short loc_1240
+0x1224: mov     ecx, dword ptr [rsp+rdx*4+158h+var_158]
+0x1227: mov     qword ptr [rdi+rsi*8], 1
+0x122f: add     rsi, 1
+0x1233: add     ecx, 1
+0x1236: mov     dword ptr [rsp+158h+var_158+4], ecx
+0x123a: nop     word ptr [rax+rax+00h]
+0x1240: mov     r10d, dword ptr [rsp+rax+158h+var_F4+4]
+0x1245: test    r10d, r10d
+0x1248: jz      short loc_1270
+0x124a: cmp     dword ptr [rsp+158h+var_158+8], 0FFFFFFFFh
+0x124f: jnz     short loc_1270
+0x1251: mov     ecx, dword ptr [rsp+rdx*4+158h+var_158]
+0x1254: mov     qword ptr [rdi+rsi*8], 2
+0x125c: add     rsi, 1
+0x1260: add     ecx, 1
+0x1263: mov     dword ptr [rsp+158h+var_158+8], ecx
+0x1267: nop     word ptr [rax+rax+00000000h]
+0x1270: mov     r9d, [rsp+rax+158h+var_EC]
+0x1275: test    r9d, r9d
+0x1278: jz      short loc_12A0
+0x127a: cmp     dword ptr [rsp+158h+var_158+0Ch], 0FFFFFFFFh
+0x127f: jnz     short loc_12A0
+0x1281: mov     ecx, dword ptr [rsp+rdx*4+158h+var_158]
+0x1284: mov     qword ptr [rdi+rsi*8], 3
+0x128c: add     rsi, 1
+0x1290: add     ecx, 1
+0x1293: mov     dword ptr [rsp+158h+var_158+0Ch], ecx
+0x1297: nop     word ptr [rax+rax+00000000h]
+0x12a0: mov     r8d, [rsp+rax+158h+var_E8]
+0x12a5: test    r8d, r8d
+0x12a8: jz      short loc_12D0
+0x12aa: cmp     [rsp+158h+var_148], 0FFFFFFFFh
+0x12af: jnz     short loc_12D0
+0x12b1: mov     ecx, dword ptr [rsp+rdx*4+158h+var_158]
+0x12b4: mov     qword ptr [rdi+rsi*8], 4
+0x12bc: add     rsi, 1
+0x12c0: add     ecx, 1
+0x12c3: mov     [rsp+158h+var_148], ecx
+0x12c7: nop     word ptr [rax+rax+00000000h]
+0x12d0: mov     ecx, [rsp+rax+158h+var_E4]
+0x12d4: test    ecx, ecx
+0x12d6: jz      short loc_12F8
+0x12d8: cmp     [rsp+158h+var_144], 0FFFFFFFFh
+0x12dd: jnz     short loc_12F8
+0x12df: mov     ecx, dword ptr [rsp+rdx*4+158h+var_158]
+0x12e2: mov     qword ptr [rdi+rsi*8], 5
+0x12ea: add     rsi, 1
+0x12ee: add     ecx, 1
+0x12f1: mov     [rsp+158h+var_144], ecx
+0x12f5: nop     dword ptr [rax]
+0x12f8: mov     eax, [rsp+rax+158h+var_E0]
+0x12fc: test    eax, eax
+0x12fe: jz      short loc_1320
+0x1300: cmp     [rsp+158h+var_140], 0FFFFFFFFh
+0x1305: jnz     short loc_1320
+0x1307: mov     eax, dword ptr [rsp+rdx*4+158h+var_158]
+0x130a: mov     qword ptr [rdi+rsi*8], 6
+0x1312: add     rsi, 1
+0x1316: add     eax, 1
+0x1319: mov     [rsp+158h+var_140], eax
+0x131d: nop     dword ptr [rax]
+0x1320: cmp     rbx, rsi
+0x1323: jb      loc_11C0
+0x1329: call    _free
+0x132e: xor     edx, edx
+0x1330: lea     rsi, aBfsOrderFromZu; "BFS order from %zu: "
+0x1337: xor     eax, eax
+0x1339: mov     edi, 2
+0x133e: lea     r13, aZuS; "%zu%s"
+0x1345: call    ___printf_chk
+0x134a: mov     rdx, [rsp+158h+var_138]
+0x134f: cmp     rbx, 1
+0x1353: jnz     loc_13DD
+0x1359: nop     dword ptr [rax+00000000h]
+0x1360: lea     rcx, aDistZuZuD+16h; ""
+0x1367: mov     rsi, r13
+0x136a: mov     edi, 2
+0x136f: xor     eax, eax
+0x1371: call    ___printf_chk
+0x1376: lea     rsi, aDistZuZuD+15h; "\n"
+0x137d: mov     edi, 2
+0x1382: xor     eax, eax
+0x1384: xor     ebx, ebx
+0x1386: call    ___printf_chk
+0x138b: mov     r12, rsp
+0x138e: lea     rbp, aDistZuZuD; "dist(%zu -> %zu) = %d\n"
+0x1395: nop     dword ptr [rax]
+0x1398: mov     r8d, [r12+rbx*4]
+0x139c: mov     rcx, rbx
+0x139f: xor     edx, edx
+0x13a1: mov     rsi, rbp
+0x13a4: mov     edi, 2
+0x13a9: xor     eax, eax
+0x13ab: add     rbx, 1
+0x13af: call    ___printf_chk
+0x13b4: cmp     rbx, 7
+0x13b8: jnz     short loc_1398
+0x13ba: mov     rax, [rsp+158h+var_30]
+0x13c2: sub     rax, fs:28h
+0x13cb: jnz     short loc_142E
+0x13cd: add     rsp, 138h
+0x13d4: xor     eax, eax
+0x13d6: pop     rbx
+0x13d7: pop     rbp
+0x13d8: pop     r12
+0x13da: pop     r13
+0x13dc: retn
+0x13dd: lea     r12, [r12+rbx*8]
+0x13e1: lea     rbp, [rsp+158h+var_130]
+0x13e6: lea     rbx, aBfsOrderFromZu+13h; " "
+0x13ed: nop     dword ptr [rax]
+0x13f0: mov     rcx, rbx
+0x13f3: mov     rsi, r13
+0x13f6: mov     edi, 2
+0x13fb: xor     eax, eax
+0x13fd: call    ___printf_chk
+0x1402: add     rbp, 8
+0x1406: mov     rdx, [rbp-8]
+0x140a: cmp     rbp, r12
+0x140d: jnz     short loc_13F0
+0x140f: jmp     loc_1360
+0x1414: xor     edx, edx
+0x1416: lea     rsi, aBfsOrderFromZu; "BFS order from %zu: "
+0x141d: mov     edi, 2
+0x1422: xor     eax, eax
+0x1424: call    ___printf_chk
+0x1429: jmp     loc_1376
+0x142e: call    ___stack_chk_fail

@@ -1,0 +1,15 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 294,
+      "ir_len": 7149,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.ll:19:40: error: '@main' defined with type 'i32 ()*' but expected '[10 x i32]*'\n  %nbytes.const = ptrtoint [10 x i32]* @main to i64  ; dummy to enforce opcode usage, replaced below\n                                       ^\n",
+      "ir_preview": "; ModuleID = 'mergesort_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.fmt = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@.nl  = private unnamed_addr constant [2 x i8] c\"\\0A\\00\", align 1",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/5/mergesort_main1.ll"
+    }
+  ]
+}

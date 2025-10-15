@@ -1,0 +1,172 @@
+; ModuleID = 'reconstructed_main'
+target datalayout = "e-m:e-i8:8:i16:16:i32:32:i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@.fmt_header = private unnamed_addr constant [24 x i8] c"DFS preorder from %zu: \00", align 1
+@.fmt_elem   = private unnamed_addr constant [6 x i8] c"%zu%s\00", align 1
+@.nl         = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+
+declare i8* @calloc(i64, i64) nounwind
+declare i8* @malloc(i64) nounwind
+declare void @free(i8*) nounwind
+declare i32 @__printf_chk(i32, i8*, ...)
+
+declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1 immarg)
+
+define i32 @main() local_unnamed_addr {
+entry:
+  %adj = alloca [49 x i32], align 16
+  %out = alloca [7 x i64], align 16
+  %top.ptr = alloca i64, align 8
+  %cnt.ptr = alloca i64, align 8
+  %visited.raw = call i8* @calloc(i64 28, i64 1)
+  %next.raw = call i8* @calloc(i64 56, i64 1)
+  %stack.raw = call i8* @malloc(i64 56)
+  %v.null = icmp eq i8* %visited.raw, null
+  %n.null = icmp eq i8* %next.raw, null
+  %vn.or = or i1 %v.null, %n.null
+  %s.null = icmp eq i8* %stack.raw, null
+  %need.fail = or i1 %vn.or, %s.null
+  br i1 %need.fail, label %alloc_fail, label %alloc_ok
+
+alloc_ok:                                           ; preds = %entry
+  %visited = bitcast i8* %visited.raw to i32*
+  %next = bitcast i8* %next.raw to i64*
+  %stack = bitcast i8* %stack.raw to i64*
+  %adj.i8 = bitcast [49 x i32]* %adj to i8*
+  call void @llvm.memset.p0i8.i64(i8* %adj.i8, i8 0, i64 196, i1 false)
+  %a.idx7.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 7
+  store i32 1, i32* %a.idx7.ptr, align 4
+  %a.idx14.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 14
+  store i32 1, i32* %a.idx14.ptr, align 4
+  %a.idx19.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 19
+  store i32 1, i32* %a.idx19.ptr, align 4
+  %a.idx22.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 22
+  store i32 1, i32* %a.idx22.ptr, align 4
+  %a.idx29.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 29
+  store i32 1, i32* %a.idx29.ptr, align 4
+  %a.idx33.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 33
+  store i32 1, i32* %a.idx33.ptr, align 4
+  %a.idx37.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 37
+  store i32 1, i32* %a.idx37.ptr, align 4
+  %a.idx39.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 39
+  store i32 1, i32* %a.idx39.ptr, align 4
+  %a.idx41.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 41
+  store i32 1, i32* %a.idx41.ptr, align 4
+  %a.idx47.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 47
+  store i32 1, i32* %a.idx47.ptr, align 4
+  store i64 0, i64* %stack, align 8
+  store i32 1, i32* %visited, align 4
+  %out0.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %out, i64 0, i64 0
+  store i64 0, i64* %out0.ptr, align 8
+  store i64 1, i64* %top.ptr, align 8
+  store i64 1, i64* %cnt.ptr, align 8
+  br label %loop
+
+loop:                                               ; preds = %pop, %push, %alloc_ok
+  %top.cur = load i64, i64* %top.ptr, align 8
+  %top.is.zero = icmp eq i64 %top.cur, 0
+  br i1 %top.is.zero, label %after_loop, label %have_top
+
+have_top:                                           ; preds = %loop
+  %u.idx = add i64 %top.cur, -1
+  %u.ptr = getelementptr inbounds i64, i64* %stack, i64 %u.idx
+  %u = load i64, i64* %u.ptr, align 8
+  %next.u.ptr = getelementptr inbounds i64, i64* %next, i64 %u
+  %k.start = load i64, i64* %next.u.ptr, align 8
+  %k.too.big = icmp ugt i64 %k.start, 6
+  br i1 %k.too.big, label %pop, label %scan
+
+scan:                                               ; preds = %have_top, %scan.next
+  %k.phi = phi i64 [ %k.start, %have_top ], [ %k.next, %scan.next ]
+  %k.done = icmp ugt i64 %k.phi, 6
+  br i1 %k.done, label %pop, label %scan.body
+
+scan.body:                                          ; preds = %scan
+  %mul = mul i64 %u, 7
+  %idx.flat = add i64 %mul, %k.phi
+  %adj.elem.ptr = getelementptr inbounds [49 x i32], [49 x i32]* %adj, i64 0, i64 %idx.flat
+  %adj.val = load i32, i32* %adj.elem.ptr, align 4
+  %adj.zero = icmp eq i32 %adj.val, 0
+  br i1 %adj.zero, label %scan.next, label %check.visited
+
+check.visited:                                      ; preds = %scan.body
+  %vis.ptr = getelementptr inbounds i32, i32* %visited, i64 %k.phi
+  %vis.val = load i32, i32* %vis.ptr, align 4
+  %vis.zero = icmp eq i32 %vis.val, 0
+  br i1 %vis.zero, label %push, label %scan.next
+
+scan.next:                                          ; preds = %check.visited, %scan.body
+  %k.next = add i64 %k.phi, 1
+  br label %scan
+
+push:                                               ; preds = %check.visited
+  %k.plus1 = add i64 %k.phi, 1
+  store i64 %k.plus1, i64* %next.u.ptr, align 8
+  store i32 1, i32* %vis.ptr, align 4
+  %cnt.cur = load i64, i64* %cnt.ptr, align 8
+  %out.elem.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %out, i64 0, i64 %cnt.cur
+  store i64 %k.phi, i64* %out.elem.ptr, align 8
+  %cnt.next = add i64 %cnt.cur, 1
+  store i64 %cnt.next, i64* %cnt.ptr, align 8
+  %stack.push.ptr = getelementptr inbounds i64, i64* %stack, i64 %top.cur
+  store i64 %k.phi, i64* %stack.push.ptr, align 8
+  %top.next = add i64 %top.cur, 1
+  store i64 %top.next, i64* %top.ptr, align 8
+  br label %loop
+
+pop:                                                ; preds = %scan, %have_top
+  %top.pop.src = phi i64 [ %top.cur, %have_top ], [ %top.cur, %scan ]
+  %top.dec = add i64 %top.pop.src, -1
+  store i64 %top.dec, i64* %top.ptr, align 8
+  br label %loop
+
+after_loop:                                         ; preds = %loop
+  call void @free(i8* %visited.raw)
+  call void @free(i8* %next.raw)
+  call void @free(i8* %stack.raw)
+  %hdr.ptr = getelementptr inbounds [24 x i8], [24 x i8]* @.fmt_header, i64 0, i64 0
+  %start.zero = add i64 0, 0
+  %printf.hdr = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %hdr.ptr, i64 %start.zero)
+  %cnt.final = load i64, i64* %cnt.ptr, align 8
+  %have.any = icmp ne i64 %cnt.final, 0
+  br i1 %have.any, label %print.first, label %print.nl
+
+print.first:                                        ; preds = %after_loop
+  %first.val.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %out, i64 0, i64 0
+  %first.val = load i64, i64* %first.val.ptr, align 8
+  %empty.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.nl, i64 0, i64 1
+  %fmt.elem.ptr = getelementptr inbounds [6 x i8], [6 x i8]* @.fmt_elem, i64 0, i64 0
+  %printf.first = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.elem.ptr, i64 %first.val, i8* %empty.ptr)
+  %need.more = icmp ugt i64 %cnt.final, 1
+  br i1 %need.more, label %print.loop.init, label %print.nl
+
+print.loop.init:                                    ; preds = %print.first
+  %i.start = add i64 1, 0
+  br label %print.loop
+
+print.loop:                                         ; preds = %print.loop, %print.loop.init
+  %i.phi = phi i64 [ %i.start, %print.loop.init ], [ %i.next, %print.loop ]
+  %space.ptr = getelementptr inbounds [24 x i8], [24 x i8]* @.fmt_header, i64 0, i64 22
+  %val.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %out, i64 0, i64 %i.phi
+  %val = load i64, i64* %val.ptr, align 8
+  %printf.it = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.elem.ptr, i64 %val, i8* %space.ptr)
+  %i.next = add i64 %i.phi, 1
+  %done = icmp eq i64 %i.next, %cnt.final
+  br i1 %done, label %print.nl, label %print.loop
+
+print.nl:                                           ; preds = %print.loop, %print.first, %after_loop
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.nl, i64 0, i64 0
+  %printf.nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  ret i32 0
+
+alloc_fail:                                         ; preds = %entry
+  call void @free(i8* %visited.raw)
+  call void @free(i8* %next.raw)
+  call void @free(i8* %stack.raw)
+  %hdr.ptr.fail = getelementptr inbounds [24 x i8], [24 x i8]* @.fmt_header, i64 0, i64 0
+  %printf.hdr.fail = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %hdr.ptr.fail, i64 0)
+  %nl.ptr.fail = getelementptr inbounds [2 x i8], [2 x i8]* @.nl, i64 0, i64 0
+  %printf.nl.fail = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr.fail)
+  ret i32 0
+}

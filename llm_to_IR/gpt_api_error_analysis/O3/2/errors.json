@@ -1,0 +1,89 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.ll:51:85: error: use of undefined value '%dfs.cont'\n  %depth.phi = phi i64 [ 1, %alloc_ok ], [ %depth.push, %dfs.push ], [ %depth.cont, %dfs.cont ], [ %depth.pop, %dfs.pop ]\n                                                                                    ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.bc",
+      "start_time": "2025-10-15T20:35:04",
+      "end_time": "2025-10-15T20:35:04",
+      "elapsed_sec": 0.026317
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.ll:60:21: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32, i64)*'\n  %call1 = call i32 @__printf_chk(i32 2, i8* %fmt1, i32 %key.val, i64 %low)\n                    ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.bc",
+      "start_time": "2025-10-15T20:40:53",
+      "end_time": "2025-10-15T20:40:53",
+      "elapsed_sec": 0.017235
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.ll:62:38: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, ...)* (i32, i8*, i32, i64)*'\n  %call1 = call i32 (i32, i8*, ...)* @__printf_chk(i32 2, i8* %fmt1, i32 %key.val, i64 %low.phi)\n                                     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.bc",
+      "start_time": "2025-10-15T20:44:08",
+      "end_time": "2025-10-15T20:44:08",
+      "elapsed_sec": 0.01841
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.ll:62:21: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32, i64)*'\n  %call1 = call i32 @__printf_chk(i32 2, i8* %fmt1, i32 %key.val, i64 %low.phi)\n                    ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.bc",
+      "start_time": "2025-10-15T20:45:15",
+      "end_time": "2025-10-15T20:45:15",
+      "elapsed_sec": 0.018315
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/mergesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/mergesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %i.tail = phi i32 [ %i.iv, %copyI.init ], [ %i.next.ti, %copyI.loop ]\nlabel %copyI.loop\nlabel %copyI.body\nInstruction does not dominate all uses!\n  %i.next.ti = add i32 %i.tail, 1\n  %i.tail = phi i32 [ %i.iv, %copyI.init ], [ %i.next.ti, %copyI.loop ]\nInstruction does not dominate all uses!\n  %k.next.ti = add i32 %k.tail, 1\n  %k.tail = phi i32 [ %k.iv, %copyI.init ], [ %k.next.ti, %copyI.loop ]\nPHI node entries do not match predecessors!\n  %j.tail = phi i32 [ %j.iv, %copyJ.init ], [ %j.next.tj, %copyJ.loop ]\nlabel %copyJ.loop\nlabel %copyJ.body\nInstruction does not dominate all uses!\n  %j.next.tj = add i32 %j.tail, 1\n  %j.tail = phi i32 [ %j.iv, %copyJ.init ], [ %j.next.tj, %copyJ.loop ]\nInstruction does not dominate all uses!\n  %k.next.tj = add i32 %k.tail2, 1\n  %k.tail2 = phi i32 [ %k.tail, %copyJ.init ], [ %k.next.tj, %copyJ.loop ]\nPHI node entries do not match predecessors!\n  %cb.i = phi i32 [ 0, %copy.back.init ], [ %cb.next, %copy.back.loop ]\nlabel %copy.back.loop\nlabel %copy.back.body\nInstruction does not dominate all uses!\n  %cb.next = add i32 %cb.i, 1\n  %cb.i = phi i32 [ 0, %copy.back.init ], [ %cb.next, %copy.back.loop ]\nPHI node entries do not match predecessors!\n  %p.iv = phi i32 [ %i.print, %print_common ], [ %p.next, %print.loop ]\nlabel %print.loop\nlabel %print.body\nInstruction does not dominate all uses!\n  %p.next = add i32 %p.iv, 1\n  %p.iv = phi i32 [ %i.print, %print_common ], [ %p.next, %print.loop ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/2/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/2/mergesort_main1.bc",
+      "start_time": "2025-10-15T20:57:12",
+      "end_time": "2025-10-15T20:57:12",
+      "elapsed_sec": 0.020792
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/selectionsort_function1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/selectionsort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %min.idx.next = phi i32 [ %min.idx.sel, %inner.body ]\nlabel %inner.latch\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/2/selectionsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis/O3/2/selectionsort_function1.bc",
+      "start_time": "2025-10-15T21:06:20",
+      "end_time": "2025-10-15T21:06:20",
+      "elapsed_sec": 0.018867
+    }
+  ]
+}

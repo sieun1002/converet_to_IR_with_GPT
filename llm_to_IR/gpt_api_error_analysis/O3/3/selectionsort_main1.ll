@@ -1,0 +1,46 @@
+; ModuleID = 'selection_sort_main'
+target triple = "x86_64-pc-linux-gnu"
+
+@.str.sorted = private unnamed_addr constant [16 x i8] c"Sorted array: \00", align 1
+@.str.fmt = private unnamed_addr constant [4 x i8] c"%d \00", align 1
+
+declare i32 @__printf_chk(i32, i8*, ...)
+declare void @selection_sort(i32*, i32)
+
+define dso_local i32 @main() {
+entry:
+  %arr = alloca [5 x i32], align 4
+  %arr.gep0 = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 0
+  store i32 7, i32* %arr.gep0, align 4
+  %arr.gep1 = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 1
+  store i32 2, i32* %arr.gep1, align 4
+  %arr.gep2 = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 2
+  store i32 9, i32* %arr.gep2, align 4
+  %arr.gep3 = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 3
+  store i32 4, i32* %arr.gep3, align 4
+  %arr.gep4 = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 4
+  store i32 13, i32* %arr.gep4, align 4
+  call void @selection_sort(i32* %arr.gep0, i32 5)
+  %sorted.gep = getelementptr inbounds [16 x i8], [16 x i8]* @.str.sorted, i64 0, i64 0
+  %call.header = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %sorted.gep)
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %i = phi i64 [ 0, %entry ], [ %inc, %for.inc ]
+  %cmp = icmp ult i64 %i, 5
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %elem.ptr = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 %i
+  %elem = load i32, i32* %elem.ptr, align 4
+  %fmt.gep = getelementptr inbounds [4 x i8], [4 x i8]* @.str.fmt, i64 0, i64 0
+  %call.elem = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.gep, i32 %elem)
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %inc = add nuw nsw i64 %i, 1
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  ret i32 0
+}

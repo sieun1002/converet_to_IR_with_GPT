@@ -1,0 +1,55 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 160,
+      "ir_len": 10610,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.ll:15:22: error: expected type\n  %adj = alloca [7 x 7 x i32], align 16\n                     ^\n",
+      "ir_preview": "; ModuleID = 'bfs_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str_bfs = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align 1\n@.str_pair = private unnamed_addr constant [6 x i",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/BFS_main1.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 2147,
+      "ir_len": 8260,
+      "error_preview": "LLVM ERROR: not a number, or does not fit in an unsigned int\n\nPLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.\nStack dump:\n0.\tProgram arguments: llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.ll -o ../../llm_to_IR/gpt_api_e",
+      "ir_preview": "; ModuleID = 'reconstructed_main'\ntarget datalayout = \"e-m:e-i8:8:i16:16:i32:32:i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.fmt_header = private unnamed_addr constant [24",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/DFS_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 320,
+      "ir_len": 3608,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.ll:4:55: error: constant expression type mismatch: got type '[21 x i8]' but expected '[22 x i8]'\n@.str.found = private unnamed_addr constant [22 x i8] c\"key %d -> index %ld\\0A\\00\", align 1\n                                    ",
+      "ir_preview": "; ModuleID = 'binsearch_demo'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.found = private unnamed_addr constant [22 x i8] c\"key %d -> index %ld\\0A\\00\", align 1\n@.str.not   = private unnamed_addr cons",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 307,
+      "ir_len": 3608,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.ll:72:26: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32, i64)*'\n  %call.found = call i32 @__printf_chk(i32 2, i8* %fmt.found.ptr, i32 %key, i64 %idx.arg)\n                    ",
+      "ir_preview": "; ModuleID = 'binsearch_demo'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.found = private unnamed_addr constant [21 x i8] c\"key %d -> index %ld\\0A\\00\", align 1\n@.str.not   = private unnamed_addr cons",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/binarysearch_main2.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 315,
+      "ir_len": 1999,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.ll:4:56: error: constant expression type mismatch: got type '[15 x i8]' but expected '[16 x i8]'\n@.str.sorted = private unnamed_addr constant [16 x i8] c\"Sorted array: \\00\", align 1\n                                          ",
+      "ir_preview": "; ModuleID = 'selection_sort_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.sorted = private unnamed_addr constant [16 x i8] c\"Sorted array: \\00\", align 1\n@.str.fmt = private unnamed_addr constant",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/3/selectionsort_main1.ll"
+    }
+  ]
+}

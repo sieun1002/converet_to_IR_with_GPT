@@ -1,0 +1,46 @@
+; Function: main
+; Start: 0x1080, End: 0x112d
+
+0x1080: endbr64
+0x1084: push    r12
+0x1086: mov     edx, 9
+0x108b: xor     esi, esi
+0x108d: push    rbp
+0x108e: lea     rbp, unk_2004
+0x1095: push    rbx
+0x1096: sub     rsp, 30h
+0x109a: movdqa  xmm0, cs:xmmword_2010
+0x10a2: mov     rax, fs:28h
+0x10ab: mov     [rsp+48h+var_20], rax
+0x10b0: xor     eax, eax
+0x10b2: mov     rbx, rsp
+0x10b5: lea     r12, [rsp+48h+var_20]
+0x10ba: mov     [rsp+48h+var_28], 4
+0x10c3: movaps  [rsp+48h+var_48], xmm0
+0x10c7: movdqa  xmm0, cs:xmmword_2020
+0x10cf: mov     rdi, rbx
+0x10d2: movaps  [rsp+48h+var_38], xmm0
+0x10d7: call    quick_sort
+0x10dc: nop     dword ptr [rax+00h]
+0x10e0: mov     edx, [rbx]
+0x10e2: mov     rsi, rbp
+0x10e5: mov     edi, 2
+0x10ea: xor     eax, eax
+0x10ec: add     rbx, 4
+0x10f0: call    ___printf_chk
+0x10f5: cmp     r12, rbx
+0x10f8: jnz     short loc_10E0
+0x10fa: xor     eax, eax
+0x10fc: lea     rsi, unk_2008
+0x1103: mov     edi, 2
+0x1108: call    ___printf_chk
+0x110d: mov     rax, [rsp+48h+var_20]
+0x1112: sub     rax, fs:28h
+0x111b: jnz     short loc_1128
+0x111d: add     rsp, 30h
+0x1121: xor     eax, eax
+0x1123: pop     rbx
+0x1124: pop     rbp
+0x1125: pop     r12
+0x1127: retn
+0x1128: call    ___stack_chk_fail

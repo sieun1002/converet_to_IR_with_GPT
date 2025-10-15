@@ -1,0 +1,66 @@
+; Function: main
+; Start: 0x1080, End: 0x1170
+
+0x1080: endbr64
+0x1084: push    r12
+0x1086: push    rbp
+0x1087: lea     rbp, aKeyDIndexLd; "key %d -> index %ld\n"
+0x108e: push    rbx
+0x108f: sub     rsp, 40h
+0x1093: movdqa  xmm0, cs:xmmword_2030
+0x109b: mov     rax, fs:28h
+0x10a4: mov     [rsp+58h+var_20], rax
+0x10a9: xor     eax, eax
+0x10ab: mov     rax, cs:qword_2050
+0x10b2: mov     [rsp+58h+var_28], 0Ch
+0x10ba: mov     r12, rsp
+0x10bd: movaps  [rsp+58h+var_48], xmm0
+0x10c2: movdqa  xmm0, cs:xmmword_2040
+0x10ca: lea     rbx, [rsp+58h+var_4C]
+0x10cf: mov     [rsp+58h+var_58], rax
+0x10d3: mov     [rsp+58h+var_50], 0FFFFFFFBh
+0x10db: movaps  [rsp+58h+var_38], xmm0
+0x10e0: mov     esi, [r12]
+0x10e4: mov     edx, 9
+0x10e9: xor     ecx, ecx
+0x10eb: jmp     short loc_1105
+0x10ed: align 10h
+0x10f0: mov     rax, rdx
+0x10f3: sub     rax, rcx
+0x10f6: shr     rax, 1
+0x10f9: add     rax, rcx
+0x10fc: cmp     esi, dword ptr [rsp+rax*4+58h+var_48]
+0x1100: jg      short loc_1150
+0x1102: mov     rdx, rax
+0x1105: cmp     rcx, rdx
+0x1108: jb      short loc_10F0
+0x110a: mov     edx, esi
+0x110c: cmp     rcx, 8
+0x1110: ja      short loc_1156
+0x1112: cmp     esi, dword ptr [rsp+rcx*4+58h+var_48]
+0x1116: jnz     short loc_1156
+0x1118: mov     rsi, rbp
+0x111b: mov     edi, 2
+0x1120: xor     eax, eax
+0x1122: call    ___printf_chk
+0x1127: add     r12, 4
+0x112b: cmp     rbx, r12
+0x112e: jnz     short loc_10E0
+0x1130: mov     rax, [rsp+58h+var_20]
+0x1135: sub     rax, fs:28h
+0x113e: jnz     short loc_116B
+0x1140: add     rsp, 40h
+0x1144: xor     eax, eax
+0x1146: pop     rbx
+0x1147: pop     rbp
+0x1148: pop     r12
+0x114a: retn
+0x114b: align 10h
+0x1150: lea     rcx, [rax+1]
+0x1154: jmp     short loc_1105
+0x1156: lea     rsi, aKeyDNotFound; "key %d -> not found\n"
+0x115d: mov     edi, 2
+0x1162: xor     eax, eax
+0x1164: call    ___printf_chk
+0x1169: jmp     short loc_1127
+0x116b: call    ___stack_chk_fail

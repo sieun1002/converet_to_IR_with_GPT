@@ -1,0 +1,65 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 326,
+      "ir_len": 7246,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.ll:51:85: error: use of undefined value '%dfs.cont'\n  %depth.phi = phi i64 [ 1, %alloc_ok ], [ %depth.push, %dfs.push ], [ %depth.cont, %dfs.cont ], [ %depth.pop, %dfs.pop ]\n                                                            ",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.pre = private unnamed_addr constant [24 x i8] c\"DFS preorder from %zu: \\00\", align 1\n@.str.num = private unnamed_addr constant [",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/DFS_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 288,
+      "ir_len": 2451,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.ll:60:21: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32, i64)*'\n  %call1 = call i32 @__printf_chk(i32 2, i8* %fmt1, i32 %key.val, i64 %low)\n                    ^\n",
+      "ir_preview": "; ModuleID = 'binsearch_main.ll'\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@arr = internal constant [9 x i32] [i32 -5, i32 -3, i32 0, i32 1, i3",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 343,
+      "ir_len": 2605,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.ll:62:38: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, ...)* (i32, i8*, i32, i64)*'\n  %call1 = call i32 (i32, i8*, ...)* @__printf_chk(i32 2, i8* %fmt1, i32 %key.val, i64 %low.p",
+      "ir_preview": "; ModuleID = 'binsearch_main.ll'\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@arr = internal constant [9 x i32] [i32 -5, i32 -3, i32 0, i32 1, i3",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main2.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 292,
+      "ir_len": 2571,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.ll:62:21: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32, i64)*'\n  %call1 = call i32 @__printf_chk(i32 2, i8* %fmt1, i32 %key.val, i64 %low.phi)\n                    ^\n",
+      "ir_preview": "; ModuleID = 'binsearch_main.ll'\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@arr = internal constant [9 x i32] [i32 -5, i32 -3, i32 0, i32 1, i3",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/binarysearch_main3.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 1548,
+      "ir_len": 6688,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %i.tail = phi i32 [ %i.iv, %copyI.init ], [ %i.next.ti, %copyI.loop ]\nlabel %copyI.loop\nlabel %copyI.body\nInstruction does not dominate all uses!\n  %i.next.ti = add i32 %i.tail, 1\n  %i.tail = p",
+      "ir_preview": "; ModuleID = 'merged-sort-10'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@.strnl = private unnamed_addr constant [2 x i8] c\"\\0A\\00\", align",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/mergesort_main1.ll"
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 181,
+      "ir_len": 1800,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %min.idx.next = phi i32 [ %min.idx.sel, %inner.body ]\nlabel %inner.latch\n",
+      "ir_preview": "; ModuleID = 'selection_sort.ll'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\ndefine dso_local void @selection_sort(i32* nocapture noundef %arr, i",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis/O3/2/selectionsort_function1.ll"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+; ModuleID = 'bfs_main'
+target triple = "x86_64-pc-linux-gnu"
+
+@.str_bfs = private unnamed_addr constant [21 x i8] c"BFS order from %zu: \00", align 1
+@.str_pair = private unnamed_addr constant [6 x i8] c"%zu%s\00", align 1
+@.str_dist = private unnamed_addr constant [23 x i8] c"dist(%zu -> %zu) = %d\0A\00", align 1
+
+declare i8* @malloc(i64)
+declare void @free(i8*)
+declare i32 @__printf_chk(i32, i8*, ...)
+
+define i32 @main() {
+entry:
+  %dist = alloca [7 x i32], align 16
+  %adj = alloca [7 x [7 x i32]], align 16
+  %vist = alloca [7 x i64], align 16
+
+  ; initialize dist[i] = -1
+  %i0 = alloca i32, align 4
+  store i32 0, i32* %i0, align 4
+  br label %dist.loop.cond
+
+dist.loop.cond:
+  %i1 = load i32, i32* %i0, align 4
+  %cmp0 = icmp slt i32 %i1, 7
+  br i1 %cmp0, label %dist.loop.body, label %dist.loop.end
+
+dist.loop.body:
+  %idx0.ext = sext i32 %i1 to i64
+  %d.gep0 = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 %idx0.ext
+  store i32 -1, i32* %d.gep0, align 4
+  %i2 = add nsw i32 %i1, 1
+  store i32 %i2, i32* %i0, align 4
+  br label %dist.loop.cond
+
+dist.loop.end:
+  ; initialize adj[r][c] = 0
+  %r0 = alloca i32, align 4
+  %c0 = alloca i32, align 4
+  store i32 0, i32* %r0, align 4
+  br label %adj.r.cond
+
+adj.r.cond:
+  %r1 = load i32, i32* %r0, align 4
+  %rcmp = icmp slt i32 %r1, 7
+  br i1 %rcmp, label %adj.c.init, label %adj.init.end
+
+adj.c.init:
+  store i32 0, i32* %c0, align 4
+  br label %adj.c.cond
+
+adj.c.cond:
+  %c1 = load i32, i32* %c0, align 4
+  %ccmp = icmp slt i32 %c1, 7
+  br i1 %ccmp, label %adj.body, label %adj.c.end
+
+adj.body:
+  %r1.ext = sext i32 %r1 to i64
+  %c1.ext = sext i32 %c1 to i64
+  %a.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %r1.ext
+  %a.cell = getelementptr inbounds [7 x i32], [7 x i32]* %a.row, i64 0, i64 %c1.ext
+  store i32 0, i32* %a.cell, align 4
+  %c2 = add nsw i32 %c1, 1
+  store i32 %c2, i32* %c0, align 4
+  br label %adj.c.cond
+
+adj.c.end:
+  %r2 = add nsw i32 %r1, 1
+  store i32 %r2, i32* %r0, align 4
+  br label %adj.r.cond
+
+adj.init.end:
+  ; set specific edges (undirected where provided)
+  ; row 0: 1, 2
+  %a00 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 0
+  %a01 = getelementptr inbounds [7 x i32], [7 x i32]* %a00, i64 0, i64 1
+  store i32 1, i32* %a01, align 4
+  %a02 = getelementptr inbounds [7 x i32], [7 x i32]* %a00, i64 0, i64 2
+  store i32 1, i32* %a02, align 4
+  ; row 1: 0, 3, 4
+  %a10.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 1
+  %a10 = getelementptr inbounds [7 x i32], [7 x i32]* %a10.row, i64 0, i64 0
+  store i32 1, i32* %a10, align 4
+  %a13 = getelementptr inbounds [7 x i32], [7 x i32]* %a10.row, i64 0, i64 3
+  store i32 1, i32* %a13, align 4
+  %a14 = getelementptr inbounds [7 x i32], [7 x i32]* %a10.row, i64 0, i64 4
+  store i32 1, i32* %a14, align 4
+  ; row 2: 0, 5
+  %a20.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 2
+  %a20 = getelementptr inbounds [7 x i32], [7 x i32]* %a20.row, i64 0, i64 0
+  store i32 1, i32* %a20, align 4
+  %a25 = getelementptr inbounds [7 x i32], [7 x i32]* %a20.row, i64 0, i64 5
+  store i32 1, i32* %a25, align 4
+  ; row 3: 1
+  %a31.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 3
+  %a31 = getelementptr inbounds [7 x i32], [7 x i32]* %a31.row, i64 0, i64 1
+  store i32 1, i32* %a31, align 4
+  ; row 4: 1, 5
+  %a41.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 4
+  %a41 = getelementptr inbounds [7 x i32], [7 x i32]* %a41.row, i64 0, i64 1
+  store i32 1, i32* %a41, align 4
+  %a45 = getelementptr inbounds [7 x i32], [7 x i32]* %a41.row, i64 0, i64 5
+  store i32 1, i32* %a45, align 4
+  ; row 5: 2, 4, 6
+  %a52.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 5
+  %a52 = getelementptr inbounds [7 x i32], [7 x i32]* %a52.row, i64 0, i64 2
+  store i32 1, i32* %a52, align 4
+  %a54 = getelementptr inbounds [7 x i32], [7 x i32]* %a52.row, i64 0, i64 4
+  store i32 1, i32* %a54, align 4
+  %a56 = getelementptr inbounds [7 x i32], [7 x i32]* %a52.row, i64 0, i64 6
+  store i32 1, i32* %a56, align 4
+  ; row 6: 5
+  %a65.row = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 6
+  %a65 = getelementptr inbounds [7 x i32], [7 x i32]* %a65.row, i64 0, i64 5
+  store i32 1, i32* %a65, align 4
+
+  ; dist[0] = 0
+  %d0 = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 0
+  store i32 0, i32* %d0, align 4
+
+  ; queue allocation
+  %qmem = call i8* @malloc(i64 56)
+  %qnull = icmp eq i8* %qmem, null
+  br i1 %qnull, label %noqueue, label %bfs.init
+
+bfs.init:
+  %q = bitcast i8* %qmem to i64*
+  store i64 0, i64* %q, align 8
+  br label %bfs.cond
+
+bfs.cond:
+  %head.phi = phi i64 [ 0, %bfs.init ], [ %head.next, %bfs.after.neigh ]
+  %tail.phi = phi i64 [ 1, %bfs.init ], [ %tail.out, %bfs.after.neigh ]
+  %vcount.phi = phi i64 [ 0, %bfs.init ], [ %vcount.next, %bfs.after.neigh ]
+  %cond.loop = icmp ult i64 %head.phi, %tail.phi
+  br i1 %cond.loop, label %bfs.body, label %bfs.done
+
+bfs.body:
+  %q.ptr.cur = getelementptr inbounds i64, i64* %q, i64 %head.phi
+  %cur = load i64, i64* %q.ptr.cur, align 8
+  %vist.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %vist, i64 0, i64 %vcount.phi
+  store i64 %cur, i64* %vist.ptr, align 8
+  %vcount.next = add nuw i64 %vcount.phi, 1
+  %cur.i32 = trunc i64 %cur to i32
+  %cur.ext = sext i32 %cur.i32 to i64
+  %dist.cur.ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 %cur.ext
+  %dist.cur = load i32, i32* %dist.cur.ptr, align 4
+  br label %neigh.init
+
+neigh.init:
+  %n.phi.init = phi i64 [ 0, %bfs.body ]
+  %tail.in = phi i64 [ %tail.phi, %bfs.body ]
+  br label %neigh.cond
+
+neigh.cond:
+  %n.phi = phi i64 [ %n.phi.init, %neigh.init ], [ %n.next, %neigh.next ]
+  %tail.phi.neigh = phi i64 [ %tail.in, %neigh.init ], [ %tail.upd, %neigh.next ]
+  %n.cmp = icmp ult i64 %n.phi, 7
+  br i1 %n.cmp, label %neigh.body, label %bfs.after.neigh
+
+neigh.body:
+  %adj.row.ptr = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %cur.ext
+  %adj.cell.ptr = getelementptr inbounds [7 x i32], [7 x i32]* %adj.row.ptr, i64 0, i64 %n.phi
+  %adj.val = load i32, i32* %adj.cell.ptr, align 4
+  %adj.nz = icmp ne i32 %adj.val, 0
+  %dist.n.ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 %n.phi
+  %dist.n = load i32, i32* %dist.n.ptr, align 4
+  %unseen = icmp eq i32 %dist.n, -1
+  %enq.ok = and i1 %adj.nz, %unseen
+  br i1 %enq.ok, label %enq, label %neigh.next
+
+enq:
+  %q.enq.ptr = getelementptr inbounds i64, i64* %q, i64 %tail.phi.neigh
+  store i64 %n.phi, i64* %q.enq.ptr, align 8
+  %tail.new = add nuw i64 %tail.phi.neigh, 1
+  %dist.next = add nsw i32 %dist.cur, 1
+  store i32 %dist.next, i32* %dist.n.ptr, align 4
+  br label %neigh.next
+
+neigh.next:
+  %tail.upd = phi i64 [ %tail.new, %enq ], [ %tail.phi.neigh, %neigh.body ]
+  %n.next = add nuw i64 %n.phi, 1
+  br label %neigh.cond
+
+bfs.after.neigh:
+  %tail.out = phi i64 [ %tail.phi.neigh, %neigh.cond ]
+  %head.next = add nuw i64 %head.phi, 1
+  br label %bfs.cond
+
+bfs.done:
+  %visited.count = phi i64 [ %vcount.phi, %bfs.cond ]
+  call void @free(i8* %qmem)
+  br label %print.header
+
+noqueue:
+  br label %print.header
+
+print.header:
+  %vcount.sel = phi i64 [ %visited.count, %bfs.done ], [ 0, %noqueue ]
+  %fmt.bfs.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str_bfs, i64 0, i64 0
+  %start.sz = zext i32 0 to i64
+  %call.header = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.bfs.ptr, i64 0)
+  %vcount.zero = icmp eq i64 %vcount.sel, 0
+  br i1 %vcount.zero, label %print.nl, label %print.nodes
+
+print.nodes:
+  %vcount.one = icmp eq i64 %vcount.sel, 1
+  %space.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str_bfs, i64 0, i64 19
+  %empty.ptr = getelementptr inbounds [23 x i8], [23 x i8]* @.str_dist, i64 0, i64 22
+  %pair.ptr = getelementptr inbounds [6 x i8], [6 x i8]* @.str_pair, i64 0, i64 0
+  br i1 %vcount.one, label %print.single, label %print.multi.first
+
+print.single:
+  %v0.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %vist, i64 0, i64 0
+  %v0 = load i64, i64* %v0.ptr, align 8
+  %call.single = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %pair.ptr, i64 %v0, i8* %empty.ptr)
+  br label %print.nl
+
+print.multi.first:
+  %v0.ptr.m = getelementptr inbounds [7 x i64], [7 x i64]* %vist, i64 0, i64 0
+  %v0.m = load i64, i64* %v0.ptr.m, align 8
+  %call.first = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %pair.ptr, i64 %v0.m, i8* %space.ptr)
+  ; loop i = 1 .. vcount-2
+  %i.start = add nuw i64 1, 0
+  br label %nodes.loop.cond
+
+nodes.loop.cond:
+  %i.phi = phi i64 [ %i.start, %print.multi.first ], [ %i.next, %nodes.loop.body ]
+  %last.idx = sub i64 %vcount.sel, 1
+  %cond.nodes = icmp ult i64 %i.phi, %last.idx
+  br i1 %cond.nodes, label %nodes.loop.body, label %nodes.loop.end
+
+nodes.loop.body:
+  %vi.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %vist, i64 0, i64 %i.phi
+  %vi = load i64, i64* %vi.ptr, align 8
+  %call.mid = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %pair.ptr, i64 %vi, i8* %space.ptr)
+  %i.next = add nuw i64 %i.phi, 1
+  br label %nodes.loop.cond
+
+nodes.loop.end:
+  ; print last without space
+  %last.pos = sub i64 %vcount.sel, 1
+  %vlast.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %vist, i64 0, i64 %last.pos
+  %vlast = load i64, i64* %vlast.ptr, align 8
+  %call.last = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %pair.ptr, i64 %vlast, i8* %empty.ptr)
+  br label %print.nl
+
+print.nl:
+  %nl.ptr = getelementptr inbounds [23 x i8], [23 x i8]* @.str_dist, i64 0, i64 21
+  %call.nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  br label %print.dists.init
+
+print.dists.init:
+  %k0 = alloca i32, align 4
+  store i32 0, i32* %k0, align 4
+  br label %print.dists.cond
+
+print.dists.cond:
+  %k1 = load i32, i32* %k0, align 4
+  %kcmp = icmp slt i32 %k1, 7
+  br i1 %kcmp, label %print.dists.body, label %done
+
+print.dists.body:
+  %k.ext = sext i32 %k1 to i64
+  %dk.ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 %k.ext
+  %dk = load i32, i32* %dk.ptr, align 4
+  %fmt.dist.ptr = getelementptr inbounds [23 x i8], [23 x i8]* @.str_dist, i64 0, i64 0
+  %k.zext = zext i32 %k1 to i64
+  %call.dist = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.dist.ptr, i64 0, i64 %k.zext, i32 %dk)
+  %k2 = add nsw i32 %k1, 1
+  store i32 %k2, i32* %k0, align 4
+  br label %print.dists.cond
+
+done:
+  ret i32 0
+}

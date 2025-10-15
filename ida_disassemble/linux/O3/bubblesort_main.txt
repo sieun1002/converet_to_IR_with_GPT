@@ -1,0 +1,67 @@
+; Function: main
+; Start: 0x1080, End: 0x117d
+
+0x1080: endbr64
+0x1084: push    r12
+0x1086: mov     edi, 0Ah
+0x108b: push    rbp
+0x108c: push    rbx
+0x108d: sub     rsp, 30h
+0x1091: movdqa  xmm0, cs:xmmword_2010
+0x1099: mov     rax, fs:28h
+0x10a2: mov     [rsp+48h+var_20], rax
+0x10a7: xor     eax, eax
+0x10a9: mov     rbx, rsp
+0x10ac: mov     [rsp+48h+var_28], 4
+0x10b5: movaps  [rsp+48h+var_48], xmm0
+0x10b9: movdqa  xmm0, cs:xmmword_2020
+0x10c1: movaps  [rsp+48h+var_38], xmm0
+0x10c6: nop     word ptr [rax+rax+00000000h]
+0x10d0: mov     rdx, rbx
+0x10d3: xor     r8d, r8d
+0x10d6: mov     eax, 1
+0x10db: nop     dword ptr [rax+rax+00h]
+0x10e0: movq    xmm0, qword ptr [rdx]
+0x10e4: pshufd  xmm1, xmm0, 0E5h
+0x10e9: movd    esi, xmm0
+0x10ed: movd    ecx, xmm1
+0x10f1: cmp     esi, ecx
+0x10f3: jle     short loc_1101
+0x10f5: pshufd  xmm0, xmm0, 0E1h
+0x10fa: mov     r8, rax
+0x10fd: movq    qword ptr [rdx], xmm0
+0x1101: add     rax, 1
+0x1105: add     rdx, 4
+0x1109: cmp     rdi, rax
+0x110c: jnz     short loc_10E0
+0x110e: test    r8, r8
+0x1111: jz      short loc_111E
+0x1113: cmp     r8, 1
+0x1117: jz      short loc_111E
+0x1119: mov     rdi, r8
+0x111c: jmp     short loc_10D0
+0x111e: lea     r12, [rsp+48h+var_20]
+0x1123: lea     rbp, unk_2004
+0x112a: nop     word ptr [rax+rax+00h]
+0x1130: mov     edx, [rbx]
+0x1132: mov     rsi, rbp
+0x1135: mov     edi, 2
+0x113a: xor     eax, eax
+0x113c: add     rbx, 4
+0x1140: call    ___printf_chk
+0x1145: cmp     r12, rbx
+0x1148: jnz     short loc_1130
+0x114a: xor     eax, eax
+0x114c: lea     rsi, unk_2008
+0x1153: mov     edi, 2
+0x1158: call    ___printf_chk
+0x115d: mov     rax, [rsp+48h+var_20]
+0x1162: sub     rax, fs:28h
+0x116b: jnz     short loc_1178
+0x116d: add     rsp, 30h
+0x1171: xor     eax, eax
+0x1173: pop     rbx
+0x1174: pop     rbp
+0x1175: pop     r12
+0x1177: retn
+0x1178: call    ___stack_chk_fail

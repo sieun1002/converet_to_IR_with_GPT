@@ -1,0 +1,62 @@
+; Function: selection_sort
+; Start: 0x1210, End: 0x12a9
+
+0x1210: endbr64
+0x1214: cmp     esi, 1
+0x1217: jle     locret_12A8
+0x121d: push    r13
+0x121f: mov     r11, rdi
+0x1222: lea     r13d, [rsi-1]
+0x1226: xor     r10d, r10d
+0x1229: push    r12
+0x122b: push    rbp
+0x122c: push    rbx
+0x122d: mov     rbx, rdi
+0x1230: mov     r9d, r10d
+0x1233: add     r10d, 1
+0x1237: mov     ebp, [rbx]
+0x1239: cmp     esi, r10d
+0x123c: jle     short loc_1290
+0x123e: lea     r12, [rbx+4]
+0x1242: mov     edi, ebp
+0x1244: mov     edx, r10d
+0x1247: mov     rax, r12
+0x124a: jmp     short loc_1262
+0x124c: align 10h
+0x1250: movsxd  rcx, r9d
+0x1253: add     edx, 1
+0x1256: add     rax, 4
+0x125a: lea     r8, [r11+rcx*4]
+0x125e: cmp     esi, edx
+0x1260: jz      short loc_127B
+0x1262: mov     ecx, [rax]
+0x1264: mov     r8, rax
+0x1267: cmp     ecx, edi
+0x1269: jge     short loc_1250
+0x126b: mov     r9d, edx
+0x126e: add     edx, 1
+0x1271: mov     edi, ecx
+0x1273: add     rax, 4
+0x1277: cmp     esi, edx
+0x1279: jnz     short loc_1262
+0x127b: mov     [rbx], edi
+0x127d: mov     rbx, r12
+0x1280: mov     [r8], ebp
+0x1283: cmp     r10d, r13d
+0x1286: jnz     short loc_1230
+0x1288: pop     rbx
+0x1289: pop     rbp
+0x128a: pop     r12
+0x128c: pop     r13
+0x128e: retn
+0x128f: align 10h
+0x1290: mov     r8, rbx
+0x1293: mov     edi, ebp
+0x1295: lea     r12, [rbx+4]
+0x1299: mov     [rbx], edi
+0x129b: mov     rbx, r12
+0x129e: mov     [r8], ebp
+0x12a1: cmp     r10d, r13d
+0x12a4: jnz     short loc_1230
+0x12a6: jmp     short loc_1288
+0x12a8: retn

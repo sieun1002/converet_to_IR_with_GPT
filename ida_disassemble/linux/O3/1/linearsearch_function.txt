@@ -1,0 +1,19 @@
+; Function: linear_search
+; Start: 0x1180, End: 0x11a6
+
+0x1180: endbr64
+0x1184: test    esi, esi
+0x1186: jle     short loc_11A0
+0x1188: movsxd  rsi, esi
+0x118b: xor     eax, eax
+0x118d: jmp     short loc_1199
+0x118f: align 10h
+0x1190: add     rax, 1
+0x1194: cmp     rax, rsi
+0x1197: jz      short loc_11A0
+0x1199: cmp     [rdi+rax*4], edx
+0x119c: jnz     short loc_1190
+0x119e: retn
+0x119f: align 20h
+0x11a0: mov     eax, 0FFFFFFFFh
+0x11a5: retn
