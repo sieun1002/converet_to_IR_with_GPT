@@ -1,0 +1,339 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; PHI nodes not grouped at top of basic block!
+;   %total = phi i64 [ %phi.rsi.1320, %L1320 ]
+; label %L1329
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-unknown-linux-gnu"
+
+@qword_2038 = external global i64
+@.str_bfs_hdr = private constant [21 x i8] c"BFS order from %zu: \00"
+@.str_zu_s   = private constant [6 x i8] c"%zu%s\00"
+@.str_dist   = private constant [23 x i8] c"dist(%zu -> %zu) = %d\0A\00"
+@.str_space  = private constant [2 x i8] c" \00"
+@.str_empty  = private constant [1 x i8] c"\00"
+@.str_nl     = private constant [2 x i8] c"\0A\00"
+
+declare noalias i8* @malloc(i64)
+declare void @free(i8*)
+declare i32 @__printf_chk(i32, i8*, ...)
+declare void @__stack_chk_fail()
+
+declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1)
+
+define i32 @main() {
+entry:
+  %dist = alloca [7 x i32], align 16
+  %adj = alloca [7 x [7 x i32]], align 16
+  %saved = alloca [7 x i64], align 16
+  %queue = alloca i64*, align 8
+  %fmt_zu_s = alloca i8*, align 8
+  %canary.slot = alloca i64, align 8
+  %guard.ptr = load i64, i64* bitcast (i64* @qword_2038 to i64*)
+  store i64 %guard.ptr, i64* %canary.slot, align 8
+  %dist.i8 = bitcast [7 x i32]* %dist to i8*
+  call void @llvm.memset.p0i8.i64(i8* %dist.i8, i8 -1, i64 28, i1 false)
+  %adj.i8 = bitcast [7 x [7 x i32]]* %adj to i8*
+  call void @llvm.memset.p0i8.i64(i8* %adj.i8, i8 0, i64 196, i1 false)
+  %adj_10 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 1, i64 0
+  store i32 1, i32* %adj_10, align 4
+  %adj_20 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 2, i64 0
+  store i32 1, i32* %adj_20, align 4
+  %adj_31 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 3, i64 1
+  store i32 1, i32* %adj_31, align 4
+  %adj_41 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 4, i64 1
+  store i32 1, i32* %adj_41, align 4
+  %adj_25 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 2, i64 5
+  store i32 1, i32* %adj_25, align 4
+  %adj_52 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 5, i64 2
+  store i32 1, i32* %adj_52, align 4
+  %adj_45 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 4, i64 5
+  store i32 1, i32* %adj_45, align 4
+  %adj_54 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 5, i64 4
+  store i32 1, i32* %adj_54, align 4
+  %adj_56 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 5, i64 6
+  store i32 1, i32* %adj_56, align 4
+  %adj_65 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 6, i64 5
+  store i32 1, i32* %adj_65, align 4
+  %g = load i64, i64* @qword_2038
+  %g32 = trunc i64 %g to i32
+  %adj_01 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 0, i64 1
+  store i32 %g32, i32* %adj_01, align 4
+  %adj_13 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 1, i64 3
+  store i32 %g32, i32* %adj_13, align 4
+  %fmtPtr = getelementptr inbounds [6 x i8], [6 x i8]* @.str_zu_s, i64 0, i64 0
+  store i8* %fmtPtr, i8** %fmt_zu_s, align 8
+  %qmem = call noalias i8* @malloc(i64 56)
+  %qnull = icmp eq i8* %qmem, null
+  br i1 %qnull, label %L1414, label %L1196
+
+L1196:
+  %q = bitcast i8* %qmem to i64*
+  store i64* %q, i64** %queue, align 8
+  %q0 = getelementptr inbounds i64, i64* %q, i64 0
+  store i64 0, i64* %q0, align 8
+  %dist0ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 0
+  store i32 0, i32* %dist0ptr, align 4
+  br label %L11D3
+
+L11C0:
+  %phi.q.11C0 = phi i64* [ %phi.q.1320, %L1320 ]
+  %phi.rbx.11C0 = phi i64 [ %rbx.next, %L1320 ]
+  %phi.rsi.11C0 = phi i64 [ %phi.rsi.1320, %L1320 ]
+  %qidx.ptr = getelementptr inbounds i64, i64* %phi.q.11C0, i64 %phi.rbx.11C0
+  %rdx.cur = load i64, i64* %qidx.ptr, align 8
+  %row0.ptr = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.cur, i64 0
+  %eax0.next = load i32, i32* %row0.ptr, align 4
+  br label %L11D3
+
+L11D3:
+  %phi.q.11D3 = phi i64* [ %q, %L1196 ], [ %phi.q.11C0, %L11C0 ]
+  %phi.rsi.11D3 = phi i64 [ 1, %L1196 ], [ %phi.rsi.11C0, %L11C0 ]
+  %phi.rbx.11D3.prev = phi i64 [ 0, %L1196 ], [ %phi.rbx.11C0, %L11C0 ]
+  %phi.eax0.11D3 = phi i32 [ 0, %L1196 ], [ %eax0.next, %L11C0 ]
+  %rbx.next = add i64 %phi.rbx.11D3.prev, 1
+  %idx.prev = sub i64 %rbx.next, 1
+  %qpop.ptr = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %idx.prev
+  %rdx.node = load i64, i64* %qpop.ptr, align 8
+  %saved.ptr = getelementptr inbounds [7 x i64], [7 x i64]* %saved, i64 0, i64 %idx.prev
+  store i64 %rdx.node, i64* %saved.ptr, align 8
+  %parent.ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 %rdx.node
+  br label %L11E1
+
+L11E1:
+  %tst_eax0 = icmp eq i32 %phi.eax0.11D3, 0
+  br i1 %tst_eax0, label %L1200, label %L11E5
+
+L11E5:
+  %d0 = load i32, i32* %dist0ptr, align 4
+  %d0_is_m1 = icmp ne i32 %d0, -1
+  br i1 %d0_is_m1, label %L1200, label %L11EB
+
+L11EB:
+  %parent.0 = load i32, i32* %parent.ptr, align 4
+  %enq.idx0 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.11D3
+  store i64 0, i64* %enq.idx0, align 8
+  %rsi.inc0 = add i64 %phi.rsi.11D3, 1
+  %newd0 = add i32 %parent.0, 1
+  store i32 %newd0, i32* %dist0ptr, align 4
+  br label %L1200
+
+L1200:
+  %phi.rsi.1200 = phi i64 [ %phi.rsi.11D3, %L11E1 ], [ %phi.rsi.11D3, %L11E5 ], [ %rsi.inc0, %L11EB ]
+  %adj_r1 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.node, i64 1
+  %r11d = load i32, i32* %adj_r1, align 4
+  %tst_r11 = icmp eq i32 %r11d, 0
+  br i1 %tst_r11, label %L1240, label %L121D
+
+L121D:
+  %dist1ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 1
+  %d1 = load i32, i32* %dist1ptr, align 4
+  %d1_is_m1 = icmp ne i32 %d1, -1
+  br i1 %d1_is_m1, label %L1240, label %L1224
+
+L1224:
+  %parent.1 = load i32, i32* %parent.ptr, align 4
+  %enq.idx1 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.1200
+  store i64 1, i64* %enq.idx1, align 8
+  %rsi.inc1 = add i64 %phi.rsi.1200, 1
+  %newd1 = add i32 %parent.1, 1
+  store i32 %newd1, i32* %dist1ptr, align 4
+  br label %L1240
+
+L1240:
+  %phi.rsi.1240 = phi i64 [ %phi.rsi.1200, %L121D ], [ %rsi.inc1, %L1224 ], [ %phi.rsi.1200, %L1200 ]
+  %adj_r2 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.node, i64 2
+  %r10d = load i32, i32* %adj_r2, align 4
+  %tst_r10 = icmp eq i32 %r10d, 0
+  br i1 %tst_r10, label %L1270, label %L124A
+
+L124A:
+  %dist2ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 2
+  %d2 = load i32, i32* %dist2ptr, align 4
+  %d2_is_m1 = icmp ne i32 %d2, -1
+  br i1 %d2_is_m1, label %L1270, label %L1251
+
+L1251:
+  %parent.2 = load i32, i32* %parent.ptr, align 4
+  %enq.idx2 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.1240
+  store i64 2, i64* %enq.idx2, align 8
+  %rsi.inc2 = add i64 %phi.rsi.1240, 1
+  %newd2 = add i32 %parent.2, 1
+  store i32 %newd2, i32* %dist2ptr, align 4
+  br label %L1270
+
+L1270:
+  %phi.rsi.1270 = phi i64 [ %phi.rsi.1240, %L124A ], [ %rsi.inc2, %L1251 ], [ %phi.rsi.1240, %L1240 ]
+  %adj_r3 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.node, i64 3
+  %r9d = load i32, i32* %adj_r3, align 4
+  %tst_r9 = icmp eq i32 %r9d, 0
+  br i1 %tst_r9, label %L12A0, label %L127A
+
+L127A:
+  %dist3ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 3
+  %d3 = load i32, i32* %dist3ptr, align 4
+  %d3_is_m1 = icmp ne i32 %d3, -1
+  br i1 %d3_is_m1, label %L12A0, label %L1281
+
+L1281:
+  %parent.3 = load i32, i32* %parent.ptr, align 4
+  %enq.idx3 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.1270
+  store i64 3, i64* %enq.idx3, align 8
+  %rsi.inc3 = add i64 %phi.rsi.1270, 1
+  %newd3 = add i32 %parent.3, 1
+  store i32 %newd3, i32* %dist3ptr, align 4
+  br label %L12A0
+
+L12A0:
+  %phi.rsi.12A0 = phi i64 [ %phi.rsi.1270, %L127A ], [ %rsi.inc3, %L1281 ], [ %phi.rsi.1270, %L1270 ]
+  %adj_r4 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.node, i64 4
+  %r8d = load i32, i32* %adj_r4, align 4
+  %tst_r8 = icmp eq i32 %r8d, 0
+  br i1 %tst_r8, label %L12D0, label %L12AA
+
+L12AA:
+  %dist4ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 4
+  %d4 = load i32, i32* %dist4ptr, align 4
+  %d4_is_m1 = icmp ne i32 %d4, -1
+  br i1 %d4_is_m1, label %L12D0, label %L12B1
+
+L12B1:
+  %parent.4 = load i32, i32* %parent.ptr, align 4
+  %enq.idx4 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.12A0
+  store i64 4, i64* %enq.idx4, align 8
+  %rsi.inc4 = add i64 %phi.rsi.12A0, 1
+  %newd4 = add i32 %parent.4, 1
+  store i32 %newd4, i32* %dist4ptr, align 4
+  br label %L12D0
+
+L12D0:
+  %phi.rsi.12D0 = phi i64 [ %phi.rsi.12A0, %L12AA ], [ %rsi.inc4, %L12B1 ], [ %phi.rsi.12A0, %L12A0 ]
+  %adj_r5 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.node, i64 5
+  %r5d = load i32, i32* %adj_r5, align 4
+  %tst_r5 = icmp eq i32 %r5d, 0
+  br i1 %tst_r5, label %L12F8, label %L12DF
+
+L12DF:
+  %dist5ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 5
+  %d5 = load i32, i32* %dist5ptr, align 4
+  %d5_is_m1 = icmp ne i32 %d5, -1
+  br i1 %d5_is_m1, label %L12F8, label %L12E2
+
+L12E2:
+  %parent.5 = load i32, i32* %parent.ptr, align 4
+  %enq.idx5 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.12D0
+  store i64 5, i64* %enq.idx5, align 8
+  %rsi.inc5 = add i64 %phi.rsi.12D0, 1
+  %newd5 = add i32 %parent.5, 1
+  store i32 %newd5, i32* %dist5ptr, align 4
+  br label %L12F8
+
+L12F8:
+  %phi.rsi.12F8 = phi i64 [ %phi.rsi.12D0, %L12DF ], [ %rsi.inc5, %L12E2 ], [ %phi.rsi.12D0, %L12D0 ]
+  %adj_r6 = getelementptr inbounds [7 x [7 x i32]], [7 x [7 x i32]]* %adj, i64 0, i64 %rdx.node, i64 6
+  %r6d = load i32, i32* %adj_r6, align 4
+  %tst_r6 = icmp eq i32 %r6d, 0
+  br i1 %tst_r6, label %L1320, label %L1307
+
+L1307:
+  %dist6ptr = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 6
+  %d6 = load i32, i32* %dist6ptr, align 4
+  %d6_is_m1 = icmp ne i32 %d6, -1
+  br i1 %d6_is_m1, label %L1320, label %L130A
+
+L130A:
+  %parent.6 = load i32, i32* %parent.ptr, align 4
+  %enq.idx6 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 %phi.rsi.12F8
+  store i64 6, i64* %enq.idx6, align 8
+  %rsi.inc6 = add i64 %phi.rsi.12F8, 1
+  %newd6 = add i32 %parent.6, 1
+  store i32 %newd6, i32* %dist6ptr, align 4
+  br label %L1320
+
+L1320:
+  %phi.rsi.1320 = phi i64 [ %phi.rsi.12F8, %L12F8 ], [ %phi.rsi.12F8, %L1307 ], [ %rsi.inc6, %L130A ]
+  %phi.q.1320 = getelementptr inbounds i64, i64* %phi.q.11D3, i64 0
+  %cmp_rb = icmp ult i64 %rbx.next, %phi.rsi.1320
+  br i1 %cmp_rb, label %L11C0, label %L1329
+
+L1329:
+  %q.fin = phi i64* [ %phi.q.11D3, %L1320 ]
+  %q.fin.i8 = bitcast i64* %q.fin to i8*
+  call void @free(i8* %q.fin.i8)
+  %hdrp = getelementptr inbounds [21 x i8], [21 x i8]* @.str_bfs_hdr, i64 0, i64 0
+  %_ = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %hdrp, i64 0)
+  %saved0 = getelementptr inbounds [7 x i64], [7 x i64]* %saved, i64 0, i64 0
+  %first = load i64, i64* %saved0, align 8
+  %total = phi i64 [ %phi.rsi.1320, %L1320 ]
+  %is_one = icmp ne i64 %total, 1
+  br i1 %is_one, label %L13DD, label %L1360
+
+L1360:
+  %fmt.ptr = load i8*, i8** %fmt_zu_s, align 8
+  %empty = getelementptr inbounds [1 x i8], [1 x i8]* @.str_empty, i64 0, i64 0
+  %__p1 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.ptr, i64 %first, i8* %empty)
+  br label %L1376
+
+L1376:
+  %nlp = getelementptr inbounds [2 x i8], [2 x i8]* @.str_nl, i64 0, i64 0
+  %__p2 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nlp)
+  br label %L1398
+
+L1398:
+  %i = phi i64 [ 0, %L1376 ], [ %i.next, %L13B4 ]
+  %di = getelementptr inbounds [7 x i32], [7 x i32]* %dist, i64 0, i64 %i
+  %val = load i32, i32* %di, align 4
+  %fmtD = getelementptr inbounds [23 x i8], [23 x i8]* @.str_dist, i64 0, i64 0
+  %__p3 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmtD, i64 0, i64 %i, i32 %val)
+  br label %L13B4
+
+L13B4:
+  %i.next = add i64 %i, 1
+  %cmp7 = icmp ne i64 %i.next, 7
+  br i1 %cmp7, label %L1398, label %L13BA
+
+L13BA:
+  %can.val = load i64, i64* %canary.slot, align 8
+  %can.now = load i64, i64* bitcast (i64* @qword_2038 to i64*)
+  %can.ok = icmp eq i64 %can.val, %can.now
+  br i1 %can.ok, label %L13CD, label %L142E
+
+L13CD:
+  ret i32 0
+
+L13DD:
+  %saved.base = getelementptr inbounds [7 x i64], [7 x i64]* %saved, i64 0, i64 0
+  %saved.end = getelementptr inbounds i64, i64* %saved.base, i64 %total
+  %rbp = getelementptr inbounds i64, i64* %saved.base, i64 1
+  %space = getelementptr inbounds [2 x i8], [2 x i8]* @.str_space, i64 0, i64 0
+  %fmt.ptr2 = load i8*, i8** %fmt_zu_s, align 8
+  br label %L13F0
+
+L13F0:
+  %rbp.phi = phi i64* [ %rbp, %L13DD ], [ %rbp.next, %L140A ]
+  %elem.ptr = getelementptr inbounds i64, i64* %rbp.phi, i64 -1
+  %elem = load i64, i64* %elem.ptr, align 8
+  %__p4 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.ptr2, i64 %elem, i8* %space)
+  br label %L1402
+
+L1402:
+  %rbp.next = getelementptr inbounds i64, i64* %rbp.phi, i64 1
+  br label %L140A
+
+L140A:
+  %cont = icmp ne i64* %rbp.next, %saved.end
+  %first.next = load i64, i64* %elem.ptr, align 8
+  %first.sel = select i1 %cont, i64 %first, i64 %first.next
+  br i1 %cont, label %L13F0, label %L1360
+
+L1414:
+  %hdrp2 = getelementptr inbounds [21 x i8], [21 x i8]* @.str_bfs_hdr, i64 0, i64 0
+  %__p5 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %hdrp2, i64 0)
+  br label %L1376
+
+L142E:
+  call void @__stack_chk_fail()
+  unreachable
+}

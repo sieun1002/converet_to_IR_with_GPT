@@ -1,0 +1,122 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.ll:59:13: error: expected instruction opcode
+;   %rcx.in = %rcx.cur
+;             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-linux-gnu"
+
+@.str_index = private unnamed_addr constant [21 x i8] c"key %d -> index %ld\0A\00", align 1
+@.str_notfound = private unnamed_addr constant [21 x i8] c"key %d -> not found\0A\00", align 1
+
+; External data referenced by the function
+@xmmword_2030 = external global [4 x i32], align 16
+@xmmword_2040 = external global [4 x i32], align 16
+@qword_2050   = external global i64, align 8
+@__stack_chk_guard = external global i64, align 8
+
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @__stack_chk_fail()
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i1 immarg)
+
+define i32 @main() {
+loc_1080:
+  %arr = alloca [9 x i32], align 16
+  %sk = alloca [3 x i32], align 16
+  %saved_canary = alloca i64, align 8
+  %guard0 = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard0, i64* %saved_canary, align 8
+  %arr.base.i32 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 0
+  %arr.base.i8 = bitcast i32* %arr.base.i32 to i8*
+  %src0 = bitcast [4 x i32]* @xmmword_2030 to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %arr.base.i8, i8* %src0, i64 16, i1 false)
+  %arr.off4 = getelementptr inbounds i32, i32* %arr.base.i32, i64 4
+  %arr.off4.i8 = bitcast i32* %arr.off4 to i8*
+  %src1 = bitcast [4 x i32]* @xmmword_2040 to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %arr.off4.i8, i8* %src1, i64 16, i1 false)
+  %arr.idx8 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 8
+  store i32 12, i32* %arr.idx8, align 4
+  %q = load i64, i64* @qword_2050, align 8
+  %key0 = trunc i64 %q to i32
+  %q_shr = lshr i64 %q, 32
+  %key1 = trunc i64 %q_shr to i32
+  %sk0 = getelementptr inbounds [3 x i32], [3 x i32]* %sk, i64 0, i64 0
+  %sk1 = getelementptr inbounds [3 x i32], [3 x i32]* %sk, i64 0, i64 1
+  %sk2 = getelementptr inbounds [3 x i32], [3 x i32]* %sk, i64 0, i64 2
+  store i32 %key0, i32* %sk0, align 4
+  store i32 %key1, i32* %sk1, align 4
+  store i32 -5,   i32* %sk2, align 4
+  %skEnd = getelementptr inbounds [3 x i32], [3 x i32]* %sk, i64 0, i64 3
+  br label %loc_10E0
+
+loc_10E0:
+  %r12.cur = phi i32* [ %sk0, %loc_1080 ], [ %r12.next, %loc_1127 ]
+  %key.load = load i32, i32* %r12.cur, align 4
+  br label %loc_1105
+
+loc_1105:
+  %rcx.cur = phi i64 [ 0, %loc_10E0 ], [ %rcx.pass, %block1102 ], [ %rcx.next, %loc_1150 ]
+  %rdx.cur = phi i64 [ 9, %loc_10E0 ], [ %mid,      %block1102 ], [ %rdx.in,   %loc_1150 ]
+  %cmp.rcx.rdx = icmp ult i64 %rcx.cur, %rdx.cur
+  br i1 %cmp.rcx.rdx, label %loc_10F0, label %block110a
+
+loc_10F0:
+  %rcx.in = %rcx.cur
+  %rdx.in = %rdx.cur
+  %sub = sub i64 %rdx.in, %rcx.in
+  %shr = lshr i64 %sub, 1
+  %mid = add i64 %shr, %rcx.in
+  %arr.base = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 0
+  %mid.ptr = getelementptr inbounds i32, i32* %arr.base, i64 %mid
+  %mid.val = load i32, i32* %mid.ptr, align 4
+  %key.cmp0 = icmp sgt i32 %key.load, %mid.val
+  br i1 %key.cmp0, label %loc_1150, label %block1102
+
+block1102:
+  %rcx.pass = %rcx.in
+  br label %loc_1105
+
+loc_1150:
+  %rcx.next = add i64 %mid, 1
+  br label %loc_1105
+
+block110a:
+  %cmp.rcx.max = icmp ugt i64 %rcx.cur, 8
+  br i1 %cmp.rcx.max, label %loc_1156, label %block1112
+
+block1112:
+  %idx.ptr = getelementptr inbounds i32, i32* %arr.base, i64 %rcx.cur
+  %idx.val = load i32, i32* %idx.ptr, align 4
+  %neq = icmp ne i32 %key.load, %idx.val
+  br i1 %neq, label %loc_1156, label %print_found
+
+print_found:
+  %fmt1 = getelementptr inbounds [21 x i8], [21 x i8]* @.str_index, i64 0, i64 0
+  %rcx.as.i64 = %rcx.cur
+  %call.ok = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt1, i32 %key.load, i64 %rcx.as.i64)
+  br label %loc_1127
+
+loc_1156:
+  %fmt2 = getelementptr inbounds [21 x i8], [21 x i8]* @.str_notfound, i64 0, i64 0
+  %call.nf = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt2, i32 %key.load)
+  br label %loc_1127
+
+loc_1127:
+  %r12.next = getelementptr inbounds i32, i32* %r12.cur, i64 1
+  %cont = icmp ne i32* %r12.next, %skEnd
+  br i1 %cont, label %loc_10E0, label %epilogue_check
+
+epilogue_check:
+  %guard.saved = load i64, i64* %saved_canary, align 8
+  %guard.now = load i64, i64* @__stack_chk_guard, align 8
+  %canary.bad = icmp ne i64 %guard.saved, %guard.now
+  br i1 %canary.bad, label %loc_116B, label %retblk
+
+retblk:
+  ret i32 0
+
+loc_116B:
+  call void @__stack_chk_fail()
+  unreachable
+}

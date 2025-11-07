@@ -1,0 +1,39 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/1/linearsearch_function1.ll:15:30: error: use of undefined value '%idx_next'
+;   %idx_from_1199 = phi i64 [ %idx_next, %loc_1199 ]
+;                              ^
+; === ERROR LOG END ===
+
+; ModuleID = 'linear_search'
+source_filename = "linear_search"
+target triple = "x86_64-pc-linux-gnu"
+
+define i32 @linear_search(i32* %arr, i32 %n, i32 %key) {
+loc_1180:
+  %cmp_n_le_zero = icmp sle i32 %n, 0
+  br i1 %cmp_n_le_zero, label %loc_11A0, label %loc_1188
+
+loc_1188:
+  %n64 = sext i32 %n to i64
+  br label %loc_1199
+
+loc_1190:
+  %idx_from_1199 = phi i64 [ %idx_next, %loc_1199 ]
+  %idx_inc = add i64 %idx_from_1199, 1
+  %cmp_end = icmp eq i64 %idx_inc, %n64
+  br i1 %cmp_end, label %loc_11A0, label %loc_1199
+
+loc_1199:
+  %idx = phi i64 [ 0, %loc_1188 ], [ %idx_inc, %loc_1190 ]
+  %elt.ptr = getelementptr i32, i32* %arr, i64 %idx
+  %elt = load i32, i32* %elt.ptr, align 4
+  %cmp_neq = icmp ne i32 %elt, %key
+  br i1 %cmp_neq, label %loc_1190, label %loc_119e
+
+loc_119e:
+  %retidx32 = trunc i64 %idx to i32
+  ret i32 %retidx32
+
+loc_11A0:
+  ret i32 -1
+}

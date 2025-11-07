@@ -1,0 +1,480 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-unknown-linux-gnu"
+
+@xmmword_2010 = external global <4 x i32>, align 16
+@xmmword_2020 = external global <4 x i32>, align 16
+@__stack_chk_guard = external global i64
+@unk_2004 = private constant [4 x i8] c"%d \00", align 1
+@unk_2008 = private constant [2 x i8] c"\0A\00", align 1
+
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail()
+
+define i32 @main() {
+entry_1080:
+  %frame = alloca [48 x i8], align 16
+  %base = getelementptr inbounds [48 x i8], [48 x i8]* %frame, i64 0, i64 0
+
+  %rcx0 = add i64 0, 0
+
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_2010, align 16
+  %base_v = bitcast i8* %base to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %base_v, align 16
+
+  %base_i32 = bitcast i8* %base to i32*
+
+  %guard = load i64, i64* @__stack_chk_guard, align 8
+  %canary_slot = getelementptr inbounds i8, i8* %base, i64 40
+  %canary_slot64 = bitcast i8* %canary_slot to i64*
+  store i64 %guard, i64* %canary_slot64, align 8
+
+  %rbp_init = ptrtoint i8* %base to i64
+
+  %p32b = getelementptr inbounds i8, i8* %base, i64 32
+  %p32b_i32 = bitcast i8* %p32b to i32*
+  store i32 4, i32* %p32b_i32, align 4
+
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_2020, align 16
+  %p16 = getelementptr inbounds i8, i8* %base, i64 16
+  %p16_v = bitcast i8* %p16 to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %p16_v, align 16
+
+  %rbx0 = getelementptr inbounds i8, i8* %base, i64 0
+  %rsi0 = getelementptr inbounds i8, i8* %base, i64 0
+
+  br label %loc_10D0
+
+loc_10D0:
+  %rcx.ph = phi i64 [ %rcx0, %entry_1080 ], [ %rcx.next, %loc_11C6 ]
+  %rsi.ph = phi i8* [ %rsi0, %entry_1080 ], [ %rsi.next, %loc_11C6 ]
+
+  %rsi_p4 = getelementptr inbounds i8, i8* %rsi.ph, i64 4
+  %rsi_p4_i32 = bitcast i8* %rsi_p4 to i32*
+  %edx.10d0 = load i32, i32* %rsi_p4_i32, align 4
+
+  %rsi_i32p = bitcast i8* %rsi.ph to i32*
+  %r8d.10d0 = load i32, i32* %rsi_i32p, align 4
+
+  %rdi.10d0 = getelementptr inbounds i8, i8* %rsi_p4, i64 0
+
+  %rax.10d0 = getelementptr inbounds i8, i8* %rsi.ph, i64 0
+
+  %cmp_10e0 = icmp sle i32 %r8d.10d0, %edx.10d0
+  br i1 %cmp_10e0, label %loc_12C3, label %cont_10E6
+
+cont_10E6:
+  store i32 %r8d.10d0, i32* %rsi_p4_i32, align 4
+  %rcx_is_zero = icmp eq i64 %rcx.ph, 0
+  br i1 %rcx_is_zero, label %loc_1234, label %loc_10F3
+
+loc_12C3:
+  %rsi.12c3 = getelementptr inbounds i8, i8* %rdi.10d0, i64 0
+  %rax.12c3 = getelementptr inbounds i8, i8* %rdi.10d0, i64 0
+  br label %loc_11C6
+
+loc_1234:
+  store i32 %edx.10d0, i32* %base_i32, align 4
+
+  %rdi_p4 = getelementptr inbounds i8, i8* %rdi.10d0, i64 4
+  %rdi_p4_i32 = bitcast i8* %rdi_p4 to i32*
+  %edx.1234 = load i32, i32* %rdi_p4_i32, align 4
+
+  %rsi.1234 = getelementptr inbounds i8, i8* %rsi.ph, i64 8
+
+  %rax.1234 = getelementptr inbounds i8, i8* %rdi.10d0, i64 0
+
+  %rdi_i32p = bitcast i8* %rdi.10d0 to i32*
+  %ecx_val_1234 = load i32, i32* %rdi_i32p, align 4
+
+  %cmp_1243 = icmp sle i32 %ecx_val_1234, %edx.1234
+  br i1 %cmp_1243, label %loc_13CC, label %cont_124B
+
+cont_124B:
+  store i32 %ecx_val_1234, i32* %rdi_p4_i32, align 4
+  %rsi.swap = getelementptr inbounds i8, i8* %rdi.10d0, i64 0
+  %rdi.swap = getelementptr inbounds i8, i8* %rsi.1234, i64 0
+  %rcx.set1 = zext i32 1 to i64
+  br label %loc_10F3
+
+loc_13CC:
+  %rax.13cc = getelementptr inbounds i8, i8* %rsi.1234, i64 0
+  %rcx.13cc = zext i32 1 to i64
+  br label %loc_11C6
+
+loc_10F3:
+  %edx.ph = phi i32 [ %edx.10d0, %cont_10E6 ], [ %edx.1234, %cont_124B ], [ %edx.sel, %loc_1288 ]
+  %rax.ph = phi i8* [ %rax.10d0, %cont_10E6 ], [ %rax.1234, %cont_124B ], [ %rax.sel, %loc_1288 ]
+  %rdi.ph = phi i8* [ %rdi.10d0, %cont_10E6 ], [ %rdi.swap, %cont_124B ], [ %rdi.to10f3, %loc_1288 ]
+  %rsi.ph2 = phi i8* [ %rsi.ph, %cont_10E6 ], [ %rsi.swap, %cont_124B ], [ %rsi.to10f3, %loc_1288 ]
+  %rcx.ph2 = phi i64 [ %rcx.ph, %cont_10E6 ], [ %rcx.set1, %cont_124B ], [ %rcx.sel, %loc_1288 ]
+
+  %p_m4 = getelementptr inbounds i8, i8* %rax.ph, i64 -4
+  %p_m4_i32 = bitcast i8* %p_m4 to i32*
+  %r8d.m4 = load i32, i32* %p_m4_i32, align 4
+  %cmp_10f7 = icmp sle i32 %r8d.m4, %edx.ph
+  br i1 %cmp_10f7, label %loc_125B, label %cont_1100
+
+cont_1100:
+  %rax_i32p = bitcast i8* %rax.ph to i32*
+  store i32 %r8d.m4, i32* %rax_i32p, align 4
+  %is_rcx_1 = icmp eq i64 %rcx.ph2, 1
+  br i1 %is_rcx_1, label %loc_1263, label %cont_110D
+
+cont_110D:
+  %p_m8 = getelementptr inbounds i8, i8* %rax.ph, i64 -8
+  %p_m8_i32 = bitcast i8* %p_m8 to i32*
+  %r8d.m8 = load i32, i32* %p_m8_i32, align 4
+  %cmp_1111 = icmp sle i32 %r8d.m8, %edx.ph
+  br i1 %cmp_1111, label %loc_1296, label %cont_111A
+
+cont_111A:
+  %p_m4_store = bitcast i8* %p_m4 to i32*
+  store i32 %r8d.m8, i32* %p_m4_store, align 4
+  %is_rcx_2 = icmp eq i64 %rcx.ph2, 2
+  br i1 %is_rcx_2, label %loc_12A2, label %cont_1128
+
+cont_1128:
+  %p_m12 = getelementptr inbounds i8, i8* %rax.ph, i64 -12
+  %p_m12_i32 = bitcast i8* %p_m12 to i32*
+  %r8d.m12 = load i32, i32* %p_m12_i32, align 4
+  %cmp_112c = icmp sle i32 %r8d.m12, %edx.ph
+  br i1 %cmp_112c, label %loc_12CE, label %cont_1135
+
+cont_1135:
+  store i32 %r8d.m12, i32* %p_m8_i32, align 4
+  %is_rcx_3 = icmp eq i64 %rcx.ph2, 3
+  br i1 %is_rcx_3, label %loc_12DA, label %cont_1143
+
+cont_1143:
+  %p_m16 = getelementptr inbounds i8, i8* %rax.ph, i64 -16
+  %p_m16_i32 = bitcast i8* %p_m16 to i32*
+  %r8d.m16 = load i32, i32* %p_m16_i32, align 4
+  %cmp_1147 = icmp sle i32 %r8d.m16, %edx.ph
+  br i1 %cmp_1147, label %loc_12FB, label %cont_1150
+
+cont_1150:
+  store i32 %r8d.m16, i32* %p_m12_i32, align 4
+  %is_rcx_4 = icmp eq i64 %rcx.ph2, 4
+  br i1 %is_rcx_4, label %loc_1307, label %cont_115E
+
+cont_115E:
+  %p_m20 = getelementptr inbounds i8, i8* %rax.ph, i64 -20
+  %p_m20_i32 = bitcast i8* %p_m20 to i32*
+  %r8d.m20 = load i32, i32* %p_m20_i32, align 4
+  %cmp_1162 = icmp sle i32 %r8d.m20, %edx.ph
+  br i1 %cmp_1162, label %loc_132B, label %cont_116B
+
+cont_116B:
+  store i32 %r8d.m20, i32* %p_m16_i32, align 4
+  %is_rcx_5 = icmp eq i64 %rcx.ph2, 5
+  br i1 %is_rcx_5, label %loc_1337, label %cont_1179
+
+cont_1179:
+  %p_m24 = getelementptr inbounds i8, i8* %rax.ph, i64 -24
+  %p_m24_i32 = bitcast i8* %p_m24 to i32*
+  %r8d.m24 = load i32, i32* %p_m24_i32, align 4
+  %cmp_117d = icmp sle i32 %r8d.m24, %edx.ph
+  br i1 %cmp_117d, label %loc_135B, label %cont_1186
+
+cont_1186:
+  store i32 %r8d.m24, i32* %p_m20_i32, align 4
+  %is_rcx_6 = icmp eq i64 %rcx.ph2, 6
+  br i1 %is_rcx_6, label %loc_1367, label %cont_1194
+
+cont_1194:
+  %p_m28 = getelementptr inbounds i8, i8* %rax.ph, i64 -28
+  %p_m28_i32 = bitcast i8* %p_m28 to i32*
+  %r8d.m28 = load i32, i32* %p_m28_i32, align 4
+  %cmp_1198 = icmp sle i32 %r8d.m28, %edx.ph
+  br i1 %cmp_1198, label %loc_1387, label %cont_11A1
+
+cont_11A1:
+  store i32 %r8d.m28, i32* %p_m24_i32, align 4
+  %is_rcx_7 = icmp eq i64 %rcx.ph2, 7
+  br i1 %is_rcx_7, label %loc_1393, label %cont_11AF
+
+cont_11AF:
+  %p_m32 = getelementptr inbounds i8, i8* %rax.ph, i64 -32
+  %p_m32_i32 = bitcast i8* %p_m32 to i32*
+  %r8d.m32 = load i32, i32* %p_m32_i32, align 4
+  %cmp_11B3 = icmp sle i32 %r8d.m32, %edx.ph
+  br i1 %cmp_11B3, label %loc_13B3, label %cont_11BC
+
+cont_11BC:
+  store i32 %r8d.m32, i32* %p_m28_i32, align 4
+  %rsi.to11c6 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rax.to11c6 = getelementptr inbounds i8, i8* %base, i64 0
+  br label %loc_11C6
+
+loc_125B:
+  %rsi.125b = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_1296:
+  %rax.1296 = getelementptr inbounds i8, i8* %rsi.ph2, i64 -4
+  %rsi.1296 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_12CE:
+  %rax.12ce = getelementptr inbounds i8, i8* %rsi.ph2, i64 -8
+  %rsi.12ce = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_12FB:
+  %rax.12fb = getelementptr inbounds i8, i8* %rsi.ph2, i64 -12
+  %rsi.12fb = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_132B:
+  %rax.132b = getelementptr inbounds i8, i8* %rsi.ph2, i64 -16
+  %rsi.132b = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_135B:
+  %rax.135b = getelementptr inbounds i8, i8* %rsi.ph2, i64 -20
+  %rsi.135b = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_1387:
+  %rax.1387 = getelementptr inbounds i8, i8* %rsi.ph2, i64 -24
+  %rsi.1387 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_13B3:
+  %rax.13b3 = getelementptr inbounds i8, i8* %rsi.ph2, i64 -28
+  %rsi.13b3 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  br label %loc_11C6
+
+loc_1263:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_1263 = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_1263 = bitcast i8* %rdi_p4_1263 to i32*
+  %edx.1263 = load i32, i32* %rdi_p4_i32_1263, align 4
+  %rsi.1263 = getelementptr inbounds i8, i8* %rdi_p4_1263, i64 0
+  %rax.1263 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_1263 = bitcast i8* %rdi.ph to i32*
+  %ecx.1263 = load i32, i32* %rdi_i32p_1263, align 4
+  %cmp_1276 = icmp sge i32 %edx.1263, %ecx.1263
+  br i1 %cmp_1276, label %loc_13BF, label %cont_127A
+
+cont_127A:
+  store i32 %ecx.1263, i32* %rdi_p4_i32_1263, align 4
+  %rcx.set2 = zext i32 2 to i64
+  br label %loc_1288
+
+loc_12A2:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_12a2 = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_12a2 = bitcast i8* %rdi_p4_12a2 to i32*
+  %edx.12a2 = load i32, i32* %rdi_p4_i32_12a2, align 4
+  %rsi.12a2 = getelementptr inbounds i8, i8* %rdi_p4_12a2, i64 0
+  %rax.12a2 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_12a2 = bitcast i8* %rdi.ph to i32*
+  %ecx.12a2 = load i32, i32* %rdi_i32p_12a2, align 4
+  %cmp_12b1 = icmp sle i32 %ecx.12a2, %edx.12a2
+  br i1 %cmp_12b1, label %loc_1400, label %cont_12B9
+
+cont_12B9:
+  store i32 %ecx.12a2, i32* %rdi_p4_i32_12a2, align 4
+  %rcx.set3 = zext i32 3 to i64
+  br label %loc_1288
+
+loc_12DA:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_12da = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_12da = bitcast i8* %rdi_p4_12da to i32*
+  %edx.12da = load i32, i32* %rdi_p4_i32_12da, align 4
+  %rsi.12da = getelementptr inbounds i8, i8* %rdi_p4_12da, i64 0
+  %rax.12da = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_12da = bitcast i8* %rdi.ph to i32*
+  %ecx.12da = load i32, i32* %rdi_i32p_12da, align 4
+  %cmp_12e9 = icmp sge i32 %edx.12da, %ecx.12da
+  br i1 %cmp_12e9, label %loc_140D, label %cont_12F1
+
+cont_12F1:
+  store i32 %ecx.12da, i32* %rdi_p4_i32_12da, align 4
+  %rcx.set4 = zext i32 4 to i64
+  br label %loc_1288
+
+loc_1307:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_1307 = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_1307 = bitcast i8* %rdi_p4_1307 to i32*
+  %edx.1307 = load i32, i32* %rdi_p4_i32_1307, align 4
+  %rsi.1307 = getelementptr inbounds i8, i8* %rdi_p4_1307, i64 0
+  %rax.1307 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_1307 = bitcast i8* %rdi.ph to i32*
+  %ecx.1307 = load i32, i32* %rdi_i32p_1307, align 4
+  %cmp_1316 = icmp sge i32 %edx.1307, %ecx.1307
+  br i1 %cmp_1316, label %loc_13E6, label %cont_131E
+
+cont_131E:
+  store i32 %ecx.1307, i32* %rdi_p4_i32_1307, align 4
+  %rcx.set5 = zext i32 5 to i64
+  br label %loc_1288
+
+loc_1337:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_1337 = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_1337 = bitcast i8* %rdi_p4_1337 to i32*
+  %edx.1337 = load i32, i32* %rdi_p4_i32_1337, align 4
+  %rsi.1337 = getelementptr inbounds i8, i8* %rdi_p4_1337, i64 0
+  %rax.1337 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_1337 = bitcast i8* %rdi.ph to i32*
+  %ecx.1337 = load i32, i32* %rdi_i32p_1337, align 4
+  %cmp_1346 = icmp sge i32 %edx.1337, %ecx.1337
+  br i1 %cmp_1346, label %loc_13F3, label %cont_134E
+
+cont_134E:
+  store i32 %ecx.1337, i32* %rdi_p4_i32_1337, align 4
+  %rcx.set6 = zext i32 6 to i64
+  br label %loc_1288
+
+loc_1367:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_1367 = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_1367 = bitcast i8* %rdi_p4_1367 to i32*
+  %edx.1367 = load i32, i32* %rdi_p4_i32_1367, align 4
+  %rsi.1367 = getelementptr inbounds i8, i8* %rdi_p4_1367, i64 0
+  %rax.1367 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_1367 = bitcast i8* %rdi.ph to i32*
+  %ecx.1367 = load i32, i32* %rdi_i32p_1367, align 4
+  %cmp_1376 = icmp sge i32 %edx.1367, %ecx.1367
+  br i1 %cmp_1376, label %loc_13D9, label %cont_137A
+
+cont_137A:
+  store i32 %ecx.1367, i32* %rdi_p4_i32_1367, align 4
+  %rcx.set7 = zext i32 7 to i64
+  br label %loc_1288
+
+loc_1393:
+  store i32 %edx.ph, i32* %base_i32, align 4
+  %rdi_p4_1393 = getelementptr inbounds i8, i8* %rdi.ph, i64 4
+  %rdi_p4_i32_1393 = bitcast i8* %rdi_p4_1393 to i32*
+  %edx.1393 = load i32, i32* %rdi_p4_i32_1393, align 4
+  %rsi.1393 = getelementptr inbounds i8, i8* %rdi_p4_1393, i64 0
+  %rax.1393 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi_i32p_1393 = bitcast i8* %rdi.ph to i32*
+  %ecx.1393 = load i32, i32* %rdi_i32p_1393, align 4
+  %cmp_13a2 = icmp sge i32 %edx.1393, %ecx.1393
+  br i1 %cmp_13a2, label %loc_141A, label %cont_13A6
+
+cont_13A6:
+  store i32 %ecx.1393, i32* %rdi_p4_i32_1393, align 4
+  %rcx.set8 = zext i32 8 to i64
+  br label %loc_1288
+
+loc_1288:
+  %edx.sel = phi i32 [ %edx.1263, %cont_127A ], [ %edx.12a2, %cont_12B9 ], [ %edx.12da, %cont_12F1 ], [ %edx.1307, %cont_131E ], [ %edx.1337, %cont_134E ], [ %edx.1367, %cont_137A ], [ %edx.1393, %cont_13A6 ]
+  %rax.sel = phi i8* [ %rax.1263, %cont_127A ], [ %rax.12a2, %cont_12B9 ], [ %rax.12da, %cont_12F1 ], [ %rax.1307, %cont_131E ], [ %rax.1337, %cont_134E ], [ %rax.1367, %cont_137A ], [ %rax.1393, %cont_13A6 ]
+  %rcx.sel = phi i64 [ %rcx.set2, %cont_127A ], [ %rcx.set3, %cont_12B9 ], [ %rcx.set4, %cont_12F1 ], [ %rcx.set5, %cont_131E ], [ %rcx.set6, %cont_134E ], [ %rcx.set7, %cont_137A ], [ %rcx.set8, %cont_13A6 ]
+  %tmp_r8 = getelementptr inbounds i8, i8* %rsi.ph2, i64 0
+  %rsi.to10f3 = getelementptr inbounds i8, i8* %rdi.ph, i64 0
+  %rdi.to10f3 = getelementptr inbounds i8, i8* %tmp_r8, i64 0
+  br label %loc_10F3
+
+loc_13BF:
+  %rax.13bf = getelementptr inbounds i8, i8* %rsi.1263, i64 0
+  %rcx.13bf = zext i32 2 to i64
+  br label %loc_11C6
+
+loc_1400:
+  %rax.1400 = getelementptr inbounds i8, i8* %rsi.12a2, i64 0
+  %rcx.1400 = zext i32 3 to i64
+  br label %loc_11C6
+
+loc_140D:
+  %rax.140d = getelementptr inbounds i8, i8* %rsi.12da, i64 0
+  %rcx.140d = zext i32 4 to i64
+  br label %loc_11C6
+
+loc_13E6:
+  %rax.13e6 = getelementptr inbounds i8, i8* %rsi.1307, i64 0
+  %rcx.13e6 = zext i32 5 to i64
+  br label %loc_11C6
+
+loc_13F3:
+  %rax.13f3 = getelementptr inbounds i8, i8* %rsi.1337, i64 0
+  %rcx.13f3 = zext i32 6 to i64
+  br label %loc_11C6
+
+loc_13D9:
+  %rax.13d9 = getelementptr inbounds i8, i8* %rsi.1367, i64 0
+  %rcx.13d9 = zext i32 7 to i64
+  br label %loc_11C6
+
+loc_141A:
+  %rax.141a = getelementptr inbounds i8, i8* %rsi.1393, i64 0
+  %rcx.141a = zext i32 8 to i64
+  br label %loc_11C6
+
+loc_11C6:
+  %edx.to_store = phi i32 [ %edx.10d0, %loc_12C3 ], [ %edx.ph, %loc_125B ], [ %edx.ph, %loc_1296 ], [ %edx.ph, %loc_12CE ], [ %edx.ph, %loc_12FB ], [ %edx.ph, %loc_132B ], [ %edx.ph, %loc_135B ], [ %edx.ph, %loc_1387 ], [ %edx.ph, %loc_13B3 ], [ %edx.1234, %loc_13CC ], [ %edx.1263, %loc_13BF ], [ %edx.12a2, %loc_1400 ], [ %edx.12da, %loc_140D ], [ %edx.1307, %loc_13E6 ], [ %edx.1337, %loc_13F3 ], [ %edx.1367, %loc_13D9 ], [ %edx.1393, %loc_141A ], [ %edx.ph, %cont_11BC ]
+  %rax.ins.ptr = phi i8* [ %rax.12c3, %loc_12C3 ], [ %rax.ph, %loc_125B ], [ %rax.1296, %loc_1296 ], [ %rax.12ce, %loc_12CE ], [ %rax.12fb, %loc_12FB ], [ %rax.132b, %loc_132B ], [ %rax.135b, %loc_135B ], [ %rax.1387, %loc_1387 ], [ %rax.13b3, %loc_13B3 ], [ %rax.13cc, %loc_13CC ], [ %rax.13bf, %loc_13BF ], [ %rax.1400, %loc_1400 ], [ %rax.140d, %loc_140D ], [ %rax.13e6, %loc_13E6 ], [ %rax.13f3, %loc_13F3 ], [ %rax.13d9, %loc_13D9 ], [ %rax.141a, %loc_141A ], [ %rax.to11c6, %cont_11BC ]
+  %rsi.next = phi i8* [ %rsi.12c3, %loc_12C3 ], [ %rsi.125b, %loc_125B ], [ %rsi.1296, %loc_1296 ], [ %rsi.12ce, %loc_12CE ], [ %rsi.12fb, %loc_12FB ], [ %rsi.132b, %loc_132B ], [ %rsi.135b, %loc_135B ], [ %rsi.1387, %loc_1387 ], [ %rsi.13b3, %loc_13B3 ], [ %rsi.1234, %loc_13CC ], [ %rsi.1263, %loc_13BF ], [ %rsi.12a2, %loc_1400 ], [ %rsi.12da, %loc_140D ], [ %rsi.1307, %loc_13E6 ], [ %rsi.1337, %loc_13F3 ], [ %rsi.1367, %loc_13D9 ], [ %rsi.1393, %loc_141A ], [ %rsi.to11c6, %cont_11BC ]
+  %rcx.ins = phi i64 [ %rcx.ph, %loc_12C3 ], [ %rcx.ph2, %loc_125B ], [ %rcx.ph2, %loc_1296 ], [ %rcx.ph2, %loc_12CE ], [ %rcx.ph2, %loc_12FB ], [ %rcx.ph2, %loc_132B ], [ %rcx.ph2, %loc_135B ], [ %rcx.ph2, %loc_1387 ], [ %rcx.ph2, %loc_13B3 ], [ %rcx.13cc, %loc_13CC ], [ %rcx.13bf, %loc_13BF ], [ %rcx.1400, %loc_1400 ], [ %rcx.140d, %loc_140D ], [ %rcx.13e6, %loc_13E6 ], [ %rcx.13f3, %loc_13F3 ], [ %rcx.13d9, %loc_13D9 ], [ %rcx.141a, %loc_141A ], [ %rcx.ph2, %cont_11BC ]
+
+  %rcx.next = add i64 %rcx.ins, 1
+
+  %rax.ins.i32p = bitcast i8* %rax.ins.ptr to i32*
+  store i32 %edx.to_store, i32* %rax.ins.i32p, align 4
+
+  %cond_loop = icmp ne i64 %rcx.next, 9
+  br i1 %cond_loop, label %loc_10D0, label %cont_11D6
+
+cont_11D6:
+  %rbp_end = getelementptr inbounds i8, i8* %base, i64 40
+  %r12_fmt = getelementptr inbounds [4 x i8], [4 x i8]* @unk_2004, i64 0, i64 0
+  br label %loc_11E8
+
+loc_11E8:
+  %rbx.ph = phi i8* [ %rbx0, %cont_11D6 ], [ %rbx.next, %cont_1200 ]
+  %rbx_i32p = bitcast i8* %rbx.ph to i32*
+  %edx.print = load i32, i32* %rbx_i32p, align 4
+  %_ = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %r12_fmt, i32 %edx.print)
+  %rbx.next = getelementptr inbounds i8, i8* %rbx.ph, i64 4
+  %more = icmp ne i8* %rbx.next, %rbp_end
+  br i1 %more, label %cont_1200, label %cont_1202
+
+cont_1200:
+  br label %loc_11E8
+
+cont_1202:
+  %fmt_nl = getelementptr inbounds [2 x i8], [2 x i8]* @unk_2008, i64 0, i64 0
+  %__ = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt_nl)
+  %saved_can = load i64, i64* %canary_slot64, align 8
+  %cur_can = load i64, i64* @__stack_chk_guard, align 8
+  %canary_ok = icmp eq i64 %saved_can, %cur_can
+  br i1 %canary_ok, label %ret_ok_1229, label %loc_1427
+
+ret_ok_1229:
+  ret i32 0
+
+loc_13BF_tail2:
+  unreachable
+
+loc_13CC_tail:
+  unreachable
+
+loc_13D9_tail:
+  unreachable
+
+loc_13E6_tail:
+  unreachable
+
+loc_13F3_tail:
+  unreachable
+
+loc_1400_tail:
+  unreachable
+
+loc_140D_tail:
+  unreachable
+
+loc_141A_tail:
+  unreachable
+
+loc_1427:
+  call void @___stack_chk_fail()
+  unreachable
+}

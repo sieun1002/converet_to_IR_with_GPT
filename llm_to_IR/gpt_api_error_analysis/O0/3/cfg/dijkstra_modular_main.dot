@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5f89e70e9180 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %var_4 = alloca i32, align 4\l  %var_8 = alloca i32, align 4\l  %var_C = alloca i32, align 4\l  %buf_graph = alloca i8, align 16\l  %buf_dist = alloca i8, align 16\l  store i32 0, ptr %var_4, align 4\l  %call_read = call i32 @read_graph(ptr %buf_graph, ptr %var_8, ptr %var_C)\l  %cmp_zero = icmp eq i32 %call_read, 0\l  br i1 %cmp_zero, label %loc_401724, label %loc_err\l|{<s0>T|<s1>F}}"];
+	Node0x5f89e70e9180:s0 -> Node0x5f89e70eb8d0[tooltip="entry -> loc_401724\nProbability 37.50%" ];
+	Node0x5f89e70e9180:s1 -> Node0x5f89e70eb950[tooltip="entry -> loc_err\nProbability 62.50%" ];
+	Node0x5f89e70eb950 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{loc_err:\l|  %stream_val = load ptr, ptr @stream, align 8\l  %fmt_ptr = getelementptr inbounds [0 x i8], ptr @byte_40202C, i64 0, i64 0\l  %call_fprintf = call i32 (ptr, ptr, ...) @fprintf(ptr %stream_val, ptr\l... %fmt_ptr)\l  store i32 1, ptr %var_4, align 4\l  br label %loc_401753\l}"];
+	Node0x5f89e70eb950 -> Node0x5f89e70ebfd0[tooltip="loc_err -> loc_401753\nProbability 100.00%" ];
+	Node0x5f89e70eb8d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{loc_401724:\l|  %n_val = load i32, ptr %var_8, align 4\l  %m_val = load i32, ptr %var_C, align 4\l  call void @dijkstra(ptr %buf_graph, i32 %n_val, i32 %m_val, ptr %buf_dist)\l  %n_val2 = load i32, ptr %var_8, align 4\l  call void @print_distances(ptr %buf_dist, i32 %n_val2)\l  store i32 0, ptr %var_4, align 4\l  br label %loc_401753\l}"];
+	Node0x5f89e70eb8d0 -> Node0x5f89e70ebfd0[tooltip="loc_401724 -> loc_401753\nProbability 100.00%" ];
+	Node0x5f89e70ebfd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_401753:\l|  %ret_load = load i32, ptr %var_4, align 4\l  ret i32 %ret_load\l}"];
+}

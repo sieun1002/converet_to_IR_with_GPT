@@ -1,0 +1,23 @@
+digraph "CFG for 'init_graph' function" {
+	label="CFG for 'init_graph' function";
+
+	Node0x5b152a7c1c40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{entry:\l|  %graph.addr = alloca ptr, align 8\l  %V.addr = alloca i32, align 4\l  %i = alloca i32, align 4\l  %j = alloca i32, align 4\l  store ptr %graph, ptr %graph.addr, align 8\l  call void @llvm.dbg.declare(metadata ptr %graph.addr, metadata !19, metadata\l... !DIExpression()), !dbg !20\l  store i32 %V, ptr %V.addr, align 4\l  call void @llvm.dbg.declare(metadata ptr %V.addr, metadata !21, metadata\l... !DIExpression()), !dbg !22\l  call void @llvm.dbg.declare(metadata ptr %i, metadata !23, metadata\l... !DIExpression()), !dbg !25\l  store i32 0, ptr %i, align 4, !dbg !25\l  br label %for.cond, !dbg !26\l}"];
+	Node0x5b152a7c1c40 -> Node0x5b152a7c6910[tooltip="entry -> for.cond\nProbability 100.00%" ];
+	Node0x5b152a7c6910 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.cond:\l|  %0 = load i32, ptr %i, align 4, !dbg !27\l  %1 = load i32, ptr %V.addr, align 4, !dbg !29\l  %cmp = icmp slt i32 %0, %1, !dbg !30\l  br i1 %cmp, label %for.body, label %for.end8, !dbg !31\l|{<s0>T|<s1>F}}"];
+	Node0x5b152a7c6910:s0 -> Node0x5b152a7c73d0[tooltip="for.cond -> for.body\nProbability 96.88%" ];
+	Node0x5b152a7c6910:s1 -> Node0x5b152a7c7450[tooltip="for.cond -> for.end8\nProbability 3.12%" ];
+	Node0x5b152a7c73d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.body:\l|  call void @llvm.dbg.declare(metadata ptr %j, metadata !32, metadata\l... !DIExpression()), !dbg !34\l  store i32 0, ptr %j, align 4, !dbg !34\l  br label %for.cond1, !dbg !35\l}"];
+	Node0x5b152a7c73d0 -> Node0x5b152a7c8260[tooltip="for.body -> for.cond1\nProbability 100.00%" ];
+	Node0x5b152a7c8260 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.cond1:\l|  %2 = load i32, ptr %j, align 4, !dbg !36\l  %3 = load i32, ptr %V.addr, align 4, !dbg !38\l  %cmp2 = icmp slt i32 %2, %3, !dbg !39\l  br i1 %cmp2, label %for.body3, label %for.end, !dbg !40\l|{<s0>T|<s1>F}}"];
+	Node0x5b152a7c8260:s0 -> Node0x5b152a7c8b50[tooltip="for.cond1 -> for.body3\nProbability 96.88%" ];
+	Node0x5b152a7c8260:s1 -> Node0x5b152a7c8ba0[tooltip="for.cond1 -> for.end\nProbability 3.12%" ];
+	Node0x5b152a7c8b50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.body3:\l|  %4 = load ptr, ptr %graph.addr, align 8, !dbg !41\l  %5 = load i32, ptr %i, align 4, !dbg !42\l  %idxprom = sext i32 %5 to i64, !dbg !41\l  %arrayidx = getelementptr inbounds [100 x i32], ptr %4, i64 %idxprom, !dbg\l... !41\l  %6 = load i32, ptr %j, align 4, !dbg !43\l  %idxprom4 = sext i32 %6 to i64, !dbg !41\l  %arrayidx5 = getelementptr inbounds [100 x i32], ptr %arrayidx, i64 0, i64\l... %idxprom4, !dbg !41\l  store i32 0, ptr %arrayidx5, align 4, !dbg !44\l  br label %for.inc, !dbg !41\l}"];
+	Node0x5b152a7c8b50 -> Node0x5b152a7c9e90[tooltip="for.body3 -> for.inc\nProbability 100.00%" ];
+	Node0x5b152a7c9e90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.inc:\l|  %7 = load i32, ptr %j, align 4, !dbg !45\l  %inc = add nsw i32 %7, 1, !dbg !45\l  store i32 %inc, ptr %j, align 4, !dbg !45\l  br label %for.cond1, !dbg !46, !llvm.loop !47\l}"];
+	Node0x5b152a7c9e90 -> Node0x5b152a7c8260[tooltip="for.inc -> for.cond1\nProbability 100.00%" ];
+	Node0x5b152a7c8ba0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.end:\l|  br label %for.inc6, !dbg !48\l}"];
+	Node0x5b152a7c8ba0 -> Node0x5b152a7cab80[tooltip="for.end -> for.inc6\nProbability 100.00%" ];
+	Node0x5b152a7cab80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.inc6:\l|  %8 = load i32, ptr %i, align 4, !dbg !50\l  %inc7 = add nsw i32 %8, 1, !dbg !50\l  store i32 %inc7, ptr %i, align 4, !dbg !50\l  br label %for.cond, !dbg !51, !llvm.loop !52\l}"];
+	Node0x5b152a7cab80 -> Node0x5b152a7c6910[tooltip="for.inc6 -> for.cond\nProbability 100.00%" ];
+	Node0x5b152a7c7450 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{for.end8:\l|  ret void, !dbg !54\l}"];
+}

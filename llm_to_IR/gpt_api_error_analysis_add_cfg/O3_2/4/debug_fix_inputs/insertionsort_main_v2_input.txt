@@ -1,0 +1,528 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/insertionsort_main1.ll:11:13: error: expected function name
+; declare i64 asm sideeffect "movq %fs:0x28, $0", "=r"()
+;             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-linux-gnu"
+
+; externals observed in the binary
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail() noreturn
+
+; TLS canary read via inline asm (fs:0x28)
+; movq %fs:0x28, reg
+; returns the current stack canary value
+declare i64 asm sideeffect "movq %fs:0x28, $0", "=r"()
+
+; external data referenced by address in the binary
+@xmmword_2010 = external global <4 x i32>, align 16
+@xmmword_2020 = external global <4 x i32>, align 16
+@unk_2004     = external global i8, align 1
+@unk_2008     = external global i8, align 1
+
+define i32 @main() {
+loc_1080:
+  ; stack canary save
+  %canary.init = call i64 asm sideeffect "movq %fs:0x28, $0", "=r"()
+  %canary.slot = alloca i64, align 8
+  store i64 %canary.init, i64* %canary.slot, align 8
+
+  ; locals: array of 10 ints
+  %arr = alloca [10 x i32], align 16
+  %base.i32 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 0
+
+  ; zero-initialize to avoid undefined reads (stack content)
+  %arr.i8 = bitcast i32* %base.i32 to i8*
+  call void @llvm.memset.p0i8.i64(i8* nonnull %arr.i8, i8 0, i64 40, i1 false)
+
+  ; load two 128-bit constants and place them at arr[0..3] and arr[4..7]
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_2010, align 16
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_2020, align 16
+  %p0 = bitcast i32* %base.i32 to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %p0, align 16
+  %p4.i32 = getelementptr inbounds i32, i32* %base.i32, i64 4
+  %p4 = bitcast i32* %p4.i32 to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %p4, align 16
+
+  ; arr[8] = 4 (per mov [rsp+...+var_28], 4)
+  %p8 = getelementptr inbounds i32, i32* %base.i32, i64 8
+  store i32 4, i32* %p8, align 4
+
+  ; NOTE: arr[9] was not explicitly initialized by the observed stores; we left it zero.
+
+  ; rbp := base (used as end pointer base for printing loop)
+  ; rbx := base (iterator for printing)
+  ; rsi := base (current element for sorting)
+  br label %loc_10D0
+
+; Top of insertion-sort-like loop body
+loc_10D0:
+  ; PHIs for loop-carried state: rsi (current), rcx (count), end of insertion store (rax), current to-insert value (edx)
+  %rsi.phi = phi i32* [ %base.i32, %loc_1080 ], [ %rsi.next, %loc_11C6 ]
+  %rcx.phi = phi i64 [ 0, %loc_1080 ], [ %rcx.next, %loc_11C6 ]
+
+  ; edx = *(rsi + 1)
+  %p.next = getelementptr inbounds i32, i32* %rsi.phi, i64 1
+  %edx.load = load i32, i32* %p.next, align 4
+  ; r8d = *rsi
+  %r8.load = load i32, i32* %rsi.phi, align 4
+  ; rdi = rsi + 1
+  ; rax = rsi
+  ; if (*rsi <= *(rsi+1)) goto loc_12C3
+  %le = icmp sle i32 %r8.load, %edx.load
+  br i1 %le, label %loc_12C3, label %loc_10E6_body
+
+; corresponds to the taken path when *rsi > *(rsi+1), starts shifting right
+loc_10E6_body:
+  ; *(rsi+1) = *rsi
+  store i32 %r8.load, i32* %p.next, align 4
+  ; test rcx, rcx
+  %rcx.iszero = icmp eq i64 %rcx.phi, 0
+  br i1 %rcx.iszero, label %loc_1234, label %loc_10F3
+
+; spilled path for rcx == 0 special handling
+loc_1234:
+  ; [base] = edx
+  store i32 %edx.load, i32* %base.i32, align 16
+  ; edx = [rdi+1] (i.e., *(rsi+2))
+  %p.next2 = getelementptr inbounds i32, i32* %p.next, i64 1
+  %edx.reload.1234 = load i32, i32* %p.next2, align 4
+  ; rsi += 2 (advance to next pair)
+  %rsi.add2 = getelementptr inbounds i32, i32* %rsi.phi, i64 2
+  ; rax = rdi (old rsi+1)
+  ; ecx = [rdi]
+  %ecx.from.mem = load i32, i32* %p.next, align 4
+  ; if (ecx <= edx) goto loc_13CC else shift and continue
+  %cmp.1234 = icmp sle i32 %ecx.from.mem, %edx.reload.1234
+  br i1 %cmp.1234, label %loc_13CC, label %loc_124b_shift
+
+loc_124b_shift:
+  ; [rdi+1] = ecx
+  store i32 %ecx.from.mem, i32* %p.next2, align 4
+  ; xchg rdi, rsi (swap rsi with rsi+1) — effect: rsi becomes old (rsi+1), next rdi becomes old (rsi+2)
+  ; ecx = 1
+  br label %loc_10F3
+
+; continue of the unrolled back-shift chain: r8d = [rax-1]
+loc_10F3:
+  ; Establish the working pointers for shifting:
+  ; We track:
+  ;   %rax.cur - cursor (starts as rsi on the first entry into 10F3, or as updated by special cases)
+  ;   %rdi.cur - equals %p.next (rsi+1) for this iteration
+  ;   %edx.cur - the value being inserted
+  ;   %rcx.cur - the "depth" already available on the left
+  %rax.cur = phi i32* [ %rsi.phi, %loc_10E6_body ], [ %p.next, %loc_1234 ], [ %rax.cur.1263, %loc_1263 ], [ %rax.cur.12A2, %loc_12A2 ], [ %rax.cur.12DA, %loc_12DA ], [ %rax.cur.1307, %loc_1307 ], [ %rax.cur.1337, %loc_1337 ], [ %rax.cur.1367, %loc_1367 ], [ %rax.cur.1393, %loc_1393 ]
+  %rdi.cur = phi i32* [ %p.next, %loc_10E6_body ], [ %rsi.add2, %loc_1234 ], [ %rdi.after, %loc_1263 ], [ %rdi.after, %loc_12A2 ], [ %rdi.after, %loc_12DA ], [ %rdi.after, %loc_1307 ], [ %rdi.after, %loc_1337 ], [ %rdi.after, %loc_1367 ], [ %rdi.after, %loc_1393 ]
+  %edx.cur = phi i32 [ %edx.load, %loc_10E6_body ], [ %edx.reload.1234, %loc_1234 ], [ %edx.reload.1263, %loc_1263 ], [ %edx.reload.12A2, %loc_12A2 ], [ %edx.reload.12DA, %loc_12DA ], [ %edx.reload.1307, %loc_1307 ], [ %edx.reload.1337, %loc_1337 ], [ %edx.reload.1367, %loc_1367 ], [ %edx.reload.1393, %loc_1393 ]
+  %rcx.cur = phi i32 [ trunc (i64 %rcx.phi to i32), %loc_10E6_body ], [ 1, %loc_1234 ], [ 2, %loc_1263 ], [ 3, %loc_12A2 ], [ 4, %loc_12DA ], [ 5, %loc_1307 ], [ 6, %loc_1337 ], [ 7, %loc_1367 ], [ 8, %loc_1393 ]
+
+  ; r8d = [rax-1]
+  %rax.m1 = getelementptr inbounds i32, i32* %rax.cur, i64 -1
+  %r8.load.m1 = load i32, i32* %rax.m1, align 4
+  ; if (r8d <= edx) goto loc_125B
+  %cmp.10F3 = icmp sle i32 %r8.load.m1, %edx.cur
+  br i1 %cmp.10F3, label %loc_125B, label %loc_1100
+
+loc_1100:
+  ; [rax] = r8d
+  store i32 %r8.load.m1, i32* %rax.cur, align 4
+  ; if (rcx == 1) goto loc_1263 else continue deeper
+  %rcx.eq1 = icmp eq i32 %rcx.cur, 1
+  br i1 %rcx.eq1, label %loc_1263, label %loc_110d
+
+loc_110d:
+  ; r8d = [rax-2]
+  %rax.m2 = getelementptr inbounds i32, i32* %rax.cur, i64 -2
+  %r8.load.m2 = load i32, i32* %rax.m2, align 4
+  ; if (r8d <= edx) goto loc_1296
+  %cmp.110d = icmp sle i32 %r8.load.m2, %edx.cur
+  br i1 %cmp.110d, label %loc_1296, label %loc_111a
+
+loc_111a:
+  ; [rax-1] = r8d
+  store i32 %r8.load.m2, i32* %rax.m1, align 4
+  ; if (rcx == 2) goto loc_12A2
+  %rcx.eq2 = icmp eq i32 %rcx.cur, 2
+  br i1 %rcx.eq2, label %loc_12A2, label %loc_1128
+
+loc_1128:
+  ; r8d = [rax-3]
+  %rax.m3 = getelementptr inbounds i32, i32* %rax.cur, i64 -3
+  %r8.load.m3 = load i32, i32* %rax.m3, align 4
+  ; if (r8d <= edx) goto loc_12CE
+  %cmp.1128 = icmp sle i32 %r8.load.m3, %edx.cur
+  br i1 %cmp.1128, label %loc_12CE, label %loc_1135
+
+loc_1135:
+  ; [rax-2] = r8d
+  store i32 %r8.load.m3, i32* %rax.m2, align 4
+  ; if (rcx == 3) goto loc_12DA
+  %rcx.eq3 = icmp eq i32 %rcx.cur, 3
+  br i1 %rcx.eq3, label %loc_12DA, label %loc_1143
+
+loc_1143:
+  ; r8d = [rax-4]
+  %rax.m4 = getelementptr inbounds i32, i32* %rax.cur, i64 -4
+  %r8.load.m4 = load i32, i32* %rax.m4, align 4
+  ; if (r8d <= edx) goto loc_12FB
+  %cmp.1143 = icmp sle i32 %r8.load.m4, %edx.cur
+  br i1 %cmp.1143, label %loc_12FB, label %loc_1150
+
+loc_1150:
+  ; [rax-3] = r8d
+  store i32 %r8.load.m4, i32* %rax.m3, align 4
+  ; if (rcx == 4) goto loc_1307
+  %rcx.eq4 = icmp eq i32 %rcx.cur, 4
+  br i1 %rcx.eq4, label %loc_1307, label %loc_115e
+
+loc_115e:
+  ; r8d = [rax-5]
+  %rax.m5 = getelementptr inbounds i32, i32* %rax.cur, i64 -5
+  %r8.load.m5 = load i32, i32* %rax.m5, align 4
+  ; if (r8d <= edx) goto loc_132B
+  %cmp.115e = icmp sle i32 %r8.load.m5, %edx.cur
+  br i1 %cmp.115e, label %loc_132B, label %loc_116b
+
+loc_116b:
+  ; [rax-4] = r8d
+  store i32 %r8.load.m5, i32* %rax.m4, align 4
+  ; if (rcx == 5) goto loc_1337
+  %rcx.eq5 = icmp eq i32 %rcx.cur, 5
+  br i1 %rcx.eq5, label %loc_1337, label %loc_1179
+
+loc_1179:
+  ; r8d = [rax-6]
+  %rax.m6 = getelementptr inbounds i32, i32* %rax.cur, i64 -6
+  %r8.load.m6 = load i32, i32* %rax.m6, align 4
+  ; if (r8d <= edx) goto loc_135B
+  %cmp.1179 = icmp sle i32 %r8.load.m6, %edx.cur
+  br i1 %cmp.1179, label %loc_135B, label %loc_1186
+
+loc_1186:
+  ; [rax-5] = r8d
+  store i32 %r8.load.m6, i32* %rax.m5, align 4
+  ; if (rcx == 6) goto loc_1367
+  %rcx.eq6 = icmp eq i32 %rcx.cur, 6
+  br i1 %rcx.eq6, label %loc_1367, label %loc_1194
+
+loc_1194:
+  ; r8d = [rax-7]
+  %rax.m7 = getelementptr inbounds i32, i32* %rax.cur, i64 -7
+  %r8.load.m7 = load i32, i32* %rax.m7, align 4
+  ; if (r8d <= edx) goto loc_1387
+  %cmp.1194 = icmp sle i32 %r8.load.m7, %edx.cur
+  br i1 %cmp.1194, label %loc_1387, label %loc_11a1
+
+loc_11a1:
+  ; [rax-6] = r8d
+  store i32 %r8.load.m7, i32* %rax.m6, align 4
+  ; if (rcx == 7) goto loc_1393
+  %rcx.eq7 = icmp eq i32 %rcx.cur, 7
+  br i1 %rcx.eq7, label %loc_1393, label %loc_11af
+
+loc_11af:
+  ; r8d = [rax-8]
+  %rax.m8 = getelementptr inbounds i32, i32* %rax.cur, i64 -8
+  %r8.load.m8 = load i32, i32* %rax.m8, align 4
+  ; if (r8d <= edx) goto loc_13B3
+  %cmp.11af = icmp sle i32 %r8.load.m8, %edx.cur
+  br i1 %cmp.11af, label %loc_13B3, label %loc_11bc
+
+loc_11bc:
+  ; [rax-7] = r8d
+  store i32 %r8.load.m8, i32* %rax.m7, align 4
+  ; fall-through path sets rsi := rdi and rax := base before entering loc_11C6
+  br label %loc_11C6_prep_from_11bc
+
+loc_11C6_prep_from_11bc:
+  ; rsi = rdi
+  ; rax = base
+  %rsi.next.11bc = %rdi.cur
+  %rax.end.11bc = %base.i32
+  br label %loc_11C6
+
+; rcx==0 special-case compare false path joins here: set rax := rdi, rsi := rdi; proceed to 11C6
+loc_12C3:
+  ; rsi = rdi (== rsi+1), rax = rdi
+  %rsi.next.12C3 = %p.next
+  %rax.end.12C3 = %p.next
+  br label %loc_11C6
+
+; these landing pads update final rax and/or rsi and jump into the common tail at loc_11C6,
+; mirroring the short-circuit cases in the original binary
+
+loc_125B:
+  ; rsi = rdi
+  %rsi.next.125b = %rdi.cur
+  ; keep rax as is (store happens into current rax)
+  br label %loc_11C6_from_rax
+
+loc_1296:
+  ; rax = rsi-1
+  %rax.cur.1296 = getelementptr inbounds i32, i32* %rsi.phi, i64 -1
+  ; rsi = rdi
+  %rsi.next.1296 = %p.next
+  br label %loc_11C6_custom
+
+loc_12CE:
+  ; rax = rsi-2
+  %rax.cur.12ce = getelementptr inbounds i32, i32* %rsi.phi, i64 -2
+  ; rsi = rdi
+  %rsi.next.12ce = %p.next
+  br label %loc_11C6_custom
+
+loc_12FB:
+  ; rax = rsi-3
+  %rax.cur.12fb = getelementptr inbounds i32, i32* %rsi.phi, i64 -3
+  ; rsi = rdi
+  %rsi.next.12fb = %p.next
+  br label %loc_11C6_custom
+
+loc_132B:
+  ; rax = rsi-4
+  %rax.cur.132b = getelementptr inbounds i32, i32* %rsi.phi, i64 -4
+  %rsi.next.132b = %p.next
+  br label %loc_11C6_custom
+
+loc_135B:
+  ; rax = rsi-5
+  %rax.cur.135b = getelementptr inbounds i32, i32* %rsi.phi, i64 -5
+  %rsi.next.135b = %p.next
+  br label %loc_11C6_custom
+
+loc_1387:
+  ; rax = rsi-6
+  %rax.cur.1387 = getelementptr inbounds i32, i32* %rsi.phi, i64 -6
+  %rsi.next.1387 = %p.next
+  br label %loc_11C6_custom
+
+loc_13B3:
+  ; rax = rsi-7
+  %rax.cur.13b3 = getelementptr inbounds i32, i32* %rsi.phi, i64 -7
+  %rsi.next.13b3 = %p.next
+  br label %loc_11C6_custom
+
+; rcx==1..8 short-circuit cases that reload edx and swap rdi/rsi before continuing shifting via loc_10F3
+loc_1263:
+  ; save edx at [base], then edx = [rdi+1], rsi = rdi+1, rax = rdi, ecx = 2, swap rdi/rsi (effect visible via PHIs)
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.1263 = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rdi.after = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rax.cur.1263 = %rdi.cur
+  br label %loc_10F3
+
+loc_12A2:
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.12A2 = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rax.cur.12A2 = %rdi.cur
+  %rdi.after.12A2 = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rdi.after = %rdi.after.12A2
+  br label %loc_10F3
+
+loc_12DA:
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.12DA = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rax.cur.12DA = %rdi.cur
+  %rdi.after.12DA = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rdi.after = %rdi.after.12DA
+  br label %loc_10F3
+
+loc_1307:
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.1307 = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rax.cur.1307 = %rdi.cur
+  %rdi.after.1307 = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rdi.after = %rdi.after.1307
+  br label %loc_10F3
+
+loc_1337:
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.1337 = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rax.cur.1337 = %rdi.cur
+  %rdi.after.1337 = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rdi.after = %rdi.after.1337
+  br label %loc_10F3
+
+loc_1367:
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.1367 = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rax.cur.1367 = %rdi.cur
+  %rdi.after.1367 = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rdi.after = %rdi.after.1367
+  br label %loc_10F3
+
+loc_1393:
+  store i32 %edx.cur, i32* %base.i32, align 16
+  %edx.reload.1393 = load i32, i32* (getelementptr inbounds i32, i32* %rdi.cur, i64 1), align 4
+  %rax.cur.1393 = %rdi.cur
+  %rdi.after.1393 = getelementptr inbounds i32, i32* %rdi.cur, i64 1
+  %rdi.after = %rdi.after.1393
+  br label %loc_10F3
+
+; Paths that decide rcx directly and jump to common insertion tail (mirrors loc_13CC..141A)
+loc_13CC:
+  ; rax = rsi; ecx = 1
+  %rax.end.13cc = %rsi.add2
+  %rsi.next.13cc = %rsi.add2
+  %rcx.pre.13cc = 1
+  br label %loc_11C6
+
+loc_13BF:
+  ; rax = rsi; ecx = 2
+  %rax.end.13bf = %rdi.cur
+  %rsi.next.13bf = %rdi.cur
+  %rcx.pre.13bf = 2
+  br label %loc_11C6
+
+loc_13D9:
+  ; rax = rsi; ecx = 7
+  %rax.end.13d9 = %rdi.cur
+  %rsi.next.13d9 = %rdi.cur
+  %rcx.pre.13d9 = 7
+  br label %loc_11C6
+
+loc_13E6:
+  ; rax = rsi; ecx = 5
+  %rax.end.13e6 = %rdi.cur
+  %rsi.next.13e6 = %rdi.cur
+  %rcx.pre.13e6 = 5
+  br label %loc_11C6
+
+loc_13F3:
+  ; rax = rsi; ecx = 6
+  %rax.end.13f3 = %rdi.cur
+  %rsi.next.13f3 = %rdi.cur
+  %rcx.pre.13f3 = 6
+  br label %loc_11C6
+
+loc_1400:
+  ; rax = rsi; ecx = 3
+  %rax.end.1400 = %rdi.cur
+  %rsi.next.1400 = %rdi.cur
+  %rcx.pre.1400 = 3
+  br label %loc_11C6
+
+loc_140D:
+  ; rax = rsi; ecx = 4
+  %rax.end.140d = %rdi.cur
+  %rsi.next.140d = %rdi.cur
+  %rcx.pre.140d = 4
+  br label %loc_11C6
+
+loc_141A:
+  ; rax = rsi; ecx = 8
+  %rax.end.141a = %rdi.cur
+  %rsi.next.141a = %rdi.cur
+  %rcx.pre.141a = 8
+  br label %loc_11C6
+
+; Common insertion tail: rcx++, [rax]=edx; loop until rcx==9
+loc_11C6_from_rax:
+  ; predecessor sets rsi.next and keeps current rax.cur, edx.cur, rcx.cur
+  %rsi.next.from.125b = %rsi.next.125b
+  %rax.end.from.125b = %rax.cur
+  %rcx.pre.from.125b = sext i32 %rcx.cur to i64
+  br label %loc_11C6
+
+loc_11C6_custom:
+  ; for predecessors that provided custom (rax, rsi)
+  %rsi.next.custom = phi i32* [ %rsi.next.1296, %loc_1296 ], [ %rsi.next.12ce, %loc_12CE ], [ %rsi.next.12fb, %loc_12FB ], [ %rsi.next.132b, %loc_132B ], [ %rsi.next.135b, %loc_135B ], [ %rsi.next.1387, %loc_1387 ], [ %rsi.next.13b3, %loc_13B3 ]
+  %rax.end.custom = phi i32* [ %rax.cur.1296, %loc_1296 ], [ %rax.cur.12ce, %loc_12CE ], [ %rax.cur.12fb, %loc_12FB ], [ %rax.cur.132b, %loc_132B ], [ %rax.cur.135b, %loc_135B ], [ %rax.cur.1387, %loc_1387 ], [ %rax.cur.13b3, %loc_13B3 ]
+  %rcx.pre.custom = sext i32 %rcx.cur to i64
+  br label %loc_11C6
+
+loc_11C6:
+  ; Merge all paths with the variables needed for the tail
+  %rsi.next = phi i32* [ %rsi.next.11bc, %loc_11C6_prep_from_11bc ],
+                     [ %rsi.next.12C3, %loc_12C3 ],
+                     [ %rsi.next.from.125b, %loc_11C6_from_rax ],
+                     [ %rsi.next.custom, %loc_11C6_custom ],
+                     [ %rsi.next.13cc, %loc_13CC ],
+                     [ %rsi.next.13bf, %loc_13BF ],
+                     [ %rsi.next.13d9, %loc_13D9 ],
+                     [ %rsi.next.13e6, %loc_13E6 ],
+                     [ %rsi.next.13f3, %loc_13F3 ],
+                     [ %rsi.next.1400, %loc_1400 ],
+                     [ %rsi.next.140d, %loc_140D ],
+                     [ %rsi.next.141a, %loc_141A ]
+  %rax.end = phi i32* [ %rax.end.11bc, %loc_11C6_prep_from_11bc ],
+                     [ %rax.end.12C3, %loc_12C3 ],
+                     [ %rax.end.from.125b, %loc_11C6_from_rax ],
+                     [ %rax.end.custom, %loc_11C6_custom ],
+                     [ %rax.end.13cc, %loc_13CC ],
+                     [ %rax.end.13bf, %loc_13BF ],
+                     [ %rax.end.13d9, %loc_13D9 ],
+                     [ %rax.end.13e6, %loc_13E6 ],
+                     [ %rax.end.13f3, %loc_13F3 ],
+                     [ %rax.end.1400, %loc_1400 ],
+                     [ %rax.end.140d, %loc_140D ],
+                     [ %rax.end.141a, %loc_141A ]
+  %rcx.pre = phi i64 [ sext (i32 0) to i64, %loc_11C6_prep_from_11bc ],
+                     [ sext (i32 0) to i64, %loc_12C3 ],
+                     [ %rcx.pre.from.125b, %loc_11C6_from_rax ],
+                     [ %rcx.pre.custom, %loc_11C6_custom ],
+                     [ sext (i32 %rcx.pre.13cc) to i64, %loc_13CC ],
+                     [ sext (i32 %rcx.pre.13bf) to i64, %loc_13BF ],
+                     [ sext (i32 %rcx.pre.13d9) to i64, %loc_13D9 ],
+                     [ sext (i32 %rcx.pre.13e6) to i64, %loc_13E6 ],
+                     [ sext (i32 %rcx.pre.13f3) to i64, %loc_13F3 ],
+                     [ sext (i32 %rcx.pre.1400) to i64, %loc_1400 ],
+                     [ sext (i32 %rcx.pre.140d) to i64, %loc_140D ],
+                     [ sext (i32 %rcx.pre.141a) to i64, %loc_141A ]
+  ; store [rax] = edx (value to insert)
+  store i32 %edx.cur, i32* %rax.end, align 4
+  ; rcx++
+  %rcx.next = add i64 %rcx.pre, 1
+  ; if rcx != 9, loop
+  %cmp.rcx = icmp ne i64 %rcx.next, 9
+  br i1 %cmp.rcx, label %loc_10D0, label %loc_11D6
+
+; after loop: set end pointer (rbp += 0x28) and print
+loc_11D6:
+  ; rbx := base
+  %rbx.it = %base.i32
+  ; rbp.end := base + 10
+  %rbp.end = getelementptr inbounds i32, i32* %base.i32, i64 10
+  br label %loc_11E8
+
+loc_11E8:
+  ; loop: while rbx != rbp.end, print *rbx with format unk_2004
+  %rbx.cur = phi i32* [ %rbx.it, %loc_11D6 ], [ %rbx.next, %loc_11F8 ]
+  %done = icmp eq i32* %rbx.cur, %rbp.end
+  br i1 %done, label %loc_1202, label %loc_11F0
+
+loc_11F0:
+  %val = load i32, i32* %rbx.cur, align 4
+  %fmt.ptr = getelementptr inbounds i8, i8* @unk_2004, i64 0
+  %call = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt.ptr, i32 %val)
+  br label %loc_11F8
+
+loc_11F8:
+  %rbx.next = getelementptr inbounds i32, i32* %rbx.cur, i64 1
+  br label %loc_11E8
+
+loc_1202:
+  ; print trailing string unk_2008 (likely newline)
+  %nl.ptr = getelementptr inbounds i8, i8* @unk_2008, i64 0
+  %call2 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %nl.ptr)
+  br label %loc_1215
+
+loc_1215:
+  ; stack canary check
+  %canary.end = call i64 asm sideeffect "movq %fs:0x28, $0", "=r"()
+  %canary.saved = load i64, i64* %canary.slot, align 8
+  %canary.ok = icmp eq i64 %canary.saved, %canary.end
+  br i1 %canary.ok, label %loc_1229, label %loc_1427
+
+loc_1229:
+  ret i32 0
+
+loc_1427:
+  call void @___stack_chk_fail()
+  unreachable
+}
+
+; memset intrinsic
+declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1)

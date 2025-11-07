@@ -1,0 +1,19 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x5e61badfb5f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb.0x1180:\l|  call void asm sideeffect \"endbr64\", \"\"()\l  %cmp_n_le_zero = icmp sle i32 %n, 0\l  br i1 %cmp_n_le_zero, label %bb.0x11a0, label %bb.0x1188\l|{<s0>T|<s1>F}}"];
+	Node0x5e61badfb5f0:s0 -> Node0x5e61badfad60[tooltip="bb.0x1180 -> bb.0x11a0\nProbability 50.00%" ];
+	Node0x5e61badfb5f0:s1 -> Node0x5e61badfadb0[tooltip="bb.0x1180 -> bb.0x1188\nProbability 50.00%" ];
+	Node0x5e61badfadb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb.0x1188:\l|  %n64 = sext i32 %n to i64\l  br label %bb.0x1199\l}"];
+	Node0x5e61badfadb0 -> Node0x5e61badfae50[tooltip="bb.0x1188 -> bb.0x1199\nProbability 100.00%" ];
+	Node0x5e61badfa720 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#3d50c370" fontname="Courier",label="{bb.0x118f:\l|  unreachable\l}"];
+	Node0x5e61badfa7f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb.0x1190:\l|  %inc = add i64 %idx, 1\l  %cmp_eq_len = icmp eq i64 %inc, %n64\l  br i1 %cmp_eq_len, label %bb.0x11a0, label %bb.0x1199\l|{<s0>T|<s1>F}}"];
+	Node0x5e61badfa7f0:s0 -> Node0x5e61badfad60[tooltip="bb.0x1190 -> bb.0x11a0\nProbability 3.12%" ];
+	Node0x5e61badfa7f0:s1 -> Node0x5e61badfae50[tooltip="bb.0x1190 -> bb.0x1199\nProbability 96.88%" ];
+	Node0x5e61badfae50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb.0x1199:\l|  %idx = phi i64 [ 0, %bb.0x1188 ], [ %inc, %bb.0x1190 ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %idx\l  %elem = load i32, ptr %elem.ptr, align 4\l  %cmp_ne = icmp ne i32 %elem, %value\l  br i1 %cmp_ne, label %bb.0x1190, label %bb.0x119e\l|{<s0>T|<s1>F}}"];
+	Node0x5e61badfae50:s0 -> Node0x5e61badfa7f0[tooltip="bb.0x1199 -> bb.0x1190\nProbability 96.88%" ];
+	Node0x5e61badfae50:s1 -> Node0x5e61badfd370[tooltip="bb.0x1199 -> bb.0x119e\nProbability 3.12%" ];
+	Node0x5e61badfd370 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb.0x119e:\l|  %ret.trunc = trunc i64 %idx to i32\l  ret i32 %ret.trunc\l}"];
+	Node0x5e61badfd5b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#3d50c370" fontname="Courier",label="{bb.0x119f:\l|  unreachable\l}"];
+	Node0x5e61badfad60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb.0x11a0:\l|  ret i32 -1\l}"];
+}

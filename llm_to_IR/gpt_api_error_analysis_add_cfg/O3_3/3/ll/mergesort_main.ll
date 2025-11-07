@@ -1,0 +1,637 @@
+; ModuleID = 'translated_main'
+target triple = "x86_64-pc-linux-gnu"
+
+@__stack_chk_guard = external global i64
+declare i32 @__printf_chk(i32, i8*, ...)
+declare noalias i8* @malloc(i64)
+declare void @free(i8*)
+declare void @__stack_chk_fail()
+
+@xmmword_2010 = internal constant <16 x i8> <i8 1, i8 0, i8 0, i8 0,  i8 2, i8 0, i8 0, i8 0,  i8 3, i8 0, i8 0, i8 0,  i8 4, i8 0, i8 0, i8 0>
+@xmmword_2020 = internal constant <16 x i8> <i8 5, i8 0, i8 0, i8 0,  i8 6, i8 0, i8 0, i8 0,  i8 7, i8 0, i8 0, i8 0,  i8 8, i8 0, i8 0, i8 0>
+@unk_2004 = private unnamed_addr constant [4 x i8] c"%d \00"
+@unk_2008 = private unnamed_addr constant [2 x i8] c"\0A\00"
+
+define i32 @main() local_unnamed_addr {
+loc_10C0:
+  %canary = alloca i64, align 8
+  %stack_arr = alloca [40 x i8], align 16
+  %ptr = alloca i8*, align 8
+  %var70 = alloca i8*, align 8
+  %var7C = alloca i32, align 4
+  %var88 = alloca i64, align 8
+  %RAX = alloca i64, align 8
+  %RBX = alloca i64, align 8
+  %RCX = alloca i64, align 8
+  %RDX = alloca i64, align 8
+  %RSI = alloca i64, align 8
+  %RDI = alloca i64, align 8
+  %R8  = alloca i64, align 8
+  %R9  = alloca i64, align 8
+  %R10 = alloca i64, align 8
+  %R11 = alloca i64, align 8
+  %R12 = alloca i64, align 8
+  %R13 = alloca i64, align 8
+  %R14 = alloca i64, align 8
+  %R15 = alloca i64, align 8
+  %RBP = alloca i64, align 8
+  %base_i8 = getelementptr inbounds [40 x i8], [40 x i8]* %stack_arr, i64 0, i64 0
+  %vptr0 = bitcast i8* %base_i8 to <16 x i8>*
+  store <16 x i8> zeroinitializer, <16 x i8>* %vptr0, align 16
+  %g0 = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %g0, i64* %canary, align 8
+  %v0 = load <16 x i8>, <16 x i8>* @xmmword_2010, align 16
+  store <16 x i8> %v0, <16 x i8>* %vptr0, align 16
+  %p16 = getelementptr inbounds i8, i8* %base_i8, i64 16
+  %vptr1 = bitcast i8* %p16 to <16 x i8>*
+  %v1 = load <16 x i8>, <16 x i8>* @xmmword_2020, align 16
+  store <16 x i8> %v1, <16 x i8>* %vptr1, align 16
+  %p32 = getelementptr inbounds i8, i8* %base_i8, i64 32
+  %p32i32 = bitcast i8* %p32 to i32*
+  store i32 4, i32* %p32i32, align 4
+  %m = call noalias i8* @malloc(i64 40)
+  %tst = icmp eq i8* %m, null
+  br i1 %tst, label %loc_142E, label %loc_1118
+
+loc_1118:
+  %bx0 = ptrtoint i8* %base_i8 to i64
+  store i64 %bx0, i64* %RBX, align 8
+  store i8* %m, i8** %ptr, align 8
+  %mi = ptrtoint i8* %m to i64
+  store i64 %mi, i64* %RSI, align 8
+  store i64 1, i64* %RDI, align 8
+  store i32 4, i32* %var7C, align 4
+  store i64 4, i64* %R10, align 8
+  store i64 %bx0, i64* %RCX, align 8
+  store i8* %base_i8, i8** %var70, align 8
+  br label %loc_1140
+
+loc_1140:
+  %rdi0 = load i64, i64* %RDI, align 8
+  store i64 %rdi0, i64* %R11, align 8
+  %rdi2 = add i64 %rdi0, %rdi0
+  store i64 %rdi2, i64* %RDI, align 8
+  store i64 0, i64* %R8, align 8
+  store i64 %rdi2, i64* %var88, align 8
+  br label %loc_128A
+
+loc_1158:
+  %rcx_1158 = load i64, i64* %RCX, align 8
+  %r12_1158 = load i64, i64* %R12, align 8
+  %idx_1158 = mul i64 %r12_1158, 4
+  %src_1158 = inttoptr i64 %rcx_1158 to i8*
+  %p_1158 = getelementptr inbounds i8, i8* %src_1158, i64 %idx_1158
+  %p_1158_i32 = bitcast i8* %p_1158 to i32*
+  %val_1158 = load i32, i32* %p_1158_i32, align 4
+  %rax_1158 = load i64, i64* %RAX, align 8
+  %rdi_next = add i64 %rax_1158, 1
+  %rsi_1158 = load i64, i64* %RSI, align 8
+  %dst_1158 = inttoptr i64 %rsi_1158 to i8*
+  %off_1158 = mul i64 %rax_1158, 4
+  %dstp_1158 = getelementptr inbounds i8, i8* %dst_1158, i64 %off_1158
+  %dstp_1158_i32 = bitcast i8* %dstp_1158 to i32*
+  store i32 %val_1158, i32* %dstp_1158_i32, align 4
+  %rdx_1158 = load i64, i64* %RDX, align 8
+  %cmp_1164 = icmp eq i64 %rdx_1158, %rdi_next
+  br i1 %cmp_1164, label %loc_1280, label %loc_116D
+
+loc_115C:
+  %rax_115c = load i64, i64* %RAX, align 8
+  %rdi_115c = add i64 %rax_115c, 1
+  store i64 %rdi_115c, i64* %RDI, align 8
+  %rcx_115c = load i64, i64* %RCX, align 8
+  %r12_115c = load i64, i64* %R12, align 8
+  %idx_115c = mul i64 %r12_115c, 4
+  %src_115c = inttoptr i64 %rcx_115c to i8*
+  %p_115c = getelementptr inbounds i8, i8* %src_115c, i64 %idx_115c
+  %p_115c_i32 = bitcast i8* %p_115c to i32*
+  %val_115c = load i32, i32* %p_115c_i32, align 4
+  %rsi_115c = load i64, i64* %RSI, align 8
+  %dst_115c = inttoptr i64 %rsi_115c to i8*
+  %off_115c = mul i64 %rax_115c, 4
+  %dstp_115c = getelementptr inbounds i8, i8* %dst_115c, i64 %off_115c
+  %dstp_115c_i32 = bitcast i8* %dstp_115c to i32*
+  store i32 %val_115c, i32* %dstp_115c_i32, align 4
+  %rdx_115c = load i64, i64* %RDX, align 8
+  %cmp_1164_b = icmp eq i64 %rdx_115c, %rdi_115c
+  br i1 %cmp_1164_b, label %loc_1280, label %loc_116D
+
+loc_116D:
+  %r12_l = load i64, i64* %R12, align 8
+  %r9_next = add i64 %r12_l, 1
+  store i64 %r9_next, i64* %R9, align 8
+  %r10_l = load i64, i64* %R10, align 8
+  %rbx_l = load i64, i64* %RBX, align 8
+  %jb_1175 = icmp ult i64 %r10_l, %rbx_l
+  br i1 %jb_1175, label %loc_143A, label %loc_117B
+
+loc_117B:
+  %rdx_l = load i64, i64* %RDX, align 8
+  store i64 %rdx_l, i64* %RBX, align 8
+  %rax_l = load i64, i64* %RAX, align 8
+  %r13_new = add i64 %rax_l, 2
+  store i64 %r13_new, i64* %R13, align 8
+  %rdi_l = load i64, i64* %RDI, align 8
+  %rbx2 = sub i64 %rdx_l, %rdi_l
+  %r10_new = add i64 %rbx2, -1
+  store i64 %r10_new, i64* %R10, align 8
+  %cmp_1189 = icmp ule i64 %r10_new, 2
+  br i1 %cmp_1189, label %loc_13A0, label %loc_1193
+
+loc_1193:
+  %rdx2 = load i64, i64* %RDX, align 8
+  %r13v = load i64, i64* %R13, align 8
+  %jb_1196 = icmp ult i64 %rdx2, %r13v
+  br i1 %jb_1196, label %loc_13A0, label %loc_119C
+
+loc_119C:
+  %rdi3 = load i64, i64* %RDI, align 8
+  %r10_ = mul i64 %rdi3, 4
+  store i64 %r10_, i64* %R10, align 8
+  %r12v = load i64, i64* %R12, align 8
+  %r12s = mul i64 %r12v, 4
+  %r12s8 = add i64 %r12s, 8
+  store i64 %r12s8, i64* %R12, align 8
+  %rsi_v = load i64, i64* %RSI, align 8
+  %rbp_new = add i64 %rsi_v, %r10_
+  store i64 %rbp_new, i64* %RBP, align 8
+  %rcx_v = load i64, i64* %RCX, align 8
+  %r15_new = add i64 %rcx_v, %r12s8
+  store i64 %r15_new, i64* %R15, align 8
+  %r14_tmp = sub i64 %rbp_new, %r15_new
+  store i64 %r14_tmp, i64* %R14, align 8
+  %cmp_11ba = icmp ugt i64 %r14_tmp, 8
+  br i1 %cmp_11ba, label %loc_12F0, label %loc_11C4
+
+loc_11C4:
+  %r9v0 = load i64, i64* %R9, align 8
+  %rbx4 = mul i64 %r9v0, 4
+  %rcx_c = load i64, i64* %RCX, align 8
+  %src_b = inttoptr i64 %rcx_c to i8*
+  %p_a = getelementptr inbounds i8, i8* %src_b, i64 %rbx4
+  %p_a_i32 = bitcast i8* %p_a to i32*
+  %v_a = load i32, i32* %p_a_i32, align 4
+  %r10_a = load i64, i64* %R10, align 8
+  %rsi_a = load i64, i64* %RSI, align 8
+  %dst_a = inttoptr i64 %rsi_a to i8*
+  %pd_a = getelementptr inbounds i8, i8* %dst_a, i64 %r10_a
+  %pd_a_i32 = bitcast i8* %pd_a to i32*
+  store i32 %v_a, i32* %pd_a_i32, align 4
+  %r13a = load i64, i64* %R13, align 8
+  %rdxa = load i64, i64* %RDX, align 8
+  %jnb_11d4 = icmp uge i64 %r13a, %rdxa
+  br i1 %jnb_11d4, label %loc_1280, label %loc_11DD
+
+loc_11DD:
+  %r9v1 = load i64, i64* %R9, align 8
+  %rbx_off = mul i64 %r9v1, 4
+  %rcx_b = load i64, i64* %RCX, align 8
+  %src_c = inttoptr i64 %rcx_b to i8*
+  %p_b = getelementptr inbounds i8, i8* %src_c, i64 %rbx_off
+  %p_b4 = getelementptr inbounds i8, i8* %p_b, i64 4
+  %p_b4_i32 = bitcast i8* %p_b4 to i32*
+  %v_b4 = load i32, i32* %p_b4_i32, align 4
+  %r10_b = load i64, i64* %R10, align 8
+  %rsi_b = load i64, i64* %RSI, align 8
+  %dst_b = inttoptr i64 %rsi_b to i8*
+  %pd_b = getelementptr inbounds i8, i8* %dst_b, i64 %r10_b
+  %pd_b4 = getelementptr inbounds i8, i8* %pd_b, i64 4
+  %pd_b4_i32 = bitcast i8* %pd_b4 to i32*
+  store i32 %v_b4, i32* %pd_b4_i32, align 4
+  %rax_c = load i64, i64* %RAX, align 8
+  %r9n3 = add i64 %rax_c, 3
+  %rdx_c = load i64, i64* %RDX, align 8
+  %jnb_11eb = icmp uge i64 %r9n3, %rdx_c
+  br i1 %jnb_11eb, label %loc_1280, label %loc_11F4
+
+loc_11F4:
+  %r9v2 = load i64, i64* %R9, align 8
+  %rbx_c = mul i64 %r9v2, 4
+  %rcx_c2 = load i64, i64* %RCX, align 8
+  %src_d = inttoptr i64 %rcx_c2 to i8*
+  %p_c = getelementptr inbounds i8, i8* %src_d, i64 %rbx_c
+  %p_c8 = getelementptr inbounds i8, i8* %p_c, i64 8
+  %p_c8_i32 = bitcast i8* %p_c8 to i32*
+  %v_c8 = load i32, i32* %p_c8_i32, align 4
+  %r10_c = load i64, i64* %R10, align 8
+  %rsi_c = load i64, i64* %RSI, align 8
+  %dst_c = inttoptr i64 %rsi_c to i8*
+  %pd_c = getelementptr inbounds i8, i8* %dst_c, i64 %r10_c
+  %pd_c8 = getelementptr inbounds i8, i8* %pd_c, i64 8
+  %pd_c8_i32 = bitcast i8* %pd_c8 to i32*
+  store i32 %v_c8, i32* %pd_c8_i32, align 4
+  %rax_d = load i64, i64* %RAX, align 8
+  %r9n4 = add i64 %rax_d, 4
+  %rdx_d = load i64, i64* %RDX, align 8
+  %jnb_1205 = icmp uge i64 %r9n4, %rdx_d
+  br i1 %jnb_1205, label %loc_1280, label %loc_1207
+
+loc_1207:
+  %r9v3 = load i64, i64* %R9, align 8
+  %rbx_d = mul i64 %r9v3, 4
+  %rcx_d = load i64, i64* %RCX, align 8
+  %src_e = inttoptr i64 %rcx_d to i8*
+  %p_d = getelementptr inbounds i8, i8* %src_e, i64 %rbx_d
+  %p_dC = getelementptr inbounds i8, i8* %p_d, i64 12
+  %p_dC_i32 = bitcast i8* %p_dC to i32*
+  %v_dC = load i32, i32* %p_dC_i32, align 4
+  %r10_d = load i64, i64* %R10, align 8
+  %rsi_d = load i64, i64* %RSI, align 8
+  %dst_d = inttoptr i64 %rsi_d to i8*
+  %pd_d = getelementptr inbounds i8, i8* %dst_d, i64 %r10_d
+  %pd_dC = getelementptr inbounds i8, i8* %pd_d, i64 12
+  %pd_dC_i32 = bitcast i8* %pd_dC to i32*
+  store i32 %v_dC, i32* %pd_dC_i32, align 4
+  %rax_e = load i64, i64* %RAX, align 8
+  %r9n5 = add i64 %rax_e, 5
+  %rdx_e = load i64, i64* %RDX, align 8
+  %jnb_1218 = icmp uge i64 %r9n5, %rdx_e
+  br i1 %jnb_1218, label %loc_1280, label %loc_121A
+
+loc_121A:
+  %r9v4 = load i64, i64* %R9, align 8
+  %rbx_e = mul i64 %r9v4, 4
+  %rcx_e = load i64, i64* %RCX, align 8
+  %src_f = inttoptr i64 %rcx_e to i8*
+  %p_e = getelementptr inbounds i8, i8* %src_f, i64 %rbx_e
+  %p_e10 = getelementptr inbounds i8, i8* %p_e, i64 16
+  %p_e10_i32 = bitcast i8* %p_e10 to i32*
+  %v_e10 = load i32, i32* %p_e10_i32, align 4
+  %r10_e = load i64, i64* %R10, align 8
+  %rsi_e = load i64, i64* %RSI, align 8
+  %dst_e = inttoptr i64 %rsi_e to i8*
+  %pd_e = getelementptr inbounds i8, i8* %dst_e, i64 %r10_e
+  %pd_e10 = getelementptr inbounds i8, i8* %pd_e, i64 16
+  %pd_e10_i32 = bitcast i8* %pd_e10 to i32*
+  store i32 %v_e10, i32* %pd_e10_i32, align 4
+  %rax_f = load i64, i64* %RAX, align 8
+  %r9n6 = add i64 %rax_f, 6
+  %rdx_f = load i64, i64* %RDX, align 8
+  %jnb_122b = icmp uge i64 %r9n6, %rdx_f
+  br i1 %jnb_122b, label %loc_1280, label %loc_122D
+
+loc_122D:
+  %r9v5 = load i64, i64* %R9, align 8
+  %rbx_f = mul i64 %r9v5, 4
+  %rcx_f = load i64, i64* %RCX, align 8
+  %src_g = inttoptr i64 %rcx_f to i8*
+  %p_f = getelementptr inbounds i8, i8* %src_g, i64 %rbx_f
+  %p_f14 = getelementptr inbounds i8, i8* %p_f, i64 20
+  %p_f14_i32 = bitcast i8* %p_f14 to i32*
+  %v_f14 = load i32, i32* %p_f14_i32, align 4
+  %r10_f = load i64, i64* %R10, align 8
+  %rsi_f = load i64, i64* %RSI, align 8
+  %dst_f = inttoptr i64 %rsi_f to i8*
+  %pd_f = getelementptr inbounds i8, i8* %dst_f, i64 %r10_f
+  %pd_f14 = getelementptr inbounds i8, i8* %pd_f, i64 20
+  %pd_f14_i32 = bitcast i8* %pd_f14 to i32*
+  store i32 %v_f14, i32* %pd_f14_i32, align 4
+  %rax_g = load i64, i64* %RAX, align 8
+  %r9n7 = add i64 %rax_g, 7
+  %rdx_g = load i64, i64* %RDX, align 8
+  %jnb_123e = icmp uge i64 %r9n7, %rdx_g
+  br i1 %jnb_123e, label %loc_1280, label %loc_1240
+
+loc_1240:
+  %r9v6 = load i64, i64* %R9, align 8
+  %rbx_g = mul i64 %r9v6, 4
+  %rcx_g = load i64, i64* %RCX, align 8
+  %src_h = inttoptr i64 %rcx_g to i8*
+  %p_g = getelementptr inbounds i8, i8* %src_h, i64 %rbx_g
+  %p_g18 = getelementptr inbounds i8, i8* %p_g, i64 24
+  %p_g18_i32 = bitcast i8* %p_g18 to i32*
+  %v_g18 = load i32, i32* %p_g18_i32, align 4
+  %rax_h = load i64, i64* %RAX, align 8
+  %rax_add8 = add i64 %rax_h, 8
+  store i64 %rax_add8, i64* %RAX, align 8
+  %r10_g = load i64, i64* %R10, align 8
+  %rsi_g = load i64, i64* %RSI, align 8
+  %dst_g = inttoptr i64 %rsi_g to i8*
+  %pd_g = getelementptr inbounds i8, i8* %dst_g, i64 %r10_g
+  %pd_g18 = getelementptr inbounds i8, i8* %pd_g, i64 24
+  %pd_g18_i32 = bitcast i8* %pd_g18 to i32*
+  store i32 %v_g18, i32* %pd_g18_i32, align 4
+  %rax_i = load i64, i64* %RAX, align 8
+  %rdx_h = load i64, i64* %RDX, align 8
+  %jnb_124e = icmp uge i64 %rax_i, %rdx_h
+  br i1 %jnb_124e, label %loc_1280, label %loc_1253
+
+loc_1253:
+  %r9v7 = load i64, i64* %R9, align 8
+  %rbx_h = mul i64 %r9v7, 4
+  %rcx_h = load i64, i64* %RCX, align 8
+  %src_i = inttoptr i64 %rcx_h to i8*
+  %p_h = getelementptr inbounds i8, i8* %src_i, i64 %rbx_h
+  %p_h1c = getelementptr inbounds i8, i8* %p_h, i64 28
+  %p_h1c_i32 = bitcast i8* %p_h1c to i32*
+  %v_h1c = load i32, i32* %p_h1c_i32, align 4
+  %r10_h = load i64, i64* %R10, align 8
+  %rsi_h = load i64, i64* %RSI, align 8
+  %dst_h = inttoptr i64 %rsi_h to i8*
+  %pd_h = getelementptr inbounds i8, i8* %dst_h, i64 %r10_h
+  %pd_h1c = getelementptr inbounds i8, i8* %pd_h, i64 28
+  %pd_h1c_i32 = bitcast i8* %pd_h1c to i32*
+  store i32 %v_h1c, i32* %pd_h1c_i32, align 4
+  %rdi_i = load i64, i64* %RDI, align 8
+  %eq1 = icmp eq i64 %rdi_i, 1
+  %alz = zext i1 %eq1 to i64
+  %neg = sub i64 0, %alz
+  %rax_j = add i64 %neg, 10
+  %rdx_i = load i64, i64* %RDX, align 8
+  %jnb_126f = icmp uge i64 %rax_j, %rdx_i
+  br i1 %jnb_126f, label %loc_1280, label %loc_1271
+
+loc_1271:
+  %r9v8 = load i64, i64* %R9, align 8
+  %rbx_i = mul i64 %r9v8, 4
+  %rcx_i = load i64, i64* %RCX, align 8
+  %src_j = inttoptr i64 %rcx_i to i8*
+  %p_i = getelementptr inbounds i8, i8* %src_j, i64 %rbx_i
+  %p_i20 = getelementptr inbounds i8, i8* %p_i, i64 32
+  %p_i20_i32 = bitcast i8* %p_i20 to i32*
+  %v_i20 = load i32, i32* %p_i20_i32, align 4
+  %rsi_i = load i64, i64* %RSI, align 8
+  %dst_i = inttoptr i64 %rsi_i to i8*
+  %p_dst_24 = getelementptr inbounds i8, i8* %dst_i, i64 36
+  %p_dst_24_i32 = bitcast i8* %p_dst_24 to i32*
+  store i32 %v_i20, i32* %p_dst_24_i32, align 4
+  br label %loc_1280
+
+loc_1280:
+  %r8v = load i64, i64* %R8, align 8
+  %cmp_1280 = icmp ugt i64 %r8v, 9
+  br i1 %cmp_1280, label %loc_1380, label %loc_128A
+
+loc_128A:
+  %r11v = load i64, i64* %R11, align 8
+  %r8v2 = load i64, i64* %R8, align 8
+  %sum = add i64 %r11v, %r8v2
+  store i64 %sum, i64* %RDX, align 8
+  store i64 10, i64* %RBX, align 8
+  store i64 %r8v2, i64* %RAX, align 8
+  %rbxv = load i64, i64* %RBX, align 8
+  %cmple = icmp ule i64 %sum, %rbxv
+  %rbx_sel = select i1 %cmple, i64 %sum, i64 %rbxv
+  store i64 %rbx_sel, i64* %RBX, align 8
+  %r8_new = add i64 %sum, %r11v
+  store i64 %r8_new, i64* %R8, align 8
+  %raxv = load i64, i64* %RAX, align 8
+  store i64 %raxv, i64* %R10, align 8
+  %rdx2b = load i64, i64* %RDX, align 8
+  %cmple2 = icmp ule i64 %r8_new, 10
+  %rdx_sel = select i1 %cmple2, i64 %r8_new, i64 10
+  store i64 %rdx_sel, i64* %RDX, align 8
+  %rbx2b = load i64, i64* %RBX, align 8
+  store i64 %rbx2b, i64* %R12, align 8
+  %cond_jnb_12b6 = icmp uge i64 %raxv, %rdx_sel
+  br i1 %cond_jnb_12b6, label %loc_1280, label %loc_12B8
+
+loc_12B8:
+  %r10v = load i64, i64* %R10, align 8
+  %rbxv2 = load i64, i64* %RBX, align 8
+  %jnb_12bb = icmp uge i64 %r10v, %rbxv2
+  br i1 %jnb_12bb, label %loc_1158, label %loc_12C1
+
+loc_12C1:
+  %rcxv = load i64, i64* %RCX, align 8
+  %off_c1 = mul i64 %r10v, 4
+  %src_c1 = inttoptr i64 %rcxv to i8*
+  %p_c1 = getelementptr inbounds i8, i8* %src_c1, i64 %off_c1
+  %p_c1_i32 = bitcast i8* %p_c1 to i32*
+  %edi_val = load i32, i32* %p_c1_i32, align 4
+  %r12v2 = load i64, i64* %R12, align 8
+  %rdxv2 = load i64, i64* %RDX, align 8
+  %jnb_12c8 = icmp uge i64 %r12v2, %rdxv2
+  br i1 %jnb_12c8, label %loc_12D7, label %loc_12CA
+
+loc_12CA:
+  %rcxv2 = load i64, i64* %RCX, align 8
+  %off_c2 = mul i64 %r12v2, 4
+  %src_c2 = inttoptr i64 %rcxv2 to i8*
+  %p_c2 = getelementptr inbounds i8, i8* %src_c2, i64 %off_c2
+  %p_c2_i32 = bitcast i8* %p_c2 to i32*
+  %r9d_val = load i32, i32* %p_c2_i32, align 4
+  %cmp_12d1 = icmp slt i32 %r9d_val, %edi_val
+  br i1 %cmp_12d1, label %loc_115C, label %loc_12D7
+
+loc_12D7:
+  %rsi_d7 = load i64, i64* %RSI, align 8
+  %rax_d7 = load i64, i64* %RAX, align 8
+  %dst_d7 = inttoptr i64 %rsi_d7 to i8*
+  %off_d7 = mul i64 %rax_d7, 4
+  %p_d7 = getelementptr inbounds i8, i8* %dst_d7, i64 %off_d7
+  %p_d7_i32 = bitcast i8* %p_d7 to i32*
+  store i32 %edi_val, i32* %p_d7_i32, align 4
+  %rax_inc = add i64 %rax_d7, 1
+  store i64 %rax_inc, i64* %RAX, align 8
+  %rdxv3 = load i64, i64* %RDX, align 8
+  %cmp_12e1 = icmp eq i64 %rdxv3, %rax_inc
+  br i1 %cmp_12e1, label %loc_1280, label %loc_12E3
+
+loc_12E3:
+  %r10_add = add i64 %r10v, 1
+  store i64 %r10_add, i64* %R10, align 8
+  br label %loc_12B8
+
+loc_12F0:
+  %rcx_f0 = load i64, i64* %RCX, align 8
+  %r12_f0 = load i64, i64* %R12, align 8
+  %rsi_f0 = load i64, i64* %RSI, align 8
+  %rbp_f0 = load i64, i64* %RBP, align 8
+  %src_f0 = inttoptr i64 %rcx_f0 to i8*
+  %p_src_head = getelementptr inbounds i8, i8* %src_f0, i64 %r12_f0
+  %p_src_m4 = getelementptr inbounds i8, i8* %p_src_head, i64 -4
+  %vec_ld = bitcast i8* %p_src_m4 to <16 x i8>*
+  %vload = load <16 x i8>, <16 x i8>* %vec_ld, align 1
+  %dst_f0 = inttoptr i64 %rbp_f0 to i8*
+  %vec_st = bitcast i8* %dst_f0 to <16 x i8>*
+  store <16 x i8> %vload, <16 x i8>* %vec_st, align 1
+  %rbx_f0 = load i64, i64* %RBX, align 8
+  %tshr = lshr i64 %rbx_f0, 2
+  %is1 = icmp eq i64 %tshr, 1
+  br i1 %is1, label %loc_1313, label %loc_130A
+
+loc_130A:
+  %p_src_p16 = getelementptr inbounds i8, i8* %p_src_m4, i64 16
+  %vec_ld2 = bitcast i8* %p_src_p16 to <16 x i8>*
+  %vload2 = load <16 x i8>, <16 x i8>* %vec_ld2, align 1
+  %p_dst_p16 = getelementptr inbounds i8, i8* %dst_f0, i64 16
+  %vec_st2 = bitcast i8* %p_dst_p16 to <16 x i8>*
+  store <16 x i8> %vload2, <16 x i8>* %vec_st2, align 1
+  br label %loc_1313
+
+loc_1313:
+  %rbx_v = load i64, i64* %RBX, align 8
+  %rax_mask = and i64 %rbx_v, -4
+  %r9v3b = load i64, i64* %R9, align 8
+  %r9_add = add i64 %r9v3b, %rax_mask
+  store i64 %r9_add, i64* %R9, align 8
+  %rdi_v = load i64, i64* %RDI, align 8
+  %rax_add = add i64 %rax_mask, %rdi_v
+  store i64 %rax_add, i64* %RAX, align 8
+  %ebx_low = and i64 %rbx_v, 3
+  %jz_1323 = icmp eq i64 %ebx_low, 0
+  br i1 %jz_1323, label %loc_1280, label %loc_1329
+
+loc_1329:
+  %rcx_1329 = load i64, i64* %RCX, align 8
+  %r9_1329 = load i64, i64* %R9, align 8
+  %off9 = mul i64 %r9_1329, 4
+  %src_1329 = inttoptr i64 %rcx_1329 to i8*
+  %p1329 = getelementptr inbounds i8, i8* %src_1329, i64 %off9
+  %p1329_i32 = bitcast i8* %p1329 to i32*
+  %v1329 = load i32, i32* %p1329_i32, align 4
+  %rsi_1329 = load i64, i64* %RSI, align 8
+  %rax_1329 = load i64, i64* %RAX, align 8
+  %doff = mul i64 %rax_1329, 4
+  %dst_1329 = inttoptr i64 %rsi_1329 to i8*
+  %pdst = getelementptr inbounds i8, i8* %dst_1329, i64 %doff
+  %pdst_i32 = bitcast i8* %pdst to i32*
+  store i32 %v1329, i32* %pdst_i32, align 4
+  %r9p1 = add i64 %rax_1329, 1
+  %rdx_1329 = load i64, i64* %RDX, align 8
+  %jnb_1348 = icmp uge i64 %r9p1, %rdx_1329
+  br i1 %jnb_1348, label %loc_1280, label %loc_134E
+
+loc_134E:
+  %rcx_134e = load i64, i64* %RCX, align 8
+  %r9idx = load i64, i64* %R9, align 8
+  %off9b = mul i64 %r9idx, 4
+  %src_134e = inttoptr i64 %rcx_134e to i8*
+  %p9b = getelementptr inbounds i8, i8* %src_134e, i64 %off9b
+  %p9b4 = getelementptr inbounds i8, i8* %p9b, i64 4
+  %p9b4_i32 = bitcast i8* %p9b4 to i32*
+  %v9b4 = load i32, i32* %p9b4_i32, align 4
+  %rsi_134e = load i64, i64* %RSI, align 8
+  %rax_134e = load i64, i64* %RAX, align 8
+  %rdi_off = mul i64 %rax_134e, 4
+  %dst_134e = inttoptr i64 %rsi_134e to i8*
+  %pd_134e = getelementptr inbounds i8, i8* %dst_134e, i64 %rdi_off
+  %pd_134e4 = getelementptr inbounds i8, i8* %pd_134e, i64 4
+  %pd_134e4_i32 = bitcast i8* %pd_134e4 to i32*
+  store i32 %v9b4, i32* %pd_134e4_i32, align 4
+  %rax_add2 = add i64 %rax_134e, 2
+  store i64 %rax_add2, i64* %RAX, align 8
+  %rdx_135c = load i64, i64* %RDX, align 8
+  %jnb_135f = icmp uge i64 %rax_add2, %rdx_135c
+  br i1 %jnb_135f, label %loc_1280, label %loc_1365
+
+loc_1365:
+  %rcx_1365 = load i64, i64* %RCX, align 8
+  %r9idx2 = load i64, i64* %R9, align 8
+  %off9c = mul i64 %r9idx2, 4
+  %src_1365 = inttoptr i64 %rcx_1365 to i8*
+  %p9c = getelementptr inbounds i8, i8* %src_1365, i64 %off9c
+  %p9c8 = getelementptr inbounds i8, i8* %p9c, i64 8
+  %p9c8_i32 = bitcast i8* %p9c8 to i32*
+  %v9c8 = load i32, i32* %p9c8_i32, align 4
+  %rsi_1365 = load i64, i64* %RSI, align 8
+  %rax_1365 = load i64, i64* %RAX, align 8
+  %doff2 = mul i64 %rax_1365, 4
+  %dst_1365 = inttoptr i64 %rsi_1365 to i8*
+  %pd_1365 = getelementptr inbounds i8, i8* %dst_1365, i64 %doff2
+  %pd_13658 = getelementptr inbounds i8, i8* %pd_1365, i64 8
+  %pd_13658_i32 = bitcast i8* %pd_13658 to i32*
+  store i32 %v9c8, i32* %pd_13658_i32, align 4
+  %r8_chk = load i64, i64* %R8, align 8
+  %jbe_1372 = icmp ule i64 %r8_chk, 9
+  br i1 %jbe_1372, label %loc_128A, label %loc_1378
+
+loc_1378:
+  br label %loc_1380
+
+loc_1380:
+  %dec7c = load i32, i32* %var7C, align 4
+  %dec7c1 = add i32 %dec7c, -1
+  store i32 %dec7c1, i32* %var7C, align 4
+  %rdi88 = load i64, i64* %var88, align 8
+  store i64 %rdi88, i64* %RDI, align 8
+  %iszero = icmp eq i32 %dec7c1, 0
+  br i1 %iszero, label %loc_13AD, label %loc_138B
+
+loc_138B:
+  %rcx_x = load i64, i64* %RCX, align 8
+  %rsi_x = load i64, i64* %RSI, align 8
+  store i64 %rcx_x, i64* %RDX, align 8
+  store i64 %rsi_x, i64* %RCX, align 8
+  %rdx_x = load i64, i64* %RDX, align 8
+  store i64 %rdx_x, i64* %RSI, align 8
+  br label %loc_1140
+
+loc_13A0:
+  %rdi_13a0 = load i64, i64* %RDI, align 8
+  %r10_13 = mul i64 %rdi_13a0, 4
+  store i64 %r10_13, i64* %R10, align 8
+  br label %loc_11C4
+
+loc_13AD:
+  %rbx70 = load i8*, i8** %var70, align 8
+  %rbx70_i = ptrtoint i8* %rbx70 to i64
+  store i64 %rbx70_i, i64* %RBX, align 8
+  %p_alloc = load i8*, i8** %ptr, align 8
+  %rsi_end = load i64, i64* %RSI, align 8
+  %cmp_same = icmp eq i64 %rsi_end, %rbx70_i
+  br i1 %cmp_same, label %loc_13C6, label %loc_13BC
+
+loc_13BC:
+  %dst_copy = inttoptr i64 %rbx70_i to i8*
+  %src_copy = inttoptr i64 %rsi_end to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %dst_copy, i8* %src_copy, i64 40, i1 false)
+  br label %loc_13C6
+
+loc_13C6:
+  %tofree = load i8*, i8** %ptr, align 8
+  call void @free(i8* %tofree)
+  br label %loc_13CE
+
+loc_13CE:
+  %r12_end = getelementptr inbounds [40 x i8], [40 x i8]* %stack_arr, i64 0, i64 40
+  %r12_end_i = ptrtoint i8* %r12_end to i64
+  store i64 %r12_end_i, i64* %R12, align 8
+  %fmt = getelementptr inbounds [4 x i8], [4 x i8]* @unk_2004, i64 0, i64 0
+  %rbx_print = load i64, i64* %RBX, align 8
+  %cmp_loop = icmp ne i64 %rbx_print, %r12_end_i
+  br i1 %cmp_loop, label %loc_13E0, label %loc_13FA
+
+loc_13E0:
+  %rbx_it = load i64, i64* %RBX, align 8
+  %valp = inttoptr i64 %rbx_it to i32*
+  %ival = load i32, i32* %valp, align 4
+  %fmtp = getelementptr inbounds [4 x i8], [4 x i8]* @unk_2004, i64 0, i64 0
+  %zero0 = add i32 0, 0
+  %pr1 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmtp, i32 %ival)
+  %rbx_next = add i64 %rbx_it, 4
+  store i64 %rbx_next, i64* %RBX, align 8
+  %r12_chk = load i64, i64* %R12, align 8
+  %cont = icmp ne i64 %r12_chk, %rbx_next
+  br i1 %cont, label %loc_13E0, label %loc_13FA
+
+loc_13FA:
+  %fmt2 = getelementptr inbounds [2 x i8], [2 x i8]* @unk_2008, i64 0, i64 0
+  %pr2 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt2)
+  %can_end = load i64, i64* %canary, align 8
+  %guard_end = load i64, i64* @__stack_chk_guard, align 8
+  %cmp_can = icmp ne i64 %can_end, %guard_end
+  br i1 %cmp_can, label %loc_1435, label %loc_141D
+
+loc_141D:
+  ret i32 0
+
+loc_142E:
+  %bx_fail = ptrtoint i8* %base_i8 to i64
+  store i64 %bx_fail, i64* %RBX, align 8
+  br label %loc_13CE
+
+loc_1435:
+  call void @__stack_chk_fail()
+  unreachable
+
+loc_143A:
+  %r9v_143a = load i64, i64* %R9, align 8
+  store i64 %r9v_143a, i64* %R12, align 8
+  %rdi_v_143a = load i64, i64* %RDI, align 8
+  store i64 %rdi_v_143a, i64* %RAX, align 8
+  br label %loc_12B8
+}
+
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8*, i8*, i64, i1)

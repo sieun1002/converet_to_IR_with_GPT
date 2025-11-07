@@ -1,0 +1,199 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/2/quicksort_function1.ll:16:13: error: expected instruction opcode
+;   %i.init = %low.cur
+;             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'quick_sort'
+target triple = "x86_64-unknown-linux-gnu"
+
+define void @quick_sort(i32* %arr, i64 %rsi, i64 %rdx) local_unnamed_addr {
+b1220:
+  ; 0x1220: cmp rsi, rdx
+  %cmp.entry = icmp sge i64 %rsi, %rdx
+  ; 0x1223: jge locret_1312
+  br i1 %cmp.entry, label %b1312, label %b123A
+
+b123A:
+  ; 0x123A: loop/setup for partition
+  %low.cur = phi i64 [ %rsi, %b1220 ], [ %low.next, %b12B2 ]
+  %high.cur = phi i64 [ %rdx, %b1220 ], [ %high.next, %b12B2 ]
+  ; rdi := r12 (i), r9 := r12+1, rbx := r13 (j)
+  %i.init = %low.cur
+  %ip1.init = add i64 %low.cur, 1
+  %j.init = %high.cur
+  ; mid = low + ((high-low)>>1)
+  %sub.hi.lo = sub i64 %high.cur, %low.cur
+  %mid.shift = ashr i64 %sub.hi.lo, 1
+  %mid = add i64 %mid.shift, %low.cur
+  ; pivot = arr[mid]
+  %pivot.ptr = getelementptr inbounds i32, i32* %arr, i64 %mid
+  %pivot.init = load i32, i32* %pivot.ptr, align 4
+  ; ptr to arr[j]
+  %ptr_j.init = getelementptr inbounds i32, i32* %arr, i64 %j.init
+  br label %b1260
+
+b1260:
+  ; 0x1260: load left and right, compare with pivot
+  %i = phi i64 [ %i.init, %b123A ], [ %i.next, %b12DB ]
+  %ip1 = phi i64 [ %ip1.init, %b123A ], [ %ip1.next, %b12DB ]
+  %j = phi i64 [ %j.init, %b123A ], [ %j.new.from12DB, %b12DB ]
+  %ptr_j = phi i32* [ %ptr_j.init, %b123A ], [ %ptr_j.from12DB, %b12DB ]
+  %pivot.phi = phi i32 [ %pivot.init, %b123A ], [ %pivot.back, %b12DB ]
+  %low.phi = phi i64 [ %low.cur, %b123A ], [ %low.back, %b12DB ]
+  %high.phi = phi i64 [ %high.cur, %b123A ], [ %high.back, %b12DB ]
+  ; leftVal = arr[i]
+  %left.ptr = getelementptr inbounds i32, i32* %arr, i64 %i
+  %leftVal = load i32, i32* %left.ptr, align 4
+  ; rightVal = arr[j]
+  %rightVal = load i32, i32* %ptr_j, align 4
+  ; 0x126c: cmp r8d (leftVal), esi (pivot)
+  %cmp.left.pivot = icmp slt i32 %leftVal, %pivot.phi
+  ; 0x126f: jl loc_12DB
+  br i1 %cmp.left.pivot, label %b12DB, label %b1260.cont
+
+b1260.cont:
+  ; 0x1271: cmp esi (pivot), edx (rightVal)
+  %cmp.pivot.ge.right = icmp sge i32 %pivot.phi, %rightVal
+  ; 0x1273: jge loc_1291
+  br i1 %cmp.pivot.ge.right, label %b1291, label %b1280.prep
+
+b1280.prep:
+  ; 0x1275.. prepare for right scan: rax = rbp+rax-4 -> ptr to j-1
+  %ptr.next0 = getelementptr inbounds i32, i32* %ptr_j, i64 -1
+  br label %b1280
+
+b1280:
+  ; 0x1280: scan from right while arr[--j] > pivot
+  %ptr.iter = phi i32* [ %ptr.next0, %b1280.prep ], [ %ptr.next, %b1280 ]
+  %j.iter = phi i64 [ %j, %b1280.prep ], [ %j.dec, %b1280 ]
+  %i.fwd = phi i64 [ %i, %b1280.prep ], [ %i.fwd, %b1280 ]
+  %ip1.fwd = phi i64 [ %ip1, %b1280.prep ], [ %ip1.fwd, %b1280 ]
+  %leftVal.fwd = phi i32 [ %leftVal, %b1280.prep ], [ %leftVal.fwd, %b1280 ]
+  %pivot.fwd = phi i32 [ %pivot.phi, %b1280.prep ], [ %pivot.fwd, %b1280 ]
+  %low.fwd = phi i64 [ %low.phi, %b1280.prep ], [ %low.fwd, %b1280 ]
+  %high.fwd = phi i64 [ %high.phi, %b1280.prep ], [ %high.fwd, %b1280 ]
+  ; rcx = ptr.iter; edx = *rcx
+  %cur.val = load i32, i32* %ptr.iter, align 4
+  ; rax -= 4 ; rbx -= 1
+  %ptr.next = getelementptr inbounds i32, i32* %ptr.iter, i64 -1
+  %j.dec = add i64 %j.iter, -1
+  ; 0x128d: cmp edx, esi
+  %cmp.cur.gt.pivot = icmp sgt i32 %cur.val, %pivot.fwd
+  ; 0x128f: jg loc_1280
+  br i1 %cmp.cur.gt.pivot, label %b1280, label %b1291
+
+b1291:
+  ; 0x1291: r14 = rdi; compare i <= j
+  %i.m = phi i64 [ %i, %b1260.cont ], [ %i.fwd, %b1280 ]
+  %ip1.m = phi i64 [ %ip1, %b1260.cont ], [ %ip1.fwd, %b1280 ]
+  %leftVal.m = phi i32 [ %leftVal, %b1260.cont ], [ %leftVal.fwd, %b1280 ]
+  %pivot.m = phi i32 [ %pivot.phi, %b1260.cont ], [ %pivot.fwd, %b1280 ]
+  %low.m = phi i64 [ %low.phi, %b1260.cont ], [ %low.fwd, %b1280 ]
+  %high.m = phi i64 [ %high.phi, %b1260.cont ], [ %high.fwd, %b1280 ]
+  %ptr.right.m = phi i32* [ %ptr_j, %b1260.cont ], [ %ptr.iter, %b1280 ]
+  %rightVal.m = phi i32 [ %rightVal, %b1260.cont ], [ %cur.val, %b1280 ]
+  %j.m = phi i64 [ %j, %b1260.cont ], [ %j.dec, %b1280 ]
+  %t0 = %i.m
+  ; 0x1294: cmp rdi, rbx
+  %cmp.i.le.j = icmp sle i64 %i.m, %j.m
+  ; 0x1297: jle loc_12C0
+  br i1 %cmp.i.le.j, label %b12C0, label %b1299
+
+b12C0:
+  ; 0x12C0: j-- ; swap arr[i] and arr[j]
+  %j1 = add i64 %j.m, -1
+  ; 0x12C4: [rbp+rdi*4] = edx (rightVal)
+  store i32 %rightVal.m, i32* %left.ptr, align 4
+  ; 0x12C8: r14 = r9
+  %t1 = %ip1.m
+  ; 0x12CB: [rcx] = r8d (leftVal)
+  store i32 %leftVal.m, i32* %ptr.right.m, align 4
+  ; 0x12CE: cmp r9, rbx
+  %cmp.ip1.gt.j1 = icmp sgt i64 %ip1.m, %j1
+  ; 0x12D1: jg loc_1299
+  br i1 %cmp.ip1.gt.j1, label %b1299, label %b12DB
+
+b12DB:
+  ; 0x12DB: r9++, rdi++ ; continue partition loop
+  %i.in = phi i64 [ %i.m, %b12C0 ], [ %i, %b1260 ]
+  %ip1.in = phi i64 [ %ip1.m, %b12C0 ], [ %ip1, %b1260 ]
+  %j.in = phi i64 [ %j1, %b12C0 ], [ %j, %b1260 ]
+  %ptr_j.in = phi i32* [ getelementptr (i32, i32* %arr, i64 %j1), %b12C0 ], [ %ptr_j, %b1260 ]
+  %pivot.in = phi i32 [ %pivot.m, %b12C0 ], [ %pivot.phi, %b1260 ]
+  %low.in = phi i64 [ %low.m, %b12C0 ], [ %low.phi, %b1260 ]
+  %high.in = phi i64 [ %high.m, %b12C0 ], [ %high.phi, %b1260 ]
+  ; 0x12DB/0x12DF increments
+  %ip1.next = add i64 %ip1.in, 1
+  %i.next = add i64 %i.in, 1
+  ; 0x12D3: rax = rbx*4 -> ptr to arr[j.in]
+  %ptr_j.from12DB = %ptr_j.in
+  %j.new.from12DB = %j.in
+  ; carry-through invariants
+  %pivot.back = %pivot.in
+  %low.back = %low.in
+  %high.back = %high.in
+  ; 0x12E3: jmp loc_1260
+  br label %b1260
+
+b1299:
+  ; 0x1299..0x12A8: choose smaller partition; t from r14
+  %t = phi i64 [ %t0, %b1291 ], [ %t1, %b12C0 ]
+  %low.k = phi i64 [ %low.m, %b1291 ], [ %low.m, %b12C0 ]
+  %high.k = phi i64 [ %high.m, %b1291 ], [ %high.m, %b12C0 ]
+  %j.k = phi i64 [ %j.m, %b1291 ], [ %j1, %b12C0 ]
+  %len1 = sub i64 %j.k, %low.k
+  %len2 = sub i64 %high.k, %t
+  %cmp.len.ge = icmp sge i64 %len1, %len2
+  ; 0x12A8: jge loc_12E8
+  br i1 %cmp.len.ge, label %b12E8, label %b12AA
+
+b12AA:
+  ; 0x12AA: cmp rbx, r12
+  %cmp.j.gt.low = icmp sgt i64 %j.k, %low.k
+  ; 0x12AD: jg loc_12F2
+  br i1 %cmp.j.gt.low, label %b12F2, label %b12AF
+
+b12F2:
+  ; 0x12F2..0x12FB: call quick_sort(arr, low, j)
+  call void @quick_sort(i32* %arr, i64 %low.k, i64 %j.k)
+  ; 0x1300: jmp loc_12AF
+  br label %b12AF
+
+b12AF:
+  ; 0x12AF: r12 = r14 (low = t)
+  %low.next.af = phi i64 [ %t, %b12F2 ], [ %t, %b12AA ]
+  %high.next.af = phi i64 [ %high.k, %b12F2 ], [ %high.k, %b12AA ]
+  br label %b12B2
+
+b12E8:
+  ; 0x12E8: cmp r14, r13
+  %cmp.t.lt.high = icmp slt i64 %t, %high.k
+  ; 0x12EB: jl loc_1302
+  br i1 %cmp.t.lt.high, label %b1302, label %b12ED
+
+b1302:
+  ; 0x1302..0x130B: call quick_sort(arr, t, high)
+  call void @quick_sort(i32* %arr, i64 %t, i64 %high.k)
+  ; 0x1310: jmp loc_12ED
+  br label %b12ED
+
+b12ED:
+  ; 0x12ED: r13 = rbx (high = j)
+  %low.next.ed = %low.k
+  %high.next.ed = %j.k
+  ; 0x12F0: jmp loc_12B2
+  br label %b12B2
+
+b12B2:
+  ; 0x12B2: cmp r13, r12
+  %low.next = phi i64 [ %low.next.ed, %b12ED ], [ %low.next.af, %b12AF ]
+  %high.next = phi i64 [ %high.next.ed, %b12ED ], [ %high.next.af, %b12AF ]
+  %cmp.high.gt.low = icmp sgt i64 %high.next, %low.next
+  ; 0x12B5: jg loc_123A
+  br i1 %cmp.high.gt.low, label %b123A, label %b1312
+
+b1312:
+  ; 0x1312: retn
+  ret void
+}

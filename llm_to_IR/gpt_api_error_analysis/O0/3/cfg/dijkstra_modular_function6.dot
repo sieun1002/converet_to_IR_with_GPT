@@ -1,0 +1,19 @@
+digraph "CFG for 'print_distances' function" {
+	label="CFG for 'print_distances' function";
+
+	Node0x560a3236b9a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x560a3236b9a0 -> Node0x560a3236b460[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x560a3236b460 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %inc ]\l  %cmp = icmp slt i32 %i, %n\l  br i1 %cmp, label %body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x560a3236b460:s0 -> Node0x560a3236b660[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x560a3236b460:s1 -> Node0x560a3236b730[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x560a3236b660 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %idx.ext = sext i32 %i to i64\l  %ptr = getelementptr inbounds i32, ptr %dist, i64 %idx.ext\l  %val = load i32, ptr %ptr, align 4\l  %isinf = icmp eq i32 %val, 2147483647\l  br i1 %isinf, label %print_inf, label %print_val\l|{<s0>T|<s1>F}}"];
+	Node0x560a3236b660:s0 -> Node0x560a3236e9b0[tooltip="body -> print_inf\nProbability 50.00%" ];
+	Node0x560a3236b660:s1 -> Node0x560a3236ea30[tooltip="body -> print_val\nProbability 50.00%" ];
+	Node0x560a3236e9b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{print_inf:\l|  %fmt1 = getelementptr inbounds [16 x i8], ptr @.str_inf, i64 0, i64 0\l  %call1 = call i32 (ptr, ...) @printf(ptr %fmt1, i32 %i)\l  br label %inc\l}"];
+	Node0x560a3236e9b0 -> Node0x560a3236b4b0[tooltip="print_inf -> inc\nProbability 100.00%" ];
+	Node0x560a3236ea30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{print_val:\l|  %fmt2 = getelementptr inbounds [15 x i8], ptr @.str_val, i64 0, i64 0\l  %call2 = call i32 (ptr, ...) @printf(ptr %fmt2, i32 %i, i32 %val)\l  br label %inc\l}"];
+	Node0x560a3236ea30 -> Node0x560a3236b4b0[tooltip="print_val -> inc\nProbability 100.00%" ];
+	Node0x560a3236b4b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inc:\l|  %i.next = add nsw i32 %i, 1\l  br label %loop\l}"];
+	Node0x560a3236b4b0 -> Node0x560a3236b460[tooltip="inc -> loop\nProbability 100.00%" ];
+	Node0x560a3236b730 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

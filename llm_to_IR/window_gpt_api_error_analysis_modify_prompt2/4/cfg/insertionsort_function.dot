@@ -1,0 +1,24 @@
+digraph "CFG for 'insertion_sort' function" {
+	label="CFG for 'insertion_sort' function";
+
+	Node0x5fb4b9385810 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  br label %outer.cond\l}"];
+	Node0x5fb4b9385810 -> Node0x5fb4b9384cc0[tooltip="entry -> outer.cond\nProbability 100.00%" ];
+	Node0x5fb4b9384cc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.cond:\l|  %i = phi i64 [ 1, %entry ], [ %i.next, %outer.end ]\l  %cmp.i.n = icmp ult i64 %i, %n\l  br i1 %cmp.i.n, label %outer.body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5fb4b9384cc0:s0 -> Node0x5fb4b93850a0[tooltip="outer.cond -> outer.body\nProbability 96.88%" ];
+	Node0x5fb4b9384cc0:s1 -> Node0x5fb4b9385120[tooltip="outer.cond -> exit\nProbability 3.12%" ];
+	Node0x5fb4b93850a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.body:\l|  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %i\l  %key = load i32, ptr %elem.ptr, align 4\l  %j.init = add i64 %i, 0\l  br label %inner.cond\l}"];
+	Node0x5fb4b93850a0 -> Node0x5fb4b9386f00[tooltip="outer.body -> inner.cond\nProbability 100.00%" ];
+	Node0x5fb4b9386f00 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cond:\l|  %j = phi i64 [ %j.init, %outer.body ], [ %j.dec, %inner.shift ]\l  %j.not.zero = icmp ne i64 %j, 0\l  br i1 %j.not.zero, label %inner.cmp, label %inner.after\l|{<s0>T|<s1>F}}"];
+	Node0x5fb4b9386f00:s0 -> Node0x5fb4b93873d0[tooltip="inner.cond -> inner.cmp\nProbability 96.88%" ];
+	Node0x5fb4b9386f00:s1 -> Node0x5fb4b93874b0[tooltip="inner.cond -> inner.after\nProbability 3.12%" ];
+	Node0x5fb4b93873d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cmp:\l|  %j.minus1 = add i64 %j, -1\l  %prev.ptr = getelementptr inbounds i32, ptr %arr, i64 %j.minus1\l  %prev = load i32, ptr %prev.ptr, align 4\l  %key.lt.prev = icmp slt i32 %key, %prev\l  br i1 %key.lt.prev, label %inner.shift, label %inner.after\l|{<s0>T|<s1>F}}"];
+	Node0x5fb4b93873d0:s0 -> Node0x5fb4b93871e0[tooltip="inner.cmp -> inner.shift\nProbability 96.88%" ];
+	Node0x5fb4b93873d0:s1 -> Node0x5fb4b93874b0[tooltip="inner.cmp -> inner.after\nProbability 3.12%" ];
+	Node0x5fb4b93871e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.shift:\l|  %dest.ptr = getelementptr inbounds i32, ptr %arr, i64 %j\l  store i32 %prev, ptr %dest.ptr, align 4\l  %j.dec = add i64 %j, -1\l  br label %inner.cond\l}"];
+	Node0x5fb4b93871e0 -> Node0x5fb4b9386f00[tooltip="inner.shift -> inner.cond\nProbability 100.00%" ];
+	Node0x5fb4b93874b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{inner.after:\l|  %j.final = phi i64 [ %j, %inner.cmp ], [ %j, %inner.cond ]\l  %ins.ptr = getelementptr inbounds i32, ptr %arr, i64 %j.final\l  store i32 %key, ptr %ins.ptr, align 4\l  br label %outer.end\l}"];
+	Node0x5fb4b93874b0 -> Node0x5fb4b9384b10[tooltip="inner.after -> outer.end\nProbability 100.00%" ];
+	Node0x5fb4b9384b10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.end:\l|  %i.next = add i64 %i, 1\l  br label %outer.cond\l}"];
+	Node0x5fb4b9384b10 -> Node0x5fb4b9384cc0[tooltip="outer.end -> outer.cond\nProbability 100.00%" ];
+	Node0x5fb4b9385120 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

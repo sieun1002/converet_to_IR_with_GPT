@@ -1,0 +1,785 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/insertionsort_main1.ll:82:15: error: expected instruction opcode
+;   %rbx.init = %bp
+;               ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-unknown-linux-gnu"
+
+@xmmword_2010 = external constant <4 x i32>, align 16
+@xmmword_2020 = external constant <4 x i32>, align 16
+@unk_2004 = external constant [4 x i8], align 1
+@unk_2008 = external constant [2 x i8], align 1
+@__stack_chk_guard = external local_unnamed_addr global i64, align 8
+
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail()
+
+define i32 @main() {
+bb_1080:
+  br label %bb_1084
+
+; prologue and locals
+bb_1084:
+  ; rcx := 0
+  br label %bb_1088
+
+bb_1088:
+  ; setup frame
+  %frame.arr = alloca [48 x i8], align 16
+  %frame = getelementptr inbounds [48 x i8], [48 x i8]* %frame.arr, i64 0, i64 0
+  ; running variables (initial)
+  ; rbp := frame
+  ; rbx := will be set later
+  ; rsi := will be set later
+  br label %bb_108a
+
+bb_108a:
+  ; sub rsp, 30h (modeled by alloca above)
+  br label %bb_108e
+
+bb_108e:
+  ; movdqa xmm0, cs:xmmword_2010
+  %vec2010 = load <4 x i32>, <4 x i32>* @xmmword_2010, align 16
+  br label %bb_1096
+
+bb_1096:
+  ; mov rax, fs:28h  (modeled via __stack_chk_guard)
+  %guard0 = load i64, i64* @__stack_chk_guard, align 8
+  br label %bb_109f
+
+bb_109f:
+  ; mov [rsp+48h+var_20], rax  (save canary)
+  %saved_canary = alloca i64, align 8
+  store i64 %guard0, i64* %saved_canary, align 8
+  br label %bb_10a4
+
+bb_10a4:
+  ; xor eax, eax
+  br label %bb_10a6
+
+bb_10a6:
+  ; mov rbp, rsp  (modeled: bp := frame)
+  %bp = bitcast i8* %frame to i8*
+  br label %bb_10a9
+
+bb_10a9:
+  ; mov [rsp+48h+var_28], 4  (store i32 4 at bp+0x20)
+  %elt8.ptr.i8 = getelementptr inbounds i8, i8* %bp, i64 32
+  %elt8.ptr = bitcast i8* %elt8.ptr.i8 to i32*
+  store i32 4, i32* %elt8.ptr, align 4
+  br label %bb_10b2
+
+bb_10b2:
+  ; movaps [rsp+48h+var_48], xmm0  (store first 4 ints at bp+0x00)
+  %vec0.ptr.i8 = getelementptr inbounds i8, i8* %bp, i64 0
+  %vec0.ptr = bitcast i8* %vec0.ptr.i8 to <4 x i32>*
+  store <4 x i32> %vec2010, <4 x i32>* %vec0.ptr, align 16
+  br label %bb_10b6
+
+bb_10b6:
+  ; movdqa xmm0, cs:xmmword_2020
+  %vec2020 = load <4 x i32>, <4 x i32>* @xmmword_2020, align 16
+  br label %bb_10be
+
+bb_10be:
+  ; mov rbx, rbp
+  %rbx.init = %bp
+  br label %bb_10c1
+
+bb_10c1:
+  ; mov rsi, rbp
+  %rsi.init = %bp
+  br label %bb_10c4
+
+bb_10c4:
+  ; movaps [rsp+48h+var_38], xmm0  (store next 4 ints at bp+0x10)
+  %vec1.ptr.i8 = getelementptr inbounds i8, i8* %bp, i64 16
+  %vec1.ptr = bitcast i8* %vec1.ptr.i8 to <4 x i32>*
+  store <4 x i32> %vec2020, <4 x i32>* %vec1.ptr, align 16
+  br label %bb_10c9
+
+bb_10c9:
+  ; nop
+  br label %bb_10d0
+
+; -------- main sorting loop --------
+
+bb_10d0:
+  ; loop header with phis for rcx and rsi, edx/rax set inside
+  %rcx.phi = phi i64 [ 0, %bb_10c9 ], [ %rcx.next, %bb_11d0 ]
+  %rsi.phi = phi i8* [ %rsi.init, %bb_10c9 ], [ %rsi.next, %bb_11d0 ]
+  ; edx = [rsi+4]
+  %rsi.plus4.i8 = getelementptr inbounds i8, i8* %rsi.phi, i64 4
+  %rsi.plus4.i32p = bitcast i8* %rsi.plus4.i8 to i32*
+  %edx.ld = load i32, i32* %rsi.plus4.i32p, align 4
+  ; r8d = [rsi]
+  %rsi.i32p = bitcast i8* %rsi.phi to i32*
+  %r8d.ld = load i32, i32* %rsi.i32p, align 4
+  ; rdi = rsi+4
+  %rdi.cur = %rsi.plus4.i8
+  ; rax = rsi
+  %rax.cur = %rsi.phi
+  ; cmp r8d, edx
+  %cmp.r8.le.edx = icmp sle i32 %r8d.ld, %edx.ld
+  br i1 %cmp.r8.le.edx, label %bb_12c3, label %bb_10e6
+
+bb_10e6:
+  ; [rsi+4] = r8d
+  store i32 %r8d.ld, i32* %rsi.plus4.i32p, align 4
+  ; test rcx,rcx
+  %rcx.iszero = icmp eq i64 %rcx.phi, 0
+  br i1 %rcx.iszero, label %bb_1234, label %bb_10f3
+
+bb_10f3:
+  ; r8d = [rax-4]
+  %rax.m4.i8 = getelementptr inbounds i8, i8* %rax.phi, i64 -4
+  %rax.m4.i32p = bitcast i8* %rax.m4.i8 to i32*
+  %r8d.m4.ld = load i32, i32* %rax.m4.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m4.le = icmp sle i32 %r8d.m4.ld, %edx.phi
+  br i1 %cmp.m4.le, label %bb_125b, label %bb_1100
+
+bb_1100:
+  ; [rax] = r8d (shift)
+  %rax.i32p = bitcast i8* %rax.phi to i32*
+  store i32 %r8d.m4.ld, i32* %rax.i32p, align 4
+  ; cmp rcx,1
+  %cmp.rcx.eq1 = icmp eq i64 %rcx.phi2, 1
+  br i1 %cmp.rcx.eq1, label %bb_1263, label %bb_110d
+
+bb_110d:
+  ; r8d = [rax-8]
+  %rax.m8.i8 = getelementptr inbounds i8, i8* %rax.phi2, i64 -8
+  %rax.m8.i32p = bitcast i8* %rax.m8.i8 to i32*
+  %r8d.m8.ld = load i32, i32* %rax.m8.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m8.le = icmp sle i32 %r8d.m8.ld, %edx.phi2
+  br i1 %cmp.m8.le, label %bb_1296, label %bb_111a
+
+bb_111a:
+  ; [rax-4] = r8d
+  store i32 %r8d.m8.ld, i32* %rax.m4.i32p2, align 4
+  ; cmp rcx,2
+  %cmp.rcx.eq2 = icmp eq i64 %rcx.phi3, 2
+  br i1 %cmp.rcx.eq2, label %bb_12a2, label %bb_1128
+
+bb_1128:
+  ; r8d = [rax-0Ch]
+  %rax.m12.i8 = getelementptr inbounds i8, i8* %rax.phi3, i64 -12
+  %rax.m12.i32p = bitcast i8* %rax.m12.i8 to i32*
+  %r8d.m12.ld = load i32, i32* %rax.m12.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m12.le = icmp sle i32 %r8d.m12.ld, %edx.phi3
+  br i1 %cmp.m12.le, label %bb_12ce, label %bb_1135
+
+bb_1135:
+  ; [rax-8] = r8d
+  store i32 %r8d.m12.ld, i32* %rax.m8.i32p2, align 4
+  ; cmp rcx,3
+  %cmp.rcx.eq3 = icmp eq i64 %rcx.phi4, 3
+  br i1 %cmp.rcx.eq3, label %bb_12da, label %bb_1143
+
+bb_1143:
+  ; r8d = [rax-10h]
+  %rax.m16.i8 = getelementptr inbounds i8, i8* %rax.phi4, i64 -16
+  %rax.m16.i32p = bitcast i8* %rax.m16.i8 to i32*
+  %r8d.m16.ld = load i32, i32* %rax.m16.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m16.le = icmp sle i32 %r8d.m16.ld, %edx.phi4
+  br i1 %cmp.m16.le, label %bb_12fb, label %bb_1150
+
+bb_1150:
+  ; [rax-0Ch] = r8d
+  store i32 %r8d.m16.ld, i32* %rax.m12.i32p2, align 4
+  ; cmp rcx,4
+  %cmp.rcx.eq4 = icmp eq i64 %rcx.phi5, 4
+  br i1 %cmp.rcx.eq4, label %bb_1307, label %bb_115e
+
+bb_115e:
+  ; r8d = [rax-14h]
+  %rax.m20.i8 = getelementptr inbounds i8, i8* %rax.phi5, i64 -20
+  %rax.m20.i32p = bitcast i8* %rax.m20.i8 to i32*
+  %r8d.m20.ld = load i32, i32* %rax.m20.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m20.le = icmp sle i32 %r8d.m20.ld, %edx.phi5
+  br i1 %cmp.m20.le, label %bb_132b, label %bb_116b
+
+bb_116b:
+  ; [rax-10h] = r8d
+  store i32 %r8d.m20.ld, i32* %rax.m16.i32p2, align 4
+  ; cmp rcx,5
+  %cmp.rcx.eq5 = icmp eq i64 %rcx.phi6, 5
+  br i1 %cmp.rcx.eq5, label %bb_1337, label %bb_1179
+
+bb_1179:
+  ; r8d = [rax-18h]
+  %rax.m24.i8 = getelementptr inbounds i8, i8* %rax.phi6, i64 -24
+  %rax.m24.i32p = bitcast i8* %rax.m24.i8 to i32*
+  %r8d.m24.ld = load i32, i32* %rax.m24.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m24.le = icmp sle i32 %r8d.m24.ld, %edx.phi6
+  br i1 %cmp.m24.le, label %bb_135b, label %bb_1186
+
+bb_1186:
+  ; [rax-14h] = r8d
+  store i32 %r8d.m24.ld, i32* %rax.m20.i32p2, align 4
+  ; cmp rcx,6
+  %cmp.rcx.eq6 = icmp eq i64 %rcx.phi7, 6
+  br i1 %cmp.rcx.eq6, label %bb_1367, label %bb_1194
+
+bb_1194:
+  ; r8d = [rax-1Ch]
+  %rax.m28.i8 = getelementptr inbounds i8, i8* %rax.phi7, i64 -28
+  %rax.m28.i32p = bitcast i8* %rax.m28.i8 to i32*
+  %r8d.m28.ld = load i32, i32* %rax.m28.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m28.le = icmp sle i32 %r8d.m28.ld, %edx.phi7
+  br i1 %cmp.m28.le, label %bb_1387, label %bb_11a1
+
+bb_11a1:
+  ; [rax-18h] = r8d
+  store i32 %r8d.m28.ld, i32* %rax.m24.i32p2, align 4
+  ; cmp rcx,7
+  %cmp.rcx.eq7 = icmp eq i64 %rcx.phi8, 7
+  br i1 %cmp.rcx.eq7, label %bb_1393, label %bb_11af
+
+bb_11af:
+  ; r8d = [rax-20h]
+  %rax.m32.i8 = getelementptr inbounds i8, i8* %rax.phi8, i64 -32
+  %rax.m32.i32p = bitcast i8* %rax.m32.i8 to i32*
+  %r8d.m32.ld = load i32, i32* %rax.m32.i32p, align 4
+  ; cmp r8d, edx
+  %cmp.m32.le = icmp sle i32 %r8d.m32.ld, %edx.phi8
+  br i1 %cmp.m32.le, label %bb_13b3, label %bb_11bc
+
+bb_11bc:
+  ; [rax-1Ch] = r8d
+  store i32 %r8d.m32.ld, i32* %rax.m28.i32p2, align 4
+  ; fallthrough to 11c0
+  br label %bb_11c0
+
+bb_11c0:
+  ; mov rsi, rdi
+  %rsi.to11c6 = %rdi.phi
+  br label %bb_11c3
+
+bb_11c3:
+  ; mov rax, rbp
+  %rax.to11c6 = %bp
+  br label %bb_11c6
+
+bb_11c6:
+  ; add rcx, 1
+  %rcx.add1 = add i64 %rcx.in, 1
+  ; [rax] = edx
+  %rax.store.i32p = bitcast i8* %rax.in to i32*
+  store i32 %edx.in, i32* %rax.store.i32p, align 4
+  ; cmp rcx,9
+  %cmp.rcx.ne9 = icmp ne i64 %rcx.add1, 9
+  br i1 %cmp.rcx.ne9, label %bb_10d0, label %bb_11d6
+
+bb_11d0:
+  ; backedge to 10d0
+  br label %bb_10d0
+
+bb_11d6:
+  ; add rbp, 28h
+  %rbp.plus28.i8 = getelementptr inbounds i8, i8* %bp, i64 40
+  ; lea r12, unk_2004
+  %fmt.ptr = getelementptr inbounds [4 x i8], [4 x i8]* @unk_2004, i64 0, i64 0
+  ; set up print loop state
+  br label %bb_11e1
+
+bb_11e1:
+  br label %bb_11e8
+
+; print loop
+bb_11e8:
+  ; mov edx, [rbx]
+  %rbx.phi = phi i8* [ %rbx.init, %bb_11e1 ], [ %rbx.next, %bb_1200 ]
+  %rbp.end = phi i8* [ %rbp.plus28.i8, %bb_11e1 ], [ %rbp.plus28.i8, %bb_1200 ]
+  %elem.ptr = bitcast i8* %rbx.phi to i32*
+  %edx.print = load i32, i32* %elem.ptr, align 4
+  ; mov rsi, r12 (format)
+  ; mov edi, 2
+  ; xor eax, eax (vararg call)
+  ; add rbx, 4
+  %rbx.next = getelementptr inbounds i8, i8* %rbx.phi, i64 4
+  %call = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt.ptr, i32 %edx.print)
+  br label %bb_11fd
+
+bb_11fd:
+  ; cmp rbp, rbx
+  %cmp.print.cont = icmp ne i8* %rbp.end, %rbx.next
+  br i1 %cmp.print.cont, label %bb_11e8, label %bb_1202
+
+bb_1200:
+  br label %bb_11e8
+
+bb_1202:
+  ; xor eax, eax
+  br label %bb_1204
+
+bb_1204:
+  ; lea rsi, unk_2008
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @unk_2008, i64 0, i64 0
+  br label %bb_120b
+
+bb_120b:
+  ; mov edi, 2
+  br label %bb_1210
+
+bb_1210:
+  ; call ___printf_chk(2, nl)
+  %call2 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %nl.ptr)
+  br label %bb_1215
+
+bb_1215:
+  ; mov rax, [saved_canary]
+  %saved = load i64, i64* %saved_canary, align 8
+  br label %bb_121a
+
+bb_121a:
+  ; sub rax, fs:28h  (compare saved with current)
+  %guard1 = load i64, i64* @__stack_chk_guard, align 8
+  %canary.ok = icmp eq i64 %saved, %guard1
+  br i1 %canary.ok, label %bb_1229, label %bb_1427
+
+bb_1223:
+  br label %bb_1427
+
+bb_1229:
+  ; add rsp, 30h  (no-op here)
+  br label %bb_122d
+
+bb_122d:
+  ; xor eax, eax
+  br label %bb_122f
+
+bb_122f:
+  ; pop rbx (no-op)
+  br label %bb_1230
+
+bb_1230:
+  ; pop rbp (no-op)
+  br label %bb_1231
+
+bb_1231:
+  ; pop r12 (no-op)
+  br label %bb_1233
+
+bb_1233:
+  ret i32 0
+
+; rcx==0 special-path
+bb_1234:
+  ; [bp+0] = edx
+  %bp.i32p = bitcast i8* %bp to i32*
+  store i32 %edx.ld, i32* %bp.i32p, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8 = getelementptr inbounds i8, i8* %rdi.cur, i64 4
+  %rdi.plus4.i32p = bitcast i8* %rdi.plus4.i8 to i32*
+  %edx.new = load i32, i32* %rdi.plus4.i32p, align 4
+  ; rsi += 8
+  %rsi.plus8 = getelementptr inbounds i8, i8* %rsi.phi, i64 8
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p = bitcast i8* %rdi.cur to i32*
+  %ecx.ld = load i32, i32* %rdi.i32p, align 4
+  ; cmp ecx, edx
+  %cmp.ecx.le.edx = icmp sle i32 %ecx.ld, %edx.new
+  br i1 %cmp.ecx.le.edx, label %bb_13cc, label %bb_124b
+
+bb_124b:
+  ; [rdi+4] = ecx
+  store i32 %ecx.ld, i32* %rdi.plus4.i32p, align 4
+  br label %bb_124e
+
+bb_124e:
+  ; xchg rdi, rsi
+  %tmp.swap = %rsi.plus8
+  %rsi.swap = %rdi.cur
+  %rdi.swap = %tmp.swap
+  br label %bb_1251
+
+bb_1251:
+  ; ecx = 1
+  br label %bb_1256
+
+bb_1256:
+  ; jmp 10F3
+  br label %bb_10f3
+
+bb_125b:
+  ; mov rsi, rdi
+  br label %bb_11c6.from125b
+
+bb_11c6.from125b:
+  ; fall into common 11c6 with rax, edx, rcx as from 10f3 path
+  br label %bb_11c6
+
+bb_1263:
+  ; [bp+0] = edx
+  %bp.i32p.2 = bitcast i8* %bp to i32*
+  store i32 %edx.phi2, i32* %bp.i32p.2, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.2 = getelementptr inbounds i8, i8* %rdi.phi2, i64 4
+  %rdi.plus4.i32p.2 = bitcast i8* %rdi.plus4.i8.2 to i32*
+  %edx.2 = load i32, i32* %rdi.plus4.i32p.2, align 4
+  ; rsi = rdi+4
+  %rsi.2 = getelementptr inbounds i8, i8* %rdi.phi2, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.2 = bitcast i8* %rdi.phi2 to i32*
+  %ecx.2 = load i32, i32* %rdi.i32p.2, align 4
+  ; cmp edx, ecx
+  %cmp.edx.ge.ecx = icmp sge i32 %edx.2, %ecx.2
+  br i1 %cmp.edx.ge.ecx, label %bb_13bf, label %bb_127a
+
+bb_127a:
+  ; [rdi+4] = ecx
+  store i32 %ecx.2, i32* %rdi.plus4.i32p.2, align 4
+  br label %bb_127d
+
+bb_127d:
+  ; ecx = 2
+  br label %bb_1282
+
+bb_1282:
+  br label %bb_1288
+
+bb_1288:
+  ; swap rsi,rdi
+  %r8.tmp = %rsi.2
+  %rsi.3 = %rdi.phi3
+  %rdi.3 = %r8.tmp
+  br label %bb_1291
+
+bb_1291:
+  br label %bb_10f3
+
+bb_1296:
+  ; lea rax, [rsi-4]
+  %rax.lea1 = getelementptr inbounds i8, i8* %rsi.phi3, i64 -4
+  ; mov rsi, rdi
+  ; jmp 11C6
+  br label %bb_11c6
+
+bb_12a2:
+  ; [bp+0] = edx
+  %bp.i32p.3 = bitcast i8* %bp to i32*
+  store i32 %edx.phi3, i32* %bp.i32p.3, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.3 = getelementptr inbounds i8, i8* %rdi.phi4, i64 4
+  %rdi.plus4.i32p.3 = bitcast i8* %rdi.plus4.i8.3 to i32*
+  %edx.3 = load i32, i32* %rdi.plus4.i32p.3, align 4
+  ; rsi = rdi+4
+  %rsi.4 = getelementptr inbounds i8, i8* %rdi.phi4, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.3 = bitcast i8* %rdi.phi4 to i32*
+  %ecx.3 = load i32, i32* %rdi.i32p.3, align 4
+  ; cmp ecx, edx
+  %cmp.ecx.le.edx.3 = icmp sle i32 %ecx.3, %edx.3
+  br i1 %cmp.ecx.le.edx.3, label %bb_1400, label %bb_12b9
+
+bb_12b9:
+  ; [rdi+4] = ecx
+  store i32 %ecx.3, i32* %rdi.plus4.i32p.3, align 4
+  br label %bb_12bc
+
+bb_12bc:
+  ; ecx = 3
+  br label %bb_1288
+
+bb_12c3:
+  ; mov rsi, rdi
+  ; mov rax, rdi
+  br label %bb_11c6
+
+bb_12ce:
+  ; lea rax, [rsi-8]
+  %rax.lea2 = getelementptr inbounds i8, i8* %rsi.phi4, i64 -8
+  ; mov rsi, rdi
+  br label %bb_11c6
+
+bb_12da:
+  ; [bp+0] = edx
+  %bp.i32p.4 = bitcast i8* %bp to i32*
+  store i32 %edx.phi4, i32* %bp.i32p.4, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.4 = getelementptr inbounds i8, i8* %rdi.phi5, i64 4
+  %rdi.plus4.i32p.4 = bitcast i8* %rdi.plus4.i8.4 to i32*
+  %edx.4 = load i32, i32* %rdi.plus4.i32p.4, align 4
+  ; rsi = rdi+4
+  %rsi.5 = getelementptr inbounds i8, i8* %rdi.phi5, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.4 = bitcast i8* %rdi.phi5 to i32*
+  %ecx.4 = load i32, i32* %rdi.i32p.4, align 4
+  ; cmp edx, ecx
+  %cmp.edx.ge.ecx.4 = icmp sge i32 %edx.4, %ecx.4
+  br i1 %cmp.edx.ge.ecx.4, label %bb_140d, label %bb_12f1
+
+bb_12f1:
+  ; [rdi+4] = ecx
+  store i32 %ecx.4, i32* %rdi.plus4.i32p.4, align 4
+  br label %bb_12f4
+
+bb_12f4:
+  ; ecx = 4
+  br label %bb_1288
+
+bb_12fb:
+  ; lea rax, [rsi-0Ch]
+  %rax.lea3 = getelementptr inbounds i8, i8* %rsi.phi5, i64 -12
+  ; mov rsi, rdi
+  br label %bb_11c6
+
+bb_1307:
+  ; [bp+0] = edx
+  %bp.i32p.5 = bitcast i8* %bp to i32*
+  store i32 %edx.phi5, i32* %bp.i32p.5, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.5 = getelementptr inbounds i8, i8* %rdi.phi6, i64 4
+  %rdi.plus4.i32p.5 = bitcast i8* %rdi.plus4.i8.5 to i32*
+  %edx.5 = load i32, i32* %rdi.plus4.i32p.5, align 4
+  ; rsi = rdi+4
+  %rsi.6 = getelementptr inbounds i8, i8* %rdi.phi6, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.5 = bitcast i8* %rdi.phi6 to i32*
+  %ecx.5 = load i32, i32* %rdi.i32p.5, align 4
+  ; cmp edx, ecx
+  %cmp.edx.ge.ecx.5 = icmp sge i32 %edx.5, %ecx.5
+  br i1 %cmp.edx.ge.ecx.5, label %bb_13e6, label %bb_131e
+
+bb_131e:
+  ; [rdi+4] = ecx
+  store i32 %ecx.5, i32* %rdi.plus4.i32p.5, align 4
+  br label %bb_1321
+
+bb_1321:
+  ; ecx = 5
+  br label %bb_1288
+
+bb_132b:
+  ; lea rax, [rsi-10h]
+  %rax.lea4 = getelementptr inbounds i8, i8* %rsi.phi6, i64 -16
+  ; mov rsi, rdi
+  br label %bb_11c6
+
+bb_1337:
+  ; [bp+0] = edx
+  %bp.i32p.6 = bitcast i8* %bp to i32*
+  store i32 %edx.phi6, i32* %bp.i32p.6, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.6 = getelementptr inbounds i8, i8* %rdi.phi7, i64 4
+  %rdi.plus4.i32p.6 = bitcast i8* %rdi.plus4.i8.6 to i32*
+  %edx.6 = load i32, i32* %rdi.plus4.i32p.6, align 4
+  ; rsi = rdi+4
+  %rsi.7 = getelementptr inbounds i8, i8* %rdi.phi7, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.6 = bitcast i8* %rdi.phi7 to i32*
+  %ecx.6 = load i32, i32* %rdi.i32p.6, align 4
+  ; cmp edx, ecx
+  %cmp.edx.ge.ecx.6 = icmp sge i32 %edx.6, %ecx.6
+  br i1 %cmp.edx.ge.ecx.6, label %bb_13f3, label %bb_134e
+
+bb_134e:
+  ; [rdi+4] = ecx
+  store i32 %ecx.6, i32* %rdi.plus4.i32p.6, align 4
+  br label %bb_1351
+
+bb_1351:
+  ; ecx = 6
+  br label %bb_1288
+
+bb_135b:
+  ; lea rax, [rsi-14h]
+  %rax.lea5 = getelementptr inbounds i8, i8* %rsi.phi7, i64 -20
+  ; mov rsi, rdi
+  br label %bb_11c6
+
+bb_1367:
+  ; [bp+0] = edx
+  %bp.i32p.7 = bitcast i8* %bp to i32*
+  store i32 %edx.phi7, i32* %bp.i32p.7, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.7 = getelementptr inbounds i8, i8* %rdi.phi8, i64 4
+  %rdi.plus4.i32p.7 = bitcast i8* %rdi.plus4.i8.7 to i32*
+  %edx.7 = load i32, i32* %rdi.plus4.i32p.7, align 4
+  ; rsi = rdi+4
+  %rsi.8 = getelementptr inbounds i8, i8* %rdi.phi8, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.7 = bitcast i8* %rdi.phi8 to i32*
+  %ecx.7 = load i32, i32* %rdi.i32p.7, align 4
+  ; cmp edx, ecx
+  %cmp.edx.ge.ecx.7 = icmp sge i32 %edx.7, %ecx.7
+  br i1 %cmp.edx.ge.ecx.7, label %bb_13d9, label %bb_137a
+
+bb_137a:
+  ; [rdi+4] = ecx
+  store i32 %ecx.7, i32* %rdi.plus4.i32p.7, align 4
+  br label %bb_137d
+
+bb_137d:
+  ; ecx = 7
+  br label %bb_1288
+
+bb_1387:
+  ; lea rax, [rsi-18h]
+  %rax.lea6 = getelementptr inbounds i8, i8* %rsi.phi8, i64 -24
+  ; mov rsi, rdi
+  br label %bb_11c6
+
+bb_1393:
+  ; [bp+0] = edx
+  %bp.i32p.8 = bitcast i8* %bp to i32*
+  store i32 %edx.phi8, i32* %bp.i32p.8, align 4
+  ; edx = [rdi+4]
+  %rdi.plus4.i8.8 = getelementptr inbounds i8, i8* %rdi.phi9, i64 4
+  %rdi.plus4.i32p.8 = bitcast i8* %rdi.plus4.i8.8 to i32*
+  %edx.8 = load i32, i32* %rdi.plus4.i32p.8, align 4
+  ; rsi = rdi+4
+  %rsi.9 = getelementptr inbounds i8, i8* %rdi.phi9, i64 4
+  ; rax = rdi
+  ; ecx = [rdi]
+  %rdi.i32p.8 = bitcast i8* %rdi.phi9 to i32*
+  %ecx.8 = load i32, i32* %rdi.i32p.8, align 4
+  ; cmp edx, ecx
+  %cmp.edx.ge.ecx.8 = icmp sge i32 %edx.8, %ecx.8
+  br i1 %cmp.edx.ge.ecx.8, label %bb_141a, label %bb_13a6
+
+bb_13a6:
+  ; [rdi+4] = ecx
+  store i32 %ecx.8, i32* %rdi.plus4.i32p.8, align 4
+  br label %bb_13a9
+
+bb_13a9:
+  ; ecx = 8
+  br label %bb_1288
+
+bb_13b3:
+  ; lea rax, [rsi-1Ch]
+  %rax.lea7 = getelementptr inbounds i8, i8* %rsi.phi9, i64 -28
+  ; mov rsi, rdi
+  br label %bb_11c6
+
+bb_13bf:
+  ; mov rax, rsi ; ecx = 2 ; jmp 11C6
+  br label %bb_11c6
+
+bb_13cc:
+  ; mov rax, rsi ; ecx = 1 ; jmp 11C6
+  br label %bb_11c6
+
+bb_13d9:
+  ; mov rax, rsi ; ecx = 7 ; jmp 11C6
+  br label %bb_11c6
+
+bb_13e6:
+  ; mov rax, rsi ; ecx = 5 ; jmp 11C6
+  br label %bb_11c6
+
+bb_13f3:
+  ; mov rax, rsi ; ecx = 6 ; jmp 11C6
+  br label %bb_11c6
+
+bb_1400:
+  ; mov rax, rsi ; ecx = 3 ; jmp 11C6
+  br label %bb_11c6
+
+bb_140d:
+  ; mov rax, rsi ; ecx = 4 ; jmp 11C6
+  br label %bb_11c6
+
+bb_141a:
+  ; mov rax, rsi ; ecx = 8 ; jmp 11C6
+  br label %bb_11c6
+
+bb_1427:
+  call void @___stack_chk_fail()
+  unreachable
+
+; -------- PHI bundles for multi-predecessor blocks --------
+
+; 10F3 PHIs
+bb_10f3.phis:
+  %rax.phi = phi i8* [ %rdi.cur, %bb_1288 ], [ %rdi.cur, %bb_1256 ], [ %rax.cur, %bb_10e6 ]
+  %edx.phi = phi i32 [ %edx.ld, %bb_1288 ], [ %edx.ld, %bb_1256 ], [ %edx.ld, %bb_10e6 ]
+  %rcx.phi2 = phi i64 [ 1, %bb_1256 ], [  %rcx.phi, %bb_1288 ], [ %rcx.phi, %bb_10e6 ]
+  br label %bb_10f3
+
+; 110D PHIs
+bb_110d.phis:
+  %rax.phi2 = phi i8* [ %rax.phi, %bb_1100 ]
+  %edx.phi2 = phi i32 [ %edx.phi, %bb_1100 ]
+  %rcx.phi3 = phi i64 [ %rcx.phi2, %bb_1100 ]
+  br label %bb_110d
+
+; 111A PHIs
+bb_111a.phis:
+  %rax.m4.i32p2 = phi i32* [ %rax.m4.i32p, %bb_110d ]
+  %rax.phi3 = phi i8* [ %rax.phi2, %bb_110d ]
+  %edx.phi3 = phi i32 [ %edx.phi2, %bb_110d ]
+  %rcx.phi4 = phi i64 [ %rcx.phi3, %bb_110d ]
+  br label %bb_111a
+
+; 1128 PHIs
+bb_1128.phis:
+  %rax.m8.i32p2 = phi i32* [ %rax.m8.i32p, %bb_111a ]
+  %rax.phi4 = phi i8* [ %rax.phi3, %bb_111a ]
+  %edx.phi4 = phi i32 [ %edx.phi3, %bb_111a ]
+  %rcx.phi5 = phi i64 [ %rcx.phi4, %bb_111a ]
+  br label %bb_1128
+
+; 1135 PHIs
+bb_1135.phis:
+  %rax.m12.i32p2 = phi i32* [ %rax.m12.i32p, %bb_1128 ]
+  %rax.phi5 = phi i8* [ %rax.phi4, %bb_1128 ]
+  %edx.phi5 = phi i32 [ %edx.phi4, %bb_1128 ]
+  %rcx.phi6 = phi i64 [ %rcx.phi5, %bb_1128 ]
+  br label %bb_1135
+
+; 1143 PHIs
+bb_1143.phis:
+  %rax.m16.i32p2 = phi i32* [ %rax.m16.i32p, %bb_1135 ]
+  %rax.phi6 = phi i8* [ %rax.phi5, %bb_1135 ]
+  %edx.phi6 = phi i32 [ %edx.phi5, %bb_1135 ]
+  %rcx.phi7 = phi i64 [ %rcx.phi6, %bb_1135 ]
+  br label %bb_1143
+
+; 1150 PHIs
+bb_1150.phis:
+  %rax.m20.i32p2 = phi i32* [ %rax.m20.i32p, %bb_1143 ]
+  %rax.phi7 = phi i8* [ %rax.phi6, %bb_1143 ]
+  %edx.phi7 = phi i32 [ %edx.phi6, %bb_1143 ]
+  %rcx.phi8 = phi i64 [ %rcx.phi7, %bb_1143 ]
+  br label %bb_1150
+
+; 115e PHIs
+bb_115e.phis:
+  %rax.m24.i32p2 = phi i32* [ %rax.m24.i32p, %bb_1150 ]
+  %rax.phi8 = phi i8* [ %rax.phi7, %bb_1150 ]
+  %edx.phi8 = phi i32 [ %edx.phi7, %bb_1150 ]
+  br label %bb_115e
+
+; 11c6 PHIs (common epilogue of insertion)
+bb_11c6.phis:
+  %rsi.in = phi i8* [ %rdi.cur, %bb_12c3 ], [ %rdi.cur, %bb_12ce ], [ %rdi.cur, %bb_12fb ], [ %rdi.cur, %bb_132b ], [ %rdi.cur, %bb_135b ], [ %rdi.cur, %bb_1387 ], [ %rdi.cur, %bb_1296 ], [ %rdi.cur, %bb_11c0 ], [ %rdi.cur, %bb_125b ]
+  %rax.in = phi i8* [ %rdi.cur, %bb_12c3 ], [ %rax.lea2, %bb_12ce ], [ %rax.lea3, %bb_12fb ], [ %rax.lea4, %bb_132b ], [ %rax.lea5, %bb_135b ], [ %rax.lea6, %bb_1387 ], [ %rax.lea1, %bb_1296 ], [ %rax.to11c6, %bb_11c3 ], [ %rax.phi, %bb_125b ]
+  %rcx.in = phi i64 [ %rcx.phi, %bb_12c3 ], [ %rcx.phi4, %bb_12ce ], [ %rcx.phi5, %bb_12fb ], [ %rcx.phi6, %bb_132b ], [ %rcx.phi7, %bb_135b ], [ %rcx.phi8, %bb_1387 ], [ %rcx.phi3, %bb_1296 ], [ %rcx.phi, %bb_11c3 ], [ %rcx.phi2, %bb_125b ]
+  %edx.in = phi i32 [ %edx.ld, %bb_12c3 ], [ %edx.phi4, %bb_12ce ], [ %edx.phi5, %bb_12fb ], [ %edx.phi6, %bb_132b ], [ %edx.phi7, %bb_135b ], [ %edx.phi8, %bb_1387 ], [ %edx.phi3, %bb_1296 ], [ %edx.phi, %bb_11c3 ], [ %edx.phi, %bb_125b ]
+  br label %bb_11c6
+
+; 11d0 backedge values
+bb_11d0.setup:
+  %rcx.next = phi i64 [ %rcx.add1, %bb_11c6 ]
+  %rsi.next = phi i8* [ %rsi.in, %bb_11c6 ]
+  br label %bb_11d0
+}

@@ -1,0 +1,250 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; Instruction does not dominate all uses!
+;   %var30_2 = load i64, i64* %var_30, align 8
+;   %chosen_child = phi i64 [ %var30_2, %bb_1395 ], [ %var28_1, %bb_to_1399_from_1361 ]
+; Terminator found in the middle of a basic block!
+; label %bb_after_heap_build
+; === ERROR LOG END ===
+
+; ModuleID = 'heap_sort'
+target triple = "x86_64-pc-linux-gnu"
+
+define void @heap_sort(i32* %arr, i64 %n) {
+bb_1189:
+  %var_68 = alloca i32*, align 8
+  %var_70 = alloca i64, align 8
+  %var_50 = alloca i64, align 8
+  %var_48 = alloca i64, align 8
+  %var_18 = alloca i64, align 8
+  %var_10 = alloca i64, align 8
+  %var_8 = alloca i64, align 8
+  %var_54 = alloca i32, align 4
+  %var_5C = alloca i32, align 4
+  %var_40 = alloca i64, align 8
+  %var_38 = alloca i64, align 8
+  %var_30 = alloca i64, align 8
+  %var_28 = alloca i64, align 8
+  %var_20 = alloca i64, align 8
+  %var_58 = alloca i32, align 4
+  store i32* %arr, i32** %var_68, align 8
+  store i64 %n, i64* %var_70, align 8
+  %n0 = load i64, i64* %var_70, align 8
+  %cmp_n_le1 = icmp ule i64 %n0, 1
+  br i1 %cmp_n_le1, label %bb_1448, label %bb_after_init
+
+bb_after_init:
+  %n1 = load i64, i64* %var_70, align 8
+  %shr = lshr i64 %n1, 1
+  store i64 %shr, i64* %var_50, align 8
+  br label %bb_12C4
+
+bb_11B4:
+  %v50_0 = load i64, i64* %var_50, align 8
+  store i64 %v50_0, i64* %var_48, align 8
+  br label %bb_11BC
+
+bb_11BC:
+  %v48_0 = load i64, i64* %var_48, align 8
+  %t0 = add i64 %v48_0, %v48_0
+  %t1 = add i64 %t0, 1
+  store i64 %t1, i64* %var_18, align 8
+  %var18_0 = load i64, i64* %var_18, align 8
+  %n2 = load i64, i64* %var_70, align 8
+  %cond_child_out = icmp uge i64 %var18_0, %n2
+  br i1 %cond_child_out, label %bb_12C0, label %bb_11D9
+
+bb_11D9:
+  %var18_1 = load i64, i64* %var_18, align 8
+  %t2 = add i64 %var18_1, 1
+  store i64 %t2, i64* %var_10, align 8
+  %var10_0 = load i64, i64* %var_10, align 8
+  %n3 = load i64, i64* %var_70, align 8
+  %cond_right_oob = icmp uge i64 %var10_0, %n3
+  br i1 %cond_right_oob, label %bb_1223, label %bb_11EF
+
+bb_11EF:
+  %arr_ptr_0 = load i32*, i32** %var_68, align 8
+  %var10_1 = load i64, i64* %var_10, align 8
+  %idx_r = getelementptr inbounds i32, i32* %arr_ptr_0, i64 %var10_1
+  %val_r = load i32, i32* %idx_r, align 4
+  %arr_ptr_1 = load i32*, i32** %var_68, align 8
+  %var18_2 = load i64, i64* %var_18, align 8
+  %idx_l = getelementptr inbounds i32, i32* %arr_ptr_1, i64 %var18_2
+  %val_l = load i32, i32* %idx_l, align 4
+  %cmp_r_le_l = icmp sle i32 %val_r, %val_l
+  br i1 %cmp_r_le_l, label %bb_1223, label %bb_1227
+
+bb_1223:
+  %var18_3 = load i64, i64* %var_18, align 8
+  br label %bb_1227
+
+bb_1227:
+  %sel_idx = phi i64 [ %var18_3, %bb_1223 ], [ %var10_0, %bb_11EF ]
+  store i64 %sel_idx, i64* %var_8, align 8
+  %arr_ptr_2 = load i32*, i32** %var_68, align 8
+  %v48_1 = load i64, i64* %var_48, align 8
+  %idx_v48 = getelementptr inbounds i32, i32* %arr_ptr_2, i64 %v48_1
+  %val_v48 = load i32, i32* %idx_v48, align 4
+  %arr_ptr_3 = load i32*, i32** %var_68, align 8
+  %v8_0 = load i64, i64* %var_8, align 8
+  %idx_v8 = getelementptr inbounds i32, i32* %arr_ptr_3, i64 %v8_0
+  %val_v8 = load i32, i32* %idx_v8, align 4
+  %cmp_v48_ge_v8 = icmp sge i32 %val_v48, %val_v8
+  br i1 %cmp_v48_ge_v8, label %bb_12C3, label %bb_1259
+
+bb_1259:
+  %arr_ptr_4 = load i32*, i32** %var_68, align 8
+  %v48_2 = load i64, i64* %var_48, align 8
+  %idx_v48_2 = getelementptr inbounds i32, i32* %arr_ptr_4, i64 %v48_2
+  %val_v48_2 = load i32, i32* %idx_v48_2, align 4
+  store i32 %val_v48_2, i32* %var_54, align 4
+  %arr_ptr_5 = load i32*, i32** %var_68, align 8
+  %v8_1 = load i64, i64* %var_8, align 8
+  %idx_v8_1 = getelementptr inbounds i32, i32* %arr_ptr_5, i64 %v8_1
+  %val_from_v8 = load i32, i32* %idx_v8_1, align 4
+  store i32 %val_from_v8, i32* %idx_v48_2, align 4
+  %arr_ptr_6 = load i32*, i32** %var_68, align 8
+  %v8_2 = load i64, i64* %var_8, align 8
+  %idx_v8_2 = getelementptr inbounds i32, i32* %arr_ptr_6, i64 %v8_2
+  %temp_v = load i32, i32* %var_54, align 4
+  store i32 %temp_v, i32* %idx_v8_2, align 4
+  %v8_3 = load i64, i64* %var_8, align 8
+  store i64 %v8_3, i64* %var_48, align 8
+  br label %bb_11BC
+
+bb_12C0:
+  br label %bb_12C4
+
+bb_12C3:
+  br label %bb_12C4
+
+bb_12C4:
+  %v50_1 = load i64, i64* %var_50, align 8
+  %dec_src = sub i64 %v50_1, 1
+  store i64 %dec_src, i64* %var_50, align 8
+  %test_nz = icmp ne i64 %v50_1, 0
+  br i1 %test_nz, label %bb_11B4, label %bb_after_heap_build
+
+bb_after_heap_build:
+  %n4 = load i64, i64* %var_70, align 8
+  %last = sub i64 %n4, 1
+  store i64 %last, i64* %var_40, align 8
+  br label %bb_143B
+
+bb_12EA:
+  %arr_ptr_7 = load i32*, i32** %var_68, align 8
+  %val_root = load i32, i32* %arr_ptr_7, align 4
+  store i32 %val_root, i32* %var_5C, align 4
+  %arr_ptr_8 = load i32*, i32** %var_68, align 8
+  %v40_0 = load i64, i64* %var_40, align 8
+  %idx_last = getelementptr inbounds i32, i32* %arr_ptr_8, i64 %v40_0
+  %val_last = load i32, i32* %idx_last, align 4
+  %arr_ptr_9 = load i32*, i32** %var_68, align 8
+  store i32 %val_last, i32* %arr_ptr_9, align 4
+  %arr_ptr_10 = load i32*, i32** %var_68, align 8
+  %v40_1 = load i64, i64* %var_40, align 8
+  %idx_last2 = getelementptr inbounds i32, i32* %arr_ptr_10, i64 %v40_1
+  %saved_root = load i32, i32* %var_5C, align 4
+  store i32 %saved_root, i32* %idx_last2, align 4
+  store i64 0, i64* %var_38, align 8
+  br label %bb_132E
+
+bb_132E:
+  %v38_0 = load i64, i64* %var_38, align 8
+  %c0 = add i64 %v38_0, %v38_0
+  %c1 = add i64 %c0, 1
+  store i64 %c1, i64* %var_30, align 8
+  %var30_0 = load i64, i64* %var_30, align 8
+  %v40_2 = load i64, i64* %var_40, align 8
+  %cmp_left_oob = icmp uge i64 %var30_0, %v40_2
+  br i1 %cmp_left_oob, label %bb_1432, label %bb_134B
+
+bb_134B:
+  %var30_1 = load i64, i64* %var_30, align 8
+  %t3 = add i64 %var30_1, 1
+  store i64 %t3, i64* %var_28, align 8
+  %var28_0 = load i64, i64* %var_28, align 8
+  %v40_3 = load i64, i64* %var_40, align 8
+  %cmp_right_oob2 = icmp uge i64 %var28_0, %v40_3
+  br i1 %cmp_right_oob2, label %bb_1395, label %bb_1361
+
+bb_1361:
+  %arr_ptr_11 = load i32*, i32** %var_68, align 8
+  %var28_1 = load i64, i64* %var_28, align 8
+  %idx_r2 = getelementptr inbounds i32, i32* %arr_ptr_11, i64 %var28_1
+  %val_r2 = load i32, i32* %idx_r2, align 4
+  %arr_ptr_12 = load i32*, i32** %var_68, align 8
+  %var30_2 = load i64, i64* %var_30, align 8
+  %idx_l2 = getelementptr inbounds i32, i32* %arr_ptr_12, i64 %var30_2
+  %val_l2 = load i32, i32* %idx_l2, align 4
+  %cmp_r_le_l2 = icmp sle i32 %val_r2, %val_l2
+  br i1 %cmp_r_le_l2, label %bb_1395, label %bb_to_1399_from_1361
+
+bb_to_1399_from_1361:
+  br label %bb_1399
+
+bb_1395:
+  br label %bb_1399
+
+bb_1399:
+  %chosen_child = phi i64 [ %var30_2, %bb_1395 ], [ %var28_1, %bb_to_1399_from_1361 ]
+  store i64 %chosen_child, i64* %var_20, align 8
+  %arr_ptr_13 = load i32*, i32** %var_68, align 8
+  %v38_1 = load i64, i64* %var_38, align 8
+  %idx_v38 = getelementptr inbounds i32, i32* %arr_ptr_13, i64 %v38_1
+  %val_v38 = load i32, i32* %idx_v38, align 4
+  %arr_ptr_14 = load i32*, i32** %var_68, align 8
+  %v20_0 = load i64, i64* %var_20, align 8
+  %idx_v20 = getelementptr inbounds i32, i32* %arr_ptr_14, i64 %v20_0
+  %val_v20 = load i32, i32* %idx_v20, align 4
+  %cmp_v38_ge_v20 = icmp sge i32 %val_v38, %val_v20
+  br i1 %cmp_v38_ge_v20, label %bb_1435, label %bb_swap2
+
+bb_swap2:
+  %arr_ptr_15 = load i32*, i32** %var_68, align 8
+  %v38_2 = load i64, i64* %var_38, align 8
+  %idx_v38_2 = getelementptr inbounds i32, i32* %arr_ptr_15, i64 %v38_2
+  %val_v38_2 = load i32, i32* %idx_v38_2, align 4
+  store i32 %val_v38_2, i32* %var_58, align 4
+  %arr_ptr_16 = load i32*, i32** %var_68, align 8
+  %v20_1 = load i64, i64* %var_20, align 8
+  %idx_v20_2 = getelementptr inbounds i32, i32* %arr_ptr_16, i64 %v20_1
+  %val_from_v20 = load i32, i32* %idx_v20_2, align 4
+  store i32 %val_from_v20, i32* %idx_v38_2, align 4
+  %arr_ptr_17 = load i32*, i32** %var_68, align 8
+  %v20_2 = load i64, i64* %var_20, align 8
+  %idx_v20_3 = getelementptr inbounds i32, i32* %arr_ptr_17, i64 %v20_2
+  %temp2 = load i32, i32* %var_58, align 4
+  store i32 %temp2, i32* %idx_v20_3, align 4
+  %v20_3 = load i64, i64* %var_20, align 8
+  store i64 %v20_3, i64* %var_38, align 8
+  br label %bb_132E
+
+bb_1432:
+  br label %bb_1436
+
+bb_1435:
+  br label %bb_1436
+
+bb_1436:
+  %v40_4 = load i64, i64* %var_40, align 8
+  %dec40 = sub i64 %v40_4, 1
+  store i64 %dec40, i64* %var_40, align 8
+  br label %bb_143B
+
+bb_143B:
+  %v40_5 = load i64, i64* %var_40, align 8
+  %cont = icmp ne i64 %v40_5, 0
+  br i1 %cont, label %bb_12EA, label %bb_1449
+
+bb_after_heap_build:                                           ; preds = %bb_12C4
+  %last_init = load i64, i64* %var_40, align 8
+  br label %bb_143B
+
+bb_1448:
+  br label %bb_1449
+
+bb_1449:
+  ret void
+}

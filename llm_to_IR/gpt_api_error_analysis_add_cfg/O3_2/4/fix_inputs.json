@@ -1,0 +1,115 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 298,
+      "ir_len": 15536,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/BFS_main1.ll:7:53: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.str.item = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\", align 1\n                                                    ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external global i64\n\n@.str.bfs = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align 1\n@.str.",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/BFS_main1.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 235,
+      "ir_len": 17581,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/DFS_main1.ll:378:48: error: use of undefined value '%bb_144e'\n  %i.phi = phi i64 [ 1, %bb_1421 ], [ %i.next, %bb_144e ]\n                                               ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@asc_2022 = private unnamed_addr constant [2 x i8] c\"\\0A\\00\", align 1\n@aDfsPreorderFro = private unnamed_addr constant [24 x i8] c\"DFS p",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/DFS_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 170,
+      "ir_len": 5040,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/binarysearch_main1.ll:87:15: error: expected instruction opcode\n  %edx.copy = %key.load\n              ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2030 = external constant <4 x i32>, align 16\n@xmmword_2040 = external constant <4 x i32>, align 16\n@qword_2050   = external con",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/binarysearch_main1.ll"
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 168,
+      "ir_len": 3517,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/bubblesort_main1.ll:71:16: error: expected instruction opcode\n  %new_limit = %r8_end\n               ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@xmmword_2010 = external constant <4 x i32>, align 16\n@xmmword_2020 = external constant <4 x i32>, align 16\n@unk_2004 = external gl",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/bubblesort_main1.ll"
+    },
+    {
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 169,
+      "ir_len": 4784,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/heapsort_function1.ll:56:16: error: expected instruction opcode\n  %tmp_build = %val_k\n               ^\n",
+      "ir_preview": "; ModuleID = 'heapsort_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine void @heap_sort(i32* %arr, i64 %n) {\nloc_1189:\n  %cmp_n_le_1 = icmp ule i64 %n, 1\n  br i1 %cmp_n_le_1, label %loc_1448, lab",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/heapsort_function1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 195,
+      "ir_len": 18913,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/insertionsort_main1.ll:11:13: error: expected function name\ndeclare i64 asm sideeffect \"movq %fs:0x28, $0\", \"=r\"()\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n; externals observed in the binary\ndeclare i32 @___printf_chk(i32, i8*, ...)\ndeclare void @___stack_chk_fail() noreturn\n\n; TLS canary re",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/insertionsort_main1.ll"
+    },
+    {
+      "filename": "linearsearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 279,
+      "ir_len": 407,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/linearsearch_main1.ll:11:20: error: '@___printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32)*'\n  %call = call i32 @___printf_chk(i32 2, i8* %fmt.ptr, i32 3)\n                   ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str = private unnamed_addr constant [27 x i8] c\"Element found at index %d\\0A\\00\", align 1\n\ndeclare i32 @___printf_chk(i32, i8*, .",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/linearsearch_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 184,
+      "ir_len": 28663,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/mergesort_main1.ll:171:23: error: expected type\n  %r12_off = add i64 (shl i64 %r12_idx, 2), 8\n                      ^\n",
+      "ir_preview": "; ModuleID = 'reconstructed_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external thread_local global i64\ndeclare void @___stack_chk_fail() noreturn cold\ndeclare noalias i8* @mall",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/mergesort_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 138,
+      "ir_len": 22815,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/mergesort_main2.ll:580:1: error: expected instruction opcode\nbb_13ce:\n^\n",
+      "ir_preview": "; ModuleID = 'reconstructed_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external thread_local global i64\ndeclare void @___stack_chk_fail() noreturn cold\ndeclare noalias i8* @mall",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/mergesort_main2.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 167,
+      "ir_len": 5865,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/quicksort_function1.ll:14:13: error: expected instruction opcode\n  %i.init = %left.cur\n            ^\n",
+      "ir_preview": "; ModuleID = 'quick_sort_module'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\ndefine dso_local void @quick_sort(i32* %base, i64 %left, i64 %right) {\nb1220:\n  ; 0x1220: cmp rsi, rdx ; 0x1223: jge locret",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/quicksort_function1.ll"
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 182,
+      "ir_len": 3498,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/selectionsort_function1.ll:26:19: error: expected instruction opcode\n  %rax.ptr.init = %r12.ptr\n                  ^\n",
+      "ir_preview": "; ModuleID = 'selection_sort'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine void @selection_sort(i32* nocapture %a, i32 %n) {\nbb_1210:                                           ; 0x1210\n  %cmp_n_le_1 ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/selectionsort_function1.ll"
+    }
+  ]
+}

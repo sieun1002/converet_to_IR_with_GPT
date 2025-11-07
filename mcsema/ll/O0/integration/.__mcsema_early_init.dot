@@ -1,0 +1,9 @@
+digraph "CFG for '__mcsema_early_init' function" {
+	label="CFG for '__mcsema_early_init' function";
+
+	Node0x5eadaef0bf70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{0:\l|  %1 = load volatile i1, ptr @0, align 1\l  br i1 %1, label %2, label %3\l|{<s0>T|<s1>F}}"];
+	Node0x5eadaef0bf70:s0 -> Node0x5eadaef0bfc0[tooltip="0 -> 2\nProbability 50.00%" ];
+	Node0x5eadaef0bf70:s1 -> Node0x5eadaef0c010[tooltip="0 -> 3\nProbability 50.00%" ];
+	Node0x5eadaef0bfc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{2:\l|  ret void\l}"];
+	Node0x5eadaef0c010 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{3:\l|  store volatile i1 true, ptr @0, align 1\l  ret void\l}"];
+}

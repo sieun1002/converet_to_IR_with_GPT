@@ -1,0 +1,18 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x615396c4fc80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{3:\l|  %4 = icmp sgt i32 %1, 0\l  br i1 %4, label %5, label %17\l|{<s0>T|<s1>F}}"];
+	Node0x615396c4fc80:s0 -> Node0x615396c4fbe0[tooltip="3 -> 5\nProbability 62.50%" ];
+	Node0x615396c4fc80:s1 -> Node0x615396c4fb40[tooltip="3 -> 17\nProbability 37.50%" ];
+	Node0x615396c4fbe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{5:\l|  %6 = zext i32 %1 to i64\l  br label %7\l}"];
+	Node0x615396c4fbe0 -> Node0x615396c52100[tooltip="5 -> 7\nProbability 100.00%" ];
+	Node0x615396c52100 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{7:\l|  %8 = phi i64 [ 0, %5 ], [ %13, %12 ]\l  %9 = getelementptr inbounds i32, ptr %0, i64 %8\l  %10 = load i32, ptr %9, align 4, !tbaa !5\l  %11 = icmp eq i32 %10, %2\l  br i1 %11, label %15, label %12\l|{<s0>T|<s1>F}}"];
+	Node0x615396c52100:s0 -> Node0x615396c52fe0[tooltip="7 -> 15\nProbability 3.12%" ];
+	Node0x615396c52100:s1 -> Node0x615396c52220[tooltip="7 -> 12\nProbability 96.88%" ];
+	Node0x615396c52220 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{12:\l|  %13 = add nuw nsw i64 %8, 1\l  %14 = icmp eq i64 %13, %6\l  br i1 %14, label %17, label %7, !llvm.loop !9\l|{<s0>T|<s1>F}}"];
+	Node0x615396c52220:s0 -> Node0x615396c4fb40[tooltip="12 -> 17\nProbability 3.12%" ];
+	Node0x615396c52220:s1 -> Node0x615396c52100[tooltip="12 -> 7\nProbability 96.88%" ];
+	Node0x615396c52fe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{15:\l|  %16 = trunc i64 %8 to i32\l  br label %17\l}"];
+	Node0x615396c52fe0 -> Node0x615396c4fb40[tooltip="15 -> 17\nProbability 100.00%" ];
+	Node0x615396c4fb40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{17:\l|  %18 = phi i32 [ -1, %3 ], [ %16, %15 ], [ -1, %12 ]\l  ret i32 %18\l}"];
+}

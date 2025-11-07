@@ -1,0 +1,23 @@
+digraph "CFG for 'init_graph' function" {
+	label="CFG for 'init_graph' function";
+
+	Node0x6228e83b92f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{entry:\l|  br label %outer.cond\l}"];
+	Node0x6228e83b92f0 -> Node0x6228e83bacf0[tooltip="entry -> outer.cond\nProbability 100.00%" ];
+	Node0x6228e83bacf0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.cond:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %outer.inc ]\l  %cmp.outer = icmp sge i32 %i, %n\l  br i1 %cmp.outer, label %exit, label %inner.init\l|{<s0>T|<s1>F}}"];
+	Node0x6228e83bacf0:s0 -> Node0x6228e83bb460[tooltip="outer.cond -> exit\nProbability 3.12%" ];
+	Node0x6228e83bacf0:s1 -> Node0x6228e83bb530[tooltip="outer.cond -> inner.init\nProbability 96.88%" ];
+	Node0x6228e83bb530 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.init:\l|  br label %inner.cond\l}"];
+	Node0x6228e83bb530 -> Node0x6228e83bb6c0[tooltip="inner.init -> inner.cond\nProbability 100.00%" ];
+	Node0x6228e83bb6c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cond:\l|  %j = phi i32 [ 0, %inner.init ], [ %j.next, %inner.inc ]\l  %cmp.inner = icmp sge i32 %j, %n\l  br i1 %cmp.inner, label %outer.inc_prep, label %store\l|{<s0>T|<s1>F}}"];
+	Node0x6228e83bb6c0:s0 -> Node0x6228e83bbb90[tooltip="inner.cond -> outer.inc_prep\nProbability 3.12%" ];
+	Node0x6228e83bb6c0:s1 -> Node0x6228e83bbc70[tooltip="inner.cond -> store\nProbability 96.88%" ];
+	Node0x6228e83bbc70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{store:\l|  %rowptr = getelementptr [100 x i32], ptr %graph, i32 %i\l  %eltptr = getelementptr [100 x i32], ptr %rowptr, i32 0, i32 %j\l  store i32 0, ptr %eltptr, align 4\l  br label %inner.inc\l}"];
+	Node0x6228e83bbc70 -> Node0x6228e83bb800[tooltip="store -> inner.inc\nProbability 100.00%" ];
+	Node0x6228e83bb800 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.inc:\l|  %j.next = add nsw i32 %j, 1\l  br label %inner.cond\l}"];
+	Node0x6228e83bb800 -> Node0x6228e83bb6c0[tooltip="inner.inc -> inner.cond\nProbability 100.00%" ];
+	Node0x6228e83bbb90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.inc_prep:\l|  br label %outer.inc\l}"];
+	Node0x6228e83bbb90 -> Node0x6228e83bb270[tooltip="outer.inc_prep -> outer.inc\nProbability 100.00%" ];
+	Node0x6228e83bb270 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.inc:\l|  %i.next = add nsw i32 %i, 1\l  br label %outer.cond\l}"];
+	Node0x6228e83bb270 -> Node0x6228e83bacf0[tooltip="outer.inc -> outer.cond\nProbability 100.00%" ];
+	Node0x6228e83bb460 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

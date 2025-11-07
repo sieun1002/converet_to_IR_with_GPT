@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x604242a90960 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{L1080:\l|  %arr = alloca [9 x i32], align 16\l  %canary = alloca i64, align 8\l  %g = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %g, ptr %canary, align 8\l  %base = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  %end = getelementptr inbounds i32, ptr %base, i64 9\l  %vptr0 = bitcast ptr %base to ptr\l  %v0 = load \<4 x i32\>, ptr @xmmword_2010, align 16\l  store \<4 x i32\> %v0, ptr %vptr0, align 16\l  %p4 = getelementptr inbounds i32, ptr %base, i64 4\l  %vptr1 = bitcast ptr %p4 to ptr\l  %v1 = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %v1, ptr %vptr1, align 16\l  %p8 = getelementptr inbounds i32, ptr %base, i64 8\l  store i32 4, ptr %p8, align 4\l  call void @quick_sort(ptr %base, i32 0, i32 9)\l  br label %L10E0\l}"];
+	Node0x604242a90960 -> Node0x604242a94e60[tooltip="L1080 -> L10E0\nProbability 100.00%" ];
+	Node0x604242a94e60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{L10E0:\l|  %it = phi ptr [ %base, %L1080 ], [ %next, %L10E0 ]\l  %val = load i32, ptr %it, align 4\l  %next = getelementptr inbounds i32, ptr %it, i64 1\l  %callp = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr @unk_2004, i32\l... %val)\l  %cmp = icmp ne ptr %next, %end\l  br i1 %cmp, label %L10E0, label %L10FA\l|{<s0>T|<s1>F}}"];
+	Node0x604242a94e60:s0 -> Node0x604242a94e60[tooltip="L10E0 -> L10E0\nProbability 96.88%" ];
+	Node0x604242a94e60:s1 -> Node0x604242a953a0[tooltip="L10E0 -> L10FA\nProbability 3.12%" ];
+	Node0x604242a953a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{L10FA:\l|  %callnl = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr @unk_2008)\l  %saved = load i64, ptr %canary, align 8\l  %cur = load i64, ptr @__stack_chk_guard, align 8\l  %ok = icmp eq i64 %saved, %cur\l  br i1 %ok, label %Lret, label %L1128\l|{<s0>T|<s1>F}}"];
+	Node0x604242a953a0:s0 -> Node0x604242a95700[tooltip="L10FA -> Lret\nProbability 100.00%" ];
+	Node0x604242a953a0:s1 -> Node0x604242a95770[tooltip="L10FA -> L1128\nProbability 0.00%" ];
+	Node0x604242a95770 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5d8d170" fontname="Courier",label="{L1128:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+	Node0x604242a95700 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{Lret:\l|  ret i32 0\l}"];
+}

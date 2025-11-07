@@ -1,0 +1,21 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x58c8be7d8da0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{0:\l|  %1 = alloca i32, align 4\l  %2 = alloca [9 x i32], align 16\l  %3 = alloca i64, align 8\l  %4 = alloca [3 x i32], align 4\l  %5 = alloca i64, align 8\l  %6 = alloca i64, align 8\l  %7 = alloca i64, align 8\l  store i32 0, ptr %1, align 4\l  %8 = bitcast ptr %2 to ptr\l  call void @llvm.memcpy.p0.p0.i64(ptr align 16 %8, ptr align 16\l... @__const.main.a, i64 36, i1 false)\l  store i64 9, ptr %3, align 8\l  %9 = bitcast ptr %4 to ptr\l  call void @llvm.memcpy.p0.p0.i64(ptr align 4 %9, ptr align 4\l... @__const.main.keys, i64 12, i1 false)\l  store i64 3, ptr %5, align 8\l  store i64 0, ptr %6, align 8\l  br label %10\l}"];
+	Node0x58c8be7d8da0 -> Node0x58c8be7d8cb0[tooltip="0 -> 10\nProbability 100.00%" ];
+	Node0x58c8be7d8cb0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{10:\l|  %11 = load i64, ptr %6, align 8\l  %12 = load i64, ptr %5, align 8\l  %13 = icmp ult i64 %11, %12\l  br i1 %13, label %14, label %38\l|{<s0>T|<s1>F}}"];
+	Node0x58c8be7d8cb0:s0 -> Node0x58c8be7dcbd0[tooltip="10 -> 14\nProbability 96.88%" ];
+	Node0x58c8be7d8cb0:s1 -> Node0x58c8be7dcc20[tooltip="10 -> 38\nProbability 3.12%" ];
+	Node0x58c8be7dcbd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{14:\l|  %15 = getelementptr inbounds [9 x i32], ptr %2, i64 0, i64 0\l  %16 = load i64, ptr %3, align 8\l  %17 = load i64, ptr %6, align 8\l  %18 = getelementptr inbounds [3 x i32], ptr %4, i64 0, i64 %17\l  %19 = load i32, ptr %18, align 4\l  %20 = call i64 @binary_search(ptr noundef %15, i64 noundef %16, i32 noundef\l... %19)\l  store i64 %20, ptr %7, align 8\l  %21 = load i64, ptr %7, align 8\l  %22 = icmp sge i64 %21, 0\l  br i1 %22, label %23, label %29\l|{<s0>T|<s1>F}}"];
+	Node0x58c8be7dcbd0:s0 -> Node0x58c8be7dd2e0[tooltip="14 -> 23\nProbability 50.00%" ];
+	Node0x58c8be7dcbd0:s1 -> Node0x58c8be7dd370[tooltip="14 -> 29\nProbability 50.00%" ];
+	Node0x58c8be7dd2e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{23:\l|  %24 = load i64, ptr %6, align 8\l  %25 = getelementptr inbounds [3 x i32], ptr %4, i64 0, i64 %24\l  %26 = load i32, ptr %25, align 4\l  %27 = load i64, ptr %7, align 8\l  %28 = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %26, i64\l... noundef %27)\l  br label %34\l}"];
+	Node0x58c8be7dd2e0 -> Node0x58c8be7dd820[tooltip="23 -> 34\nProbability 100.00%" ];
+	Node0x58c8be7dd370 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{29:\l|  %30 = load i64, ptr %6, align 8\l  %31 = getelementptr inbounds [3 x i32], ptr %4, i64 0, i64 %30\l  %32 = load i32, ptr %31, align 4\l  %33 = call i32 (ptr, ...) @printf(ptr noundef @.str.1, i32 noundef %32)\l  br label %34\l}"];
+	Node0x58c8be7dd370 -> Node0x58c8be7dd820[tooltip="29 -> 34\nProbability 100.00%" ];
+	Node0x58c8be7dd820 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{34:\l|  br label %35\l}"];
+	Node0x58c8be7dd820 -> Node0x58c8be7ddc20[tooltip="34 -> 35\nProbability 100.00%" ];
+	Node0x58c8be7ddc20 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{35:\l|  %36 = load i64, ptr %6, align 8\l  %37 = add i64 %36, 1\l  store i64 %37, ptr %6, align 8\l  br label %10, !llvm.loop !6\l}"];
+	Node0x58c8be7ddc20 -> Node0x58c8be7d8cb0[tooltip="35 -> 10\nProbability 100.00%" ];
+	Node0x58c8be7dcc20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{38:\l|  ret i32 0\l}"];
+}

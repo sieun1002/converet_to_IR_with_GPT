@@ -1,0 +1,100 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/3/selectionsort_function1.ll:14:19: error: expected instruction opcode
+;   %rbx_ptr_init = %arr
+;                   ^
+; === ERROR LOG END ===
+
+; ModuleID = 'selection_sort_module'
+target triple = "x86_64-pc-linux-gnu"
+
+define dso_local void @selection_sort(i32* nocapture %arr, i32 %n) {
+loc_1210:
+  ; endbr64 (no-op in IR)
+  %cmp_entry = icmp sle i32 %n, 1
+  br i1 %cmp_entry, label %locret_12A8, label %loc_121D
+
+loc_121D:                                            ; preds = %loc_1210
+  %r11_base = ptrtoint i32* %arr to i64
+  %r13_n_minus_1 = add i32 %n, -1
+  %r10_i_init = add i32 0, 0
+  %rbx_ptr_init = %arr
+  br label %loc_1230
+
+loc_1230:                                            ; preds = %loc_121D, %loc_127B, %loc_1290
+  %r10_i = phi i32 [ %r10_i_init, %loc_121D ], [ %r10_next_from_127B, %loc_127B ], [ %r10_next_from_1290, %loc_1290 ]
+  %rbx_ptr = phi i32* [ %rbx_ptr_init, %loc_121D ], [ %rbx_next_after_inner, %loc_127B ], [ %rbx_next_from_1290, %loc_1290 ]
+  %r9_minidx_init = %r10_i
+  %r10_ip1 = add i32 %r10_i, 1
+  %ebp_val = load i32, i32* %rbx_ptr, align 4
+  %cmp_1239_jle = icmp sle i32 %n, %r10_ip1
+  br i1 %cmp_1239_jle, label %loc_1290, label %loc_123E
+
+loc_123E:                                            ; preds = %loc_1230
+  %r12_ptr = getelementptr inbounds i32, i32* %rbx_ptr, i64 1
+  %edi_min_init = %ebp_val
+  %edx_j_init = %r10_ip1
+  %rax_scan_ptr_init = %r12_ptr
+  br label %loc_1262
+
+loc_1262:                                            ; preds = %loc_123E, %loc_1250, %loc_126B
+  %rax_scan_ptr = phi i32* [ %rax_scan_ptr_init, %loc_123E ], [ %rax_ptr_after_1250, %loc_1250 ], [ %rax_ptr_after_126B, %loc_126B ]
+  %edx_j = phi i32 [ %edx_j_init, %loc_123E ], [ %edx_after_1250, %loc_1250 ], [ %edx_after_126B, %loc_126B ]
+  %r9_minidx = phi i32 [ %r9_minidx_init, %loc_1230 ], [ %r9_min_after_1250, %loc_1250 ], [ %r9_min_after_126B, %loc_126B ]
+  %edi_min = phi i32 [ %edi_min_init, %loc_123E ], [ %edi_min_after_1250, %loc_1250 ], [ %edi_min_after_126B, %loc_126B ]
+  %ecx_curr = load i32, i32* %rax_scan_ptr, align 4
+  %r8_candidate_ptr = %rax_scan_ptr
+  %cmp_1267_jge = icmp sge i32 %ecx_curr, %edi_min
+  br i1 %cmp_1267_jge, label %loc_1250, label %loc_126B
+
+loc_1250:                                            ; preds = %loc_1262
+  %r9_sext = sext i32 %r9_minidx to i64
+  %r11_ptr = inttoptr i64 %r11_base to i32*
+  %r8_min_ptr = getelementptr inbounds i32, i32* %r11_ptr, i64 %r9_sext
+  %edx_plus1_1250 = add i32 %edx_j, 1
+  %rax_advanced_1250 = getelementptr inbounds i32, i32* %rax_scan_ptr, i64 1
+  %cmp_125e_jz = icmp eq i32 %n, %edx_plus1_1250
+  ; values for loop carry
+  %rax_ptr_after_1250 = %rax_advanced_1250
+  %edx_after_1250 = %edx_plus1_1250
+  %r9_min_after_1250 = %r9_minidx
+  %edi_min_after_1250 = %edi_min
+  %r8_ptr_after_1250 = %r8_min_ptr
+  br i1 %cmp_125e_jz, label %loc_127B, label %loc_1262
+
+loc_126B:                                            ; preds = %loc_1262
+  %r9_min_after_126B = %edx_j
+  %edx_plus1_126B = add i32 %edx_j, 1
+  %edi_min_after_126B = %ecx_curr
+  %rax_advanced_126B = getelementptr inbounds i32, i32* %rax_scan_ptr, i64 1
+  %cmp_1279_jnz = icmp ne i32 %n, %edx_plus1_126B
+  %rax_ptr_after_126B = %rax_advanced_126B
+  %edx_after_126B = %edx_plus1_126B
+  br i1 %cmp_1279_jnz, label %loc_1262, label %loc_127B
+
+loc_127B:                                            ; preds = %loc_1250, %loc_126B
+  %r8_ptr_final = phi i32* [ %r8_ptr_after_1250, %loc_1250 ], [ %r8_candidate_ptr, %loc_126B ]
+  %edi_min_final = phi i32 [ %edi_min, %loc_1250 ], [ %edi_min_after_126B, %loc_126B ]
+  store i32 %edi_min_final, i32* %rbx_ptr, align 4
+  %rbx_next_after_inner = %r12_ptr
+  store i32 %ebp_val, i32* %r8_ptr_final, align 4
+  %cmp_1286_jnz = icmp ne i32 %r10_ip1, %r13_n_minus_1
+  %r10_next_from_127B = %r10_ip1
+  br i1 %cmp_1286_jnz, label %loc_1230, label %loc_1288
+
+loc_1290:                                            ; preds = %loc_1230
+  %r8_ptr_1290 = %rbx_ptr
+  %edi_1290 = %ebp_val
+  %r12_ptr_1290 = getelementptr inbounds i32, i32* %rbx_ptr, i64 1
+  store i32 %edi_1290, i32* %rbx_ptr, align 4
+  %rbx_next_from_1290 = %r12_ptr_1290
+  store i32 %ebp_val, i32* %r8_ptr_1290, align 4
+  %cmp_12a4_jnz = icmp ne i32 %r10_ip1, %r13_n_minus_1
+  %r10_next_from_1290 = %r10_ip1
+  br i1 %cmp_12a4_jnz, label %loc_1230, label %loc_1288
+
+loc_1288:                                            ; preds = %loc_127B, %loc_1290
+  ret void
+
+locret_12A8:                                         ; preds = %loc_1210
+  ret void
+}

@@ -1,0 +1,134 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/binarysearch_main1.ll:87:15: error: expected instruction opcode
+;   %edx.copy = %key.load
+;               ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-linux-gnu"
+
+@xmmword_2030 = external constant <4 x i32>, align 16
+@xmmword_2040 = external constant <4 x i32>, align 16
+@qword_2050   = external constant i64, align 8
+@__stack_chk_guard = external global i64
+
+@.str.found = private unnamed_addr constant [21 x i8] c"key %d -> index %ld\0A\00", align 1
+@.str.nf    = private unnamed_addr constant [21 x i8] c"key %d -> not found\0A\00", align 1
+
+declare i32 @__printf_chk(i32, i8*, ...)
+declare void @__stack_chk_fail() noreturn
+
+define i32 @main() {
+BB1080:
+  %arr = alloca [9 x i32], align 16
+  %keys = alloca [3 x i32], align 16
+  %canary.slot = alloca i64, align 8
+
+  %guard0 = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard0, i64* %canary.slot, align 8
+
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_2030, align 16
+  %arr.vec0.ptr = bitcast [9 x i32]* %arr to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %arr.vec0.ptr, align 16
+
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_2040, align 16
+  %arr.i32.4 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 4
+  %arr.vec1.ptr = bitcast i32* %arr.i32.4 to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %arr.vec1.ptr, align 16
+
+  %arr.i32.8 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 8
+  store i32 12, i32* %arr.i32.8, align 4
+
+  %q = load i64, i64* @qword_2050, align 8
+  %low32 = trunc i64 %q to i32
+  %q.shr32 = lshr i64 %q, 32
+  %high32 = trunc i64 %q.shr32 to i32
+
+  %keys.0 = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 0
+  %keys.1 = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 1
+  %keys.2 = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 2
+  store i32 %low32,  i32* %keys.0, align 4
+  store i32 %high32, i32* %keys.1, align 4
+  store i32 -5,      i32* %keys.2, align 4
+
+  %keys.end = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 3
+  br label %BB10E0
+
+BB10E0:                                             ; 0x10E0
+  %r12.cur = phi i32* [ %keys.0, %BB1080 ], [ %r12.next, %BB1127 ]
+  %key.load = load i32, i32* %r12.cur, align 4
+  br label %BB1105
+
+BB10F0:                                             ; 0x10F0
+  %rdx.ph = phi i64 [ %rdx.init, %BB1105 ], [ %rdx.next, %BB1105 ]
+  %rcx.ph = phi i64 [ %rcx.init, %BB1105 ], [ %rcx.next, %BB1105 ]
+  %tmp.sub = sub i64 %rdx.ph, %rcx.ph
+  %tmp.shr = lshr i64 %tmp.sub, 1
+  %mid = add i64 %tmp.shr, %rcx.ph
+  %mid.elem.ptr = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 %mid
+  %mid.val = load i32, i32* %mid.elem.ptr, align 4
+  %cmp.sgt = icmp sgt i32 %key.load, %mid.val
+  br i1 %cmp.sgt, label %BB1150, label %BB1105.update
+
+BB1105:                                             ; 0x1105
+  %rcx.init = phi i64 [ 0, %BB10E0 ]
+  %rdx.init = phi i64 [ 9, %BB10E0 ]
+  %cmp.rcx.rdx = icmp ult i64 %rcx.init, %rdx.init
+  br i1 %cmp.rcx.rdx, label %BB10F0, label %BB110A
+
+BB1105.update:
+  ; key <= mid.val path: rdx = mid, rcx unchanged
+  %rdx.next = phi i64 [ %mid, %BB10F0 ]
+  %rcx.next = phi i64 [ %rcx.ph, %BB10F0 ]
+  ; Loop back to header with updated bounds
+  br label %BB1105
+
+BB1150:                                             ; 0x1150
+  ; key > mid.val path: rcx = mid + 1, rdx unchanged
+  %rcx.plus1 = add i64 %mid, 1
+  br label %BB1105
+
+BB110A:
+  ; After binary search: test equality and bounds
+  %edx.copy = %key.load
+  %out.of.range = icmp ugt i64 %rcx.init, 8
+  br i1 %out.of.range, label %BB1156, label %BB110A.cmp
+
+BB110A.cmp:
+  %elem.ptr = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 %rcx.init
+  %elem.val = load i32, i32* %elem.ptr, align 4
+  %eq = icmp eq i32 %edx.copy, %elem.val
+  br i1 %eq, label %BB1118, label %BB1156
+
+BB1118:                                             ; found
+  %fmt.found.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str.found, i64 0, i64 0
+  %fmt.found.i8 = bitcast i8* %fmt.found.ptr to i8*
+  %idx64 = sext i64 %rcx.init to i64
+  %call.found = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.found.i8, i32 %edx.copy, i64 %idx64)
+  br label %BB1127
+
+BB1156:                                             ; 0x1156 not found
+  %fmt.nf.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str.nf, i64 0, i64 0
+  %fmt.nf.i8 = bitcast i8* %fmt.nf.ptr to i8*
+  %call.nf = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.nf.i8, i32 %edx.copy)
+  br label %BB1127
+
+BB1127:                                             ; 0x1127
+  %r12.sel = phi i32* [ %r12.cur, %BB1118 ], [ %r12.cur, %BB1156 ]
+  %r12.next = getelementptr inbounds i32, i32* %r12.sel, i64 1
+  %more = icmp ne i32* %r12.next, %keys.end
+  br i1 %more, label %BB10E0, label %BB1130
+
+BB1130:
+  %guard1 = load i64, i64* @__stack_chk_guard, align 8
+  %guard.saved = load i64, i64* %canary.slot, align 8
+  %guard.ok = icmp eq i64 %guard1, %guard.saved
+  br i1 %guard.ok, label %BB1140, label %BB116B
+
+BB116B:                                             ; 0x116B
+  call void @__stack_chk_fail()
+  unreachable
+
+BB1140:                                             ; 0x1140
+  ret i32 0
+}

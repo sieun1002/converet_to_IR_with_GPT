@@ -1,0 +1,12 @@
+digraph "CFG for 'sub_1020' function" {
+	label="CFG for 'sub_1020' function";
+
+	Node0x5eadaeed5660 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inst_1020:\l|  %0 = load i64, ptr @data_3fa0, align 8\l  %1 = load i64, ptr @RSP_2312_9d175b8, align 8, !tbaa !1289\l  %2 = add i64 %1, -8\l  %3 = inttoptr i64 %2 to ptr\l  store i64 %0, ptr %3, align 8\l  store i64 %2, ptr @RSP_2312_9d175b8, align 8, !tbaa !1292\l  %4 = load i64, ptr @data_3fa8, align 8\l  store i64 %4, ptr @RIP_2472_9d175b8, align 8, !tbaa !1292\l  %5 = icmp eq i64 %4, 4140\l  br i1 %5, label %inst_102c, label %6\l|{<s0>T|<s1>F}}"];
+	Node0x5eadaeed5660:s0 -> Node0x5eadaeed5cd0[tooltip="inst_1020 -> inst_102c\nProbability 50.00%" ];
+	Node0x5eadaeed5660:s1 -> Node0x5eadaeec7950[tooltip="inst_1020 -> 6\nProbability 50.00%" ];
+	Node0x5eadaeed5cd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{inst_102c:\l|  ret ptr %memory\l}"];
+	Node0x5eadaeec7950 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{6:\l|  %7 = sub i64 ptrtoint (ptr @data_102c to i64), %4\l  %8 = trunc i64 %7 to i32\l  %9 = zext i32 %8 to i64\l  %10 = icmp eq i64 %9, 0\l  br i1 %10, label %inst_102c, label %11\l|{<s0>T|<s1>F}}"];
+	Node0x5eadaeec7950:s0 -> Node0x5eadaeed5cd0[tooltip="6 -> inst_102c\nProbability 37.50%" ];
+	Node0x5eadaeec7950:s1 -> Node0x5eadaeec7d00[tooltip="6 -> 11\nProbability 62.50%" ];
+	Node0x5eadaeec7d00 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{11:\l|  %12 = call ptr @__remill_jump(ptr @__mcsema_reg_state, i64 %4, ptr %memory)\l  ret ptr %12\l}"];
+}

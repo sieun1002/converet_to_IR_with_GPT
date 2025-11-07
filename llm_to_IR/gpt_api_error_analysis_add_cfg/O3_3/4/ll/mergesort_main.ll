@@ -1,0 +1,604 @@
+; ModuleID = 'reconstructed_from_asm'
+target triple = "x86_64-pc-linux-gnu"
+
+@__stack_chk_guard = external global i64, align 8
+@xmmword_2010 = external constant <16 x i8>, align 16
+@xmmword_2020 = external constant <16 x i8>, align 16
+@unk_2004 = external global [0 x i8], align 1
+@unk_2008 = external global [0 x i8], align 1
+
+declare i8* @_malloc(i64)
+declare void @_free(i8*)
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail() noreturn
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8*, i8*, i64, i1)
+
+define i32 @main() {
+entry_10c0:
+  %rax = alloca i64, align 8
+  %rbx = alloca i64, align 8
+  %rcx = alloca i64, align 8
+  %rdx = alloca i64, align 8
+  %rsi = alloca i64, align 8
+  %rdi = alloca i64, align 8
+  %r8 = alloca i64, align 8
+  %r9 = alloca i64, align 8
+  %r10 = alloca i64, align 8
+  %r11 = alloca i64, align 8
+  %r12 = alloca i64, align 8
+  %r13 = alloca i64, align 8
+  %r14 = alloca i64, align 8
+  %r15 = alloca i64, align 8
+  %rbp = alloca i64, align 8
+  %ptr = alloca i8*, align 8
+  %var70 = alloca i8*, align 8
+  %var7C = alloca i64, align 8
+  %var88 = alloca i64, align 8
+  %canary = alloca i64, align 8
+  %local_init = alloca [32 x i8], align 16
+
+  %g1 = load <16 x i8>, <16 x i8>* @xmmword_2010, align 16
+  %bufptr = bitcast [32 x i8]* %local_init to <16 x i8>*
+  store <16 x i8> %g1, <16 x i8>* %bufptr, align 16
+  %bufptr2.byte = getelementptr inbounds [32 x i8], [32 x i8]* %local_init, i64 0, i64 16
+  %bufptr2 = bitcast i8* %bufptr2.byte to <16 x i8>*
+  %g2 = load <16 x i8>, <16 x i8>* @xmmword_2020, align 16
+  store <16 x i8> %g2, <16 x i8>* %bufptr2, align 16
+
+  %guard = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard, i64* %canary, align 8
+
+  %m = call i8* @_malloc(i64 40)
+  %m64 = ptrtoint i8* %m to i64
+  store i64 %m64, i64* %rax, align 8
+  %isnull = icmp eq i8* %m, null
+  br i1 %isnull, label %loc_142E, label %after_malloc_1118
+
+after_malloc_1118:
+  %rbxptr = getelementptr inbounds [32 x i8], [32 x i8]* %local_init, i64 0, i64 0
+  %rbxint = ptrtoint i8* %rbxptr to i64
+  store i64 %rbxint, i64* %rbx, align 8
+  store i8* %m, i8** %ptr, align 8
+  store i64 %m64, i64* %rsi, align 8
+  store i64 1, i64* %rdi, align 8
+  store i64 4, i64* %r10, align 8
+  store i8* %rbxptr, i8** %var70, align 8
+  store i64 %rbxint, i64* %rcx, align 8
+  store i64 4, i64* %var7C, align 8
+  br label %loc_1140
+
+loc_1140:
+  %rdi_val_1140 = load i64, i64* %rdi, align 8
+  store i64 %rdi_val_1140, i64* %r11, align 8
+  %twice = add i64 %rdi_val_1140, %rdi_val_1140
+  store i64 %twice, i64* %rdi, align 8
+  store i64 0, i64* %r8, align 8
+  store i64 %twice, i64* %var88, align 8
+  br label %loc_128A
+
+loc_1158:
+  %rcx_load_1158 = load i64, i64* %rcx, align 8
+  %r12_load_1158 = load i64, i64* %r12, align 8
+  %src_i8_1158 = inttoptr i64 %rcx_load_1158 to i8*
+  %src_i32_1158 = bitcast i8* %src_i8_1158 to i32*
+  %elem_ptr_1158 = getelementptr inbounds i32, i32* %src_i32_1158, i64 %r12_load_1158
+  %val_i32_1158 = load i32, i32* %elem_ptr_1158, align 4
+  %val_i64_1158 = zext i32 %val_i32_1158 to i64
+  store i64 %val_i64_1158, i64* %r9, align 8
+  %rax_load_1158 = load i64, i64* %rax, align 8
+  %rdi_new_1158 = add i64 %rax_load_1158, 1
+  store i64 %rdi_new_1158, i64* %rdi, align 8
+  %rsi_load_1158 = load i64, i64* %rsi, align 8
+  %dst_base_1158 = inttoptr i64 %rsi_load_1158 to i32*
+  %dst_ptr_1158 = getelementptr inbounds i32, i32* %dst_base_1158, i64 %rax_load_1158
+  %r9_load_1158 = load i64, i64* %r9, align 8
+  %r9_trunc_1158 = trunc i64 %r9_load_1158 to i32
+  store i32 %r9_trunc_1158, i32* %dst_ptr_1158, align 4
+  %rdx_load_1158 = load i64, i64* %rdx, align 8
+  %rdi_now_1158 = load i64, i64* %rdi, align 8
+  %cmp_1158 = icmp eq i64 %rdx_load_1158, %rdi_now_1158
+  br i1 %cmp_1158, label %loc_1280, label %loc_116d
+
+loc_115C:
+  %rax_load_115c = load i64, i64* %rax, align 8
+  %rdi_new_115c = add i64 %rax_load_115c, 1
+  store i64 %rdi_new_115c, i64* %rdi, align 8
+  %rsi_load_115c = load i64, i64* %rsi, align 8
+  %dst_base_115c = inttoptr i64 %rsi_load_115c to i32*
+  %dst_ptr_115c = getelementptr inbounds i32, i32* %dst_base_115c, i64 %rax_load_115c
+  %r9_load_115c = load i64, i64* %r9, align 8
+  %r9_trunc_115c = trunc i64 %r9_load_115c to i32
+  store i32 %r9_trunc_115c, i32* %dst_ptr_115c, align 4
+  %rdx_load_1164 = load i64, i64* %rdx, align 8
+  %cmp_eq_1164 = icmp eq i64 %rdx_load_1164, %rdi_new_115c
+  br i1 %cmp_eq_1164, label %loc_1280, label %loc_116d
+
+loc_116d:
+  %r12_load_116d = load i64, i64* %r12, align 8
+  %r9_new_116d = add i64 %r12_load_116d, 1
+  store i64 %r9_new_116d, i64* %r9, align 8
+  %r10_load_116d = load i64, i64* %r10, align 8
+  %rbx_load_116d = load i64, i64* %rbx, align 8
+  %cmp_jb_116d = icmp ult i64 %r10_load_116d, %rbx_load_116d
+  br i1 %cmp_jb_116d, label %loc_143A, label %loc_117b
+
+loc_117b:
+  %rdx_load_117b = load i64, i64* %rdx, align 8
+  store i64 %rdx_load_117b, i64* %rbx, align 8
+  %rax_load_117b = load i64, i64* %rax, align 8
+  %r13_new_117b = add i64 %rax_load_117b, 2
+  store i64 %r13_new_117b, i64* %r13, align 8
+  %rdi_load_117b = load i64, i64* %rdi, align 8
+  %rbx_sub_117b = sub i64 %rdx_load_117b, %rdi_load_117b
+  store i64 %rbx_sub_117b, i64* %rbx, align 8
+  %r10_new_117b = add i64 %rbx_sub_117b, -1
+  store i64 %r10_new_117b, i64* %r10, align 8
+  %cmp_jbe_1189 = icmp ule i64 %r10_new_117b, 2
+  br i1 %cmp_jbe_1189, label %loc_13A0, label %loc_1193
+
+loc_1193:
+  %rdx_load_1193 = load i64, i64* %rdx, align 8
+  %r13_load_1193 = load i64, i64* %r13, align 8
+  %cmp_jb_1193 = icmp ult i64 %rdx_load_1193, %r13_load_1193
+  br i1 %cmp_jb_1193, label %loc_13A0, label %loc_119c
+
+loc_119c:
+  %rdi_load_119c = load i64, i64* %rdi, align 8
+  %r10_new2_119c = mul i64 %rdi_load_119c, 4
+  store i64 %r10_new2_119c, i64* %r10, align 8
+  %r12_load_119c = load i64, i64* %r12, align 8
+  %r12_scaled = mul i64 %r12_load_119c, 4
+  %r12_plus8 = add i64 %r12_scaled, 8
+  store i64 %r12_plus8, i64* %r12, align 8
+  %rsi_load_119c = load i64, i64* %rsi, align 8
+  %rbp_new = add i64 %rsi_load_119c, %r10_new2_119c
+  store i64 %rbp_new, i64* %rbp, align 8
+  %rcx_load_119c = load i64, i64* %rcx, align 8
+  %r15_new = add i64 %rcx_load_119c, %r12_plus8
+  store i64 %r15_new, i64* %r15, align 8
+  store i64 %rbp_new, i64* %r14, align 8
+  %r14_load = load i64, i64* %r14, align 8
+  %r15_load = load i64, i64* %r15, align 8
+  %r14_sub = sub i64 %r14_load, %r15_load
+  store i64 %r14_sub, i64* %r14, align 8
+  %cmp_ja_11be = icmp ugt i64 %r14_sub, 8
+  br i1 %cmp_ja_11be, label %loc_12F0, label %loc_11c4
+
+loc_11c4:
+  %r9_load_11c4 = load i64, i64* %r9, align 8
+  %rbx_new_11c4 = mul i64 %r9_load_11c4, 4
+  store i64 %rbx_new_11c4, i64* %rbx, align 8
+  %rcx_load_11c4 = load i64, i64* %rcx, align 8
+  %src_i32_11c4 = inttoptr i64 %rcx_load_11c4 to i32*
+  %r9_load_index_11c4 = load i64, i64* %r9, align 8
+  %elem_ptr_11c4 = getelementptr inbounds i32, i32* %src_i32_11c4, i64 %r9_load_index_11c4
+  %val_i32_11c4 = load i32, i32* %elem_ptr_11c4, align 4
+  %val_i64_11c4 = zext i32 %val_i32_11c4 to i64
+  store i64 %val_i64_11c4, i64* %r9, align 8
+  %rsi_load_11c4 = load i64, i64* %rsi, align 8
+  %r10_load_11c4 = load i64, i64* %r10, align 8
+  %dst_ptr_i8_11c4 = inttoptr i64 %rsi_load_11c4 to i8*
+  %dst_ptr_i32_11c4 = bitcast i8* %dst_ptr_i8_11c4 to i32*
+  %off_elems_11c4 = lshr i64 %r10_load_11c4, 2
+  %dst_ptr_11c4 = getelementptr inbounds i32, i32* %dst_ptr_i32_11c4, i64 %off_elems_11c4
+  %r9_trunc_11c4 = trunc i64 %val_i64_11c4 to i32
+  store i32 %r9_trunc_11c4, i32* %dst_ptr_11c4, align 4
+  %r13_load_11c4b = load i64, i64* %r13, align 8
+  %rdx_load_11c4b = load i64, i64* %rdx, align 8
+  %cmp_jnb_11d4 = icmp uge i64 %r13_load_11c4b, %rdx_load_11c4b
+  br i1 %cmp_jnb_11d4, label %loc_1280, label %loc_11dd
+
+loc_11dd:
+  %rcx_load_11dd = load i64, i64* %rcx, align 8
+  %rbx_load_11dd = load i64, i64* %rbx, align 8
+  %addr_sum = add i64 %rcx_load_11dd, %rbx_load_11dd
+  %addr_plus4 = add i64 %addr_sum, 4
+  %ptr_plus4 = inttoptr i64 %addr_plus4 to i32*
+  %val_i32_11dd = load i32, i32* %ptr_plus4, align 4
+  %val_i64_11dd = zext i32 %val_i32_11dd to i64
+  store i64 %val_i64_11dd, i64* %r9, align 8
+  %rsi_load_11dd = load i64, i64* %rsi, align 8
+  %r10_load_11dd = load i64, i64* %r10, align 8
+  %addr_dst = add i64 %rsi_load_11dd, %r10_load_11dd
+  %addr_dst_plus4 = add i64 %addr_dst, 4
+  %dst_ptr_plus4 = inttoptr i64 %addr_dst_plus4 to i32*
+  %r9_trunc_11dd = trunc i64 %val_i64_11dd to i32
+  store i32 %r9_trunc_11dd, i32* %dst_ptr_plus4, align 4
+  %rax_load_11dd = load i64, i64* %rax, align 8
+  %r9_new_11e7 = add i64 %rax_load_11dd, 3
+  store i64 %r9_new_11e7, i64* %r9, align 8
+  %rdx_load_11eb = load i64, i64* %rdx, align 8
+  %cmp_jnb_11eb = icmp uge i64 %r9_new_11e7, %rdx_load_11eb
+  br i1 %cmp_jnb_11eb, label %loc_1280, label %loc_11f4
+
+loc_11f4:
+  %addr_plus8 = add i64 %addr_sum, 8
+  %ptr_plus8 = inttoptr i64 %addr_plus8 to i32*
+  %val_i32_11f4 = load i32, i32* %ptr_plus8, align 4
+  %val_i64_11f4 = zext i32 %val_i32_11f4 to i64
+  store i64 %val_i64_11f4, i64* %r9, align 8
+  %addr_dst_plus8 = add i64 %addr_dst, 8
+  %dst_ptr_plus8 = inttoptr i64 %addr_dst_plus8 to i32*
+  %r9_trunc_11f9 = trunc i64 %val_i64_11f4 to i32
+  store i32 %r9_trunc_11f9, i32* %dst_ptr_plus8, align 4
+  %r9_new_11fe = add i64 %rax_load_11dd, 4
+  store i64 %r9_new_11fe, i64* %r9, align 8
+  %cmp_jnb_1202 = icmp uge i64 %r9_new_11fe, %rdx_load_11eb
+  br i1 %cmp_jnb_1202, label %loc_1280, label %loc_1207
+
+loc_1207:
+  %addr_plusC = add i64 %addr_sum, 12
+  %ptr_plusC = inttoptr i64 %addr_plusC to i32*
+  %val_i32_1207 = load i32, i32* %ptr_plusC, align 4
+  %val_i64_1207 = zext i32 %val_i32_1207 to i64
+  store i64 %val_i64_1207, i64* %r9, align 8
+  %addr_dst_plusC = add i64 %addr_dst, 12
+  %dst_ptr_plusC = inttoptr i64 %addr_dst_plusC to i32*
+  %r9_trunc_120c = trunc i64 %val_i64_1207 to i32
+  store i32 %r9_trunc_120c, i32* %dst_ptr_plusC, align 4
+  %r9_new_1211 = add i64 %rax_load_11dd, 5
+  store i64 %r9_new_1211, i64* %r9, align 8
+  %cmp_jnb_1215 = icmp uge i64 %r9_new_1211, %rdx_load_11eb
+  br i1 %cmp_jnb_1215, label %loc_1280, label %loc_121a
+
+loc_121a:
+  %addr_plus10 = add i64 %addr_sum, 16
+  %ptr_plus10 = inttoptr i64 %addr_plus10 to i32*
+  %val_i32_121a = load i32, i32* %ptr_plus10, align 4
+  %val_i64_121a = zext i32 %val_i32_121a to i64
+  store i64 %val_i64_121a, i64* %r9, align 8
+  %addr_dst_plus10 = add i64 %addr_dst, 16
+  %dst_ptr_plus10 = inttoptr i64 %addr_dst_plus10 to i32*
+  %r9_trunc_121f = trunc i64 %val_i64_121a to i32
+  store i32 %r9_trunc_121f, i32* %dst_ptr_plus10, align 4
+  %r9_new_1224 = add i64 %rax_load_11dd, 6
+  store i64 %r9_new_1224, i64* %r9, align 8
+  %cmp_jnb_1228 = icmp uge i64 %r9_new_1224, %rdx_load_11eb
+  br i1 %cmp_jnb_1228, label %loc_1280, label %loc_122d
+
+loc_122d:
+  %addr_plus14 = add i64 %addr_sum, 20
+  %ptr_plus14 = inttoptr i64 %addr_plus14 to i32*
+  %val_i32_122d = load i32, i32* %ptr_plus14, align 4
+  %val_i64_122d = zext i32 %val_i32_122d to i64
+  store i64 %val_i64_122d, i64* %r9, align 8
+  %addr_dst_plus14 = add i64 %addr_dst, 20
+  %dst_ptr_plus14 = inttoptr i64 %addr_dst_plus14 to i32*
+  %r9_trunc_1232 = trunc i64 %val_i64_122d to i32
+  store i32 %r9_trunc_1232, i32* %dst_ptr_plus14, align 4
+  %r9_new_1237 = add i64 %rax_load_11dd, 7
+  store i64 %r9_new_1237, i64* %r9, align 8
+  %cmp_jnb_123b = icmp uge i64 %r9_new_1237, %rdx_load_11eb
+  br i1 %cmp_jnb_123b, label %loc_1280, label %loc_1240
+
+loc_1240:
+  %addr_plus18 = add i64 %addr_sum, 24
+  %ptr_plus18 = inttoptr i64 %addr_plus18 to i32*
+  %val_i32_1240 = load i32, i32* %ptr_plus18, align 4
+  %val_i64_1240 = zext i32 %val_i32_1240 to i64
+  store i64 %val_i64_1240, i64* %r9, align 8
+  %rax_add8 = add i64 %rax_load_11dd, 8
+  store i64 %rax_add8, i64* %rax, align 8
+  %addr_dst_plus18 = add i64 %addr_dst, 24
+  %dst_ptr_plus18 = inttoptr i64 %addr_dst_plus18 to i32*
+  %r9_trunc_1249 = trunc i64 %val_i64_1240 to i32
+  store i32 %r9_trunc_1249, i32* %dst_ptr_plus18, align 4
+  %rdx_load_124e = load i64, i64* %rdx, align 8
+  %cmp_jnb_124e = icmp uge i64 %rax_add8, %rdx_load_124e
+  br i1 %cmp_jnb_124e, label %loc_1280, label %loc_1253
+
+loc_1253:
+  %addr_plus1C = add i64 %addr_sum, 28
+  %ptr_plus1C = inttoptr i64 %addr_plus1C to i32*
+  %val_i32_1253 = load i32, i32* %ptr_plus1C, align 4
+  %addr_dst_plus1C = add i64 %addr_dst, 28
+  %dst_ptr_plus1C = inttoptr i64 %addr_dst_plus1C to i32*
+  store i32 %val_i32_1253, i32* %dst_ptr_plus1C, align 4
+  %rdi_load_125e = load i64, i64* %rdi, align 8
+  %is_one = icmp eq i64 %rdi_load_125e, 1
+  %al = zext i1 %is_one to i64
+  %neg = sub i64 0, %al
+  %rax_tmp = add i64 %neg, 10
+  store i64 %rax_tmp, i64* %rax, align 8
+  %rdx_load_126c = load i64, i64* %rdx, align 8
+  %cmp_jnb_126c = icmp uge i64 %rax_tmp, %rdx_load_126c
+  br i1 %cmp_jnb_126c, label %loc_1280, label %loc_1271
+
+loc_1271:
+  %addr_plus20 = add i64 %addr_sum, 32
+  %ptr_plus20 = inttoptr i64 %addr_plus20 to i32*
+  %val_i32_1271 = load i32, i32* %ptr_plus20, align 4
+  %rsi_load_1275 = load i64, i64* %rsi, align 8
+  %addr_dst_24 = add i64 %rsi_load_1275, 36
+  %dst_ptr_24 = inttoptr i64 %addr_dst_24 to i32*
+  store i32 %val_i32_1271, i32* %dst_ptr_24, align 4
+  br label %loc_1280
+
+loc_1280:
+  %r8_load_1280 = load i64, i64* %r8, align 8
+  %cmp_ja_1280 = icmp ugt i64 %r8_load_1280, 9
+  br i1 %cmp_ja_1280, label %loc_1380, label %loc_128A
+
+loc_128A:
+  %r11_load_128a = load i64, i64* %r11, align 8
+  %r8_load_128a = load i64, i64* %r8, align 8
+  %rdx_new_128a = add i64 %r11_load_128a, %r8_load_128a
+  store i64 %rdx_new_128a, i64* %rdx, align 8
+  store i64 10, i64* %rbx, align 8
+  store i64 %r8_load_128a, i64* %rax, align 8
+  %rbx_load_1296 = load i64, i64* %rbx, align 8
+  %cond_be = icmp ule i64 %rdx_new_128a, %rbx_load_1296
+  %rbx_sel = select i1 %cond_be, i64 %rdx_new_128a, i64 %rbx_load_1296
+  store i64 %rbx_sel, i64* %rbx, align 8
+  %r8_new = add i64 %rdx_new_128a, %r11_load_128a
+  store i64 %r8_new, i64* %r8, align 8
+  %rax_load_129d = load i64, i64* %rax, align 8
+  store i64 %rax_load_129d, i64* %r10, align 8
+  store i64 10, i64* %rdx, align 8
+  %rdx_load_12a9 = load i64, i64* %rdx, align 8
+  %cond_be2 = icmp ule i64 %r8_new, %rdx_load_12a9
+  %rdx_sel = select i1 %cond_be2, i64 %r8_new, i64 %rdx_load_12a9
+  store i64 %rdx_sel, i64* %rdx, align 8
+  store i64 %rbx_sel, i64* %r12, align 8
+  %rax_load_12b3 = load i64, i64* %rax, align 8
+  %rdx_load_12b3 = load i64, i64* %rdx, align 8
+  %cmp_jnb_12b3 = icmp uge i64 %rax_load_12b3, %rdx_load_12b3
+  br i1 %cmp_jnb_12b3, label %loc_1280, label %loc_12b8
+
+loc_12b8:
+  %r10_load_12b8 = load i64, i64* %r10, align 8
+  %rbx_load_12b8 = load i64, i64* %rbx, align 8
+  %cmp_jnb_12b8 = icmp uge i64 %r10_load_12b8, %rbx_load_12b8
+  br i1 %cmp_jnb_12b8, label %loc_1158, label %loc_12c1
+
+loc_12c1:
+  %rcx_load_12c1 = load i64, i64* %rcx, align 8
+  %r10_load_12c1 = load i64, i64* %r10, align 8
+  %src_base_i32_12c1 = inttoptr i64 %rcx_load_12c1 to i32*
+  %elem_ptr_12c1 = getelementptr inbounds i32, i32* %src_base_i32_12c1, i64 %r10_load_12c1
+  %edi_val_i32 = load i32, i32* %elem_ptr_12c1, align 4
+  %edi_val_i64 = zext i32 %edi_val_i32 to i64
+  store i64 %edi_val_i64, i64* %rdi, align 8
+  %r12_load_12c5 = load i64, i64* %r12, align 8
+  %rdx_load_12c5 = load i64, i64* %rdx, align 8
+  %cmp_jnb_12c8 = icmp uge i64 %r12_load_12c5, %rdx_load_12c5
+  br i1 %cmp_jnb_12c8, label %loc_12D7, label %loc_12ca
+
+loc_12ca:
+  %rcx_load_12ca = load i64, i64* %rcx, align 8
+  %src_i32_12ca = inttoptr i64 %rcx_load_12ca to i32*
+  %r12_load_12ca = load i64, i64* %r12, align 8
+  %elem_ptr_12ca = getelementptr inbounds i32, i32* %src_i32_12ca, i64 %r12_load_12ca
+  %r9_i32_12ca = load i32, i32* %elem_ptr_12ca, align 4
+  %r9_i64_12ca = zext i32 %r9_i32_12ca to i64
+  store i64 %r9_i64_12ca, i64* %r9, align 8
+  %edi_load_12ce = load i64, i64* %rdi, align 8
+  %r9_load_12ce = load i64, i64* %r9, align 8
+  %r9_i32_forcmp = trunc i64 %r9_load_12ce to i32
+  %edi_i32_forcmp = trunc i64 %edi_load_12ce to i32
+  %cmp_jl_12ce = icmp slt i32 %r9_i32_forcmp, %edi_i32_forcmp
+  br i1 %cmp_jl_12ce, label %loc_115C, label %loc_12D7
+
+loc_12D7:
+  %rsi_load_12d7 = load i64, i64* %rsi, align 8
+  %dst_base_i32_12d7 = inttoptr i64 %rsi_load_12d7 to i32*
+  %rax_load_12d7 = load i64, i64* %rax, align 8
+  %dst_ptr_12d7 = getelementptr inbounds i32, i32* %dst_base_i32_12d7, i64 %rax_load_12d7
+  %edi_load_12d7 = load i64, i64* %rdi, align 8
+  %edi_trunc_12d7 = trunc i64 %edi_load_12d7 to i32
+  store i32 %edi_trunc_12d7, i32* %dst_ptr_12d7, align 4
+  %rax_plus1_12da = add i64 %rax_load_12d7, 1
+  store i64 %rax_plus1_12da, i64* %rax, align 8
+  %rdx_load_12de = load i64, i64* %rdx, align 8
+  %cmp_jz_12de = icmp eq i64 %rdx_load_12de, %rax_plus1_12da
+  br i1 %cmp_jz_12de, label %loc_1280, label %loc_12e3
+
+loc_12e3:
+  %r10_load_12e3 = load i64, i64* %r10, align 8
+  %r10_plus1_12e3 = add i64 %r10_load_12e3, 1
+  store i64 %r10_plus1_12e3, i64* %r10, align 8
+  br label %loc_12b8
+
+loc_12F0:
+  %rcx_load_12f0 = load i64, i64* %rcx, align 8
+  %r12_load_12f0 = load i64, i64* %r12, align 8
+  %tmp_sum = add i64 %rcx_load_12f0, %r12_load_12f0
+  %rax_new_12f0 = add i64 %tmp_sum, -4
+  store i64 %rax_new_12f0, i64* %rax, align 8
+  %rbx_load_12f0 = load i64, i64* %rbx, align 8
+  store i64 %rbx_load_12f0, i64* %r10, align 8
+  %src_vec_ptr_12f8 = inttoptr i64 %rax_new_12f0 to <4 x i32>*
+  %vec1_12f8 = load <4 x i32>, <4 x i32>* %src_vec_ptr_12f8, align 1
+  %rbp_load_12f8 = load i64, i64* %rbp, align 8
+  %dst_vec_ptr_1300 = inttoptr i64 %rbp_load_12f8 to <4 x i32>*
+  store <4 x i32> %vec1_12f8, <4 x i32>* %dst_vec_ptr_1300, align 1
+  %r10_load_shr = load i64, i64* %r10, align 8
+  %r10_shr2 = lshr i64 %r10_load_shr, 2
+  store i64 %r10_shr2, i64* %r10, align 8
+  %cmp_jz_1304 = icmp eq i64 %r10_shr2, 1
+  br i1 %cmp_jz_1304, label %loc_1313, label %loc_130a
+
+loc_130a:
+  %rax_load_130a2 = load i64, i64* %rax, align 8
+  %addr_rax_plus16 = add i64 %rax_load_130a2, 16
+  %src_vec_ptr2 = inttoptr i64 %addr_rax_plus16 to <4 x i32>*
+  %vec2 = load <4 x i32>, <4 x i32>* %src_vec_ptr2, align 1
+  %rbp_load_130a2 = load i64, i64* %rbp, align 8
+  %addr_rbp_plus16 = add i64 %rbp_load_130a2, 16
+  %dst_vec_ptr2 = inttoptr i64 %addr_rbp_plus16 to <4 x i32>*
+  store <4 x i32> %vec2, <4 x i32>* %dst_vec_ptr2, align 1
+  br label %loc_1313
+
+loc_1313:
+  %rbx_load_1313 = load i64, i64* %rbx, align 8
+  store i64 %rbx_load_1313, i64* %rax, align 8
+  %rax_and = and i64 %rbx_load_1313, -4
+  store i64 %rax_and, i64* %rax, align 8
+  %r9_load_131a = load i64, i64* %r9, align 8
+  %r9_plus_rax = add i64 %r9_load_131a, %rax_and
+  store i64 %r9_plus_rax, i64* %r9, align 8
+  %rdi_load_131d = load i64, i64* %rdi, align 8
+  %rax_plus_rdi = add i64 %rax_and, %rdi_load_131d
+  store i64 %rax_plus_rdi, i64* %rax, align 8
+  %rbx_and3 = and i64 %rbx_load_1313, 3
+  store i64 %rbx_and3, i64* %rbx, align 8
+  %cmp_jz_1323 = icmp eq i64 %rbx_and3, 0
+  br i1 %cmp_jz_1323, label %loc_1280, label %loc_1329
+
+loc_1329:
+  %r9_load_1329 = load i64, i64* %r9, align 8
+  %r10_new_1329 = mul i64 %r9_load_1329, 4
+  store i64 %r10_new_1329, i64* %r10, align 8
+  %rcx_load_1331 = load i64, i64* %rcx, align 8
+  %src_i32_1331 = inttoptr i64 %rcx_load_1331 to i32*
+  %elem_ptr_1331 = getelementptr inbounds i32, i32* %src_i32_1331, i64 %r9_load_1329
+  %r9_i32_1331 = load i32, i32* %elem_ptr_1331, align 4
+  %r9_i64_1331 = zext i32 %r9_i32_1331 to i64
+  store i64 %r9_i64_1331, i64* %r9, align 8
+  %rax_load_1335 = load i64, i64* %rax, align 8
+  %rdi_new_1335 = mul i64 %rax_load_1335, 4
+  store i64 %rdi_new_1335, i64* %rdi, align 8
+  %rsi_load_133d = load i64, i64* %rsi, align 8
+  %dst_base_i32_133d = inttoptr i64 %rsi_load_133d to i32*
+  %dst_ptr_133d = getelementptr inbounds i32, i32* %dst_base_i32_133d, i64 %rax_load_1335
+  %r9_trunc_133d = trunc i64 %r9_i64_1331 to i32
+  store i32 %r9_trunc_133d, i32* %dst_ptr_133d, align 4
+  %r9_new_1341 = add i64 %rax_load_1335, 1
+  store i64 %r9_new_1341, i64* %r9, align 8
+  %rdx_load_1345 = load i64, i64* %rdx, align 8
+  %cmp_jnb_1345 = icmp uge i64 %r9_new_1341, %rdx_load_1345
+  br i1 %cmp_jnb_1345, label %loc_1280, label %loc_134e
+
+loc_134e:
+  %rcx_load_134e = load i64, i64* %rcx, align 8
+  %r10_load_134e = load i64, i64* %r10, align 8
+  %addr_r10_plus4 = add i64 %r10_load_134e, 4
+  %addr_src_sum = add i64 %rcx_load_134e, %addr_r10_plus4
+  %ptr_src = inttoptr i64 %addr_src_sum to i32*
+  %r9_i32_134e = load i32, i32* %ptr_src, align 4
+  %r9_i64_134e = zext i32 %r9_i32_134e to i64
+  store i64 %r9_i64_134e, i64* %r9, align 8
+  %rax_plus2_1353 = add i64 %rax_load_1335, 2
+  store i64 %rax_plus2_1353, i64* %rax, align 8
+  %rsi_load_1357 = load i64, i64* %rsi, align 8
+  %rdi_load_1357 = load i64, i64* %rdi, align 8
+  %addr_dst_b = add i64 %rsi_load_1357, %rdi_load_1357
+  %addr_dst_plus4b = add i64 %addr_dst_b, 4
+  %dst_ptr_plus4b = inttoptr i64 %addr_dst_plus4b to i32*
+  %r9_trunc_1357 = trunc i64 %r9_i64_134e to i32
+  store i32 %r9_trunc_1357, i32* %dst_ptr_plus4b, align 4
+  %rdx_load_135c = load i64, i64* %rdx, align 8
+  %cmp_jnb_135c = icmp uge i64 %rax_plus2_1353, %rdx_load_135c
+  br i1 %cmp_jnb_135c, label %loc_1280, label %loc_1365
+
+loc_1365:
+  %addr_r10_plus8 = add i64 %r10_load_134e, 8
+  %addr_src_sum2 = add i64 %rcx_load_134e, %addr_r10_plus8
+  %ptr_src2 = inttoptr i64 %addr_src_sum2 to i32*
+  %val_i32_1365 = load i32, i32* %ptr_src2, align 4
+  %addr_dst_plus8b = add i64 %addr_dst_b, 8
+  %dst_ptr_plus8b = inttoptr i64 %addr_dst_plus8b to i32*
+  store i32 %val_i32_1365, i32* %dst_ptr_plus8b, align 4
+  %r8_load_136e = load i64, i64* %r8, align 8
+  %cmp_jbe_136e = icmp ule i64 %r8_load_136e, 9
+  br i1 %cmp_jbe_136e, label %loc_128A, label %loc_1380
+
+loc_1380:
+  %var7C_load_1380 = load i64, i64* %var7C, align 8
+  %var7C_dec = sub i64 %var7C_load_1380, 1
+  store i64 %var7C_dec, i64* %var7C, align 8
+  %var88_load_1385 = load i64, i64* %var88, align 8
+  store i64 %var88_load_1385, i64* %rdi, align 8
+  %is_zero_1389 = icmp eq i64 %var7C_dec, 0
+  br i1 %is_zero_1389, label %loc_13AD, label %loc_138b
+
+loc_138b:
+  %rcx_load_138b = load i64, i64* %rcx, align 8
+  store i64 %rcx_load_138b, i64* %rdx, align 8
+  %rsi_load_138e = load i64, i64* %rsi, align 8
+  store i64 %rsi_load_138e, i64* %rcx, align 8
+  %rdx_load_1391 = load i64, i64* %rdx, align 8
+  store i64 %rdx_load_1391, i64* %rsi, align 8
+  br label %loc_1140
+
+loc_13A0:
+  %rdi_load_13a0 = load i64, i64* %rdi, align 8
+  %r10_new_13a0 = mul i64 %rdi_load_13a0, 4
+  store i64 %r10_new_13a0, i64* %r10, align 8
+  br label %loc_11c4
+
+loc_13AD:
+  %var70_load = load i8*, i8** %var70, align 8
+  %rbx_int_13ad = ptrtoint i8* %var70_load to i64
+  store i64 %rbx_int_13ad, i64* %rbx, align 8
+  %ptr_load = load i8*, i8** %ptr, align 8
+  %ptr_int = ptrtoint i8* %ptr_load to i64
+  store i64 %ptr_int, i64* %rax, align 8
+  %rsi_load_13b7 = load i64, i64* %rsi, align 8
+  %rbx_load_13b7 = load i64, i64* %rbx, align 8
+  %cmp_jz_13b7 = icmp eq i64 %rsi_load_13b7, %rbx_load_13b7
+  br i1 %cmp_jz_13b7, label %loc_13C6, label %loc_13bc
+
+loc_13bc:
+  %rsi_ptr_13c1 = inttoptr i64 %rsi_load_13b7 to i8*
+  %rbx_ptr_13c1 = inttoptr i64 %rbx_load_13b7 to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %rbx_ptr_13c1, i8* %rsi_ptr_13c1, i64 40, i1 false)
+  br label %loc_13C6
+
+loc_13C6:
+  %rax_load_13c6 = load i64, i64* %rax, align 8
+  %rax_ptr_13c6 = inttoptr i64 %rax_load_13c6 to i8*
+  call void @_free(i8* %rax_ptr_13c6)
+  br label %loc_13CE
+
+loc_13CE:
+  %rbx_load_13ce = load i64, i64* %rbx, align 8
+  %r12_new_13ce = add i64 %rbx_load_13ce, 40
+  store i64 %r12_new_13ce, i64* %r12, align 8
+  %fmt1 = getelementptr [0 x i8], [0 x i8]* @unk_2004, i64 0, i64 0
+  %fmt1_i64 = ptrtoint i8* %fmt1 to i64
+  store i64 %fmt1_i64, i64* %rbp, align 8
+  br label %loc_13E0
+
+loc_13E0:
+  %rbx_load_13e0 = load i64, i64* %rbx, align 8
+  %rbx_ptr_i32 = inttoptr i64 %rbx_load_13e0 to i32*
+  %val_i32_print = load i32, i32* %rbx_ptr_i32, align 4
+  %rbp_load_13e2 = load i64, i64* %rbp, align 8
+  %fmt_ptr = inttoptr i64 %rbp_load_13e2 to i8*
+  %rbx_plus4 = add i64 %rbx_load_13e0, 4
+  store i64 %rbx_plus4, i64* %rbx, align 8
+  %call_printf = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt_ptr, i32 %val_i32_print)
+  %r12_load_13f5 = load i64, i64* %r12, align 8
+  %rbx_load_13f5 = load i64, i64* %rbx, align 8
+  %cmp_jnz_13f5 = icmp ne i64 %r12_load_13f5, %rbx_load_13f5
+  br i1 %cmp_jnz_13f5, label %loc_13E0, label %loc_13FA
+
+loc_13FA:
+  %fmt2 = getelementptr [0 x i8], [0 x i8]* @unk_2008, i64 0, i64 0
+  %call_printf2 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt2)
+  %saved = load i64, i64* %canary, align 8
+  %guard2 = load i64, i64* @__stack_chk_guard, align 8
+  %cmp_canary = icmp ne i64 %saved, %guard2
+  br i1 %cmp_canary, label %loc_1435, label %loc_141d
+
+loc_141d:
+  ret i32 0
+
+loc_142E:
+  %rbx_ptr_142e = getelementptr inbounds [32 x i8], [32 x i8]* %local_init, i64 0, i64 0
+  %rbx_int_142e = ptrtoint i8* %rbx_ptr_142e to i64
+  store i64 %rbx_int_142e, i64* %rbx, align 8
+  br label %loc_13CE
+
+loc_1435:
+  call void @___stack_chk_fail()
+  unreachable
+
+loc_143A:
+  %r9_load_143a = load i64, i64* %r9, align 8
+  store i64 %r9_load_143a, i64* %r12, align 8
+  %rdi_load_143d = load i64, i64* %rdi, align 8
+  store i64 %rdi_load_143d, i64* %rax, align 8
+  br label %loc_12b8
+}

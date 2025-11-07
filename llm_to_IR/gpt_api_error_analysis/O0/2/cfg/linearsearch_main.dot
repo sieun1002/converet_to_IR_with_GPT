@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x57548b12c700 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %arr.elem0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 5, ptr %arr.elem0, align 4\l  %arr.elem1 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %arr.elem1, align 4\l  %arr.elem2 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %arr.elem2, align 4\l  %arr.elem3 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 4, ptr %arr.elem3, align 4\l  %arr.elem4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 2, ptr %arr.elem4, align 4\l  %arr.base = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %call = call i32 @linear_search(ptr %arr.base, i32 5, i32 4)\l  %cmp = icmp eq i32 %call, -1\l  br i1 %cmp, label %not_found, label %found\l|{<s0>T|<s1>F}}"];
+	Node0x57548b12c700:s0 -> Node0x57548b130660[tooltip="entry -> not_found\nProbability 37.50%" ];
+	Node0x57548b12c700:s1 -> Node0x57548b1306e0[tooltip="entry -> found\nProbability 62.50%" ];
+	Node0x57548b1306e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{found:\l|  %fmt.ptr = getelementptr inbounds [27 x i8], ptr @.str, i64 0, i64 0\l  %printf.call = call i32 (ptr, ...) @printf(ptr %fmt.ptr, i32 %call)\l  br label %ret\l}"];
+	Node0x57548b1306e0 -> Node0x57548b130b10[tooltip="found -> ret\nProbability 100.00%" ];
+	Node0x57548b130660 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{not_found:\l|  %s.ptr = getelementptr inbounds [18 x i8], ptr @.str.1, i64 0, i64 0\l  %puts.call = call i32 @puts(ptr %s.ptr)\l  br label %ret\l}"];
+	Node0x57548b130660 -> Node0x57548b130b10[tooltip="not_found -> ret\nProbability 100.00%" ];
+	Node0x57548b130b10 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{ret:\l|  ret i32 0\l}"];
+}

@@ -1,0 +1,18 @@
+digraph "CFG for 'init_graph' function" {
+	label="CFG for 'init_graph' function";
+
+	Node0x55eb1316f4a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{entry:\l|  %cmp.n.pos = icmp sgt i32 %n, 0\l  br i1 %cmp.n.pos, label %outer.loop, label %done\l|{<s0>T|<s1>F}}"];
+	Node0x55eb1316f4a0:s0 -> Node0x55eb1316e920[tooltip="entry -> outer.loop\nProbability 62.50%" ];
+	Node0x55eb1316f4a0:s1 -> Node0x55eb1316e6e0[tooltip="entry -> done\nProbability 37.50%" ];
+	Node0x55eb1316e920 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %outer.cont ]\l  br label %inner.loop\l}"];
+	Node0x55eb1316e920 -> Node0x55eb13170560[tooltip="outer.loop -> inner.loop\nProbability 100.00%" ];
+	Node0x55eb13170560 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.loop:\l|  %j = phi i32 [ 0, %outer.loop ], [ %j.next, %inner.body ]\l  %j.cmp = icmp slt i32 %j, %n\l  br i1 %j.cmp, label %inner.body, label %outer.cont\l|{<s0>T|<s1>F}}"];
+	Node0x55eb13170560:s0 -> Node0x55eb13170660[tooltip="inner.loop -> inner.body\nProbability 96.88%" ];
+	Node0x55eb13170560:s1 -> Node0x55eb1316ec10[tooltip="inner.loop -> outer.cont\nProbability 3.12%" ];
+	Node0x55eb13170660 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.body:\l|  %i64 = sext i32 %i to i64\l  %mul = mul nsw i64 %i64, 100\l  %j64 = sext i32 %j to i64\l  %index = add nsw i64 %mul, %j64\l  %elem.ptr = getelementptr inbounds i32, ptr %p, i64 %index\l  store i32 0, ptr %elem.ptr, align 4\l  %j.next = add nsw i32 %j, 1\l  br label %inner.loop\l}"];
+	Node0x55eb13170660 -> Node0x55eb13170560[tooltip="inner.body -> inner.loop\nProbability 100.00%" ];
+	Node0x55eb1316ec10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.cont:\l|  %i.next = add nsw i32 %i, 1\l  %i.cmp = icmp slt i32 %i.next, %n\l  br i1 %i.cmp, label %outer.loop, label %done\l|{<s0>T|<s1>F}}"];
+	Node0x55eb1316ec10:s0 -> Node0x55eb1316e920[tooltip="outer.cont -> outer.loop\nProbability 96.88%" ];
+	Node0x55eb1316ec10:s1 -> Node0x55eb1316e6e0[tooltip="outer.cont -> done\nProbability 3.12%" ];
+	Node0x55eb1316e6e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{done:\l|  ret void\l}"];
+}

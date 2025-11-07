@@ -1,0 +1,147 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/heapsort_function1.ll:73:9: error: expected instruction opcode
+;   %p0 = %arr
+;         ^
+; === ERROR LOG END ===
+
+; ModuleID = 'heap_sort'
+target triple = "x86_64-unknown-linux-gnu"
+
+define dso_local void @heap_sort(i32* nocapture %arr, i64 %n) local_unnamed_addr {
+bb1189:
+  %cmp_n_le1 = icmp ule i64 %n, 1
+  br i1 %cmp_n_le1, label %bb1448, label %bb11a4
+
+bb11a4:
+  %start = lshr i64 %n, 1
+  br label %bb12C4
+
+bb11B4:
+  br label %bb11BC
+
+bb11BC:
+  %i = phi i64 [ %dec, %bb11B4 ], [ %child_build, %bb1259_swap ]
+  %twice = add i64 %i, %i
+  %left = add i64 %twice, 1
+  %left_ge_n = icmp uge i64 %left, %n
+  br i1 %left_ge_n, label %bb12C0, label %bb11E5
+
+bb11E5:
+  %right = add i64 %left, 1
+  %right_ge_n = icmp uge i64 %right, %n
+  br i1 %right_ge_n, label %bb1223, label %bb1219
+
+bb1219:
+  %pr = getelementptr inbounds i32, i32* %arr, i64 %right
+  %vr = load i32, i32* %pr, align 4
+  %pl = getelementptr inbounds i32, i32* %arr, i64 %left
+  %vl = load i32, i32* %pl, align 4
+  %r_gt_l = icmp sgt i32 %vr, %vl
+  br i1 %r_gt_l, label %bb121D, label %bb1223
+
+bb121D:
+  br label %bb1227
+
+bb1223:
+  br label %bb1227
+
+bb1227:
+  %child_build = phi i64 [ %left, %bb1223 ], [ %right, %bb121D ]
+  %pi = getelementptr inbounds i32, i32* %arr, i64 %i
+  %vi = load i32, i32* %pi, align 4
+  %pc = getelementptr inbounds i32, i32* %arr, i64 %child_build
+  %vc = load i32, i32* %pc, align 4
+  %i_ge_c = icmp sge i32 %vi, %vc
+  br i1 %i_ge_c, label %bb12C3, label %bb1259_swap
+
+bb1259_swap:
+  store i32 %vc, i32* %pi, align 4
+  store i32 %vi, i32* %pc, align 4
+  br label %bb11BC
+
+bb12C0:
+  br label %bb12C4
+
+bb12C3:
+  br label %bb12C4
+
+bb12C4:
+  %cur = phi i64 [ %start, %bb11a4 ], [ %dec, %bb12C0 ], [ %dec, %bb12C3 ]
+  %dec = add i64 %cur, -1
+  %cur_nz = icmp ne i64 %cur, 0
+  br i1 %cur_nz, label %bb11B4, label %bb12D9
+
+bb12D9:
+  %limit0 = add i64 %n, -1
+  br label %bb143B
+
+bb12EA:
+  %p0 = %arr
+  %v0 = load i32, i32* %p0, align 4
+  %plim = getelementptr inbounds i32, i32* %arr, i64 %limit
+  %vlim = load i32, i32* %plim, align 4
+  store i32 %vlim, i32* %p0, align 4
+  store i32 %v0, i32* %plim, align 4
+  br label %bb132E
+
+bb132E:
+  %k = phi i64 [ 0, %bb12EA ], [ %child2, %bb13CB_swap ]
+  %tw2 = add i64 %k, %k
+  %left2 = add i64 %tw2, 1
+  %left2_ge_lim = icmp uge i64 %left2, %limit
+  br i1 %left2_ge_lim, label %bb1432, label %bb1357
+
+bb1357:
+  %right2 = add i64 %left2, 1
+  %right2_ge_lim = icmp uge i64 %right2, %limit
+  br i1 %right2_ge_lim, label %bb1395, label %bb1389
+
+bb1389:
+  %pr2 = getelementptr inbounds i32, i32* %arr, i64 %right2
+  %vr2 = load i32, i32* %pr2, align 4
+  %pl2 = getelementptr inbounds i32, i32* %arr, i64 %left2
+  %vl2 = load i32, i32* %pl2, align 4
+  %r2_gt_l2 = icmp sgt i32 %vr2, %vl2
+  br i1 %r2_gt_l2, label %bb138F, label %bb1395
+
+bb138F:
+  br label %bb1399
+
+bb1395:
+  br label %bb1399
+
+bb1399:
+  %child2 = phi i64 [ %left2, %bb1395 ], [ %right2, %bb138F ]
+  %pk = getelementptr inbounds i32, i32* %arr, i64 %k
+  %vk = load i32, i32* %pk, align 4
+  %pch2 = getelementptr inbounds i32, i32* %arr, i64 %child2
+  %vch2 = load i32, i32* %pch2, align 4
+  %k_ge_ch2 = icmp sge i32 %vk, %vch2
+  br i1 %k_ge_ch2, label %bb1435, label %bb13CB_swap
+
+bb13CB_swap:
+  store i32 %vch2, i32* %pk, align 4
+  store i32 %vk, i32* %pch2, align 4
+  br label %bb132E
+
+bb1432:
+  br label %bb1436
+
+bb1435:
+  br label %bb1436
+
+bb1436:
+  %limit_dec = add i64 %limit, -1
+  br label %bb143B
+
+bb143B:
+  %limit = phi i64 [ %limit0, %bb12D9 ], [ %limit_dec, %bb1436 ]
+  %lim_nz = icmp ne i64 %limit, 0
+  br i1 %lim_nz, label %bb12EA, label %bb1449
+
+bb1448:
+  br label %bb1449
+
+bb1449:
+  ret void
+}

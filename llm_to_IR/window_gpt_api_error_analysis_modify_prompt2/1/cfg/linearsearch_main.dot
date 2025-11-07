@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x64ed9954f750 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %var_8 = alloca i32, align 4\l  %var_4 = alloca i32, align 4\l  %var_C = alloca i32, align 4\l  %p0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 5, ptr %p0, align 4\l  %p1 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %p1, align 4\l  %p2 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %p2, align 4\l  %p3 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 4, ptr %p3, align 4\l  %p4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 2, ptr %p4, align 4\l  store i32 5, ptr %var_4, align 4\l  store i32 4, ptr %var_8, align 4\l  %arrptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %len = load i32, ptr %var_8, align 4\l  %tgt = load i32, ptr %var_4, align 4\l  %res = call i32 @linear_search(ptr noundef %arrptr, i32 noundef %tgt, i32\l... noundef %len)\l  store i32 %res, ptr %var_C, align 4\l  %res2 = load i32, ptr %var_C, align 4\l  %cmp = icmp eq i32 %res2, -1\l  br i1 %cmp, label %notfound, label %found\l|{<s0>T|<s1>F}}"];
+	Node0x64ed9954f750:s0 -> Node0x64ed99553dd0[tooltip="entry -> notfound\nProbability 37.50%" ];
+	Node0x64ed9954f750:s1 -> Node0x64ed99553e50[tooltip="entry -> found\nProbability 62.50%" ];
+	Node0x64ed99553e50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{found:\l|  %idx = load i32, ptr %var_C, align 4\l  %fmtptr = getelementptr inbounds [27 x i8], ptr @_Format, i64 0, i64 0\l  %callprintf = call i32 (ptr, ...) @printf(ptr noundef %fmtptr, i32 noundef\l... %idx)\l  br label %done\l}"];
+	Node0x64ed99553e50 -> Node0x64ed99554180[tooltip="found -> done\nProbability 100.00%" ];
+	Node0x64ed99553dd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{notfound:\l|  %bufptr = getelementptr inbounds [18 x i8], ptr @Buffer, i64 0, i64 0\l  %callputs = call i32 @puts(ptr noundef %bufptr)\l  br label %done\l}"];
+	Node0x64ed99553dd0 -> Node0x64ed99554180[tooltip="notfound -> done\nProbability 100.00%" ];
+	Node0x64ed99554180 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{done:\l|  ret i32 0\l}"];
+}

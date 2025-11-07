@@ -1,0 +1,26 @@
+digraph "CFG for 'binary_search' function" {
+	label="CFG for 'binary_search' function";
+
+	Node0x6147e8545780 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %cond\l}"];
+	Node0x6147e8545780 -> Node0x6147e8544c30[tooltip="entry -> cond\nProbability 100.00%" ];
+	Node0x6147e8544c30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{cond:\l|  %low = phi i64 [ 0, %entry ], [ %low.next, %latch ]\l  %high = phi i64 [ %count, %entry ], [ %high.next, %latch ]\l  %cmp = icmp ult i64 %low, %high\l  br i1 %cmp, label %body, label %after\l|{<s0>T|<s1>F}}"];
+	Node0x6147e8544c30:s0 -> Node0x6147e85468c0[tooltip="cond -> body\nProbability 96.88%" ];
+	Node0x6147e8544c30:s1 -> Node0x6147e8546990[tooltip="cond -> after\nProbability 3.12%" ];
+	Node0x6147e85468c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %sub = sub i64 %high, %low\l  %half = lshr i64 %sub, 1\l  %mid = add i64 %low, %half\l  %ptr = getelementptr inbounds i32, ptr %arr, i64 %mid\l  %val = load i32, ptr %ptr, align 4\l  %is_gt = icmp sgt i32 %key, %val\l  br i1 %is_gt, label %setlow, label %sethigh\l|{<s0>T|<s1>F}}"];
+	Node0x6147e85468c0:s0 -> Node0x6147e8547340[tooltip="body -> setlow\nProbability 50.00%" ];
+	Node0x6147e85468c0:s1 -> Node0x6147e85473b0[tooltip="body -> sethigh\nProbability 50.00%" ];
+	Node0x6147e8547340 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{setlow:\l|  %mid.plus1 = add i64 %mid, 1\l  br label %latch\l}"];
+	Node0x6147e8547340 -> Node0x6147e8544a80[tooltip="setlow -> latch\nProbability 100.00%" ];
+	Node0x6147e85473b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{sethigh:\l|  br label %latch\l}"];
+	Node0x6147e85473b0 -> Node0x6147e8544a80[tooltip="sethigh -> latch\nProbability 100.00%" ];
+	Node0x6147e8544a80 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{latch:\l|  %low.next = phi i64 [ %mid.plus1, %setlow ], [ %low, %sethigh ]\l  %high.next = phi i64 [ %high, %setlow ], [ %mid, %sethigh ]\l  br label %cond\l}"];
+	Node0x6147e8544a80 -> Node0x6147e8544c30[tooltip="latch -> cond\nProbability 100.00%" ];
+	Node0x6147e8546990 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after:\l|  %inrange = icmp ult i64 %low, %count\l  br i1 %inrange, label %checkeq, label %retneg1\l|{<s0>T|<s1>F}}"];
+	Node0x6147e8546990:s0 -> Node0x6147e85477f0[tooltip="after -> checkeq\nProbability 50.00%" ];
+	Node0x6147e8546990:s1 -> Node0x6147e8547860[tooltip="after -> retneg1\nProbability 50.00%" ];
+	Node0x6147e85477f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{checkeq:\l|  %ptr2 = getelementptr inbounds i32, ptr %arr, i64 %low\l  %val2 = load i32, ptr %ptr2, align 4\l  %eq = icmp eq i32 %key, %val2\l  br i1 %eq, label %retlow, label %retneg1\l|{<s0>T|<s1>F}}"];
+	Node0x6147e85477f0:s0 -> Node0x6147e8547eb0[tooltip="checkeq -> retlow\nProbability 50.00%" ];
+	Node0x6147e85477f0:s1 -> Node0x6147e8547860[tooltip="checkeq -> retneg1\nProbability 50.00%" ];
+	Node0x6147e8547eb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{retlow:\l|  ret i64 %low\l}"];
+	Node0x6147e8547860 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d8564670" fontname="Courier",label="{retneg1:\l|  ret i64 4294967295\l}"];
+}

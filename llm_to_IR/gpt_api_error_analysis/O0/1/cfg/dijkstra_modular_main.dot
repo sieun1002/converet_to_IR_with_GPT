@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5f9eecde7a50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %ret = alloca i32, align 4\l  %n = alloca i32, align 4\l  %src = alloca i32, align 4\l  %graph = alloca [40016 x i8], align 16\l  %dist = alloca [164 x i32], align 16\l  store i32 0, ptr %ret, align 4\l  %graph.ptr = getelementptr inbounds [40016 x i8], ptr %graph, i64 0, i64 0\l  %rg = call i32 @read_graph(ptr %graph.ptr, ptr %n, ptr %src)\l  %ok = icmp eq i32 %rg, 0\l  br i1 %ok, label %L_ok, label %L_err\l|{<s0>T|<s1>F}}"];
+	Node0x5f9eecde7a50:s0 -> Node0x5f9eecdead30[tooltip="entry -> L_ok\nProbability 37.50%" ];
+	Node0x5f9eecde7a50:s1 -> Node0x5f9eecdeada0[tooltip="entry -> L_err\nProbability 62.50%" ];
+	Node0x5f9eecdeada0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{L_err:\l|  %stderr.val = load ptr, ptr @stderr, align 8\l  %fmt = getelementptr inbounds [13 x i8], ptr @.str, i64 0, i64 0\l  %ignored = call i32 (ptr, ptr, ...) @fprintf(ptr %stderr.val, ptr %fmt)\l  store i32 1, ptr %ret, align 4\l  br label %L_end\l}"];
+	Node0x5f9eecdeada0 -> Node0x5f9eecdeb3f0[tooltip="L_err -> L_end\nProbability 100.00%" ];
+	Node0x5f9eecdead30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{L_ok:\l|  %n.val = load i32, ptr %n, align 4\l  %src.val = load i32, ptr %src, align 4\l  %dist.ptr = getelementptr inbounds [164 x i32], ptr %dist, i64 0, i64 0\l  call void @dijkstra(ptr %graph.ptr, i32 %n.val, i32 %src.val, ptr %dist.ptr)\l  %n.val2 = load i32, ptr %n, align 4\l  call void @print_distances(ptr %dist.ptr, i32 %n.val2)\l  store i32 0, ptr %ret, align 4\l  br label %L_end\l}"];
+	Node0x5f9eecdead30 -> Node0x5f9eecdeb3f0[tooltip="L_ok -> L_end\nProbability 100.00%" ];
+	Node0x5f9eecdeb3f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{L_end:\l|  %rv = load i32, ptr %ret, align 4\l  ret i32 %rv\l}"];
+}

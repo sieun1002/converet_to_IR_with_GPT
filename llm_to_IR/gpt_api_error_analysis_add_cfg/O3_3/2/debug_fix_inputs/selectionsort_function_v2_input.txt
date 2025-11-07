@@ -1,0 +1,83 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/2/selectionsort_function1.ll:7:15: warning: ptr type is only supported in -opaque-pointers mode
+;   %r11.base = ptr %a
+;               ^
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/2/selectionsort_function1.ll:7:15: error: expected instruction opcode
+;   %r11.base = ptr %a
+;               ^
+; === ERROR LOG END ===
+
+; ModuleID = 'selection_sort'
+target triple = "x86_64-pc-linux-gnu"
+
+define void @selection_sort(i32* %a, i32 %n) {
+entry:
+  ; 0x1210
+  %r11.base = ptr %a
+  %r13d = add i32 %n, -1
+  %cmp_1217 = icmp sle i32 %n, 1
+  br i1 %cmp_1217, label %locret_12A8, label %loc_1230
+
+loc_1230:                                            ; 0x1230
+  %r10d.phi = phi i32 [ 0, %entry ], [ %r10d.inc, %loc_127B ], [ %r10d.inc, %loc_1290 ]
+  %rbx.phi = phi i32* [ %a, %entry ], [ %rbx.next.l127B, %loc_127B ], [ %rbx.next.l1290, %loc_1290 ]
+  %r9d.init = %r10d.phi
+  %r10d.inc = add i32 %r10d.phi, 1
+  %ebp.val = load i32, i32* %rbx.phi, align 4
+  %cmp_1239 = icmp sle i32 %n, %r10d.inc
+  br i1 %cmp_1239, label %loc_1290, label %cont_123e
+
+cont_123e:                                           ; 0x123e (fall-through setup)
+  %r12.ptr = getelementptr inbounds i32, i32* %rbx.phi, i64 1
+  %edx.init = %r10d.inc
+  %rax.init = %r12.ptr
+  br label %loc_1262
+
+loc_1250:                                            ; 0x1250
+  %rcx.ext = sext i32 %r9d.phi to i64
+  %edx.next.1250 = add i32 %edx.phi, 1
+  %rax.next.1250 = getelementptr inbounds i32, i32* %rax.phi, i64 1
+  %r8.fromr9 = getelementptr inbounds i32, i32* %r11.base, i64 %rcx.ext
+  %cmp_1260 = icmp eq i32 %n, %edx.next.1250
+  br i1 %cmp_1260, label %loc_127B, label %loc_1262
+
+loc_1262:                                            ; 0x1262
+  %rax.phi = phi i32* [ %rax.init, %cont_123e ], [ %rax.next.1250, %loc_1250 ], [ %rax.next.1262lt, %loc_1262_lt ]
+  %edx.phi = phi i32 [ %edx.init, %cont_123e ], [ %edx.next.1250, %loc_1250 ], [ %edx.next.1262lt, %loc_1262_lt ]
+  %r9d.phi = phi i32 [ %r9d.init, %cont_123e ], [ %r9d.phi, %loc_1250 ], [ %r9d.new.1262lt, %loc_1262_lt ]
+  %edi.phi = phi i32 [ %ebp.val, %cont_123e ], [ %edi.phi, %loc_1250 ], [ %edi.new.1262lt, %loc_1262_lt ]
+  %ecx.load = load i32, i32* %rax.phi, align 4
+  %cmp_1269 = icmp sge i32 %ecx.load, %edi.phi
+  br i1 %cmp_1269, label %loc_1250, label %loc_1262_lt
+
+loc_1262_lt:                                         ; 0x126b..0x1279 fall-through
+  %r9d.new.1262lt = %edx.phi
+  %edx.next.1262lt = add i32 %edx.phi, 1
+  %edi.new.1262lt = %ecx.load
+  %rax.next.1262lt = getelementptr inbounds i32, i32* %rax.phi, i64 1
+  %cmp_1279 = icmp ne i32 %n, %edx.next.1262lt
+  br i1 %cmp_1279, label %loc_1262, label %loc_127B
+
+loc_127B:                                            ; 0x127B
+  %r8.phi.127B = phi i32* [ %r8.fromr9, %loc_1250 ], [ %rax.phi, %loc_1262_lt ]
+  %edi.end.127B = phi i32 [ %edi.phi, %loc_1250 ], [ %edi.new.1262lt, %loc_1262_lt ]
+  store i32 %edi.end.127B, i32* %rbx.phi, align 4
+  %rbx.next.l127B = %r12.ptr
+  store i32 %ebp.val, i32* %r8.phi.127B, align 4
+  %cmp_1286 = icmp ne i32 %r10d.inc, %r13d
+  br i1 %cmp_1286, label %loc_1230, label %loc_1288
+
+loc_1288:                                            ; 0x1288
+  ret void
+
+loc_1290:                                            ; 0x1290
+  %r12.l1290 = getelementptr inbounds i32, i32* %rbx.phi, i64 1
+  store i32 %ebp.val, i32* %rbx.phi, align 4
+  %rbx.next.l1290 = %r12.l1290
+  store i32 %ebp.val, i32* %rbx.phi, align 4
+  %cmp_12a4 = icmp ne i32 %r10d.inc, %r13d
+  br i1 %cmp_12a4, label %loc_1230, label %loc_1288
+
+locret_12A8:                                         ; 0x12A8
+  ret void
+}

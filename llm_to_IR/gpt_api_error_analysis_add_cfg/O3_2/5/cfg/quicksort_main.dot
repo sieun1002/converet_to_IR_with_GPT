@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5a40c54dae30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb1080:\l|  %canary.slot = alloca i64, align 8\l  %arr = alloca [10 x i32], align 16\l  %guard0 = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard0, ptr %canary.slot, align 8\l  %arr.i8 = bitcast ptr %arr to ptr\l  %src0 = bitcast ptr @xmmword_2010 to ptr\l  call void @llvm.memcpy.p0.p0.i64(ptr align 16 %arr.i8, ptr align 16 %src0,\l... i64 16, i1 false)\l  %dst1 = getelementptr inbounds i8, ptr %arr.i8, i64 16\l  %src1 = bitcast ptr @xmmword_2020 to ptr\l  call void @llvm.memcpy.p0.p0.i64(ptr align 16 %dst1, ptr align 16 %src1, i64\l... 16, i1 false)\l  %arr8 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 8\l  store i32 4, ptr %arr8, align 4\l  %base = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 0\l  call void @quick_sort(ptr %base, i64 0, i32 9)\l  %end = getelementptr inbounds i32, ptr %base, i64 10\l  br label %bb10E0\l}"];
+	Node0x5a40c54dae30 -> Node0x5a40c54ded00[tooltip="bb1080 -> bb10E0\nProbability 100.00%" ];
+	Node0x5a40c54ded00 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb10E0:\l|  %pcur = phi ptr [ %base, %bb1080 ], [ %next, %bb10E0 ]\l  %val = load i32, ptr %pcur, align 4\l  %fmt0 = getelementptr inbounds i8, ptr @unk_2004, i64 0\l  %call.print = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt0, i32\l... %val)\l  %next = getelementptr inbounds i32, ptr %pcur, i64 1\l  %cont = icmp ne ptr %next, %end\l  br i1 %cont, label %bb10E0, label %bb_after\l|{<s0>T|<s1>F}}"];
+	Node0x5a40c54ded00:s0 -> Node0x5a40c54ded00[tooltip="bb10E0 -> bb10E0\nProbability 96.88%" ];
+	Node0x5a40c54ded00:s1 -> Node0x5a40c54df390[tooltip="bb10E0 -> bb_after\nProbability 3.12%" ];
+	Node0x5a40c54df390 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_after:\l|  %fmt1 = getelementptr inbounds i8, ptr @unk_2008, i64 0\l  %call.nl = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt1)\l  %guard1 = load i64, ptr %canary.slot, align 8\l  %guard.now = load i64, ptr @__stack_chk_guard, align 8\l  %cmpcan = icmp ne i64 %guard1, %guard.now\l  br i1 %cmpcan, label %bb1128, label %bb_ret\l|{<s0>T|<s1>F}}"];
+	Node0x5a40c54df390:s0 -> Node0x5a40c54df820[tooltip="bb_after -> bb1128\nProbability 0.00%" ];
+	Node0x5a40c54df390:s1 -> Node0x5a40c54dfbb0[tooltip="bb_after -> bb_ret\nProbability 100.00%" ];
+	Node0x5a40c54dfbb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_ret:\l|  ret i32 0\l}"];
+	Node0x5a40c54df820 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#abc8fd70" fontname="Courier",label="{bb1128:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+}

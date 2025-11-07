@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 203,
+      "ir_len": 4901,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll:58:18: error: invalid cast opcode for cast from 'i64' to 'i64'\n  %r8.new = sext i64 %rax.cur to i64\n                 ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n%struct.Frame = type { [16 x i8], [16 x i8], i32, i32, i64 }\n\n@xmmword_2010 = external constant [16 x i8], align 16\n@xmmword_2020 = exte",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll"
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 174,
+      "ir_len": 4896,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %r8.init = phi i64 [ 0, %L1080 ], [ 0, %bb_1119 ]\nlabel %loc_10D0\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n%struct.Frame = type { [16 x i8], [16 x i8], i32, i32, i64 }\n\n@xmmword_2010 = external constant [16 x i8], align 16\n@xmmword_2020 = exte",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main2.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 169,
+      "ir_len": 17837,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll:55:15: error: expected instruction opcode\n  %rax.1234 = %rdi.10d0\n              ^\n",
+      "ir_preview": "; ModuleID = 'main_from_asm'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = private unnamed_addr constant <4 x i32> <i32 1, i32 2, i32 3, i32 4>, align 16\n@xmmword_2020 = private unnamed_addr ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 780,
+      "ir_len": 18157,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %edx.f = phi i32 [ %edx.10d0, %bb_10e6 ], [ %edx.1234, %loc_1234 ], [ %edx.1288, %loc_1288 ]\nlabel %loc_1234\nlabel %bb_124b\nPHINode should have one entry for each predecessor of its parent basi",
+      "ir_preview": "; ModuleID = 'main_from_asm'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = private unnamed_addr constant <4 x i32> <i32 1, i32 2, i32 3, i32 4>, align 16\n@xmmword_2020 = private unnamed_addr ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 603,
+      "ir_len": 16004,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll:223:187: error: use of undefined value '%bb_12B6'\n  %phi_dummy_1280 = phi i32 [ 0, %bb_1164 ], [ 0, %bb_11D4 ], [ 0, %bb_11EB ], [ 0, %bb_1202 ], [ 0, %bb_1215 ], [ 0, %bb_1228 ], [ 0, %bb_123B ], [ 0, %bb_124E ], [ 0",
+      "ir_preview": "; ModuleID = 'recovered_from_asm_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = internal constant [4 x i32] [i32 1, i32 3, i32 5, i32 7], align 16\n@xmmword_2020 = internal constant [4 x ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 213,
+      "ir_len": 16048,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %phi_13E0 = phi i8* [ %arr.begin.i8, %bb_13CE ], [ %next.i8, %bb_13F8 ]\n",
+      "ir_preview": "; ModuleID = 'recovered_from_asm_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = internal constant [4 x i32] [i32 1, i32 3, i32 5, i32 7], align 16\n@xmmword_2020 = internal constant [4 x ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.ll"
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 171,
+      "ir_len": 3016,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll:16:14: error: expected instruction opcode\n  %r9_init = %r10_prev\n             ^\n",
+      "ir_preview": "; ModuleID = 'selection_sort'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine void @selection_sort(i32* nocapture %arr, i32 %n) local_unnamed_addr {\nbb_1210:\n  %cmp_entry = icmp sle i32 %n, 1\n  br i1 %c",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x59cbd2e60470 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{entry:\l|  %cmp0 = icmp sle i32 %n, 0\l  br i1 %cmp0, label %ret_neg1, label %init\l|{<s0>T|<s1>F}}"];
+	Node0x59cbd2e60470:s0 -> Node0x59cbd2e603a0[tooltip="entry -> ret_neg1\nProbability 50.00%" ];
+	Node0x59cbd2e60470:s1 -> Node0x59cbd2e61c80[tooltip="entry -> init\nProbability 50.00%" ];
+	Node0x59cbd2e61c80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{init:\l|  %n64 = sext i32 %n to i64\l  br label %loop\l}"];
+	Node0x59cbd2e61c80 -> Node0x59cbd2e61e90[tooltip="init -> loop\nProbability 100.00%" ];
+	Node0x59cbd2e61e90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %init ], [ %i.next, %cont ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %i\l  %elem = load i32, ptr %elem.ptr, align 4\l  %match = icmp eq i32 %elem, %target\l  br i1 %match, label %found, label %cont\l|{<s0>T|<s1>F}}"];
+	Node0x59cbd2e61e90:s0 -> Node0x59cbd2e624d0[tooltip="loop -> found\nProbability 3.12%" ];
+	Node0x59cbd2e61e90:s1 -> Node0x59cbd2e61ff0[tooltip="loop -> cont\nProbability 96.88%" ];
+	Node0x59cbd2e61ff0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{cont:\l|  %i.next = add i64 %i, 1\l  %done = icmp eq i64 %i.next, %n64\l  br i1 %done, label %ret_neg1, label %loop\l|{<s0>T|<s1>F}}"];
+	Node0x59cbd2e61ff0:s0 -> Node0x59cbd2e603a0[tooltip="cont -> ret_neg1\nProbability 3.12%" ];
+	Node0x59cbd2e61ff0:s1 -> Node0x59cbd2e61e90[tooltip="cont -> loop\nProbability 96.88%" ];
+	Node0x59cbd2e624d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{found:\l|  %retidx = trunc i64 %i to i32\l  ret i32 %retidx\l}"];
+	Node0x59cbd2e603a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{ret_neg1:\l|  ret i32 -1\l}"];
+}

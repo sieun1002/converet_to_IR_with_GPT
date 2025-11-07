@@ -1,0 +1,25 @@
+digraph "CFG for 'selection_sort' function" {
+	label="CFG for 'selection_sort' function";
+
+	Node0x60ca0df6de70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5705870" fontname="Courier",label="{entry:\l|  %cmp1 = icmp sle i32 %len, 1\l  br i1 %cmp1, label %ret, label %outer.preheader\l|{<s0>T|<s1>F}}"];
+	Node0x60ca0df6de70:s0 -> Node0x60ca0df6dc50[tooltip="entry -> ret\nProbability 50.00%" ];
+	Node0x60ca0df6de70:s1 -> Node0x60ca0df6e0e0[tooltip="entry -> outer.preheader\nProbability 50.00%" ];
+	Node0x60ca0df6e0e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{outer.preheader:\l|  %nminus1 = add nsw i32 %len, -1\l  br label %outer\l}"];
+	Node0x60ca0df6e0e0 -> Node0x60ca0df6e190[tooltip="outer.preheader -> outer\nProbability 100.00%" ];
+	Node0x60ca0df6e190 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer:\l|  %i = phi i32 [ 0, %outer.preheader ], [ %i.next, %outer.latch ]\l  %base.ptr = phi ptr [ %arr, %outer.preheader ], [ %next.base, %outer.latch ]\l  %cur = load i32, ptr %base.ptr, align 4\l  %i.plus1 = add nuw nsw i32 %i, 1\l  %has_more = icmp slt i32 %i.plus1, %len\l  br i1 %has_more, label %inner, label %noinner\l|{<s0>T|<s1>F}}"];
+	Node0x60ca0df6e190:s0 -> Node0x60ca0df70970[tooltip="outer -> inner\nProbability 50.00%" ];
+	Node0x60ca0df6e190:s1 -> Node0x60ca0df70a40[tooltip="outer -> noinner\nProbability 50.00%" ];
+	Node0x60ca0df70970 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner:\l|  %j = phi i32 [ %i.plus1, %outer ], [ %j.next, %inner ]\l  %min.ptr = phi ptr [ %base.ptr, %outer ], [ %min.ptr.next, %inner ]\l  %min.val = phi i32 [ %cur, %outer ], [ %min.val.next, %inner ]\l  %j.gep = getelementptr inbounds i32, ptr %arr, i32 %j\l  %j.val = load i32, ptr %j.gep, align 4\l  %cmp.lt = icmp slt i32 %j.val, %min.val\l  %min.ptr.next = select i1 %cmp.lt, ptr %j.gep, ptr %min.ptr\l  %min.val.next = select i1 %cmp.lt, i32 %j.val, i32 %min.val\l  %j.next = add nuw nsw i32 %j, 1\l  %j.cont = icmp slt i32 %j.next, %len\l  br i1 %j.cont, label %inner, label %inner.exit\l|{<s0>T|<s1>F}}"];
+	Node0x60ca0df70970:s0 -> Node0x60ca0df70970[tooltip="inner -> inner\nProbability 96.88%" ];
+	Node0x60ca0df70970:s1 -> Node0x60ca0df716e0[tooltip="inner -> inner.exit\nProbability 3.12%" ];
+	Node0x60ca0df716e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.exit:\l|  %final.min.ptr1 = phi ptr [ %min.ptr.next, %inner ]\l  %final.min.val1 = phi i32 [ %min.val.next, %inner ]\l  br label %swap\l}"];
+	Node0x60ca0df716e0 -> Node0x60ca0df71840[tooltip="inner.exit -> swap\nProbability 100.00%" ];
+	Node0x60ca0df70a40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{noinner:\l|  br label %swap\l}"];
+	Node0x60ca0df70a40 -> Node0x60ca0df71840[tooltip="noinner -> swap\nProbability 100.00%" ];
+	Node0x60ca0df71840 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{swap:\l|  %final.min.ptr = phi ptr [ %final.min.ptr1, %inner.exit ], [ %base.ptr,\l... %noinner ]\l  %final.min.val = phi i32 [ %final.min.val1, %inner.exit ], [ %cur, %noinner ]\l  store i32 %final.min.val, ptr %base.ptr, align 4\l  store i32 %cur, ptr %final.min.ptr, align 4\l  br label %outer.latch\l}"];
+	Node0x60ca0df71840 -> Node0x60ca0df6e250[tooltip="swap -> outer.latch\nProbability 100.00%" ];
+	Node0x60ca0df6e250 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.latch:\l|  %next.base = getelementptr inbounds i32, ptr %base.ptr, i32 1\l  %i.next = add nuw nsw i32 %i, 1\l  %cont.outer = icmp slt i32 %i.next, %nminus1\l  br i1 %cont.outer, label %outer, label %ret\l|{<s0>T|<s1>F}}"];
+	Node0x60ca0df6e250:s0 -> Node0x60ca0df6e190[tooltip="outer.latch -> outer\nProbability 96.88%" ];
+	Node0x60ca0df6e250:s1 -> Node0x60ca0df6dc50[tooltip="outer.latch -> ret\nProbability 3.12%" ];
+	Node0x60ca0df6dc50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5705870" fontname="Courier",label="{ret:\l|  ret void\l}"];
+}

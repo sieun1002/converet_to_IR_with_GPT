@@ -1,0 +1,26 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x6182189e4210 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_1080:\l|  %canary.slot = alloca i64, align 8\l  %arr = alloca [5 x i32], align 16\l  %base.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %fmt_d = getelementptr inbounds [4 x i8], ptr @.str_d, i64 0, i64 0\l  %fmt_sorted = getelementptr inbounds [15 x i8], ptr @.str_sorted, i64 0, i64\l... 0\l  %guard.ld = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard.ld, ptr %canary.slot, align 8\l  %vec.ld = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  %vec.ptr = bitcast ptr %base.ptr to ptr\l  store \<4 x i32\> %vec.ld, ptr %vec.ptr, align 16\l  %fifth.ptr = getelementptr inbounds i32, ptr %base.ptr, i64 4\l  store i32 13, ptr %fifth.ptr, align 4\l  br label %bb_10C7\l}"];
+	Node0x6182189e4210 -> Node0x6182189e5b00[tooltip="bb_1080 -> bb_10C7\nProbability 100.00%" ];
+	Node0x6182189e5b00 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10C7:\l|  call void @selection_sort(ptr nonnull %base.ptr, i32 5)\l  br label %bb_10CC\l}"];
+	Node0x6182189e5b00 -> Node0x6182189e5da0[tooltip="bb_10C7 -> bb_10CC\nProbability 100.00%" ];
+	Node0x6182189e5da0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10CC:\l|  br label %bb_10DA\l}"];
+	Node0x6182189e5da0 -> Node0x6182189e5e60[tooltip="bb_10CC -> bb_10DA\nProbability 100.00%" ];
+	Node0x6182189e5e60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10DA:\l|  %call.prhdr = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr nonnull\l... %fmt_sorted)\l  br label %bb_10DF\l}"];
+	Node0x6182189e5e60 -> Node0x6182189e6230[tooltip="bb_10DA -> bb_10DF\nProbability 100.00%" ];
+	Node0x6182189e6230 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10DF:\l|  br label %loc_10E0\l}"];
+	Node0x6182189e6230 -> Node0x6182189e6310[tooltip="bb_10DF -> loc_10E0\nProbability 100.00%" ];
+	Node0x6182189e6310 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_10E0:\l|  %rbx.cur = phi ptr [ %base.ptr, %bb_10DF ], [ %rbx.next.ph, %bb_10F5 ]\l  %val.ld = load i32, ptr %rbx.cur, align 4\l  %rbx.next = getelementptr inbounds i32, ptr %rbx.cur, i64 1\l  br label %bb_10F0\l}"];
+	Node0x6182189e6310 -> Node0x6182189e67b0[tooltip="loc_10E0 -> bb_10F0\nProbability 100.00%" ];
+	Node0x6182189e67b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_10F0:\l|  %call.elem = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr nonnull\l... %fmt_d, i32 %val.ld)\l  br label %bb_10F5\l}"];
+	Node0x6182189e67b0 -> Node0x6182189e6460[tooltip="bb_10F0 -> bb_10F5\nProbability 100.00%" ];
+	Node0x6182189e6460 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_10F5:\l|  %rbx.next.ph = phi ptr [ %rbx.next, %bb_10F0 ]\l  %end.ptr = getelementptr inbounds i32, ptr %base.ptr, i64 5\l  %cmp.ne = icmp ne ptr %rbx.next.ph, %end.ptr\l  br i1 %cmp.ne, label %loc_10E0, label %bb_10FA\l|{<s0>T|<s1>F}}"];
+	Node0x6182189e6460:s0 -> Node0x6182189e6310[tooltip="bb_10F5 -> loc_10E0\nProbability 96.88%" ];
+	Node0x6182189e6460:s1 -> Node0x6182189e6e10[tooltip="bb_10F5 -> bb_10FA\nProbability 3.12%" ];
+	Node0x6182189e6e10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10FA:\l|  %saved.canary = load i64, ptr %canary.slot, align 8\l  %cur.canary = load i64, ptr @__stack_chk_guard, align 8\l  %canary.mismatch = icmp ne i64 %saved.canary, %cur.canary\l  br i1 %canary.mismatch, label %loc_1115, label %bb_110A\l|{<s0>T|<s1>F}}"];
+	Node0x6182189e6e10:s0 -> Node0x6182189e70f0[tooltip="bb_10FA -> loc_1115\nProbability 0.00%" ];
+	Node0x6182189e6e10:s1 -> Node0x6182189e7140[tooltip="bb_10FA -> bb_110A\nProbability 100.00%" ];
+	Node0x6182189e7140 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_110A:\l|  ret i32 0\l}"];
+	Node0x6182189e70f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5d8d170" fontname="Courier",label="{loc_1115:\l|  call void @__stack_chk_fail()\l  unreachable\l}"];
+}

@@ -1,0 +1,422 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/1/BFS_main1.ll:86:59: error: invalid use of function-local name
+;   call void @llvm.memset.p0i8.i64(i8* bitcast ([7 x i32]* %distarr to i8*), i8 0, i64 28, i1 false)
+;                                                           ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered_main'
+source_filename = "recovered_main.ll"
+target triple = "x86_64-pc-linux-gnu"
+
+@qword_2038 = external global i64
+@__stack_chk_guard = external global i64
+
+@.str.bfs = private constant [21 x i8] c"BFS order from %zu: \00"
+@.str.zus = private constant [6 x i8] c"%zu%s\00"
+@.str.dist = private constant [23 x i8] c"dist(%zu -> %zu) = %d\0A\00"
+@.str.space = private constant [2 x i8] c" \00"
+@.str.nl = private constant [2 x i8] c"\0A\00"
+@.str.empty = private constant [1 x i8] c"\00"
+
+declare noalias i8* @malloc(i64)
+declare void @free(i8*)
+declare i32 @__printf_chk(i32, i8*, ...)
+declare void @__stack_chk_fail()
+
+declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1)
+
+define i32 @main() local_unnamed_addr {
+x10c0:
+  %frame = alloca [352 x i8], align 16
+  %distarr = alloca [7 x i32], align 16
+  %queue = alloca i64*, align 8
+  %rbx = alloca i64, align 8
+  %rsi = alloca i64, align 8
+  %r12 = alloca i8*, align 8
+  %r13 = alloca i8*, align 8
+  %rbp = alloca i8*, align 8
+  %eax32 = alloca i32, align 4
+  %saved_canary = alloca i64, align 8
+  %frame.base = getelementptr inbounds [352 x i8], [352 x i8]* %frame, i64 0, i64 0
+  %guard0 = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard0, i64* %saved_canary, align 8
+  %off_var158 = getelementptr inbounds i8, i8* %frame.base, i64 0
+  %p_var158_i32 = bitcast i8* %off_var158 to i32*
+  store i32 -1, i32* %p_var158_i32, align 4
+  %p_var158_i32_4 = getelementptr inbounds i32, i32* %p_var158_i32, i64 1
+  store i32 -1, i32* %p_var158_i32_4, align 4
+  %p_var158_i32_8 = getelementptr inbounds i32, i32* %p_var158_i32, i64 2
+  store i32 -1, i32* %p_var158_i32_8, align 4
+  %p_var158_i32_c = getelementptr inbounds i32, i32* %p_var158_i32, i64 3
+  store i32 -1, i32* %p_var158_i32_c, align 4
+  %off_zero_region = getelementptr inbounds i8, i8* %frame.base, i64 96
+  call void @llvm.memset.p0i8.i64(i8* %off_zero_region, i8 0, i64 192, i1 false)
+  %rax_qw2038 = load i64, i64* @qword_2038, align 8
+  %off_varF4 = getelementptr inbounds i8, i8* %frame.base, i64 100
+  %p_varF4_q = bitcast i8* %off_varF4 to i64*
+  store i64 %rax_qw2038, i64* %p_varF4_q, align 4
+  %off_varD0 = getelementptr inbounds i8, i8* %frame.base, i64 136
+  %p_varD0_q = bitcast i8* %off_varD0 to i64*
+  store i64 %rax_qw2038, i64* %p_varD0_q, align 8
+  %off_varDC = getelementptr inbounds i8, i8* %frame.base, i64 124
+  %p_varDC = bitcast i8* %off_varDC to i32*
+  store i32 1, i32* %p_varDC, align 4
+  %off_varC0 = getelementptr inbounds i8, i8* %frame.base, i64 152
+  %p_varC0 = bitcast i8* %off_varC0 to i32*
+  store i32 1, i32* %p_varC0, align 8
+  %off_varA0 = getelementptr inbounds i8, i8* %frame.base, i64 184
+  %p_varA0 = bitcast i8* %off_varA0 to i32*
+  store i32 1, i32* %p_varA0, align 8
+  %off_var84 = getelementptr inbounds i8, i8* %frame.base, i64 212
+  %p_var84 = bitcast i8* %off_var84 to i32*
+  store i32 1, i32* %p_var84, align 4
+  %off_varAC = getelementptr inbounds i8, i8* %frame.base, i64 172
+  %p_varAC = bitcast i8* %off_varAC to i32*
+  store i32 1, i32* %p_varAC, align 4
+  %off_var64 = getelementptr inbounds i8, i8* %frame.base, i64 244
+  %p_var64 = bitcast i8* %off_var64 to i32*
+  store i32 1, i32* %p_var64, align 4
+  %off_var74 = getelementptr inbounds i8, i8* %frame.base, i64 228
+  %p_var74 = bitcast i8* %off_var74 to i32*
+  store i32 1, i32* %p_var74, align 4
+  %off_var5C = getelementptr inbounds i8, i8* %frame.base, i64 252
+  %p_var5C = bitcast i8* %off_var5C to i32*
+  store i32 1, i32* %p_var5C, align 4
+  %off_var54 = getelementptr inbounds i8, i8* %frame.base, i64 260
+  %p_var54 = bitcast i8* %off_var54 to i32*
+  store i32 1, i32* %p_var54, align 4
+  %off_var3C = getelementptr inbounds i8, i8* %frame.base, i64 284
+  %p_var3C = bitcast i8* %off_var3C to i32*
+  store i32 1, i32* %p_var3C, align 4
+  %dist0 = getelementptr inbounds [7 x i32], [7 x i32]* %distarr, i64 0, i64 0
+  call void @llvm.memset.p0i8.i64(i8* bitcast ([7 x i32]* %distarr to i8*), i8 0, i64 28, i1 false)
+  %qmem = call i8* @malloc(i64 56)
+  %qnull = icmp eq i8* %qmem, null
+  br i1 %qnull, label %loc_1414, label %after_malloc
+
+after_malloc:                                      ; preds = %x10c0
+  %q64 = bitcast i8* %qmem to i64*
+  store i64* %q64, i64** %queue, align 8
+  store i64 1, i64* %rsi, align 8
+  %off_var138 = getelementptr inbounds i8, i8* %frame.base, i64 32
+  store i8* %off_var138, i8** %r12, align 8
+  store i64 0, i64* %rbx, align 8
+  store i64 0, i64* %q64, align 8
+  store i32 0, i32* %eax32, align 4
+  store i32 0, i32* %p_var158_i32, align 4
+  br label %loc_11D3
+
+loc_11C0:                                          ; 0x11c0
+  %qptr.11C0 = load i64*, i64** %queue, align 8
+  %rbxv.11C0 = load i64, i64* %rbx, align 8
+  %idx.q.11C0 = getelementptr inbounds i64, i64* %qptr.11C0, i64 %rbxv.11C0
+  %rdx.11C0 = load i64, i64* %idx.q.11C0, align 8
+  %mul8.11C0 = mul nsw i64 %rdx.11C0, 8
+  %rax7.11C0 = sub nsw i64 %mul8.11C0, %rdx.11C0
+  %idx.bytes.11C0 = mul nsw i64 %rax7.11C0, 4
+  %base_varF8.11C0 = getelementptr inbounds i8, i8* %frame.base, i64 96
+  %ptr_varF8_idx.11C0 = getelementptr inbounds i8, i8* %base_varF8.11C0, i64 %idx.bytes.11C0
+  %ptr_varF8_idx_i32.11C0 = bitcast i8* %ptr_varF8_idx.11C0 to i32*
+  %eax_load.11C0 = load i32, i32* %ptr_varF8_idx_i32.11C0, align 4
+  store i32 %eax_load.11C0, i32* %eax32, align 4
+  br label %loc_11D3
+
+loc_11D3:                                          ; 0x11d3
+  %rbx.cur.11D3 = load i64, i64* %rbx, align 8
+  %rbx.inc.11D3 = add i64 %rbx.cur.11D3, 1
+  store i64 %rbx.inc.11D3, i64* %rbx, align 8
+  %qptr.11D3 = load i64*, i64** %queue, align 8
+  %rbx.minus1.11D3 = add i64 %rbx.inc.11D3, -1
+  %q.idx.m1.11D3 = getelementptr inbounds i64, i64* %qptr.11D3, i64 %rbx.minus1.11D3
+  %rdx.11D3 = load i64, i64* %q.idx.m1.11D3, align 8
+  %r12.ptr.11D3 = load i8*, i8** %r12, align 8
+  %dst.ptr.11D3 = getelementptr inbounds i8, i8* %r12.ptr.11D3, i64 mul (i64 %rbx.inc.11D3, i64 8)
+  %store.dst.ptr.11D3 = getelementptr inbounds i8, i8* %dst.ptr.11D3, i64 -8
+  %store.dst.q.11D3 = bitcast i8* %store.dst.ptr.11D3 to i64*
+  store i64 %rdx.11D3, i64* %store.dst.q.11D3, align 8
+  %eax.cur.11D3 = load i32, i32* %eax32, align 4
+  %test.eax.11D3 = icmp eq i32 %eax.cur.11D3, 0
+  br i1 %test.eax.11D3, label %loc_1200, label %x11E5
+
+x11E5:                                             ; 0x11e5..0x11fd path
+  %var158.load.11E5 = load i32, i32* %p_var158_i32, align 4
+  %cmp.m1.11E5 = icmp ne i32 %var158.load.11E5, -1
+  br i1 %cmp.m1.11E5, label %loc_1200, label %x11EB
+
+x11EB:
+  %idx.rdx4.11EB = mul nsw i64 %rdx.11D3, 4
+  %ptr.var158.idx.11EB = getelementptr inbounds i8, i8* %off_var158, i64 %idx.rdx4.11EB
+  %ptr.var158.idx.i32.11EB = bitcast i8* %ptr.var158.idx.11EB to i32*
+  %ecx.11EB = load i32, i32* %ptr.var158.idx.i32.11EB, align 4
+  %qptr.11EB = load i64*, i64** %queue, align 8
+  %rsi.cur.11EB = load i64, i64* %rsi, align 8
+  %q.enq.ptr.11EB = getelementptr inbounds i64, i64* %qptr.11EB, i64 %rsi.cur.11EB
+  store i64 0, i64* %q.enq.ptr.11EB, align 8
+  %rsi.inc.11EB = add i64 %rsi.cur.11EB, 1
+  store i64 %rsi.inc.11EB, i64* %rsi, align 8
+  %ecx.inc.11EB = add i32 %ecx.11EB, 1
+  store i32 %ecx.inc.11EB, i32* %p_var158_i32, align 4
+  br label %loc_1200
+
+loc_1200:                                          ; 0x1200
+  %mul8.1200 = mul nsw i64 %rdx.11D3, 8
+  %rcx7.1200 = sub nsw i64 %mul8.1200, %rdx.11D3
+  %rax4.1200 = mul nsw i64 %rcx7.1200, 4
+  %base_varF4.1200 = getelementptr inbounds i8, i8* %frame.base, i64 100
+  %ptr_r11d.1200 = getelementptr inbounds i8, i8* %base_varF4.1200, i64 %rax4.1200
+  %ptr_r11d_i32.1200 = bitcast i8* %ptr_r11d.1200 to i32*
+  %r11d.1200 = load i32, i32* %ptr_r11d_i32.1200, align 4
+  %test.r11.1200 = icmp eq i32 %r11d.1200, 0
+  br i1 %test.r11.1200, label %loc_1240, label %x121D
+
+x121D:
+  %var158p4 = getelementptr inbounds i32, i32* %p_var158_i32, i64 1
+  %var158p4.load = load i32, i32* %var158p4, align 4
+  %cmp.p4 = icmp ne i32 %var158p4.load, -1
+  br i1 %cmp.p4, label %loc_1240, label %x1224
+
+x1224:
+  %ptr.var158.idx.1224 = getelementptr inbounds i8, i8* %off_var158, i64 mul (i64 %rdx.11D3, i64 4)
+  %ptr.var158.idx.i32.1224 = bitcast i8* %ptr.var158.idx.1224 to i32*
+  %ecx.1224 = load i32, i32* %ptr.var158.idx.i32.1224, align 4
+  %qptr.1224 = load i64*, i64** %queue, align 8
+  %rsi.cur.1224 = load i64, i64* %rsi, align 8
+  %q.enq.1224 = getelementptr inbounds i64, i64* %qptr.1224, i64 %rsi.cur.1224
+  store i64 1, i64* %q.enq.1224, align 8
+  %rsi.inc.1224 = add i64 %rsi.cur.1224, 1
+  store i64 %rsi.inc.1224, i64* %rsi, align 8
+  %ecx.inc.1224 = add i32 %ecx.1224, 1
+  store i32 %ecx.inc.1224, i32* %var158p4, align 4
+  br label %loc_1240
+
+loc_1240:                                          ; 0x1240
+  %ptr_r10d.1240 = getelementptr inbounds i8, i8* %base_varF4.1200, i64 add (i64 %rax4.1200, i64 4)
+  %ptr_r10d_i32.1240 = bitcast i8* %ptr_r10d.1240 to i32*
+  %r10d.1240 = load i32, i32* %ptr_r10d_i32.1240, align 4
+  %test.r10.1240 = icmp eq i32 %r10d.1240, 0
+  br i1 %test.r10.1240, label %loc_1270, label %x124A
+
+x124A:
+  %var158p8 = getelementptr inbounds i32, i32* %p_var158_i32, i64 2
+  %var158p8.load = load i32, i32* %var158p8, align 4
+  %cmp.p8 = icmp ne i32 %var158p8.load, -1
+  br i1 %cmp.p8, label %loc_1270, label %x1251
+
+x1251:
+  %ptr.var158.idx.1251 = getelementptr inbounds i8, i8* %off_var158, i64 mul (i64 %rdx.11D3, i64 4)
+  %ptr.var158.idx.i32.1251 = bitcast i8* %ptr.var158.idx.1251 to i32*
+  %ecx.1251 = load i32, i32* %ptr.var158.idx.i32.1251, align 4
+  %qptr.1251 = load i64*, i64** %queue, align 8
+  %rsi.cur.1251 = load i64, i64* %rsi, align 8
+  %q.enq.1251 = getelementptr inbounds i64, i64* %qptr.1251, i64 %rsi.cur.1251
+  store i64 2, i64* %q.enq.1251, align 8
+  %rsi.inc.1251 = add i64 %rsi.cur.1251, 1
+  store i64 %rsi.inc.1251, i64* %rsi, align 8
+  %ecx.inc.1251 = add i32 %ecx.1251, 1
+  store i32 %ecx.inc.1251, i32* %var158p8, align 4
+  br label %loc_1270
+
+loc_1270:                                          ; 0x1270
+  %base_varEC.1270 = getelementptr inbounds i8, i8* %frame.base, i64 108
+  %ptr_r9d.1270 = getelementptr inbounds i8, i8* %base_varEC.1270, i64 %rax4.1200
+  %ptr_r9d_i32.1270 = bitcast i8* %ptr_r9d.1270 to i32*
+  %r9d.1270 = load i32, i32* %ptr_r9d_i32.1270, align 4
+  %test.r9.1270 = icmp eq i32 %r9d.1270, 0
+  br i1 %test.r9.1270, label %loc_12A0, label %x127A
+
+x127A:
+  %var158pC = getelementptr inbounds i32, i32* %p_var158_i32, i64 3
+  %var158pC.load = load i32, i32* %var158pC, align 4
+  %cmp.pC = icmp ne i32 %var158pC.load, -1
+  br i1 %cmp.pC, label %loc_12A0, label %x1281
+
+x1281:
+  %ptr.var158.idx.1281 = getelementptr inbounds i8, i8* %off_var158, i64 mul (i64 %rdx.11D3, i64 4)
+  %ptr.var158.idx.i32.1281 = bitcast i8* %ptr.var158.idx.1281 to i32*
+  %ecx.1281 = load i32, i32* %ptr.var158.idx.i32.1281, align 4
+  %qptr.1281 = load i64*, i64** %queue, align 8
+  %rsi.cur.1281 = load i64, i64* %rsi, align 8
+  %q.enq.1281 = getelementptr inbounds i64, i64* %qptr.1281, i64 %rsi.cur.1281
+  store i64 3, i64* %q.enq.1281, align 8
+  %rsi.inc.1281 = add i64 %rsi.cur.1281, 1
+  store i64 %rsi.inc.1281, i64* %rsi, align 8
+  %ecx.inc.1281 = add i32 %ecx.1281, 1
+  store i32 %ecx.inc.1281, i32* %var158pC, align 4
+  br label %loc_12A0
+
+loc_12A0:                                          ; 0x12a0
+  %base_varE8.12A0 = getelementptr inbounds i8, i8* %frame.base, i64 112
+  %ptr_r8d.12A0 = getelementptr inbounds i8, i8* %base_varE8.12A0, i64 %rax4.1200
+  %ptr_r8d_i32.12A0 = bitcast i8* %ptr_r8d.12A0 to i32*
+  %r8d.12A0 = load i32, i32* %ptr_r8d_i32.12A0, align 4
+  %test.r8.12A0 = icmp eq i32 %r8d.12A0, 0
+  br i1 %test.r8.12A0, label %loc_12D0, label %x12AA
+
+x12AA:
+  %off_var148 = getelementptr inbounds i8, i8* %frame.base, i64 16
+  %p_var148_i32 = bitcast i8* %off_var148 to i32*
+  %var148.load = load i32, i32* %p_var148_i32, align 4
+  %cmp.var148 = icmp ne i32 %var148.load, -1
+  br i1 %cmp.var148, label %loc_12D0, label %x12B1
+
+x12B1:
+  %ptr.var158.idx.12B1 = getelementptr inbounds i8, i8* %off_var158, i64 mul (i64 %rdx.11D3, i64 4)
+  %ptr.var158.idx.i32.12B1 = bitcast i8* %ptr.var158.idx.12B1 to i32*
+  %ecx.12B1 = load i32, i32* %ptr.var158.idx.i32.12B1, align 4
+  %qptr.12B1 = load i64*, i64** %queue, align 8
+  %rsi.cur.12B1 = load i64, i64* %rsi, align 8
+  %q.enq.12B1 = getelementptr inbounds i64, i64* %qptr.12B1, i64 %rsi.cur.12B1
+  store i64 4, i64* %q.enq.12B1, align 8
+  %rsi.inc.12B1 = add i64 %rsi.cur.12B1, 1
+  store i64 %rsi.inc.12B1, i64* %rsi, align 8
+  %ecx.inc.12B1 = add i32 %ecx.12B1, 1
+  store i32 %ecx.inc.12B1, i32* %p_var148_i32, align 4
+  br label %loc_12D0
+
+loc_12D0:                                          ; 0x12d0
+  %base_varE4.12D0 = getelementptr inbounds i8, i8* %frame.base, i64 116
+  %ptr_ecx.12D0 = getelementptr inbounds i8, i8* %base_varE4.12D0, i64 %rax4.1200
+  %ptr_ecx_i32.12D0 = bitcast i8* %ptr_ecx.12D0 to i32*
+  %ecx.12D0 = load i32, i32* %ptr_ecx_i32.12D0, align 4
+  %test.ecx.12D0 = icmp eq i32 %ecx.12D0, 0
+  br i1 %test.ecx.12D0, label %loc_12F8, label %x12D8
+
+x12D8:
+  %off_var144 = getelementptr inbounds i8, i8* %frame.base, i64 20
+  %p_var144_i32 = bitcast i8* %off_var144 to i32*
+  %var144.load = load i32, i32* %p_var144_i32, align 4
+  %cmp.var144 = icmp ne i32 %var144.load, -1
+  br i1 %cmp.var144, label %loc_12F8, label %x12DF
+
+x12DF:
+  %ptr.var158.idx.12DF = getelementptr inbounds i8, i8* %off_var158, i64 mul (i64 %rdx.11D3, i64 4)
+  %ptr.var158.idx.i32.12DF = bitcast i8* %ptr.var158.idx.12DF to i32*
+  %ecx.12DF = load i32, i32* %ptr.var158.idx.i32.12DF, align 4
+  %qptr.12DF = load i64*, i64** %queue, align 8
+  %rsi.cur.12DF = load i64, i64* %rsi, align 8
+  %q.enq.12DF = getelementptr inbounds i64, i64* %qptr.12DF, i64 %rsi.cur.12DF
+  store i64 5, i64* %q.enq.12DF, align 8
+  %rsi.inc.12DF = add i64 %rsi.cur.12DF, 1
+  store i64 %rsi.inc.12DF, i64* %rsi, align 8
+  %ecx.inc.12DF = add i32 %ecx.12DF, 1
+  store i32 %ecx.inc.12DF, i32* %p_var144_i32, align 4
+  br label %loc_12F8
+
+loc_12F8:                                          ; 0x12f8
+  %base_varE0.12F8 = getelementptr inbounds i8, i8* %frame.base, i64 120
+  %ptr_eax.12F8 = getelementptr inbounds i8, i8* %base_varE0.12F8, i64 %rax4.1200
+  %ptr_eax_i32.12F8 = bitcast i8* %ptr_eax.12F8 to i32*
+  %eax.load.12F8 = load i32, i32* %ptr_eax_i32.12F8, align 4
+  %test.eax.12F8 = icmp eq i32 %eax.load.12F8, 0
+  br i1 %test.eax.12F8, label %loc_1320, label %x1300
+
+x1300:
+  %off_var140 = getelementptr inbounds i8, i8* %frame.base, i64 24
+  %p_var140_i32 = bitcast i8* %off_var140 to i32*
+  %var140.load = load i32, i32* %p_var140_i32, align 4
+  %cmp.var140 = icmp ne i32 %var140.load, -1
+  br i1 %cmp.var140, label %loc_1320, label %x1307
+
+x1307:
+  %ptr.var158.idx.1307 = getelementptr inbounds i8, i8* %off_var158, i64 mul (i64 %rdx.11D3, i64 4)
+  %ptr.var158.idx.i32.1307 = bitcast i8* %ptr.var158.idx.1307 to i32*
+  %eax.1307 = load i32, i32* %ptr.var158.idx.i32.1307, align 4
+  %qptr.1307 = load i64*, i64** %queue, align 8
+  %rsi.cur.1307 = load i64, i64* %rsi, align 8
+  %q.enq.1307 = getelementptr inbounds i64, i64* %qptr.1307, i64 %rsi.cur.1307
+  store i64 6, i64* %q.enq.1307, align 8
+  %rsi.inc.1307 = add i64 %rsi.cur.1307, 1
+  store i64 %rsi.inc.1307, i64* %rsi, align 8
+  %eax.inc.1307 = add i32 %eax.1307, 1
+  store i32 %eax.inc.1307, i32* %p_var140_i32, align 4
+  br label %loc_1320
+
+loc_1320:                                          ; 0x1320
+  %rbx.cur.1320 = load i64, i64* %rbx, align 8
+  %rsi.cur.1320 = load i64, i64* %rsi, align 8
+  %cmp.jb.1320 = icmp ult i64 %rbx.cur.1320, %rsi.cur.1320
+  br i1 %cmp.jb.1320, label %loc_11C0, label %x1329
+
+x1329:
+  %qptr.free = load i64*, i64** %queue, align 8
+  call void @free(i8* bitcast (i64* %qptr.free to i8*))
+  %edx.zero = add i32 0, 0
+  %fmt.bfs.ptr = getelementptr inbounds [21 x i8], [21 x i8]* @.str.bfs, i64 0, i64 0
+  %edi.two = add i32 2, 0
+  store i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.zus, i64 0, i64 0), i8** %r13, align 8
+  %rdx0ext = zext i32 %edx.zero to i64
+  %call.printf.bfs = call i32 (i32, i8*, ...) @__printf_chk(i32 %edi.two, i8* %fmt.bfs.ptr, i64 %rdx0ext)
+  %off_var138_ld = getelementptr inbounds i8, i8* %frame.base, i64 32
+  %p_var138_q = bitcast i8* %off_var138_ld to i64*
+  %rdx.first = load i64, i64* %p_var138_q, align 8
+  %rbx.cur2 = load i64, i64* %rbx, align 8
+  %cmp.rbx1 = icmp ne i64 %rbx.cur2, 1
+  br i1 %cmp.rbx1, label %loc_13DD, label %loc_1360
+
+loc_1360:                                          ; 0x1360
+  %empty.ptr = getelementptr inbounds [1 x i8], [1 x i8]* @.str.empty, i64 0, i64 0
+  %r13.ld = load i8*, i8** %r13, align 8
+  %call.printf.one = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %r13.ld, i64 %rdx.first, i8* %empty.ptr)
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str.nl, i64 0, i64 0
+  %call.printf.nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  store i64 0, i64* %rbx, align 8
+  br label %loc_1376
+
+loc_13DD:                                          ; 0x13dd
+  %r12.base = load i8*, i8** %r12, align 8
+  %rbx.cur3 = load i64, i64* %rbx, align 8
+  %ofs.r12.step = mul i64 %rbx.cur3, 8
+  %r12.new = getelementptr inbounds i8, i8* %r12.base, i64 %ofs.r12.step
+  store i8* %r12.new, i8** %r12, align 8
+  %off_var130 = getelementptr inbounds i8, i8* %frame.base, i64 40
+  store i8* %off_var130, i8** %rbp, align 8
+  %sp.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str.space, i64 0, i64 0
+  br label %loc_13F0
+
+loc_13F0:                                          ; 0x13f0
+  %rbp.cur = load i8*, i8** %rbp, align 8
+  %r13.ld2 = load i8*, i8** %r13, align 8
+  %rdx.emit = load i64, i64* bitcast (i8* %rbp.cur to i64*), align 8
+  %call.printf.iter = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %r13.ld2, i64 %rdx.emit, i8* %sp.ptr)
+  %rbp.next = getelementptr inbounds i8, i8* %rbp.cur, i64 8
+  store i8* %rbp.next, i8** %rbp, align 8
+  %rdx.next = load i64, i64* bitcast (i8* %rbp.cur to i64*), align 8
+  %r12.end = load i8*, i8** %r12, align 8
+  %cmp.loop = icmp ne i8* %rbp.next, %r12.end
+  br i1 %cmp.loop, label %loc_13F0, label %loc_1360
+
+loc_1376:                                          ; 0x1376
+  %r12.dist = bitcast [7 x i32]* %distarr to i8*
+  store i8* %r12.dist, i8** %r12, align 8
+  %dist.fmt = getelementptr inbounds [23 x i8], [23 x i8]* @.str.dist, i64 0, i64 0
+  br label %loc_1398
+
+loc_1398:                                          ; 0x1398
+  %rbx.idx = load i64, i64* %rbx, align 8
+  %elem.ptr = getelementptr inbounds [7 x i32], [7 x i32]* %distarr, i64 0, i64 %rbx.idx
+  %r8d.val = load i32, i32* %elem.ptr, align 4
+  %rcx.idx = trunc i64 %rbx.idx to i64
+  %call.printf.dist = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %dist.fmt, i64 %rbx.idx, i64 %rcx.idx, i32 %r8d.val)
+  %rbx.next = add i64 %rbx.idx, 1
+  store i64 %rbx.next, i64* %rbx, align 8
+  %cmp.end = icmp ne i64 %rbx.next, 7
+  br i1 %cmp.end, label %loc_1398, label %x13BA
+
+x13BA:
+  %saved = load i64, i64* %saved_canary, align 8
+  %guard.now = load i64, i64* @__stack_chk_guard, align 8
+  %canary.eq = icmp eq i64 %saved, %guard.now
+  br i1 %canary.eq, label %ret.ok, label %loc_142E
+
+ret.ok:
+  ret i32 0
+
+loc_1414:                                          ; 0x1414
+  %fmt.bfs.ptr.1414 = getelementptr inbounds [21 x i8], [21 x i8]* @.str.bfs, i64 0, i64 0
+  %call.printf.bfs2 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.bfs.ptr.1414, i64 0)
+  br label %loc_1376
+
+loc_142E:                                          ; 0x142e
+  call void @__stack_chk_fail()
+  unreachable
+}

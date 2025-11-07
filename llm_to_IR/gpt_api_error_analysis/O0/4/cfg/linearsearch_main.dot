@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5cd66f83c4a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %target = alloca i32, align 4\l  %n = alloca i32, align 4\l  %idx = alloca i32, align 4\l  %arr0ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 5, ptr %arr0ptr, align 4\l  %arr1ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %arr1ptr, align 4\l  %arr2ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %arr2ptr, align 4\l  %arr3ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 4, ptr %arr3ptr, align 4\l  %arr4ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 2, ptr %arr4ptr, align 4\l  store i32 5, ptr %target, align 4\l  store i32 4, ptr %n, align 4\l  %arrdecay = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %tval = load i32, ptr %target, align 4\l  %nval = load i32, ptr %n, align 4\l  %call = call i32 @linear_search(ptr %arrdecay, i32 %tval, i32 %nval)\l  store i32 %call, ptr %idx, align 4\l  %cmp = icmp eq i32 %call, -1\l  br i1 %cmp, label %notfound, label %found\l|{<s0>T|<s1>F}}"];
+	Node0x5cd66f83c4a0:s0 -> Node0x5cd66f83e700[tooltip="entry -> notfound\nProbability 37.50%" ];
+	Node0x5cd66f83c4a0:s1 -> Node0x5cd66f83e780[tooltip="entry -> found\nProbability 62.50%" ];
+	Node0x5cd66f83e780 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{found:\l|  %idxval = load i32, ptr %idx, align 4\l  %fmtptr = getelementptr inbounds [27 x i8], ptr @.str.found, i64 0, i64 0\l  %printf.call = call i32 (ptr, ...) @printf(ptr %fmtptr, i32 %idxval)\l  br label %ret\l}"];
+	Node0x5cd66f83e780 -> Node0x5cd66f83ebc0[tooltip="found -> ret\nProbability 100.00%" ];
+	Node0x5cd66f83e700 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{notfound:\l|  %spptr = getelementptr inbounds [18 x i8], ptr @.str.notfound, i64 0, i64 0\l  %puts.call = call i32 @puts(ptr %spptr)\l  br label %ret\l}"];
+	Node0x5cd66f83e700 -> Node0x5cd66f83ebc0[tooltip="notfound -> ret\nProbability 100.00%" ];
+	Node0x5cd66f83ebc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{ret:\l|  ret i32 0\l}"];
+}

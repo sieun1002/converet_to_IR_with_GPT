@@ -1,0 +1,23 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5b645ad07790 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [9 x i32], align 16\l  %base = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  %fmt = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %gep0 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  store i32 7, ptr %gep0, align 4\l  %gep1 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %gep1, align 4\l  %gep2 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 2\l  store i32 9, ptr %gep2, align 4\l  %gep3 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 3\l  store i32 1, ptr %gep3, align 4\l  %gep4 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 4\l  store i32 4, ptr %gep4, align 4\l  %gep5 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 5\l  store i32 8, ptr %gep5, align 4\l  %gep6 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 6\l  store i32 2, ptr %gep6, align 4\l  %gep7 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 7\l  store i32 6, ptr %gep7, align 4\l  %gep8 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 8\l  store i32 5, ptr %gep8, align 4\l  br label %print.preheader\l}"];
+	Node0x5b645ad07790 -> Node0x5b645ad09b50[tooltip="entry -> print.preheader\nProbability 100.00%" ];
+	Node0x5b645ad09b50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{print.preheader:\l|  br label %print.header\l}"];
+	Node0x5b645ad09b50 -> Node0x5b645ad09c70[tooltip="print.preheader -> print.header\nProbability 100.00%" ];
+	Node0x5b645ad09c70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{print.header:\l|  %i = phi i64 [ 0, %print.preheader ], [ %i.next, %print.body ]\l  %cmp0 = icmp ult i64 %i, 9\l  br i1 %cmp0, label %print.body, label %print.end\l|{<s0>T|<s1>F}}"];
+	Node0x5b645ad09c70:s0 -> Node0x5b645ad09d80[tooltip="print.header -> print.body\nProbability 96.88%" ];
+	Node0x5b645ad09c70:s1 -> Node0x5b645ad09f90[tooltip="print.header -> print.end\nProbability 3.12%" ];
+	Node0x5b645ad09d80 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{print.body:\l|  %elem.ptr0 = getelementptr inbounds i32, ptr %base, i64 %i\l  %elem0 = load i32, ptr %elem.ptr0, align 4\l  %call0 = call i32 (ptr, ...) @printf(ptr %fmt, i32 %elem0)\l  %i.next = add i64 %i, 1\l  br label %print.header\l}"];
+	Node0x5b645ad09d80 -> Node0x5b645ad09c70[tooltip="print.body -> print.header\nProbability 100.00%" ];
+	Node0x5b645ad09f90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{print.end:\l|  %nl0 = call i32 @putchar(i32 10)\l  call void @heap_sort(ptr %base, i64 9)\l  br label %print2.preheader\l}"];
+	Node0x5b645ad09f90 -> Node0x5b645ad0a9e0[tooltip="print.end -> print2.preheader\nProbability 100.00%" ];
+	Node0x5b645ad0a9e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{print2.preheader:\l|  br label %print2.header\l}"];
+	Node0x5b645ad0a9e0 -> Node0x5b645ad0ab00[tooltip="print2.preheader -> print2.header\nProbability 100.00%" ];
+	Node0x5b645ad0ab00 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{print2.header:\l|  %j = phi i64 [ 0, %print2.preheader ], [ %j.next, %print2.body ]\l  %cmp1 = icmp ult i64 %j, 9\l  br i1 %cmp1, label %print2.body, label %print2.end\l|{<s0>T|<s1>F}}"];
+	Node0x5b645ad0ab00:s0 -> Node0x5b645ad0abf0[tooltip="print2.header -> print2.body\nProbability 96.88%" ];
+	Node0x5b645ad0ab00:s1 -> Node0x5b645ad0ad50[tooltip="print2.header -> print2.end\nProbability 3.12%" ];
+	Node0x5b645ad0abf0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{print2.body:\l|  %elem.ptr1 = getelementptr inbounds i32, ptr %base, i64 %j\l  %elem1 = load i32, ptr %elem.ptr1, align 4\l  %call1 = call i32 (ptr, ...) @printf(ptr %fmt, i32 %elem1)\l  %j.next = add i64 %j, 1\l  br label %print2.header\l}"];
+	Node0x5b645ad0abf0 -> Node0x5b645ad0ab00[tooltip="print2.body -> print2.header\nProbability 100.00%" ];
+	Node0x5b645ad0ad50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{print2.end:\l|  %nl1 = call i32 @putchar(i32 10)\l  ret i32 0\l}"];
+}

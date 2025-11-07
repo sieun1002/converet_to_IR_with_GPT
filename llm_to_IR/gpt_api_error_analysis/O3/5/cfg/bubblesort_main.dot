@@ -1,0 +1,31 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5857fb0aa310 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{entry:\l|  %arr = alloca [10 x i32], align 16\l  %arr0 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 0\l  store i32 9, ptr %arr0, align 16\l  %arr1 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 1\l  store i32 1, ptr %arr1, align 4\l  %arr2 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 2\l  store i32 8, ptr %arr2, align 8\l  %arr3 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 3\l  store i32 2, ptr %arr3, align 4\l  %arr4 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 4\l  store i32 7, ptr %arr4, align 16\l  %arr5 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 5\l  store i32 3, ptr %arr5, align 4\l  %arr6 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 6\l  store i32 6, ptr %arr6, align 8\l  %arr7 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 7\l  store i32 5, ptr %arr7, align 4\l  %arr8 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 8\l  store i32 4, ptr %arr8, align 16\l  %arr9 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 9\l  store i32 0, ptr %arr9, align 4\l  br label %outer\l}"];
+	Node0x5857fb0aa310 -> Node0x5857fb0adfe0[tooltip="entry -> outer\nProbability 100.00%" ];
+	Node0x5857fb0adfe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer:\l|  %bound = phi i32 [ 10, %entry ], [ %last.exit, %inner.end ]\l  br label %inner.header\l}"];
+	Node0x5857fb0adfe0 -> Node0x5857fb0ae440[tooltip="outer -> inner.header\nProbability 100.00%" ];
+	Node0x5857fb0ae440 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.header:\l|  %i = phi i32 [ 1, %outer ], [ %i.next, %body.cont ]\l  %last.cur = phi i32 [ 0, %outer ], [ %last.next, %body.cont ]\l  %cmp.i.bound = icmp slt i32 %i, %bound\l  br i1 %cmp.i.bound, label %inner.body, label %inner.end\l|{<s0>T|<s1>F}}"];
+	Node0x5857fb0ae440:s0 -> Node0x5857fb0ae980[tooltip="inner.header -> inner.body\nProbability 96.88%" ];
+	Node0x5857fb0ae440:s1 -> Node0x5857fb0ae280[tooltip="inner.header -> inner.end\nProbability 3.12%" ];
+	Node0x5857fb0ae980 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.body:\l|  %i.minus1 = add nsw i32 %i, -1\l  %ptr.prev = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 %i.minus1\l  %ptr.curr = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 %i\l  %val.prev = load i32, ptr %ptr.prev, align 4\l  %val.curr = load i32, ptr %ptr.curr, align 4\l  %gt = icmp sgt i32 %val.prev, %val.curr\l  br i1 %gt, label %swap, label %noswap\l|{<s0>T|<s1>F}}"];
+	Node0x5857fb0ae980:s0 -> Node0x5857fb0af140[tooltip="inner.body -> swap\nProbability 50.00%" ];
+	Node0x5857fb0ae980:s1 -> Node0x5857fb0af1b0[tooltip="inner.body -> noswap\nProbability 50.00%" ];
+	Node0x5857fb0af140 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{swap:\l|  store i32 %val.curr, ptr %ptr.prev, align 4\l  store i32 %val.prev, ptr %ptr.curr, align 4\l  br label %body.cont\l}"];
+	Node0x5857fb0af140 -> Node0x5857fb0ae5e0[tooltip="swap -> body.cont\nProbability 100.00%" ];
+	Node0x5857fb0af1b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{noswap:\l|  br label %body.cont\l}"];
+	Node0x5857fb0af1b0 -> Node0x5857fb0ae5e0[tooltip="noswap -> body.cont\nProbability 100.00%" ];
+	Node0x5857fb0ae5e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body.cont:\l|  %last.next = phi i32 [ %i, %swap ], [ %last.cur, %noswap ]\l  %i.next = add nsw i32 %i, 1\l  br label %inner.header\l}"];
+	Node0x5857fb0ae5e0 -> Node0x5857fb0ae440[tooltip="body.cont -> inner.header\nProbability 100.00%" ];
+	Node0x5857fb0ae280 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.end:\l|  %last.exit = phi i32 [ %last.cur, %inner.header ]\l  %is0 = icmp eq i32 %last.exit, 0\l  %is1 = icmp eq i32 %last.exit, 1\l  %stop = or i1 %is0, %is1\l  br i1 %stop, label %print.init, label %outer\l|{<s0>T|<s1>F}}"];
+	Node0x5857fb0ae280:s0 -> Node0x5857fb0af7d0[tooltip="inner.end -> print.init\nProbability 3.12%" ];
+	Node0x5857fb0ae280:s1 -> Node0x5857fb0adfe0[tooltip="inner.end -> outer\nProbability 96.88%" ];
+	Node0x5857fb0af7d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{print.init:\l|  br label %print.loop\l}"];
+	Node0x5857fb0af7d0 -> Node0x5857fb0af8d0[tooltip="print.init -> print.loop\nProbability 100.00%" ];
+	Node0x5857fb0af8d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{print.loop:\l|  %idx = phi i32 [ 0, %print.init ], [ %idx.next, %print.body ]\l  %done = icmp eq i32 %idx, 10\l  br i1 %done, label %print.nl, label %print.body\l|{<s0>T|<s1>F}}"];
+	Node0x5857fb0af8d0:s0 -> Node0x5857fb0afb40[tooltip="print.loop -> print.nl\nProbability 3.12%" ];
+	Node0x5857fb0af8d0:s1 -> Node0x5857fb0af9f0[tooltip="print.loop -> print.body\nProbability 96.88%" ];
+	Node0x5857fb0af9f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{print.body:\l|  %elt.ptr = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 %idx\l  %elt = load i32, ptr %elt.ptr, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %call = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt.ptr, i32 %elt)\l  %idx.next = add nsw i32 %idx, 1\l  br label %print.loop\l}"];
+	Node0x5857fb0af9f0 -> Node0x5857fb0af8d0[tooltip="print.body -> print.loop\nProbability 100.00%" ];
+	Node0x5857fb0afb40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{print.nl:\l|  %nl.ptr = getelementptr inbounds [2 x i8], ptr @.strnl, i64 0, i64 0\l  %call2 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %nl.ptr)\l  ret i32 0\l}"];
+}

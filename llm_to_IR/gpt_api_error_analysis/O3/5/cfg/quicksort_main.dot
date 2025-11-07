@@ -1,0 +1,16 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x65199088a2b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [9 x i32], align 16\l  %canary = alloca i64, align 8\l  %guard.load = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard.load, ptr %canary, align 8\l  %arr.vec0.ptr = bitcast ptr %arr to ptr\l  %v0 = load \<4 x i32\>, ptr @xmmword_2010, align 16\l  store \<4 x i32\> %v0, ptr %arr.vec0.ptr, align 16\l  %arr.idx4 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 4\l  %arr.vec1.ptr = bitcast ptr %arr.idx4 to ptr\l  %v1 = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %v1, ptr %arr.vec1.ptr, align 16\l  %arr.idx8 = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 8\l  store i32 4, ptr %arr.idx8, align 4\l  %arr.base = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  call void @quick_sort(ptr noundef %arr.base, i32 noundef 0, i32 noundef 9)\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @unk_2004, i64 0, i64 0\l  %bound.ptr = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 9\l  br label %loop\l}"];
+	Node0x65199088a2b0 -> Node0x65199088b610[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x65199088b610 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %it.ptr = phi ptr [ %arr.base, %entry ], [ %next.ptr, %loop.body ]\l  %done = icmp eq ptr %it.ptr, %bound.ptr\l  br i1 %done, label %after.loop, label %loop.body\l|{<s0>T|<s1>F}}"];
+	Node0x65199088b610:s0 -> Node0x65199088b910[tooltip="loop -> after.loop\nProbability 3.12%" ];
+	Node0x65199088b610:s1 -> Node0x65199088b730[tooltip="loop -> loop.body\nProbability 96.88%" ];
+	Node0x65199088b730 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.body:\l|  %val.load = load i32, ptr %it.ptr, align 4\l  %call.printf = call i32 (i32, ptr, ...) @__printf_chk(i32 noundef 2, ptr\l... noundef %fmt.ptr, i32 noundef %val.load)\l  %next.ptr = getelementptr inbounds i32, ptr %it.ptr, i64 1\l  br label %loop\l}"];
+	Node0x65199088b730 -> Node0x65199088b610[tooltip="loop.body -> loop\nProbability 100.00%" ];
+	Node0x65199088b910 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after.loop:\l|  %nl.ptr = getelementptr inbounds [2 x i8], ptr @unk_2008, i64 0, i64 0\l  %call.nl = call i32 (i32, ptr, ...) @__printf_chk(i32 noundef 2, ptr noundef\l... %nl.ptr)\l  %canary.load = load i64, ptr %canary, align 8\l  %guard.cur = load i64, ptr @__stack_chk_guard, align 8\l  %ssp.ok = icmp eq i64 %canary.load, %guard.cur\l  br i1 %ssp.ok, label %ret.ok, label %ssp.fail\l|{<s0>T|<s1>F}}"];
+	Node0x65199088b910:s0 -> Node0x65199088c310[tooltip="after.loop -> ret.ok\nProbability 100.00%" ];
+	Node0x65199088b910:s1 -> Node0x65199088c380[tooltip="after.loop -> ssp.fail\nProbability 0.00%" ];
+	Node0x65199088c380 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#abc8fd70" fontname="Courier",label="{ssp.fail:\l|  call void @__stack_chk_fail()\l  unreachable\l}"];
+	Node0x65199088c310 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{ret.ok:\l|  ret i32 0\l}"];
+}

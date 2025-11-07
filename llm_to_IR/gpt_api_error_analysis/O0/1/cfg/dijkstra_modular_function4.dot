@@ -1,0 +1,22 @@
+digraph "CFG for 'min_index' function" {
+	label="CFG for 'min_index' function";
+
+	Node0x5ef0917b1990 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop.header\l}"];
+	Node0x5ef0917b1990 -> Node0x5ef0917b1c20[tooltip="entry -> loop.header\nProbability 100.00%" ];
+	Node0x5ef0917b1c20 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.header:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %cont ]\l  %minv = phi i32 [ 2147483647, %entry ], [ %minv.next, %cont ]\l  %idx = phi i32 [ -1, %entry ], [ %idx.next, %cont ]\l  %cmp = icmp slt i32 %i, %n\l  br i1 %cmp, label %loop.body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5ef0917b1c20:s0 -> Node0x5ef0917b3e90[tooltip="loop.header -> loop.body\nProbability 96.88%" ];
+	Node0x5ef0917b1c20:s1 -> Node0x5ef0917b3f70[tooltip="loop.header -> exit\nProbability 3.12%" ];
+	Node0x5ef0917b3e90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.body:\l|  %b.ptr = getelementptr inbounds i32, ptr %b, i32 %i\l  %b.val = load i32, ptr %b.ptr, align 4\l  %b.isnz = icmp ne i32 %b.val, 0\l  br i1 %b.isnz, label %noUpdate, label %maybe\l|{<s0>T|<s1>F}}"];
+	Node0x5ef0917b3e90:s0 -> Node0x5ef0917b4360[tooltip="loop.body -> noUpdate\nProbability 62.50%" ];
+	Node0x5ef0917b3e90:s1 -> Node0x5ef0917b43e0[tooltip="loop.body -> maybe\nProbability 37.50%" ];
+	Node0x5ef0917b43e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{maybe:\l|  %a.ptr = getelementptr inbounds i32, ptr %a, i32 %i\l  %a.val = load i32, ptr %a.ptr, align 4\l  %isless = icmp slt i32 %a.val, %minv\l  br i1 %isless, label %doUpdate, label %noUpdate\l|{<s0>T|<s1>F}}"];
+	Node0x5ef0917b43e0:s0 -> Node0x5ef0917b46e0[tooltip="maybe -> doUpdate\nProbability 50.00%" ];
+	Node0x5ef0917b43e0:s1 -> Node0x5ef0917b4360[tooltip="maybe -> noUpdate\nProbability 50.00%" ];
+	Node0x5ef0917b46e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ca3b3770" fontname="Courier",label="{doUpdate:\l|  br label %cont\l}"];
+	Node0x5ef0917b46e0 -> Node0x5ef0917b17e0[tooltip="doUpdate -> cont\nProbability 100.00%" ];
+	Node0x5ef0917b4360 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{noUpdate:\l|  br label %cont\l}"];
+	Node0x5ef0917b4360 -> Node0x5ef0917b17e0[tooltip="noUpdate -> cont\nProbability 100.00%" ];
+	Node0x5ef0917b17e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{cont:\l|  %minv.next = phi i32 [ %minv, %noUpdate ], [ %a.val, %doUpdate ]\l  %idx.next = phi i32 [ %idx, %noUpdate ], [ %i, %doUpdate ]\l  %i.next = add nsw i32 %i, 1\l  br label %loop.header\l}"];
+	Node0x5ef0917b17e0 -> Node0x5ef0917b1c20[tooltip="cont -> loop.header\nProbability 100.00%" ];
+	Node0x5ef0917b3f70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret i32 %idx\l}"];
+}

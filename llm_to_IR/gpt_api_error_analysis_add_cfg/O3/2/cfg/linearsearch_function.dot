@@ -1,0 +1,17 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x5e9c3248c550 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb_1180:\l|  %n_le_zero = icmp sle i32 %n, 0\l  br i1 %n_le_zero, label %loc_11A0, label %bb_1188\l|{<s0>T|<s1>F}}"];
+	Node0x5e9c3248c550:s0 -> Node0x5e9c3248b9d0[tooltip="bb_1180 -> loc_11A0\nProbability 50.00%" ];
+	Node0x5e9c3248c550:s1 -> Node0x5e9c3248b820[tooltip="bb_1180 -> bb_1188\nProbability 50.00%" ];
+	Node0x5e9c3248b820 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb_1188:\l|  %n64 = sext i32 %n to i64\l  br label %loc_1199\l}"];
+	Node0x5e9c3248b820 -> Node0x5e9c3248bc60[tooltip="bb_1188 -> loc_1199\nProbability 100.00%" ];
+	Node0x5e9c3248bc60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_1199:\l|  %idx = phi i64 [ 0, %bb_1188 ], [ %idx_inc, %loc_1190 ]\l  %elem_ptr = getelementptr inbounds i32, ptr %a, i64 %idx\l  %elem = load i32, ptr %elem_ptr, align 4\l  %neq = icmp ne i32 %elem, %val\l  br i1 %neq, label %loc_1190, label %bb_119e\l|{<s0>T|<s1>F}}"];
+	Node0x5e9c3248bc60:s0 -> Node0x5e9c3248bdd0[tooltip="loc_1199 -> loc_1190\nProbability 96.88%" ];
+	Node0x5e9c3248bc60:s1 -> Node0x5e9c3248da20[tooltip="loc_1199 -> bb_119e\nProbability 3.12%" ];
+	Node0x5e9c3248bdd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_1190:\l|  %idx_inc = add i64 %idx, 1\l  %reached_end = icmp eq i64 %idx_inc, %n64\l  br i1 %reached_end, label %loc_11A0, label %loc_1199\l|{<s0>T|<s1>F}}"];
+	Node0x5e9c3248bdd0:s0 -> Node0x5e9c3248b9d0[tooltip="loc_1190 -> loc_11A0\nProbability 3.12%" ];
+	Node0x5e9c3248bdd0:s1 -> Node0x5e9c3248bc60[tooltip="loc_1190 -> loc_1199\nProbability 96.88%" ];
+	Node0x5e9c3248da20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_119e:\l|  %retidx = trunc i64 %idx to i32\l  ret i32 %retidx\l}"];
+	Node0x5e9c3248b9d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{loc_11A0:\l|  ret i32 -1\l}"];
+}

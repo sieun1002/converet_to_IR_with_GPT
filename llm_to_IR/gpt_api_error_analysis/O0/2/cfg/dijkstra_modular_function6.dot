@@ -1,0 +1,19 @@
+digraph "CFG for 'print_distances' function" {
+	label="CFG for 'print_distances' function";
+
+	Node0x604e13b3ca10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x604e13b3ca10 -> Node0x604e13b3c4d0[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x604e13b3c4d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.inc, %latch ]\l  %cond = icmp slt i32 %i, %n\l  br i1 %cond, label %body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x604e13b3c4d0:s0 -> Node0x604e13b3c6d0[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x604e13b3c4d0:s1 -> Node0x604e13b3c7a0[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x604e13b3c6d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %idx.ext = sext i32 %i to i64\l  %elem.ptr = getelementptr inbounds i32, ptr %dist, i64 %idx.ext\l  %val = load i32, ptr %elem.ptr, align 4\l  %isinf = icmp eq i32 %val, 2147483647\l  br i1 %isinf, label %print_inf, label %print_val\l|{<s0>T|<s1>F}}"];
+	Node0x604e13b3c6d0:s0 -> Node0x604e13b3fa30[tooltip="body -> print_inf\nProbability 50.00%" ];
+	Node0x604e13b3c6d0:s1 -> Node0x604e13b3fab0[tooltip="body -> print_val\nProbability 50.00%" ];
+	Node0x604e13b3fa30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{print_inf:\l|  %fmt1 = getelementptr inbounds [16 x i8], ptr @.str.inf, i64 0, i64 0\l  %call1 = call i32 (ptr, ...) @printf(ptr noundef nonnull %fmt1, i32 noundef\l... %i)\l  br label %latch\l}"];
+	Node0x604e13b3fa30 -> Node0x604e13b3c520[tooltip="print_inf -> latch\nProbability 100.00%" ];
+	Node0x604e13b3fab0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{print_val:\l|  %fmt2 = getelementptr inbounds [15 x i8], ptr @.str.val, i64 0, i64 0\l  %call2 = call i32 (ptr, ...) @printf(ptr noundef nonnull %fmt2, i32 noundef\l... %i, i32 noundef %val)\l  br label %latch\l}"];
+	Node0x604e13b3fab0 -> Node0x604e13b3c520[tooltip="print_val -> latch\nProbability 100.00%" ];
+	Node0x604e13b3c520 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{latch:\l|  %i.inc = add nsw i32 %i, 1\l  br label %loop\l}"];
+	Node0x604e13b3c520 -> Node0x604e13b3c4d0[tooltip="latch -> loop\nProbability 100.00%" ];
+	Node0x604e13b3c7a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

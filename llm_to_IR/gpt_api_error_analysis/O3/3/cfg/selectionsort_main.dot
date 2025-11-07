@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x62b2e58f82e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 4\l  %arr.gep0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 7, ptr %arr.gep0, align 4\l  %arr.gep1 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 2, ptr %arr.gep1, align 4\l  %arr.gep2 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 9, ptr %arr.gep2, align 4\l  %arr.gep3 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 4, ptr %arr.gep3, align 4\l  %arr.gep4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %arr.gep4, align 4\l  call void @selection_sort(ptr %arr.gep0, i32 5)\l  %sorted.gep = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0, i64\l... 0\l  %call.header = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %sorted.gep)\l  br label %for.cond\l}"];
+	Node0x62b2e58f82e0 -> Node0x62b2e58fb940[tooltip="entry -> for.cond\nProbability 100.00%" ];
+	Node0x62b2e58fb940 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.cond:\l|  %i = phi i64 [ 0, %entry ], [ %inc, %for.inc ]\l  %cmp = icmp ult i64 %i, 5\l  br i1 %cmp, label %for.body, label %for.end\l|{<s0>T|<s1>F}}"];
+	Node0x62b2e58fb940:s0 -> Node0x62b2e58fbd50[tooltip="for.cond -> for.body\nProbability 96.88%" ];
+	Node0x62b2e58fb940:s1 -> Node0x62b2e58fbe30[tooltip="for.cond -> for.end\nProbability 3.12%" ];
+	Node0x62b2e58fbd50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.body:\l|  %elem.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 %i\l  %elem = load i32, ptr %elem.ptr, align 4\l  %fmt.gep = getelementptr inbounds [4 x i8], ptr @.str.fmt, i64 0, i64 0\l  %call.elem = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt.gep, i32\l... %elem)\l  br label %for.inc\l}"];
+	Node0x62b2e58fbd50 -> Node0x62b2e58fb9f0[tooltip="for.body -> for.inc\nProbability 100.00%" ];
+	Node0x62b2e58fb9f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.inc:\l|  %inc = add nuw nsw i64 %i, 1\l  br label %for.cond\l}"];
+	Node0x62b2e58fb9f0 -> Node0x62b2e58fb940[tooltip="for.inc -> for.cond\nProbability 100.00%" ];
+	Node0x62b2e58fbe30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.end:\l|  ret i32 0\l}"];
+}

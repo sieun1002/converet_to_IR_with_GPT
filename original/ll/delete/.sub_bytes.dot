@@ -1,0 +1,14 @@
+digraph "CFG for 'sub_bytes' function" {
+	label="CFG for 'sub_bytes' function";
+
+	Node0x5aeb62511ec0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %s.addr = alloca ptr, align 8\l  %i = alloca i32, align 4\l  store ptr %s, ptr %s.addr, align 8\l  call void @llvm.dbg.declare(metadata ptr %s.addr, metadata !293, metadata\l... !DIExpression()), !dbg !294\l  call void @llvm.dbg.declare(metadata ptr %i, metadata !295, metadata\l... !DIExpression()), !dbg !297\l  store i32 0, ptr %i, align 4, !dbg !42\l  br label %for.cond, !dbg !43\l}"];
+	Node0x5aeb62511ec0 -> Node0x5aeb62512fa0[tooltip="entry -> for.cond\nProbability 100.00%" ];
+	Node0x5aeb62512fa0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.cond:\l|  %0 = load i32, ptr %i, align 4, !dbg !44\l  %cmp = icmp slt i32 %0, 16, !dbg !46\l  br i1 %cmp, label %for.body, label %for.end, !dbg !47\l|{<s0>T|<s1>F}}"];
+	Node0x5aeb62512fa0:s0 -> Node0x5aeb624f76d0[tooltip="for.cond -> for.body\nProbability 96.88%" ];
+	Node0x5aeb62512fa0:s1 -> Node0x5aeb624f7720[tooltip="for.cond -> for.end\nProbability 3.12%" ];
+	Node0x5aeb624f76d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.body:\l|  %1 = load ptr, ptr %s.addr, align 8, !dbg !48\l  %2 = load i32, ptr %i, align 4, !dbg !49\l  %idxprom = sext i32 %2 to i64, !dbg !48\l  %arrayidx = getelementptr inbounds i8, ptr %1, i64 %idxprom, !dbg !48\l  %3 = load i8, ptr %arrayidx, align 1, !dbg !48\l  %call = call zeroext i8 @sbox_lookup(i8 noundef zeroext %3), !dbg !50\l  %4 = load ptr, ptr %s.addr, align 8, !dbg !51\l  %5 = load i32, ptr %i, align 4, !dbg !52\l  %idxprom1 = sext i32 %5 to i64, !dbg !51\l  %arrayidx2 = getelementptr inbounds i8, ptr %4, i64 %idxprom1, !dbg !51\l  store i8 %call, ptr %arrayidx2, align 1, !dbg !53\l  br label %for.inc, !dbg !51\l}"];
+	Node0x5aeb624f76d0 -> Node0x5aeb62516400[tooltip="for.body -> for.inc\nProbability 100.00%" ];
+	Node0x5aeb62516400 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.inc:\l|  %6 = load i32, ptr %i, align 4, !dbg !54\l  %inc = add nsw i32 %6, 1, !dbg !54\l  store i32 %inc, ptr %i, align 4, !dbg !54\l  br label %for.cond, !dbg !55, !llvm.loop !56\l}"];
+	Node0x5aeb62516400 -> Node0x5aeb62512fa0[tooltip="for.inc -> for.cond\nProbability 100.00%" ];
+	Node0x5aeb624f7720 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.end:\l|  ret void, !dbg !59\l}"];
+}

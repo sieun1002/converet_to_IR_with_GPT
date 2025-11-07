@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 189,
+      "ir_len": 14772,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.ll:66:26: error: expected value token\n  br i1 %any.null, label loc_1455, label %chk_r12\n                         ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\n@__stack_chk_guard = extern_weak global i64\n@qword_2028 = extern_weak global",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 146,
+      "ir_len": 14819,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.ll:73:9: error: expected '=' after instruction name\n%init_ok:\n        ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\n@__stack_chk_guard = extern_weak global i64\n@qword_2028 = extern_weak global",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.ll"
+    },
+    {
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 218,
+      "ir_len": 8697,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %selected = phi i64 [ %v10_for_phi, %bb_11bc_compare_children ], [ %v18_to_store, %loc_1223 ]\nlabel %loc_1227\n",
+      "ir_preview": "; ModuleID = 'heap_sort_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine void @heap_sort(i32* %arr, i64 %n) {\nentry:\n  %arr.addr = alloca i32*, align 8\n  %n.addr = alloca i64, align 8\n  %var_50 =",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_function1.ll"
+    },
+    {
+      "filename": "heapsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 212,
+      "ir_len": 3533,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.ll:60:41: error: expected instruction opcode\n  br i1 %cmp1, label %loc_14B7, label %0x14e4\n                                        ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@format = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@__stack_chk_guard = external global i64\n\ndeclare i32 @printf",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 406,
+      "ir_len": 26729,
+      "error_preview": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.ll:12:32: warning: ptr type is only supported in -opaque-pointers mode\ndeclare i32 @__printf_chk(i32, ptr, ...)\n                               ^\nllvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = external constant <4 x i32>, align 16\n@xmmword_2020 = external constant <4 x i32>, align 16\n\n@unk_2004 = private constan",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 218,
+      "ir_len": 843,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.ll:1:1: error: expected top-level entity\nThis function is large and has many basic blocks and conditional jumps. I can generate either:\n^\n",
+      "ir_preview": "This function is large and has many basic blocks and conditional jumps. I can generate either:\n- a complete LLVM 14 IR with all instructions and branches (very long), or\n- a compact “skeleton” IR that",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.ll"
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 418,
+      "ir_len": 6330,
+      "error_preview": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.ll:12:30: warning: ptr type is only supported in -opaque-pointers mode\n  %rbx0 = getelementptr i32, ptr %arr, i64 0\n                             ^\nllvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort",
+      "ir_preview": "; ModuleID = 'selection_sort'\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine void @selection_sort(i32* %arr, i32 %n) local_unnamed_addr {\nent",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.ll"
+    }
+  ]
+}

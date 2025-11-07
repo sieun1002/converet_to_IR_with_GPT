@@ -1,0 +1,36 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x56e2b67c0530 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{entry:\l|  %arr = alloca [9 x i32], align 16\l  %keys = alloca [3 x i32], align 16\l  %arr.base = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  %arr.idx1 = getelementptr inbounds i32, ptr %arr.base, i64 1\l  %arr.idx2 = getelementptr inbounds i32, ptr %arr.base, i64 2\l  %arr.idx3 = getelementptr inbounds i32, ptr %arr.base, i64 3\l  %arr.idx4 = getelementptr inbounds i32, ptr %arr.base, i64 4\l  %arr.idx5 = getelementptr inbounds i32, ptr %arr.base, i64 5\l  %arr.idx6 = getelementptr inbounds i32, ptr %arr.base, i64 6\l  %arr.idx7 = getelementptr inbounds i32, ptr %arr.base, i64 7\l  %arr.idx8 = getelementptr inbounds i32, ptr %arr.base, i64 8\l  store i32 -10, ptr %arr.base, align 4\l  store i32 -3, ptr %arr.idx1, align 4\l  store i32 0, ptr %arr.idx2, align 4\l  store i32 1, ptr %arr.idx3, align 4\l  store i32 2, ptr %arr.idx4, align 4\l  store i32 4, ptr %arr.idx5, align 4\l  store i32 8, ptr %arr.idx6, align 4\l  store i32 16, ptr %arr.idx7, align 4\l  store i32 32, ptr %arr.idx8, align 4\l  %keys.base = getelementptr inbounds [3 x i32], ptr %keys, i64 0, i64 0\l  %keys.idx1 = getelementptr inbounds i32, ptr %keys.base, i64 1\l  %keys.idx2 = getelementptr inbounds i32, ptr %keys.base, i64 2\l  store i32 8, ptr %keys.base, align 4\l  store i32 1, ptr %keys.idx1, align 4\l  store i32 -5, ptr %keys.idx2, align 4\l  %p.begin = getelementptr inbounds [3 x i32], ptr %keys, i64 0, i64 0\l  %p.end = getelementptr inbounds [3 x i32], ptr %keys, i64 0, i64 3\l  br label %key.loop\l}"];
+	Node0x56e2b67c0530 -> Node0x56e2b67c4a60[tooltip="entry -> key.loop\nProbability 100.00%" ];
+	Node0x56e2b67c4a60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{key.loop:\l|  %p.cur = phi ptr [ %p.begin, %entry ], [ %p.next, %post.print ]\l  %done = icmp eq ptr %p.cur, %p.end\l  br i1 %done, label %exit, label %process.key\l|{<s0>T|<s1>F}}"];
+	Node0x56e2b67c4a60:s0 -> Node0x56e2b67c4d10[tooltip="key.loop -> exit\nProbability 3.12%" ];
+	Node0x56e2b67c4a60:s1 -> Node0x56e2b67c4de0[tooltip="key.loop -> process.key\nProbability 96.88%" ];
+	Node0x56e2b67c4de0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{process.key:\l|  %k.load = load i32, ptr %p.cur, align 4\l  br label %lower.bound\l}"];
+	Node0x56e2b67c4de0 -> Node0x56e2b67c4f60[tooltip="process.key -> lower.bound\nProbability 100.00%" ];
+	Node0x56e2b67c4f60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{lower.bound:\l|  %lo.phi = phi i64 [ 0, %process.key ], [ %lo.next, %step.end ]\l  %hi.phi = phi i64 [ 9, %process.key ], [ %hi.next, %step.end ]\l  %cont = icmp ult i64 %lo.phi, %hi.phi\l  br i1 %cont, label %step, label %lb.done\l|{<s0>T|<s1>F}}"];
+	Node0x56e2b67c4f60:s0 -> Node0x56e2b67c5760[tooltip="lower.bound -> step\nProbability 96.88%" ];
+	Node0x56e2b67c4f60:s1 -> Node0x56e2b67c5830[tooltip="lower.bound -> lb.done\nProbability 3.12%" ];
+	Node0x56e2b67c5760 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{step:\l|  %diff = sub i64 %hi.phi, %lo.phi\l  %half = lshr i64 %diff, 1\l  %mid = add i64 %half, %lo.phi\l  %mid.ptr = getelementptr inbounds i32, ptr %arr.base, i64 %mid\l  %mid.val = load i32, ptr %mid.ptr, align 4\l  %cmp.k.gt = icmp sgt i32 %k.load, %mid.val\l  br i1 %cmp.k.gt, label %set.lo, label %set.hi\l|{<s0>T|<s1>F}}"];
+	Node0x56e2b67c5760:s0 -> Node0x56e2b67c5c30[tooltip="step -> set.lo\nProbability 50.00%" ];
+	Node0x56e2b67c5760:s1 -> Node0x56e2b67c5ca0[tooltip="step -> set.hi\nProbability 50.00%" ];
+	Node0x56e2b67c5c30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{set.lo:\l|  %mid.plus1 = add i64 %mid, 1\l  br label %step.end\l}"];
+	Node0x56e2b67c5c30 -> Node0x56e2b67c53c0[tooltip="set.lo -> step.end\nProbability 100.00%" ];
+	Node0x56e2b67c5ca0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{set.hi:\l|  br label %step.end\l}"];
+	Node0x56e2b67c5ca0 -> Node0x56e2b67c53c0[tooltip="set.hi -> step.end\nProbability 100.00%" ];
+	Node0x56e2b67c53c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{step.end:\l|  %lo.next = phi i64 [ %mid.plus1, %set.lo ], [ %lo.phi, %set.hi ]\l  %hi.next = phi i64 [ %hi.phi, %set.lo ], [ %mid, %set.hi ]\l  br label %lower.bound\l}"];
+	Node0x56e2b67c53c0 -> Node0x56e2b67c4f60[tooltip="step.end -> lower.bound\nProbability 100.00%" ];
+	Node0x56e2b67c5830 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{lb.done:\l|  %in.range = icmp ule i64 %lo.phi, 8\l  br i1 %in.range, label %maybe.equal, label %not.found\l|{<s0>T|<s1>F}}"];
+	Node0x56e2b67c5830:s0 -> Node0x56e2b67c68d0[tooltip="lb.done -> maybe.equal\nProbability 50.00%" ];
+	Node0x56e2b67c5830:s1 -> Node0x56e2b67c6920[tooltip="lb.done -> not.found\nProbability 50.00%" ];
+	Node0x56e2b67c68d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{maybe.equal:\l|  %pos.ptr = getelementptr inbounds i32, ptr %arr.base, i64 %lo.phi\l  %pos.val = load i32, ptr %pos.ptr, align 4\l  %is.eq = icmp eq i32 %k.load, %pos.val\l  br i1 %is.eq, label %found, label %not.found\l|{<s0>T|<s1>F}}"];
+	Node0x56e2b67c68d0:s0 -> Node0x56e2b67c6c60[tooltip="maybe.equal -> found\nProbability 50.00%" ];
+	Node0x56e2b67c68d0:s1 -> Node0x56e2b67c6920[tooltip="maybe.equal -> not.found\nProbability 50.00%" ];
+	Node0x56e2b67c6c60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{found:\l|  %fmt.f.ptr = getelementptr inbounds [21 x i8], ptr @.fmt_found, i64 0, i64\l... 0\l  %call.f = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt.f.ptr, i32\l... %k.load, i64 %lo.phi)\l  br label %post.print\l}"];
+	Node0x56e2b67c6c60 -> Node0x56e2b67c4b30[tooltip="found -> post.print\nProbability 100.00%" ];
+	Node0x56e2b67c6920 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d8564670" fontname="Courier",label="{not.found:\l|  %fmt.n.ptr = getelementptr inbounds [21 x i8], ptr @.fmt_not, i64 0, i64 0\l  %call.n = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt.n.ptr, i32\l... %k.load)\l  br label %post.print\l}"];
+	Node0x56e2b67c6920 -> Node0x56e2b67c4b30[tooltip="not.found -> post.print\nProbability 100.00%" ];
+	Node0x56e2b67c4b30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{post.print:\l|  %p.next = getelementptr inbounds i32, ptr %p.cur, i64 1\l  br label %key.loop\l}"];
+	Node0x56e2b67c4b30 -> Node0x56e2b67c4a60[tooltip="post.print -> key.loop\nProbability 100.00%" ];
+	Node0x56e2b67c4d10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{exit:\l|  ret i32 0\l}"];
+}

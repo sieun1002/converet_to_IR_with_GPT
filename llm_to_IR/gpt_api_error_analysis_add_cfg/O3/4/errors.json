@@ -1,0 +1,103 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll:58:18: error: invalid cast opcode for cast from 'i64' to 'i64'\n  %r8.new = sext i64 %rax.cur to i64\n                 ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.bc",
+      "start_time": "2025-11-01T21:57:57",
+      "end_time": "2025-11-01T21:57:57",
+      "elapsed_sec": 0.020585
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %r8.init = phi i64 [ 0, %L1080 ], [ 0, %bb_1119 ]\nlabel %loc_10D0\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main2.bc",
+      "start_time": "2025-11-01T21:58:28",
+      "end_time": "2025-11-01T21:58:28",
+      "elapsed_sec": 0.025279
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll:55:15: error: expected instruction opcode\n  %rax.1234 = %rdi.10d0\n              ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.bc",
+      "start_time": "2025-11-02T01:58:54",
+      "end_time": "2025-11-02T01:58:54",
+      "elapsed_sec": 0.116858
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %edx.f = phi i32 [ %edx.10d0, %bb_10e6 ], [ %edx.1234, %loc_1234 ], [ %edx.1288, %loc_1288 ]\nlabel %loc_1234\nlabel %bb_124b\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rsi.next.11c6 = phi i32* [ %rdi.10d0, %loc_12C3 ], [ %rdi.f, %loc_125B ], [ %rdi.f, %loc_1296 ], [ %rdi.f, %loc_12CE ], [ %rdi.f, %loc_12FB ], [ %rdi.f, %loc_132B ], [ %rdi.f, %loc_135B ], [ %rdi.f, %loc_1387 ], [ %rdi.f, %loc_13B3 ], [ %rdi.f, %bb_11bc ], [ %rsi.1263, %loc_13BF ], [ %rsi.1234.tmp, %loc_13CC ], [ %rsi.1367, %loc_13D9 ], [ %rsi.1307, %loc_13E6 ], [ %rsi.1337, %loc_13F3 ], [ %rsi.12A2, %loc_1400 ], [ %rsi.12DA, %loc_140D ], [ %rsi.1393, %loc_141A ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.bc",
+      "start_time": "2025-11-02T02:01:36",
+      "end_time": "2025-11-02T02:01:36",
+      "elapsed_sec": 0.138614
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll:223:187: error: use of undefined value '%bb_12B6'\n  %phi_dummy_1280 = phi i32 [ 0, %bb_1164 ], [ 0, %bb_11D4 ], [ 0, %bb_11EB ], [ 0, %bb_1202 ], [ 0, %bb_1215 ], [ 0, %bb_1228 ], [ 0, %bb_123B ], [ 0, %bb_124E ], [ 0, %bb_126C ], [ 0, %bb_12B6 ], [ 0, %bb_12E1 ], [ 0, %bb_1323 ], [ 0, %bb_1345 ], [ 0, %bb_135C ], [ 0, %bb_1278 ]\n                                                                                                                                                                                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.bc",
+      "start_time": "2025-11-02T02:12:18",
+      "end_time": "2025-11-02T02:12:18",
+      "elapsed_sec": 0.017524
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %phi_13E0 = phi i8* [ %arr.begin.i8, %bb_13CE ], [ %next.i8, %bb_13F8 ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.bc",
+      "start_time": "2025-11-02T02:14:34",
+      "end_time": "2025-11-02T02:14:34",
+      "elapsed_sec": 0.015709
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll:16:14: error: expected instruction opcode\n  %r9_init = %r10_prev\n             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.bc",
+      "start_time": "2025-11-02T02:29:38",
+      "end_time": "2025-11-02T02:29:38",
+      "elapsed_sec": 0.017269
+    }
+  ]
+}

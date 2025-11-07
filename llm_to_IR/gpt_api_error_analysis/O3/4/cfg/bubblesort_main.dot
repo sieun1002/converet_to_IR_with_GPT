@@ -1,0 +1,34 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5efff9c2af90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{entry:\l|  %arr = alloca [10 x i32], align 16\l  %p0 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 0\l  %p0.vec = bitcast ptr %p0 to ptr\l  %v0 = load \<4 x i32\>, ptr @xmmword_2010, align 16\l  store \<4 x i32\> %v0, ptr %p0.vec, align 16\l  %p4 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 4\l  %p4.vec = bitcast ptr %p4 to ptr\l  %v1 = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %v1, ptr %p4.vec, align 16\l  %p8 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 8\l  store i32 4, ptr %p8, align 4\l  %p9 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 9\l  store i32 0, ptr %p9, align 4\l  br label %outer.header\l}"];
+	Node0x5efff9c2af90 -> Node0x5efff9c2edb0[tooltip="entry -> outer.header\nProbability 100.00%" ];
+	Node0x5efff9c2edb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.header:\l|  %limit = phi i32 [ 10, %entry ], [ %lastSwap, %reduce.limit ]\l  br label %inner.header\l}"];
+	Node0x5efff9c2edb0 -> Node0x5efff9c2f290[tooltip="outer.header -> inner.header\nProbability 100.00%" ];
+	Node0x5efff9c2f290 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.header:\l|  %i = phi i32 [ 1, %outer.header ], [ %i.next, %inner.latch ]\l  %lastSwap = phi i32 [ 0, %outer.header ], [ %lastSwap.updated, %inner.latch ]\l  %cmp.i.limit = icmp slt i32 %i, %limit\l  br i1 %cmp.i.limit, label %inner.body, label %outer.after\l|{<s0>T|<s1>F}}"];
+	Node0x5efff9c2f290:s0 -> Node0x5efff9c2f7c0[tooltip="inner.header -> inner.body\nProbability 96.88%" ];
+	Node0x5efff9c2f290:s1 -> Node0x5efff9c2f810[tooltip="inner.header -> outer.after\nProbability 3.12%" ];
+	Node0x5efff9c2f7c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.body:\l|  %idx.prev = add nsw i32 %i, -1\l  %p.prev = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 %idx.prev\l  %p.cur = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 %i\l  %a = load i32, ptr %p.prev, align 4\l  %b = load i32, ptr %p.cur, align 4\l  %cmp.ab = icmp sgt i32 %a, %b\l  br i1 %cmp.ab, label %inner.swap, label %inner.noswap\l|{<s0>T|<s1>F}}"];
+	Node0x5efff9c2f7c0:s0 -> Node0x5efff9c30040[tooltip="inner.body -> inner.swap\nProbability 50.00%" ];
+	Node0x5efff9c2f7c0:s1 -> Node0x5efff9c300c0[tooltip="inner.body -> inner.noswap\nProbability 50.00%" ];
+	Node0x5efff9c30040 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{inner.swap:\l|  store i32 %b, ptr %p.prev, align 4\l  store i32 %a, ptr %p.cur, align 4\l  br label %inner.latch\l}"];
+	Node0x5efff9c30040 -> Node0x5efff9c2f430[tooltip="inner.swap -> inner.latch\nProbability 100.00%" ];
+	Node0x5efff9c300c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{inner.noswap:\l|  br label %inner.latch\l}"];
+	Node0x5efff9c300c0 -> Node0x5efff9c2f430[tooltip="inner.noswap -> inner.latch\nProbability 100.00%" ];
+	Node0x5efff9c2f430 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.latch:\l|  %lastSwap.updated = select i1 %cmp.ab, i32 %i, i32 %lastSwap\l  %i.next = add nsw i32 %i, 1\l  br label %inner.header\l}"];
+	Node0x5efff9c2f430 -> Node0x5efff9c2f290[tooltip="inner.latch -> inner.header\nProbability 100.00%" ];
+	Node0x5efff9c2f810 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.after:\l|  %no.swap = icmp eq i32 %lastSwap, 0\l  br i1 %no.swap, label %print.entry, label %check.one\l|{<s0>T|<s1>F}}"];
+	Node0x5efff9c2f810:s0 -> Node0x5efff9c30650[tooltip="outer.after -> print.entry\nProbability 3.12%" ];
+	Node0x5efff9c2f810:s1 -> Node0x5efff9c306a0[tooltip="outer.after -> check.one\nProbability 96.88%" ];
+	Node0x5efff9c306a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{check.one:\l|  %is.one = icmp eq i32 %lastSwap, 1\l  br i1 %is.one, label %print.entry, label %reduce.limit\l|{<s0>T|<s1>F}}"];
+	Node0x5efff9c306a0:s0 -> Node0x5efff9c30650[tooltip="check.one -> print.entry\nProbability 3.12%" ];
+	Node0x5efff9c306a0:s1 -> Node0x5efff9c2ef30[tooltip="check.one -> reduce.limit\nProbability 96.88%" ];
+	Node0x5efff9c2ef30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{reduce.limit:\l|  br label %outer.header\l}"];
+	Node0x5efff9c2ef30 -> Node0x5efff9c2edb0[tooltip="reduce.limit -> outer.header\nProbability 100.00%" ];
+	Node0x5efff9c30650 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{print.entry:\l|  br label %print.loop\l}"];
+	Node0x5efff9c30650 -> Node0x5efff9c30970[tooltip="print.entry -> print.loop\nProbability 100.00%" ];
+	Node0x5efff9c30970 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{print.loop:\l|  %j = phi i32 [ 0, %print.entry ], [ %j.next, %print.loop ]\l  %pj = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 %j\l  %val = load i32, ptr %pj, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.str, i32 0, i32 0\l  %call.print = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt.ptr,\l... i32 %val)\l  %j.next = add nsw i32 %j, 1\l  %cont = icmp slt i32 %j.next, 10\l  br i1 %cont, label %print.loop, label %print.after\l|{<s0>T|<s1>F}}"];
+	Node0x5efff9c30970:s0 -> Node0x5efff9c30970[tooltip="print.loop -> print.loop\nProbability 96.88%" ];
+	Node0x5efff9c30970:s1 -> Node0x5efff9c316d0[tooltip="print.loop -> print.after\nProbability 3.12%" ];
+	Node0x5efff9c316d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{print.after:\l|  %nl.ptr = getelementptr inbounds [2 x i8], ptr @.nl, i32 0, i32 0\l  %call.nl = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %nl.ptr)\l  ret i32 0\l}"];
+}

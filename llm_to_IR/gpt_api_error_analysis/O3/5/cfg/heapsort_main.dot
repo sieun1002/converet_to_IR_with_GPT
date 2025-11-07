@@ -1,0 +1,19 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5745ace81340 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [9 x i32], align 16\l  %arrdecay = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  %e0ptr = getelementptr inbounds i32, ptr %arrdecay, i64 0\l  store i32 7, ptr %e0ptr, align 4\l  %e1ptr = getelementptr inbounds i32, ptr %arrdecay, i64 1\l  store i32 3, ptr %e1ptr, align 4\l  %e2ptr = getelementptr inbounds i32, ptr %arrdecay, i64 2\l  store i32 9, ptr %e2ptr, align 4\l  %e3ptr = getelementptr inbounds i32, ptr %arrdecay, i64 3\l  store i32 1, ptr %e3ptr, align 4\l  %e4ptr = getelementptr inbounds i32, ptr %arrdecay, i64 4\l  store i32 4, ptr %e4ptr, align 4\l  %e5ptr = getelementptr inbounds i32, ptr %arrdecay, i64 5\l  store i32 8, ptr %e5ptr, align 4\l  %e6ptr = getelementptr inbounds i32, ptr %arrdecay, i64 6\l  store i32 2, ptr %e6ptr, align 4\l  %e7ptr = getelementptr inbounds i32, ptr %arrdecay, i64 7\l  store i32 6, ptr %e7ptr, align 4\l  %e8ptr = getelementptr inbounds i32, ptr %arrdecay, i64 8\l  store i32 5, ptr %e8ptr, align 4\l  br label %loop1.cond\l}"];
+	Node0x5745ace81340 -> Node0x5745ace84cb0[tooltip="entry -> loop1.cond\nProbability 100.00%" ];
+	Node0x5745ace84cb0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop1.cond:\l|  %i1 = phi i64 [ 0, %entry ], [ %i1.next, %loop1.body ]\l  %cmp1 = icmp ult i64 %i1, 9\l  br i1 %cmp1, label %loop1.body, label %after1\l|{<s0>T|<s1>F}}"];
+	Node0x5745ace84cb0:s0 -> Node0x5745ace84f20[tooltip="loop1.cond -> loop1.body\nProbability 96.88%" ];
+	Node0x5745ace84cb0:s1 -> Node0x5745ace85130[tooltip="loop1.cond -> after1\nProbability 3.12%" ];
+	Node0x5745ace84f20 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop1.body:\l|  %elem.ptr1 = getelementptr inbounds i32, ptr %arrdecay, i64 %i1\l  %elem1 = load i32, ptr %elem.ptr1, align 4\l  %fmtptr1 = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %call1 = call i32 (ptr, ...) @printf(ptr noundef %fmtptr1, i32 noundef\l... %elem1)\l  %i1.next = add i64 %i1, 1\l  br label %loop1.cond\l}"];
+	Node0x5745ace84f20 -> Node0x5745ace84cb0[tooltip="loop1.body -> loop1.cond\nProbability 100.00%" ];
+	Node0x5745ace85130 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after1:\l|  %nl1 = call i32 @putchar(i32 noundef 10)\l  call void @heap_sort(ptr noundef %arrdecay, i64 noundef 9)\l  br label %loop2.cond\l}"];
+	Node0x5745ace85130 -> Node0x5745ace85850[tooltip="after1 -> loop2.cond\nProbability 100.00%" ];
+	Node0x5745ace85850 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop2.cond:\l|  %i2 = phi i64 [ 0, %after1 ], [ %i2.next, %loop2.body ]\l  %cmp2 = icmp ult i64 %i2, 9\l  br i1 %cmp2, label %loop2.body, label %after2\l|{<s0>T|<s1>F}}"];
+	Node0x5745ace85850:s0 -> Node0x5745ace85970[tooltip="loop2.cond -> loop2.body\nProbability 96.88%" ];
+	Node0x5745ace85850:s1 -> Node0x5745ace85e20[tooltip="loop2.cond -> after2\nProbability 3.12%" ];
+	Node0x5745ace85970 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop2.body:\l|  %elem.ptr2 = getelementptr inbounds i32, ptr %arrdecay, i64 %i2\l  %elem2 = load i32, ptr %elem.ptr2, align 4\l  %fmtptr2 = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %call2 = call i32 (ptr, ...) @printf(ptr noundef %fmtptr2, i32 noundef\l... %elem2)\l  %i2.next = add i64 %i2, 1\l  br label %loop2.cond\l}"];
+	Node0x5745ace85970 -> Node0x5745ace85850[tooltip="loop2.body -> loop2.cond\nProbability 100.00%" ];
+	Node0x5745ace85e20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after2:\l|  %nl2 = call i32 @putchar(i32 noundef 10)\l  ret i32 0\l}"];
+}

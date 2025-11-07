@@ -1,0 +1,159 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/quicksort_function1.ll:14:13: error: expected instruction opcode
+;   %i.init = %left.cur
+;             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'quick_sort_module'
+target triple = "x86_64-unknown-linux-gnu"
+
+define dso_local void @quick_sort(i32* %base, i64 %left, i64 %right) {
+b1220:
+  ; 0x1220: cmp rsi, rdx ; 0x1223: jge locret_1312
+  %cmp_init = icmp sge i64 %left, %right
+  br i1 %cmp_init, label %b1312, label %b123A
+
+b123A: ; 0x123A
+  ; r12 <- left_cur, r13 <- right_cur, rdi <- r12, r9 <- r12+1, rbx <- r13
+  %left.cur = phi i64 [ %left, %b1220 ], [ %left.next, %b12B2_true ]
+  %right.cur = phi i64 [ %right, %b1220 ], [ %right.next, %b12B2_true ]
+  %i.init = %left.cur
+  %r9.init = add i64 %left.cur, 1
+  %j.init = %right.cur
+  ; 0x1248..0x1251: mid = left + ((right-left)>>1); pivot = base[mid]
+  %diff = sub i64 %right.cur, %left.cur
+  %half = ashr i64 %diff, 1
+  %mid = add i64 %left.cur, %half
+  %pivot.ptr = getelementptr inbounds i32, i32* %base, i64 %mid
+  %pivot = load i32, i32* %pivot.ptr, align 4
+  br label %b1260
+
+b1260: ; 0x1260
+  ; loop header for partition
+  %i = phi i64 [ %i.init, %b123A ], [ %i.next, %b12DB ]
+  %j = phi i64 [ %j.init, %b123A ], [ %j.db, %b12DB ]
+  %r9 = phi i64 [ %r9.init, %b123A ], [ %r9.next, %b12DB ]
+  ; load arr[i] and arr[j]
+  %i.ptr = getelementptr inbounds i32, i32* %base, i64 %i
+  %left.val = load i32, i32* %i.ptr, align 4
+  %j.ptr = getelementptr inbounds i32, i32* %base, i64 %j
+  %right.val = load i32, i32* %j.ptr, align 4
+  ; 0x126c: cmp r8d, esi ; 0x126f: jl loc_12DB
+  %cmp_li = icmp slt i32 %left.val, %pivot
+  br i1 %cmp_li, label %b12DB, label %b1260_checkR
+
+b1260_checkR: ; corresponds to 0x1271 test and branch setup
+  ; 0x1271: cmp esi, edx ; 0x1273: jge loc_1291
+  %cmp_pr = icmp sge i32 %pivot, %right.val
+  br i1 %cmp_pr, label %b1291, label %b1275
+
+b1275: ; 0x1275 start of scanning j leftwards
+  ; prepare pointer to arr[j-1]
+  %j.minus1 = add i64 %j, -1
+  %scan.ptr0 = getelementptr inbounds i32, i32* %base, i64 %j.minus1
+  br label %b1280
+
+b1280: ; 0x1280 scan loop: while (*ptr) > pivot
+  %scan.ptr = phi i32* [ %scan.ptr0, %b1275 ], [ %scan.ptr.next, %b1280 ]
+  %j.loop = phi i64 [ %j, %b1275 ], [ %j.next, %b1280 ]
+  %scan.val = load i32, i32* %scan.ptr, align 4
+  ; rcx is current scan.ptr; after load, rbx := rbx - 1; rax moves left by one
+  %j.next = add i64 %j.loop, -1
+  %scan.ptr.next = getelementptr inbounds i32, i32* %scan.ptr, i64 -1
+  ; 0x128d: cmp edx, esi ; 0x128f: jg loc_1280
+  %cmp_scan = icmp sgt i32 %scan.val, %pivot
+  br i1 %cmp_scan, label %b1280, label %b1291
+
+b1291: ; 0x1291
+  ; Merge after right-side check/scan
+  %j.m = phi i64 [ %j, %b1260_checkR ], [ %j.next, %b1280 ]
+  %rcx.ptr = phi i32* [ %j.ptr, %b1260_checkR ], [ %scan.ptr, %b1280 ]
+  %right.val.m = phi i32 [ %right.val, %b1260_checkR ], [ %scan.val, %b1280 ]
+  %left.val.m = phi i32 [ %left.val, %b1260_checkR ], [ %left.val, %b1280 ]
+  %i.m = phi i64 [ %i, %b1260_checkR ], [ %i, %b1280 ]
+  %r9.m = phi i64 [ %r9, %b1260_checkR ], [ %r9, %b1280 ]
+  ; 0x1291: mov r14, rdi ; 0x1294: cmp rdi, rbx ; 0x1297: jle loc_12C0
+  %r14.cand = %i.m
+  %cmp_ij = icmp sle i64 %i.m, %j.m
+  br i1 %cmp_ij, label %b12C0, label %b1299_from1291
+
+b12C0: ; 0x12C0 swap when i <= j
+  ; sub rbx,1
+  %j.dec = add i64 %j.m, -1
+  ; [base + i] = right.val.m
+  store i32 %right.val.m, i32* %i.ptr, align 4
+  ; r14 = r9
+  %r14.afterSwap = %r9.m
+  ; [rcx] = left.val.m
+  store i32 %left.val.m, i32* %rcx.ptr, align 4
+  ; 0x12ce: cmp r9, rbx ; 0x12d1: jg loc_1299
+  %cmp_r9_j = icmp sgt i64 %r9.m, %j.dec
+  br i1 %cmp_r9_j, label %b1299_from12C0, label %b12DB_from12C0
+
+b12DB_from12C0: ; falls into 0x12DB path after swap
+  ; increment i and r9, keep j = j.dec
+  %i.next.sw = add i64 %i.m, 1
+  %r9.next.sw = add i64 %r9.m, 1
+  br label %b12DB
+
+b12DB: ; 0x12DB
+  ; increments from either left< pivot path or after swap
+  %i.src = phi i64 [ %i.next.sw, %b12DB_from12C0 ], [ %i, %b1260 ]
+  %r9.src = phi i64 [ %r9.next.sw, %b12DB_from12C0 ], [ %r9, %b1260 ]
+  %j.db = phi i64 [ %j.dec, %b12DB_from12C0 ], [ %j, %b1260 ]
+  %i.next = add i64 %i.src, 1
+  %r9.next = add i64 %r9.src, 1
+  br label %b1260
+
+b1299_from1291: ; path to 0x1299 when i > j (no swap)
+  br label %b1299
+
+b1299_from12C0: ; path to 0x1299 after swap when r9 > j.dec
+  br label %b1299
+
+b1299: ; 0x1299..0x12A8 choose recursion order
+  %j.part = phi i64 [ %j.m, %b1299_from1291 ], [ %j.dec, %b1299_from12C0 ]
+  %r14.part = phi i64 [ %r14.cand, %b1299_from1291 ], [ %r14.afterSwap, %b1299_from12C0 ]
+  ; leftLen = j.part - left.cur ; rightLen = right.cur - r14.part
+  %leftLen = sub i64 %j.part, %left.cur
+  %rightLen = sub i64 %right.cur, %r14.part
+  ; 0x12a5: cmp rdx, rax ; 0x12a8: jge loc_12E8
+  %cmp_len = icmp sge i64 %leftLen, %rightLen
+  br i1 %cmp_len, label %b12E8, label %b12AA
+
+b12AA: ; 0x12AA: cmp rbx, r12 ; 0x12AD: jg loc_12F2
+  %cmp_left_nonempty = icmp sgt i64 %j.part, %left.cur
+  br i1 %cmp_left_nonempty, label %b12F2, label %b12AF
+
+b12F2: ; 0x12F2 call quick_sort(base, left.cur, j.part)
+  call void @quick_sort(i32* %base, i64 %left.cur, i64 %j.part)
+  br label %b12AF
+
+b12AF: ; 0x12AF: r12 = r14.part
+  %left.next.af = %r14.part
+  br label %b12B2
+
+b12E8: ; 0x12E8: cmp r14, r13 ; 0x12EB: jl loc_1302
+  %cmp_right_nonempty = icmp slt i64 %r14.part, %right.cur
+  br i1 %cmp_right_nonempty, label %b1302, label %b12ED
+
+b1302: ; 0x1302 call quick_sort(base, r14.part, right.cur)
+  call void @quick_sort(i32* %base, i64 %r14.part, i64 %right.cur)
+  br label %b12ED
+
+b12ED: ; 0x12ED: r13 = j.part
+  %right.next.ed = %j.part
+  br label %b12B2
+
+b12B2: ; 0x12B2: cmp r13, r12 ; 0x12B5: jg loc_123A else return
+  %left.next = phi i64 [ %left.next.af, %b12AF ], [ %left.cur, %b12ED ]
+  %right.next = phi i64 [ %right.cur, %b12AF ], [ %right.next.ed, %b12ED ]
+  %cmp_loop = icmp sgt i64 %right.next, %left.next
+  br i1 %cmp_loop, label %b123A, label %b1312
+
+b12B2_true: ; helper label for PHI predecessor naming (to 0x123A)
+  br label %b123A
+
+b1312: ; locret_1312 0x1312
+  ret void
+}

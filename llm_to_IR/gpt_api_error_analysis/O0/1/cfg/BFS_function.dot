@@ -1,0 +1,47 @@
+digraph "CFG for 'bfs' function" {
+	label="CFG for 'bfs' function";
+
+	Node0x577e5aa21410 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e36c5570" fontname="Courier",label="{entry:\l|  %cmp_n0 = icmp eq i64 %n, 0\l  br i1 %cmp_n0, label %early_ret, label %check_start\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa21410:s0 -> Node0x577e5aa211f0[tooltip="entry -> early_ret\nProbability 37.50%" ];
+	Node0x577e5aa21410:s1 -> Node0x577e5aa23050[tooltip="entry -> check_start\nProbability 62.50%" ];
+	Node0x577e5aa23050 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5705870" fontname="Courier",label="{check_start:\l|  %cmp_start = icmp ult i64 %start, %n\l  br i1 %cmp_start, label %init_loop.entry, label %early_ret\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa23050:s0 -> Node0x577e5aa23100[tooltip="check_start -> init_loop.entry\nProbability 50.00%" ];
+	Node0x577e5aa23050:s1 -> Node0x577e5aa211f0[tooltip="check_start -> early_ret\nProbability 50.00%" ];
+	Node0x577e5aa211f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5705870" fontname="Courier",label="{early_ret:\l|  store i64 0, ptr %outCount, align 8\l  ret void\l}"];
+	Node0x577e5aa23100 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{init_loop.entry:\l|  br label %init_loop.cond\l}"];
+	Node0x577e5aa23100 -> Node0x577e5aa23350[tooltip="init_loop.entry -> init_loop.cond\nProbability 100.00%" ];
+	Node0x577e5aa23350 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d24b4070" fontname="Courier",label="{init_loop.cond:\l|  %i = phi i64 [ 0, %init_loop.entry ], [ %i.next, %init_loop.body ]\l  %cond_i = icmp ult i64 %i, %n\l  br i1 %cond_i, label %init_loop.body, label %alloc_queue\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa23350:s0 -> Node0x577e5aa23590[tooltip="init_loop.cond -> init_loop.body\nProbability 96.88%" ];
+	Node0x577e5aa23350:s1 -> Node0x577e5aa23710[tooltip="init_loop.cond -> alloc_queue\nProbability 3.12%" ];
+	Node0x577e5aa23590 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d24b4070" fontname="Courier",label="{init_loop.body:\l|  %gep_dist_i = getelementptr inbounds i32, ptr %dist, i64 %i\l  store i32 -1, ptr %gep_dist_i, align 4\l  %i.next = add i64 %i, 1\l  br label %init_loop.cond\l}"];
+	Node0x577e5aa23590 -> Node0x577e5aa23350[tooltip="init_loop.body -> init_loop.cond\nProbability 100.00%" ];
+	Node0x577e5aa23710 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{alloc_queue:\l|  %size_elems = shl i64 %n, 3\l  %qraw = call noalias ptr @malloc(i64 %size_elems)\l  %queue = bitcast ptr %qraw to ptr\l  %isnull = icmp eq ptr %queue, null\l  br i1 %isnull, label %malloc_fail, label %bfs_init\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa23710:s0 -> Node0x577e5aa24cd0[tooltip="alloc_queue -> malloc_fail\nProbability 37.50%" ];
+	Node0x577e5aa23710:s1 -> Node0x577e5aa24d50[tooltip="alloc_queue -> bfs_init\nProbability 62.50%" ];
+	Node0x577e5aa24cd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{malloc_fail:\l|  store i64 0, ptr %outCount, align 8\l  ret void\l}"];
+	Node0x577e5aa24d50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{bfs_init:\l|  %dist_start_ptr = getelementptr inbounds i32, ptr %dist, i64 %start\l  store i32 0, ptr %dist_start_ptr, align 4\l  %qpos0 = getelementptr inbounds i64, ptr %queue, i64 0\l  store i64 %start, ptr %qpos0, align 8\l  store i64 0, ptr %outCount, align 8\l  br label %outer_cond\l}"];
+	Node0x577e5aa24d50 -> Node0x577e5aa25630[tooltip="bfs_init -> outer_cond\nProbability 100.00%" ];
+	Node0x577e5aa25630 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer_cond:\l|  %head.phi = phi i64 [ 0, %bfs_init ], [ %head.next, %after_inner ]\l  %tail.phi = phi i64 [ 1, %bfs_init ], [ %tail.inner, %after_inner ]\l  %cmp_ht = icmp ult i64 %head.phi, %tail.phi\l  br i1 %cmp_ht, label %outer_body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa25630:s0 -> Node0x577e5aa25af0[tooltip="outer_cond -> outer_body\nProbability 96.88%" ];
+	Node0x577e5aa25630:s1 -> Node0x577e5aa25bd0[tooltip="outer_cond -> exit\nProbability 3.12%" ];
+	Node0x577e5aa25af0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer_body:\l|  %qhead.ptr = getelementptr inbounds i64, ptr %queue, i64 %head.phi\l  %x = load i64, ptr %qhead.ptr, align 8\l  %head.next = add i64 %head.phi, 1\l  %count0 = load i64, ptr %outCount, align 8\l  %count1 = add i64 %count0, 1\l  store i64 %count1, ptr %outCount, align 8\l  %out.ptr = getelementptr inbounds i64, ptr %out, i64 %count0\l  store i64 %x, ptr %out.ptr, align 8\l  br label %inner_cond\l}"];
+	Node0x577e5aa25af0 -> Node0x577e5aa26220[tooltip="outer_body -> inner_cond\nProbability 100.00%" ];
+	Node0x577e5aa26220 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner_cond:\l|  %i2 = phi i64 [ 0, %outer_body ], [ %i2.next, %inner_latch ]\l  %tail.inner = phi i64 [ %tail.phi, %outer_body ], [ %tail.next, %inner_latch\l... ]\l  %cond_i2 = icmp ult i64 %i2, %n\l  br i1 %cond_i2, label %inner_body, label %after_inner\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa26220:s0 -> Node0x577e5aa26ed0[tooltip="inner_cond -> inner_body\nProbability 96.88%" ];
+	Node0x577e5aa26220:s1 -> Node0x577e5aa25780[tooltip="inner_cond -> after_inner\nProbability 3.12%" ];
+	Node0x577e5aa26ed0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner_body:\l|  %xn = mul i64 %x, %n\l  %idx = add i64 %xn, %i2\l  %adj.ptr = getelementptr inbounds i32, ptr %adj, i64 %idx\l  %adj.val = load i32, ptr %adj.ptr, align 4\l  %adj.iszero = icmp eq i32 %adj.val, 0\l  br i1 %adj.iszero, label %inner_skip, label %check_unvisited\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa26ed0:s0 -> Node0x577e5aa27970[tooltip="inner_body -> inner_skip\nProbability 37.50%" ];
+	Node0x577e5aa26ed0:s1 -> Node0x577e5aa279f0[tooltip="inner_body -> check_unvisited\nProbability 62.50%" ];
+	Node0x577e5aa279f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{check_unvisited:\l|  %dist_i_ptr = getelementptr inbounds i32, ptr %dist, i64 %i2\l  %dist_i_val = load i32, ptr %dist_i_ptr, align 4\l  %is_unvisited = icmp eq i32 %dist_i_val, -1\l  br i1 %is_unvisited, label %visit, label %inner_skip\l|{<s0>T|<s1>F}}"];
+	Node0x577e5aa279f0:s0 -> Node0x577e5aa27dc0[tooltip="check_unvisited -> visit\nProbability 37.50%" ];
+	Node0x577e5aa279f0:s1 -> Node0x577e5aa27970[tooltip="check_unvisited -> inner_skip\nProbability 62.50%" ];
+	Node0x577e5aa27dc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c5333470" fontname="Courier",label="{visit:\l|  %dist_x_ptr = getelementptr inbounds i32, ptr %dist, i64 %x\l  %dist_x_val = load i32, ptr %dist_x_ptr, align 4\l  %dist_x_plus1 = add i32 %dist_x_val, 1\l  store i32 %dist_x_plus1, ptr %dist_i_ptr, align 4\l  %qtail.ptr = getelementptr inbounds i64, ptr %queue, i64 %tail.inner\l  store i64 %i2, ptr %qtail.ptr, align 8\l  %tail.next.visit = add i64 %tail.inner, 1\l  br label %inner_latch\l}"];
+	Node0x577e5aa27dc0 -> Node0x577e5aa26330[tooltip="visit -> inner_latch\nProbability 100.00%" ];
+	Node0x577e5aa27970 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{inner_skip:\l|  br label %inner_latch\l}"];
+	Node0x577e5aa27970 -> Node0x577e5aa26330[tooltip="inner_skip -> inner_latch\nProbability 100.00%" ];
+	Node0x577e5aa26330 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner_latch:\l|  %tail.next = phi i64 [ %tail.next.visit, %visit ], [ %tail.inner,\l... %inner_skip ]\l  %i2.next = add i64 %i2, 1\l  br label %inner_cond\l}"];
+	Node0x577e5aa26330 -> Node0x577e5aa26220[tooltip="inner_latch -> inner_cond\nProbability 100.00%" ];
+	Node0x577e5aa25780 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after_inner:\l|  br label %outer_cond\l}"];
+	Node0x577e5aa25780 -> Node0x577e5aa25630[tooltip="after_inner -> outer_cond\nProbability 100.00%" ];
+	Node0x577e5aa25bd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{exit:\l|  %queue.cast = bitcast ptr %queue to ptr\l  call void @free(ptr %queue.cast)\l  ret void\l}"];
+}

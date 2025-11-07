@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5c72345ea9e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_1080:\l|  %arr = alloca [5 x i32], align 16\l  %saved_canary = alloca i64, align 8\l  %vec = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  %base = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %vecptr = bitcast ptr %base to ptr\l  store \<4 x i32\> %vec, ptr %vecptr, align 16\l  %fifth = getelementptr inbounds i32, ptr %base, i64 4\l  store i32 13, ptr %fifth, align 4\l  %canary = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %canary, ptr %saved_canary, align 8\l  %end = getelementptr inbounds i32, ptr %base, i64 5\l  call void @selection_sort(ptr %base, i32 5)\l  %hfmt = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0, i64 0\l  %hdr = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %hfmt)\l  br label %bb_10E0\l}"];
+	Node0x5c72345ea9e0 -> Node0x5c72345eee60[tooltip="bb_1080 -> bb_10E0\nProbability 100.00%" ];
+	Node0x5c72345eee60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_10E0:\l|  %cur = phi ptr [ %base, %bb_1080 ], [ %next, %bb_10E0 ]\l  %val = load i32, ptr %cur, align 4\l  %fmt = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %call = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt, i32 %val)\l  %next = getelementptr inbounds i32, ptr %cur, i64 1\l  %cont = icmp ne ptr %next, %end\l  br i1 %cont, label %bb_10E0, label %bb_10FA\l|{<s0>T|<s1>F}}"];
+	Node0x5c72345eee60:s0 -> Node0x5c72345eee60[tooltip="bb_10E0 -> bb_10E0\nProbability 96.88%" ];
+	Node0x5c72345eee60:s1 -> Node0x5c72345ef4f0[tooltip="bb_10E0 -> bb_10FA\nProbability 3.12%" ];
+	Node0x5c72345ef4f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10FA:\l|  %cur_canary = load i64, ptr @__stack_chk_guard, align 8\l  %saved_val = load i64, ptr %saved_canary, align 8\l  %mismatch = icmp ne i64 %saved_val, %cur_canary\l  br i1 %mismatch, label %bb_1115, label %bb_ret\l|{<s0>T|<s1>F}}"];
+	Node0x5c72345ef4f0:s0 -> Node0x5c72345ef6c0[tooltip="bb_10FA -> bb_1115\nProbability 0.00%" ];
+	Node0x5c72345ef4f0:s1 -> Node0x5c72345ef730[tooltip="bb_10FA -> bb_ret\nProbability 100.00%" ];
+	Node0x5c72345ef730 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_ret:\l|  ret i32 0\l}"];
+	Node0x5c72345ef6c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5d8d170" fontname="Courier",label="{bb_1115:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+}

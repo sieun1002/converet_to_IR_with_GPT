@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x595123c7e470 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %arr0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 29, ptr %arr0, align 4\l  %arr1 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 10, ptr %arr1, align 4\l  %arr2 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 14, ptr %arr2, align 4\l  %arr3 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 37, ptr %arr3, align 4\l  %arr4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %arr4, align 4\l  %arrdecay = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  call void @selection_sort(ptr noundef %arrdecay, i32 noundef 5)\l  %fmt_sorted_ptr = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0,\l... i64 0\l  %call0 = call i32 (ptr, ...) @printf(ptr noundef %fmt_sorted_ptr)\l  br label %for.cond\l}"];
+	Node0x595123c7e470 -> Node0x595123c802d0[tooltip="entry -> for.cond\nProbability 100.00%" ];
+	Node0x595123c802d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.cond:\l|  %i = phi i32 [ 0, %entry ], [ %inc, %for.inc ]\l  %cmp = icmp slt i32 %i, 5\l  br i1 %cmp, label %for.body, label %for.end\l|{<s0>T|<s1>F}}"];
+	Node0x595123c802d0:s0 -> Node0x595123c80790[tooltip="for.cond -> for.body\nProbability 96.88%" ];
+	Node0x595123c802d0:s1 -> Node0x595123c80870[tooltip="for.cond -> for.end\nProbability 3.12%" ];
+	Node0x595123c80790 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.body:\l|  %idx.ext = sext i32 %i to i64\l  %elem.ptr = getelementptr inbounds i32, ptr %arrdecay, i64 %idx.ext\l  %val = load i32, ptr %elem.ptr, align 4\l  %fmt_d_ptr = getelementptr inbounds [4 x i8], ptr @.str.int, i64 0, i64 0\l  %call1 = call i32 (ptr, ...) @printf(ptr noundef %fmt_d_ptr, i32 noundef\l... %val)\l  br label %for.inc\l}"];
+	Node0x595123c80790 -> Node0x595123c80420[tooltip="for.body -> for.inc\nProbability 100.00%" ];
+	Node0x595123c80420 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.inc:\l|  %inc = add nsw i32 %i, 1\l  br label %for.cond\l}"];
+	Node0x595123c80420 -> Node0x595123c802d0[tooltip="for.inc -> for.cond\nProbability 100.00%" ];
+	Node0x595123c80870 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.end:\l|  ret i32 0\l}"];
+}

@@ -1,0 +1,103 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.ll:66:26: error: expected value token\n  br i1 %any.null, label loc_1455, label %chk_r12\n                         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main1.bc",
+      "start_time": "2025-11-01T18:54:13",
+      "end_time": "2025-11-01T18:54:13",
+      "elapsed_sec": 0.142245
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.ll:73:9: error: expected '=' after instruction name\n%init_ok:\n        ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/DFS_main2.bc",
+      "start_time": "2025-11-01T18:55:21",
+      "end_time": "2025-11-01T18:55:21",
+      "elapsed_sec": 0.026139
+    },
+    {
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_function1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %selected = phi i64 [ %v10_for_phi, %bb_11bc_compare_children ], [ %v18_to_store, %loc_1223 ]\nlabel %loc_1227\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_function1.bc",
+      "start_time": "2025-11-01T19:04:26",
+      "end_time": "2025-11-01T19:04:26",
+      "elapsed_sec": 0.02136
+    },
+    {
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.ll:60:41: error: expected instruction opcode\n  br i1 %cmp1, label %loc_14B7, label %0x14e4\n                                        ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/heapsort_main1.bc",
+      "start_time": "2025-11-01T19:08:04",
+      "end_time": "2025-11-01T19:08:04",
+      "elapsed_sec": 0.020641
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.ll:12:32: warning: ptr type is only supported in -opaque-pointers mode\ndeclare i32 @__printf_chk(i32, ptr, ...)\n                               ^\nllvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.ll:12:32: error: expected type\ndeclare i32 @__printf_chk(i32, ptr, ...)\n                               ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/insertionsort_main1.bc",
+      "start_time": "2025-11-01T19:12:56",
+      "end_time": "2025-11-01T19:12:56",
+      "elapsed_sec": 0.021199
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.ll:1:1: error: expected top-level entity\nThis function is large and has many basic blocks and conditional jumps. I can generate either:\n^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/mergesort_main1.bc",
+      "start_time": "2025-11-01T19:19:24",
+      "end_time": "2025-11-01T19:19:24",
+      "elapsed_sec": 0.019233
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.ll:12:30: warning: ptr type is only supported in -opaque-pointers mode\n  %rbx0 = getelementptr i32, ptr %arr, i64 0\n                             ^\nllvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.ll:12:30: error: expected type\n  %rbx0 = getelementptr i32, ptr %arr, i64 0\n                             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/1/selectionsort_function1.bc",
+      "start_time": "2025-11-01T19:30:10",
+      "end_time": "2025-11-01T19:30:10",
+      "elapsed_sec": 0.022123
+    }
+  ]
+}

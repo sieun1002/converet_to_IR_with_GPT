@@ -1,0 +1,21 @@
+digraph "CFG for 'init_graph' function" {
+	label="CFG for 'init_graph' function";
+
+	Node0x64d53febc500 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{entry:\l|  br label %outer.header\l}"];
+	Node0x64d53febc500 -> Node0x64d53febb980[tooltip="entry -> outer.header\nProbability 100.00%" ];
+	Node0x64d53febb980 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.header:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %outer.latch ]\l  %cmp.i = icmp sge i32 %i, %n\l  br i1 %cmp.i, label %exit, label %inner.header\l|{<s0>T|<s1>F}}"];
+	Node0x64d53febb980:s0 -> Node0x64d53febbd50[tooltip="outer.header -> exit\nProbability 3.12%" ];
+	Node0x64d53febb980:s1 -> Node0x64d53febd5c0[tooltip="outer.header -> inner.header\nProbability 96.88%" ];
+	Node0x64d53febd5c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.header:\l|  %j = phi i32 [ 0, %outer.header ], [ %j.next, %inner.latch ]\l  %cmp.j = icmp sge i32 %j, %n\l  br i1 %cmp.j, label %after.inner, label %inner.body\l|{<s0>T|<s1>F}}"];
+	Node0x64d53febd5c0:s0 -> Node0x64d53febd880[tooltip="inner.header -> after.inner\nProbability 3.12%" ];
+	Node0x64d53febd5c0:s1 -> Node0x64d53febdb00[tooltip="inner.header -> inner.body\nProbability 96.88%" ];
+	Node0x64d53febdb00 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.body:\l|  %i.ext = sext i32 %i to i64\l  %row.off = mul nsw i64 %i.ext, 400\l  %row.ptr.i8 = getelementptr inbounds i8, ptr %base, i64 %row.off\l  %row.ptr.i32 = bitcast ptr %row.ptr.i8 to ptr\l  %j.ext = sext i32 %j to i64\l  %elem.ptr = getelementptr inbounds i32, ptr %row.ptr.i32, i64 %j.ext\l  store i32 0, ptr %elem.ptr, align 4\l  br label %inner.latch\l}"];
+	Node0x64d53febdb00 -> Node0x64d53febd6a0[tooltip="inner.body -> inner.latch\nProbability 100.00%" ];
+	Node0x64d53febd6a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.latch:\l|  %j.next = add nsw i32 %j, 1\l  br label %inner.header\l}"];
+	Node0x64d53febd6a0 -> Node0x64d53febd5c0[tooltip="inner.latch -> inner.header\nProbability 100.00%" ];
+	Node0x64d53febd880 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after.inner:\l|  br label %outer.latch\l}"];
+	Node0x64d53febd880 -> Node0x64d53febb760[tooltip="after.inner -> outer.latch\nProbability 100.00%" ];
+	Node0x64d53febb760 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.latch:\l|  %i.next = add nsw i32 %i, 1\l  br label %outer.header\l}"];
+	Node0x64d53febb760 -> Node0x64d53febb980[tooltip="outer.latch -> outer.header\nProbability 100.00%" ];
+	Node0x64d53febbd50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

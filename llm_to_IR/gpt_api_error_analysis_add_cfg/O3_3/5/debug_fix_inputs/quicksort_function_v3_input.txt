@@ -1,0 +1,128 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; Instruction does not dominate all uses!
+;   %r12.next = add i64 %r14.part, 0
+;   %r12.cur = phi i64 [ %left, %loc_1220 ], [ %r12.next, %loc_12B2 ]
+; Instruction does not dominate all uses!
+;   %r13.next = add i64 %rbx.part, 0
+;   %r13.cur = phi i64 [ %right, %loc_1220 ], [ %r13.next, %loc_12B2 ]
+; === ERROR LOG END ===
+
+; ModuleID = 'qs_from_asm'
+target triple = "x86_64-unknown-linux-gnu"
+
+define dso_local void @quick_sort(i32* %arr, i64 %left, i64 %right) {
+loc_1220:
+  %cmp0 = icmp sge i64 %left, %right
+  br i1 %cmp0, label %locret_1312, label %loc_123A
+
+loc_123A:
+  %r12.cur = phi i64 [ %left, %loc_1220 ], [ %r12.next, %loc_12B2 ]
+  %r13.cur = phi i64 [ %right, %loc_1220 ], [ %r13.next, %loc_12B2 ]
+  %mid.diff = sub i64 %r13.cur, %r12.cur
+  %mid.half = ashr i64 %mid.diff, 1
+  %mid = add i64 %r12.cur, %mid.half
+  %pivot.ptr = getelementptr inbounds i32, i32* %arr, i64 %mid
+  %pivot = load i32, i32* %pivot.ptr, align 4
+  %idx_rcx.init = add i64 %r13.cur, 0
+  %r9.init = add i64 %r12.cur, 1
+  br label %loc_1260
+
+loc_1260:
+  %rdi.cur = phi i64 [ %r12.cur, %loc_123A ], [ %rdi.next, %loc_12DB ]
+  %r9.cur = phi i64 [ %r9.init, %loc_123A ], [ %r9.next, %loc_12DB ]
+  %rbx.cur = phi i64 [ %r13.cur, %loc_123A ], [ %rbx.to1260, %loc_12DB ]
+  %idx_rcx.cur = phi i64 [ %idx_rcx.init, %loc_123A ], [ %idx_rcx.next, %loc_12DB ]
+  %arr.i.ptr = getelementptr inbounds i32, i32* %arr, i64 %rdi.cur
+  %r8.val = load i32, i32* %arr.i.ptr, align 4
+  %rcx.ptr = getelementptr inbounds i32, i32* %arr, i64 %idx_rcx.cur
+  %edx.val = load i32, i32* %rcx.ptr, align 4
+  %cmp1 = icmp slt i32 %r8.val, %pivot
+  br i1 %cmp1, label %loc_12DB, label %loc_1271
+
+loc_1271:
+  %idx.before = add i64 %idx_rcx.cur, -1
+  %rax.pre.ptr = getelementptr inbounds i32, i32* %arr, i64 %idx.before
+  %cmp2 = icmp sge i32 %pivot, %edx.val
+  br i1 %cmp2, label %loc_1291, label %loc_1280
+
+loc_1280:
+  %rax.ptr = phi i32* [ %rax.pre.ptr, %loc_1271 ], [ %rax.dec, %loc_1280 ]
+  %rbx.loop = phi i64 [ %rbx.cur, %loc_1271 ], [ %rbx.dec, %loc_1280 ]
+  %rcx.loop = getelementptr inbounds i32, i32* %rax.ptr, i64 0
+  %edx.loop = load i32, i32* %rcx.loop, align 4
+  %rax.dec = getelementptr inbounds i32, i32* %rcx.loop, i64 -1
+  %rbx.dec = add i64 %rbx.loop, -1
+  %cmp3 = icmp sgt i32 %edx.loop, %pivot
+  br i1 %cmp3, label %loc_1280, label %loc_1291
+
+loc_1291:
+  %rbx.sel = phi i64 [ %rbx.cur, %loc_1271 ], [ %rbx.dec, %loc_1280 ]
+  %edx.sel = phi i32 [ %edx.val, %loc_1271 ], [ %edx.loop, %loc_1280 ]
+  %rcx.sel = phi i32* [ %rcx.ptr, %loc_1271 ], [ %rcx.loop, %loc_1280 ]
+  %r14.from = add i64 %rdi.cur, 0
+  %cmp4 = icmp sle i64 %rdi.cur, %rbx.sel
+  br i1 %cmp4, label %loc_12C0, label %loc_1299
+
+loc_12C0:
+  %rbx.after = add i64 %rbx.sel, -1
+  store i32 %edx.sel, i32* %arr.i.ptr, align 4
+  %r14.alt = add i64 %r9.cur, 0
+  store i32 %r8.val, i32* %rcx.sel, align 4
+  %cmp5 = icmp sgt i64 %r9.cur, %rbx.after
+  br i1 %cmp5, label %loc_1299, label %loc_12DB
+
+loc_12DB:
+  %rbx.to1260 = phi i64 [ %rbx.cur, %loc_1260 ], [ %rbx.after, %loc_12C0 ]
+  %idx_rcx.base = phi i64 [ %idx_rcx.cur, %loc_1260 ], [ %rbx.after, %loc_12C0 ]
+  %r9.base = phi i64 [ %r9.cur, %loc_1260 ], [ %r9.cur, %loc_12C0 ]
+  %rdi.base = phi i64 [ %rdi.cur, %loc_1260 ], [ %rdi.cur, %loc_12C0 ]
+  %idx_rcx.next = add i64 %idx_rcx.base, 0
+  %r9.next = add i64 %r9.base, 1
+  %rdi.next = add i64 %rdi.base, 1
+  br label %loc_1260
+
+loc_1299:
+  %rbx.part = phi i64 [ %rbx.sel, %loc_1291 ], [ %rbx.after, %loc_12C0 ]
+  %r14.part = phi i64 [ %r14.from, %loc_1291 ], [ %r14.alt, %loc_12C0 ]
+  %len.left = sub i64 %rbx.part, %r12.cur
+  %len.right = sub i64 %r13.cur, %r14.part
+  %cmp6 = icmp sge i64 %len.left, %len.right
+  br i1 %cmp6, label %loc_12E8, label %loc_12AA
+
+loc_12AA:
+  %cmp7 = icmp sgt i64 %rbx.part, %r12.cur
+  br i1 %cmp7, label %loc_12F2, label %loc_12AF
+
+loc_12F2:
+  call void @quick_sort(i32* %arr, i64 %r12.cur, i64 %rbx.part)
+  br label %loc_12AF
+
+loc_12AF:
+  %r12.next = add i64 %r14.part, 0
+  br label %loc_12B2
+
+loc_12E8:
+  %cmp8 = icmp slt i64 %r14.part, %r13.cur
+  br i1 %cmp8, label %loc_1302, label %loc_12ED
+
+loc_1302:
+  call void @quick_sort(i32* %arr, i64 %r14.part, i64 %r13.cur)
+  br label %loc_12ED
+
+loc_12ED:
+  %r13.next = add i64 %rbx.part, 0
+  br label %loc_12B2
+
+loc_12B2:
+  %r12.loop = phi i64 [ %r12.next, %loc_12AF ], [ %r12.cur, %loc_12ED ]
+  %r13.loop = phi i64 [ %r13.cur, %loc_12AF ], [ %r13.next, %loc_12ED ]
+  %cmp9 = icmp sgt i64 %r13.loop, %r12.loop
+  br i1 %cmp9, label %loc_123A, label %epilogue_ret
+
+epilogue_ret:
+  ret void
+
+locret_1312:
+  ret void
+}

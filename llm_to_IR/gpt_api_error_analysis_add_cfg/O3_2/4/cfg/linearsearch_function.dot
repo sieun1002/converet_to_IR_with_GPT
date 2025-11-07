@@ -1,0 +1,15 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x649853d093e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb_1180:\l|  %cmp_n_nonpos = icmp sle i32 %n, 0\l  %n64 = sext i32 %n to i64\l  br i1 %cmp_n_nonpos, label %bb_11a0, label %bb_1199\l|{<s0>T|<s1>F}}"];
+	Node0x649853d093e0:s0 -> Node0x649853d08860[tooltip="bb_1180 -> bb_11a0\nProbability 50.00%" ];
+	Node0x649853d093e0:s1 -> Node0x649853d08660[tooltip="bb_1180 -> bb_1199\nProbability 50.00%" ];
+	Node0x649853d08af0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_1190:\l|  %i.inc = add i64 %i.cur, 1\l  %cmp_end = icmp eq i64 %i.inc, %n64\l  br i1 %cmp_end, label %bb_11a0, label %bb_1199\l|{<s0>T|<s1>F}}"];
+	Node0x649853d08af0:s0 -> Node0x649853d08860[tooltip="bb_1190 -> bb_11a0\nProbability 3.12%" ];
+	Node0x649853d08af0:s1 -> Node0x649853d08660[tooltip="bb_1190 -> bb_1199\nProbability 96.88%" ];
+	Node0x649853d08660 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_1199:\l|  %i.cur = phi i64 [ 0, %bb_1180 ], [ %i.inc, %bb_1190 ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %i.cur\l  %elem = load i32, ptr %elem.ptr, align 4\l  %eq = icmp eq i32 %elem, %key\l  br i1 %eq, label %bb_119e, label %bb_1190\l|{<s0>T|<s1>F}}"];
+	Node0x649853d08660:s0 -> Node0x649853d0ac80[tooltip="bb_1199 -> bb_119e\nProbability 3.12%" ];
+	Node0x649853d08660:s1 -> Node0x649853d08af0[tooltip="bb_1199 -> bb_1190\nProbability 96.88%" ];
+	Node0x649853d0ac80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_119e:\l|  %ret = trunc i64 %i.cur to i32\l  ret i32 %ret\l}"];
+	Node0x649853d08860 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb_11a0:\l|  ret i32 -1\l}"];
+}

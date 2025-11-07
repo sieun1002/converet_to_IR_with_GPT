@@ -1,0 +1,31 @@
+digraph "CFG for 'read_graph' function" {
+	label="CFG for 'read_graph' function";
+
+	Node0x561521827ec0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{entry:\l|  %m = alloca i32, align 4\l  %i = alloca i32, align 4\l  %u = alloca i32, align 4\l  %v = alloca i32, align 4\l  %w = alloca i32, align 4\l  %fmt_dd_gep = getelementptr inbounds [6 x i8], ptr @.str.dd, i64 0, i64 0\l  %call_scanf1 = call i32 (ptr, ...) @__isoc99_scanf(ptr %fmt_dd_gep, ptr\l... %n_ptr, ptr %m)\l  %cmp_scanf1_ok = icmp eq i32 %call_scanf1, 2\l  br i1 %cmp_scanf1_ok, label %check_bounds1, label %ret_minus1\l|{<s0>T|<s1>F}}"];
+	Node0x561521827ec0:s0 -> Node0x56152182b6c0[tooltip="entry -> check_bounds1\nProbability 50.00%" ];
+	Node0x561521827ec0:s1 -> Node0x56152182b8e0[tooltip="entry -> ret_minus1\nProbability 50.00%" ];
+	Node0x56152182b6c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ca3b3770" fontname="Courier",label="{check_bounds1:\l|  %n_val_ldr = load i32, ptr %n_ptr, align 4\l  %n_pos = icmp sgt i32 %n_val_ldr, 0\l  %n_le_100 = icmp sle i32 %n_val_ldr, 100\l  %n_ok = and i1 %n_pos, %n_le_100\l  %m_ldr = load i32, ptr %m, align 4\l  %m_nonneg = icmp sge i32 %m_ldr, 0\l  %bounds1_ok = and i1 %n_ok, %m_nonneg\l  br i1 %bounds1_ok, label %init, label %ret_minus1\l|{<s0>T|<s1>F}}"];
+	Node0x56152182b6c0:s0 -> Node0x56152182bf10[tooltip="check_bounds1 -> init\nProbability 50.00%" ];
+	Node0x56152182b6c0:s1 -> Node0x56152182b8e0[tooltip="check_bounds1 -> ret_minus1\nProbability 50.00%" ];
+	Node0x56152182bf10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{init:\l|  %n_for_init = load i32, ptr %n_ptr, align 4\l  call void @init_graph(ptr %g, i32 %n_for_init)\l  store i32 0, ptr %i, align 4\l  br label %loop_hdr\l}"];
+	Node0x56152182bf10 -> Node0x56152182c2d0[tooltip="init -> loop_hdr\nProbability 100.00%" ];
+	Node0x56152182c2d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop_hdr:\l|  %i_cur = load i32, ptr %i, align 4\l  %m_cur = load i32, ptr %m, align 4\l  %i_ge_m = icmp sge i32 %i_cur, %m_cur\l  br i1 %i_ge_m, label %after_loop, label %loop_body\l|{<s0>T|<s1>F}}"];
+	Node0x56152182c2d0:s0 -> Node0x56152182c820[tooltip="loop_hdr -> after_loop\nProbability 3.12%" ];
+	Node0x56152182c2d0:s1 -> Node0x56152182c8a0[tooltip="loop_hdr -> loop_body\nProbability 96.88%" ];
+	Node0x56152182c8a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop_body:\l|  %fmt_ddd_gep = getelementptr inbounds [9 x i8], ptr @.str.ddd, i64 0, i64 0\l  %call_scanf_edge = call i32 (ptr, ...) @__isoc99_scanf(ptr %fmt_ddd_gep, ptr\l... %u, ptr %v, ptr %w)\l  %scanf_edge_ok = icmp eq i32 %call_scanf_edge, 3\l  br i1 %scanf_edge_ok, label %validate_uv, label %ret_minus1\l|{<s0>T|<s1>F}}"];
+	Node0x56152182c8a0:s0 -> Node0x56152182cd90[tooltip="loop_body -> validate_uv\nProbability 96.88%" ];
+	Node0x56152182c8a0:s1 -> Node0x56152182b8e0[tooltip="loop_body -> ret_minus1\nProbability 3.12%" ];
+	Node0x56152182cd90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{validate_uv:\l|  %u_val = load i32, ptr %u, align 4\l  %u_nonneg = icmp sge i32 %u_val, 0\l  %n_val_for_u = load i32, ptr %n_ptr, align 4\l  %u_lt_n = icmp slt i32 %u_val, %n_val_for_u\l  %u_ok = and i1 %u_nonneg, %u_lt_n\l  %v_val = load i32, ptr %v, align 4\l  %v_nonneg = icmp sge i32 %v_val, 0\l  %n_val_for_v = load i32, ptr %n_ptr, align 4\l  %v_lt_n = icmp slt i32 %v_val, %n_val_for_v\l  %v_ok = and i1 %v_nonneg, %v_lt_n\l  %uv_ok = and i1 %u_ok, %v_ok\l  br i1 %uv_ok, label %add_call, label %ret_minus1\l|{<s0>T|<s1>F}}"];
+	Node0x56152182cd90:s0 -> Node0x56152182de60[tooltip="validate_uv -> add_call\nProbability 96.88%" ];
+	Node0x56152182cd90:s1 -> Node0x56152182b8e0[tooltip="validate_uv -> ret_minus1\nProbability 3.12%" ];
+	Node0x56152182de60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{add_call:\l|  %w_val = load i32, ptr %w, align 4\l  call void @add_edge(ptr %g, i32 %u_val, i32 %v_val, i32 %w_val, i32 1)\l  %i_next = add nsw i32 %i_cur, 1\l  store i32 %i_next, ptr %i, align 4\l  br label %loop_hdr\l}"];
+	Node0x56152182de60 -> Node0x56152182c2d0[tooltip="add_call -> loop_hdr\nProbability 100.00%" ];
+	Node0x56152182c820 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after_loop:\l|  %fmt_d_gep = getelementptr inbounds [3 x i8], ptr @.str.d, i64 0, i64 0\l  %call_scanf_last = call i32 (ptr, ...) @__isoc99_scanf(ptr %fmt_d_gep, ptr\l... %start_ptr)\l  %scanf_last_ok = icmp eq i32 %call_scanf_last, 1\l  br i1 %scanf_last_ok, label %check_start, label %ret_minus1\l|{<s0>T|<s1>F}}"];
+	Node0x56152182c820:s0 -> Node0x56152182ec90[tooltip="after_loop -> check_start\nProbability 50.00%" ];
+	Node0x56152182c820:s1 -> Node0x56152182b8e0[tooltip="after_loop -> ret_minus1\nProbability 50.00%" ];
+	Node0x56152182ec90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{check_start:\l|  %start_val = load i32, ptr %start_ptr, align 4\l  %start_nonneg = icmp sge i32 %start_val, 0\l  %n_val_final = load i32, ptr %n_ptr, align 4\l  %start_lt_n = icmp slt i32 %start_val, %n_val_final\l  %start_ok = and i1 %start_nonneg, %start_lt_n\l  br i1 %start_ok, label %ret_zero, label %ret_minus1\l|{<s0>T|<s1>F}}"];
+	Node0x56152182ec90:s0 -> Node0x56152182f160[tooltip="check_start -> ret_zero\nProbability 50.00%" ];
+	Node0x56152182ec90:s1 -> Node0x56152182b8e0[tooltip="check_start -> ret_minus1\nProbability 50.00%" ];
+	Node0x56152182b8e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{ret_minus1:\l|  ret i32 -1\l}"];
+	Node0x56152182f160 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{ret_zero:\l|  ret i32 0\l}"];
+}

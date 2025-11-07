@@ -1,0 +1,33 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x5f9774ad8840 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb1180:\l|  br label %bb1184\l}"];
+	Node0x5f9774ad8840 -> Node0x5f9774ad7cc0[tooltip="bb1180 -> bb1184\nProbability 100.00%" ];
+	Node0x5f9774ad7cc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb1184:\l|  %cmp_le = icmp sle i32 %len, 0\l  br label %bb1186\l}"];
+	Node0x5f9774ad7cc0 -> Node0x5f9774ad7aa0[tooltip="bb1184 -> bb1186\nProbability 100.00%" ];
+	Node0x5f9774ad7aa0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb1186:\l|  br i1 %cmp_le, label %bb11a0, label %bb1188\l|{<s0>T|<s1>F}}"];
+	Node0x5f9774ad7aa0:s0 -> Node0x5f9774ad7fe0[tooltip="bb1186 -> bb11a0\nProbability 50.00%" ];
+	Node0x5f9774ad7aa0:s1 -> Node0x5f9774ad8030[tooltip="bb1186 -> bb1188\nProbability 50.00%" ];
+	Node0x5f9774ad8030 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb1188:\l|  %len64 = sext i32 %len to i64\l  br label %bb118b\l}"];
+	Node0x5f9774ad8030 -> Node0x5f9774ad8130[tooltip="bb1188 -> bb118b\nProbability 100.00%" ];
+	Node0x5f9774ad8130 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb118b:\l|  br label %bb118d\l}"];
+	Node0x5f9774ad8130 -> Node0x5f9774ad9990[tooltip="bb118b -> bb118d\nProbability 100.00%" ];
+	Node0x5f9774ad9990 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb118d:\l|  br label %bb1199\l}"];
+	Node0x5f9774ad9990 -> Node0x5f9774ad9a70[tooltip="bb118d -> bb1199\nProbability 100.00%" ];
+	Node0x5f9774ad9cf0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#3d50c370" fontname="Courier",label="{bb118f:\l|  unreachable\l}"];
+	Node0x5f9774ad9e10 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb1190:\l|  %idx_next = add i64 %idx_cur, 1\l  br label %bb1194\l}"];
+	Node0x5f9774ad9e10 -> Node0x5f9774ada2b0[tooltip="bb1190 -> bb1194\nProbability 100.00%" ];
+	Node0x5f9774ada2b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb1194:\l|  %end_reached = icmp eq i64 %idx_next, %len64\l  br label %bb1197\l}"];
+	Node0x5f9774ada2b0 -> Node0x5f9774ada420[tooltip="bb1194 -> bb1197\nProbability 100.00%" ];
+	Node0x5f9774ada420 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb1197:\l|  br i1 %end_reached, label %bb11a0, label %bb1199\l|{<s0>T|<s1>F}}"];
+	Node0x5f9774ada420:s0 -> Node0x5f9774ad7fe0[tooltip="bb1197 -> bb11a0\nProbability 3.12%" ];
+	Node0x5f9774ada420:s1 -> Node0x5f9774ad9a70[tooltip="bb1197 -> bb1199\nProbability 96.88%" ];
+	Node0x5f9774ad9a70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb1199:\l|  %idx_cur = phi i64 [ 0, %bb118d ], [ %idx_next, %bb1197 ]\l  %eltptr = getelementptr inbounds i32, ptr %arr, i64 %idx_cur\l  %elt = load i32, ptr %eltptr, align 4\l  %eq = icmp eq i32 %elt, %val\l  br label %bb119c\l}"];
+	Node0x5f9774ad9a70 -> Node0x5f9774ada7f0[tooltip="bb1199 -> bb119c\nProbability 100.00%" ];
+	Node0x5f9774ada7f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb119c:\l|  br i1 %eq, label %bb119e, label %bb1190\l|{<s0>T|<s1>F}}"];
+	Node0x5f9774ada7f0:s0 -> Node0x5f9774ada8d0[tooltip="bb119c -> bb119e\nProbability 3.12%" ];
+	Node0x5f9774ada7f0:s1 -> Node0x5f9774ad9e10[tooltip="bb119c -> bb1190\nProbability 96.88%" ];
+	Node0x5f9774ada8d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb119e:\l|  %ret_trunc = trunc i64 %idx_cur to i32\l  ret i32 %ret_trunc\l}"];
+	Node0x5f9774adadf0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#3d50c370" fontname="Courier",label="{bb119f:\l|  unreachable\l}"];
+	Node0x5f9774ad7fe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb11a0:\l|  ret i32 -1\l}"];
+}

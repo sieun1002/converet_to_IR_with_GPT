@@ -1,0 +1,19 @@
+digraph "CFG for 'min_index' function" {
+	label="CFG for 'min_index' function";
+
+	Node0x5b8f9f79d5b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x5b8f9f79d5b0 -> Node0x5b8f9f79ea30[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5b8f9f79ea30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %latch ]\l  %min = phi i32 [ 2147483647, %entry ], [ %min.latch, %latch ]\l  %midx = phi i32 [ -1, %entry ], [ %idx.latch, %latch ]\l  %cmp = icmp slt i32 %i, %n\l  br i1 %cmp, label %body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5b8f9f79ea30:s0 -> Node0x5b8f9f79faf0[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5b8f9f79ea30:s1 -> Node0x5b8f9f79fbc0[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x5b8f9f79faf0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %idx64 = sext i32 %i to i64\l  %mask.ptr = getelementptr inbounds i32, ptr %mask, i64 %idx64\l  %mask.val = load i32, ptr %mask.ptr, align 4\l  %mask.is.zero = icmp eq i32 %mask.val, 0\l  br i1 %mask.is.zero, label %check, label %noUpdate\l|{<s0>T|<s1>F}}"];
+	Node0x5b8f9f79faf0:s0 -> Node0x5b8f9f7a0120[tooltip="body -> check\nProbability 37.50%" ];
+	Node0x5b8f9f79faf0:s1 -> Node0x5b8f9f7a0190[tooltip="body -> noUpdate\nProbability 62.50%" ];
+	Node0x5b8f9f7a0120 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{check:\l|  %vals.ptr = getelementptr inbounds i32, ptr %vals, i64 %idx64\l  %val = load i32, ptr %vals.ptr, align 4\l  %lt = icmp slt i32 %val, %min\l  %selMin = select i1 %lt, i32 %val, i32 %min\l  %selIdx = select i1 %lt, i32 %i, i32 %midx\l  br label %latch\l}"];
+	Node0x5b8f9f7a0120 -> Node0x5b8f9f79ef70[tooltip="check -> latch\nProbability 100.00%" ];
+	Node0x5b8f9f7a0190 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{noUpdate:\l|  br label %latch\l}"];
+	Node0x5b8f9f7a0190 -> Node0x5b8f9f79ef70[tooltip="noUpdate -> latch\nProbability 100.00%" ];
+	Node0x5b8f9f79ef70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{latch:\l|  %min.latch = phi i32 [ %min, %noUpdate ], [ %selMin, %check ]\l  %idx.latch = phi i32 [ %midx, %noUpdate ], [ %selIdx, %check ]\l  %i.next = add i32 %i, 1\l  br label %loop\l}"];
+	Node0x5b8f9f79ef70 -> Node0x5b8f9f79ea30[tooltip="latch -> loop\nProbability 100.00%" ];
+	Node0x5b8f9f79fbc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret i32 %midx\l}"];
+}

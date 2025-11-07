@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5d42cae9e810 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %len = alloca i32, align 4\l  %i = alloca i32, align 4\l  %arr0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 29, ptr %arr0, align 4\l  %arr1 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 10, ptr %arr1, align 4\l  %arr2 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 14, ptr %arr2, align 4\l  %arr3 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 37, ptr %arr3, align 4\l  %arr4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %arr4, align 4\l  store i32 5, ptr %len, align 4\l  %arrptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %lenval = load i32, ptr %len, align 4\l  call void @selection_sort(ptr noundef %arrptr, i32 noundef %lenval)\l  %fmt1 = getelementptr inbounds [15 x i8], ptr @.str, i64 0, i64 0\l  %call1 = call i32 (ptr, ...) @printf(ptr noundef %fmt1)\l  store i32 0, ptr %i, align 4\l  br label %loop\l}"];
+	Node0x5d42cae9e810 -> Node0x5d42caea2cf0[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5d42caea2cf0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i.cur = load i32, ptr %i, align 4\l  %len.cur = load i32, ptr %len, align 4\l  %cmp = icmp slt i32 %i.cur, %len.cur\l  br i1 %cmp, label %body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5d42caea2cf0:s0 -> Node0x5d42caea2ec0[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5d42caea2cf0:s1 -> Node0x5d42caea2f30[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x5d42caea2ec0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %idxext = sext i32 %i.cur to i64\l  %elem.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 %idxext\l  %elem = load i32, ptr %elem.ptr, align 4\l  %fmt2 = getelementptr inbounds [4 x i8], ptr @.str.1, i64 0, i64 0\l  %call2 = call i32 (ptr, ...) @printf(ptr noundef %fmt2, i32 noundef %elem)\l  %inc = add nsw i32 %i.cur, 1\l  store i32 %inc, ptr %i, align 4\l  br label %loop\l}"];
+	Node0x5d42caea2ec0 -> Node0x5d42caea2cf0[tooltip="body -> loop\nProbability 100.00%" ];
+	Node0x5d42caea2f30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret i32 0\l}"];
+}

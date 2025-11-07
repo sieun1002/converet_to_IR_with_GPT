@@ -1,0 +1,47 @@
+digraph "CFG for 'quick_sort' function" {
+	label="CFG for 'quick_sort' function";
+
+	Node0x5e22d185e4c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{entry:\l|  br label %loop.cond\l}"];
+	Node0x5e22d185e4c0 -> Node0x5e22d185d970[tooltip="entry -> loop.cond\nProbability 100.00%" ];
+	Node0x5e22d185d970 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{loop.cond:\l|  %low = phi i32 [ %low0, %entry ], [ %low.next.ls, %left.small.end ], [\l... %low.next.rb, %right.big.end ]\l  %high = phi i32 [ %high0, %entry ], [ %high.next.ls, %left.small.end ], [\l... %high.next.rb, %right.big.end ]\l  %cmp.loop = icmp slt i32 %low, %high\l  br i1 %cmp.loop, label %partition.init, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d185d970:s0 -> Node0x5e22d185d720[tooltip="loop.cond -> partition.init\nProbability 96.88%" ];
+	Node0x5e22d185d970:s1 -> Node0x5e22d185f580[tooltip="loop.cond -> exit\nProbability 3.12%" ];
+	Node0x5e22d185d720 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{partition.init:\l|  %diff = sub i32 %high, %low\l  %sign = lshr i32 %diff, 31\l  %diff.adj = add i32 %diff, %sign\l  %half = ashr i32 %diff.adj, 1\l  %mid = add i32 %low, %half\l  %mid.ext = sext i32 %mid to i64\l  %pivot.ptr = getelementptr inbounds i32, ptr %arr, i64 %mid.ext\l  %pivot = load i32, ptr %pivot.ptr, align 4\l  br label %left.scan\l}"];
+	Node0x5e22d185d720 -> Node0x5e22d1860660[tooltip="partition.init -> left.scan\nProbability 100.00%" ];
+	Node0x5e22d1860660 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{left.scan:\l|  %left.cur = phi i32 [ %low, %partition.init ], [ %left.inc, %left.scan ],\l... [ %left.cont, %partition.check ]\l  %right.cur.l = phi i32 [ %high, %partition.init ], [ %right.cur.l,\l... %left.scan ], [ %right.cont, %partition.check ]\l  %left.idx.ext = sext i32 %left.cur to i64\l  %left.elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %left.idx.ext\l  %left.elem = load i32, ptr %left.elem.ptr, align 4\l  %cmp.left = icmp sgt i32 %pivot, %left.elem\l  %left.inc = add i32 %left.cur, 1\l  br i1 %cmp.left, label %left.scan, label %right.scan\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d1860660:s0 -> Node0x5e22d1860660[tooltip="left.scan -> left.scan\nProbability 50.00%" ];
+	Node0x5e22d1860660:s1 -> Node0x5e22d1861380[tooltip="left.scan -> right.scan\nProbability 50.00%" ];
+	Node0x5e22d1861380 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{right.scan:\l|  %right.cur = phi i32 [ %right.cur.l, %left.scan ], [ %right.dec,\l... %right.scan ]\l  %left.pass = phi i32 [ %left.cur, %left.scan ], [ %left.pass, %right.scan ]\l  %right.idx.ext = sext i32 %right.cur to i64\l  %right.elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %right.idx.ext\l  %right.elem = load i32, ptr %right.elem.ptr, align 4\l  %cmp.right = icmp slt i32 %pivot, %right.elem\l  %right.dec = sub i32 %right.cur, 1\l  br i1 %cmp.right, label %right.scan, label %compare.swap\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d1861380:s0 -> Node0x5e22d1861380[tooltip="right.scan -> right.scan\nProbability 96.88%" ];
+	Node0x5e22d1861380:s1 -> Node0x5e22d1861a30[tooltip="right.scan -> compare.swap\nProbability 3.12%" ];
+	Node0x5e22d1861a30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{compare.swap:\l|  %cmp.leq = icmp sgt i32 %left.pass, %right.cur\l  br i1 %cmp.leq, label %partition.check, label %do.swap\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d1861a30:s0 -> Node0x5e22d18608d0[tooltip="compare.swap -> partition.check\nProbability 50.00%" ];
+	Node0x5e22d1861a30:s1 -> Node0x5e22d1861c10[tooltip="compare.swap -> do.swap\nProbability 50.00%" ];
+	Node0x5e22d1861c10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{do.swap:\l|  %left.idx.ext2 = sext i32 %left.pass to i64\l  %right.idx.ext2 = sext i32 %right.cur to i64\l  %left.ptr2 = getelementptr inbounds i32, ptr %arr, i64 %left.idx.ext2\l  %right.ptr2 = getelementptr inbounds i32, ptr %arr, i64 %right.idx.ext2\l  %tmp = load i32, ptr %left.ptr2, align 4\l  %val.right = load i32, ptr %right.ptr2, align 4\l  store i32 %val.right, ptr %left.ptr2, align 4\l  store i32 %tmp, ptr %right.ptr2, align 4\l  %left.after = add i32 %left.pass, 1\l  %right.after = sub i32 %right.cur, 1\l  br label %partition.check\l}"];
+	Node0x5e22d1861c10 -> Node0x5e22d18608d0[tooltip="do.swap -> partition.check\nProbability 100.00%" ];
+	Node0x5e22d18608d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{partition.check:\l|  %left.cont = phi i32 [ %left.pass, %compare.swap ], [ %left.after,\l... %do.swap ]\l  %right.cont = phi i32 [ %right.cur, %compare.swap ], [ %right.after,\l... %do.swap ]\l  %cont.cond = icmp sle i32 %left.cont, %right.cont\l  br i1 %cont.cond, label %left.scan, label %partition.end\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d18608d0:s0 -> Node0x5e22d1860660[tooltip="partition.check -> left.scan\nProbability 96.88%" ];
+	Node0x5e22d18608d0:s1 -> Node0x5e22d1863350[tooltip="partition.check -> partition.end\nProbability 3.12%" ];
+	Node0x5e22d1863350 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{partition.end:\l|  %size.left = sub i32 %right.cont, %low\l  %size.right = sub i32 %high, %left.cont\l  %cmp.size = icmp sge i32 %size.left, %size.right\l  br i1 %cmp.size, label %right.big, label %left.small\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d1863350:s0 -> Node0x5e22d1863660[tooltip="partition.end -> right.big\nProbability 50.00%" ];
+	Node0x5e22d1863350:s1 -> Node0x5e22d18636e0[tooltip="partition.end -> left.small\nProbability 50.00%" ];
+	Node0x5e22d18636e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{left.small:\l|  %need.call.left = icmp slt i32 %low, %right.cont\l  br i1 %need.call.left, label %left.small.call, label %left.small.skip\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d18636e0:s0 -> Node0x5e22d1863930[tooltip="left.small -> left.small.call\nProbability 50.00%" ];
+	Node0x5e22d18636e0:s1 -> Node0x5e22d18639b0[tooltip="left.small -> left.small.skip\nProbability 50.00%" ];
+	Node0x5e22d1863930 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2907270" fontname="Courier",label="{left.small.call:\l|  call void @quick_sort(ptr %arr, i32 %low, i32 %right.cont)\l  br label %left.small.end\l}"];
+	Node0x5e22d1863930 -> Node0x5e22d185dc60[tooltip="left.small.call -> left.small.end\nProbability 100.00%" ];
+	Node0x5e22d18639b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2907270" fontname="Courier",label="{left.small.skip:\l|  br label %left.small.end\l}"];
+	Node0x5e22d18639b0 -> Node0x5e22d185dc60[tooltip="left.small.skip -> left.small.end\nProbability 100.00%" ];
+	Node0x5e22d185dc60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{left.small.end:\l|  %low.next.ls = add i32 %left.cont, 0\l  %high.next.ls = add i32 %high, 0\l  br label %loop.cond\l}"];
+	Node0x5e22d185dc60 -> Node0x5e22d185d970[tooltip="left.small.end -> loop.cond\nProbability 100.00%" ];
+	Node0x5e22d1863660 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{right.big:\l|  %need.call.right = icmp slt i32 %left.cont, %high\l  br i1 %need.call.right, label %right.big.call, label %right.big.skip\l|{<s0>T|<s1>F}}"];
+	Node0x5e22d1863660:s0 -> Node0x5e22d1863f00[tooltip="right.big -> right.big.call\nProbability 50.00%" ];
+	Node0x5e22d1863660:s1 -> Node0x5e22d1863f50[tooltip="right.big -> right.big.skip\nProbability 50.00%" ];
+	Node0x5e22d1863f00 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2907270" fontname="Courier",label="{right.big.call:\l|  call void @quick_sort(ptr %arr, i32 %left.cont, i32 %high)\l  br label %right.big.end\l}"];
+	Node0x5e22d1863f00 -> Node0x5e22d185dda0[tooltip="right.big.call -> right.big.end\nProbability 100.00%" ];
+	Node0x5e22d1863f50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2907270" fontname="Courier",label="{right.big.skip:\l|  br label %right.big.end\l}"];
+	Node0x5e22d1863f50 -> Node0x5e22d185dda0[tooltip="right.big.skip -> right.big.end\nProbability 100.00%" ];
+	Node0x5e22d185dda0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{right.big.end:\l|  %low.next.rb = add i32 %low, 0\l  %high.next.rb = add i32 %right.cont, 0\l  br label %loop.cond\l}"];
+	Node0x5e22d185dda0 -> Node0x5e22d185d970[tooltip="right.big.end -> loop.cond\nProbability 100.00%" ];
+	Node0x5e22d185f580 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

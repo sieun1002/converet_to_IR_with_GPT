@@ -1,0 +1,30 @@
+digraph "CFG for 'bubble_sort' function" {
+	label="CFG for 'bubble_sort' function";
+
+	Node0x6358fdc559d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5705870" fontname="Courier",label="{entry:\l|  %arr.addr = alloca ptr, align 8\l  %n.addr = alloca i64, align 8\l  %var8 = alloca i64, align 8\l  %var10 = alloca i64, align 8\l  %var18 = alloca i64, align 8\l  %var1C = alloca i32, align 4\l  store ptr %arr, ptr %arr.addr, align 8\l  store i64 %n, ptr %n.addr, align 8\l  %nload0 = load i64, ptr %n.addr, align 8\l  %cmp0 = icmp ule i64 %nload0, 1\l  br i1 %cmp0, label %exit, label %init_limit\l|{<s0>T|<s1>F}}"];
+	Node0x6358fdc559d0:s0 -> Node0x6358fdc54e80[tooltip="entry -> exit\nProbability 50.00%" ];
+	Node0x6358fdc559d0:s1 -> Node0x6358fdc56d10[tooltip="entry -> init_limit\nProbability 50.00%" ];
+	Node0x6358fdc56d10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{init_limit:\l|  %nload1 = load i64, ptr %n.addr, align 8\l  store i64 %nload1, ptr %var8, align 8\l  br label %outer_check\l}"];
+	Node0x6358fdc56d10 -> Node0x6358fdc570d0[tooltip="init_limit -> outer_check\nProbability 100.00%" ];
+	Node0x6358fdc570d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer_check:\l|  %limit.load = load i64, ptr %var8, align 8\l  %cond1 = icmp ugt i64 %limit.load, 1\l  br i1 %cond1, label %outer_body_init, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x6358fdc570d0:s0 -> Node0x6358fdc57220[tooltip="outer_check -> outer_body_init\nProbability 96.88%" ];
+	Node0x6358fdc570d0:s1 -> Node0x6358fdc54e80[tooltip="outer_check -> exit\nProbability 3.12%" ];
+	Node0x6358fdc57220 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer_body_init:\l|  store i64 0, ptr %var10, align 8\l  store i64 1, ptr %var18, align 8\l  br label %inner_check\l}"];
+	Node0x6358fdc57220 -> Node0x6358fdc578d0[tooltip="outer_body_init -> inner_check\nProbability 100.00%" ];
+	Node0x6358fdc578d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner_check:\l|  %i.load = load i64, ptr %var18, align 8\l  %limit.load2 = load i64, ptr %var8, align 8\l  %cmp2 = icmp ult i64 %i.load, %limit.load2\l  br i1 %cmp2, label %inner_body, label %after_inner\l|{<s0>T|<s1>F}}"];
+	Node0x6358fdc578d0:s0 -> Node0x6358fdc57b30[tooltip="inner_check -> inner_body\nProbability 96.88%" ];
+	Node0x6358fdc578d0:s1 -> Node0x6358fdc57bb0[tooltip="inner_check -> after_inner\nProbability 3.12%" ];
+	Node0x6358fdc57b30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner_body:\l|  %i.val = load i64, ptr %var18, align 8\l  %im1 = sub i64 %i.val, 1\l  %arr.base = load ptr, ptr %arr.addr, align 8\l  %ptr.prev = getelementptr inbounds i32, ptr %arr.base, i64 %im1\l  %val.prev = load i32, ptr %ptr.prev, align 4\l  %i.val2 = load i64, ptr %var18, align 8\l  %arr.base2 = load ptr, ptr %arr.addr, align 8\l  %ptr.cur = getelementptr inbounds i32, ptr %arr.base2, i64 %i.val2\l  %val.cur = load i32, ptr %ptr.cur, align 4\l  %cmp.le = icmp sle i32 %val.prev, %val.cur\l  br i1 %cmp.le, label %inner_increment, label %swap_block\l|{<s0>T|<s1>F}}"];
+	Node0x6358fdc57b30:s0 -> Node0x6358fdc58740[tooltip="inner_body -> inner_increment\nProbability 50.00%" ];
+	Node0x6358fdc57b30:s1 -> Node0x6358fdc587c0[tooltip="inner_body -> swap_block\nProbability 50.00%" ];
+	Node0x6358fdc587c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{swap_block:\l|  store i32 %val.prev, ptr %var1C, align 4\l  store i32 %val.cur, ptr %ptr.prev, align 4\l  %tmp.saved = load i32, ptr %var1C, align 4\l  store i32 %tmp.saved, ptr %ptr.cur, align 4\l  %i.for.last = load i64, ptr %var18, align 8\l  store i64 %i.for.last, ptr %var10, align 8\l  br label %inner_increment\l}"];
+	Node0x6358fdc587c0 -> Node0x6358fdc58740[tooltip="swap_block -> inner_increment\nProbability 100.00%" ];
+	Node0x6358fdc58740 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner_increment:\l|  %i.old = load i64, ptr %var18, align 8\l  %i.next = add i64 %i.old, 1\l  store i64 %i.next, ptr %var18, align 8\l  br label %inner_check\l}"];
+	Node0x6358fdc58740 -> Node0x6358fdc578d0[tooltip="inner_increment -> inner_check\nProbability 100.00%" ];
+	Node0x6358fdc57bb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after_inner:\l|  %last.load = load i64, ptr %var10, align 8\l  %is.zero = icmp eq i64 %last.load, 0\l  br i1 %is.zero, label %exit, label %setlimit\l|{<s0>T|<s1>F}}"];
+	Node0x6358fdc57bb0:s0 -> Node0x6358fdc54e80[tooltip="after_inner -> exit\nProbability 3.12%" ];
+	Node0x6358fdc57bb0:s1 -> Node0x6358fdc59160[tooltip="after_inner -> setlimit\nProbability 96.88%" ];
+	Node0x6358fdc59160 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{setlimit:\l|  store i64 %last.load, ptr %var8, align 8\l  br label %outer_check\l}"];
+	Node0x6358fdc59160 -> Node0x6358fdc570d0[tooltip="setlimit -> outer_check\nProbability 100.00%" ];
+	Node0x6358fdc54e80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5705870" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

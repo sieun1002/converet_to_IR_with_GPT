@@ -1,0 +1,46 @@
+digraph "CFG for 'quick_sort' function" {
+	label="CFG for 'quick_sort' function";
+
+	Node0x6490313a7310 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{entry:\l|  br label %outer\l}"];
+	Node0x6490313a7310 -> Node0x6490313a6790[tooltip="entry -> outer\nProbability 100.00%" ];
+	Node0x6490313a6790 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{outer:\l|  %lo.cur = phi i64 [ %lo, %entry ], [ %lo.next, %outer.cont ]\l  %hi.cur = phi i64 [ %hi, %entry ], [ %hi.next, %outer.cont ]\l  %cmp.outer = icmp slt i64 %lo.cur, %hi.cur\l  br i1 %cmp.outer, label %part.init, label %ret\l|{<s0>T|<s1>F}}"];
+	Node0x6490313a6790:s0 -> Node0x6490313a6280[tooltip="outer -> part.init\nProbability 96.88%" ];
+	Node0x6490313a6790:s1 -> Node0x6490313a6360[tooltip="outer -> ret\nProbability 3.12%" ];
+	Node0x6490313a6280 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{part.init:\l|  %i0 = add i64 %lo.cur, 0\l  %j0 = add i64 %hi.cur, 0\l  %delta = sub i64 %hi.cur, %lo.cur\l  %neg = lshr i64 %delta, 63\l  %biased = add i64 %delta, %neg\l  %half = ashr i64 %biased, 1\l  %mid = add i64 %lo.cur, %half\l  %ptr.mid = getelementptr inbounds i32, ptr %arr, i64 %mid\l  %pivot = load i32, ptr %ptr.mid, align 4\l  br label %inc_i.check\l}"];
+	Node0x6490313a6280 -> Node0x6490313a9560[tooltip="part.init -> inc_i.check\nProbability 100.00%" ];
+	Node0x6490313a9560 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{inc_i.check:\l|  %i.cur = phi i64 [ %i0, %part.init ], [ %i.next, %inc_i.inc ], [\l... %i.after.swap, %swap.true ]\l  %j.pass = phi i64 [ %j0, %part.init ], [ %j.passthru, %inc_i.inc ], [\l... %j.after.swap, %swap.true ]\l  %iptr = getelementptr inbounds i32, ptr %arr, i64 %i.cur\l  %ival = load i32, ptr %iptr, align 4\l  %cmp.i = icmp sgt i32 %pivot, %ival\l  br i1 %cmp.i, label %inc_i.inc, label %dec_j.check\l|{<s0>T|<s1>F}}"];
+	Node0x6490313a9560:s0 -> Node0x6490313a96a0[tooltip="inc_i.check -> inc_i.inc\nProbability 50.00%" ];
+	Node0x6490313a9560:s1 -> Node0x6490313aa1d0[tooltip="inc_i.check -> dec_j.check\nProbability 50.00%" ];
+	Node0x6490313a96a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inc_i.inc:\l|  %i.next = add i64 %i.cur, 1\l  %j.passthru = add i64 %j.pass, 0\l  br label %inc_i.check\l}"];
+	Node0x6490313a96a0 -> Node0x6490313a9560[tooltip="inc_i.inc -> inc_i.check\nProbability 100.00%" ];
+	Node0x6490313aa1d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{dec_j.check:\l|  %i.fixed = phi i64 [ %i.cur, %inc_i.check ], [ %i.fwd, %dec_j.dec ]\l  %j.cur = phi i64 [ %j.pass, %inc_i.check ], [ %j.next, %dec_j.dec ]\l  %jptr = getelementptr inbounds i32, ptr %arr, i64 %j.cur\l  %jval = load i32, ptr %jptr, align 4\l  %cmp.j = icmp slt i32 %pivot, %jval\l  br i1 %cmp.j, label %dec_j.dec, label %check.swap\l|{<s0>T|<s1>F}}"];
+	Node0x6490313aa1d0:s0 -> Node0x6490313aa510[tooltip="dec_j.check -> dec_j.dec\nProbability 96.88%" ];
+	Node0x6490313aa1d0:s1 -> Node0x6490313aa920[tooltip="dec_j.check -> check.swap\nProbability 3.12%" ];
+	Node0x6490313aa510 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{dec_j.dec:\l|  %j.next = add i64 %j.cur, -1\l  %i.fwd = add i64 %i.fixed, 0\l  br label %dec_j.check\l}"];
+	Node0x6490313aa510 -> Node0x6490313aa1d0[tooltip="dec_j.dec -> dec_j.check\nProbability 100.00%" ];
+	Node0x6490313aa920 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{check.swap:\l|  %cmp.ij = icmp sle i64 %i.fixed, %j.cur\l  br i1 %cmp.ij, label %swap.true, label %choose\l|{<s0>T|<s1>F}}"];
+	Node0x6490313aa920:s0 -> Node0x6490313a9840[tooltip="check.swap -> swap.true\nProbability 96.88%" ];
+	Node0x6490313aa920:s1 -> Node0x6490313aad20[tooltip="check.swap -> choose\nProbability 3.12%" ];
+	Node0x6490313a9840 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{swap.true:\l|  %ptr.i = getelementptr inbounds i32, ptr %arr, i64 %i.fixed\l  %val.i = load i32, ptr %ptr.i, align 4\l  %ptr.j = getelementptr inbounds i32, ptr %arr, i64 %j.cur\l  %val.j = load i32, ptr %ptr.j, align 4\l  store i32 %val.j, ptr %ptr.i, align 4\l  store i32 %val.i, ptr %ptr.j, align 4\l  %i.after.swap = add i64 %i.fixed, 1\l  %j.after.swap = add i64 %j.cur, -1\l  br label %inc_i.check\l}"];
+	Node0x6490313a9840 -> Node0x6490313a9560[tooltip="swap.true -> inc_i.check\nProbability 100.00%" ];
+	Node0x6490313aad20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{choose:\l|  %left.len = sub i64 %j.cur, %lo.cur\l  %right.len = sub i64 %hi.cur, %i.fixed\l  %left.smaller = icmp slt i64 %left.len, %right.len\l  br i1 %left.smaller, label %do.left, label %do.right\l|{<s0>T|<s1>F}}"];
+	Node0x6490313aad20:s0 -> Node0x6490313ac3b0[tooltip="choose -> do.left\nProbability 50.00%" ];
+	Node0x6490313aad20:s1 -> Node0x6490313ac420[tooltip="choose -> do.right\nProbability 50.00%" ];
+	Node0x6490313ac3b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{do.left:\l|  %need.left = icmp slt i64 %lo.cur, %j.cur\l  br i1 %need.left, label %call.left, label %skip.left\l|{<s0>T|<s1>F}}"];
+	Node0x6490313ac3b0:s0 -> Node0x6490313ac5e0[tooltip="do.left -> call.left\nProbability 50.00%" ];
+	Node0x6490313ac3b0:s1 -> Node0x6490313ac660[tooltip="do.left -> skip.left\nProbability 50.00%" ];
+	Node0x6490313ac5e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2907270" fontname="Courier",label="{call.left:\l|  call void @quick_sort(ptr %arr, i64 %lo.cur, i64 %j.cur)\l  br label %skip.left\l}"];
+	Node0x6490313ac5e0 -> Node0x6490313ac660[tooltip="call.left -> skip.left\nProbability 100.00%" ];
+	Node0x6490313ac660 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{skip.left:\l|  %lo.next.L = add i64 %i.fixed, 0\l  %hi.next.L = add i64 %hi.cur, 0\l  br label %outer.cont\l}"];
+	Node0x6490313ac660 -> Node0x6490313a6a20[tooltip="skip.left -> outer.cont\nProbability 100.00%" ];
+	Node0x6490313ac420 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{do.right:\l|  %need.right = icmp slt i64 %i.fixed, %hi.cur\l  br i1 %need.right, label %call.right, label %skip.right\l|{<s0>T|<s1>F}}"];
+	Node0x6490313ac420:s0 -> Node0x6490313acb40[tooltip="do.right -> call.right\nProbability 50.00%" ];
+	Node0x6490313ac420:s1 -> Node0x6490313acbc0[tooltip="do.right -> skip.right\nProbability 50.00%" ];
+	Node0x6490313acb40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2907270" fontname="Courier",label="{call.right:\l|  call void @quick_sort(ptr %arr, i64 %i.fixed, i64 %hi.cur)\l  br label %skip.right\l}"];
+	Node0x6490313acb40 -> Node0x6490313acbc0[tooltip="call.right -> skip.right\nProbability 100.00%" ];
+	Node0x6490313acbc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ef886b70" fontname="Courier",label="{skip.right:\l|  %lo.next.R = add i64 %lo.cur, 0\l  %hi.next.R = add i64 %j.cur, 0\l  br label %outer.cont\l}"];
+	Node0x6490313acbc0 -> Node0x6490313a6a20[tooltip="skip.right -> outer.cont\nProbability 100.00%" ];
+	Node0x6490313a6a20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{outer.cont:\l|  %lo.next = phi i64 [ %lo.next.L, %skip.left ], [ %lo.next.R, %skip.right ]\l  %hi.next = phi i64 [ %hi.next.L, %skip.left ], [ %hi.next.R, %skip.right ]\l  br label %outer\l}"];
+	Node0x6490313a6a20 -> Node0x6490313a6790[tooltip="outer.cont -> outer\nProbability 100.00%" ];
+	Node0x6490313a6360 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{ret:\l|  ret void\l}"];
+}

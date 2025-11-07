@@ -1,0 +1,10 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x578fe8e1a130 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %arr.base = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %p0 = getelementptr inbounds i32, ptr %arr.base, i64 0\l  store i32 9, ptr %p0, align 16\l  %p1 = getelementptr inbounds i32, ptr %arr.base, i64 1\l  store i32 4, ptr %p1, align 4\l  %p2 = getelementptr inbounds i32, ptr %arr.base, i64 2\l  store i32 2, ptr %p2, align 8\l  %p3 = getelementptr inbounds i32, ptr %arr.base, i64 3\l  store i32 8, ptr %p3, align 4\l  %p4 = getelementptr inbounds i32, ptr %arr.base, i64 4\l  store i32 13, ptr %p4, align 16\l  call void @selection_sort(ptr %arr.base, i32 5)\l  %hdr.ptr = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0, i64 0\l  %call.hdr = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %hdr.ptr)\l  br label %loop\l}"];
+	Node0x578fe8e1a130 -> Node0x578fe8e1d750[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x578fe8e1d750 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %entry ], [ %next, %loop ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arr.base, i64 %i\l  %val = load i32, ptr %elem.ptr, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.str.fmt, i64 0, i64 0\l  %call.elem = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt.ptr, i32\l... %val)\l  %next = add nuw nsw i64 %i, 1\l  %cond = icmp ult i64 %next, 5\l  br i1 %cond, label %loop, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x578fe8e1d750:s0 -> Node0x578fe8e1d750[tooltip="loop -> loop\nProbability 96.88%" ];
+	Node0x578fe8e1d750:s1 -> Node0x578fe8e1dd60[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x578fe8e1dd60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret i32 0\l}"];
+}

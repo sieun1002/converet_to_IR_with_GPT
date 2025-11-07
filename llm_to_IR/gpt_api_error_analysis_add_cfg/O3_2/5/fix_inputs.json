@@ -1,0 +1,145 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 315,
+      "ir_len": 17949,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/BFS_main1.ll:6:53: error: constant expression type mismatch: got type '[21 x i8]' but expected '[22 x i8]'\n@.str.bfs = private unnamed_addr constant [22 x i8] c\"BFS order from %zu: \\00\", align 1\n                                       ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@qword_2038 = external global i64\n\n@.str.bfs = private unnamed_addr constant [22 x i8] c\"BFS order from %zu: \\00\", align 1\n@.str.pzu_s =",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/BFS_main1.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 913,
+      "ir_len": 15899,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %fmt.pzu = getelementptr inbounds [6 x i8], [6 x i8]* @.str.pzu_s, i64 0, i64 0\n  %_ = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.pzu, i64 %phi.elem, i8* %empty.ptr)\nInstruction does no",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@qword_2038 = external global i64\n\n@.str.bfs = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align 1\n@.str.pzu_s =",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/BFS_main2.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 177,
+      "ir_len": 4699,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/binarysearch_main1.ll:64:19: error: expected instruction opcode\n  %low.in.10f0  = %low.phi\n                  ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@.str_found = private unnamed_addr constant [21 x i8] c\"key %d -> index %ld\\0A\\00\", align 1\n@.str_not   = private unnamed_addr cons",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/binarysearch_main1.ll"
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 167,
+      "ir_len": 4457,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/bubblesort_main1.ll:39:15: error: expected instruction opcode\n  %rdx.init = %base.i8\n              ^\n",
+      "ir_preview": "; ModuleID = 'main_from_asm'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = external global <4 x i32>, align 16\n@xmmword_2020 = external global <4 x i32>, align 16\n@unk_2004 = external global ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/bubblesort_main1.ll"
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 163,
+      "ir_len": 4305,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/bubblesort_main2.ll:53:13: error: expected instruction opcode\n  %r8.set = %rax.phi\n            ^\n",
+      "ir_preview": "; ModuleID = 'main_from_asm'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = external global <4 x i32>, align 16\n@xmmword_2020 = external global <4 x i32>, align 16\n@unk_2004 = external global ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/bubblesort_main2.ll"
+    },
+    {
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 152,
+      "ir_len": 3483,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/heapsort_function1.ll:73:9: error: expected instruction opcode\n  %p0 = %arr\n        ^\n",
+      "ir_preview": "; ModuleID = 'heap_sort'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\ndefine dso_local void @heap_sort(i32* nocapture %arr, i64 %n) local_unnamed_addr {\nbb1189:\n  %cmp_n_le1 = icmp ule i64 %n, 1\n  br i",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/heapsort_function1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 165,
+      "ir_len": 21380,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/insertionsort_main1.ll:82:15: error: expected instruction opcode\n  %rbx.init = %bp\n              ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@xmmword_2010 = external constant <4 x i32>, align 16\n@xmmword_2020 = external constant <4 x i32>, align 16\n@unk_2004 = external co",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/insertionsort_main1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 304,
+      "ir_len": 2714,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/insertionsort_main2.ll:35:75: error: '%i' defined with type 'i32' but expected 'i64'\n  %idxptr = getelementptr inbounds [8 x i32], [8 x i32]* %arr, i64 0, i64 %i\n                                                                        ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@xmmword_2010 = external constant <4 x i32>, align 16\n@xmmword_2020 = external constant <4 x i32>, align 16\n@unk_2004 = external co",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/insertionsort_main2.ll"
+    },
+    {
+      "filename": "linearsearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 278,
+      "ir_len": 432,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/linearsearch_main1.ll:12:20: error: '@___printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32)*'\n  %call = call i32 @___printf_chk(i32 2, i8* %fmtptr, i32 3)\n                   ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\nsource_filename = \"main.s\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@aElementFoundAt = private unnamed_addr constant [27 x i8] c\"Element found at index %d\\0A\\00\", align 1\n\ndec",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/linearsearch_main1.ll"
+    },
+    {
+      "filename": "linearsearch_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 329,
+      "ir_len": 449,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/linearsearch_main2.ll:12:37: error: '@___printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, ...)* (i32, i8*, i32)*'\n  %call = call i32 (i32, i8*, ...)* @___printf_chk(i32 2, i8* %fmtptr, i32 3)\n         ",
+      "ir_preview": "; ModuleID = 'main_module'\nsource_filename = \"main.s\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@aElementFoundAt = private unnamed_addr constant [27 x i8] c\"Element found at index %d\\0A\\00\", align 1\n\ndec",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/linearsearch_main2.ll"
+    },
+    {
+      "filename": "linearsearch_main.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 278,
+      "ir_len": 432,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/linearsearch_main3.ll:12:20: error: '@___printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32)*'\n  %call = call i32 @___printf_chk(i32 2, i8* %fmtptr, i32 3)\n                   ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\nsource_filename = \"main.s\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@aElementFoundAt = private unnamed_addr constant [27 x i8] c\"Element found at index %d\\0A\\00\", align 1\n\ndec",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/linearsearch_main3.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 176,
+      "ir_len": 30406,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/mergesort_main1.ll:69:15: error: expected instruction opcode\n  %rcx_init = %base_stack_i8_gep\n              ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external global i64\n@xmmword_2010 = external global [16 x i8], align 16\n@xmmword_2020 = external global [16 x i8], ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/mergesort_main1.ll"
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 170,
+      "ir_len": 2793,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/selectionsort_function1.ll:31:13: error: expected instruction opcode\n  %r8_cur = %rax_phi\n            ^\n",
+      "ir_preview": "; ModuleID = 'selection_sort'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine dso_local void @selection_sort(i32* %arr, i32 %n) local_unnamed_addr {\nbb_1210:\n  %cmp_n_le_1 = icmp sle i32 %n, 1\n  br i1 %",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/selectionsort_function1.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 165,
+      "ir_len": 1919,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/selectionsort_main1.ll:35:14: error: expected instruction opcode\n  br label %0x10E0\n             ^\n",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2020 = external global <4 x i32>, align 16\n@__stack_chk_guard = external thread_local global i64\n\n@.str = private unnamed_add",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/selectionsort_main1.ll"
+    }
+  ]
+}

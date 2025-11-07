@@ -1,0 +1,24 @@
+digraph "CFG for 'insertion_sort' function" {
+	label="CFG for 'insertion_sort' function";
+
+	Node0x5b678903b580 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  br label %outer.cond\l}"];
+	Node0x5b678903b580 -> Node0x5b678903aa30[tooltip="entry -> outer.cond\nProbability 100.00%" ];
+	Node0x5b678903aa30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.cond:\l|  %i = phi i64 [ 1, %entry ], [ %i.next, %outer.latch ]\l  %cmp.outer = icmp ult i64 %i, %n\l  br i1 %cmp.outer, label %outer.body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5b678903aa30:s0 -> Node0x5b678903ae40[tooltip="outer.cond -> outer.body\nProbability 96.88%" ];
+	Node0x5b678903aa30:s1 -> Node0x5b678903c6a0[tooltip="outer.cond -> exit\nProbability 3.12%" ];
+	Node0x5b678903ae40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.body:\l|  %idx.key = getelementptr inbounds i32, ptr %arr, i64 %i\l  %key = load i32, ptr %idx.key, align 4\l  br label %inner.cond\l}"];
+	Node0x5b678903ae40 -> Node0x5b678903c810[tooltip="outer.body -> inner.cond\nProbability 100.00%" ];
+	Node0x5b678903c810 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cond:\l|  %j = phi i64 [ %i, %outer.body ], [ %j.dec, %shift ]\l  %j.zero = icmp eq i64 %j, 0\l  br i1 %j.zero, label %inner.exit, label %inner.cmp\l|{<s0>T|<s1>F}}"];
+	Node0x5b678903c810:s0 -> Node0x5b678903d100[tooltip="inner.cond -> inner.exit\nProbability 3.12%" ];
+	Node0x5b678903c810:s1 -> Node0x5b678903d1e0[tooltip="inner.cond -> inner.cmp\nProbability 96.88%" ];
+	Node0x5b678903d1e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cmp:\l|  %j.prev = add i64 %j, -1\l  %idx.prev = getelementptr inbounds i32, ptr %arr, i64 %j.prev\l  %prevval = load i32, ptr %idx.prev, align 4\l  %cmp.inner = icmp slt i32 %key, %prevval\l  br i1 %cmp.inner, label %shift, label %inner.exit\l|{<s0>T|<s1>F}}"];
+	Node0x5b678903d1e0:s0 -> Node0x5b678903c950[tooltip="inner.cmp -> shift\nProbability 96.88%" ];
+	Node0x5b678903d1e0:s1 -> Node0x5b678903d100[tooltip="inner.cmp -> inner.exit\nProbability 3.12%" ];
+	Node0x5b678903c950 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{shift:\l|  %idx.j = getelementptr inbounds i32, ptr %arr, i64 %j\l  store i32 %prevval, ptr %idx.j, align 4\l  %j.dec = add i64 %j, -1\l  br label %inner.cond\l}"];
+	Node0x5b678903c950 -> Node0x5b678903c810[tooltip="shift -> inner.cond\nProbability 100.00%" ];
+	Node0x5b678903d100 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{inner.exit:\l|  %j.fin = phi i64 [ %j, %inner.cond ], [ %j, %inner.cmp ]\l  %idx.dest = getelementptr inbounds i32, ptr %arr, i64 %j.fin\l  store i32 %key, ptr %idx.dest, align 4\l  br label %outer.latch\l}"];
+	Node0x5b678903d100 -> Node0x5b678903a880[tooltip="inner.exit -> outer.latch\nProbability 100.00%" ];
+	Node0x5b678903a880 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.latch:\l|  %i.next = add i64 %i, 1\l  br label %outer.cond\l}"];
+	Node0x5b678903a880 -> Node0x5b678903aa30[tooltip="outer.latch -> outer.cond\nProbability 100.00%" ];
+	Node0x5b678903c6a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

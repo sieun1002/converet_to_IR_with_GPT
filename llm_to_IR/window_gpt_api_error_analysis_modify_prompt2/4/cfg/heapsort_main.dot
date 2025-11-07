@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x593e1a623150 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [9 x i32], align 4\l  %arr.elem0.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 0\l  store i32 7, ptr %arr.elem0.ptr, align 4\l  %arr.elem1.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %arr.elem1.ptr, align 4\l  %arr.elem2.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 2\l  store i32 9, ptr %arr.elem2.ptr, align 4\l  %arr.elem3.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 3\l  store i32 1, ptr %arr.elem3.ptr, align 4\l  %arr.elem4.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 4\l  store i32 4, ptr %arr.elem4.ptr, align 4\l  %arr.elem5.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 5\l  store i32 8, ptr %arr.elem5.ptr, align 4\l  %arr.elem6.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 6\l  store i32 2, ptr %arr.elem6.ptr, align 4\l  %arr.elem7.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 7\l  store i32 6, ptr %arr.elem7.ptr, align 4\l  %arr.elem8.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 8\l  store i32 5, ptr %arr.elem8.ptr, align 4\l  %arr.base = getelementptr [9 x i32], ptr %arr, i64 0, i64 0\l  call void @heap_sort(ptr %arr.base, i64 9)\l  br label %cond\l}"];
+	Node0x593e1a623150 -> Node0x593e1a626dc0[tooltip="entry -> cond\nProbability 100.00%" ];
+	Node0x593e1a626dc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{cond:\l|  %i = phi i64 [ 0, %entry ], [ %i.next, %body ]\l  %cmp = icmp ult i64 %i, 9\l  br i1 %cmp, label %body, label %after\l|{<s0>T|<s1>F}}"];
+	Node0x593e1a626dc0:s0 -> Node0x593e1a626fe0[tooltip="cond -> body\nProbability 96.88%" ];
+	Node0x593e1a626dc0:s1 -> Node0x593e1a6271b0[tooltip="cond -> after\nProbability 3.12%" ];
+	Node0x593e1a626fe0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %elem.ptr = getelementptr [9 x i32], ptr %arr, i64 0, i64 %i\l  %elem = load i32, ptr %elem.ptr, align 4\l  %fmt.ptr = getelementptr [4 x i8], ptr @_Format, i64 0, i64 0\l  %call.printf = call i32 (ptr, ...) @printf(ptr %fmt.ptr, i32 %elem)\l  %i.next = add i64 %i, 1\l  br label %cond\l}"];
+	Node0x593e1a626fe0 -> Node0x593e1a626dc0[tooltip="body -> cond\nProbability 100.00%" ];
+	Node0x593e1a6271b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after:\l|  ret i32 0\l}"];
+}

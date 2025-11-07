@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5cfa3382b7e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %arr0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %vecptr = bitcast ptr %arr0 to ptr\l  %vinit = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %vinit, ptr %vecptr, align 16\l  %fifth = getelementptr inbounds i32, ptr %arr0, i64 4\l  store i32 13, ptr %fifth, align 4\l  call void @selection_sort(ptr %arr0, i32 5)\l  %msgptr = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0, i64 0\l  %call0 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %msgptr)\l  br label %loop\l}"];
+	Node0x5cfa3382b7e0 -> Node0x5cfa3382f420[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5cfa3382f420 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %entry ], [ %i.next, %loop.body ]\l  %cmp = icmp ult i64 %i, 5\l  br i1 %cmp, label %loop.body, label %done\l|{<s0>T|<s1>F}}"];
+	Node0x5cfa3382f420:s0 -> Node0x5cfa3382f550[tooltip="loop -> loop.body\nProbability 96.88%" ];
+	Node0x5cfa3382f420:s1 -> Node0x5cfa3382f760[tooltip="loop -> done\nProbability 3.12%" ];
+	Node0x5cfa3382f550 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.body:\l|  %elem.ptr = getelementptr inbounds i32, ptr %arr0, i64 %i\l  %val = load i32, ptr %elem.ptr, align 4\l  %fmtptr = getelementptr inbounds [4 x i8], ptr @.str.fmt, i64 0, i64 0\l  %call1 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmtptr, i32 %val)\l  %i.next = add nuw nsw i64 %i, 1\l  br label %loop\l}"];
+	Node0x5cfa3382f550 -> Node0x5cfa3382f420[tooltip="loop.body -> loop\nProbability 100.00%" ];
+	Node0x5cfa3382f760 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{done:\l|  ret i32 0\l}"];
+}

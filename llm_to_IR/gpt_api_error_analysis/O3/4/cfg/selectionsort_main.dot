@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x597e30eac6a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %arr.vec.ptr = bitcast ptr %arr to ptr\l  %vecinit = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %vecinit, ptr %arr.vec.ptr, align 16\l  %fifth = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %fifth, align 4\l  %arrdecay = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  call void @selection_sort(ptr %arrdecay, i32 5)\l  %sortedstr = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0, i64 0\l  %call0 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %sortedstr)\l  %fmt = getelementptr inbounds [4 x i8], ptr @.str.num, i64 0, i64 0\l  br label %loop.preheader\l}"];
+	Node0x597e30eac6a0 -> Node0x597e30eb0980[tooltip="entry -> loop.preheader\nProbability 100.00%" ];
+	Node0x597e30eb0980 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loop.preheader:\l|  br label %loop\l}"];
+	Node0x597e30eb0980 -> Node0x597e30eb0a70[tooltip="loop.preheader -> loop\nProbability 100.00%" ];
+	Node0x597e30eb0a70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %loop.preheader ], [ %i.next, %loop ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arrdecay, i64 %i\l  %val = load i32, ptr %elem.ptr, align 4\l  %call1 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt, i32 %val)\l  %i.next = add i64 %i, 1\l  %cmp = icmp eq i64 %i.next, 5\l  br i1 %cmp, label %done, label %loop\l|{<s0>T|<s1>F}}"];
+	Node0x597e30eb0a70:s0 -> Node0x597e30eb1050[tooltip="loop -> done\nProbability 3.12%" ];
+	Node0x597e30eb0a70:s1 -> Node0x597e30eb0a70[tooltip="loop -> loop\nProbability 96.88%" ];
+	Node0x597e30eb1050 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{done:\l|  ret i32 0\l}"];
+}

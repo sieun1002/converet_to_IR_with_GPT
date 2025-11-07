@@ -1,0 +1,48 @@
+digraph "CFG for 'merge_sort' function" {
+	label="CFG for 'merge_sort' function";
+
+	Node0x63234b16a900 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f4987a70" fontname="Courier",label="{entry:\l|  %cmp_n_le1 = icmp ule i64 %n, 1\l  br i1 %cmp_n_le1, label %ret, label %alloc\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16a900:s0 -> Node0x63234b16a3b0[tooltip="entry -> ret\nProbability 50.00%" ];
+	Node0x63234b16a900:s1 -> Node0x63234b16a970[tooltip="entry -> alloc\nProbability 50.00%" ];
+	Node0x63234b16a970 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f5a08170" fontname="Courier",label="{alloc:\l|  %bytes = shl i64 %n, 2\l  %tmp_ptr_i8 = call ptr @malloc(i64 %bytes)\l  %isnull = icmp eq ptr %tmp_ptr_i8, null\l  br i1 %isnull, label %ret, label %init\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16a970:s0 -> Node0x63234b16a3b0[tooltip="alloc -> ret\nProbability 37.50%" ];
+	Node0x63234b16a970:s1 -> Node0x63234b16cd70[tooltip="alloc -> init\nProbability 62.50%" ];
+	Node0x63234b16cd70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{init:\l|  %tmp_ptr = bitcast ptr %tmp_ptr_i8 to ptr\l  br label %outer.cond\l}"];
+	Node0x63234b16cd70 -> Node0x63234b16ceb0[tooltip="init -> outer.cond\nProbability 100.00%" ];
+	Node0x63234b16ceb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{outer.cond:\l|  %width.phi = phi i64 [ 1, %init ], [ %width.next, %outer.swap ]\l  %src.phi = phi ptr [ %dest, %init ], [ %src.next, %outer.swap ]\l  %buf.phi = phi ptr [ %tmp_ptr, %init ], [ %buf.next, %outer.swap ]\l  %cmp_width = icmp ult i64 %width.phi, %n\l  br i1 %cmp_width, label %inner.cond, label %after.loops\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16ceb0:s0 -> Node0x63234b16d770[tooltip="outer.cond -> inner.cond\nProbability 96.88%" ];
+	Node0x63234b16ceb0:s1 -> Node0x63234b16d850[tooltip="outer.cond -> after.loops\nProbability 3.12%" ];
+	Node0x63234b16d770 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.cond:\l|  %i.phi = phi i64 [ 0, %outer.cond ], [ %i.next, %merge.done ]\l  %tw = shl i64 %width.phi, 1\l  %i.cmp = icmp ult i64 %i.phi, %n\l  br i1 %i.cmp, label %chunk.setup, label %outer.swap\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16d770:s0 -> Node0x63234b16e190[tooltip="inner.cond -> chunk.setup\nProbability 96.88%" ];
+	Node0x63234b16d770:s1 -> Node0x63234b16d000[tooltip="inner.cond -> outer.swap\nProbability 3.12%" ];
+	Node0x63234b16e190 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{chunk.setup:\l|  %i_plus_w = add i64 %i.phi, %width.phi\l  %mid.le = icmp ule i64 %i_plus_w, %n\l  %mid = select i1 %mid.le, i64 %i_plus_w, i64 %n\l  %i_plus_2w = add i64 %i.phi, %tw\l  %end.le = icmp ule i64 %i_plus_2w, %n\l  %end = select i1 %end.le, i64 %i_plus_2w, i64 %n\l  br label %merge.header\l}"];
+	Node0x63234b16e190 -> Node0x63234b16eac0[tooltip="chunk.setup -> merge.header\nProbability 100.00%" ];
+	Node0x63234b16eac0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{merge.header:\l|  %j.phi = phi i64 [ %i.phi, %chunk.setup ], [ %j.next, %choose.left ], [\l... %j.keep, %choose.right ]\l  %k.phi = phi i64 [ %mid, %chunk.setup ], [ %k.keep, %choose.left ], [\l... %k.next, %choose.right ]\l  %d.phi = phi i64 [ %i.phi, %chunk.setup ], [ %d.next.left, %choose.left ], [\l... %d.next.right, %choose.right ]\l  %d.cmp = icmp ult i64 %d.phi, %end\l  br i1 %d.cmp, label %choose.pre, label %merge.done\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16eac0:s0 -> Node0x63234b16fd10[tooltip="merge.header -> choose.pre\nProbability 96.88%" ];
+	Node0x63234b16eac0:s1 -> Node0x63234b16de70[tooltip="merge.header -> merge.done\nProbability 3.12%" ];
+	Node0x63234b16fd10 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{choose.pre:\l|  %left.avail = icmp ult i64 %j.phi, %mid\l  br i1 %left.avail, label %check.right, label %choose.right\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16fd10:s0 -> Node0x63234b16ff60[tooltip="choose.pre -> check.right\nProbability 50.00%" ];
+	Node0x63234b16fd10:s1 -> Node0x63234b16ed90[tooltip="choose.pre -> choose.right\nProbability 50.00%" ];
+	Node0x63234b16ff60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{check.right:\l|  %right.avail = icmp ult i64 %k.phi, %end\l  br i1 %right.avail, label %cmp.values, label %choose.left\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16ff60:s0 -> Node0x63234b170150[tooltip="check.right -> cmp.values\nProbability 50.00%" ];
+	Node0x63234b16ff60:s1 -> Node0x63234b16ec00[tooltip="check.right -> choose.left\nProbability 50.00%" ];
+	Node0x63234b170150 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c5333470" fontname="Courier",label="{cmp.values:\l|  %left.ptr = getelementptr inbounds i32, ptr %src.phi, i64 %j.phi\l  %left.load = load i32, ptr %left.ptr, align 4\l  %right.ptr = getelementptr inbounds i32, ptr %src.phi, i64 %k.phi\l  %right.load = load i32, ptr %right.ptr, align 4\l  %le.cmp = icmp sle i32 %left.load, %right.load\l  br i1 %le.cmp, label %choose.left, label %choose.right\l|{<s0>T|<s1>F}}"];
+	Node0x63234b170150:s0 -> Node0x63234b16ec00[tooltip="cmp.values -> choose.left\nProbability 50.00%" ];
+	Node0x63234b170150:s1 -> Node0x63234b16ed90[tooltip="cmp.values -> choose.right\nProbability 50.00%" ];
+	Node0x63234b16ec00 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{choose.left:\l|  %dst.ptr.left = getelementptr inbounds i32, ptr %buf.phi, i64 %d.phi\l  %src.l.ptr2 = getelementptr inbounds i32, ptr %src.phi, i64 %j.phi\l  %lval2 = load i32, ptr %src.l.ptr2, align 4\l  store i32 %lval2, ptr %dst.ptr.left, align 4\l  %j.next = add i64 %j.phi, 1\l  %k.keep = add i64 %k.phi, 0\l  %d.next.left = add i64 %d.phi, 1\l  br label %merge.header\l}"];
+	Node0x63234b16ec00 -> Node0x63234b16eac0[tooltip="choose.left -> merge.header\nProbability 100.00%" ];
+	Node0x63234b16ed90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{choose.right:\l|  %dst.ptr.right = getelementptr inbounds i32, ptr %buf.phi, i64 %d.phi\l  %src.r.ptr2 = getelementptr inbounds i32, ptr %src.phi, i64 %k.phi\l  %rval2 = load i32, ptr %src.r.ptr2, align 4\l  store i32 %rval2, ptr %dst.ptr.right, align 4\l  %k.next = add i64 %k.phi, 1\l  %j.keep = add i64 %j.phi, 0\l  %d.next.right = add i64 %d.phi, 1\l  br label %merge.header\l}"];
+	Node0x63234b16ed90 -> Node0x63234b16eac0[tooltip="choose.right -> merge.header\nProbability 100.00%" ];
+	Node0x63234b16de70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{merge.done:\l|  %i.next = add i64 %i.phi, %tw\l  br label %inner.cond\l}"];
+	Node0x63234b16de70 -> Node0x63234b16d770[tooltip="merge.done -> inner.cond\nProbability 100.00%" ];
+	Node0x63234b16d000 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{outer.swap:\l|  %src.next = getelementptr inbounds i32, ptr %buf.phi, i64 0\l  %buf.next = getelementptr inbounds i32, ptr %src.phi, i64 0\l  %width.next = shl i64 %width.phi, 1\l  br label %outer.cond\l}"];
+	Node0x63234b16d000 -> Node0x63234b16ceb0[tooltip="outer.swap -> outer.cond\nProbability 100.00%" ];
+	Node0x63234b16d850 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{after.loops:\l|  %src.ne.dest = icmp ne ptr %src.phi, %dest\l  br i1 %src.ne.dest, label %do.copy, label %skip.copy\l|{<s0>T|<s1>F}}"];
+	Node0x63234b16d850:s0 -> Node0x63234b171a70[tooltip="after.loops -> do.copy\nProbability 62.50%" ];
+	Node0x63234b16d850:s1 -> Node0x63234b171ae0[tooltip="after.loops -> skip.copy\nProbability 37.50%" ];
+	Node0x63234b171a70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f7ac8e70" fontname="Courier",label="{do.copy:\l|  %bytes.copy = shl i64 %n, 2\l  %dest.i8 = bitcast ptr %dest to ptr\l  %src.i8 = bitcast ptr %src.phi to ptr\l  %memcpy.call = call ptr @memcpy(ptr %dest.i8, ptr %src.i8, i64 %bytes.copy)\l  br label %skip.copy\l}"];
+	Node0x63234b171a70 -> Node0x63234b171ae0[tooltip="do.copy -> skip.copy\nProbability 100.00%" ];
+	Node0x63234b171ae0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f6a38570" fontname="Courier",label="{skip.copy:\l|  call void @free(ptr %tmp_ptr_i8)\l  br label %ret\l}"];
+	Node0x63234b171ae0 -> Node0x63234b16a3b0[tooltip="skip.copy -> ret\nProbability 100.00%" ];
+	Node0x63234b16a3b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f4987a70" fontname="Courier",label="{ret:\l|  ret void\l}"];
+}

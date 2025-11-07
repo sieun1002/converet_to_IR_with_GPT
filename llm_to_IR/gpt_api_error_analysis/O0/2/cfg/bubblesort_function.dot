@@ -1,0 +1,30 @@
+digraph "CFG for 'bubble_sort' function" {
+	label="CFG for 'bubble_sort' function";
+
+	Node0x64a0421fb4e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e36c5570" fontname="Courier",label="{entry:\l|  %cmp0 = icmp ule i64 %n, 1\l  br i1 %cmp0, label %ret, label %outer.header\l|{<s0>T|<s1>F}}"];
+	Node0x64a0421fb4e0:s0 -> Node0x64a0421fcd30[tooltip="entry -> ret\nProbability 50.00%" ];
+	Node0x64a0421fb4e0:s1 -> Node0x64a0421fcda0[tooltip="entry -> outer.header\nProbability 50.00%" ];
+	Node0x64a0421fcda0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.header:\l|  %limit = phi i64 [ %n, %entry ], [ %limit.next, %outer.update ]\l  %gt1 = icmp ugt i64 %limit, 1\l  br i1 %gt1, label %outer.body.init, label %ret\l|{<s0>T|<s1>F}}"];
+	Node0x64a0421fcda0:s0 -> Node0x64a0421fd170[tooltip="outer.header -> outer.body.init\nProbability 93.94%" ];
+	Node0x64a0421fcda0:s1 -> Node0x64a0421fcd30[tooltip="outer.header -> ret\nProbability 6.06%" ];
+	Node0x64a0421fd170 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.body.init:\l|  br label %inner.header\l}"];
+	Node0x64a0421fd170 -> Node0x64a0421fd330[tooltip="outer.body.init -> inner.header\nProbability 100.00%" ];
+	Node0x64a0421fd330 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.header:\l|  %j = phi i64 [ 1, %outer.body.init ], [ %j.next, %inc ]\l  %last = phi i64 [ 0, %outer.body.init ], [ %last.updated, %inc ]\l  %j_lt_limit = icmp ult i64 %j, %limit\l  br i1 %j_lt_limit, label %inner.body, label %after.inner\l|{<s0>T|<s1>F}}"];
+	Node0x64a0421fd330:s0 -> Node0x64a0421fdda0[tooltip="inner.header -> inner.body\nProbability 96.88%" ];
+	Node0x64a0421fd330:s1 -> Node0x64a0421fde80[tooltip="inner.header -> after.inner\nProbability 3.12%" ];
+	Node0x64a0421fdda0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.body:\l|  %jm1 = add i64 %j, -1\l  %ptr.prev = getelementptr inbounds i32, ptr %arr, i64 %jm1\l  %ptr.cur = getelementptr inbounds i32, ptr %arr, i64 %j\l  %v.prev = load i32, ptr %ptr.prev, align 4\l  %v.cur = load i32, ptr %ptr.cur, align 4\l  %need.swap = icmp sgt i32 %v.prev, %v.cur\l  br i1 %need.swap, label %swap, label %no.swap\l|{<s0>T|<s1>F}}"];
+	Node0x64a0421fdda0:s0 -> Node0x64a0421fe970[tooltip="inner.body -> swap\nProbability 50.00%" ];
+	Node0x64a0421fdda0:s1 -> Node0x64a0421fe9e0[tooltip="inner.body -> no.swap\nProbability 50.00%" ];
+	Node0x64a0421fe970 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{swap:\l|  store i32 %v.cur, ptr %ptr.prev, align 4\l  store i32 %v.prev, ptr %ptr.cur, align 4\l  br label %inc\l}"];
+	Node0x64a0421fe970 -> Node0x64a0421fd440[tooltip="swap -> inc\nProbability 100.00%" ];
+	Node0x64a0421fe9e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{no.swap:\l|  br label %inc\l}"];
+	Node0x64a0421fe9e0 -> Node0x64a0421fd440[tooltip="no.swap -> inc\nProbability 100.00%" ];
+	Node0x64a0421fd440 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inc:\l|  %last.updated = phi i64 [ %j, %swap ], [ %last, %no.swap ]\l  %j.next = add i64 %j, 1\l  br label %inner.header\l}"];
+	Node0x64a0421fd440 -> Node0x64a0421fd330[tooltip="inc -> inner.header\nProbability 100.00%" ];
+	Node0x64a0421fde80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after.inner:\l|  %no.swaps = icmp eq i64 %last, 0\l  br i1 %no.swaps, label %ret, label %outer.update\l|{<s0>T|<s1>F}}"];
+	Node0x64a0421fde80:s0 -> Node0x64a0421fcd30[tooltip="after.inner -> ret\nProbability 3.12%" ];
+	Node0x64a0421fde80:s1 -> Node0x64a0421fcf90[tooltip="after.inner -> outer.update\nProbability 96.88%" ];
+	Node0x64a0421fcf90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.update:\l|  %limit.next = phi i64 [ %last, %after.inner ]\l  br label %outer.header\l}"];
+	Node0x64a0421fcf90 -> Node0x64a0421fcda0[tooltip="outer.update -> outer.header\nProbability 100.00%" ];
+	Node0x64a0421fcd30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e36c5570" fontname="Courier",label="{ret:\l|  ret void\l}"];
+}

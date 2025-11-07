@@ -1,0 +1,226 @@
+; ModuleID = 'heap_sort'
+target triple = "x86_64-unknown-linux-gnu"
+
+define void @heap_sort(i32* %arr, i64 %n) {
+b1189:
+  %arr.addr = alloca i32*, align 8
+  %n.addr = alloca i64, align 8
+  %var50 = alloca i64, align 8
+  %var48 = alloca i64, align 8
+  %var18 = alloca i64, align 8
+  %var10 = alloca i64, align 8
+  %var8 = alloca i64, align 8
+  %tmp54 = alloca i32, align 4
+  %var40 = alloca i64, align 8
+  %tmp5C = alloca i32, align 4
+  %var38 = alloca i64, align 8
+  %var30 = alloca i64, align 8
+  %var28 = alloca i64, align 8
+  %var20 = alloca i64, align 8
+  %tmp58 = alloca i32, align 4
+  store i32* %arr, i32** %arr.addr, align 8
+  store i64 %n, i64* %n.addr, align 8
+  %n0 = load i64, i64* %n.addr, align 8
+  %cmp_n_le_1 = icmp ule i64 %n0, 1
+  br i1 %cmp_n_le_1, label %b1448, label %b1189.cont
+
+b1189.cont:
+  %n1 = load i64, i64* %n.addr, align 8
+  %shr = lshr i64 %n1, 1
+  store i64 %shr, i64* %var50, align 8
+  br label %b12c4
+
+b11b4:
+  %i_cur = load i64, i64* %var50, align 8
+  store i64 %i_cur, i64* %var48, align 8
+  br label %b11bc
+
+b11bc:
+  %parent = load i64, i64* %var48, align 8
+  %mul2 = shl i64 %parent, 1
+  %left = add i64 %mul2, 1
+  store i64 %left, i64* %var18, align 8
+  %left2 = load i64, i64* %var18, align 8
+  %n2 = load i64, i64* %n.addr, align 8
+  %cmp_left_ge_n = icmp uge i64 %left2, %n2
+  br i1 %cmp_left_ge_n, label %b12c0, label %b11bc.cont
+
+b11bc.cont:
+  %left3 = load i64, i64* %var18, align 8
+  %right = add i64 %left3, 1
+  store i64 %right, i64* %var10, align 8
+  %right2 = load i64, i64* %var10, align 8
+  %n3 = load i64, i64* %n.addr, align 8
+  %cmp_right_ge_n = icmp uge i64 %right2, %n3
+  br i1 %cmp_right_ge_n, label %b1223, label %bcmp_child1
+
+bcmp_child1:
+  %arrp1 = load i32*, i32** %arr.addr, align 8
+  %ridx = load i64, i64* %var10, align 8
+  %rptr = getelementptr inbounds i32, i32* %arrp1, i64 %ridx
+  %rval = load i32, i32* %rptr, align 4
+  %arrp2 = load i32*, i32** %arr.addr, align 8
+  %lidx = load i64, i64* %var18, align 8
+  %lptr = getelementptr inbounds i32, i32* %arrp2, i64 %lidx
+  %lval = load i32, i32* %lptr, align 4
+  %cmp_r_gt_l = icmp sgt i32 %rval, %lval
+  br i1 %cmp_r_gt_l, label %b1227, label %b1223
+
+b1223:
+  %left_val_idx = load i64, i64* %var18, align 8
+  br label %b1227
+
+b1227:
+  %child_idx = phi i64 [ %ridx, %bcmp_child1 ], [ %left_val_idx, %b1223 ]
+  store i64 %child_idx, i64* %var8, align 8
+  %arrp3 = load i32*, i32** %arr.addr, align 8
+  %pidx = load i64, i64* %var48, align 8
+  %pptr = getelementptr inbounds i32, i32* %arrp3, i64 %pidx
+  %pval = load i32, i32* %pptr, align 4
+  %arrp4 = load i32*, i32** %arr.addr, align 8
+  %cidx = load i64, i64* %var8, align 8
+  %cptr = getelementptr inbounds i32, i32* %arrp4, i64 %cidx
+  %cval = load i32, i32* %cptr, align 4
+  %cmp_p_ge_c = icmp sge i32 %pval, %cval
+  br i1 %cmp_p_ge_c, label %b12c3, label %bswap1
+
+bswap1:
+  %arrp5 = load i32*, i32** %arr.addr, align 8
+  %pidx2 = load i64, i64* %var48, align 8
+  %pptr2 = getelementptr inbounds i32, i32* %arrp5, i64 %pidx2
+  %pval2 = load i32, i32* %pptr2, align 4
+  store i32 %pval2, i32* %tmp54, align 4
+  %arrp6 = load i32*, i32** %arr.addr, align 8
+  %cidx2 = load i64, i64* %var8, align 8
+  %cptr2 = getelementptr inbounds i32, i32* %arrp6, i64 %cidx2
+  %cval2 = load i32, i32* %cptr2, align 4
+  store i32 %cval2, i32* %pptr2, align 4
+  %tmp_p = load i32, i32* %tmp54, align 4
+  store i32 %tmp_p, i32* %cptr2, align 4
+  %new_parent = load i64, i64* %var8, align 8
+  store i64 %new_parent, i64* %var48, align 8
+  br label %b11bc
+
+b12c0:
+  br label %b12c4
+
+b12c3:
+  br label %b12c4
+
+b12c4:
+  %cur = load i64, i64* %var50, align 8
+  %dec = add i64 %cur, -1
+  store i64 %dec, i64* %var50, align 8
+  %test = icmp ne i64 %cur, 0
+  br i1 %test, label %b11b4, label %b12c4.after
+
+b12c4.after:
+  %n4 = load i64, i64* %n.addr, align 8
+  %nm1 = add i64 %n4, -1
+  store i64 %nm1, i64* %var40, align 8
+  br label %b143b
+
+b12ea:
+  %arrp7 = load i32*, i32** %arr.addr, align 8
+  %rootptr = getelementptr inbounds i32, i32* %arrp7, i64 0
+  %rootval = load i32, i32* %rootptr, align 4
+  store i32 %rootval, i32* %tmp5C, align 4
+  %hidx = load i64, i64* %var40, align 8
+  %arrp8 = load i32*, i32** %arr.addr, align 8
+  %hiptr = getelementptr inbounds i32, i32* %arrp8, i64 %hidx
+  %hval = load i32, i32* %hiptr, align 4
+  store i32 %hval, i32* %rootptr, align 4
+  %tmp_root = load i32, i32* %tmp5C, align 4
+  store i32 %tmp_root, i32* %hiptr, align 4
+  store i64 0, i64* %var38, align 8
+  br label %b132e
+
+b132e:
+  %curi = load i64, i64* %var38, align 8
+  %mul2b = shl i64 %curi, 1
+  %leftb = add i64 %mul2b, 1
+  store i64 %leftb, i64* %var30, align 8
+  %leftb2 = load i64, i64* %var30, align 8
+  %heap_end = load i64, i64* %var40, align 8
+  %cmp_left_ge_end = icmp uge i64 %leftb2, %heap_end
+  br i1 %cmp_left_ge_end, label %b1432, label %b132e.cont
+
+b132e.cont:
+  %leftb3 = load i64, i64* %var30, align 8
+  %rightb = add i64 %leftb3, 1
+  store i64 %rightb, i64* %var28, align 8
+  %rightb2 = load i64, i64* %var28, align 8
+  %heap_end2 = load i64, i64* %var40, align 8
+  %cmp_right_ge_end = icmp uge i64 %rightb2, %heap_end2
+  br i1 %cmp_right_ge_end, label %b1395, label %bcmp_child2
+
+bcmp_child2:
+  %arrp9 = load i32*, i32** %arr.addr, align 8
+  %ridxb = load i64, i64* %var28, align 8
+  %rptrb = getelementptr inbounds i32, i32* %arrp9, i64 %ridxb
+  %rvalb = load i32, i32* %rptrb, align 4
+  %arrp10 = load i32*, i32** %arr.addr, align 8
+  %lidxb = load i64, i64* %var30, align 8
+  %lptrb = getelementptr inbounds i32, i32* %arrp10, i64 %lidxb
+  %lvalb = load i32, i32* %lptrb, align 4
+  %cmp_r_gt_l_b = icmp sgt i32 %rvalb, %lvalb
+  br i1 %cmp_r_gt_l_b, label %b1399, label %b1395
+
+b1395:
+  %left_choose = load i64, i64* %var30, align 8
+  br label %b1399
+
+b1399:
+  %child2 = phi i64 [ %ridxb, %bcmp_child2 ], [ %left_choose, %b1395 ]
+  store i64 %child2, i64* %var20, align 8
+  %arrp11 = load i32*, i32** %arr.addr, align 8
+  %pidxb = load i64, i64* %var38, align 8
+  %pptrb = getelementptr inbounds i32, i32* %arrp11, i64 %pidxb
+  %pvalb = load i32, i32* %pptrb, align 4
+  %arrp12 = load i32*, i32** %arr.addr, align 8
+  %cidxb = load i64, i64* %var20, align 8
+  %cptrb = getelementptr inbounds i32, i32* %arrp12, i64 %cidxb
+  %cvalb = load i32, i32* %cptrb, align 4
+  %cmp_p_ge_c_b = icmp sge i32 %pvalb, %cvalb
+  br i1 %cmp_p_ge_c_b, label %b1435, label %bswap2
+
+bswap2:
+  %arrp13 = load i32*, i32** %arr.addr, align 8
+  %pidxb2 = load i64, i64* %var38, align 8
+  %pptrb2 = getelementptr inbounds i32, i32* %arrp13, i64 %pidxb2
+  %pvalb2 = load i32, i32* %pptrb2, align 4
+  store i32 %pvalb2, i32* %tmp58, align 4
+  %arrp14 = load i32*, i32** %arr.addr, align 8
+  %cidxb2 = load i64, i64* %var20, align 8
+  %cptrb2 = getelementptr inbounds i32, i32* %arrp14, i64 %cidxb2
+  %cvalb2 = load i32, i32* %cptrb2, align 4
+  store i32 %cvalb2, i32* %pptrb2, align 4
+  %tmp_p2 = load i32, i32* %tmp58, align 4
+  store i32 %tmp_p2, i32* %cptrb2, align 4
+  %newp2 = load i64, i64* %var20, align 8
+  store i64 %newp2, i64* %var38, align 8
+  br label %b132e
+
+b1432:
+  br label %b1436
+
+b1435:
+  br label %b1436
+
+b1436:
+  %he = load i64, i64* %var40, align 8
+  %he_dec = add i64 %he, -1
+  store i64 %he_dec, i64* %var40, align 8
+  br label %b143b
+
+b143b:
+  %he2 = load i64, i64* %var40, align 8
+  %cond = icmp ne i64 %he2, 0
+  br i1 %cond, label %b12ea, label %b1449
+
+b1448:
+  br label %b1449
+
+b1449:
+  ret void
+}

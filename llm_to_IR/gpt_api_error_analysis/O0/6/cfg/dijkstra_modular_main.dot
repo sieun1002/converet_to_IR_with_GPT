@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5c086d1f1a10 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %ret.addr = alloca i32, align 4\l  %n.addr = alloca i32, align 4\l  %m.addr = alloca i32, align 4\l  %graphbuf = alloca [40016 x i8], align 16\l  %distbuf = alloca [40416 x i8], align 16\l  store i32 0, ptr %ret.addr, align 4\l  %graphbuf.ptr = getelementptr inbounds [40016 x i8], ptr %graphbuf, i64 0,\l... i64 0\l  %call.read_graph = call i32 @read_graph(ptr nonnull %graphbuf.ptr, ptr\l... nonnull %n.addr, ptr nonnull %m.addr)\l  %cmp = icmp eq i32 %call.read_graph, 0\l  br i1 %cmp, label %if.success, label %if.error\l|{<s0>T|<s1>F}}"];
+	Node0x5c086d1f1a10:s0 -> Node0x5c086d1f2a70[tooltip="entry -> if.success\nProbability 37.50%" ];
+	Node0x5c086d1f1a10:s1 -> Node0x5c086d1f2ac0[tooltip="entry -> if.error\nProbability 62.50%" ];
+	Node0x5c086d1f2ac0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{if.error:\l|  %stream.ptr = load ptr, ptr @stream, align 8\l  %fmt.ptr = getelementptr inbounds [28 x i8], ptr @.str, i64 0, i64 0\l  %call.fprintf = call i32 (ptr, ptr, ...) @fprintf(ptr %stream.ptr, ptr\l... %fmt.ptr)\l  store i32 1, ptr %ret.addr, align 4\l  br label %return\l}"];
+	Node0x5c086d1f2ac0 -> Node0x5c086d1f3140[tooltip="if.error -> return\nProbability 100.00%" ];
+	Node0x5c086d1f2a70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{if.success:\l|  %n.val = load i32, ptr %n.addr, align 4\l  %m.val = load i32, ptr %m.addr, align 4\l  %distbuf.i8 = getelementptr inbounds [40416 x i8], ptr %distbuf, i64 0, i64 0\l  %distbuf.i32 = bitcast ptr %distbuf.i8 to ptr\l  call void @dijkstra(ptr nonnull %graphbuf.ptr, i32 %n.val, i32 %m.val, ptr\l... nonnull %distbuf.i32)\l  %n.val2 = load i32, ptr %n.addr, align 4\l  call void @print_distances(ptr nonnull %distbuf.i32, i32 %n.val2)\l  store i32 0, ptr %ret.addr, align 4\l  br label %return\l}"];
+	Node0x5c086d1f2a70 -> Node0x5c086d1f3140[tooltip="if.success -> return\nProbability 100.00%" ];
+	Node0x5c086d1f3140 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{return:\l|  %ret.final = load i32, ptr %ret.addr, align 4\l  ret i32 %ret.final\l}"];
+}

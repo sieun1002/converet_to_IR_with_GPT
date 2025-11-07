@@ -1,0 +1,22 @@
+digraph "CFG for 'insertion_sort' function" {
+	label="CFG for 'insertion_sort' function";
+
+	Node0x6281894b7930 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  %array = alloca ptr, align 8\l  %n.addr = alloca i64, align 8\l  %i.addr = alloca i64, align 8\l  %j.addr = alloca i64, align 8\l  %key.addr = alloca i32, align 4\l  store ptr %a, ptr %array, align 8\l  store i64 %n, ptr %n.addr, align 8\l  store i64 1, ptr %i.addr, align 8\l  br label %outer.check\l}"];
+	Node0x6281894b7930 -> Node0x6281894b6de0[tooltip="entry -> outer.check\nProbability 100.00%" ];
+	Node0x6281894b8bd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.body:\l|  %i0 = load i64, ptr %i.addr, align 8\l  %arr0 = load ptr, ptr %array, align 8\l  %idxptr0 = getelementptr inbounds i32, ptr %arr0, i64 %i0\l  %val0 = load i32, ptr %idxptr0, align 4\l  store i32 %val0, ptr %key.addr, align 4\l  store i64 %i0, ptr %j.addr, align 8\l  br label %inner.check\l}"];
+	Node0x6281894b8bd0 -> Node0x6281894b9210[tooltip="outer.body -> inner.check\nProbability 100.00%" ];
+	Node0x6281894b9300 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.shift:\l|  %j1 = load i64, ptr %j.addr, align 8\l  %jm1 = sub i64 %j1, 1\l  %arr1 = load ptr, ptr %array, align 8\l  %addr_jm1 = getelementptr inbounds i32, ptr %arr1, i64 %jm1\l  %v_jm1 = load i32, ptr %addr_jm1, align 4\l  %arr2 = load ptr, ptr %array, align 8\l  %addr_j = getelementptr inbounds i32, ptr %arr2, i64 %j1\l  store i32 %v_jm1, ptr %addr_j, align 4\l  store i64 %jm1, ptr %j.addr, align 8\l  br label %inner.check\l}"];
+	Node0x6281894b9300 -> Node0x6281894b9210[tooltip="inner.shift -> inner.check\nProbability 100.00%" ];
+	Node0x6281894b9210 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.check:\l|  %j2 = load i64, ptr %j.addr, align 8\l  %cmp0 = icmp eq i64 %j2, 0\l  br i1 %cmp0, label %place, label %check2\l|{<s0>T|<s1>F}}"];
+	Node0x6281894b9210:s0 -> Node0x6281894ba1e0[tooltip="inner.check -> place\nProbability 3.12%" ];
+	Node0x6281894b9210:s1 -> Node0x6281894ba250[tooltip="inner.check -> check2\nProbability 96.88%" ];
+	Node0x6281894ba250 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{check2:\l|  %j3 = load i64, ptr %j.addr, align 8\l  %jm1b = sub i64 %j3, 1\l  %arr3 = load ptr, ptr %array, align 8\l  %addr_jm1b = getelementptr inbounds i32, ptr %arr3, i64 %jm1b\l  %a_jm1 = load i32, ptr %addr_jm1b, align 4\l  %key0 = load i32, ptr %key.addr, align 4\l  %cmp1 = icmp slt i32 %key0, %a_jm1\l  br i1 %cmp1, label %inner.shift, label %place\l|{<s0>T|<s1>F}}"];
+	Node0x6281894ba250:s0 -> Node0x6281894b9300[tooltip="check2 -> inner.shift\nProbability 96.88%" ];
+	Node0x6281894ba250:s1 -> Node0x6281894ba1e0[tooltip="check2 -> place\nProbability 3.12%" ];
+	Node0x6281894ba1e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{place:\l|  %j4 = load i64, ptr %j.addr, align 8\l  %arr4 = load ptr, ptr %array, align 8\l  %addr_j2 = getelementptr inbounds i32, ptr %arr4, i64 %j4\l  %key1 = load i32, ptr %key.addr, align 4\l  store i32 %key1, ptr %addr_j2, align 4\l  %i1 = load i64, ptr %i.addr, align 8\l  %iinc = add i64 %i1, 1\l  store i64 %iinc, ptr %i.addr, align 8\l  br label %outer.check\l}"];
+	Node0x6281894ba1e0 -> Node0x6281894b6de0[tooltip="place -> outer.check\nProbability 100.00%" ];
+	Node0x6281894b6de0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.check:\l|  %i2 = load i64, ptr %i.addr, align 8\l  %n0 = load i64, ptr %n.addr, align 8\l  %cmp2 = icmp ult i64 %i2, %n0\l  br i1 %cmp2, label %outer.body, label %ret\l|{<s0>T|<s1>F}}"];
+	Node0x6281894b6de0:s0 -> Node0x6281894b8bd0[tooltip="outer.check -> outer.body\nProbability 96.88%" ];
+	Node0x6281894b6de0:s1 -> Node0x6281894baf20[tooltip="outer.check -> ret\nProbability 3.12%" ];
+	Node0x6281894baf20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{ret:\l|  ret void\l}"];
+}

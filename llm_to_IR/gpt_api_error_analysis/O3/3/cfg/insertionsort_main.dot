@@ -1,0 +1,31 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x558689f7e470 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  %arr = alloca [10 x i32], align 16\l  %p0 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 0\l  store i32 10, ptr %p0, align 4\l  %p1 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 1\l  store i32 9, ptr %p1, align 4\l  %p2 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %p2, align 4\l  %p3 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 3\l  store i32 7, ptr %p3, align 4\l  %p4 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 4\l  store i32 6, ptr %p4, align 4\l  %p5 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 5\l  store i32 5, ptr %p5, align 4\l  %p6 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 6\l  store i32 4, ptr %p6, align 4\l  %p7 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 7\l  store i32 3, ptr %p7, align 4\l  %p8 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 8\l  store i32 2, ptr %p8, align 4\l  %p9 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 9\l  store i32 1, ptr %p9, align 4\l  br label %outer.header\l}"];
+	Node0x558689f7e470 -> Node0x558689f82320[tooltip="entry -> outer.header\nProbability 100.00%" ];
+	Node0x558689f82320 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.header:\l|  %i = phi i32 [ 1, %entry ], [ %i.next, %outer.latch ]\l  %i.cmp = icmp slt i32 %i, 10\l  br i1 %i.cmp, label %outer.body, label %print.init\l|{<s0>T|<s1>F}}"];
+	Node0x558689f82320:s0 -> Node0x558689f82710[tooltip="outer.header -> outer.body\nProbability 96.88%" ];
+	Node0x558689f82320:s1 -> Node0x558689f827f0[tooltip="outer.header -> print.init\nProbability 3.12%" ];
+	Node0x558689f82710 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.body:\l|  %i.sext = sext i32 %i to i64\l  %key.ptr = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %i.sext\l  %key = load i32, ptr %key.ptr, align 4\l  %j.init = add nsw i32 %i, -1\l  br label %inner.header\l}"];
+	Node0x558689f82710 -> Node0x558689f82b30[tooltip="outer.body -> inner.header\nProbability 100.00%" ];
+	Node0x558689f82b30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.header:\l|  %j = phi i32 [ %j.init, %outer.body ], [ %j.next, %inner.shift ]\l  %j.ge0 = icmp sge i32 %j, 0\l  br i1 %j.ge0, label %inner.cmp, label %inner.insert\l|{<s0>T|<s1>F}}"];
+	Node0x558689f82b30:s0 -> Node0x558689f831a0[tooltip="inner.header -> inner.cmp\nProbability 96.88%" ];
+	Node0x558689f82b30:s1 -> Node0x558689f83280[tooltip="inner.header -> inner.insert\nProbability 3.12%" ];
+	Node0x558689f831a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cmp:\l|  %j.sext = sext i32 %j to i64\l  %elt.ptr = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %j.sext\l  %elt = load i32, ptr %elt.ptr, align 4\l  %elt.gt.key = icmp sgt i32 %elt, %key\l  br i1 %elt.gt.key, label %inner.shift, label %inner.insert\l|{<s0>T|<s1>F}}"];
+	Node0x558689f831a0:s0 -> Node0x558689f82c70[tooltip="inner.cmp -> inner.shift\nProbability 96.88%" ];
+	Node0x558689f831a0:s1 -> Node0x558689f83280[tooltip="inner.cmp -> inner.insert\nProbability 3.12%" ];
+	Node0x558689f82c70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.shift:\l|  %j.plus1 = add nsw i32 %j, 1\l  %j.plus1.sext = sext i32 %j.plus1 to i64\l  %dest.ptr = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64\l... %j.plus1.sext\l  store i32 %elt, ptr %dest.ptr, align 4\l  %j.next = add nsw i32 %j, -1\l  br label %inner.header\l}"];
+	Node0x558689f82c70 -> Node0x558689f82b30[tooltip="inner.shift -> inner.header\nProbability 100.00%" ];
+	Node0x558689f83280 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{inner.insert:\l|  %ins.pos = add nsw i32 %j, 1\l  %ins.pos.sext = sext i32 %ins.pos to i64\l  %ins.ptr = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64\l... %ins.pos.sext\l  store i32 %key, ptr %ins.ptr, align 4\l  br label %outer.latch\l}"];
+	Node0x558689f83280 -> Node0x558689f82590[tooltip="inner.insert -> outer.latch\nProbability 100.00%" ];
+	Node0x558689f82590 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.latch:\l|  %i.next = add nuw nsw i32 %i, 1\l  br label %outer.header\l}"];
+	Node0x558689f82590 -> Node0x558689f82320[tooltip="outer.latch -> outer.header\nProbability 100.00%" ];
+	Node0x558689f827f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{print.init:\l|  br label %print.loop\l}"];
+	Node0x558689f827f0 -> Node0x558689f83e60[tooltip="print.init -> print.loop\nProbability 100.00%" ];
+	Node0x558689f83e60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{print.loop:\l|  %p = phi i32 [ 0, %print.init ], [ %p.next, %print.body ]\l  %p.cmp = icmp slt i32 %p, 10\l  br i1 %p.cmp, label %print.body, label %done\l|{<s0>T|<s1>F}}"];
+	Node0x558689f83e60:s0 -> Node0x558689f83f70[tooltip="print.loop -> print.body\nProbability 96.88%" ];
+	Node0x558689f83e60:s1 -> Node0x558689f848d0[tooltip="print.loop -> done\nProbability 3.12%" ];
+	Node0x558689f83f70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{print.body:\l|  %p.sext = sext i32 %p to i64\l  %pptr = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %p.sext\l  %val = load i32, ptr %pptr, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.fmt, i64 0, i64 0\l  %call = call i32 (ptr, ...) @printf(ptr %fmt.ptr, i32 %val)\l  %p.next = add nuw nsw i32 %p, 1\l  br label %print.loop\l}"];
+	Node0x558689f83f70 -> Node0x558689f83e60[tooltip="print.body -> print.loop\nProbability 100.00%" ];
+	Node0x558689f848d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{done:\l|  %nl.ptr = getelementptr inbounds [2 x i8], ptr @.nl, i64 0, i64 0\l  %call2 = call i32 (ptr, ...) @printf(ptr %nl.ptr)\l  ret i32 0\l}"];
+}

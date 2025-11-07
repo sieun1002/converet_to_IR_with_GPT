@@ -1,0 +1,79 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/3/selectionsort_function1.ll:44:13: error: expected instruction opcode
+;   %r9_new = %edx_phi                               ; mov r9d, edx
+;             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'selection_sort_module'
+target triple = "x86_64-pc-linux-gnu"
+
+define dso_local void @selection_sort(i32* noundef %arr, i32 noundef %len) {
+bb_1210:                                           ; 0x1210
+  %cmp_len_le_1 = icmp sle i32 %len, 1            ; cmp esi, 1
+  %len_minus1 = add i32 %len, -1                  ; r13d = rsi - 1
+  br i1 %cmp_len_le_1, label %bb_12A8, label %bb_1230  ; jle locret_12A8
+
+bb_1230:                                           ; 0x1230 (loc_1230)
+  %rbx_phi = phi i32* [ %arr, %bb_1210 ], [ %rbx_next_from_127B, %bb_127B ], [ %rbx_next_from_1290, %bb_1290 ]
+  %r10_phi = phi i32 [ 0, %bb_1210 ], [ %r10_next, %bb_127B ], [ %r10_next, %bb_1290 ]
+  %r10_next = add nsw i32 %r10_phi, 1             ; add r10d, 1
+  %ebp_val = load i32, i32* %rbx_phi, align 4     ; mov ebp, [rbx]
+  %r12_ptr_init = getelementptr inbounds i32, i32* %rbx_phi, i64 1  ; lea r12, [rbx+4]
+  %cmp_len_le_r10next = icmp sle i32 %len, %r10_next ; cmp esi, r10d
+  br i1 %cmp_len_le_r10next, label %bb_1290, label %bb_1262  ; jle loc_1290 else to loc_1262
+
+bb_1250:                                           ; 0x1250 (loc_1250)
+  %edx_phi.in = phi i32 [ %edx_phi, %bb_1262 ]
+  %rax_phi.in = phi i32* [ %rax_phi, %bb_1262 ]
+  %edi_phi.in = phi i32 [ %edi_phi, %bb_1262 ]
+  %r9_phi.in = phi i32 [ %r9_phi, %bb_1262 ]
+  %idx64 = sext i32 %r9_phi.in to i64             ; movsxd rcx, r9d
+  %edx_inc2 = add nsw i32 %edx_phi.in, 1          ; add edx, 1
+  %rax_next2 = getelementptr inbounds i32, i32* %rax_phi.in, i64 1 ; add rax, 4
+  %r8_from_r9 = getelementptr inbounds i32, i32* %arr, i64 %idx64  ; lea r8, [r11+rcx*4] (r11 == %arr)
+  %edi_passthru = add i32 %edi_phi.in, 0          ; passthrough edi
+  %r9_passthru = add i32 %r9_phi.in, 0            ; passthrough r9
+  %cmp_len_eq = icmp eq i32 %len, %edx_inc2       ; cmp esi, edx
+  br i1 %cmp_len_eq, label %bb_127B, label %bb_1262  ; jz loc_127B else to loc_1262
+
+bb_1262:                                           ; 0x1262 (loc_1262)
+  %edx_phi = phi i32 [ %r10_next, %bb_1230 ], [ %edx_inc2, %bb_1250 ], [ %edx_inc, %bb_126B ]
+  %rax_phi = phi i32* [ %r12_ptr_init, %bb_1230 ], [ %rax_next2, %bb_1250 ], [ %rax_next, %bb_126B ]
+  %edi_phi = phi i32 [ %ebp_val, %bb_1230 ], [ %edi_passthru, %bb_1250 ], [ %edi_new, %bb_126B ]
+  %r9_phi = phi i32 [ %r10_phi, %bb_1230 ], [ %r9_passthru, %bb_1250 ], [ %r9_new, %bb_126B ]
+  %r8_phi = phi i32* [ %rbx_phi, %bb_1230 ], [ %r8_from_r9, %bb_1250 ], [ %r8_new, %bb_126B ]
+  %ecx_val = load i32, i32* %rax_phi, align 4     ; mov ecx, [rax]
+  %cmp_ecx_ge_edi = icmp sge i32 %ecx_val, %edi_phi ; cmp ecx, edi
+  br i1 %cmp_ecx_ge_edi, label %bb_1250, label %bb_126B  ; jge loc_1250 else continue
+
+bb_126B:                                           ; 0x126B (fall-through from 0x1269)
+  %r9_new = %edx_phi                               ; mov r9d, edx
+  %edx_inc = add nsw i32 %edx_phi, 1               ; add edx, 1
+  %edi_new = %ecx_val                              ; mov edi, ecx
+  %rax_next = getelementptr inbounds i32, i32* %rax_phi, i64 1 ; add rax, 4
+  %r8_new = %rax_phi                               ; r8 = rax (current min pointer)
+  %cmp_len_ne = icmp ne i32 %len, %edx_inc         ; cmp esi, edx
+  br i1 %cmp_len_ne, label %bb_1262, label %bb_127B  ; jnz loc_1262 else fall-through to loc_127B
+
+bb_127B:                                           ; 0x127B (loc_127B)
+  %edi_final = phi i32 [ %edi_new, %bb_126B ], [ %edi_passthru, %bb_1250 ]
+  %r8_final = phi i32* [ %r8_new, %bb_126B ], [ %r8_from_r9, %bb_1250 ]
+  store i32 %edi_final, i32* %rbx_phi, align 4    ; mov [rbx], edi
+  %rbx_next_from_127B = getelementptr inbounds i32, i32* %rbx_phi, i64 1 ; mov rbx, r12 -> rbx+4
+  store i32 %ebp_val, i32* %r8_final, align 4     ; mov [r8], ebp
+  %cmp_outer = icmp ne i32 %r10_next, %len_minus1 ; cmp r10d, r13d
+  br i1 %cmp_outer, label %bb_1230, label %bb_1288 ; jnz loc_1230 else loc_1288
+
+bb_1288:                                           ; 0x1288 (loc_1288)
+  ret void
+
+bb_1290:                                           ; 0x1290 (loc_1290)
+  %rbx_next_from_1290 = getelementptr inbounds i32, i32* %rbx_phi, i64 1 ; lea r12, [rbx+4]; mov rbx, r12
+  store i32 %ebp_val, i32* %rbx_phi, align 4      ; mov [rbx], edi (edi==ebp here)
+  store i32 %ebp_val, i32* %rbx_phi, align 4      ; mov [r8], ebp with r8=rbx
+  %cmp_outer2 = icmp ne i32 %r10_next, %len_minus1 ; cmp r10d, r13d
+  br i1 %cmp_outer2, label %bb_1230, label %bb_1288 ; jnz loc_1230 else jmp loc_1288
+
+bb_12A8:                                           ; 0x12A8 (locret_12A8)
+  ret void
+}

@@ -1,0 +1,161 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/4/heapsort_function1.ll:56:16: error: expected instruction opcode
+;   %tmp_build = %val_k
+;                ^
+; === ERROR LOG END ===
+
+; ModuleID = 'heapsort_module'
+target triple = "x86_64-pc-linux-gnu"
+
+define void @heap_sort(i32* %arr, i64 %n) {
+loc_1189:
+  %cmp_n_le_1 = icmp ule i64 %n, 1
+  br i1 %cmp_n_le_1, label %loc_1448, label %init_build
+
+init_build:
+  %n_half = lshr i64 %n, 1
+  br label %loc_12C4
+
+loc_12C4:
+  %var50.cur = phi i64 [ %n_half, %init_build ], [ %carry_back_c0, %loc_12C0 ], [ %carry_back_c3, %loc_12C3 ]
+  %var50.next = add i64 %var50.cur, -1
+  %test_var50 = icmp ne i64 %var50.cur, 0
+  br i1 %test_var50, label %loc_11B4, label %after_build
+
+loc_11B4:
+  br label %loc_11BC
+
+loc_11BC:
+  %k = phi i64 [ %var50.next, %loc_11B4 ], [ %k2, %loc_12BB ]
+  %carry_build = phi i64 [ %var50.next, %loc_11B4 ], [ %carry_build_thru, %loc_12BB ]
+  %left = add i64 %k, %k
+  %left.plus1 = add i64 %left, 1
+  %cmp_left_ge_n = icmp uge i64 %left.plus1, %n
+  br i1 %cmp_left_ge_n, label %loc_12C0, label %check_right_build
+
+check_right_build:
+  %right = add i64 %left.plus1, 1
+  %cmp_right_ge_n = icmp uge i64 %right, %n
+  br i1 %cmp_right_ge_n, label %loc_1223, label %cmp_children_build
+
+cmp_children_build:
+  %gep_right_ptr = getelementptr inbounds i32, i32* %arr, i64 %right
+  %val_right = load i32, i32* %gep_right_ptr, align 4
+  %gep_left_ptr = getelementptr inbounds i32, i32* %arr, i64 %left.plus1
+  %val_left = load i32, i32* %gep_left_ptr, align 4
+  %cmp_right_gt_left = icmp sgt i32 %val_right, %val_left
+  br i1 %cmp_right_gt_left, label %loc_1227, label %loc_1223
+
+loc_1223:
+  br label %loc_1227
+
+loc_1227:
+  %chosen_build = phi i64 [ %left.plus1, %loc_1223 ], [ %right, %cmp_children_build ]
+  %gep_k_ptr = getelementptr inbounds i32, i32* %arr, i64 %k
+  %val_k = load i32, i32* %gep_k_ptr, align 4
+  %gep_chosen_ptr = getelementptr inbounds i32, i32* %arr, i64 %chosen_build
+  %val_chosen = load i32, i32* %gep_chosen_ptr, align 4
+  %cmp_k_ge_chosen = icmp sge i32 %val_k, %val_chosen
+  br i1 %cmp_k_ge_chosen, label %loc_12C3, label %do_swap_build
+
+do_swap_build:
+  %tmp_build = %val_k
+  store i32 %val_chosen, i32* %gep_k_ptr, align 4
+  store i32 %tmp_build, i32* %gep_chosen_ptr, align 4
+  %k2 = %chosen_build
+  br label %loc_12BB
+
+loc_12BB:
+  %carry_build_thru = %carry_build
+  br label %loc_11BC
+
+loc_12C0:
+  %carry_back_c0 = %carry_build
+  br label %loc_12C4
+
+loc_12C3:
+  %carry_back_c3 = %carry_build
+  br label %loc_12C4
+
+after_build:
+  %n_minus1 = add i64 %n, -1
+  br label %loc_143B
+
+loc_143B:
+  %limit = phi i64 [ %n_minus1, %after_build ], [ %limit_next, %loc_1436 ]
+  %cmp_limit_nz = icmp ne i64 %limit, 0
+  br i1 %cmp_limit_nz, label %loc_12EA, label %loc_1446
+
+loc_12EA:
+  %a0_ptr = getelementptr inbounds i32, i32* %arr, i64 0
+  %a0 = load i32, i32* %a0_ptr, align 4
+  %last_ptr = getelementptr inbounds i32, i32* %arr, i64 %limit
+  %last_val = load i32, i32* %last_ptr, align 4
+  store i32 %last_val, i32* %a0_ptr, align 4
+  store i32 %a0, i32* %last_ptr, align 4
+  br label %loc_132E
+
+loc_132E:
+  %parent = phi i64 [ 0, %loc_12EA ], [ %parent2, %after_swap2 ]
+  %limit_thru = phi i64 [ %limit, %loc_12EA ], [ %limit_thru2, %after_swap2 ]
+  %left2 = add i64 %parent, %parent
+  %left2.plus1 = add i64 %left2, 1
+  %cmp_left2_ge_limit = icmp uge i64 %left2.plus1, %limit_thru
+  br i1 %cmp_left2_ge_limit, label %loc_1432, label %check_right2
+
+check_right2:
+  %right2 = add i64 %left2.plus1, 1
+  %cmp_right2_ge_limit = icmp uge i64 %right2, %limit_thru
+  br i1 %cmp_right2_ge_limit, label %loc_1395, label %cmp_children2
+
+cmp_children2:
+  %ptr_right2 = getelementptr inbounds i32, i32* %arr, i64 %right2
+  %val_right2 = load i32, i32* %ptr_right2, align 4
+  %ptr_left2 = getelementptr inbounds i32, i32* %arr, i64 %left2.plus1
+  %val_left2 = load i32, i32* %ptr_left2, align 4
+  %cmp_right2_gt_left2 = icmp sgt i32 %val_right2, %val_left2
+  br i1 %cmp_right2_gt_left2, label %loc_1399, label %loc_1395
+
+loc_1395:
+  br label %loc_1399
+
+loc_1399:
+  %chosen2 = phi i64 [ %left2.plus1, %loc_1395 ], [ %right2, %cmp_children2 ]
+  %ptr_parent = getelementptr inbounds i32, i32* %arr, i64 %parent
+  %val_parent = load i32, i32* %ptr_parent, align 4
+  %ptr_chosen2 = getelementptr inbounds i32, i32* %arr, i64 %chosen2
+  %val_chosen2 = load i32, i32* %ptr_chosen2, align 4
+  %cmp_parent_ge_chosen2 = icmp sge i32 %val_parent, %val_chosen2
+  br i1 %cmp_parent_ge_chosen2, label %loc_1435, label %do_swap2
+
+do_swap2:
+  %tmp2 = %val_parent
+  store i32 %val_chosen2, i32* %ptr_parent, align 4
+  store i32 %tmp2, i32* %ptr_chosen2, align 4
+  %parent2 = %chosen2
+  %limit_thru2 = %limit_thru
+  br label %after_swap2
+
+after_swap2:
+  br label %loc_132E
+
+loc_1432:
+  br label %loc_1436
+
+loc_1435:
+  br label %loc_1436
+
+loc_1436:
+  %limit_sub = add i64 %limit, -1
+  %limit_next = %limit_sub
+  br label %loc_143B
+
+loc_1446:
+  br label %loc_1449
+
+loc_1448:
+  br label %loc_1449
+
+loc_1449:
+  ret void
+}

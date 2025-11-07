@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5615c9c8d590 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [10 x i32], align 16\l  %p0 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 0\l  store i32 9, ptr %p0, align 4\l  %p1 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 1\l  store i32 1, ptr %p1, align 4\l  %p2 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 2\l  store i32 5, ptr %p2, align 4\l  %p3 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 3\l  store i32 3, ptr %p3, align 4\l  %p4 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 4\l  store i32 7, ptr %p4, align 4\l  %p5 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 5\l  store i32 2, ptr %p5, align 4\l  %p6 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 6\l  store i32 8, ptr %p6, align 4\l  %p7 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 7\l  store i32 6, ptr %p7, align 4\l  %p8 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 8\l  store i32 4, ptr %p8, align 4\l  %p9 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 9\l  store i32 0, ptr %p9, align 4\l  %decay = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 0\l  call void @insertion_sort(ptr noundef %decay, i64 noundef 10)\l  br label %loop\l}"];
+	Node0x5615c9c8d590 -> Node0x5615c9c8fcd0[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5615c9c8fcd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %entry ], [ %i.next, %print ]\l  %cmp = icmp ult i64 %i, 10\l  br i1 %cmp, label %body, label %done\l|{<s0>T|<s1>F}}"];
+	Node0x5615c9c8fcd0:s0 -> Node0x5615c9c8ff90[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5615c9c8fcd0:s1 -> Node0x5615c9c90060[tooltip="loop -> done\nProbability 3.12%" ];
+	Node0x5615c9c8ff90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %elem.ptr = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %i\l  %elem = load i32, ptr %elem.ptr, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %call = call i32 (ptr, ...) @printf(ptr noundef %fmt.ptr, i32 noundef %elem)\l  br label %print\l}"];
+	Node0x5615c9c8ff90 -> Node0x5615c9c8fdc0[tooltip="body -> print\nProbability 100.00%" ];
+	Node0x5615c9c8fdc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{print:\l|  %i.next = add nuw nsw i64 %i, 1\l  br label %loop\l}"];
+	Node0x5615c9c8fdc0 -> Node0x5615c9c8fcd0[tooltip="print -> loop\nProbability 100.00%" ];
+	Node0x5615c9c90060 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{done:\l|  %pcall = call i32 @putchar(i32 noundef 10)\l  ret i32 0\l}"];
+}

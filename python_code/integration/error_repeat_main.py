@@ -9,23 +9,24 @@ from gpt_fix import GPTFixer
 
 # ================= 사용자 설정 =================
 API_KEY = os.getenv("OPENAI_API_KEY", "")
+# API_KEY = os.getenv("OPENAI_API_KEY", "")
 
 # 모델/프롬프트 (생성/수정 각각 분리 가능)
 GENERATE_MODEL = "gpt-5"
 FIX_MODEL      = "gpt-5"
 
 GENERATE_SYSTEM_PROMPT      = ""
-GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/error_analysis.txt"
+GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/error_analysis_cfg3.txt"
 
 FIX_SYSTEM_PROMPT      = ""
-FIX_SYSTEM_PROMPT_FILE = "../systemprompt/error2.txt"
+FIX_SYSTEM_PROMPT_FILE = "../systemprompt/fix2_cfg3.txt"
 
 # 입력/출력
-INPUT_FOLDER_TXT = "../../ida_disassemble/linux/O3/4"               # 디스어셈블리 .txt 폴더
-OUTPUT_ROOT      = "../../llm_to_IR/gpt_api_error_analysis/O3"       # 라운드 루트
+INPUT_FOLDER_TXT = "../../ida_disassemble/linux/O3"               # 디스어셈블리 .txt 폴더
+OUTPUT_ROOT      = "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3"       # 라운드 루트
 
-NUM_ROUNDS  = 1
-START_INDEX = 4
+NUM_ROUNDS  = 5
+START_INDEX = 1
 
 INPUT_EXT_TXT = ".txt"
 

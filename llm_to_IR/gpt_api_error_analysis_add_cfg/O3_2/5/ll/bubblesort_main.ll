@@ -1,0 +1,101 @@
+; ModuleID = 'main_from_asm'
+target triple = "x86_64-pc-linux-gnu"
+
+@xmmword_2010 = external global <4 x i32>, align 16
+@xmmword_2020 = external global <4 x i32>, align 16
+@unk_2004 = external global i8
+@unk_2008 = external global i8
+@__stack_chk_guard = external global i64
+
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail() noreturn
+
+define i32 @main() {
+entry_1080:
+  %stack = alloca [48 x i8], align 16
+  %base.i8 = bitcast [48 x i8]* %stack to i8*
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_2010, align 16
+  %p0 = bitcast i8* %base.i8 to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %p0, align 16
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_2020, align 16
+  %p1.i8 = getelementptr inbounds i8, i8* %base.i8, i64 16
+  %p1 = bitcast i8* %p1.i8 to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %p1, align 16
+  %p9.i8 = getelementptr inbounds i8, i8* %base.i8, i64 32
+  %p9 = bitcast i8* %p9.i8 to i32*
+  store i32 4, i32* %p9, align 4
+  %canary.ptr.i8 = getelementptr inbounds i8, i8* %base.i8, i64 40
+  %canary.ptr = bitcast i8* %canary.ptr.i8 to i64*
+  %guard = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard, i64* %canary.ptr, align 8
+  br label %block_10D0
+
+block_10D0:                                         ; preds = %entry_1080, %block_1119
+  %rdi.pass = phi i64 [ 10, %entry_1080 ], [ %rdi.next, %block_1119 ]
+  br label %block_10E0
+
+block_10E0:                                         ; preds = %block_10D0, %block_1101
+  %rax.phi = phi i64 [ 1, %block_10D0 ], [ %rax.next, %block_1101 ]
+  %rdx.phi = phi i8* [ %base.i8, %block_10D0 ], [ %rdx.next, %block_1101 ]
+  %r8.phi = phi i64 [ 0, %block_10D0 ], [ %r8.through, %block_1101 ]
+  %rdi.phi = phi i64 [ %rdi.pass, %block_10D0 ], [ %rdi.pass, %block_1101 ]
+  %a.ptr = bitcast i8* %rdx.phi to i32*
+  %a = load i32, i32* %a.ptr, align 4
+  %b.ptr.i8 = getelementptr inbounds i8, i8* %rdx.phi, i64 4
+  %b.ptr = bitcast i8* %b.ptr.i8 to i32*
+  %b = load i32, i32* %b.ptr, align 4
+  %cmp.le = icmp sle i32 %a, %b
+  br i1 %cmp.le, label %block_1101, label %block_10F5
+
+block_10F5:                                         ; preds = %block_10E0
+  store i32 %b, i32* %a.ptr, align 4
+  store i32 %a, i32* %b.ptr, align 4
+  %r8.set = add i64 %rax.phi, 0
+  br label %block_1101
+
+block_1101:                                         ; preds = %block_10E0, %block_10F5
+  %r8.through = phi i64 [ %r8.phi, %block_10E0 ], [ %r8.set, %block_10F5 ]
+  %rax.next = add i64 %rax.phi, 1
+  %rdx.next = getelementptr inbounds i8, i8* %rdx.phi, i64 4
+  %cmp.jnz = icmp ne i64 %rdi.phi, %rax.next
+  br i1 %cmp.jnz, label %block_10E0, label %block_110E
+
+block_110E:                                         ; preds = %block_1101
+  %r8.zero = icmp eq i64 %r8.through, 0
+  br i1 %r8.zero, label %block_111E, label %block_1113
+
+block_1113:                                         ; preds = %block_110E
+  %r8.is.one = icmp eq i64 %r8.through, 1
+  br i1 %r8.is.one, label %block_111E, label %block_1119
+
+block_1119:                                         ; preds = %block_1113
+  %rdi.next = add i64 %r8.through, 0
+  br label %block_10D0
+
+block_111E:                                         ; preds = %block_1113, %block_110E
+  %endptr = getelementptr inbounds i8, i8* %base.i8, i64 40
+  br label %block_1130
+
+block_1130:                                         ; preds = %block_1130, %block_111E
+  %rbx.cur = phi i8* [ %base.i8, %block_111E ], [ %rbx.next, %block_1130 ]
+  %val.ptr = bitcast i8* %rbx.cur to i32*
+  %val = load i32, i32* %val.ptr, align 4
+  %call1 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* @unk_2004, i32 %val)
+  %rbx.next = getelementptr inbounds i8, i8* %rbx.cur, i64 4
+  %more = icmp ne i8* %endptr, %rbx.next
+  br i1 %more, label %block_1130, label %block_114A
+
+block_114A:                                         ; preds = %block_1130
+  %call2 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* @unk_2008)
+  %saved = load i64, i64* %canary.ptr, align 8
+  %guard2 = load i64, i64* @__stack_chk_guard, align 8
+  %can.mis = icmp ne i64 %saved, %guard2
+  br i1 %can.mis, label %block_1178, label %block_116D
+
+block_116D:                                         ; preds = %block_114A
+  ret i32 0
+
+block_1178:                                         ; preds = %block_114A
+  call void @___stack_chk_fail()
+  unreachable
+}

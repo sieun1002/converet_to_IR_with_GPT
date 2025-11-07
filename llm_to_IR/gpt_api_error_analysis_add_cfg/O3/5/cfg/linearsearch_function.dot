@@ -1,0 +1,17 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x6289449898f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{bb_1180:\l|  %cmp_len_le0 = icmp sle i32 %len, 0\l  br i1 %cmp_len_le0, label %loc_11A0, label %bb_1188\l|{<s0>T|<s1>F}}"];
+	Node0x6289449898f0:s0 -> Node0x628944988d70[tooltip="bb_1180 -> loc_11A0\nProbability 50.00%" ];
+	Node0x6289449898f0:s1 -> Node0x628944988bc0[tooltip="bb_1180 -> bb_1188\nProbability 50.00%" ];
+	Node0x628944988bc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb_1188:\l|  %len64_init = sext i32 %len to i64\l  br label %loc_1199\l}"];
+	Node0x628944988bc0 -> Node0x628944989030[tooltip="bb_1188 -> loc_1199\nProbability 100.00%" ];
+	Node0x628944989120 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_1190:\l|  %idx_inc = add i64 %idx_phi, 1\l  %cmp_idx_eq_len = icmp eq i64 %idx_inc, %len64_phi\l  br i1 %cmp_idx_eq_len, label %loc_11A0, label %loc_1199\l|{<s0>T|<s1>F}}"];
+	Node0x628944989120:s0 -> Node0x628944988d70[tooltip="loc_1190 -> loc_11A0\nProbability 3.12%" ];
+	Node0x628944989120:s1 -> Node0x628944989030[tooltip="loc_1190 -> loc_1199\nProbability 96.88%" ];
+	Node0x628944989030 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_1199:\l|  %idx_phi = phi i64 [ 0, %bb_1188 ], [ %idx_inc, %loc_1190 ]\l  %len64_phi = phi i64 [ %len64_init, %bb_1188 ], [ %len64_phi, %loc_1190 ]\l  %elem_ptr = getelementptr inbounds i32, ptr %arr, i64 %idx_phi\l  %elem_val = load i32, ptr %elem_ptr, align 4\l  %cmp_ne = icmp ne i32 %elem_val, %val\l  br i1 %cmp_ne, label %loc_1190, label %bb_119e\l|{<s0>T|<s1>F}}"];
+	Node0x628944989030:s0 -> Node0x628944989120[tooltip="loc_1199 -> loc_1190\nProbability 96.88%" ];
+	Node0x628944989030:s1 -> Node0x62894498b360[tooltip="loc_1199 -> bb_119e\nProbability 3.12%" ];
+	Node0x62894498b360 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_119e:\l|  %ret_idx32 = trunc i64 %idx_phi to i32\l  ret i32 %ret_idx32\l}"];
+	Node0x628944988d70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{loc_11A0:\l|  ret i32 -1\l}"];
+}

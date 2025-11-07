@@ -1,0 +1,34 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5e0d25e70520 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{bb_1080:\l|  %frame = alloca \{ [10 x i32], i64 \}, align 16\l  %arr.slot = getelementptr inbounds \{ [10 x i32], i64 \}, ptr %frame, i32 0,\l... i32 0\l  %arr.base = getelementptr inbounds [10 x i32], ptr %arr.slot, i32 0, i32 0\l  %canary.slot = getelementptr inbounds \{ [10 x i32], i64 \}, ptr %frame, i32\l... 0, i32 1\l  %guard.load = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard.load, ptr %canary.slot, align 8\l  %v0 = load \<4 x i32\>, ptr @xmmword_2010, align 16\l  %vptr0 = bitcast ptr %arr.base to ptr\l  store \<4 x i32\> %v0, ptr %vptr0, align 16\l  %arr.base.plus4 = getelementptr inbounds i32, ptr %arr.base, i64 4\l  %v1 = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  %vptr1 = bitcast ptr %arr.base.plus4 to ptr\l  store \<4 x i32\> %v1, ptr %vptr1, align 16\l  %idx8 = getelementptr inbounds i32, ptr %arr.base, i64 8\l  store i32 4, ptr %idx8, align 4\l  %idx9 = getelementptr inbounds i32, ptr %arr.base, i64 9\l  %last.init = load i32, ptr @dword_2030, align 4\l  store i32 %last.init, ptr %idx9, align 4\l  br label %bb_10D0\l}"];
+	Node0x5e0d25e70520 -> Node0x5e0d25e74e70[tooltip="bb_1080 -> bb_10D0\nProbability 100.00%" ];
+	Node0x5e0d25e74e70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10D0:\l|  %rdi.cur = phi i64 [ 10, %bb_1080 ], [ %r8.to.rdi, %bb_1119 ]\l  br label %bb_10E0\l}"];
+	Node0x5e0d25e74e70 -> Node0x5e0d25e75190[tooltip="bb_10D0 -> bb_10E0\nProbability 100.00%" ];
+	Node0x5e0d25e75190 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_10E0:\l|  %rax.phi = phi i64 [ 1, %bb_10D0 ], [ %rax.next, %bb_1101 ]\l  %rdx.phi = phi ptr [ %arr.base, %bb_10D0 ], [ %rdx.next, %bb_1101 ]\l  %r8.phi = phi i64 [ 0, %bb_10D0 ], [ %r8.carry, %bb_1101 ]\l  %a = load i32, ptr %rdx.phi, align 4\l  %rdx.next.elem = getelementptr inbounds i32, ptr %rdx.phi, i64 1\l  %b = load i32, ptr %rdx.next.elem, align 4\l  %cmp.le = icmp sle i32 %a, %b\l  br i1 %cmp.le, label %bb_1101, label %bb_10F5\l|{<s0>T|<s1>F}}"];
+	Node0x5e0d25e75190:s0 -> Node0x5e0d25e75360[tooltip="bb_10E0 -> bb_1101\nProbability 50.00%" ];
+	Node0x5e0d25e75190:s1 -> Node0x5e0d25e75dd0[tooltip="bb_10E0 -> bb_10F5\nProbability 50.00%" ];
+	Node0x5e0d25e75dd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{bb_10F5:\l|  store i32 %b, ptr %rdx.phi, align 4\l  store i32 %a, ptr %rdx.next.elem, align 4\l  %r8.new = add i64 %rax.phi, 0\l  br label %bb_1101\l}"];
+	Node0x5e0d25e75dd0 -> Node0x5e0d25e75360[tooltip="bb_10F5 -> bb_1101\nProbability 100.00%" ];
+	Node0x5e0d25e75360 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_1101:\l|  %r8.carry = phi i64 [ %r8.phi, %bb_10E0 ], [ %r8.new, %bb_10F5 ]\l  %rax.in = phi i64 [ %rax.phi, %bb_10E0 ], [ %rax.phi, %bb_10F5 ]\l  %rdx.in = phi ptr [ %rdx.phi, %bb_10E0 ], [ %rdx.phi, %bb_10F5 ]\l  %rax.next = add i64 %rax.in, 1\l  %rdx.next = getelementptr inbounds i32, ptr %rdx.in, i64 1\l  %cmp.rdi.ne = icmp ne i64 %rdi.cur, %rax.next\l  br i1 %cmp.rdi.ne, label %bb_10E0, label %bb_110E\l|{<s0>T|<s1>F}}"];
+	Node0x5e0d25e75360:s0 -> Node0x5e0d25e75190[tooltip="bb_1101 -> bb_10E0\nProbability 96.88%" ];
+	Node0x5e0d25e75360:s1 -> Node0x5e0d25e76270[tooltip="bb_1101 -> bb_110E\nProbability 3.12%" ];
+	Node0x5e0d25e76270 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_110E:\l|  %r8.is.zero = icmp eq i64 %r8.carry, 0\l  br i1 %r8.is.zero, label %bb_111E, label %bb_1113\l|{<s0>T|<s1>F}}"];
+	Node0x5e0d25e76270:s0 -> Node0x5e0d25e76420[tooltip="bb_110E -> bb_111E\nProbability 3.12%" ];
+	Node0x5e0d25e76270:s1 -> Node0x5e0d25e76490[tooltip="bb_110E -> bb_1113\nProbability 96.88%" ];
+	Node0x5e0d25e76490 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_1113:\l|  %r8.is.one = icmp eq i64 %r8.carry, 1\l  br i1 %r8.is.one, label %bb_111E, label %bb_1119\l|{<s0>T|<s1>F}}"];
+	Node0x5e0d25e76490:s0 -> Node0x5e0d25e76420[tooltip="bb_1113 -> bb_111E\nProbability 3.12%" ];
+	Node0x5e0d25e76490:s1 -> Node0x5e0d25e74fe0[tooltip="bb_1113 -> bb_1119\nProbability 96.88%" ];
+	Node0x5e0d25e74fe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_1119:\l|  %r8.to.rdi = add i64 %r8.carry, 0\l  br label %bb_10D0\l}"];
+	Node0x5e0d25e74fe0 -> Node0x5e0d25e74e70[tooltip="bb_1119 -> bb_10D0\nProbability 100.00%" ];
+	Node0x5e0d25e76420 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{bb_111E:\l|  %limit.i32p = bitcast ptr %canary.slot to ptr\l  %fmt1 = getelementptr inbounds [0 x i8], ptr @unk_2004, i64 0, i64 0\l  %fmt2 = getelementptr inbounds [0 x i8], ptr @unk_2008, i64 0, i64 0\l  br label %bb_1130\l}"];
+	Node0x5e0d25e76420 -> Node0x5e0d25e77230[tooltip="bb_111E -> bb_1130\nProbability 100.00%" ];
+	Node0x5e0d25e77230 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{bb_1130:\l|  %rbx.cur = phi ptr [ %arr.base, %bb_111E ], [ %rbx.next, %bb_1130 ]\l  %val = load i32, ptr %rbx.cur, align 4\l  %rbx.next = getelementptr inbounds i32, ptr %rbx.cur, i64 1\l  %call.print.elem = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt1,\l... i32 %val)\l  %cont = icmp ne ptr %limit.i32p, %rbx.next\l  br i1 %cont, label %bb_1130, label %bb_114A\l|{<s0>T|<s1>F}}"];
+	Node0x5e0d25e77230:s0 -> Node0x5e0d25e77230[tooltip="bb_1130 -> bb_1130\nProbability 96.88%" ];
+	Node0x5e0d25e77230:s1 -> Node0x5e0d25e77c20[tooltip="bb_1130 -> bb_114A\nProbability 3.12%" ];
+	Node0x5e0d25e77c20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{bb_114A:\l|  %call.print.tail = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr\l... %fmt2)\l  %guard.saved = load i64, ptr %canary.slot, align 8\l  %guard.now = load i64, ptr @__stack_chk_guard, align 8\l  %guard.bad = icmp ne i64 %guard.saved, %guard.now\l  br i1 %guard.bad, label %bb_1178, label %bb_116D\l|{<s0>T|<s1>F}}"];
+	Node0x5e0d25e77c20:s0 -> Node0x5e0d25e780a0[tooltip="bb_114A -> bb_1178\nProbability 0.00%" ];
+	Node0x5e0d25e77c20:s1 -> Node0x5e0d25e78110[tooltip="bb_114A -> bb_116D\nProbability 100.00%" ];
+	Node0x5e0d25e78110 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e97a5f70" fontname="Courier",label="{bb_116D:\l|  ret i32 0\l}"];
+	Node0x5e0d25e780a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d4dbe670" fontname="Courier",label="{bb_1178:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+}

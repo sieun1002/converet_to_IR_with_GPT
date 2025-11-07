@@ -1,0 +1,129 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/binarysearch_main1.ll:64:19: error: expected instruction opcode
+;   %low.in.10f0  = %low.phi
+;                   ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str_found = private unnamed_addr constant [21 x i8] c"key %d -> index %ld\0A\00", align 1
+@.str_not   = private unnamed_addr constant [21 x i8] c"key %d -> not found\0A\00", align 1
+
+@xmmword_2030 = external constant <4 x i32>, align 16
+@xmmword_2040 = external constant <4 x i32>, align 16
+@qword_2050   = external constant i64, align 8
+
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail() noreturn
+
+define i32 @main() {
+bb_1080:
+  %arr = alloca [9 x i32], align 16
+  %keys = alloca [3 x i32], align 8
+  %canary.save = alloca i64, align 8
+
+  ; stack canary read (fs:0x28)
+  %canary.init = call i64 asm "movq %fs:0x28, $0", "=r"()
+  store i64 %canary.init, i64* %canary.save, align 8
+
+  ; load two 128-bit constants into the search array
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_2030, align 16
+  %p0 = bitcast [9 x i32]* %arr to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %p0, align 16
+
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_2040, align 16
+  %idx4 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 4
+  %p1 = bitcast i32* %idx4 to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %p1, align 16
+
+  ; ninth element = 12
+  %idx8 = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 8
+  store i32 12, i32* %idx8, align 4
+
+  ; build three keys: two 32-bit pieces of qword_2050, then -5
+  %qv = load i64, i64* @qword_2050, align 8
+  %keys.as.i64 = bitcast [3 x i32]* %keys to i64*
+  store i64 %qv, i64* %keys.as.i64, align 8
+  %key2ptr = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 2
+  store i32 -5, i32* %key2ptr, align 4
+
+  ; r12 = base of keys, rbx = end (one past 3 ints)
+  %keys.base = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 0
+  %keys.end  = getelementptr inbounds [3 x i32], [3 x i32]* %keys, i64 0, i64 3
+
+  br label %bb_10e0
+
+bb_10e0: ; load next key, set up bounds (ecx=0, edx=9)
+  %r12.cur = phi i32* [ %keys.base, %bb_1080 ], [ %r12.next, %bb_1127 ]
+  %key.load = load i32, i32* %r12.cur, align 4
+  br label %bb_1105
+
+bb_1105: ; binary search loop header: while (low < high)
+  %low.phi  = phi i64 [ 0, %bb_10e0 ], [ %newLow, %bb_1150 ], [ %low.in.10f0, %bb_1102 ]
+  %high.phi = phi i64 [ 9, %bb_10e0 ], [ %high.in.10f0, %bb_1150 ], [ %mid, %bb_1102 ]
+  %key.phi  = phi i32 [ %key.load, %bb_10e0 ], [ %key.in.10f0, %bb_1150 ], [ %key.in.10f0, %bb_1102 ]
+  %cmp.lohi = icmp ult i64 %low.phi, %high.phi
+  br i1 %cmp.lohi, label %bb_10f0, label %bb_110a
+
+bb_10f0: ; mid = low + ((high-low)>>1); compare key vs arr[mid]
+  %low.in.10f0  = %low.phi
+  %high.in.10f0 = %high.phi
+  %key.in.10f0  = %key.phi
+
+  %diff   = sub i64 %high.in.10f0, %low.in.10f0
+  %half   = lshr i64 %diff, 1
+  %mid    = add i64 %half, %low.in.10f0
+
+  %arr.base = getelementptr inbounds [9 x i32], [9 x i32]* %arr, i64 0, i64 0
+  %elt.ptr  = getelementptr inbounds i32, i32* %arr.base, i64 %mid
+  %elt.val  = load i32, i32* %elt.ptr, align 4
+
+  %key.gt.mid = icmp sgt i32 %key.in.10f0, %elt.val
+  br i1 %key.gt.mid, label %bb_1150, label %bb_1102
+
+bb_1102: ; rdx = mid (high = mid), low unchanged
+  br label %bb_1105
+
+bb_110a: ; post-loop: check if low <= 8 and arr[low] == key
+  %idx.ok = icmp ugt i64 %low.phi, 8
+  br i1 %idx.ok, label %bb_1156, label %bb_110a.cont
+
+bb_110a.cont:
+  %idx.ptr = getelementptr inbounds i32, i32* %arr.base, i64 %low.phi
+  %idx.val = load i32, i32* %idx.ptr, align 4
+  %eq      = icmp ne i32 %key.phi, %idx.val
+  br i1 %eq, label %bb_1156, label %bb_1118
+
+bb_1118: ; found: printf_chk(2, "key %d -> index %ld\n", key, (long)low)
+  %fmt1 = getelementptr inbounds [21 x i8], [21 x i8]* @.str_found, i64 0, i64 0
+  %call.ok = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt1, i32 %key.phi, i64 %low.phi)
+  br label %bb_1127
+
+bb_1150: ; rcx = mid + 1 (low = mid+1), high unchanged
+  %newLow = add i64 %mid, 1
+  br label %bb_1105
+
+bb_1156: ; not found: printf_chk(2, "key %d -> not found\n", key)
+  %fmt2 = getelementptr inbounds [21 x i8], [21 x i8]* @.str_not, i64 0, i64 0
+  %call.nf = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt2, i32 %key.phi)
+  br label %bb_1127
+
+bb_1127: ; advance to next key; loop if r12 != rbx
+  %r12.next = getelementptr inbounds i32, i32* %r12.cur, i64 1
+  %more = icmp ne i32* %r12.next, %keys.end
+  br i1 %more, label %bb_10e0, label %bb_1130
+
+bb_1130: ; stack canary check and return
+  %canary.now = call i64 asm "movq %fs:0x28, $0", "=r"()
+  %canary.was = load i64, i64* %canary.save, align 8
+  %canary.bad = icmp ne i64 %canary.was, %canary.now
+  br i1 %canary.bad, label %bb_116b, label %bb_1140
+
+bb_1140:
+  ret i32 0
+
+bb_116b:
+  call void @___stack_chk_fail()
+  unreachable
+}

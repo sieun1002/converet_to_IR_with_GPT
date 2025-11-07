@@ -1,0 +1,146 @@
+; ModuleID = 'quick_sort_module'
+target triple = "x86_64-pc-linux-gnu"
+
+define dso_local void @quick_sort(i32* %base, i64 %left, i64 %right) {
+bb_1220:
+  %cmp_entry = icmp sge i64 %left, %right
+  br i1 %cmp_entry, label %bb_1312, label %bb_123A
+
+bb_123A:
+  %left.cur = phi i64 [ %left, %bb_1220 ], [ %left.next, %bb_12B2 ]
+  %right.cur = phi i64 [ %right, %bb_1220 ], [ %right.next, %bb_12B2 ]
+  %i.init = add i64 %left.cur, 0
+  %nextL.init = add i64 %left.cur, 1
+  %j.init = add i64 %right.cur, 0
+  %tmp.sub = sub i64 %right.cur, %left.cur
+  %tmp.half = ashr i64 %tmp.sub, 1
+  %mid = add i64 %left.cur, %tmp.half
+  %pivot.ptr = getelementptr inbounds i32, i32* %base, i64 %mid
+  %pivot = load i32, i32* %pivot.ptr, align 4
+  br label %bb_1260
+
+bb_1260:
+  %i.phi = phi i64 [ %i.init, %bb_123A ], [ %i.next, %bb_12DB ]
+  %j.phi = phi i64 [ %j.init, %bb_123A ], [ %j.cont, %bb_12DB ]
+  %nextL.phi = phi i64 [ %nextL.init, %bb_123A ], [ %nextL.cont, %bb_12DB ]
+  %pivot.phi = phi i32 [ %pivot, %bb_123A ], [ %pivot.phi.db, %bb_12DB ]
+  %left.part = phi i64 [ %left.cur, %bb_123A ], [ %left.part.db, %bb_12DB ]
+  %right.part = phi i64 [ %right.cur, %bb_123A ], [ %right.part.db, %bb_12DB ]
+  %val_i.ptr = getelementptr inbounds i32, i32* %base, i64 %i.phi
+  %val.i = load i32, i32* %val_i.ptr, align 4
+  %val_j.ptr = getelementptr inbounds i32, i32* %base, i64 %j.phi
+  %val.j = load i32, i32* %val_j.ptr, align 4
+  %cmp_i_pivot = icmp slt i32 %val.i, %pivot.phi
+  br i1 %cmp_i_pivot, label %bb_12DB, label %bb_1271
+
+bb_1271:
+  %cmp_pivot_j = icmp sge i32 %pivot.phi, %val.j
+  %j.start = add i64 %j.phi, -1
+  %ptr.start = getelementptr inbounds i32, i32* %val_j.ptr, i64 -1
+  br i1 %cmp_pivot_j, label %bb_1291, label %bb_1280
+
+bb_1280:
+  %j.scan.phi = phi i64 [ %j.dec, %bb_1280 ], [ %j.start, %bb_1271 ]
+  %ptr.scan.phi = phi i32* [ %ptr.prev, %bb_1280 ], [ %ptr.start, %bb_1271 ]
+  %val.scan = load i32, i32* %ptr.scan.phi, align 4
+  %j.dec = add i64 %j.scan.phi, -1
+  %ptr.prev = getelementptr inbounds i32, i32* %ptr.scan.phi, i64 -1
+  %cmp_scan = icmp sgt i32 %val.scan, %pivot.phi
+  br i1 %cmp_scan, label %bb_1280, label %bb_1291
+
+bb_1291:
+  %j.from = phi i64 [ %j.phi, %bb_1271 ], [ %j.scan.phi, %bb_1280 ]
+  %ptr.j.from = phi i32* [ %val_j.ptr, %bb_1271 ], [ %ptr.scan.phi, %bb_1280 ]
+  %val.j.from = phi i32 [ %val.j, %bb_1271 ], [ %val.scan, %bb_1280 ]
+  %i.at1291 = phi i64 [ %i.phi, %bb_1271 ], [ %i.phi, %bb_1280 ]
+  %nextL.at1291 = phi i64 [ %nextL.phi, %bb_1271 ], [ %nextL.phi, %bb_1280 ]
+  %left.at1291 = phi i64 [ %left.part, %bb_1271 ], [ %left.part, %bb_1280 ]
+  %right.at1291 = phi i64 [ %right.part, %bb_1271 ], [ %right.part, %bb_1280 ]
+  %val.i.at1291 = phi i32 [ %val.i, %bb_1271 ], [ %val.i, %bb_1280 ]
+  %startR.candidate = add i64 %i.at1291, 0
+  %cmp_i_le_j = icmp sle i64 %i.at1291, %j.from
+  br i1 %cmp_i_le_j, label %bb_12C0, label %bb_1299_from_1291
+
+bb_12C0:
+  %j.predec = add i64 %j.from, -1
+  %store.i.ptr = getelementptr inbounds i32, i32* %base, i64 %i.at1291
+  store i32 %val.j.from, i32* %store.i.ptr, align 4
+  %startR.swap = add i64 %nextL.at1291, 0
+  store i32 %val.i.at1291, i32* %ptr.j.from, align 4
+  %cmp_nextL_gt_j = icmp sgt i64 %nextL.at1291, %j.predec
+  br i1 %cmp_nextL_gt_j, label %bb_1299_from_12C0, label %bb_12DB_from_12C0
+
+bb_12DB_from_12C0:
+  br label %bb_12DB
+
+bb_12DB:
+  %i.in.db = phi i64 [ %i.at1291, %bb_12DB_from_12C0 ], [ %i.phi, %bb_1260 ]
+  %nextL.in.db = phi i64 [ %nextL.at1291, %bb_12DB_from_12C0 ], [ %nextL.phi, %bb_1260 ]
+  %j.in.db = phi i64 [ %j.predec, %bb_12DB_from_12C0 ], [ %j.phi, %bb_1260 ]
+  %pivot.phi.db = phi i32 [ %pivot.phi, %bb_12DB_from_12C0 ], [ %pivot.phi, %bb_1260 ]
+  %left.part.db = phi i64 [ %left.at1291, %bb_12DB_from_12C0 ], [ %left.part, %bb_1260 ]
+  %right.part.db = phi i64 [ %right.at1291, %bb_12DB_from_12C0 ], [ %right.part, %bb_1260 ]
+  %i.next = add i64 %i.in.db, 1
+  %nextL.cont = add i64 %nextL.in.db, 1
+  %j.cont = add i64 %j.in.db, 0
+  br label %bb_1260
+
+bb_1299_from_1291:
+  %left.p1291 = add i64 %left.at1291, 0
+  %right.p1291 = add i64 %right.at1291, 0
+  %startR.p1291 = add i64 %startR.candidate, 0
+  %j.p1291 = add i64 %j.from, 0
+  br label %bb_1299
+
+bb_1299_from_12C0:
+  %left.p12C0 = phi i64 [ %left.at1291, %bb_12C0 ]
+  %right.p12C0 = phi i64 [ %right.at1291, %bb_12C0 ]
+  %startR.p12C0 = phi i64 [ %startR.swap, %bb_12C0 ]
+  %j.p12C0 = phi i64 [ %j.predec, %bb_12C0 ]
+  br label %bb_1299
+
+bb_1299:
+  %left.in.1299 = phi i64 [ %left.p1291, %bb_1299_from_1291 ], [ %left.p12C0, %bb_1299_from_12C0 ]
+  %right.in.1299 = phi i64 [ %right.p1291, %bb_1299_from_1291 ], [ %right.p12C0, %bb_1299_from_12C0 ]
+  %startR.in.1299 = phi i64 [ %startR.p1291, %bb_1299_from_1291 ], [ %startR.p12C0, %bb_1299_from_12C0 ]
+  %j.in.1299 = phi i64 [ %j.p1291, %bb_1299_from_1291 ], [ %j.p12C0, %bb_1299_from_12C0 ]
+  %leftLen = sub i64 %j.in.1299, %left.in.1299
+  %rightLen = sub i64 %right.in.1299, %startR.in.1299
+  %cmp_left_ge_right = icmp sge i64 %leftLen, %rightLen
+  br i1 %cmp_left_ge_right, label %bb_12E8, label %bb_1299_choose_left
+
+bb_1299_choose_left:
+  %cmp_j_gt_left = icmp sgt i64 %j.in.1299, %left.in.1299
+  br i1 %cmp_j_gt_left, label %bb_12F2, label %bb_12AF
+
+bb_12F2:
+  call void @quick_sort(i32* %base, i64 %left.in.1299, i64 %j.in.1299)
+  br label %bb_12AF
+
+bb_12AF:
+  %left.for12B2 = phi i64 [ %startR.in.1299, %bb_12F2 ], [ %startR.in.1299, %bb_1299_choose_left ]
+  %right.for12B2 = phi i64 [ %right.in.1299, %bb_12F2 ], [ %right.in.1299, %bb_1299_choose_left ]
+  br label %bb_12B2
+
+bb_12E8:
+  %cmp_startR_lt_right = icmp slt i64 %startR.in.1299, %right.in.1299
+  br i1 %cmp_startR_lt_right, label %bb_1302, label %bb_12ED
+
+bb_1302:
+  call void @quick_sort(i32* %base, i64 %startR.in.1299, i64 %right.in.1299)
+  br label %bb_12ED
+
+bb_12ED:
+  %left.for12B2_2 = phi i64 [ %left.in.1299, %bb_12E8 ], [ %left.in.1299, %bb_1302 ]
+  %j.for12B2_2 = phi i64 [ %j.in.1299, %bb_12E8 ], [ %j.in.1299, %bb_1302 ]
+  br label %bb_12B2
+
+bb_12B2:
+  %left.next = phi i64 [ %left.for12B2, %bb_12AF ], [ %left.for12B2_2, %bb_12ED ]
+  %right.next = phi i64 [ %right.for12B2, %bb_12AF ], [ %j.for12B2_2, %bb_12ED ]
+  %cmp_loop = icmp sgt i64 %right.next, %left.next
+  br i1 %cmp_loop, label %bb_123A, label %bb_1312
+
+bb_1312:
+  ret void
+}

@@ -1,0 +1,75 @@
+; ModuleID = 'selection_sort'
+target triple = "x86_64-pc-linux-gnu"
+
+define dso_local void @selection_sort(i32* %arr, i32 %n) local_unnamed_addr {
+bb_1210:
+  %cmp_n_le_1 = icmp sle i32 %n, 1
+  br i1 %cmp_n_le_1, label %bb_12A8, label %bb_init
+
+bb_init:
+  %n_minus1 = add i32 %n, -1
+  br label %bb_1230
+
+bb_1230:
+  %rbx_cur = phi i32* [ %arr, %bb_init ], [ %rbx_next, %bb_127B ], [ %rbx_after_1290, %bb_1290 ]
+  %r10_cur = phi i32 [ 0, %bb_init ], [ %r10_inc, %bb_127B ], [ %r10_inc, %bb_1290 ]
+  %ebp_val = load i32, i32* %rbx_cur, align 4
+  %r10_inc = add i32 %r10_cur, 1
+  %cmp_n_le_r10inc = icmp sle i32 %n, %r10_inc
+  br i1 %cmp_n_le_r10inc, label %bb_1290, label %bb_after_cmp_1239
+
+bb_after_cmp_1239:
+  %r12_val = getelementptr i32, i32* %rbx_cur, i64 1
+  br label %bb_1262
+
+bb_1262:
+  %edx_phi = phi i32 [ %r10_inc, %bb_after_cmp_1239 ], [ %edx_next_u, %bb_1262_update ], [ %edx_next_nl, %bb_1250 ]
+  %rax_phi = phi i32* [ %r12_val, %bb_after_cmp_1239 ], [ %rax_next_u, %bb_1262_update ], [ %rax_next_nl, %bb_1250 ]
+  %edi_phi = phi i32 [ %ebp_val, %bb_after_cmp_1239 ], [ %edi_next_u, %bb_1262_update ], [ %edi_through, %bb_1250 ]
+  %r9_phi = phi i32 [ %r10_cur, %bb_after_cmp_1239 ], [ %r9_next_u, %bb_1262_update ], [ %r9_through, %bb_1250 ]
+  %ecx_val = load i32, i32* %rax_phi, align 4
+  %r8_cur = getelementptr i32, i32* %rax_phi, i64 0
+  %cmp_ecx_ge_edi = icmp sge i32 %ecx_val, %edi_phi
+  br i1 %cmp_ecx_ge_edi, label %bb_1250, label %bb_1262_update
+
+bb_1262_update:
+  %r9_next_u = add i32 %edx_phi, 0
+  %edx_next_u = add i32 %edx_phi, 1
+  %edi_next_u = add i32 %ecx_val, 0
+  %rax_next_u = getelementptr i32, i32* %rax_phi, i64 1
+  %cmp_n_ne_edx = icmp ne i32 %n, %edx_next_u
+  br i1 %cmp_n_ne_edx, label %bb_1262, label %bb_127B
+
+bb_1250:
+  %r9_through = add i32 %r9_phi, 0
+  %edi_through = add i32 %edi_phi, 0
+  %edx_next_nl = add i32 %edx_phi, 1
+  %rax_next_nl = getelementptr i32, i32* %rax_phi, i64 1
+  %r9_sext = sext i32 %r9_phi to i64
+  %r8_ptr_from_nl = getelementptr i32, i32* %arr, i64 %r9_sext
+  %cmp_n_eq_edx = icmp eq i32 %n, %edx_next_nl
+  br i1 %cmp_n_eq_edx, label %bb_127B, label %bb_1262
+
+bb_127B:
+  %r8_phi = phi i32* [ %r8_cur, %bb_1262_update ], [ %r8_ptr_from_nl, %bb_1250 ]
+  %edi_final = phi i32 [ %edi_next_u, %bb_1262_update ], [ %edi_through, %bb_1250 ]
+  store i32 %edi_final, i32* %rbx_cur, align 4
+  %rbx_next = getelementptr i32, i32* %r12_val, i64 0
+  store i32 %ebp_val, i32* %r8_phi, align 4
+  %cmp_r10_ne_n1 = icmp ne i32 %r10_inc, %n_minus1
+  br i1 %cmp_r10_ne_n1, label %bb_1230, label %bb_1288
+
+bb_1290:
+  %r12_val_1290 = getelementptr i32, i32* %rbx_cur, i64 1
+  store i32 %ebp_val, i32* %rbx_cur, align 4
+  %rbx_after_1290 = getelementptr i32, i32* %r12_val_1290, i64 0
+  store i32 %ebp_val, i32* %rbx_cur, align 4
+  %cmp_r10_ne_n1_1290 = icmp ne i32 %r10_inc, %n_minus1
+  br i1 %cmp_r10_ne_n1_1290, label %bb_1230, label %bb_1288
+
+bb_1288:
+  ret void
+
+bb_12A8:
+  ret void
+}

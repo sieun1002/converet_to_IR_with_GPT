@@ -1,0 +1,55 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 235,
+      "ir_len": 18826,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.ll:483:49: error: use of undefined value '%bb_144e'\n  %phi.bx = phi i64 [ 1, %bb_1421 ], [ %bx.inc, %bb_144e ]\n                                                ^\n",
+      "ir_preview": "; ModuleID = 'reconstructed'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external global i64\n@qword_2028 = external global i64\n\n@aDfsPreorderFro = private unnamed_addr constant [24 x i",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 163,
+      "ir_len": 4370,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.ll:59:13: error: expected instruction opcode\n  %rcx.in = %rcx.cur\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str_index = private unnamed_addr constant [21 x i8] c\"key %d -> index %ld\\0A\\00\", align 1\n@.str_notfound = private unnamed_addr consta",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 184,
+      "ir_len": 23810,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.ll:158:23: error: expected type\n  %r12_off = add i64 (shl i64 %r12_b119c, 2), 8\n                      ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main'\nsource_filename = \"recovered_main\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external global i64\n@xmmword_2010 = external constant [16 x i8], align 16\n@",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 269,
+      "ir_len": 25985,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.ll:464:51: error: invalid use of function-local name\n  %xmm2 = load <16 x i8>, <16 x i8>* bitcast (i8* %ptr_130a to <16 x i8>*), align 1\n                                                  ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main'\nsource_filename = \"recovered_main\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@__stack_chk_guard = external global i64\n@xmmword_2010 = external constant [16 x i8], align 16\n@",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.ll"
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 276,
+      "ir_len": 3431,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.ll:59:19: error: invalid operand type for instruction\n  %rbx.next = add i32* %r12.cur, null          ; placeholder to create SSA? Not allowed. Replace with direct use:\n                  ^\n",
+      "ir_preview": "; ModuleID = 'selection_sort_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine dso_local void @selection_sort(i32* %arr, i32 %n) {\nentry_1210:\n  ; endbr64 (no-op)\n  %cmp.n_le_1 = icmp sle i32 %n, ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.ll"
+    }
+  ]
+}

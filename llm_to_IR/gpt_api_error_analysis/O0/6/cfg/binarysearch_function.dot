@@ -1,0 +1,24 @@
+digraph "CFG for 'binary_search' function" {
+	label="CFG for 'binary_search' function";
+
+	Node0x5cf84a1393b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %cond\l}"];
+	Node0x5cf84a1393b0 -> Node0x5cf84a13a810[tooltip="entry -> cond\nProbability 100.00%" ];
+	Node0x5cf84a13a810 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{cond:\l|  %low = phi i64 [ 0, %entry ], [ %mid_plus1, %update_low ], [ %low,\l... %update_high ]\l  %high = phi i64 [ %n, %entry ], [ %high, %update_low ], [ %mid, %update_high\l... ]\l  %cond_lt = icmp ult i64 %low, %high\l  br i1 %cond_lt, label %loop, label %post\l|{<s0>T|<s1>F}}"];
+	Node0x5cf84a13a810:s0 -> Node0x5cf84a13b280[tooltip="cond -> loop\nProbability 96.88%" ];
+	Node0x5cf84a13a810:s1 -> Node0x5cf84a13b2f0[tooltip="cond -> post\nProbability 3.12%" ];
+	Node0x5cf84a13b280 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %diff = sub i64 %high, %low\l  %half = lshr i64 %diff, 1\l  %mid = add i64 %low, %half\l  %elt.ptr = getelementptr inbounds i32, ptr %arr, i64 %mid\l  %elt = load i32, ptr %elt.ptr, align 4\l  %le = icmp sle i32 %key, %elt\l  br i1 %le, label %update_high, label %update_low\l|{<s0>T|<s1>F}}"];
+	Node0x5cf84a13b280:s0 -> Node0x5cf84a13aef0[tooltip="loop -> update_high\nProbability 50.00%" ];
+	Node0x5cf84a13b280:s1 -> Node0x5cf84a13ad60[tooltip="loop -> update_low\nProbability 50.00%" ];
+	Node0x5cf84a13ad60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{update_low:\l|  %mid_plus1 = add i64 %mid, 1\l  br label %cond\l}"];
+	Node0x5cf84a13ad60 -> Node0x5cf84a13a810[tooltip="update_low -> cond\nProbability 100.00%" ];
+	Node0x5cf84a13aef0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{update_high:\l|  br label %cond\l}"];
+	Node0x5cf84a13aef0 -> Node0x5cf84a13a810[tooltip="update_high -> cond\nProbability 100.00%" ];
+	Node0x5cf84a13b2f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{post:\l|  %inrange = icmp ult i64 %low, %n\l  br i1 %inrange, label %check, label %notfound\l|{<s0>T|<s1>F}}"];
+	Node0x5cf84a13b2f0:s0 -> Node0x5cf84a13be20[tooltip="post -> check\nProbability 50.00%" ];
+	Node0x5cf84a13b2f0:s1 -> Node0x5cf84a13be90[tooltip="post -> notfound\nProbability 50.00%" ];
+	Node0x5cf84a13be20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{check:\l|  %elt2.ptr = getelementptr inbounds i32, ptr %arr, i64 %low\l  %elt2 = load i32, ptr %elt2.ptr, align 4\l  %eq = icmp eq i32 %key, %elt2\l  br i1 %eq, label %found, label %notfound\l|{<s0>T|<s1>F}}"];
+	Node0x5cf84a13be20:s0 -> Node0x5cf84a13c4a0[tooltip="check -> found\nProbability 50.00%" ];
+	Node0x5cf84a13be20:s1 -> Node0x5cf84a13be90[tooltip="check -> notfound\nProbability 50.00%" ];
+	Node0x5cf84a13c4a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{found:\l|  ret i64 %low\l}"];
+	Node0x5cf84a13be90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d8564670" fontname="Courier",label="{notfound:\l|  ret i64 -1\l}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5606049d18c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %graph = alloca [40016 x i8], align 16\l  %dist = alloca [100 x i32], align 16\l  %ret = alloca i32, align 4\l  %n = alloca i32, align 4\l  %src = alloca i32, align 4\l  store i32 0, ptr %ret, align 4\l  %graph.bc = bitcast ptr %graph to ptr\l  %call = call i32 @read_graph(ptr nonnull %graph.bc, ptr nonnull %n, ptr\l... nonnull %src)\l  %cmp = icmp eq i32 %call, 0\l  br i1 %cmp, label %ok, label %fail\l|{<s0>T|<s1>F}}"];
+	Node0x5606049d18c0:s0 -> Node0x5606049d2850[tooltip="entry -> ok\nProbability 37.50%" ];
+	Node0x5606049d18c0:s1 -> Node0x5606049d28c0[tooltip="entry -> fail\nProbability 62.50%" ];
+	Node0x5606049d28c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{fail:\l|  %streamptr = load ptr, ptr @stream, align 8\l  %fmtptr = getelementptr inbounds [21 x i8], ptr @.str, i64 0, i64 0\l  %call1 = call i32 (ptr, ptr, ...) @fprintf(ptr %streamptr, ptr %fmtptr)\l  store i32 1, ptr %ret, align 4\l  br label %end\l}"];
+	Node0x5606049d28c0 -> Node0x5606049d2f40[tooltip="fail -> end\nProbability 100.00%" ];
+	Node0x5606049d2850 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{ok:\l|  %nval = load i32, ptr %n, align 4\l  %srcval = load i32, ptr %src, align 4\l  %dist0 = getelementptr inbounds [100 x i32], ptr %dist, i64 0, i64 0\l  call void @dijkstra(ptr %graph.bc, i32 %nval, i32 %srcval, ptr %dist0)\l  %nval2 = load i32, ptr %n, align 4\l  call void @print_distances(ptr %dist0, i32 %nval2)\l  store i32 0, ptr %ret, align 4\l  br label %end\l}"];
+	Node0x5606049d2850 -> Node0x5606049d2f40[tooltip="ok -> end\nProbability 100.00%" ];
+	Node0x5606049d2f40 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{end:\l|  %retv = load i32, ptr %ret, align 4\l  ret i32 %retv\l}"];
+}

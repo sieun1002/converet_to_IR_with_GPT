@@ -1,0 +1,34 @@
+digraph "CFG for 'read_graph' function" {
+	label="CFG for 'read_graph' function";
+
+	Node0x59d0d2301750 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{entry:\l|  %m = alloca i32, align 4\l  %u = alloca i32, align 4\l  %v = alloca i32, align 4\l  %w = alloca i32, align 4\l  %i = alloca i32, align 4\l  %ret = alloca i32, align 4\l  %fmt1.ptr = getelementptr inbounds [6 x i8], ptr @.str.dd, i64 0, i64 0\l  %scanf1 = call i32 (ptr, ...) @__isoc99_scanf(ptr %fmt1.ptr, ptr %n_ptr, ptr\l... %m)\l  %cmp.scanf1 = icmp eq i32 %scanf1, 2\l  br i1 %cmp.scanf1, label %check_nm, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d2301750:s0 -> Node0x59d0d2302dd0[tooltip="entry -> check_nm\nProbability 50.00%" ];
+	Node0x59d0d2301750:s1 -> Node0x59d0d2302e50[tooltip="entry -> err\nProbability 50.00%" ];
+	Node0x59d0d2302dd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ca3b3770" fontname="Courier",label="{check_nm:\l|  %n.load = load i32, ptr %n_ptr, align 4\l  %m.load = load i32, ptr %m, align 4\l  %n.gt0 = icmp sgt i32 %n.load, 0\l  %n.le100 = icmp sle i32 %n.load, 100\l  %n.ok = and i1 %n.gt0, %n.le100\l  %m.ge0 = icmp sge i32 %m.load, 0\l  %all.ok = and i1 %n.ok, %m.ge0\l  br i1 %all.ok, label %init_g, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d2302dd0:s0 -> Node0x59d0d2303430[tooltip="check_nm -> init_g\nProbability 50.00%" ];
+	Node0x59d0d2302dd0:s1 -> Node0x59d0d2302e50[tooltip="check_nm -> err\nProbability 50.00%" ];
+	Node0x59d0d2303430 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{init_g:\l|  call void @init_graph(ptr %g, i32 %n.load)\l  store i32 0, ptr %i, align 4\l  br label %loop\l}"];
+	Node0x59d0d2303430 -> Node0x59d0d2303740[tooltip="init_g -> loop\nProbability 100.00%" ];
+	Node0x59d0d2303740 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i.cur = load i32, ptr %i, align 4\l  %m.cur = load i32, ptr %m, align 4\l  %i.ge.m = icmp sge i32 %i.cur, %m.cur\l  br i1 %i.ge.m, label %after_edges, label %read_edge\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d2303740:s0 -> Node0x59d0d2303c80[tooltip="loop -> after_edges\nProbability 3.12%" ];
+	Node0x59d0d2303740:s1 -> Node0x59d0d2303d00[tooltip="loop -> read_edge\nProbability 96.88%" ];
+	Node0x59d0d2303d00 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{read_edge:\l|  %fmt2.ptr = getelementptr inbounds [9 x i8], ptr @.str.ddd, i64 0, i64 0\l  %scanf2 = call i32 (ptr, ...) @__isoc99_scanf(ptr %fmt2.ptr, ptr %u, ptr %v,\l... ptr %w)\l  %cmp.scanf2 = icmp eq i32 %scanf2, 3\l  br i1 %cmp.scanf2, label %validate_edge, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d2303d00:s0 -> Node0x59d0d23041e0[tooltip="read_edge -> validate_edge\nProbability 96.88%" ];
+	Node0x59d0d2303d00:s1 -> Node0x59d0d2302e50[tooltip="read_edge -> err\nProbability 3.12%" ];
+	Node0x59d0d23041e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{validate_edge:\l|  %u.val = load i32, ptr %u, align 4\l  %v.val = load i32, ptr %v, align 4\l  %n.reload1 = load i32, ptr %n_ptr, align 4\l  %u.ge0 = icmp sge i32 %u.val, 0\l  %u.lt.n = icmp slt i32 %u.val, %n.reload1\l  %u.ok = and i1 %u.ge0, %u.lt.n\l  %v.ge0 = icmp sge i32 %v.val, 0\l  %v.lt.n = icmp slt i32 %v.val, %n.reload1\l  %v.ok = and i1 %v.ge0, %v.lt.n\l  %uv.ok = and i1 %u.ok, %v.ok\l  br i1 %uv.ok, label %do_add, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d23041e0:s0 -> Node0x59d0d23051e0[tooltip="validate_edge -> do_add\nProbability 96.88%" ];
+	Node0x59d0d23041e0:s1 -> Node0x59d0d2302e50[tooltip="validate_edge -> err\nProbability 3.12%" ];
+	Node0x59d0d23051e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{do_add:\l|  %w.val = load i32, ptr %w, align 4\l  call void @add_edge(ptr %g, i32 %u.val, i32 %v.val, i32 %w.val, i32 1)\l  %i.old = load i32, ptr %i, align 4\l  %i.next = add nsw i32 %i.old, 1\l  store i32 %i.next, ptr %i, align 4\l  br label %loop\l}"];
+	Node0x59d0d23051e0 -> Node0x59d0d2303740[tooltip="do_add -> loop\nProbability 100.00%" ];
+	Node0x59d0d2303c80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after_edges:\l|  %fmt3.ptr = getelementptr inbounds [3 x i8], ptr @.str.d, i64 0, i64 0\l  %scanf3 = call i32 (ptr, ...) @__isoc99_scanf(ptr %fmt3.ptr, ptr %src_ptr)\l  %cmp.scanf3 = icmp eq i32 %scanf3, 1\l  br i1 %cmp.scanf3, label %validate_src, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d2303c80:s0 -> Node0x59d0d2306070[tooltip="after_edges -> validate_src\nProbability 50.00%" ];
+	Node0x59d0d2303c80:s1 -> Node0x59d0d2302e50[tooltip="after_edges -> err\nProbability 50.00%" ];
+	Node0x59d0d2306070 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{validate_src:\l|  %src.val = load i32, ptr %src_ptr, align 4\l  %n.reload2 = load i32, ptr %n_ptr, align 4\l  %src.ge0 = icmp sge i32 %src.val, 0\l  %src.lt.n = icmp slt i32 %src.val, %n.reload2\l  %src.ok = and i1 %src.ge0, %src.lt.n\l  br i1 %src.ok, label %ok_ret, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x59d0d2306070:s0 -> Node0x59d0d2306510[tooltip="validate_src -> ok_ret\nProbability 50.00%" ];
+	Node0x59d0d2306070:s1 -> Node0x59d0d2302e50[tooltip="validate_src -> err\nProbability 50.00%" ];
+	Node0x59d0d2306510 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{ok_ret:\l|  store i32 0, ptr %ret, align 4\l  br label %exit\l}"];
+	Node0x59d0d2306510 -> Node0x59d0d23066d0[tooltip="ok_ret -> exit\nProbability 100.00%" ];
+	Node0x59d0d2302e50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{err:\l|  store i32 -1, ptr %ret, align 4\l  br label %exit\l}"];
+	Node0x59d0d2302e50 -> Node0x59d0d23066d0[tooltip="err -> exit\nProbability 100.00%" ];
+	Node0x59d0d23066d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{exit:\l|  %rv = load i32, ptr %ret, align 4\l  ret i32 %rv\l}"];
+}

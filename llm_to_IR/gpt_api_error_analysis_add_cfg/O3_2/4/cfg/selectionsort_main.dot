@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5dcff475ca20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{L1080:\l|  %canary.slot = alloca i64, align 8\l  %arr = alloca [5 x i32], align 16\l  %guard.load = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard.load, ptr %canary.slot, align 8\l  %vec = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  %arr.vecptr = bitcast ptr %arr to ptr\l  store \<4 x i32\> %vec, ptr %arr.vecptr, align 16\l  %arr.idx4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %arr.idx4, align 4\l  %base = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %end = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 5\l  call void @selection_sort(ptr %base, i32 5)\l  %hdrptr = getelementptr inbounds [15 x i8], ptr @.str_sorted, i64 0, i64 0\l  %call.hdr = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %hdrptr)\l  br label %L10E0\l}"];
+	Node0x5dcff475ca20 -> Node0x5dcff4760f30[tooltip="L1080 -> L10E0\nProbability 100.00%" ];
+	Node0x5dcff4760f30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{L10E0:\l|  %cur = phi ptr [ %base, %L1080 ], [ %next, %L10E0 ]\l  %val = load i32, ptr %cur, align 4\l  %fmtptr = getelementptr inbounds [4 x i8], ptr @.str_d, i64 0, i64 0\l  %call.elem = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmtptr, i32\l... %val)\l  %next = getelementptr inbounds i32, ptr %cur, i64 1\l  %cont = icmp ne ptr %next, %end\l  br i1 %cont, label %L10E0, label %L10FA\l|{<s0>T|<s1>F}}"];
+	Node0x5dcff4760f30:s0 -> Node0x5dcff4760f30[tooltip="L10E0 -> L10E0\nProbability 96.88%" ];
+	Node0x5dcff4760f30:s1 -> Node0x5dcff47615b0[tooltip="L10E0 -> L10FA\nProbability 3.12%" ];
+	Node0x5dcff47615b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{L10FA:\l|  %guard.now = load i64, ptr @__stack_chk_guard, align 8\l  %guard.saved = load i64, ptr %canary.slot, align 8\l  %mismatch = icmp ne i64 %guard.saved, %guard.now\l  br i1 %mismatch, label %L1115, label %L110A\l|{<s0>T|<s1>F}}"];
+	Node0x5dcff47615b0:s0 -> Node0x5dcff4761780[tooltip="L10FA -> L1115\nProbability 0.00%" ];
+	Node0x5dcff47615b0:s1 -> Node0x5dcff47617f0[tooltip="L10FA -> L110A\nProbability 100.00%" ];
+	Node0x5dcff47617f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{L110A:\l|  ret i32 0\l}"];
+	Node0x5dcff4761780 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5d8d170" fontname="Courier",label="{L1115:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+}

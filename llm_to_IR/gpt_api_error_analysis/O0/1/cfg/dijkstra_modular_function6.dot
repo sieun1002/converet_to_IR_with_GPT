@@ -1,0 +1,19 @@
+digraph "CFG for 'print_distances' function" {
+	label="CFG for 'print_distances' function";
+
+	Node0x5fccbff109e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x5fccbff109e0 -> Node0x5fccbff104a0[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5fccbff104a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %after_print ]\l  %cmp = icmp slt i32 %i, %n\l  br i1 %cmp, label %body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5fccbff104a0:s0 -> Node0x5fccbff106b0[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5fccbff104a0:s1 -> Node0x5fccbff10780[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x5fccbff106b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %idxext = sext i32 %i to i64\l  %eltptr = getelementptr inbounds i32, ptr %dist, i64 %idxext\l  %val = load i32, ptr %eltptr, align 4\l  %isinf = icmp eq i32 %val, 2147483647\l  br i1 %isinf, label %print_inf, label %print_val\l|{<s0>T|<s1>F}}"];
+	Node0x5fccbff106b0:s0 -> Node0x5fccbff13a10[tooltip="body -> print_inf\nProbability 50.00%" ];
+	Node0x5fccbff106b0:s1 -> Node0x5fccbff13a90[tooltip="body -> print_val\nProbability 50.00%" ];
+	Node0x5fccbff13a10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{print_inf:\l|  %fmt_inf_ptr = getelementptr inbounds [16 x i8], ptr @.str.inf, i64 0, i64\l... 0\l  %call_inf = call i32 (ptr, ...) @printf(ptr %fmt_inf_ptr, i32 %i)\l  br label %after_print\l}"];
+	Node0x5fccbff13a10 -> Node0x5fccbff104f0[tooltip="print_inf -> after_print\nProbability 100.00%" ];
+	Node0x5fccbff13a90 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{print_val:\l|  %fmt_val_ptr = getelementptr inbounds [15 x i8], ptr @.str.val, i64 0, i64\l... 0\l  %call_val = call i32 (ptr, ...) @printf(ptr %fmt_val_ptr, i32 %i, i32 %val)\l  br label %after_print\l}"];
+	Node0x5fccbff13a90 -> Node0x5fccbff104f0[tooltip="print_val -> after_print\nProbability 100.00%" ];
+	Node0x5fccbff104f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{after_print:\l|  %i.next = add nsw i32 %i, 1\l  br label %loop\l}"];
+	Node0x5fccbff104f0 -> Node0x5fccbff104a0[tooltip="after_print -> loop\nProbability 100.00%" ];
+	Node0x5fccbff10780 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

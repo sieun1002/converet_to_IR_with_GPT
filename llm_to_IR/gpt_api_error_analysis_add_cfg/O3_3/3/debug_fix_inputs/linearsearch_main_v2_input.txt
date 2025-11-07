@@ -1,0 +1,23 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/3/linearsearch_main1.ll:12:12: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*, i32)*'
+;   call i32 @__printf_chk(i32 2, i8* %fmtptr, i32 3)
+;            ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-linux-gnu"
+
+@aElementFoundAt = private unnamed_addr constant [27 x i8] c"Element found at index %d\0A\00", align 1
+
+declare i32 @__printf_chk(i32, i8*, ...)
+
+define i32 @main() {
+loc_1060:
+  call void asm sideeffect "endbr64", ""()
+  %fmtptr = getelementptr inbounds [27 x i8], [27 x i8]* @aElementFoundAt, i64 0, i64 0
+  call i32 @__printf_chk(i32 2, i8* %fmtptr, i32 3)
+  br label %loc_1080
+
+loc_1080:
+  ret i32 0
+}

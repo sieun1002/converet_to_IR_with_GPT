@@ -1,0 +1,19 @@
+digraph "CFG for 'binary_search' function" {
+	label="CFG for 'binary_search' function";
+
+	Node0x5fe25a534ad0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x5fe25a534ad0 -> Node0x5fe25a534d60[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5fe25a534d60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %lo = phi i64 [ 0, %entry ], [ %lo.next, %body ]\l  %hi = phi i64 [ %n, %entry ], [ %hi.next, %body ]\l  %cond = icmp ult i64 %lo, %hi\l  br i1 %cond, label %body, label %after\l|{<s0>T|<s1>F}}"];
+	Node0x5fe25a534d60:s0 -> Node0x5fe25a5348f0[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5fe25a534d60:s1 -> Node0x5fe25a5367b0[tooltip="loop -> after\nProbability 3.12%" ];
+	Node0x5fe25a5348f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %diff = sub i64 %hi, %lo\l  %half = lshr i64 %diff, 1\l  %mid = add i64 %lo, %half\l  %ptr.mid = getelementptr inbounds i32, ptr %arr, i64 %mid\l  %val.mid = load i32, ptr %ptr.mid, align 4\l  %le = icmp sle i32 %key, %val.mid\l  %hi.next = select i1 %le, i64 %mid, i64 %hi\l  %mid.plus = add i64 %mid, 1\l  %lo.next = select i1 %le, i64 %lo, i64 %mid.plus\l  br label %loop\l}"];
+	Node0x5fe25a5348f0 -> Node0x5fe25a534d60[tooltip="body -> loop\nProbability 100.00%" ];
+	Node0x5fe25a5367b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after:\l|  %inrange = icmp ult i64 %lo, %n\l  br i1 %inrange, label %check, label %ret.neg\l|{<s0>T|<s1>F}}"];
+	Node0x5fe25a5367b0:s0 -> Node0x5fe25a5372c0[tooltip="after -> check\nProbability 50.00%" ];
+	Node0x5fe25a5367b0:s1 -> Node0x5fe25a537330[tooltip="after -> ret.neg\nProbability 50.00%" ];
+	Node0x5fe25a5372c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{check:\l|  %ptr.lo = getelementptr inbounds i32, ptr %arr, i64 %lo\l  %val.lo = load i32, ptr %ptr.lo, align 4\l  %eq = icmp eq i32 %key, %val.lo\l  br i1 %eq, label %ret.idx, label %ret.neg\l|{<s0>T|<s1>F}}"];
+	Node0x5fe25a5372c0:s0 -> Node0x5fe25a537980[tooltip="check -> ret.idx\nProbability 50.00%" ];
+	Node0x5fe25a5372c0:s1 -> Node0x5fe25a537330[tooltip="check -> ret.neg\nProbability 50.00%" ];
+	Node0x5fe25a537980 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{ret.idx:\l|  ret i64 %lo\l}"];
+	Node0x5fe25a537330 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d8564670" fontname="Courier",label="{ret.neg:\l|  ret i64 -1\l}"];
+}

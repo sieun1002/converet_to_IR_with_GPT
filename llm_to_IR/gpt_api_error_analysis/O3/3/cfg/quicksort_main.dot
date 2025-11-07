@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5579122c8940 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [10 x i32], align 16\l  %p0 = getelementptr inbounds [10 x i32], ptr %arr, i32 0, i32 0\l  %vecptr0 = bitcast ptr %p0 to ptr\l  %v0 = load \<4 x i32\>, ptr @.v0, align 16\l  store \<4 x i32\> %v0, ptr %vecptr0, align 16\l  %p4 = getelementptr inbounds i32, ptr %p0, i64 4\l  %vecptr1 = bitcast ptr %p4 to ptr\l  %v1 = load \<4 x i32\>, ptr @.v1, align 16\l  store \<4 x i32\> %v1, ptr %vecptr1, align 16\l  %p8 = getelementptr inbounds i32, ptr %p0, i64 8\l  store i32 4, ptr %p8, align 4\l  %p9 = getelementptr inbounds i32, ptr %p0, i64 9\l  store i32 0, ptr %p9, align 4\l  call void @quick_sort(ptr %p0, i64 0, i64 9)\l  br label %loop\l}"];
+	Node0x5579122c8940 -> Node0x5579122c9880[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5579122c9880 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %entry ], [ %i.next, %loop.inc ]\l  %idxptr = getelementptr inbounds i32, ptr %p0, i64 %i\l  %val = load i32, ptr %idxptr, align 4\l  %fmtptr = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %printres = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmtptr, i32\l... %val)\l  br label %loop.inc\l}"];
+	Node0x5579122c9880 -> Node0x5579122c9ae0[tooltip="loop -> loop.inc\nProbability 100.00%" ];
+	Node0x5579122c9ae0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.inc:\l|  %i.next = add nuw nsw i64 %i, 1\l  %cond = icmp ult i64 %i.next, 10\l  br i1 %cond, label %loop, label %after\l|{<s0>T|<s1>F}}"];
+	Node0x5579122c9ae0:s0 -> Node0x5579122c9880[tooltip="loop.inc -> loop\nProbability 96.88%" ];
+	Node0x5579122c9ae0:s1 -> Node0x5579122ca020[tooltip="loop.inc -> after\nProbability 3.12%" ];
+	Node0x5579122ca020 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after:\l|  %nlptr = getelementptr inbounds [2 x i8], ptr @.nl, i64 0, i64 0\l  %printnl = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %nlptr)\l  ret i32 0\l}"];
+}

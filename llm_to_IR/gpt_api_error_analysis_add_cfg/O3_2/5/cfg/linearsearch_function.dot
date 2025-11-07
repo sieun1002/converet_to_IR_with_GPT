@@ -1,0 +1,19 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x59319fc75430 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{block_1180:\l|  br label %block_1184\l}"];
+	Node0x59319fc75430 -> Node0x59319fc748b0[tooltip="block_1180 -> block_1184\nProbability 100.00%" ];
+	Node0x59319fc748b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{block_1184:\l|  %cmp.le.zero = icmp sle i32 %n, 0\l  br i1 %cmp.le.zero, label %block_11a0, label %block_1188\l|{<s0>T|<s1>F}}"];
+	Node0x59319fc748b0:s0 -> Node0x59319fc74700[tooltip="block_1184 -> block_11a0\nProbability 50.00%" ];
+	Node0x59319fc748b0:s1 -> Node0x59319fc74ba0[tooltip="block_1184 -> block_1188\nProbability 50.00%" ];
+	Node0x59319fc74ba0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{block_1188:\l|  %n64 = sext i32 %n to i64\l  br label %block_1199\l}"];
+	Node0x59319fc74ba0 -> Node0x59319fc74c90[tooltip="block_1188 -> block_1199\nProbability 100.00%" ];
+	Node0x59319fc74c90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{block_1199:\l|  %idx = phi i64 [ 0, %block_1188 ], [ %idx.next, %block_1190 ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %idx\l  %elem = load i32, ptr %elem.ptr, align 4\l  %cmp.ne = icmp ne i32 %elem, %target\l  br i1 %cmp.ne, label %block_1190, label %block_119e\l|{<s0>T|<s1>F}}"];
+	Node0x59319fc74c90:s0 -> Node0x59319fc76580[tooltip="block_1199 -> block_1190\nProbability 96.88%" ];
+	Node0x59319fc74c90:s1 -> Node0x59319fc76a30[tooltip="block_1199 -> block_119e\nProbability 3.12%" ];
+	Node0x59319fc76580 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{block_1190:\l|  %idx.next = add i64 %idx, 1\l  %at.limit = icmp eq i64 %idx.next, %n64\l  br i1 %at.limit, label %block_11a0, label %block_1199\l|{<s0>T|<s1>F}}"];
+	Node0x59319fc76580:s0 -> Node0x59319fc74700[tooltip="block_1190 -> block_11a0\nProbability 3.12%" ];
+	Node0x59319fc76580:s1 -> Node0x59319fc74c90[tooltip="block_1190 -> block_1199\nProbability 96.88%" ];
+	Node0x59319fc76a30 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{block_119e:\l|  %ret.idx = trunc i64 %idx to i32\l  ret i32 %ret.idx\l}"];
+	Node0x59319fc74700 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{block_11a0:\l|  ret i32 -1\l}"];
+}

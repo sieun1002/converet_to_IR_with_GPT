@@ -1,0 +1,5 @@
+digraph "CFG for 'sbox_lookup' function" {
+	label="CFG for 'sbox_lookup' function";
+
+	Node0x5aeb62553da0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %x.addr = alloca i8, align 1\l  store i8 %x, ptr %x.addr, align 1\l  call void @llvm.dbg.declare(metadata ptr %x.addr, metadata !507, metadata\l... !DIExpression()), !dbg !508\l  %0 = load i8, ptr %x.addr, align 1, !dbg !35\l  %idxprom = zext i8 %0 to i64, !dbg !36\l  %arrayidx = getelementptr inbounds [256 x i8], ptr @sbox_lookup.SBOX, i64 0,\l... i64 %idxprom, !dbg !36\l  %1 = load i8, ptr %arrayidx, align 1, !dbg !36\l  ret i8 %1, !dbg !37\l}"];
+}

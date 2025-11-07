@@ -1,0 +1,24 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5bc34239be30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %out = alloca [7 x i64], align 16\l  %visited.raw = call ptr @calloc(i64 28, i64 1)\l  %nextidx.raw = call ptr @calloc(i64 56, i64 1)\l  %stack.raw = call ptr @malloc(i64 56)\l  %vnull = icmp eq ptr %visited.raw, null\l  %nnull = icmp eq ptr %nextidx.raw, null\l  %vn.or = or i1 %vnull, %nnull\l  %snull = icmp eq ptr %stack.raw, null\l  %need_fail = or i1 %vn.or, %snull\l  br i1 %need_fail, label %fail, label %init\l|{<s0>T|<s1>F}}"];
+	Node0x5bc34239be30:s0 -> Node0x5bc34239f960[tooltip="entry -> fail\nProbability 50.00%" ];
+	Node0x5bc34239be30:s1 -> Node0x5bc34239f9d0[tooltip="entry -> init\nProbability 50.00%" ];
+	Node0x5bc34239f9d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{init:\l|  %visited = bitcast ptr %visited.raw to ptr\l  %nextidx = bitcast ptr %nextidx.raw to ptr\l  %stack = bitcast ptr %stack.raw to ptr\l  store i64 0, ptr %stack, align 8\l  store i32 1, ptr %visited, align 4\l  %out0.ptr = getelementptr inbounds [7 x i64], ptr %out, i64 0, i64 0\l  store i64 0, ptr %out0.ptr, align 8\l  call void @free(ptr %visited.raw)\l  call void @free(ptr %nextidx.raw)\l  call void @free(ptr %stack.raw)\l  %hdr.ptr = getelementptr inbounds [24 x i8], ptr @.str.header, i64 0, i64 0\l  %call.header = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %hdr.ptr,\l... i64 0)\l  %fmt.ptr = getelementptr inbounds [6 x i8], ptr @.str.format, i64 0, i64 0\l  %empty.ptr = getelementptr inbounds [2 x i8], ptr @.str.nl, i64 0, i64 1\l  %out0.val = load i64, ptr %out0.ptr, align 8\l  %call.first = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt.ptr,\l... i64 %out0.val, ptr %empty.ptr)\l  %nl.ptr = getelementptr inbounds [2 x i8], ptr @.str.nl, i64 0, i64 0\l  %call.nl = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %nl.ptr)\l  ret i32 0\l}"];
+	Node0x5bc34239f960 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{fail:\l|  br i1 %vnull, label %skip.free.v, label %do.free.v\l|{<s0>T|<s1>F}}"];
+	Node0x5bc34239f960:s0 -> Node0x5bc3423a0fa0[tooltip="fail -> skip.free.v\nProbability 37.50%" ];
+	Node0x5bc34239f960:s1 -> Node0x5bc3423a1340[tooltip="fail -> do.free.v\nProbability 62.50%" ];
+	Node0x5bc3423a1340 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{do.free.v:\l|  call void @free(ptr %visited.raw)\l  br label %skip.free.v\l}"];
+	Node0x5bc3423a1340 -> Node0x5bc3423a0fa0[tooltip="do.free.v -> skip.free.v\nProbability 100.00%" ];
+	Node0x5bc3423a0fa0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{skip.free.v:\l|  br i1 %nnull, label %skip.free.n, label %do.free.n\l|{<s0>T|<s1>F}}"];
+	Node0x5bc3423a0fa0:s0 -> Node0x5bc3423a15f0[tooltip="skip.free.v -> skip.free.n\nProbability 37.50%" ];
+	Node0x5bc3423a0fa0:s1 -> Node0x5bc3423a1670[tooltip="skip.free.v -> do.free.n\nProbability 62.50%" ];
+	Node0x5bc3423a1670 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{do.free.n:\l|  call void @free(ptr %nextidx.raw)\l  br label %skip.free.n\l}"];
+	Node0x5bc3423a1670 -> Node0x5bc3423a15f0[tooltip="do.free.n -> skip.free.n\nProbability 100.00%" ];
+	Node0x5bc3423a15f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{skip.free.n:\l|  br i1 %snull, label %printf.only, label %do.free.s\l|{<s0>T|<s1>F}}"];
+	Node0x5bc3423a15f0:s0 -> Node0x5bc3423a1900[tooltip="skip.free.n -> printf.only\nProbability 37.50%" ];
+	Node0x5bc3423a15f0:s1 -> Node0x5bc3423a1980[tooltip="skip.free.n -> do.free.s\nProbability 62.50%" ];
+	Node0x5bc3423a1980 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{do.free.s:\l|  call void @free(ptr %stack.raw)\l  br label %printf.only\l}"];
+	Node0x5bc3423a1980 -> Node0x5bc3423a1900[tooltip="do.free.s -> printf.only\nProbability 100.00%" ];
+	Node0x5bc3423a1900 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{printf.only:\l|  %hdr2.ptr = getelementptr inbounds [24 x i8], ptr @.str.header, i64 0, i64\l... 0\l  %call.hdr2 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %hdr2.ptr,\l... i64 0)\l  %nl2.ptr = getelementptr inbounds [2 x i8], ptr @.str.nl, i64 0, i64 0\l  %call.nl2 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %nl2.ptr)\l  ret i32 0\l}"];
+}

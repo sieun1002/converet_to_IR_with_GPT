@@ -1,0 +1,16 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x56f65cb30310 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{entry:\l|  br label %loop.test\l}"];
+	Node0x56f65cb30310 -> Node0x56f65cb2f7c0[tooltip="entry -> loop.test\nProbability 100.00%" ];
+	Node0x56f65cb2f7c0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.test:\l|  %i = phi i32 [ 0, %entry ], [ %i.inc, %inc ]\l  %cmplimit = icmp slt i32 %i, %count\l  br i1 %cmplimit, label %loop.body, label %notfound\l|{<s0>T|<s1>F}}"];
+	Node0x56f65cb2f7c0:s0 -> Node0x56f65cb2fb60[tooltip="loop.test -> loop.body\nProbability 96.88%" ];
+	Node0x56f65cb2f7c0:s1 -> Node0x56f65cb313d0[tooltip="loop.test -> notfound\nProbability 3.12%" ];
+	Node0x56f65cb2fb60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.body:\l|  %idx.ext = sext i32 %i to i64\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %idx.ext\l  %elem = load i32, ptr %elem.ptr, align 4\l  %equals = icmp eq i32 %value, %elem\l  br i1 %equals, label %found, label %inc\l|{<s0>T|<s1>F}}"];
+	Node0x56f65cb2fb60:s0 -> Node0x56f65cb31840[tooltip="loop.body -> found\nProbability 3.12%" ];
+	Node0x56f65cb2fb60:s1 -> Node0x56f65cb2f610[tooltip="loop.body -> inc\nProbability 96.88%" ];
+	Node0x56f65cb2f610 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inc:\l|  %i.inc = add nsw i32 %i, 1\l  br label %loop.test\l}"];
+	Node0x56f65cb2f610 -> Node0x56f65cb2f7c0[tooltip="inc -> loop.test\nProbability 100.00%" ];
+	Node0x56f65cb31840 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{found:\l|  ret i32 %i\l}"];
+	Node0x56f65cb313d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{notfound:\l|  ret i32 -1\l}"];
+}

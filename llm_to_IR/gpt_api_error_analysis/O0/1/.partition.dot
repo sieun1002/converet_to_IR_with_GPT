@@ -1,0 +1,19 @@
+digraph "CFG for 'partition' function" {
+	label="CFG for 'partition' function";
+
+	Node0x63e87648ec60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %hptr = getelementptr inbounds i32, ptr %arr, i64 %high\l  %pivot = load i32, ptr %hptr, align 4\l  %i_init = add nsw i64 %low, -1\l  %high_minus1 = add nsw i64 %high, -1\l  br label %loop_head\l}"];
+	Node0x63e87648ec60 -> Node0x63e87648eef0[tooltip="entry -> loop_head\nProbability 100.00%" ];
+	Node0x63e87648eef0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop_head:\l|  %j = phi i64 [ %low, %entry ], [ %j_next, %j_inc ]\l  %i_cur = phi i64 [ %i_init, %entry ], [ %i_updated, %j_inc ]\l  %cmp = icmp sle i64 %j, %high_minus1\l  br i1 %cmp, label %body, label %after_loop\l|{<s0>T|<s1>F}}"];
+	Node0x63e87648eef0:s0 -> Node0x63e87648f4b0[tooltip="loop_head -> body\nProbability 96.88%" ];
+	Node0x63e87648eef0:s1 -> Node0x63e87648f580[tooltip="loop_head -> after_loop\nProbability 3.12%" ];
+	Node0x63e87648f4b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %jptr = getelementptr inbounds i32, ptr %arr, i64 %j\l  %aj = load i32, ptr %jptr, align 4\l  %le = icmp sle i32 %aj, %pivot\l  br i1 %le, label %iftrue, label %iffalse\l|{<s0>T|<s1>F}}"];
+	Node0x63e87648f4b0:s0 -> Node0x63e87648f920[tooltip="body -> iftrue\nProbability 50.00%" ];
+	Node0x63e87648f4b0:s1 -> Node0x63e87648f990[tooltip="body -> iffalse\nProbability 50.00%" ];
+	Node0x63e87648f920 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{iftrue:\l|  %i1 = add nsw i64 %i_cur, 1\l  %iptr = getelementptr inbounds i32, ptr %arr, i64 %i1\l  %ai = load i32, ptr %iptr, align 4\l  store i32 %aj, ptr %iptr, align 4\l  store i32 %ai, ptr %jptr, align 4\l  br label %j_inc\l}"];
+	Node0x63e87648f920 -> Node0x63e87648f030[tooltip="iftrue -> j_inc\nProbability 100.00%" ];
+	Node0x63e87648f990 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{iffalse:\l|  br label %j_inc\l}"];
+	Node0x63e87648f990 -> Node0x63e87648f030[tooltip="iffalse -> j_inc\nProbability 100.00%" ];
+	Node0x63e87648f030 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{j_inc:\l|  %i_updated = phi i64 [ %i1, %iftrue ], [ %i_cur, %iffalse ]\l  %j_next = add nsw i64 %j, 1\l  br label %loop_head\l}"];
+	Node0x63e87648f030 -> Node0x63e87648eef0[tooltip="j_inc -> loop_head\nProbability 100.00%" ];
+	Node0x63e87648f580 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after_loop:\l|  %i_end = phi i64 [ %i_cur, %loop_head ]\l  %ip1 = add nsw i64 %i_end, 1\l  %iptr2 = getelementptr inbounds i32, ptr %arr, i64 %ip1\l  %aip1 = load i32, ptr %iptr2, align 4\l  store i32 %pivot, ptr %iptr2, align 4\l  store i32 %aip1, ptr %hptr, align 4\l  ret i64 %ip1\l}"];
+}

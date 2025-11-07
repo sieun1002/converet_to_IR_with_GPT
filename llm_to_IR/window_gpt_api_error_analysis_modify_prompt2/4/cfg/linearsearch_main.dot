@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x568d78f676f0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %var4 = alloca i32, align 4\l  %var8 = alloca i32, align 4\l  %res = alloca i32, align 4\l  %0 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 5, ptr %0, align 4\l  %1 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %1, align 4\l  %2 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %2, align 4\l  %3 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 4, ptr %3, align 4\l  %4 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 2, ptr %4, align 4\l  store i32 5, ptr %var4, align 4\l  store i32 4, ptr %var8, align 4\l  %5 = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %6 = load i32, ptr %var4, align 4\l  %7 = load i32, ptr %var8, align 4\l  %8 = call i32 @linear_search(ptr %5, i32 %6, i32 %7)\l  store i32 %8, ptr %res, align 4\l  %9 = load i32, ptr %res, align 4\l  %10 = icmp eq i32 %9, -1\l  br i1 %10, label %notfound, label %found\l|{<s0>T|<s1>F}}"];
+	Node0x568d78f676f0:s0 -> Node0x568d78f6bec0[tooltip="entry -> notfound\nProbability 37.50%" ];
+	Node0x568d78f676f0:s1 -> Node0x568d78f6bf40[tooltip="entry -> found\nProbability 62.50%" ];
+	Node0x568d78f6bf40 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{found:\l|  %11 = load i32, ptr %res, align 4\l  %12 = getelementptr inbounds [27 x i8], ptr @_Format, i64 0, i64 0\l  %13 = call i32 (ptr, ...) @printf(ptr %12, i32 %11)\l  br label %done\l}"];
+	Node0x568d78f6bf40 -> Node0x568d78f6c1e0[tooltip="found -> done\nProbability 100.00%" ];
+	Node0x568d78f6bec0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{notfound:\l|  %14 = getelementptr inbounds [18 x i8], ptr @Buffer, i64 0, i64 0\l  %15 = call i32 @puts(ptr %14)\l  br label %done\l}"];
+	Node0x568d78f6bec0 -> Node0x568d78f6c1e0[tooltip="notfound -> done\nProbability 100.00%" ];
+	Node0x568d78f6c1e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{done:\l|  ret i32 0\l}"];
+}

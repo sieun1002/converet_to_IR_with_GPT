@@ -1,0 +1,151 @@
+; ModuleID = '/home/sieun/workspace/converet_to_IR_with_GPT/original/src/insertionsort.c'
+source_filename = "/home/sieun/workspace/converet_to_IR_with_GPT/original/src/insertionsort.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@__const.main.a = private unnamed_addr constant [10 x i32] [i32 9, i32 1, i32 5, i32 3, i32 7, i32 2, i32 8, i32 6, i32 4, i32 0], align 16
+@.str = private unnamed_addr constant [4 x i8] c"%d \00", align 1
+@.str.1 = private unnamed_addr constant [2 x i8] c"\0A\00", align 1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+  %1 = alloca i32, align 4
+  %2 = alloca [10 x i32], align 16
+  %3 = alloca i64, align 8
+  %4 = alloca i64, align 8
+  store i32 0, i32* %1, align 4
+  %5 = bitcast [10 x i32]* %2 to i8*
+  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 16 %5, i8* align 16 bitcast ([10 x i32]* @__const.main.a to i8*), i64 40, i1 false)
+  store i64 10, i64* %3, align 8
+  %6 = getelementptr inbounds [10 x i32], [10 x i32]* %2, i64 0, i64 0
+  %7 = load i64, i64* %3, align 8
+  call void @insertion_sort(i32* noundef %6, i64 noundef %7)
+  store i64 0, i64* %4, align 8
+  br label %8
+
+8:                                                ; preds = %17, %0
+  %9 = load i64, i64* %4, align 8
+  %10 = load i64, i64* %3, align 8
+  %11 = icmp ult i64 %9, %10
+  br i1 %11, label %12, label %20
+
+12:                                               ; preds = %8
+  %13 = load i64, i64* %4, align 8
+  %14 = getelementptr inbounds [10 x i32], [10 x i32]* %2, i64 0, i64 %13
+  %15 = load i32, i32* %14, align 4
+  %16 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i64 0, i64 0), i32 noundef %15)
+  br label %17
+
+17:                                               ; preds = %12
+  %18 = load i64, i64* %4, align 8
+  %19 = add i64 %18, 1
+  store i64 %19, i64* %4, align 8
+  br label %8, !llvm.loop !6
+
+20:                                               ; preds = %8
+  %21 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([2 x i8], [2 x i8]* @.str.1, i64 0, i64 0))
+  ret i32 0
+}
+
+; Function Attrs: argmemonly nofree nounwind willreturn
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i64, i1 immarg) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define internal void @insertion_sort(i32* noundef %0, i64 noundef %1) #0 {
+  %3 = alloca i32*, align 8
+  %4 = alloca i64, align 8
+  %5 = alloca i64, align 8
+  %6 = alloca i32, align 4
+  %7 = alloca i64, align 8
+  store i32* %0, i32** %3, align 8
+  store i64 %1, i64* %4, align 8
+  store i64 1, i64* %5, align 8
+  br label %8
+
+8:                                                ; preds = %47, %2
+  %9 = load i64, i64* %5, align 8
+  %10 = load i64, i64* %4, align 8
+  %11 = icmp ult i64 %9, %10
+  br i1 %11, label %12, label %50
+
+12:                                               ; preds = %8
+  %13 = load i32*, i32** %3, align 8
+  %14 = load i64, i64* %5, align 8
+  %15 = getelementptr inbounds i32, i32* %13, i64 %14
+  %16 = load i32, i32* %15, align 4
+  store i32 %16, i32* %6, align 4
+  %17 = load i64, i64* %5, align 8
+  store i64 %17, i64* %7, align 8
+  br label %18
+
+18:                                               ; preds = %31, %12
+  %19 = load i64, i64* %7, align 8
+  %20 = icmp ugt i64 %19, 0
+  br i1 %20, label %21, label %29
+
+21:                                               ; preds = %18
+  %22 = load i32*, i32** %3, align 8
+  %23 = load i64, i64* %7, align 8
+  %24 = sub i64 %23, 1
+  %25 = getelementptr inbounds i32, i32* %22, i64 %24
+  %26 = load i32, i32* %25, align 4
+  %27 = load i32, i32* %6, align 4
+  %28 = icmp sgt i32 %26, %27
+  br label %29
+
+29:                                               ; preds = %21, %18
+  %30 = phi i1 [ false, %18 ], [ %28, %21 ]
+  br i1 %30, label %31, label %42
+
+31:                                               ; preds = %29
+  %32 = load i32*, i32** %3, align 8
+  %33 = load i64, i64* %7, align 8
+  %34 = sub i64 %33, 1
+  %35 = getelementptr inbounds i32, i32* %32, i64 %34
+  %36 = load i32, i32* %35, align 4
+  %37 = load i32*, i32** %3, align 8
+  %38 = load i64, i64* %7, align 8
+  %39 = getelementptr inbounds i32, i32* %37, i64 %38
+  store i32 %36, i32* %39, align 4
+  %40 = load i64, i64* %7, align 8
+  %41 = add i64 %40, -1
+  store i64 %41, i64* %7, align 8
+  br label %18, !llvm.loop !8
+
+42:                                               ; preds = %29
+  %43 = load i32, i32* %6, align 4
+  %44 = load i32*, i32** %3, align 8
+  %45 = load i64, i64* %7, align 8
+  %46 = getelementptr inbounds i32, i32* %44, i64 %45
+  store i32 %43, i32* %46, align 4
+  br label %47
+
+47:                                               ; preds = %42
+  %48 = load i64, i64* %5, align 8
+  %49 = add i64 %48, 1
+  store i64 %49, i64* %5, align 8
+  br label %8, !llvm.loop !9
+
+50:                                               ; preds = %8
+  ret void
+}
+
+declare i32 @printf(i8* noundef, ...) #2
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { argmemonly nofree nounwind willreturn }
+attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.module.flags = !{!0, !1, !2, !3, !4}
+!llvm.ident = !{!5}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 7, !"PIC Level", i32 2}
+!2 = !{i32 7, !"PIE Level", i32 2}
+!3 = !{i32 7, !"uwtable", i32 1}
+!4 = !{i32 7, !"frame-pointer", i32 2}
+!5 = !{!"Ubuntu clang version 14.0.6"}
+!6 = distinct !{!6, !7}
+!7 = !{!"llvm.loop.mustprogress"}
+!8 = distinct !{!8, !7}
+!9 = distinct !{!9, !7}

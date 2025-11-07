@@ -1,0 +1,105 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 153,
+      "ir_len": 16149,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/BFS_main1.ll:61:14: error: expected instruction opcode\n  br label %0x11D3\n             ^\n",
+      "ir_preview": "; ModuleID = 'reconstructed_main'\nsource_filename = \"reconstructed_main.ll\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.bfs = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/BFS_main1.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 1214,
+      "ir_len": 16287,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rsi.phi.1200 = phi i64 [ %rsi.phi, %loc_11D3 ], [ %rsi.inc.11e5, %push0_11E5 ]\nPHINode should have one entry for each predecessor of its parent basic block!\n ",
+      "ir_preview": "; ModuleID = 'reconstructed_main'\nsource_filename = \"reconstructed_main.ll\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.bfs = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/BFS_main2.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 258,
+      "ir_len": 15471,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %rsi.phi.12D0 = phi i64 [ %rsi.phi.12A0, %loc_12A0 ], [ %rsi.phi.12A0, %then_12D8 ], [ %rsi.inc.12b1, %push4_12B1 ]\nlabel %push4_12B1\nlabel %then_12AA\n",
+      "ir_preview": "; ModuleID = 'reconstructed_main'\nsource_filename = \"reconstructed_main.ll\"\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.bfs = private unnamed_addr constant [21 x i8] c\"BFS order from %zu: \\00\", align",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/BFS_main3.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 301,
+      "ir_len": 12894,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/DFS_main1.ll:16:55: error: constant expression type mismatch: got type '[6 x i8]' but expected '[5 x i8]'\n@.str.fmt_zs = private unnamed_addr constant [5 x i8] c\"%zu%s\\00\", align 1\n                                                      ^",
+      "ir_preview": "; ModuleID = 'main_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndeclare i8* @calloc(i64, i64)\ndeclare i8* @malloc(i64)\ndeclare void @free(i8*)\ndeclare i32 @__printf_chk(i32, i8*, ...)\ndeclare void @",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/DFS_main1.ll"
+    },
+    {
+      "filename": "heapsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 158,
+      "ir_len": 4150,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/heapsort_main1.ll:41:14: error: expected instruction opcode\n  br label %0x14da\n             ^\n",
+      "ir_preview": "; ModuleID = 'reconstructed'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@format = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@__stack_chk_guard = external global i64\n\ndeclare i32 @printf(i8",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/heapsort_main1.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 376,
+      "ir_len": 2719,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/mergesort_main1.ll:1:1: error: expected top-level entity\nI can generate LLVM 14 IR for this function, but to satisfy the “MUST” constraints (valid external declarations, exact data sizes, correct target, and stack protector handling) I ",
+      "ir_preview": "I can generate LLVM 14 IR for this function, but to satisfy the “MUST” constraints (valid external declarations, exact data sizes, correct target, and stack protector handling) I need a few concrete e",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/mergesort_main1.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 257,
+      "ir_len": 7016,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/quicksort_function1.ll:11:44: error: use of undefined value '%hi.B2.to.123A'\n  %hi.123A = phi i64 [ %hi, %loc_1220 ], [ %hi.B2.to.123A, %loc_12B2 ]\n                                           ^\n",
+      "ir_preview": "; ModuleID = 'qs_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine dso_local void @quick_sort(i32* %arr, i64 %lo, i64 %hi) {\nloc_1220:\n  %cmp_entry = icmp sge i64 %lo, %hi\n  br i1 %cmp_entry, labe",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/quicksort_function1.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 281,
+      "ir_len": 2521,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/selectionsort_main1.ll:28:27: error: '@__printf_chk' defined with type 'i32 (i32, i8*, ...)*' but expected 'i32 (i32, i8*)*'\n  %call.header = call i32 @__printf_chk(i32 2, i8* %sorted.ptr)\n                          ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\n@.str.int = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/selectionsort_main1.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 252,
+      "ir_len": 2233,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/selectionsort_main2.ll:28:27: error: '@printf' defined with type 'i32 (i8*, ...)*' but expected 'i32 (i8*)*'\n  %call.header = call i32 @printf(i8* %sorted.ptr)\n                          ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\n@.str.int = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/selectionsort_main2.ll"
+    },
+    {
+      "filename": "selectionsort_main.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 268,
+      "ir_len": 2386,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/selectionsort_main3.ll:30:27: error: '@printf' defined with type 'i32 (i8*, ...)*' but expected 'i32 (i8*, i8*)*'\n  %call.header = call i32 @printf(i8* %fmtS, i8* %sorted.ptr)\n                          ^\n",
+      "ir_preview": "; ModuleID = 'recovered_main'\ntarget triple = \"x86_64-pc-linux-gnu\"\ntarget datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"\n\n@.str.int = private unnamed_addr constant [4 x i8] c\"%d \\00\", align 1\n@",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/2/selectionsort_main3.ll"
+    }
+  ]
+}

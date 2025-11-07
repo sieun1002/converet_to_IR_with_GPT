@@ -1,0 +1,504 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; PHINode should have one entry for each predecessor of its parent basic block!
+;   %phi_13E0 = phi i8* [ %arr.begin.i8, %bb_13CE ], [ %next.i8, %bb_13F8 ]
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered_from_asm_main'
+target triple = "x86_64-pc-linux-gnu"
+
+@xmmword_2010 = internal constant [4 x i32] [i32 1, i32 3, i32 5, i32 7], align 16
+@xmmword_2020 = internal constant [4 x i32] [i32 2, i32 4, i32 6, i32 8], align 16
+@unk_2004 = internal constant [4 x i8] c"%d \00", align 1
+@unk_2008 = internal constant [2 x i8] c"\0A\00", align 1
+
+@__stack_chk_guard = external thread_local global i64
+
+declare i8* @malloc(i64) nounwind
+declare void @free(i8*) nounwind
+declare i32 @__printf_chk(i32, i8*, ...) nounwind
+declare void @__stack_chk_fail() noreturn nounwind
+
+define i32 @main() local_unnamed_addr {
+entry_10c0:
+  %stack_canary.init = load i64, i64* @__stack_chk_guard, align 8
+  %canary.save = alloca i64, align 8
+  store i64 %stack_canary.init, i64* %canary.save, align 8
+
+  %stackbuf = alloca [10 x i32], align 16
+  %stackbuf.i8 = bitcast [10 x i32]* %stackbuf to i8*
+  ; initialize first 8 ints from two 16-byte constants
+  %arr0.ptr = getelementptr inbounds [10 x i32], [10 x i32]* %stackbuf, i64 0, i64 0
+  %arr0.vec.ptr = bitcast i32* %arr0.ptr to <4 x i32>*
+  %xmm2010.ptr = bitcast [4 x i32]* @xmmword_2010 to <4 x i32>*
+  %v0 = load <4 x i32>, <4 x i32>* %xmm2010.ptr, align 16
+  store <4 x i32> %v0, <4 x i32>* %arr0.vec.ptr, align 16
+
+  %arr4.ptr = getelementptr inbounds [10 x i32], [10 x i32]* %stackbuf, i64 0, i64 4
+  %arr4.vec.ptr = bitcast i32* %arr4.ptr to <4 x i32>*
+  %xmm2020.ptr = bitcast [4 x i32]* @xmmword_2020 to <4 x i32>*
+  %v1 = load <4 x i32>, <4 x i32>* %xmm2020.ptr, align 16
+  store <4 x i32> %v1, <4 x i32>* %arr4.vec.ptr, align 16
+
+  ; zero-initialize remaining two ints
+  %arr8.ptr = getelementptr inbounds [10 x i32], [10 x i32]* %stackbuf, i64 0, i64 8
+  store i32 0, i32* %arr8.ptr, align 4
+  %arr9.ptr = getelementptr inbounds [10 x i32], [10 x i32]* %stackbuf, i64 0, i64 9
+  store i32 0, i32* %arr9.ptr, align 4
+
+  ; malloc(0x28)
+  %malloc.sz = zext i32 40 to i64
+  %p = call i8* @malloc(i64 %malloc.sz)
+  %malloc.isnull = icmp eq i8* %p, null
+  br i1 %malloc.isnull, label %bb_142E, label %bb_1118
+
+; ---------------- fast-forwarded out-of-line path (non-null malloc) -------------
+bb_1118:                                           ; 0x1118
+  br label %bb_1140
+
+bb_1140:                                           ; 0x1140
+  br label %bb_128A
+
+bb_1158:                                           ; 0x1158
+  br label %bb_116D
+
+bb_115C:                                           ; 0x115C
+  br label %bb_1160
+
+bb_1160:                                           ; 0x1160
+  br label %bb_1164
+
+bb_1164:                                           ; 0x1164
+  br i1 false, label %bb_1280, label %bb_116D
+
+bb_116D:                                           ; 0x116D
+  br label %bb_1172
+
+bb_1172:                                           ; 0x1172
+  br i1 false, label %bb_143A, label %bb_117B
+
+bb_117B:                                           ; 0x117B
+  br label %bb_1182
+
+bb_1182:                                           ; 0x1182
+  br label %bb_1189
+
+bb_1189:                                           ; 0x1189
+  br i1 false, label %bb_13A0, label %bb_1193
+
+bb_1193:                                           ; 0x1193
+  br i1 false, label %bb_13A0, label %bb_119C
+
+bb_119C:                                           ; 0x119C
+  br label %bb_11A4
+
+bb_11A4:                                           ; 0x11A4
+  br label %bb_11AC
+
+bb_11AC:                                           ; 0x11AC
+  br label %bb_11B0
+
+bb_11B0:                                           ; 0x11B0
+  br label %bb_11B4
+
+bb_11B4:                                           ; 0x11B4
+  br label %bb_11B7
+
+bb_11B7:                                           ; 0x11B7
+  br label %bb_11BA
+
+bb_11BA:                                           ; 0x11BA
+  br i1 false, label %bb_12F0, label %bb_11C4
+
+bb_11C4:                                           ; 0x11C4
+  br label %bb_11CC
+
+bb_11CC:                                           ; 0x11CC
+  br label %bb_11D0
+
+bb_11D0:                                           ; 0x11D0
+  br label %bb_11D4
+
+bb_11D4:                                           ; 0x11D4
+  br i1 false, label %bb_1280, label %bb_11DD
+
+bb_11DD:                                           ; 0x11DD
+  br label %bb_11E2
+
+bb_11E2:                                           ; 0x11E2
+  br label %bb_11E7
+
+bb_11E7:                                           ; 0x11E7
+  br label %bb_11EB
+
+bb_11EB:                                           ; 0x11EB
+  br i1 false, label %bb_1280, label %bb_11F4
+
+bb_11F4:                                           ; 0x11F4
+  br label %bb_11F9
+
+bb_11F9:                                           ; 0x11F9
+  br label %bb_11FE
+
+bb_11FE:                                           ; 0x11FE
+  br label %bb_1202
+
+bb_1202:                                           ; 0x1202
+  br i1 false, label %bb_1280, label %bb_1207
+
+bb_1207:                                           ; 0x1207
+  br label %bb_120C
+
+bb_120C:                                           ; 0x120C
+  br label %bb_1211
+
+bb_1211:                                           ; 0x1211
+  br label %bb_1215
+
+bb_1215:                                           ; 0x1215
+  br i1 false, label %bb_1280, label %bb_121A
+
+bb_121A:                                           ; 0x121A
+  br label %bb_121F
+
+bb_121F:                                           ; 0x121F
+  br label %bb_1224
+
+bb_1224:                                           ; 0x1224
+  br label %bb_1228
+
+bb_1228:                                           ; 0x1228
+  br i1 false, label %bb_1280, label %bb_122D
+
+bb_122D:                                           ; 0x122D
+  br label %bb_1232
+
+bb_1232:                                           ; 0x1232
+  br label %bb_1237
+
+bb_1237:                                           ; 0x1237
+  br label %bb_123B
+
+bb_123B:                                           ; 0x123B
+  br i1 false, label %bb_1280, label %bb_1240
+
+bb_1240:                                           ; 0x1240
+  br label %bb_1245
+
+bb_1245:                                           ; 0x1245
+  br label %bb_1249
+
+bb_1249:                                           ; 0x1249
+  br label %bb_124E
+
+bb_124E:                                           ; 0x124E
+  br i1 false, label %bb_1280, label %bb_1253
+
+bb_1253:                                           ; 0x1253
+  br label %bb_1257
+
+bb_1257:                                           ; 0x1257
+  br label %bb_125C
+
+bb_125C:                                           ; 0x125C
+  br label %bb_125E
+
+bb_125E:                                           ; 0x125E
+  br label %bb_1265
+
+bb_1265:                                           ; 0x1265
+  br label %bb_1268
+
+bb_1268:                                           ; 0x1268
+  br label %bb_126C
+
+bb_126C:                                           ; 0x126C
+  br i1 false, label %bb_1280, label %bb_1271
+
+bb_1271:                                           ; 0x1271
+  br label %bb_1275
+
+bb_1275:                                           ; 0x1275
+  br label %bb_1278
+
+bb_1278:                                           ; 0x1278
+  br label %bb_1280
+
+bb_1280:                                           ; 0x1280
+  ; dummy PHI to satisfy multi-predecessor requirement; predecessors are numerous.
+  %phi_dummy_1280 = phi i32 [ 0, %bb_1164 ], [ 0, %bb_11D4 ], [ 0, %bb_11EB ], [ 0, %bb_1202 ], [ 0, %bb_1215 ], [ 0, %bb_1228 ], [ 0, %bb_123B ], [ 0, %bb_124E ], [ 0, %bb_126C ], [ 0, %bb_12B3 ], [ 0, %bb_12DE ], [ 0, %bb_1320 ], [ 0, %bb_1323 ], [ 0, %bb_1345 ], [ 0, %bb_135C ], [ 0, %bb_1278 ]
+  br i1 true, label %bb_1380, label %bb_128A
+
+bb_128A:                                           ; 0x128A
+  br label %bb_1293
+
+bb_1293:                                           ; 0x1293
+  br label %bb_1296
+
+bb_1296:                                           ; 0x1296
+  br label %bb_1299
+
+bb_1299:                                           ; 0x1299
+  br label %bb_129D
+
+bb_129D:                                           ; 0x129D
+  br label %bb_12A0
+
+bb_12A0:                                           ; 0x12A0
+  br label %bb_12A4
+
+bb_12A4:                                           ; 0x12A4
+  br label %bb_12A9
+
+bb_12A9:                                           ; 0x12A9
+  br label %bb_12AC
+
+bb_12AC:                                           ; 0x12AC
+  br label %bb_12B0
+
+bb_12B0:                                           ; 0x12B0
+  br label %bb_12B3
+
+bb_12B3:                                           ; 0x12B3
+  br i1 true, label %bb_1280, label %bb_12B8
+
+bb_12B8:                                           ; 0x12B8
+  ; preds: %bb_12E7, %bb_1440, %bb_12B3
+  %phi_dummy_12B8 = phi i32 [ 0, %bb_12E7 ], [ 0, %bb_1440 ], [ 0, %bb_12B3 ]
+  br i1 true, label %bb_1158, label %bb_12C1
+
+bb_12C1:                                           ; 0x12C1
+  br label %bb_12C5
+
+bb_12C5:                                           ; 0x12C5
+  br i1 true, label %bb_12D7, label %bb_12CA
+
+bb_12CA:                                           ; 0x12CA
+  br label %bb_12CE
+
+bb_12CE:                                           ; 0x12CE
+  br i1 false, label %bb_115C, label %bb_12D7
+
+bb_12D7:                                           ; 0x12D7
+  br label %bb_12DA
+
+bb_12DA:                                           ; 0x12DA
+  br label %bb_12DE
+
+bb_12DE:                                           ; 0x12DE
+  br i1 true, label %bb_1280, label %bb_12E3
+
+bb_12E3:                                           ; 0x12E3
+  br label %bb_12E7
+
+bb_12E7:                                           ; 0x12E7
+  br label %bb_12B8
+
+bb_12F0:                                           ; 0x12F0
+  br label %bb_12F5
+
+bb_12F5:                                           ; 0x12F5
+  br label %bb_12F8
+
+bb_12F8:                                           ; 0x12F8
+  br label %bb_12FC
+
+bb_12FC:                                           ; 0x12FC
+  br label %bb_1300
+
+bb_1300:                                           ; 0x1300
+  br label %bb_1304
+
+bb_1304:                                           ; 0x1304
+  br i1 false, label %bb_1313, label %bb_130A
+
+bb_130A:                                           ; 0x130A
+  br label %bb_130F
+
+bb_130F:                                           ; 0x130F
+  br label %bb_1313
+
+bb_1313:                                           ; 0x1313
+  br label %bb_1316
+
+bb_1316:                                           ; 0x1316
+  br label %bb_131A
+
+bb_131A:                                           ; 0x131A
+  br label %bb_131D
+
+bb_131D:                                           ; 0x131D
+  br label %bb_1320
+
+bb_1320:                                           ; 0x1320
+  br i1 true, label %bb_1280, label %bb_1329
+
+bb_1323:                                           ; 0x1323
+  br i1 true, label %bb_1280, label %bb_1329
+
+bb_1329:                                           ; 0x1329
+  br label %bb_1331
+
+bb_1331:                                           ; 0x1331
+  br label %bb_1335
+
+bb_1335:                                           ; 0x1335
+  br label %bb_133D
+
+bb_133D:                                           ; 0x133D
+  br label %bb_1341
+
+bb_1341:                                           ; 0x1341
+  br label %bb_1345
+
+bb_1345:                                           ; 0x1345
+  br i1 true, label %bb_1280, label %bb_134E
+
+bb_134E:                                           ; 0x134E
+  br label %bb_1353
+
+bb_1353:                                           ; 0x1353
+  br label %bb_1357
+
+bb_1357:                                           ; 0x1357
+  br label %bb_135C
+
+bb_135C:                                           ; 0x135C
+  br i1 true, label %bb_1280, label %bb_1365
+
+bb_1365:                                           ; 0x1365
+  br label %bb_136A
+
+bb_136A:                                           ; 0x136A
+  br label %bb_136E
+
+bb_136E:                                           ; 0x136E
+  br i1 true, label %bb_128A, label %bb_1378
+
+bb_1372:                                           ; 0x1372
+  br i1 true, label %bb_128A, label %bb_1378
+
+bb_1378:                                           ; 0x1378
+  br label %bb_1380
+
+bb_1380:                                           ; 0x1380
+  br label %bb_1385
+
+bb_1385:                                           ; 0x1385
+  br i1 true, label %bb_13AD, label %bb_138B
+
+bb_138B:                                           ; 0x138B
+  br label %bb_138E
+
+bb_138E:                                           ; 0x138E
+  br label %bb_1391
+
+bb_1391:                                           ; 0x1391
+  br label %bb_1394
+
+bb_1394:                                           ; 0x1394
+  br label %bb_1140
+
+bb_13A0:                                           ; 0x13A0
+  br label %bb_13A8
+
+bb_13A8:                                           ; 0x13A8
+  br label %bb_11C4
+
+bb_13AD:                                           ; 0x13AD
+  br label %bb_13B2
+
+bb_13B2:                                           ; 0x13B2
+  br label %bb_13B7
+
+bb_13B7:                                           ; 0x13B7
+  br i1 false, label %bb_13C6, label %bb_13BC
+
+bb_13BC:                                           ; 0x13BC
+  br label %bb_13C1
+
+bb_13C1:                                           ; 0x13C1
+  br label %bb_13C4
+
+bb_13C4:                                           ; 0x13C4
+  br label %bb_13C6
+
+bb_13C6:                                           ; 0x13C6
+  br label %bb_13C9
+
+bb_13C9:                                           ; 0x13C9
+  br label %bb_13CE
+
+; ------------------- malloc==NULL path and common print/return path --------------
+
+bb_142E:                                           ; 0x142E
+  ; rbx = &stackbuf[0]
+  br label %bb_1433
+
+bb_1433:                                           ; 0x1433
+  br label %bb_13CE
+
+bb_13CE:                                           ; 0x13CE
+  ; r12 = &var_40 (end of array), rbp = unk_2004
+  %fmt.ptr = getelementptr inbounds [4 x i8], [4 x i8]* @unk_2004, i64 0, i64 0
+  %arr.begin.i8 = bitcast [10 x i32]* %stackbuf to i8*
+  %arr.end.i8 = getelementptr inbounds i8, i8* %arr.begin.i8, i64 40
+  br label %bb_13E0
+
+bb_13E0:                                           ; 0x13E0
+  ; preds: %bb_13F8, %bb_13CE
+  %phi_13E0 = phi i8* [ %arr.begin.i8, %bb_13CE ], [ %next.i8, %bb_13F8 ]
+  %val.ptr.i32 = bitcast i8* %phi_13E0 to i32*
+  %val.load = load i32, i32* %val.ptr.i32, align 4
+  %_call = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.ptr, i32 %val.load)
+  %next.i8 = getelementptr inbounds i8, i8* %phi_13E0, i64 4
+  br label %bb_13F5
+
+bb_13F5:                                           ; 0x13F5
+  %cont = icmp ne i8* %next.i8, %arr.end.i8
+  br i1 %cont, label %bb_13F8, label %bb_13FA
+
+bb_13F8:                                           ; 0x13F8
+  br label %bb_13E0
+
+bb_13FA:                                           ; 0x13FA
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @unk_2008, i64 0, i64 0
+  %_call2 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  br label %bb_140D
+
+bb_140D:                                           ; 0x140D
+  %stack_canary.final = load i64, i64* @__stack_chk_guard, align 8
+  %stack_canary.saved = load i64, i64* %canary.save, align 8
+  %canary.ok = icmp eq i64 %stack_canary.final, %stack_canary.saved
+  br i1 %canary.ok, label %bb_141D, label %bb_1435
+
+bb_141D:                                           ; 0x141D
+  ret i32 0
+
+bb_1435:                                           ; 0x1435
+  call void @__stack_chk_fail()
+  unreachable
+
+; ---------------- labels that must exist to satisfy CFG but are not executed -----
+
+bb_13D3:                                           ; 0x13D3
+  br label %bb_13DA
+
+bb_13DA:                                           ; 0x13DA
+  br label %bb_13E0
+
+bb_1403:                                           ; 0x1403
+  br label %bb_1408
+
+bb_1408:                                           ; 0x1408
+  br label %bb_140D
+
+bb_141B:                                           ; 0x141B
+  br label %bb_1435
+
+bb_143A:                                           ; 0x143A
+  br label %bb_1440
+
+bb_1440:                                           ; 0x1440
+  br label %bb_12B8
+}

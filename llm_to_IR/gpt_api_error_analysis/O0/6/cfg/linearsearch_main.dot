@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x628b980a2440 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %arr = alloca [5 x i32], align 16\l  %arr0.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  store i32 5, ptr %arr0.ptr, align 4\l  %arr1.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 1\l  store i32 3, ptr %arr1.ptr, align 4\l  %arr2.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %arr2.ptr, align 4\l  %arr3.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 3\l  store i32 4, ptr %arr3.ptr, align 4\l  %arr4.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 2, ptr %arr4.ptr, align 4\l  %call.idx = call i32 @linear_search(ptr %arr0.ptr, i32 5, i32 4)\l  %cmp.notneg1 = icmp ne i32 %call.idx, -1\l  br i1 %cmp.notneg1, label %found, label %notfound\l|{<s0>T|<s1>F}}"];
+	Node0x628b980a2440:s0 -> Node0x628b980a3fc0[tooltip="entry -> found\nProbability 62.50%" ];
+	Node0x628b980a2440:s1 -> Node0x628b980a4010[tooltip="entry -> notfound\nProbability 37.50%" ];
+	Node0x628b980a3fc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{found:\l|  %fmt.ptr = getelementptr inbounds [27 x i8], ptr @.str.found, i64 0, i64 0\l  %printf.call = call i32 (ptr, ...) @printf(ptr %fmt.ptr, i32 %call.idx)\l  br label %ret\l}"];
+	Node0x628b980a3fc0 -> Node0x628b980a4540[tooltip="found -> ret\nProbability 100.00%" ];
+	Node0x628b980a4010 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{notfound:\l|  %msg.ptr = getelementptr inbounds [18 x i8], ptr @.str.notfound, i64 0,\l... i64 0\l  %puts.call = call i32 @puts(ptr %msg.ptr)\l  br label %ret\l}"];
+	Node0x628b980a4010 -> Node0x628b980a4540[tooltip="notfound -> ret\nProbability 100.00%" ];
+	Node0x628b980a4540 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{ret:\l|  ret i32 0\l}"];
+}

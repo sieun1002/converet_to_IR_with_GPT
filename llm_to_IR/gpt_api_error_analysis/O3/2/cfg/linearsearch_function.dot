@@ -1,0 +1,17 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x610c1a1ff2a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{entry:\l|  %cmp_n_le_zero = icmp sle i32 %n, 0\l  br i1 %cmp_n_le_zero, label %not_found, label %loop_prep\l|{<s0>T|<s1>F}}"];
+	Node0x610c1a1ff2a0:s0 -> Node0x610c1a200b40[tooltip="entry -> not_found\nProbability 50.00%" ];
+	Node0x610c1a1ff2a0:s1 -> Node0x610c1a200bc0[tooltip="entry -> loop_prep\nProbability 50.00%" ];
+	Node0x610c1a200bc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{loop_prep:\l|  %n64 = sext i32 %n to i64\l  br label %loop_cmp\l}"];
+	Node0x610c1a200bc0 -> Node0x610c1a200de0[tooltip="loop_prep -> loop_cmp\nProbability 100.00%" ];
+	Node0x610c1a200de0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop_cmp:\l|  %i = phi i64 [ 0, %loop_prep ], [ %i_next, %loop_inc ]\l  %elem_ptr = getelementptr i32, ptr %arr, i64 %i\l  %elem = load i32, ptr %elem_ptr, align 4\l  %eq = icmp eq i32 %elem, %key\l  br i1 %eq, label %found, label %loop_inc\l|{<s0>T|<s1>F}}"];
+	Node0x610c1a200de0:s0 -> Node0x610c1a201440[tooltip="loop_cmp -> found\nProbability 3.12%" ];
+	Node0x610c1a200de0:s1 -> Node0x610c1a200f50[tooltip="loop_cmp -> loop_inc\nProbability 96.88%" ];
+	Node0x610c1a200f50 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop_inc:\l|  %i_next = add i64 %i, 1\l  %end_reached = icmp eq i64 %i_next, %n64\l  br i1 %end_reached, label %not_found, label %loop_cmp\l|{<s0>T|<s1>F}}"];
+	Node0x610c1a200f50:s0 -> Node0x610c1a200b40[tooltip="loop_inc -> not_found\nProbability 3.12%" ];
+	Node0x610c1a200f50:s1 -> Node0x610c1a200de0[tooltip="loop_inc -> loop_cmp\nProbability 96.88%" ];
+	Node0x610c1a201440 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{found:\l|  %ret_index = trunc i64 %i to i32\l  ret i32 %ret_index\l}"];
+	Node0x610c1a200b40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{not_found:\l|  ret i32 -1\l}"];
+}

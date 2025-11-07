@@ -1,0 +1,20 @@
+digraph "CFG for 'min_index' function" {
+	label="CFG for 'min_index' function";
+
+	Node0x5d40815f2a50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x5d40815f2a50 -> Node0x5d40815f2ce0[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5d40815f2ce0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %inc ]\l  %min = phi i32 [ 2147483647, %entry ], [ %min.sel, %inc ]\l  %best = phi i32 [ -1, %entry ], [ %best.sel, %inc ]\l  %cmp = icmp slt i32 %i, %n\l  br i1 %cmp, label %body, label %end\l|{<s0>T|<s1>F}}"];
+	Node0x5d40815f2ce0:s0 -> Node0x5d40815f4f30[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5d40815f2ce0:s1 -> Node0x5d40815f5000[tooltip="loop -> end\nProbability 3.12%" ];
+	Node0x5d40815f4f30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %idx = sext i32 %i to i64\l  %mask.ptr = getelementptr inbounds i32, ptr %mask, i64 %idx\l  %mask.val = load i32, ptr %mask.ptr, align 4\l  %mask.iszero = icmp eq i32 %mask.val, 0\l  br i1 %mask.iszero, label %maybe_update, label %inc\l|{<s0>T|<s1>F}}"];
+	Node0x5d40815f4f30:s0 -> Node0x5d40815f54b0[tooltip="body -> maybe_update\nProbability 37.50%" ];
+	Node0x5d40815f4f30:s1 -> Node0x5d40815f2870[tooltip="body -> inc\nProbability 62.50%" ];
+	Node0x5d40815f54b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{maybe_update:\l|  %arr.ptr = getelementptr inbounds i32, ptr %arr, i64 %idx\l  %arr.val = load i32, ptr %arr.ptr, align 4\l  %isless = icmp slt i32 %arr.val, %min\l  br i1 %isless, label %do_update, label %inc\l|{<s0>T|<s1>F}}"];
+	Node0x5d40815f54b0:s0 -> Node0x5d40815f5760[tooltip="maybe_update -> do_update\nProbability 50.00%" ];
+	Node0x5d40815f54b0:s1 -> Node0x5d40815f2870[tooltip="maybe_update -> inc\nProbability 50.00%" ];
+	Node0x5d40815f5760 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ca3b3770" fontname="Courier",label="{do_update:\l|  br label %inc\l}"];
+	Node0x5d40815f5760 -> Node0x5d40815f2870[tooltip="do_update -> inc\nProbability 100.00%" ];
+	Node0x5d40815f2870 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inc:\l|  %i.inc = phi i32 [ %i, %body ], [ %i, %maybe_update ], [ %i, %do_update ]\l  %min.sel = phi i32 [ %min, %body ], [ %min, %maybe_update ], [ %arr.val,\l... %do_update ]\l  %best.sel = phi i32 [ %best, %body ], [ %best, %maybe_update ], [ %i,\l... %do_update ]\l  %i.next = add nsw i32 %i.inc, 1\l  br label %loop\l}"];
+	Node0x5d40815f2870 -> Node0x5d40815f2ce0[tooltip="inc -> loop\nProbability 100.00%" ];
+	Node0x5d40815f5000 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{end:\l|  ret i32 %best\l}"];
+}

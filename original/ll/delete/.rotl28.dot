@@ -1,0 +1,5 @@
+digraph "CFG for 'rotl28' function" {
+	label="CFG for 'rotl28' function";
+
+	Node0x581dd2ab8ae0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %v.addr = alloca i32, align 4\l  %s.addr = alloca i32, align 4\l  store i32 %v, ptr %v.addr, align 4\l  call void @llvm.dbg.declare(metadata ptr %v.addr, metadata !287, metadata\l... !DIExpression()), !dbg !288\l  store i32 %s, ptr %s.addr, align 4\l  call void @llvm.dbg.declare(metadata ptr %s.addr, metadata !289, metadata\l... !DIExpression()), !dbg !290\l  %0 = load i32, ptr %v.addr, align 4, !dbg !69\l  %and = and i32 %0, 268435455, !dbg !69\l  store i32 %and, ptr %v.addr, align 4, !dbg !69\l  %1 = load i32, ptr %v.addr, align 4, !dbg !70\l  %2 = load i32, ptr %s.addr, align 4, !dbg !71\l  %shl = shl i32 %1, %2, !dbg !72\l  %3 = load i32, ptr %v.addr, align 4, !dbg !73\l  %4 = load i32, ptr %s.addr, align 4, !dbg !74\l  %sub = sub nsw i32 28, %4, !dbg !75\l  %shr = lshr i32 %3, %sub, !dbg !76\l  %or = or i32 %shl, %shr, !dbg !77\l  %and1 = and i32 %or, 268435455, !dbg !78\l  ret i32 %and1, !dbg !79\l}"];
+}

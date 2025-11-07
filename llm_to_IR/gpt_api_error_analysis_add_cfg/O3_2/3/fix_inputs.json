@@ -1,0 +1,115 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 319,
+      "ir_len": 15794,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/BFS_main1.ll:7:55: error: constant expression type mismatch: got type '[21 x i8]' but expected '[22 x i8]'\n@.str_bfs   = private unnamed_addr constant [22 x i8] c\"BFS order from %zu: \\00\", align 1\n                                     ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@qword_2038 = external global i64, align 8\n@__stack_chk_guard = external global i64, align 8\n\n@.str_bfs   = private unnamed_addr constan",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/BFS_main1.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 324,
+      "ir_len": 14723,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/BFS_main2.ll:12:55: error: constant expression type mismatch: got type '[23 x i8]' but expected '[22 x i8]'\n@.str_dist  = private unnamed_addr constant [22 x i8] c\"dist(%zu -> %zu) = %d\\0A\\00\", align 1\n                                ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@qword_2038 = external global i64, align 8\n@__stack_chk_guard = external global i64, align 8\n\n@.str_bfs   = private unnamed_addr constan",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/BFS_main2.ll"
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 198,
+      "ir_len": 14723,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %qsize_phi1200 = phi i64 [ %qsize_in, %bb11D3 ], [ %qsize_after0, %bb11EB ]\nlabel %bb1200\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@qword_2038 = external global i64, align 8\n@__stack_chk_guard = external global i64, align 8\n\n@.str_bfs   = private unnamed_addr constan",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/BFS_main3.ll"
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 143,
+      "ir_len": 17504,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/DFS_main1.ll:415:1: error: unable to create block named 'rdx.phi'\nrdx.phi:\n^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@.str.header = private unnamed_addr constant [24 x i8] c\"DFS preorder from %zu: \\00\", align 1\n@.str.nl     = private unnamed_addr consta",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/DFS_main1.ll"
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 204,
+      "ir_len": 4994,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/binarysearch_main1.ll:104:18: error: invalid cast opcode for cast from 'i64' to 'i64'\n  %idx64 = trunc i64 %low to i64\n                 ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2030 = external constant [16 x i8], align 16\n@xmmword_2040 = external constant [16 x i8], align 16\n@qword_2050   = external con",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/binarysearch_main1.ll"
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 166,
+      "ir_len": 3992,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/bubblesort_main1.ll:41:15: error: expected instruction opcode\n  %ptr.init = %base.p\n              ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = external global <4 x i32>, align 16\n@xmmword_2020 = external global <4 x i32>, align 16\n@unk_2004 = external global i8, ",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/bubblesort_main1.ll"
+    },
+    {
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 308,
+      "ir_len": 8403,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %var30_2 = load i64, i64* %var_30, align 8\n  %chosen_child = phi i64 [ %var30_2, %bb_1395 ], [ %var28_1, %bb_to_1399_from_1361 ]\nTerminator found in the middle of a basic block!\nlabel %bb_after_hea",
+      "ir_preview": "; ModuleID = 'heap_sort'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine void @heap_sort(i32* %arr, i64 %n) {\nbb_1189:\n  %var_68 = alloca i32*, align 8\n  %var_70 = alloca i64, align 8\n  %var_50 = alloca",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/heapsort_function1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 171,
+      "ir_len": 24659,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/insertionsort_main1.ll:36:15: error: expected instruction opcode\n  %rax_10D0 = %rsi_10D0\n              ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@xmmword_2010 = external global <16 x i8>, align 16\n@xmmword_2020 = external global <16 x i8>, align 16\n@unk_2004 = external global",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/insertionsort_main1.ll"
+    },
+    {
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 652,
+      "ir_len": 26074,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rsi_in_1288 = phi i8* [ %rsi_1234, %bb_1251 ], [ %rsi_1337, %bb_1356 ], [ %rsi_1307, %bb_1326 ], [ %rsi_12DA, %bb_12F9 ], [ %rsi_12A2, %bb_12C1 ], [ %rsi_1367",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-unknown-linux-gnu\"\n\n@xmmword_2010 = external global <16 x i8>, align 16\n@xmmword_2020 = external global <16 x i8>, align 16\n@unk_2004 = external global",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/insertionsort_main2.ll"
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 160,
+      "ir_len": 11159,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/mergesort_main1.ll:95:13: error: expected instruction opcode\n  %left.v = %i.cur\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\n@xmmword_2010 = external constant <4 x i32>, align 16\n@xmmword_2020 = external constant <4 x i32>, align 16\n@unk_2004 = external constan",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/mergesort_main1.ll"
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 190,
+      "ir_len": 6798,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/quicksort_function1.ll:54:1: error: expected instruction opcode\nj.start = phi i64 [ %j.start.val, %bb_1271_to_1280_init ]\n^\n",
+      "ir_preview": "; ModuleID = 'quick_sort_module'\ntarget triple = \"x86_64-pc-linux-gnu\"\n\ndefine dso_local void @quick_sort(i32* %base, i64 %left, i64 %right) {\nbb_1220:\n  %cmp_entry = icmp sge i64 %left, %right\n  br i",
+      "prev_ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/3/quicksort_function1.ll"
+    }
+  ]
+}

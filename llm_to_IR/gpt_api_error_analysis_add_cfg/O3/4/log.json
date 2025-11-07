@@ -1,0 +1,665 @@
+{
+  "meta": {
+    "round": 4,
+    "start_time": "2025-11-02T21:50:40",
+    "input_folder": "/home/sieun/workspace/converet_to_IR_with_GPT/ida_disassemble/linux/O3",
+    "output_dir": "/home/sieun/workspace/converet_to_IR_with_GPT/llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 10,
+    "max_fix_attempts": 9,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "request_id": "resp_0e88c3c33f8f980600690638e07b3c81989c2a685796bc223e",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T01:44:15",
+      "end_time": "2025-11-02T01:48:42",
+      "elapsed_sec": 258.51569,
+      "usage": {
+        "input_tokens": 3382,
+        "output_tokens": 16718,
+        "total_tokens": 20100
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/heapsort_function1.ll",
+      "success": true,
+      "time": "2025-11-02T01:48:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/heapsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/heapsort_function1.bc",
+      "start_time": "2025-11-02T01:48:42",
+      "end_time": "2025-11-02T01:48:43",
+      "elapsed_sec": 0.141776
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "request_id": "resp_0112996e1c5b9b0400690639ec1ac481999ce256e0eda97159",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T01:48:43",
+      "end_time": "2025-11-02T01:51:15",
+      "elapsed_sec": 147.272453,
+      "usage": {
+        "input_tokens": 1374,
+        "output_tokens": 7416,
+        "total_tokens": 8790
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/heapsort_main1.ll",
+      "success": true,
+      "time": "2025-11-02T01:51:15"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/heapsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/heapsort_main1.bc",
+      "start_time": "2025-11-02T01:51:15",
+      "end_time": "2025-11-02T01:51:15",
+      "elapsed_sec": 0.135544
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "request_id": "resp_0a7c2a579ff360420069063a84c0348194a998b8a99188ee42",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T01:51:15",
+      "end_time": "2025-11-02T01:58:54",
+      "elapsed_sec": 439.196305,
+      "usage": {
+        "input_tokens": 3977,
+        "output_tokens": 34660,
+        "total_tokens": 38637
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll",
+      "success": true,
+      "time": "2025-11-02T01:58:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll:55:15: error: expected instruction opcode\n  %rax.1234 = %rdi.10d0\n              ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main1.bc",
+      "start_time": "2025-11-02T01:58:54",
+      "end_time": "2025-11-02T01:58:54",
+      "elapsed_sec": 0.116858
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "request_id": "resp_0a8269d26a8ba1020069063c4f17a081979df0dccffb17c1c3",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T01:58:54",
+      "end_time": "2025-11-02T02:01:36",
+      "elapsed_sec": 154.090293,
+      "usage": {
+        "input_tokens": 8397,
+        "output_tokens": 13156,
+        "total_tokens": 21553
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.ll",
+      "success": true,
+      "time": "2025-11-02T02:01:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %edx.f = phi i32 [ %edx.10d0, %bb_10e6 ], [ %edx.1234, %loc_1234 ], [ %edx.1288, %loc_1288 ]\nlabel %loc_1234\nlabel %bb_124b\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rsi.next.11c6 = phi i32* [ %rdi.10d0, %loc_12C3 ], [ %rdi.f, %loc_125B ], [ %rdi.f, %loc_1296 ], [ %rdi.f, %loc_12CE ], [ %rdi.f, %loc_12FB ], [ %rdi.f, %loc_132B ], [ %rdi.f, %loc_135B ], [ %rdi.f, %loc_1387 ], [ %rdi.f, %loc_13B3 ], [ %rdi.f, %bb_11bc ], [ %rsi.1263, %loc_13BF ], [ %rsi.1234.tmp, %loc_13CC ], [ %rsi.1367, %loc_13D9 ], [ %rsi.1307, %loc_13E6 ], [ %rsi.1337, %loc_13F3 ], [ %rsi.12A2, %loc_1400 ], [ %rsi.12DA, %loc_140D ], [ %rsi.1393, %loc_141A ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main2.bc",
+      "start_time": "2025-11-02T02:01:36",
+      "end_time": "2025-11-02T02:01:36",
+      "elapsed_sec": 0.138614
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "request_id": "resp_072d9187707bb74d0069063cf0dd708194bfdfa416cf60bbf0",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:01:36",
+      "end_time": "2025-11-02T02:04:36",
+      "elapsed_sec": 171.398832,
+      "usage": {
+        "input_tokens": 8836,
+        "output_tokens": 15133,
+        "total_tokens": 23969
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main3.ll",
+      "success": true,
+      "time": "2025-11-02T02:04:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main3.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/insertionsort_main3.bc",
+      "start_time": "2025-11-02T02:04:36",
+      "end_time": "2025-11-02T02:04:36",
+      "elapsed_sec": 0.029182
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "linearsearch_function.txt",
+      "version": 1,
+      "request_id": "resp_015409b90d52268e0069063da557f4819ba5946d4d2a748b24",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:04:36",
+      "end_time": "2025-11-02T02:06:53",
+      "elapsed_sec": 131.6254,
+      "usage": {
+        "input_tokens": 678,
+        "output_tokens": 7574,
+        "total_tokens": 8252
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/linearsearch_function1.ll",
+      "success": true,
+      "time": "2025-11-02T02:06:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/linearsearch_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/linearsearch_function1.bc",
+      "start_time": "2025-11-02T02:06:53",
+      "end_time": "2025-11-02T02:06:54",
+      "elapsed_sec": 0.129223
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "linearsearch_main.txt",
+      "version": 1,
+      "request_id": "resp_03022c4067f6f43f0069063e2f0a108198b3b66cff9d9ce9f0",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:06:54",
+      "end_time": "2025-11-02T02:07:28",
+      "elapsed_sec": 32.68951,
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 2407,
+        "total_tokens": 3007
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/linearsearch_main1.ll",
+      "success": true,
+      "time": "2025-11-02T02:07:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/linearsearch_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/linearsearch_main1.bc",
+      "start_time": "2025-11-02T02:07:28",
+      "end_time": "2025-11-02T02:07:28",
+      "elapsed_sec": 0.023447
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "request_id": "resp_081c6f7c060ba3dc0069063e515120819a924b3896e936148e",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:07:28",
+      "end_time": "2025-11-02T02:12:18",
+      "elapsed_sec": 276.637541,
+      "usage": {
+        "input_tokens": 3770,
+        "output_tokens": 15189,
+        "total_tokens": 18959
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll",
+      "success": true,
+      "time": "2025-11-02T02:12:18"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll:223:187: error: use of undefined value '%bb_12B6'\n  %phi_dummy_1280 = phi i32 [ 0, %bb_1164 ], [ 0, %bb_11D4 ], [ 0, %bb_11EB ], [ 0, %bb_1202 ], [ 0, %bb_1215 ], [ 0, %bb_1228 ], [ 0, %bb_123B ], [ 0, %bb_124E ], [ 0, %bb_126C ], [ 0, %bb_12B6 ], [ 0, %bb_12E1 ], [ 0, %bb_1323 ], [ 0, %bb_1345 ], [ 0, %bb_135C ], [ 0, %bb_1278 ]\n                                                                                                                                                                                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main1.bc",
+      "start_time": "2025-11-02T02:12:18",
+      "end_time": "2025-11-02T02:12:18",
+      "elapsed_sec": 0.017524
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "request_id": "resp_0c38199a2f48f4d20069063f73e008819a8399242fb0b5d1f8",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:12:18",
+      "end_time": "2025-11-02T02:14:34",
+      "elapsed_sec": 128.879417,
+      "usage": {
+        "input_tokens": 5851,
+        "output_tokens": 10160,
+        "total_tokens": 16011
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.ll",
+      "success": true,
+      "time": "2025-11-02T02:14:34"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %phi_13E0 = phi i8* [ %arr.begin.i8, %bb_13CE ], [ %next.i8, %bb_13F8 ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main2.bc",
+      "start_time": "2025-11-02T02:14:34",
+      "end_time": "2025-11-02T02:14:34",
+      "elapsed_sec": 0.015709
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "request_id": "resp_002d60ae994d59640069063ffb9d6881949ed8d8cd8cc6cafc",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:14:34",
+      "end_time": "2025-11-02T02:16:23",
+      "elapsed_sec": 104.417893,
+      "usage": {
+        "input_tokens": 5734,
+        "output_tokens": 10228,
+        "total_tokens": 15962
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main3.ll",
+      "success": true,
+      "time": "2025-11-02T02:16:23"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main3.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/mergesort_main3.bc",
+      "start_time": "2025-11-02T02:16:23",
+      "end_time": "2025-11-02T02:16:23",
+      "elapsed_sec": 0.018247
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "request_id": "resp_0f9100437c5df11e0069064068a5c4819b8a59cb2600148085",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:16:23",
+      "end_time": "2025-11-02T02:22:23",
+      "elapsed_sec": 342.931592,
+      "usage": {
+        "input_tokens": 1556,
+        "output_tokens": 23050,
+        "total_tokens": 24606
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/quicksort_function1.ll",
+      "success": true,
+      "time": "2025-11-02T02:22:23"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/quicksort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/quicksort_function1.bc",
+      "start_time": "2025-11-02T02:22:23",
+      "end_time": "2025-11-02T02:22:23",
+      "elapsed_sec": 0.01864
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "quicksort_main.txt",
+      "version": 1,
+      "request_id": "resp_013c863287a77ee500690641cffcb08198b38d4447f94f26d6",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:22:23",
+      "end_time": "2025-11-02T02:25:28",
+      "elapsed_sec": 176.158394,
+      "usage": {
+        "input_tokens": 1075,
+        "output_tokens": 11553,
+        "total_tokens": 12628
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/quicksort_main1.ll",
+      "success": true,
+      "time": "2025-11-02T02:25:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/quicksort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/quicksort_main1.bc",
+      "start_time": "2025-11-02T02:25:28",
+      "end_time": "2025-11-02T02:25:28",
+      "elapsed_sec": 0.016747
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "request_id": "resp_083f37ef71273954006906428947b8819581cce0b4d7afa6fe",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:25:28",
+      "end_time": "2025-11-02T02:29:38",
+      "elapsed_sec": 238.545242,
+      "usage": {
+        "input_tokens": 1242,
+        "output_tokens": 19878,
+        "total_tokens": 21120
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll",
+      "success": true,
+      "time": "2025-11-02T02:29:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll:16:14: error: expected instruction opcode\n  %r9_init = %r10_prev\n             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function1.bc",
+      "start_time": "2025-11-02T02:29:38",
+      "end_time": "2025-11-02T02:29:38",
+      "elapsed_sec": 0.017269
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "request_id": "resp_0423ee5a2cf112bc006906438413e88197b2cbb51abc6e4b69",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:29:38",
+      "end_time": "2025-11-02T02:30:30",
+      "elapsed_sec": 48.475396,
+      "usage": {
+        "input_tokens": 1866,
+        "output_tokens": 6254,
+        "total_tokens": 8120
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function2.ll",
+      "success": true,
+      "time": "2025-11-02T02:30:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_function2.bc",
+      "start_time": "2025-11-02T02:30:30",
+      "end_time": "2025-11-02T02:30:30",
+      "elapsed_sec": 0.017353
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "request_id": "resp_0f61f921e063f27700690643b6faac8199afdcb907d3316762",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T02:30:30",
+      "end_time": "2025-11-02T02:32:52",
+      "elapsed_sec": 136.109098,
+      "usage": {
+        "input_tokens": 1020,
+        "output_tokens": 8492,
+        "total_tokens": 9512
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_main1.ll",
+      "success": true,
+      "time": "2025-11-02T02:32:52"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/selectionsort_main1.bc",
+      "start_time": "2025-11-02T02:32:52",
+      "end_time": "2025-11-02T02:32:52",
+      "elapsed_sec": 0.018353
+    },
+    {
+      "phase": "round_complete",
+      "round": 4,
+      "end_time": "2025-11-02T02:32:52"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "request_id": "resp_0113d5bcf42de3ef006907505837ec819595e5c9c0b151c412",
+      "model": "gpt-5",
+      "start_time": "2025-11-02T21:36:40",
+      "end_time": "2025-11-02T21:39:53",
+      "elapsed_sec": 211.182659,
+      "usage": {
+        "input_tokens": 1402,
+        "output_tokens": 12531,
+        "total_tokens": 13933
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll",
+      "success": true,
+      "time": "2025-11-02T21:39:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/4/bubblesort_main1.bc",
+      "start_time": "2025-11-02T21:39:53",
+      "end_time": "2025-11-02T21:39:53",
+      "elapsed_sec": 0.164052
+    },
+    {
+      "phase": "round_complete",
+      "round": 4,
+      "end_time": "2025-11-02T21:39:53"
+    }
+  ]
+}

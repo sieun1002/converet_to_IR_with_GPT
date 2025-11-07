@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "round": 1,
+    "start_time": "2025-10-17T13:52:20",
+    "input_folder": "/home/sieun/workspace/converet_to_IR_with_GPT/ida_disassemble/linux/O0/test",
+    "output_dir": "/home/sieun/workspace/converet_to_IR_with_GPT/llm_to_IR/test/1",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 10,
+    "max_fix_attempts": 9,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "request_id": "resp_0314cde62e2f6eca0068f1cb863c58819b95dbc58e7b1835f0",
+      "model": "gpt-5",
+      "start_time": "2025-10-17T13:52:20",
+      "end_time": "2025-10-17T13:55:30",
+      "elapsed_sec": 181.549682,
+      "usage": {
+        "input_tokens": 2568,
+        "output_tokens": 10331,
+        "total_tokens": 12899
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/test/1/BFS_main1.ll",
+      "success": true,
+      "time": "2025-10-17T13:55:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/test/1/BFS_main1.ll -o ../../llm_to_IR/test/1/BFS_main1.bc",
+      "start_time": "2025-10-17T13:55:30",
+      "end_time": "2025-10-17T13:55:31",
+      "elapsed_sec": 0.134862
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "mergesort_function.txt",
+      "version": 1,
+      "request_id": "resp_0b67325afb077c9e0068f1cc43e6e0819b848e41e5b291c8fc",
+      "model": "gpt-5",
+      "start_time": "2025-10-17T13:55:31",
+      "end_time": "2025-10-17T13:58:37",
+      "elapsed_sec": 179.249223,
+      "usage": {
+        "input_tokens": 2584,
+        "output_tokens": 8758,
+        "total_tokens": 11342
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/test/1/mergesort_function1.ll",
+      "success": true,
+      "time": "2025-10-17T13:58:37"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_function.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/test/1/mergesort_function1.ll -o ../../llm_to_IR/test/1/mergesort_function1.bc",
+      "start_time": "2025-10-17T13:58:37",
+      "end_time": "2025-10-17T13:58:37",
+      "elapsed_sec": 0.019407
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "mergesort_function2.txt",
+      "version": 1,
+      "request_id": "resp_00ab71e78a9947950068f1ccfeff7081998dbc8818f1779f13",
+      "model": "gpt-5",
+      "start_time": "2025-10-17T13:58:37",
+      "end_time": "2025-10-17T14:00:22",
+      "elapsed_sec": 100.987689,
+      "usage": {
+        "input_tokens": 2584,
+        "output_tokens": 8053,
+        "total_tokens": 10637
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_function2.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/test/1/mergesort_function21.ll",
+      "success": true,
+      "time": "2025-10-17T14:00:22"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_function2.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/test/1/mergesort_function21.ll -o ../../llm_to_IR/test/1/mergesort_function21.bc",
+      "start_time": "2025-10-17T14:00:22",
+      "end_time": "2025-10-17T14:00:23",
+      "elapsed_sec": 0.121568
+    },
+    {
+      "phase": "round_complete",
+      "round": 1,
+      "end_time": "2025-10-17T14:00:23"
+    }
+  ]
+}

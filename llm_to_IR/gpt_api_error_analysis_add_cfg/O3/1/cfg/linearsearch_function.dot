@@ -1,0 +1,33 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x5727bd0467a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{addr_1180:\l|  br label %addr_1184\l}"];
+	Node0x5727bd0467a0 -> Node0x5727bd045c20[tooltip="addr_1180 -> addr_1184\nProbability 100.00%" ];
+	Node0x5727bd045c20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{addr_1184:\l|  %test.and = and i32 %len, %len\l  %test.zf = icmp eq i32 %test.and, 0\l  %test.sf = icmp slt i32 %test.and, 0\l  %sf.xor.of = xor i1 %test.sf, false\l  %jle.cond = or i1 %test.zf, %sf.xor.of\l  br i1 %jle.cond, label %addr_11a0, label %addr_1188\l|{<s0>T|<s1>F}}"];
+	Node0x5727bd045c20:s0 -> Node0x5727bd045f40[tooltip="addr_1184 -> addr_11a0\nProbability 50.00%" ];
+	Node0x5727bd045c20:s1 -> Node0x5727bd045fc0[tooltip="addr_1184 -> addr_1188\nProbability 50.00%" ];
+	Node0x5727bd045fc0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{addr_1188:\l|  %len64 = sext i32 %len to i64\l  br label %addr_118b\l}"];
+	Node0x5727bd045fc0 -> Node0x5727bd0460b0[tooltip="addr_1188 -> addr_118b\nProbability 100.00%" ];
+	Node0x5727bd0460b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{addr_118b:\l|  %idx0 = xor i64 0, 0\l  br label %addr_118d\l}"];
+	Node0x5727bd0460b0 -> Node0x5727bd047ad0[tooltip="addr_118b -> addr_118d\nProbability 100.00%" ];
+	Node0x5727bd047ad0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{addr_118d:\l|  br label %addr_1199\l}"];
+	Node0x5727bd047ad0 -> Node0x5727bd047bc0[tooltip="addr_118d -> addr_1199\nProbability 100.00%" ];
+	Node0x5727bd047cb0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#3d50c370" fontname="Courier",label="{addr_118f:\l|  unreachable\l}"];
+	Node0x5727bd047de0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{addr_1190:\l|  %idx.inc = add i64 %idx.1199, 1\l  br label %addr_1194\l}"];
+	Node0x5727bd047de0 -> Node0x5727bd0483b0[tooltip="addr_1190 -> addr_1194\nProbability 100.00%" ];
+	Node0x5727bd0483b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{addr_1194:\l|  %cmp.eq = icmp eq i64 %idx.inc, %len64\l  br label %addr_1197\l}"];
+	Node0x5727bd0483b0 -> Node0x5727bd0485b0[tooltip="addr_1194 -> addr_1197\nProbability 100.00%" ];
+	Node0x5727bd0485b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{addr_1197:\l|  br i1 %cmp.eq, label %addr_11a0, label %addr_1199\l|{<s0>T|<s1>F}}"];
+	Node0x5727bd0485b0:s0 -> Node0x5727bd045f40[tooltip="addr_1197 -> addr_11a0\nProbability 3.12%" ];
+	Node0x5727bd0485b0:s1 -> Node0x5727bd047bc0[tooltip="addr_1197 -> addr_1199\nProbability 96.88%" ];
+	Node0x5727bd047bc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{addr_1199:\l|  %idx.1199 = phi i64 [ %idx0, %addr_118d ], [ %idx.inc, %addr_1197 ]\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %idx.1199\l  %elem = load i32, ptr %elem.ptr, align 4\l  %cmp.eq2 = icmp eq i32 %elem, %key\l  br label %addr_119c\l}"];
+	Node0x5727bd047bc0 -> Node0x5727bd048c60[tooltip="addr_1199 -> addr_119c\nProbability 100.00%" ];
+	Node0x5727bd048c60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{addr_119c:\l|  %cond.jnz = xor i1 %cmp.eq2, true\l  br i1 %cond.jnz, label %addr_1190, label %addr_119e\l|{<s0>T|<s1>F}}"];
+	Node0x5727bd048c60:s0 -> Node0x5727bd047de0[tooltip="addr_119c -> addr_1190\nProbability 96.88%" ];
+	Node0x5727bd048c60:s1 -> Node0x5727bd048e40[tooltip="addr_119c -> addr_119e\nProbability 3.12%" ];
+	Node0x5727bd048e40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{addr_119e:\l|  %ret.idx = trunc i64 %idx.1199 to i32\l  ret i32 %ret.idx\l}"];
+	Node0x5727bd049070 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#3d50c370" fontname="Courier",label="{addr_119f:\l|  unreachable\l}"];
+	Node0x5727bd045f40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{addr_11a0:\l|  %minus1 = add i32 -1, 0\l  br label %addr_11a5\l}"];
+	Node0x5727bd045f40 -> Node0x5727bd049830[tooltip="addr_11a0 -> addr_11a5\nProbability 100.00%" ];
+	Node0x5727bd049830 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#cc403a70" fontname="Courier",label="{addr_11a5:\l|  ret i32 %minus1\l}"];
+}

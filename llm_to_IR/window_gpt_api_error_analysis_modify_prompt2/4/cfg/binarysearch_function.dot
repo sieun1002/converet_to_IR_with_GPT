@@ -1,0 +1,26 @@
+digraph "CFG for 'binary_search' function" {
+	label="CFG for 'binary_search' function";
+
+	Node0x5c9f67a37760 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  br label %loop\l}"];
+	Node0x5c9f67a37760 -> Node0x5c9f67a36c10[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5c9f67a36c10 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %lo = phi i64 [ 0, %entry ], [ %lo.next, %cont ]\l  %hi = phi i64 [ %n, %entry ], [ %hi.next, %cont ]\l  %cmp = icmp ult i64 %lo, %hi\l  br i1 %cmp, label %body, label %after\l|{<s0>T|<s1>F}}"];
+	Node0x5c9f67a36c10:s0 -> Node0x5c9f67a388a0[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x5c9f67a36c10:s1 -> Node0x5c9f67a38970[tooltip="loop -> after\nProbability 3.12%" ];
+	Node0x5c9f67a388a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %sub = sub i64 %hi, %lo\l  %half = lshr i64 %sub, 1\l  %mid = add i64 %lo, %half\l  %ptr = getelementptr inbounds i32, ptr %arr, i64 %mid\l  %val = load i32, ptr %ptr, align 4\l  %cmp2 = icmp sle i32 %key, %val\l  br i1 %cmp2, label %sethi, label %setlo\l|{<s0>T|<s1>F}}"];
+	Node0x5c9f67a388a0:s0 -> Node0x5c9f67a39320[tooltip="body -> sethi\nProbability 50.00%" ];
+	Node0x5c9f67a388a0:s1 -> Node0x5c9f67a39390[tooltip="body -> setlo\nProbability 50.00%" ];
+	Node0x5c9f67a39320 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{sethi:\l|  br label %cont\l}"];
+	Node0x5c9f67a39320 -> Node0x5c9f67a36a30[tooltip="sethi -> cont\nProbability 100.00%" ];
+	Node0x5c9f67a39390 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{setlo:\l|  %midplus = add i64 %mid, 1\l  br label %cont\l}"];
+	Node0x5c9f67a39390 -> Node0x5c9f67a36a30[tooltip="setlo -> cont\nProbability 100.00%" ];
+	Node0x5c9f67a36a30 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{cont:\l|  %lo.next = phi i64 [ %lo, %sethi ], [ %midplus, %setlo ]\l  %hi.next = phi i64 [ %mid, %sethi ], [ %hi, %setlo ]\l  br label %loop\l}"];
+	Node0x5c9f67a36a30 -> Node0x5c9f67a36c10[tooltip="cont -> loop\nProbability 100.00%" ];
+	Node0x5c9f67a38970 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{after:\l|  %cmp3 = icmp ult i64 %lo, %n\l  br i1 %cmp3, label %check, label %ret_fail\l|{<s0>T|<s1>F}}"];
+	Node0x5c9f67a38970:s0 -> Node0x5c9f67a397c0[tooltip="after -> check\nProbability 50.00%" ];
+	Node0x5c9f67a38970:s1 -> Node0x5c9f67a39830[tooltip="after -> ret_fail\nProbability 50.00%" ];
+	Node0x5c9f67a397c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{check:\l|  %ptr2 = getelementptr inbounds i32, ptr %arr, i64 %lo\l  %val2 = load i32, ptr %ptr2, align 4\l  %eq = icmp eq i32 %key, %val2\l  br i1 %eq, label %ret_ok, label %ret_fail\l|{<s0>T|<s1>F}}"];
+	Node0x5c9f67a397c0:s0 -> Node0x5c9f67a39e60[tooltip="check -> ret_ok\nProbability 50.00%" ];
+	Node0x5c9f67a397c0:s1 -> Node0x5c9f67a39830[tooltip="check -> ret_fail\nProbability 50.00%" ];
+	Node0x5c9f67a39e60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e1675170" fontname="Courier",label="{ret_ok:\l|  %retv = trunc i64 %lo to i32\l  ret i32 %retv\l}"];
+	Node0x5c9f67a39830 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d8564670" fontname="Courier",label="{ret_fail:\l|  ret i32 -1\l}"];
+}

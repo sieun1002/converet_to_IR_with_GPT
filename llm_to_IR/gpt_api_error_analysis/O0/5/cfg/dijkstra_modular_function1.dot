@@ -1,0 +1,21 @@
+digraph "CFG for 'init_graph' function" {
+	label="CFG for 'init_graph' function";
+
+	Node0x5c1eae6991b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{entry:\l|  br label %outer.loop\l}"];
+	Node0x5c1eae6991b0 -> Node0x5c1eae69a5a0[tooltip="entry -> outer.loop\nProbability 100.00%" ];
+	Node0x5c1eae69a5a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.loop:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %outer.inc ]\l  %outer.cond = icmp slt i32 %i, %n\l  br i1 %outer.cond, label %inner.init, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x5c1eae69a5a0:s0 -> Node0x5c1eae69ad10[tooltip="outer.loop -> inner.init\nProbability 96.88%" ];
+	Node0x5c1eae69a5a0:s1 -> Node0x5c1eae69adf0[tooltip="outer.loop -> exit\nProbability 3.12%" ];
+	Node0x5c1eae69ad10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.init:\l|  br label %inner.loop\l}"];
+	Node0x5c1eae69ad10 -> Node0x5c1eae69af70[tooltip="inner.init -> inner.loop\nProbability 100.00%" ];
+	Node0x5c1eae69af70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.loop:\l|  %j = phi i32 [ 0, %inner.init ], [ %j.next, %inner.inc ]\l  %inner.cond = icmp slt i32 %j, %n\l  br i1 %inner.cond, label %store, label %outer.inc\l|{<s0>T|<s1>F}}"];
+	Node0x5c1eae69af70:s0 -> Node0x5c1eae69b440[tooltip="inner.loop -> store\nProbability 96.88%" ];
+	Node0x5c1eae69af70:s1 -> Node0x5c1eae69ab20[tooltip="inner.loop -> outer.inc\nProbability 3.12%" ];
+	Node0x5c1eae69b440 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{store:\l|  %i.ext = sext i32 %i to i64\l  %row.mul = mul nsw i64 %i.ext, 100\l  %j.ext = sext i32 %j to i64\l  %idx = add nsw i64 %row.mul, %j.ext\l  %elem.ptr = getelementptr inbounds i32, ptr %base, i64 %idx\l  store i32 0, ptr %elem.ptr, align 4\l  br label %inner.inc\l}"];
+	Node0x5c1eae69b440 -> Node0x5c1eae69b0b0[tooltip="store -> inner.inc\nProbability 100.00%" ];
+	Node0x5c1eae69b0b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.inc:\l|  %j.next = add nsw i32 %j, 1\l  br label %inner.loop\l}"];
+	Node0x5c1eae69b0b0 -> Node0x5c1eae69af70[tooltip="inner.inc -> inner.loop\nProbability 100.00%" ];
+	Node0x5c1eae69ab20 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.inc:\l|  %i.next = add nsw i32 %i, 1\l  br label %outer.loop\l}"];
+	Node0x5c1eae69ab20 -> Node0x5c1eae69a5a0[tooltip="outer.inc -> outer.loop\nProbability 100.00%" ];
+	Node0x5c1eae69adf0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{exit:\l|  ret void\l}"];
+}

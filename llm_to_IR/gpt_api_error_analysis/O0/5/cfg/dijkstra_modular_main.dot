@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5929d5800a10 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %var_4 = alloca i32, align 4\l  %var_8 = alloca i32, align 4\l  %var_C = alloca i32, align 4\l  %graph = alloca [40016 x i8], align 16\l  %dist = alloca [164 x i32], align 16\l  store i32 0, ptr %var_4, align 4\l  %graph.ptr0 = getelementptr inbounds [40016 x i8], ptr %graph, i64 0, i64 0\l  %call.read_graph = call i32 @read_graph(ptr %graph.ptr0, ptr %var_8, ptr\l... %var_C)\l  %cmp.zero = icmp eq i32 %call.read_graph, 0\l  br i1 %cmp.zero, label %ok, label %err\l|{<s0>T|<s1>F}}"];
+	Node0x5929d5800a10:s0 -> Node0x5929d5801910[tooltip="entry -> ok\nProbability 37.50%" ];
+	Node0x5929d5800a10:s1 -> Node0x5929d5801960[tooltip="entry -> err\nProbability 62.50%" ];
+	Node0x5929d5801960 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{err:\l|  %stderr.ld = load ptr, ptr @stderr, align 8\l  %fmt.gep = getelementptr inbounds [26 x i8], ptr @.str, i64 0, i64 0\l  %call.fprintf = call i32 (ptr, ptr, ...) @fprintf(ptr %stderr.ld, ptr\l... %fmt.gep)\l  store i32 1, ptr %var_4, align 4\l  br label %exit\l}"];
+	Node0x5929d5801960 -> Node0x5929d5801fd0[tooltip="err -> exit\nProbability 100.00%" ];
+	Node0x5929d5801910 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{ok:\l|  %n.ld = load i32, ptr %var_8, align 4\l  %start.ld = load i32, ptr %var_C, align 4\l  %dist.ptr0 = getelementptr inbounds [164 x i32], ptr %dist, i64 0, i64 0\l  call void @dijkstra(ptr %graph.ptr0, i32 %n.ld, i32 %start.ld, ptr\l... %dist.ptr0)\l  %n.ld2 = load i32, ptr %var_8, align 4\l  call void @print_distances(ptr %dist.ptr0, i32 %n.ld2)\l  store i32 0, ptr %var_4, align 4\l  br label %exit\l}"];
+	Node0x5929d5801910 -> Node0x5929d5801fd0[tooltip="ok -> exit\nProbability 100.00%" ];
+	Node0x5929d5801fd0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{exit:\l|  %ret.ld = load i32, ptr %var_4, align 4\l  ret i32 %ret.ld\l}"];
+}

@@ -1,0 +1,103 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main1.ll:308:3: error: multiple definition of local value named 'rbx.cur.ph2'\n  %rbx.cur.ph2 = phi i64 [ %rbx.next, %loc_1200 ], [ %rbx.next, %loc_1224_then ], [ %rbx.next, %loc_11E5_body ], [ %rbx.next, %loc_1240 ], [ %rbx.next, %loc_1251_then ], [ %rbx.next, %loc_1251_body ], [ %rbx.next, %loc_1270 ], [ %rbx.next, %loc_1281_then ], [ %rbx.next, %loc_1281_body ], [ %rbx.next, %loc_12A0 ], [ %rbx.next, %loc_12B1_then ], [ %rbx.next, %loc_12B1_body ], [ %rbx.next, %loc_12D0 ], [ %rbx.next, %loc_12DF_then ], [ %rbx.next, %loc_12DF_body ], [ %rbx.next, %loc_12F8 ], [ %rbx.next, %loc_1307_then ], [ %rbx.next, %loc_1307_body ]\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main1.bc",
+      "start_time": "2025-11-03T05:00:49",
+      "end_time": "2025-11-03T05:00:49",
+      "elapsed_sec": 0.021017
+    },
+    {
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rdi.ptr.ph = phi i8* [ %m, %loc_11D3 ], [ %rdi.ptr.latch, %loc_1320 ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/BFS_main2.bc",
+      "start_time": "2025-11-03T05:04:08",
+      "end_time": "2025-11-03T05:04:08",
+      "elapsed_sec": 0.02091
+    },
+    {
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/DFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/DFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rdi.in.1208 = phi i64 [ %rdi.next, %loc_1341 ]\nPHI node entries do not match predecessors!\n  %rsi.vis.ptr = phi i32* [ %vptr0, %loc_check_visited0 ], [ %vptr1, %loc_1248_check_visited ], [ %vptr2, %loc_1274_check_visited ], [ %vptr3, %loc_12A0_check_visited ], [ %vptr4, %loc_12CC_check_visited ], [ %vptr5, %loc_12F4_check_visited ], [ %vptr6, %loc_131C_check_vis6 ]\nlabel %loc_check_visited0\nlabel %loc_13EA\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/DFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/DFS_main1.bc",
+      "start_time": "2025-11-03T05:12:02",
+      "end_time": "2025-11-03T05:12:02",
+      "elapsed_sec": 0.021944
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/binarysearch_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/binarysearch_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/binarysearch_main1.ll:16:41: warning: ptr type is only supported in -opaque-pointers mode\ndeclare void @llvm.memcpy.p0i8.p0i8.i64(ptr nocapture writeonly, ptr nocapture readonly, i64, i1 immarg)\n                                        ^\nllvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/binarysearch_main1.ll:16:41: error: expected type\ndeclare void @llvm.memcpy.p0i8.p0i8.i64(ptr nocapture writeonly, ptr nocapture readonly, i64, i1 immarg)\n                                        ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/binarysearch_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/binarysearch_main1.bc",
+      "start_time": "2025-11-03T05:18:46",
+      "end_time": "2025-11-03T05:18:46",
+      "elapsed_sec": 0.018776
+    },
+    {
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/bubblesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/bubblesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/bubblesort_main1.ll:5:27: error: expected 'global' or 'constant'\n@___printf_chk = external vararg i32 (i32, i8*, ...)\n                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/bubblesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/bubblesort_main1.bc",
+      "start_time": "2025-11-03T05:24:05",
+      "end_time": "2025-11-03T05:24:05",
+      "elapsed_sec": 0.017822
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/mergesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/mergesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %edi_load_12ce = load i64, i64* %rdi, align 8\n  %edi_trunc_12d7 = trunc i64 %edi_load_12ce to i32\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/mergesort_main1.bc",
+      "start_time": "2025-11-03T05:42:55",
+      "end_time": "2025-11-03T05:42:55",
+      "elapsed_sec": 0.019213
+    },
+    {
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/quicksort_function1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/quicksort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/quicksort_function1.ll:6:13: error: invalid redefinition of function 'quick_sort'\ndefine void @quick_sort(i32* %base, i64 %low, i64 %high) {\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/quicksort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/quicksort_function1.bc",
+      "start_time": "2025-11-03T05:48:00",
+      "end_time": "2025-11-03T05:48:00",
+      "elapsed_sec": 0.018316
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5d870365fa50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loc_1080:\l|  %arr = alloca [5 x i32], align 16\l  %saved_canary = alloca i64, align 8\l  %guard.init = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard.init, ptr %saved_canary, align 8\l  %vec.src = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  %vec.dst = bitcast ptr %arr to ptr\l  store \<4 x i32\> %vec.src, ptr %vec.dst, align 16\l  %fifth = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %fifth, align 4\l  %arr.begin = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  %arr.end = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 5\l  call void @selection_sort(ptr %arr.begin, i32 5)\l  %hdr.ptr = getelementptr inbounds [15 x i8], ptr @.str_sorted, i64 0, i64 0\l  %call.hdr = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %hdr.ptr)\l  br label %loc_10E0\l}"];
+	Node0x5d870365fa50 -> Node0x5d8703663f60[tooltip="loc_1080 -> loc_10E0\nProbability 100.00%" ];
+	Node0x5d8703663f60 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_10E0:\l|  %cur = phi ptr [ %arr.begin, %loc_1080 ], [ %cur.next, %loc_10E0 ]\l  %val = load i32, ptr %cur, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.str_d, i64 0, i64 0\l  %call.item = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt.ptr,\l... i32 %val)\l  %cur.next = getelementptr inbounds i32, ptr %cur, i64 1\l  %cmp.loop = icmp ne ptr %cur.next, %arr.end\l  br i1 %cmp.loop, label %loc_10E0, label %bb_after_loop\l|{<s0>T|<s1>F}}"];
+	Node0x5d8703663f60:s0 -> Node0x5d8703663f60[tooltip="loc_10E0 -> loc_10E0\nProbability 96.88%" ];
+	Node0x5d8703663f60:s1 -> Node0x5d87036645e0[tooltip="loc_10E0 -> bb_after_loop\nProbability 3.12%" ];
+	Node0x5d87036645e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_after_loop:\l|  %saved = load i64, ptr %saved_canary, align 8\l  %guard.now = load i64, ptr @__stack_chk_guard, align 8\l  %canary.eq = icmp eq i64 %saved, %guard.now\l  br i1 %canary.eq, label %bb_ret, label %loc_1115\l|{<s0>T|<s1>F}}"];
+	Node0x5d87036645e0:s0 -> Node0x5d87036647e0[tooltip="bb_after_loop -> bb_ret\nProbability 100.00%" ];
+	Node0x5d87036645e0:s1 -> Node0x5d8703664850[tooltip="bb_after_loop -> loc_1115\nProbability 0.00%" ];
+	Node0x5d8703664850 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#abc8fd70" fontname="Courier",label="{loc_1115:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+	Node0x5d87036647e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_ret:\l|  ret i32 0\l}"];
+}

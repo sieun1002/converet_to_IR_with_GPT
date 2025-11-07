@@ -1,0 +1,109 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/4/bubblesort_main1.ll:5:27: error: expected 'global' or 'constant'
+; @___printf_chk = external vararg i32 (i32, i8*, ...)
+;                           ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered_main'
+target triple = "x86_64-unknown-linux-gnu"
+
+@__stack_chk_guard = external global i64
+@___printf_chk = external vararg i32 (i32, i8*, ...)
+@__stack_chk_fail = external void ()
+@xmmword_2010 = external global <4 x i32>, align 16
+@xmmword_2020 = external global <4 x i32>, align 16
+@unk_2004 = external global i8
+@unk_2008 = external global i8
+
+define i32 @main() {
+loc_1080:
+  %arr = alloca [10 x i32], align 16
+  %arr.base = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 0
+  %saved_canary = alloca i64, align 8
+  %guard0 = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard0, i64* %saved_canary, align 8
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_2010, align 16
+  %arr.v0.ptr = bitcast i32* %arr.base to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %arr.v0.ptr, align 16
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_2020, align 16
+  %arr.v1.base = getelementptr inbounds i32, i32* %arr.base, i64 4
+  %arr.v1.ptr = bitcast i32* %arr.v1.base to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %arr.v1.ptr, align 16
+  %p8 = getelementptr inbounds i32, i32* %arr.base, i64 8
+  store i32 4, i32* %p8, align 4
+  %p9 = getelementptr inbounds i32, i32* %arr.base, i64 9
+  store i32 0, i32* %p9, align 4
+  br label %loc_10D0
+
+loc_10D0:                                           ; 0x10D0
+  %rdi.10D0 = phi i64 [ 10, %loc_1080 ], [ %rdi.next, %bb_111C ]
+  br label %loc_10E0
+
+loc_10E0:                                           ; 0x10E0
+  %rax.i = phi i64 [ 1, %loc_10D0 ], [ %rax.next, %loc_1101 ]
+  %rdx.i = phi i32* [ %arr.base, %loc_10D0 ], [ %rdx.next, %loc_1101 ]
+  %r8.i = phi i64 [ 0, %loc_10D0 ], [ %r8.out, %loc_1101 ]
+  %rdi.i = phi i64 [ %rdi.10D0, %loc_10D0 ], [ %rdi.i, %loc_1101 ]
+  %next.ptr = getelementptr inbounds i32, i32* %rdx.i, i64 1
+  %a = load i32, i32* %rdx.i, align 4
+  %b = load i32, i32* %next.ptr, align 4
+  %cmp.le = icmp sle i32 %a, %b
+  br i1 %cmp.le, label %loc_1101, label %bb_10F5
+
+bb_10F5:                                            ; 0x10F5..0x10FD (swap path)
+  store i32 %b, i32* %rdx.i, align 4
+  store i32 %a, i32* %next.ptr, align 4
+  %r8.new = add i64 %rax.i, 0
+  br label %loc_1101
+
+loc_1101:                                           ; 0x1101
+  %r8.out = phi i64 [ %r8.i, %loc_10E0 ], [ %r8.new, %bb_10F5 ]
+  %rax.next = add i64 %rax.i, 1
+  %rdx.next = getelementptr inbounds i32, i32* %rdx.i, i64 1
+  %cmp.loop = icmp ne i64 %rdi.i, %rax.next
+  br i1 %cmp.loop, label %loc_10E0, label %bb_110E
+
+bb_110E:                                            ; 0x110E
+  %r8.eq0 = icmp eq i64 %r8.out, 0
+  br i1 %r8.eq0, label %loc_111E, label %bb_1113
+
+bb_1113:                                            ; 0x1113
+  %r8.eq1 = icmp eq i64 %r8.out, 1
+  br i1 %r8.eq1, label %loc_111E, label %bb_111C
+
+bb_111C:                                            ; 0x111C
+  %rdi.next = add i64 %r8.out, 0
+  br label %loc_10D0
+
+loc_111E:                                           ; 0x111E
+  %end.ptr = getelementptr inbounds i32, i32* %arr.base, i64 10
+  br label %loc_1130
+
+loc_1130:                                           ; 0x1130
+  %rbx.p = phi i32* [ %arr.base, %loc_111E ], [ %rbx.next, %bb_1140_cont ]
+  %val = load i32, i32* %rbx.p, align 4
+  %call1 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* @unk_2004, i32 %val)
+  br label %bb_1140_cont
+
+bb_1140_cont:                                       ; 0x1140 (post-call)
+  %rbx.next = getelementptr inbounds i32, i32* %rbx.p, i64 1
+  %cont = icmp ne i32* %rbx.next, %end.ptr
+  br i1 %cont, label %loc_1130, label %loc_114A
+
+loc_114A:                                           ; 0x114A
+  %call2 = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* @unk_2008)
+  br label %bb_1158_cont
+
+bb_1158_cont:                                       ; 0x1158 (post-call)
+  %saved1 = load i64, i64* %saved_canary, align 8
+  %guard1 = load i64, i64* @__stack_chk_guard, align 8
+  %canary.diff = icmp ne i64 %saved1, %guard1
+  br i1 %canary.diff, label %loc_1178, label %loc_116D
+
+loc_116D:                                           ; 0x116D..0x1177
+  ret i32 0
+
+loc_1178:                                           ; 0x1178
+  call void @__stack_chk_fail()
+  unreachable
+}

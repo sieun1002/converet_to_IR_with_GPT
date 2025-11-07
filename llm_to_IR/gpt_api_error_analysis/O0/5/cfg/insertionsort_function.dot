@@ -1,0 +1,24 @@
+digraph "CFG for 'insertion_sort' function" {
+	label="CFG for 'insertion_sort' function";
+
+	Node0x5670c66b1820 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  br label %for.cond\l}"];
+	Node0x5670c66b1820 -> Node0x5670c66b2c70[tooltip="entry -> for.cond\nProbability 100.00%" ];
+	Node0x5670c66b2c70 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{for.cond:\l|  %i = phi i64 [ 1, %entry ], [ %i.next, %for.latch ]\l  %cmp.i.n = icmp ult i64 %i, %n\l  br i1 %cmp.i.n, label %for.body, label %for.end\l|{<s0>T|<s1>F}}"];
+	Node0x5670c66b2c70:s0 -> Node0x5670c66b33d0[tooltip="for.cond -> for.body\nProbability 96.88%" ];
+	Node0x5670c66b2c70:s1 -> Node0x5670c66b34b0[tooltip="for.cond -> for.end\nProbability 3.12%" ];
+	Node0x5670c66b33d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{for.body:\l|  %key.ptr = getelementptr inbounds i32, ptr %arr, i64 %i\l  %key = load i32, ptr %key.ptr, align 4\l  br label %while.cond\l}"];
+	Node0x5670c66b33d0 -> Node0x5670c66b3790[tooltip="for.body -> while.cond\nProbability 100.00%" ];
+	Node0x5670c66b3790 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{while.cond:\l|  %j = phi i64 [ %i, %for.body ], [ %j.dec, %while.body ]\l  %j.is.zero = icmp eq i64 %j, 0\l  br i1 %j.is.zero, label %while.end, label %check.swap\l|{<s0>T|<s1>F}}"];
+	Node0x5670c66b3790:s0 -> Node0x5670c66b40a0[tooltip="while.cond -> while.end\nProbability 3.12%" ];
+	Node0x5670c66b3790:s1 -> Node0x5670c66b4180[tooltip="while.cond -> check.swap\nProbability 96.88%" ];
+	Node0x5670c66b4180 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{check.swap:\l|  %j.minus1 = sub i64 %j, 1\l  %jm1.ptr = getelementptr inbounds i32, ptr %arr, i64 %j.minus1\l  %jm1.val = load i32, ptr %jm1.ptr, align 4\l  %need.shift = icmp slt i32 %key, %jm1.val\l  br i1 %need.shift, label %while.body, label %while.end\l|{<s0>T|<s1>F}}"];
+	Node0x5670c66b4180:s0 -> Node0x5670c66b38d0[tooltip="check.swap -> while.body\nProbability 96.88%" ];
+	Node0x5670c66b4180:s1 -> Node0x5670c66b40a0[tooltip="check.swap -> while.end\nProbability 3.12%" ];
+	Node0x5670c66b38d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{while.body:\l|  %j.ptr = getelementptr inbounds i32, ptr %arr, i64 %j\l  store i32 %jm1.val, ptr %j.ptr, align 4\l  %j.dec = sub i64 %j, 1\l  br label %while.cond\l}"];
+	Node0x5670c66b38d0 -> Node0x5670c66b3790[tooltip="while.body -> while.cond\nProbability 100.00%" ];
+	Node0x5670c66b40a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{while.end:\l|  %j.final = phi i64 [ %j, %while.cond ], [ %j, %check.swap ]\l  %ins.ptr = getelementptr inbounds i32, ptr %arr, i64 %j.final\l  store i32 %key, ptr %ins.ptr, align 4\l  br label %for.latch\l}"];
+	Node0x5670c66b40a0 -> Node0x5670c66b31f0[tooltip="while.end -> for.latch\nProbability 100.00%" ];
+	Node0x5670c66b31f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{for.latch:\l|  %i.next = add i64 %i, 1\l  br label %for.cond\l}"];
+	Node0x5670c66b31f0 -> Node0x5670c66b2c70[tooltip="for.latch -> for.cond\nProbability 100.00%" ];
+	Node0x5670c66b34b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{for.end:\l|  ret void\l}"];
+}

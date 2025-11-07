@@ -1,0 +1,406 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/3/DFS_main1.ll:75:28: error: use of undefined value '%rbp.ph.next.1341'
+;   %rbp.ph.1208 = phi i64 [ %rbp.ph.next.1341, %loc_1341 ]
+;                            ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered_main'
+target triple = "x86_64-pc-linux-gnu"
+
+@qword_2028 = external global i64
+@__stack_chk_guard = external global i64
+
+@.str.pre = private unnamed_addr constant [24 x i8] c"DFS preorder from %zu: \00"
+@.str.nl = private unnamed_addr constant [2 x i8] c"\0A\00"
+@.str.space = private unnamed_addr constant [2 x i8] c" \00"
+@.str.zu_s = private unnamed_addr constant [6 x i8] c"%zu%s\00"
+
+declare noalias i8* @calloc(i64, i64) local_unnamed_addr
+declare noalias i8* @malloc(i64) local_unnamed_addr
+declare void @free(i8*) local_unnamed_addr
+declare i32 @__printf_chk(i32, i8*, ...) local_unnamed_addr
+declare void @__stack_chk_fail() local_unnamed_addr
+declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1) nounwind
+
+define i32 @main() local_unnamed_addr {
+bb_10e0:
+  %canary.slot = alloca i64, align 8
+  %arr = alloca [256 x i32], align 16
+  %res = alloca [128 x i64], align 16
+  %arr.i8 = bitcast [256 x i32]* %arr to i8*
+  call void @llvm.memset.p0i8.i64(i8* %arr.i8, i8 0, i64 1024, i1 false)
+  %guard = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard, i64* %canary.slot, align 8
+  %gq = load i64, i64* @qword_2028, align 8
+  ; Initialize a few specific positions to 1 (mirrors scattered var_* = 1)
+  %a0p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 0
+  store i32 0, i32* %a0p, align 4
+  %a1p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 1
+  store i32 1, i32* %a1p, align 4
+  %a2p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 2
+  store i32 1, i32* %a2p, align 4
+  %a3p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 3
+  store i32 1, i32* %a3p, align 4
+  %a4p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 4
+  store i32 1, i32* %a4p, align 4
+  %a5p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 5
+  store i32 1, i32* %a5p, align 4
+  %a6p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 6
+  store i32 1, i32* %a6p, align 4
+  %a7p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 7
+  store i32 1, i32* %a7p, align 4
+  %a8p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 8
+  store i32 1, i32* %a8p, align 4
+  %a9p = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 9
+  store i32 1, i32* %a9p, align 4
+  ; calloc(0x1c,1)
+  %p1.raw = call noalias i8* @calloc(i64 28, i64 1)
+  ; calloc(0x38,1)
+  %p2.raw = call noalias i8* @calloc(i64 56, i64 1)
+  ; malloc(0x38)
+  %p3.raw = call noalias i8* @malloc(i64 56)
+  %p1.null = icmp eq i8* %p1.raw, null
+  %p2.null = icmp eq i8* %p2.raw, null
+  %p3.null = icmp eq i8* %p3.raw, null
+  %any.null = or i1 %p1.null, %p2.null
+  %any.null2 = or i1 %any.null, %p3.null
+  br i1 %any.null2, label %loc_1455, label %bb_11e0
+
+bb_11e0:                                             ; 0x11e0 path
+  %p1.i32 = bitcast i8* %p1.raw to i32*
+  %p2.i64 = bitcast i8* %p2.raw to i64*
+  %p3.i64 = bitcast i8* %p3.raw to i64*
+  store i64 0, i64* %p3.i64, align 8
+  store i32 1, i32* %p1.i32, align 4
+  %res0p = getelementptr inbounds [128 x i64], [128 x i64]* %res, i64 0, i64 0
+  store i64 0, i64* %res0p, align 8
+  br label %loc_120D
+
+loc_1208:                                            ; 0x1208
+  %rdi.ph.1208 = phi i64 [ %rdi.next.1341, %loc_1341 ]
+  %rbp.ph.1208 = phi i64 [ %rbp.ph.next.1341, %loc_1341 ]
+  %p3.i64.ph.1208 = phi i64* [ %p3.i64, %loc_1341 ]
+  %p2.i64.ph.1208 = phi i64* [ %p2.i64, %loc_1341 ]
+  %p1.i32.ph.1208 = phi i32* [ %p1.i32, %loc_1341 ]
+  %rdi.minus1 = add i64 %rdi.ph.1208, -1
+  %stk.elem.ptr = getelementptr inbounds i64, i64* %p3.i64.ph.1208, i64 %rdi.minus1
+  %rdx.loaded = load i64, i64* %stk.elem.ptr, align 8
+  br label %loc_120D
+
+loc_120D:                                            ; 0x120D
+  %p1.i32.ph.120D = phi i32* [ %p1.i32, %bb_11e0 ], [ %p1.i32.ph.1208, %loc_1208 ]
+  %p2.i64.ph.120D = phi i64* [ %p2.i64, %bb_11e0 ], [ %p2.i64.ph.1208, %loc_1208 ]
+  %p3.i64.ph.120D = phi i64* [ %p3.i64, %bb_11e0 ], [ %p3.i64.ph.1208, %loc_1208 ]
+  %rdi.ph.120D = phi i64 [ 1, %bb_11e0 ], [ %rdi.ph.1208, %loc_1208 ]
+  %rbp.ph.120D = phi i64 [ 1, %bb_11e0 ], [ %rbp.ph.1208, %loc_1208 ]
+  %rdx.ph.120D = phi i64 [ 0, %bb_11e0 ], [ %rdx.loaded, %loc_1208 ]
+  %adj.ptr.src = getelementptr inbounds i64, i64* %p2.i64.ph.120D, i64 %rdx.ph.120D
+  %rax.load = load i64, i64* %adj.ptr.src, align 8
+  %cmp_ja = icmp ugt i64 %rax.load, 6
+  br i1 %cmp_ja, label %loc_1412, label %bb_1227
+
+bb_1227:                                             ; after 0x1221
+  %mul7 = mul i64 %rdx.ph.120D, 7
+  %idx0 = add i64 %mul7, %rax.load
+  %arr.idx0.ptr = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %idx0
+  %v0 = load i32, i32* %arr.idx0.ptr, align 4
+  %v0.is0 = icmp eq i32 %v0, 0
+  br i1 %v0.is0, label %loc_1248, label %bb_1238
+
+bb_1238:                                             ; 0x1238
+  %rbx.idx0.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.120D, i64 %rax.load
+  %r11d = load i32, i32* %rbx.idx0.ptr, align 4
+  %r11.zero = icmp eq i32 %r11d, 0
+  br i1 %r11.zero, label %loc_13EA, label %loc_1248
+
+loc_1248:                                            ; 0x1248
+  %rdi.ph.1248 = phi i64 [ %rdi.ph.120D, %bb_1227 ], [ %rdi.ph.120D, %bb_1238 ]
+  %rbp.ph.1248 = phi i64 [ %rbp.ph.120D, %bb_1227 ], [ %rbp.ph.120D, %bb_1238 ]
+  %rdx.src.ph.1248 = phi i64 [ %rdx.ph.120D, %bb_1227 ], [ %rdx.ph.120D, %bb_1238 ]
+  %rax.ph.1248 = phi i64 [ %rax.load, %bb_1227 ], [ %rax.load, %bb_1238 ]
+  %p1.i32.ph.1248 = phi i32* [ %p1.i32.ph.120D, %bb_1227 ], [ %p1.i32.ph.120D, %bb_1238 ]
+  %p2.i64.ph.1248 = phi i64* [ %p2.i64.ph.120D, %bb_1227 ], [ %p2.i64.ph.120D, %bb_1238 ]
+  %p3.i64.ph.1248 = phi i64* [ %p3.i64.ph.120D, %bb_1227 ], [ %p3.i64.ph.120D, %bb_1238 ]
+  %adj.ptr.src.1248 = getelementptr inbounds i64, i64* %p2.i64.ph.1248, i64 %rdx.src.ph.1248
+  %mul7.1248 = mul i64 %rdx.src.ph.1248, 7
+  %rdx.c1 = add i64 %rax.ph.1248, 1
+  %cmp.ax.eq6 = icmp eq i64 %rax.ph.1248, 6
+  br i1 %cmp.ax.eq6, label %loc_133D, label %bb_1256
+
+bb_1256:                                             ; 0x1256
+  %idx1 = add i64 %mul7.1248, %rdx.c1
+  %arr.idx1.ptr = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %idx1
+  %v1 = load i32, i32* %arr.idx1.ptr, align 4
+  %v1.is0 = icmp eq i32 %v1, 0
+  br i1 %v1.is0, label %loc_1274, label %bb_1264
+
+bb_1264:                                             ; 0x1264
+  %rbx.idx1.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.1248, i64 %rdx.c1
+  %r9d = load i32, i32* %rbx.idx1.ptr, align 4
+  %r9.zero = icmp eq i32 %r9d, 0
+  br i1 %r9.zero, label %loc_13F0, label %loc_1274
+
+loc_1274:                                            ; 0x1274
+  %rdi.ph.1274 = phi i64 [ %rdi.ph.1248, %bb_1256 ], [ %rdi.ph.1248, %bb_1264 ]
+  %rbp.ph.1274 = phi i64 [ %rbp.ph.1248, %bb_1256 ], [ %rbp.ph.1248, %bb_1264 ]
+  %rdx.src.ph.1274 = phi i64 [ %rdx.src.ph.1248, %bb_1256 ], [ %rdx.src.ph.1248, %bb_1264 ]
+  %rax.ph.1274 = phi i64 [ %rax.ph.1248, %bb_1256 ], [ %rax.ph.1248, %bb_1264 ]
+  %p1.i32.ph.1274 = phi i32* [ %p1.i32.ph.1248, %bb_1256 ], [ %p1.i32.ph.1248, %bb_1264 ]
+  %p2.i64.ph.1274 = phi i64* [ %p2.i64.ph.1248, %bb_1256 ], [ %p2.i64.ph.1248, %bb_1264 ]
+  %p3.i64.ph.1274 = phi i64* [ %p3.i64.ph.1248, %bb_1256 ], [ %p3.i64.ph.1248, %bb_1264 ]
+  %adj.ptr.src.1274 = getelementptr inbounds i64, i64* %p2.i64.ph.1274, i64 %rdx.src.ph.1274
+  %mul7.1274 = mul i64 %rdx.src.ph.1274, 7
+  %rdx.c2 = add i64 %rax.ph.1274, 2
+  %cmp.ax.eq5 = icmp eq i64 %rax.ph.1274, 5
+  br i1 %cmp.ax.eq5, label %loc_133D, label %bb_1282
+
+bb_1282:                                             ; 0x1282
+  %idx2 = add i64 %mul7.1274, %rdx.c2
+  %arr.idx2.ptr = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %idx2
+  %v2 = load i32, i32* %arr.idx2.ptr, align 4
+  %v2.is0 = icmp eq i32 %v2, 0
+  br i1 %v2.is0, label %loc_12A0, label %bb_1290
+
+bb_1290:                                             ; 0x1290
+  %rbx.idx2.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.1274, i64 %rdx.c2
+  %r11d.2 = load i32, i32* %rbx.idx2.ptr, align 4
+  %r11.2.zero = icmp eq i32 %r11d.2, 0
+  br i1 %r11.2.zero, label %loc_13F0, label %loc_12A0
+
+loc_12A0:                                            ; 0x12A0
+  %rdi.ph.12A0 = phi i64 [ %rdi.ph.1274, %bb_1282 ], [ %rdi.ph.1274, %bb_1290 ]
+  %rbp.ph.12A0 = phi i64 [ %rbp.ph.1274, %bb_1282 ], [ %rbp.ph.1274, %bb_1290 ]
+  %rdx.src.ph.12A0 = phi i64 [ %rdx.src.ph.1274, %bb_1282 ], [ %rdx.src.ph.1274, %bb_1290 ]
+  %rax.ph.12A0 = phi i64 [ %rax.ph.1274, %bb_1282 ], [ %rax.ph.1274, %bb_1290 ]
+  %p1.i32.ph.12A0 = phi i32* [ %p1.i32.ph.1274, %bb_1282 ], [ %p1.i32.ph.1274, %bb_1290 ]
+  %p2.i64.ph.12A0 = phi i64* [ %p2.i64.ph.1274, %bb_1282 ], [ %p2.i64.ph.1274, %bb_1290 ]
+  %p3.i64.ph.12A0 = phi i64* [ %p3.i64.ph.1274, %bb_1282 ], [ %p3.i64.ph.1274, %bb_1290 ]
+  %adj.ptr.src.12A0 = getelementptr inbounds i64, i64* %p2.i64.ph.12A0, i64 %rdx.src.ph.12A0
+  %mul7.12A0 = mul i64 %rdx.src.ph.12A0, 7
+  %rdx.c3 = add i64 %rax.ph.12A0, 3
+  %cmp.ax.eq4 = icmp eq i64 %rax.ph.12A0, 4
+  br i1 %cmp.ax.eq4, label %loc_133D, label %bb_12AE
+
+bb_12AE:                                             ; 0x12AE
+  %idx3 = add i64 %mul7.12A0, %rdx.c3
+  %arr.idx3.ptr = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %idx3
+  %v3 = load i32, i32* %arr.idx3.ptr, align 4
+  %v3.is0 = icmp eq i32 %v3, 0
+  br i1 %v3.is0, label %loc_12CC, label %bb_12BC
+
+bb_12BC:                                             ; 0x12BC
+  %rbx.idx3.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.12A0, i64 %rdx.c3
+  %r9d.3 = load i32, i32* %rbx.idx3.ptr, align 4
+  %r9.3.zero = icmp eq i32 %r9d.3, 0
+  br i1 %r9.3.zero, label %loc_13F0, label %loc_12CC
+
+loc_12CC:                                            ; 0x12CC
+  %rdi.ph.12CC = phi i64 [ %rdi.ph.12A0, %bb_12AE ], [ %rdi.ph.12A0, %bb_12BC ]
+  %rbp.ph.12CC = phi i64 [ %rbp.ph.12A0, %bb_12AE ], [ %rbp.ph.12A0, %bb_12BC ]
+  %rdx.src.ph.12CC = phi i64 [ %rdx.src.ph.12A0, %bb_12AE ], [ %rdx.src.ph.12A0, %bb_12BC ]
+  %rax.ph.12CC = phi i64 [ %rax.ph.12A0, %bb_12AE ], [ %rax.ph.12A0, %bb_12BC ]
+  %p1.i32.ph.12CC = phi i32* [ %p1.i32.ph.12A0, %bb_12AE ], [ %p1.i32.ph.12A0, %bb_12BC ]
+  %p2.i64.ph.12CC = phi i64* [ %p2.i64.ph.12A0, %bb_12AE ], [ %p2.i64.ph.12A0, %bb_12BC ]
+  %p3.i64.ph.12CC = phi i64* [ %p3.i64.ph.12A0, %bb_12AE ], [ %p3.i64.ph.12A0, %bb_12BC ]
+  %adj.ptr.src.12CC = getelementptr inbounds i64, i64* %p2.i64.ph.12CC, i64 %rdx.src.ph.12CC
+  %mul7.12CC = mul i64 %rdx.src.ph.12CC, 7
+  %rdx.c4 = add i64 %rax.ph.12CC, 4
+  %cmp.ax.eq3 = icmp eq i64 %rax.ph.12CC, 3
+  br i1 %cmp.ax.eq3, label %loc_133D, label %bb_12D6
+
+bb_12D6:                                             ; 0x12D6
+  %idx4 = add i64 %mul7.12CC, %rdx.c4
+  %arr.idx4.ptr = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %idx4
+  %v4 = load i32, i32* %arr.idx4.ptr, align 4
+  %v4.is0 = icmp eq i32 %v4, 0
+  br i1 %v4.is0, label %loc_12F4, label %bb_12E4
+
+bb_12E4:                                             ; 0x12E4
+  %rbx.idx4.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.12CC, i64 %rdx.c4
+  %r11d.4 = load i32, i32* %rbx.idx4.ptr, align 4
+  %r11.4.zero = icmp eq i32 %r11d.4, 0
+  br i1 %r11.4.zero, label %loc_13F0, label %loc_12F4
+
+loc_12F4:                                            ; 0x12F4
+  %rdi.ph.12F4 = phi i64 [ %rdi.ph.12CC, %bb_12D6 ], [ %rdi.ph.12CC, %bb_12E4 ]
+  %rbp.ph.12F4 = phi i64 [ %rbp.ph.12CC, %bb_12D6 ], [ %rbp.ph.12CC, %bb_12E4 ]
+  %rdx.src.ph.12F4 = phi i64 [ %rdx.src.ph.12CC, %bb_12D6 ], [ %rdx.src.ph.12CC, %bb_12E4 ]
+  %rax.ph.12F4 = phi i64 [ %rax.ph.12CC, %bb_12D6 ], [ %rax.ph.12CC, %bb_12E4 ]
+  %p1.i32.ph.12F4 = phi i32* [ %p1.i32.ph.12CC, %bb_12D6 ], [ %p1.i32.ph.12CC, %bb_12E4 ]
+  %p2.i64.ph.12F4 = phi i64* [ %p2.i64.ph.12CC, %bb_12D6 ], [ %p2.i64.ph.12CC, %bb_12E4 ]
+  %p3.i64.ph.12F4 = phi i64* [ %p3.i64.ph.12CC, %bb_12D6 ], [ %p3.i64.ph.12CC, %bb_12E4 ]
+  %adj.ptr.src.12F4 = getelementptr inbounds i64, i64* %p2.i64.ph.12F4, i64 %rdx.src.ph.12F4
+  %mul7.12F4 = mul i64 %rdx.src.ph.12F4, 7
+  %rdx.c5 = add i64 %rax.ph.12F4, 5
+  %cmp.ax.eq2 = icmp eq i64 %rax.ph.12F4, 2
+  br i1 %cmp.ax.eq2, label %loc_133D, label %bb_12FE
+
+bb_12FE:                                             ; 0x12FE
+  %idx5 = add i64 %mul7.12F4, %rdx.c5
+  %arr.idx5.ptr = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %idx5
+  %v5 = load i32, i32* %arr.idx5.ptr, align 4
+  %v5.is0 = icmp eq i32 %v5, 0
+  br i1 %v5.is0, label %loc_131C, label %bb_130C
+
+bb_130C:                                             ; 0x130C
+  %rbx.idx5.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.12F4, i64 %rdx.c5
+  %r9d.5 = load i32, i32* %rbx.idx5.ptr, align 4
+  %r9.5.zero = icmp eq i32 %r9d.5, 0
+  br i1 %r9.5.zero, label %loc_13F0, label %loc_131C
+
+loc_131C:                                            ; 0x131C
+  %rdi.ph.131C = phi i64 [ %rdi.ph.12F4, %bb_12FE ], [ %rdi.ph.12F4, %bb_130C ]
+  %rbp.ph.131C = phi i64 [ %rbp.ph.12F4, %bb_12FE ], [ %rbp.ph.12F4, %bb_130C ]
+  %rdx.src.ph.131C = phi i64 [ %rdx.src.ph.12F4, %bb_12FE ], [ %rdx.src.ph.12F4, %bb_130C ]
+  %rax.ph.131C = phi i64 [ %rax.ph.12F4, %bb_12FE ], [ %rax.ph.12F4, %bb_130C ]
+  %p1.i32.ph.131C = phi i32* [ %p1.i32.ph.12F4, %bb_12FE ], [ %p1.i32.ph.12F4, %bb_130C ]
+  %p2.i64.ph.131C = phi i64* [ %p2.i64.ph.12F4, %bb_12FE ], [ %p2.i64.ph.12F4, %bb_130C ]
+  %p3.i64.ph.131C = phi i64* [ %p3.i64.ph.12F4, %bb_12FE ], [ %p3.i64.ph.12F4, %bb_130C ]
+  %adj.ptr.src.131C = getelementptr inbounds i64, i64* %p2.i64.ph.131C, i64 %rdx.src.ph.131C
+  %mul7.131C = mul i64 %rdx.src.ph.131C, 7
+  %ax.nonzero = icmp ne i64 %rax.ph.131C, 0
+  br i1 %ax.nonzero, label %loc_133D, label %bb_1321
+
+bb_1321:                                             ; 0x1321
+  %idxE0 = getelementptr inbounds [256 x i32], [256 x i32]* %arr, i64 0, i64 %mul7.131C
+  %edx.from.arr = load i32, i32* %idxE0, align 4
+  %edx.zero = icmp eq i32 %edx.from.arr, 0
+  br i1 %edx.zero, label %loc_133D, label %bb_1329
+
+bb_1329:                                             ; 0x1329
+  %rbx.plus18.ptr = getelementptr inbounds i32, i32* %p1.i32.ph.131C, i64 6
+  %eax.from.mem = load i32, i32* %rbx.plus18.ptr, align 4
+  %eax.zero = icmp eq i32 %eax.from.mem, 0
+  br i1 %eax.zero, label %loc_13F0, label %loc_133D
+
+loc_133D:                                            ; 0x133D
+  %rdi.in = phi i64 [ %rdi.ph.1248, %loc_1248 ], [ %rdi.ph.1274, %loc_1274 ], [ %rdi.ph.12A0, %loc_12A0 ], [ %rdi.ph.12CC, %loc_12CC ], [ %rdi.ph.12F4, %loc_12F4 ], [ %rdi.ph.131C, %loc_131C ], [ %rdi.ph.131C, %bb_1321 ], [ %rdi.ph.131C, %bb_1329 ], [ %rdi.ph.120D, %loc_1412 ]
+  %rbp.in = phi i64 [ %rbp.ph.1248, %loc_1248 ], [ %rbp.ph.1274, %loc_1274 ], [ %rbp.ph.12A0, %loc_12A0 ], [ %rbp.ph.12CC, %loc_12CC ], [ %rbp.ph.12F4, %loc_12F4 ], [ %rbp.ph.131C, %loc_131C ], [ %rbp.ph.131C, %bb_1321 ], [ %rbp.ph.131C, %bb_1329 ], [ %rbp.ph.120D, %loc_1412 ]
+  %p1.i32.in = phi i32* [ %p1.i32.ph.1248, %loc_1248 ], [ %p1.i32.ph.1274, %loc_1274 ], [ %p1.i32.ph.12A0, %loc_12A0 ], [ %p1.i32.ph.12CC, %loc_12CC ], [ %p1.i32.ph.12F4, %loc_12F4 ], [ %p1.i32.ph.131C, %loc_131C ], [ %p1.i32.ph.131C, %bb_1321 ], [ %p1.i32.ph.131C, %bb_1329 ], [ %p1.i32.ph.120D, %loc_1412 ]
+  %p2.i64.in = phi i64* [ %p2.i64.ph.1248, %loc_1248 ], [ %p2.i64.ph.1274, %loc_1274 ], [ %p2.i64.ph.12A0, %loc_12A0 ], [ %p2.i64.ph.12CC, %loc_12CC ], [ %p2.i64.ph.12F4, %loc_12F4 ], [ %p2.i64.ph.131C, %loc_131C ], [ %p2.i64.ph.131C, %bb_1321 ], [ %p2.i64.ph.131C, %bb_1329 ], [ %p2.i64.ph.120D, %loc_1412 ]
+  %p3.i64.in = phi i64* [ %p3.i64.ph.1248, %loc_1248 ], [ %p3.i64.ph.1274, %loc_1274 ], [ %p3.i64.ph.12A0, %loc_12A0 ], [ %p3.i64.ph.12CC, %loc_12CC ], [ %p3.i64.ph.12F4, %loc_12F4 ], [ %p3.i64.ph.131C, %loc_131C ], [ %p3.i64.ph.131C, %bb_1321 ], [ %p3.i64.ph.131C, %bb_1329 ], [ %p3.i64.ph.120D, %loc_1412 ]
+  %rdi.dec = add i64 %rdi.in, -1
+  br label %loc_1341
+
+loc_1341:                                            ; 0x1341
+  %rdi.ph.1341 = phi i64 [ %rdi.dec, %loc_133D ], [ %rdi.inc.13F0, %loc_13F0 ]
+  %rbp.ph.1341 = phi i64 [ %rbp.in, %loc_133D ], [ %rbp.inc.13F0, %loc_13F0 ]
+  %p1.i32.ph.1341 = phi i32* [ %p1.i32.in, %loc_133D ], [ %p1.i32.ph.13F0, %loc_13F0 ]
+  %p2.i64.ph.1341 = phi i64* [ %p2.i64.in, %loc_133D ], [ %p2.i64.ph.13F0, %loc_13F0 ]
+  %p3.i64.ph.1341 = phi i64* [ %p3.i64.in, %loc_133D ], [ %p3.i64.ph.13F0, %loc_13F0 ]
+  %has.items = icmp ne i64 %rdi.ph.1341, 0
+  br i1 %has.items, label %loc_1208, label %bb_134a
+
+bb_134a:                                             ; 0x134a .. cleanup after loop
+  %p1.cast.free = bitcast i32* %p1.i32.ph.1341 to i8*
+  call void @free(i8* %p1.cast.free)
+  %p2.cast.free = bitcast i64* %p2.i64.ph.1341 to i8*
+  call void @free(i8* %p2.cast.free)
+  %p3.cast.free = bitcast i64* %p3.i64.ph.1341 to i8*
+  call void @free(i8* %p3.cast.free)
+  %fmt.pre.ptr = getelementptr inbounds [24 x i8], [24 x i8]* @.str.pre, i64 0, i64 0
+  %call.pre = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.pre.ptr, i64 0)
+  %rbp.end = phi i64 [ %rbp.ph.1341, %loc_1341 ]
+  %has.any = icmp ne i64 %rbp.end, 0
+  br i1 %has.any, label %bb_137c, label %loc_13AE
+
+bb_137c:                                             ; 0x137c
+  %first.elem = getelementptr inbounds [128 x i64], [128 x i64]* %res, i64 0, i64 0
+  %rdx.print = load i64, i64* %first.elem, align 8
+  %fmt.zus.ptr = getelementptr inbounds [6 x i8], [6 x i8]* @.str.zu_s, i64 0, i64 0
+  %rbp.is.one = icmp ne i64 %rbp.end, 1
+  br i1 %rbp.is.one, label %loc_1421, label %loc_1398
+
+loc_1398:                                            ; 0x1398
+  %empty.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str.nl, i64 0, i64 1
+  %call.last = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.zus.ptr, i64 %rdx.print, i8* %empty.ptr)
+  br label %loc_13AE
+
+loc_13AE:                                            ; 0x13AE
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str.nl, i64 0, i64 0
+  %call.nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  %canary.end = load i64, i64* %canary.slot, align 8
+  %guard.now = load i64, i64* @__stack_chk_guard, align 8
+  %canary.ok = icmp eq i64 %canary.end, %guard.now
+  br i1 %canary.ok, label %bb_13d8, label %loc_1487
+
+bb_13d8:                                             ; 0x13d8 epilogue
+  ret i32 0
+
+loc_13EA:                                            ; 0x13EA
+  %rdi.ph.13EA = phi i64 [ %rdi.ph.120D, %bb_1238 ]
+  %rbp.ph.13EA = phi i64 [ %rbp.ph.120D, %bb_1238 ]
+  %p1.i32.ph.13EA = phi i32* [ %p1.i32.ph.120D, %bb_1238 ]
+  %p2.i64.ph.13EA = phi i64* [ %p2.i64.ph.120D, %bb_1238 ]
+  %p3.i64.ph.13EA = phi i64* [ %p3.i64.ph.120D, %bb_1238 ]
+  %adj.ptr.src.13EA = getelementptr inbounds i64, i64* %p2.i64.ph.13EA, i64 %rdx.ph.120D
+  %rsi.ptr.13EA = getelementptr inbounds i32, i32* %p1.i32.ph.13EA, i64 %rax.load
+  br label %loc_13F0
+
+loc_13F0:                                            ; 0x13F0
+  %rdi.ph.13F0 = phi i64 [ %rdi.ph.13EA, %loc_13EA ], [ %rdi.ph.1248, %bb_1264 ], [ %rdi.ph.1274, %bb_1290 ], [ %rdi.ph.12A0, %bb_12BC ], [ %rdi.ph.12CC, %bb_12E4 ], [ %rdi.ph.12F4, %bb_130C ], [ %rdi.ph.131C, %bb_1329 ], [ %rdi.ph.131C, %bb_1321 ]
+  %rbp.ph.13F0 = phi i64 [ %rbp.ph.13EA, %loc_13EA ], [ %rbp.ph.1248, %bb_1264 ], [ %rbp.ph.1274, %bb_1290 ], [ %rbp.ph.12A0, %bb_12BC ], [ %rbp.ph.12CC, %bb_12E4 ], [ %rbp.ph.12F4, %bb_130C ], [ %rbp.ph.131C, %bb_1329 ], [ %rbp.ph.131C, %bb_1321 ]
+  %p1.i32.ph.13F0 = phi i32* [ %p1.i32.ph.13EA, %loc_13EA ], [ %p1.i32.ph.1248, %bb_1264 ], [ %p1.i32.ph.1274, %bb_1290 ], [ %p1.i32.ph.12A0, %bb_12BC ], [ %p1.i32.ph.12CC, %bb_12E4 ], [ %p1.i32.ph.12F4, %bb_130C ], [ %p1.i32.ph.131C, %bb_1329 ], [ %p1.i32.ph.131C, %bb_1321 ]
+  %p2.i64.ph.13F0 = phi i64* [ %p2.i64.ph.13EA, %loc_13EA ], [ %p2.i64.ph.1248, %bb_1264 ], [ %p2.i64.ph.1274, %bb_1290 ], [ %p2.i64.ph.12A0, %bb_12BC ], [ %p2.i64.ph.12CC, %bb_12E4 ], [ %p2.i64.ph.12F4, %bb_130C ], [ %p2.i64.ph.131C, %bb_1329 ], [ %p2.i64.ph.131C, %bb_1321 ]
+  %p3.i64.ph.13F0 = phi i64* [ %p3.i64.ph.13EA, %loc_13EA ], [ %p3.i64.ph.1248, %bb_1264 ], [ %p3.i64.ph.1274, %bb_1290 ], [ %p3.i64.ph.12A0, %bb_12BC ], [ %p3.i64.ph.12CC, %bb_12E4 ], [ %p3.i64.ph.12F4, %bb_130C ], [ %p3.i64.ph.131C, %bb_1329 ], [ %p3.i64.ph.131C, %bb_1321 ]
+  %adj.ptr.src.13F0 = phi i64* [ %adj.ptr.src.13EA, %loc_13EA ], [ %adj.ptr.src.1248, %bb_1264 ], [ %adj.ptr.src.1274, %bb_1290 ], [ %adj.ptr.src.12A0, %bb_12BC ], [ %adj.ptr.src.12CC, %bb_12E4 ], [ %adj.ptr.src.12F4, %bb_130C ], [ %adj.ptr.src.131C, %bb_1329 ], [ %adj.ptr.src.131C, %bb_1321 ]
+  %rdx.push = phi i64 [ %rax.load, %loc_13EA ], [ %rdx.c1, %bb_1264 ], [ %rdx.c2, %bb_1290 ], [ %rdx.c3, %bb_12BC ], [ %rdx.c4, %bb_12E4 ], [ %rdx.c5, %bb_130C ], [ 6, %bb_1329 ], [ 6, %bb_1321 ]
+  %rsi.ptr.13F0 = phi i32* [ %rsi.ptr.13EA, %loc_13EA ], [ %rbx.idx1.ptr, %bb_1264 ], [ %rbx.idx2.ptr, %bb_1290 ], [ %rbx.idx3.ptr, %bb_12BC ], [ %rbx.idx4.ptr, %bb_12E4 ], [ %rbx.idx5.ptr, %bb_130C ], [ %rbx.plus18.ptr, %bb_1329 ], [ %rbx.plus18.ptr, %bb_1321 ]
+  %rax.next = add i64 %rdx.push, 1
+  %res.store.ptr = getelementptr inbounds [128 x i64], [128 x i64]* %res, i64 0, i64 %rbp.ph.13F0
+  store i64 %rdx.push, i64* %res.store.ptr, align 8
+  %rbp.inc.13F0 = add i64 %rbp.ph.13F0, 1
+  %stk.top.ptr = getelementptr inbounds i64, i64* %p3.i64.ph.13F0, i64 %rdi.ph.13F0
+  store i64 %rdx.push, i64* %stk.top.ptr, align 8
+  %rdi.inc.13F0 = add i64 %rdi.ph.13F0, 1
+  store i64 %rax.next, i64* %adj.ptr.src.13F0, align 8
+  store i32 1, i32* %rsi.ptr.13F0, align 4
+  br label %loc_1341
+
+loc_1412:                                            ; 0x1412
+  %p1.i32.ph.1412 = phi i32* [ %p1.i32.ph.120D, %loc_120D ]
+  %p2.i64.ph.1412 = phi i64* [ %p2.i64.ph.120D, %loc_120D ]
+  %p3.i64.ph.1412 = phi i64* [ %p3.i64.ph.120D, %loc_120D ]
+  %rdi.ph.1412 = phi i64 [ %rdi.ph.120D, %loc_120D ]
+  %rbp.ph.1412 = phi i64 [ %rbp.ph.120D, %loc_120D ]
+  %rax.cmp7 = icmp ne i64 %rax.load, 7
+  br i1 %rax.cmp7, label %loc_1208, label %loc_133D
+
+loc_1421:                                            ; 0x1421
+  %space.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @.str.space, i64 0, i64 0
+  %fmt.zus.ptr.2 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.zu_s, i64 0, i64 0
+  %ebx.idx.start = add i64 1, 0
+  br label %loc_1430
+
+loc_1430:                                            ; 0x1430
+  %ebx.ph = phi i64 [ %ebx.idx.start, %loc_1421 ], [ %ebx.next, %bb_1442 ]
+  %rdx.print.loop = phi i64 [ %rdx.print, %loc_1421 ], [ %rdx.next, %bb_1442 ]
+  %call.mid = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.zus.ptr.2, i64 %rdx.print.loop, i8* %space.ptr)
+  br label %bb_1442
+
+bb_1442:                                             ; 0x1442
+  %ebx.next = add i64 %ebx.ph, 1
+  %elem.ptr.next = getelementptr inbounds [128 x i64], [128 x i64]* %res, i64 0, i64 %ebx.ph
+  %rdx.next = load i64, i64* %elem.ptr.next, align 8
+  %cmp.ebx = icmp ne i64 %ebx.next, %rbp.end
+  br i1 %cmp.ebx, label %loc_1430, label %loc_1450
+
+loc_1450:                                            ; 0x1450
+  %rdx.print.last = phi i64 [ %rdx.next, %bb_1442 ]
+  br label %loc_1398
+
+loc_1455:                                            ; 0x1455 (error/early exit)
+  %p1.free.null = phi i8* [ %p1.raw, %bb_10e0 ]
+  %p2.free.null = phi i8* [ %p2.raw, %bb_10e0 ]
+  %p3.free.null = phi i8* [ %p3.raw, %bb_10e0 ]
+  call void @free(i8* %p1.free.null)
+  call void @free(i8* %p2.free.null)
+  call void @free(i8* %p3.free.null)
+  %fmt.pre.ptr.err = getelementptr inbounds [24 x i8], [24 x i8]* @.str.pre, i64 0, i64 0
+  %call.pre.err = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.pre.ptr.err, i64 0)
+  br label %loc_13AE
+
+loc_1487:                                            ; 0x1487
+  call void @__stack_chk_fail()
+  unreachable
+}

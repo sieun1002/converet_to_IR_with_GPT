@@ -1,0 +1,31 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x653e71b54430 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  %arr = alloca [10 x i32], align 16\l  %p0 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 0\l  store i32 9, ptr %p0, align 16\l  %p1 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 1\l  store i32 1, ptr %p1, align 4\l  %p2 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 2\l  store i32 8, ptr %p2, align 8\l  %p3 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 3\l  store i32 3, ptr %p3, align 4\l  %p4 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 4\l  store i32 7, ptr %p4, align 16\l  %p5 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 5\l  store i32 5, ptr %p5, align 4\l  %p6 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 6\l  store i32 2, ptr %p6, align 8\l  %p7 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 7\l  store i32 6, ptr %p7, align 4\l  %p8 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 8\l  store i32 4, ptr %p8, align 16\l  %p9 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 9\l  store i32 0, ptr %p9, align 4\l  br label %outer.cond\l}"];
+	Node0x653e71b54430 -> Node0x653e71b582e0[tooltip="entry -> outer.cond\nProbability 100.00%" ];
+	Node0x653e71b582e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.cond:\l|  %i = phi i32 [ 1, %entry ], [ %i.next, %outer.inc ]\l  %cmp.i = icmp slt i32 %i, 10\l  br i1 %cmp.i, label %outer.body, label %print.init\l|{<s0>T|<s1>F}}"];
+	Node0x653e71b582e0:s0 -> Node0x653e71b58760[tooltip="outer.cond -> outer.body\nProbability 96.88%" ];
+	Node0x653e71b582e0:s1 -> Node0x653e71b58840[tooltip="outer.cond -> print.init\nProbability 3.12%" ];
+	Node0x653e71b58760 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.body:\l|  %i64 = sext i32 %i to i64\l  %pi = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %i64\l  %key = load i32, ptr %pi, align 4\l  %j0 = add nsw i32 %i, -1\l  br label %inner.cond\l}"];
+	Node0x653e71b58760 -> Node0x653e71b58b80[tooltip="outer.body -> inner.cond\nProbability 100.00%" ];
+	Node0x653e71b58b80 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.cond:\l|  %j = phi i32 [ %j0, %outer.body ], [ %j.next, %inner.shift ]\l  %j.nonneg = icmp sge i32 %j, 0\l  br i1 %j.nonneg, label %inner.check, label %inner.exit\l|{<s0>T|<s1>F}}"];
+	Node0x653e71b58b80:s0 -> Node0x653e71b591d0[tooltip="inner.cond -> inner.check\nProbability 96.88%" ];
+	Node0x653e71b58b80:s1 -> Node0x653e71b592b0[tooltip="inner.cond -> inner.exit\nProbability 3.12%" ];
+	Node0x653e71b591d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.check:\l|  %j64 = sext i32 %j to i64\l  %pj = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %j64\l  %aj = load i32, ptr %pj, align 4\l  %gt = icmp sgt i32 %aj, %key\l  br i1 %gt, label %inner.shift, label %inner.exit\l|{<s0>T|<s1>F}}"];
+	Node0x653e71b591d0:s0 -> Node0x653e71b58cc0[tooltip="inner.check -> inner.shift\nProbability 96.88%" ];
+	Node0x653e71b591d0:s1 -> Node0x653e71b592b0[tooltip="inner.check -> inner.exit\nProbability 3.12%" ];
+	Node0x653e71b58cc0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.shift:\l|  %j1 = add nsw i32 %j, 1\l  %j1.64 = sext i32 %j1 to i64\l  %pj1 = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %j1.64\l  store i32 %aj, ptr %pj1, align 4\l  %j.next = add nsw i32 %j, -1\l  br label %inner.cond\l}"];
+	Node0x653e71b58cc0 -> Node0x653e71b58b80[tooltip="inner.shift -> inner.cond\nProbability 100.00%" ];
+	Node0x653e71b592b0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{inner.exit:\l|  %j.exit = phi i32 [ %j, %inner.cond ], [ %j, %inner.check ]\l  %ins = add nsw i32 %j.exit, 1\l  %ins64 = sext i32 %ins to i64\l  %pins = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %ins64\l  store i32 %key, ptr %pins, align 4\l  br label %outer.inc\l}"];
+	Node0x653e71b592b0 -> Node0x653e71b58550[tooltip="inner.exit -> outer.inc\nProbability 100.00%" ];
+	Node0x653e71b58550 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{outer.inc:\l|  %i.next = add nuw nsw i32 %i, 1\l  br label %outer.cond\l}"];
+	Node0x653e71b58550 -> Node0x653e71b582e0[tooltip="outer.inc -> outer.cond\nProbability 100.00%" ];
+	Node0x653e71b58840 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{print.init:\l|  br label %print.loop\l}"];
+	Node0x653e71b58840 -> Node0x653e71b59ea0[tooltip="print.init -> print.loop\nProbability 100.00%" ];
+	Node0x653e71b59ea0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{print.loop:\l|  %k = phi i32 [ 0, %print.init ], [ %k.next, %print.body ]\l  %k.cmp = icmp slt i32 %k, 10\l  br i1 %k.cmp, label %print.body, label %ret\l|{<s0>T|<s1>F}}"];
+	Node0x653e71b59ea0:s0 -> Node0x653e71b59f80[tooltip="print.loop -> print.body\nProbability 96.88%" ];
+	Node0x653e71b59ea0:s1 -> Node0x653e71b5a8e0[tooltip="print.loop -> ret\nProbability 3.12%" ];
+	Node0x653e71b59f80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{print.body:\l|  %k64 = sext i32 %k to i64\l  %pk = getelementptr inbounds [10 x i32], ptr %arr, i64 0, i64 %k64\l  %vk = load i32, ptr %pk, align 4\l  %fmt = getelementptr inbounds [4 x i8], ptr @.str, i64 0, i64 0\l  %call = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmt, i32 %vk)\l  %k.next = add nuw nsw i32 %k, 1\l  br label %print.loop\l}"];
+	Node0x653e71b59f80 -> Node0x653e71b59ea0[tooltip="print.body -> print.loop\nProbability 100.00%" ];
+	Node0x653e71b5a8e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{ret:\l|  %fmtnl = getelementptr inbounds [2 x i8], ptr @.strnl, i64 0, i64 0\l  %call2 = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr %fmtnl)\l  ret i32 0\l}"];
+}

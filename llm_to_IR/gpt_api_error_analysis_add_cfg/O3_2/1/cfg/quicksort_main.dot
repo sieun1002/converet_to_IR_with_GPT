@@ -1,0 +1,14 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5d59bfc69980 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry_1080:\l|  %arr = alloca [9 x i32], align 16\l  %canary = alloca i64, align 8\l  %arr.ptr = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  %guard0 = call i64 asm sideeffect \"movq %fs:0x28, $0\", \"=r\"()\l  store i64 %guard0, ptr %canary, align 8\l  %v0 = load \<4 x i32\>, ptr @xmmword_2010, align 16\l  %vecptr0 = bitcast ptr %arr.ptr to ptr\l  store \<4 x i32\> %v0, ptr %vecptr0, align 16\l  %v1 = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  %arr.plus4 = getelementptr inbounds i32, ptr %arr.ptr, i64 4\l  %vecptr1 = bitcast ptr %arr.plus4 to ptr\l  store \<4 x i32\> %v1, ptr %vecptr1, align 16\l  %elem8 = getelementptr inbounds i32, ptr %arr.ptr, i64 8\l  store i32 4, ptr %elem8, align 4\l  call void @quick_sort(ptr %arr.ptr, i32 0, i32 9)\l  %endptr = getelementptr inbounds i32, ptr %arr.ptr, i64 9\l  br label %bb_10e0\l}"];
+	Node0x5d59bfc69980 -> Node0x5d59bfc6e0a0[tooltip="entry_1080 -> bb_10e0\nProbability 100.00%" ];
+	Node0x5d59bfc6e0a0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{bb_10e0:\l|  %curptr = phi ptr [ %arr.ptr, %entry_1080 ], [ %nextptr, %bb_10e0 ]\l  %val = load i32, ptr %curptr, align 4\l  %fmt1 = bitcast ptr @unk_2004 to ptr\l  %call1 = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt1, i32 %val)\l  %nextptr = getelementptr inbounds i32, ptr %curptr, i64 1\l  %cont = icmp ne ptr %nextptr, %endptr\l  br i1 %cont, label %bb_10e0, label %bb_10fa\l|{<s0>T|<s1>F}}"];
+	Node0x5d59bfc6e0a0:s0 -> Node0x5d59bfc6e0a0[tooltip="bb_10e0 -> bb_10e0\nProbability 96.88%" ];
+	Node0x5d59bfc6e0a0:s1 -> Node0x5d59bfc6e6f0[tooltip="bb_10e0 -> bb_10fa\nProbability 3.12%" ];
+	Node0x5d59bfc6e6f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_10fa:\l|  %fmt2 = bitcast ptr @unk_2008 to ptr\l  %call2 = call i32 (i32, ptr, ...) @___printf_chk(i32 2, ptr %fmt2)\l  %guard1 = call i64 asm sideeffect \"movq %fs:0x28, $0\", \"=r\"()\l  %saved = load i64, ptr %canary, align 8\l  %cmp = icmp ne i64 %saved, %guard1\l  br i1 %cmp, label %bb_1128, label %bb_ret\l|{<s0>T|<s1>F}}"];
+	Node0x5d59bfc6e6f0:s0 -> Node0x5d59bfc6ee50[tooltip="bb_10fa -> bb_1128\nProbability 0.00%" ];
+	Node0x5d59bfc6e6f0:s1 -> Node0x5d59bfc6eec0[tooltip="bb_10fa -> bb_ret\nProbability 100.00%" ];
+	Node0x5d59bfc6eec0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{bb_ret:\l|  ret i32 0\l}"];
+	Node0x5d59bfc6ee50 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5d8d170" fontname="Courier",label="{bb_1128:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+}

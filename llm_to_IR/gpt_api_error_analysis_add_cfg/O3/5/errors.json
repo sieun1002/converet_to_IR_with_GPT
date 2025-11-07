@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.ll:483:49: error: use of undefined value '%bb_144e'\n  %phi.bx = phi i64 [ 1, %bb_1421 ], [ %bx.inc, %bb_144e ]\n                                                ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/DFS_main1.bc",
+      "start_time": "2025-10-31T16:19:58",
+      "end_time": "2025-10-31T16:19:59",
+      "elapsed_sec": 0.025581
+    },
+    {
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.ll:59:13: error: expected instruction opcode\n  %rcx.in = %rcx.cur\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/binarysearch_main1.bc",
+      "start_time": "2025-10-31T16:28:09",
+      "end_time": "2025-10-31T16:28:09",
+      "elapsed_sec": 0.016503
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.ll:158:23: error: expected type\n  %r12_off = add i64 (shl i64 %r12_b119c, 2), 8\n                      ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main1.bc",
+      "start_time": "2025-10-31T17:08:18",
+      "end_time": "2025-10-31T17:08:18",
+      "elapsed_sec": 0.019131
+    },
+    {
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.ll:464:51: error: invalid use of function-local name\n  %xmm2 = load <16 x i8>, <16 x i8>* bitcast (i8* %ptr_130a to <16 x i8>*), align 1\n                                                  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/mergesort_main2.bc",
+      "start_time": "2025-10-31T17:13:06",
+      "end_time": "2025-10-31T17:13:06",
+      "elapsed_sec": 0.019314
+    },
+    {
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.ll",
+      "bc_path": "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.ll:59:19: error: invalid operand type for instruction\n  %rbx.next = add i32* %r12.cur, null          ; placeholder to create SSA? Not allowed. Replace with direct use:\n                  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.ll -o ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3/5/selectionsort_function1.bc",
+      "start_time": "2025-10-31T17:32:00",
+      "end_time": "2025-10-31T17:32:00",
+      "elapsed_sec": 0.021291
+    }
+  ]
+}

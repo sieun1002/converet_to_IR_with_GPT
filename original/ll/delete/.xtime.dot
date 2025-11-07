@@ -1,0 +1,5 @@
+digraph "CFG for 'xtime' function" {
+	label="CFG for 'xtime' function";
+
+	Node0x5aeb62558020 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{entry:\l|  %a.addr = alloca i8, align 1\l  store i8 %a, ptr %a.addr, align 1\l  call void @llvm.dbg.declare(metadata ptr %a.addr, metadata !521, metadata\l... !DIExpression()), !dbg !522\l  %0 = load i8, ptr %a.addr, align 1, !dbg !36\l  %conv = zext i8 %0 to i32, !dbg !36\l  %shl = shl i32 %conv, 1, !dbg !37\l  %1 = load i8, ptr %a.addr, align 1, !dbg !38\l  %conv1 = zext i8 %1 to i32, !dbg !38\l  %shr = ashr i32 %conv1, 7, !dbg !39\l  %and = and i32 %shr, 1, !dbg !40\l  %mul = mul nsw i32 %and, 27, !dbg !41\l  %xor = xor i32 %shl, %mul, !dbg !42\l  %and2 = and i32 %xor, 255, !dbg !43\l  %conv3 = trunc i32 %and2 to i8, !dbg !44\l  ret i8 %conv3, !dbg !45\l}"];
+}

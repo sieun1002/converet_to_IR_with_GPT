@@ -1,0 +1,19 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x56252fa9e400 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %arr = alloca [9 x i32], align 16\l  %keys = alloca [3 x i32], align 16\l  store [9 x i32] [i32 -5, i32 -1, i32 0, i32 2, i32 2, i32 3, i32 7, i32 9,\l... i32 12], ptr %arr, align 16\l  store [3 x i32] [i32 2, i32 5, i32 -5], ptr %keys, align 16\l  br label %loop\l}"];
+	Node0x56252fa9e400 -> Node0x56252fa9f910[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x56252fa9f910 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %i = phi i64 [ 0, %entry ], [ %i.next, %latch ]\l  %cmp = icmp ult i64 %i, 3\l  br i1 %cmp, label %body, label %exit\l|{<s0>T|<s1>F}}"];
+	Node0x56252fa9f910:s0 -> Node0x56252fa9fc70[tooltip="loop -> body\nProbability 96.88%" ];
+	Node0x56252fa9f910:s1 -> Node0x56252fa9fd40[tooltip="loop -> exit\nProbability 3.12%" ];
+	Node0x56252fa9fc70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{body:\l|  %key.ptr = getelementptr inbounds [3 x i32], ptr %keys, i64 0, i64 %i\l  %key = load i32, ptr %key.ptr, align 4\l  %arrdecay = getelementptr inbounds [9 x i32], ptr %arr, i64 0, i64 0\l  %idx = call i64 @binary_search(ptr noundef %arrdecay, i64 noundef 9, i32\l... noundef %key)\l  %isneg = icmp slt i64 %idx, 0\l  br i1 %isneg, label %notfound, label %found\l|{<s0>T|<s1>F}}"];
+	Node0x56252fa9fc70:s0 -> Node0x56252faa03c0[tooltip="body -> notfound\nProbability 37.50%" ];
+	Node0x56252fa9fc70:s1 -> Node0x56252faa0410[tooltip="body -> found\nProbability 62.50%" ];
+	Node0x56252faa0410 [shape=record,color="#b70d28ff", style=filled, fillcolor="#bb1b2c70" fontname="Courier",label="{found:\l|  %fmt1 = getelementptr inbounds [21 x i8], ptr @.str_found, i64 0, i64 0\l  %call1 = call i32 (ptr, ...) @printf(ptr noundef %fmt1, i32 noundef %key,\l... i64 noundef %idx)\l  br label %latch\l}"];
+	Node0x56252faa0410 -> Node0x56252fa9fa70[tooltip="found -> latch\nProbability 100.00%" ];
+	Node0x56252faa03c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#c32e3170" fontname="Courier",label="{notfound:\l|  %fmt2 = getelementptr inbounds [21 x i8], ptr @.str_notfound, i64 0, i64 0\l  %call2 = call i32 (ptr, ...) @printf(ptr noundef %fmt2, i32 noundef %key)\l  br label %latch\l}"];
+	Node0x56252faa03c0 -> Node0x56252fa9fa70[tooltip="notfound -> latch\nProbability 100.00%" ];
+	Node0x56252fa9fa70 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{latch:\l|  %i.next = add nuw nsw i64 %i, 1\l  br label %loop\l}"];
+	Node0x56252fa9fa70 -> Node0x56252fa9f910[tooltip="latch -> loop\nProbability 100.00%" ];
+	Node0x56252fa9fd40 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit:\l|  ret i32 0\l}"];
+}

@@ -1,0 +1,511 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-unknown-linux-gnu"
+
+@xmmword_2010 = external global <16 x i8>, align 16
+@xmmword_2020 = external global <16 x i8>, align 16
+@unk_2004 = external global i8, align 1
+@unk_2008 = external global i8, align 1
+@__stack_chk_guard = external thread_local global i64
+
+declare i32 @__printf_chk(i32, i8*, ...)
+declare void @__stack_chk_fail()
+
+define i32 @main() local_unnamed_addr {
+bb_1080:
+  %frame = alloca [48 x i8], align 16
+  %saved_guard = alloca i64, align 8
+  %base = getelementptr inbounds [48 x i8], [48 x i8]* %frame, i64 0, i64 0
+  %base_i32p = bitcast i8* %base to i32*
+  %vec1p = bitcast i8* %base to <16 x i8>*
+  %v1 = load <16 x i8>, <16 x i8>* @xmmword_2010, align 16
+  store <16 x i8> %v1, <16 x i8>* %vec1p, align 16
+  %guard0 = load i64, i64* @__stack_chk_guard
+  store i64 %guard0, i64* %saved_guard, align 8
+  %p16 = getelementptr inbounds i8, i8* %base, i64 16
+  %vec2p = bitcast i8* %p16 to <16 x i8>*
+  %v2 = load <16 x i8>, <16 x i8>* @xmmword_2020, align 16
+  store <16 x i8> %v2, <16 x i8>* %vec2p, align 16
+  %p32 = getelementptr inbounds i8, i8* %base, i64 32
+  %p32i32 = bitcast i8* %p32 to i32*
+  store i32 4, i32* %p32i32, align 4
+  br label %bb_10D0
+
+bb_10D0:                                              ; preds = %bb_11C6_from11BC, %bb_11C6, %bb_1080
+  %rsi_10D0 = phi i8* [ %base, %bb_1080 ], [ %rsi_next_11C6, %bb_11C6 ], [ %rsi_11C0, %bb_11C6_from11BC ]
+  %rcx_10D0 = phi i64 [ 0, %bb_1080 ], [ %rcx_inc_11C6, %bb_11C6 ], [ %rcx_inc_11BC, %bb_11C6_from11BC ]
+  %rdi_10D0 = getelementptr inbounds i8, i8* %rsi_10D0, i64 4
+  %rax_10D0 = getelementptr inbounds i8, i8* %rsi_10D0, i64 0
+  %p_rsi4_i32 = bitcast i8* %rdi_10D0 to i32*
+  %edx_10D0 = load i32, i32* %p_rsi4_i32, align 4
+  %p_rsi0_i32 = bitcast i8* %rsi_10D0 to i32*
+  %r8d_10D0 = load i32, i32* %p_rsi0_i32, align 4
+  %cmp_10D0 = icmp sle i32 %r8d_10D0, %edx_10D0
+  br i1 %cmp_10D0, label %bb_12C3, label %bb_10E6
+
+bb_12C3:                                              ; preds = %bb_10D0
+  %rsi_12C3 = getelementptr inbounds i8, i8* %rdi_10D0, i64 0
+  %rax_12C3 = getelementptr inbounds i8, i8* %rdi_10D0, i64 0
+  br label %bb_11C6
+
+bb_10E6:                                              ; preds = %bb_10D0
+  store i32 %r8d_10D0, i32* %p_rsi4_i32, align 4
+  %tst_10EA = icmp eq i64 %rcx_10D0, 0
+  br i1 %tst_10EA, label %bb_1234, label %bb_10F3
+
+bb_1234:                                              ; preds = %bb_10E6
+  %base_i32p_1234 = bitcast i8* %base to i32*
+  store i32 %edx_10D0, i32* %base_i32p, align 4
+  %p_rdi8 = getelementptr inbounds i8, i8* %rdi_10D0, i64 8
+  %p_rdi8_i32 = bitcast i8* %p_rdi8 to i32*
+  %edx_1234 = load i32, i32* %p_rdi8_i32, align 4
+  %rsi_1234 = getelementptr inbounds i8, i8* %rsi_10D0, i64 8
+  %rax_1234 = getelementptr inbounds i8, i8* %rdi_10D0, i64 0
+  %ecx_from_rdi_1234 = bitcast i8* %rdi_10D0 to i32*
+  %ecxval_1234 = load i32, i32* %ecx_from_rdi_1234, align 4
+  %cmp_1243 = icmp sle i32 %ecxval_1234, %edx_1234
+  br i1 %cmp_1243, label %bb_13CC, label %bb_124B
+
+bb_124B:                                              ; preds = %bb_1234
+  %p_rdi4_i32_124B = getelementptr inbounds i8, i8* %rdi_10D0, i64 4
+  %p_rdi4_i32_124B_cast = bitcast i8* %p_rdi4_i32_124B to i32*
+  store i32 %ecxval_1234, i32* %p_rdi4_i32_124B_cast, align 4
+  br label %bb_1251
+
+bb_1251:                                              ; preds = %bb_124B
+  br label %bb_1288
+
+bb_13CC:                                              ; preds = %bb_1234
+  %rax_13CC = getelementptr inbounds i8, i8* %rsi_1234, i64 0
+  br label %bb_11C6_setup1
+
+bb_11C6_setup1:                                       ; preds = %bb_13CC
+  %rcx_11C6_setup1 = add i64 0, 1
+  br label %bb_11C6_join
+
+bb_10F3:                                              ; preds = %bb_10E6, %bb_1288
+  %rax_10F3 = phi i8* [ %rax_10D0, %bb_10E6 ], [ %rax_1288, %bb_1288 ]
+  %rdi_10F3 = phi i8* [ %rdi_10D0, %bb_10E6 ], [ %rdi_out_1288, %bb_1288 ]
+  %rsi_10F3 = phi i8* [ %rsi_10D0, %bb_10E6 ], [ %rsi_out_1288, %bb_1288 ]
+  %rcx_10F3 = phi i64 [ %rcx_10D0, %bb_10E6 ], [ %rcx_1288, %bb_1288 ]
+  %edx_10F3 = phi i32 [ %edx_10D0, %bb_10E6 ], [ %edx_1288, %bb_1288 ]
+  %ptr_m4 = getelementptr inbounds i8, i8* %rax_10F3, i64 -4
+  %ptr_m4_i32 = bitcast i8* %ptr_m4 to i32*
+  %r8d_m4 = load i32, i32* %ptr_m4_i32, align 4
+  %cmp_10F7 = icmp sle i32 %r8d_m4, %edx_10F3
+  br i1 %cmp_10F7, label %bb_125B, label %bb_1100
+
+bb_125B:                                              ; preds = %bb_10F3
+  %rsi_125B = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %rax_125B = getelementptr inbounds i8, i8* %rax_10F3, i64 0
+  br label %bb_11C6
+
+bb_1100:                                              ; preds = %bb_10F3
+  %ptr_ax_i32 = bitcast i8* %rax_10F3 to i32*
+  store i32 %r8d_m4, i32* %ptr_ax_i32, align 4
+  %cmp1 = icmp eq i64 %rcx_10F3, 1
+  br i1 %cmp1, label %bb_1263, label %bb_110D
+
+bb_1263:                                              ; preds = %bb_1100
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_1263 = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_1263 = bitcast i8* %p_rdi8_1263 to i32*
+  %edx_1263 = load i32, i32* %p_rdi8_i32_1263, align 4
+  %rsi_1263 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_1263 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_1263 = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_1263 = load i32, i32* %ecxptr_1263, align 4
+  %cmp_1272 = icmp sge i32 %edx_1263, %ecxval_1263
+  br i1 %cmp_1272, label %bb_13BF, label %bb_127A
+
+bb_127A:                                              ; preds = %bb_1263
+  %p_rdi4_i32_127A = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_127A_cast = bitcast i8* %p_rdi4_i32_127A to i32*
+  store i32 %ecxval_1263, i32* %p_rdi4_i32_127A_cast, align 4
+  br label %bb_1282
+
+bb_1282:                                              ; preds = %bb_127A
+  br label %bb_1288
+
+bb_13BF:                                              ; preds = %bb_1263
+  %rax_13BF = getelementptr inbounds i8, i8* %rsi_1263, i64 0
+  br label %bb_11C6_setup2
+
+bb_11C6_setup2:                                       ; preds = %bb_13BF
+  %rcx_11C6_setup2 = add i64 1, 1
+  br label %bb_11C6_join
+
+bb_110D:                                              ; preds = %bb_1100
+  %ptr_m8 = getelementptr inbounds i8, i8* %rax_10F3, i64 -8
+  %ptr_m8_i32 = bitcast i8* %ptr_m8 to i32*
+  %r8d_m8 = load i32, i32* %ptr_m8_i32, align 4
+  %cmp_1111 = icmp sle i32 %r8d_m8, %edx_10F3
+  br i1 %cmp_1111, label %bb_1296, label %bb_111A
+
+bb_1296:                                              ; preds = %bb_110D
+  %rax_1296 = getelementptr inbounds i8, i8* %rsi_10F3, i64 -4
+  %rsi_1296 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_111A:                                              ; preds = %bb_110D
+  %ptr_m4_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -4
+  %ptr_m4_dst_i32 = bitcast i8* %ptr_m4_dst to i32*
+  store i32 %r8d_m8, i32* %ptr_m4_dst_i32, align 4
+  %cmp2 = icmp eq i64 %rcx_10F3, 2
+  br i1 %cmp2, label %bb_12A2, label %bb_1128
+
+bb_12A2:                                              ; preds = %bb_111A
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_12A2 = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_12A2 = bitcast i8* %p_rdi8_12A2 to i32*
+  %edx_12A2 = load i32, i32* %p_rdi8_i32_12A2, align 4
+  %rsi_12A2 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_12A2 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_12A2 = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_12A2 = load i32, i32* %ecxptr_12A2, align 4
+  %cmp_12B1 = icmp sle i32 %ecxval_12A2, %edx_12A2
+  br i1 %cmp_12B1, label %bb_1400, label %bb_12B9
+
+bb_12B9:                                              ; preds = %bb_12A2
+  %p_rdi4_i32_12B9 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_12B9_cast = bitcast i8* %p_rdi4_i32_12B9 to i32*
+  store i32 %ecxval_12A2, i32* %p_rdi4_i32_12B9_cast, align 4
+  br label %bb_12C1
+
+bb_12C1:                                              ; preds = %bb_12B9
+  br label %bb_1288
+
+bb_1400:                                              ; preds = %bb_12A2
+  %rax_1400 = getelementptr inbounds i8, i8* %rsi_12A2, i64 0
+  br label %bb_11C6_setup3
+
+bb_11C6_setup3:                                       ; preds = %bb_1400
+  %rcx_11C6_setup3 = add i64 2, 1
+  br label %bb_11C6_join
+
+bb_1128:                                              ; preds = %bb_111A
+  %ptr_m12 = getelementptr inbounds i8, i8* %rax_10F3, i64 -12
+  %ptr_m12_i32 = bitcast i8* %ptr_m12 to i32*
+  %r8d_m12 = load i32, i32* %ptr_m12_i32, align 4
+  %cmp_112C = icmp sle i32 %r8d_m12, %edx_10F3
+  br i1 %cmp_112C, label %bb_12CE, label %bb_1135
+
+bb_12CE:                                              ; preds = %bb_1128
+  %rax_12CE = getelementptr inbounds i8, i8* %rsi_10F3, i64 -8
+  %rsi_12CE = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_1135:                                              ; preds = %bb_1128
+  %ptr_m8_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -8
+  %ptr_m8_dst_i32 = bitcast i8* %ptr_m8_dst to i32*
+  store i32 %r8d_m12, i32* %ptr_m8_dst_i32, align 4
+  %cmp3 = icmp eq i64 %rcx_10F3, 3
+  br i1 %cmp3, label %bb_12DA, label %bb_1143
+
+bb_12DA:                                              ; preds = %bb_1135
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_12DA = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_12DA = bitcast i8* %p_rdi8_12DA to i32*
+  %edx_12DA = load i32, i32* %p_rdi8_i32_12DA, align 4
+  %rsi_12DA = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_12DA = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_12DA = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_12DA = load i32, i32* %ecxptr_12DA, align 4
+  %cmp_12E9 = icmp sge i32 %edx_12DA, %ecxval_12DA
+  br i1 %cmp_12E9, label %bb_140D, label %bb_12F1
+
+bb_12F1:                                              ; preds = %bb_12DA
+  %p_rdi4_i32_12F1 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_12F1_cast = bitcast i8* %p_rdi4_i32_12F1 to i32*
+  store i32 %ecxval_12DA, i32* %p_rdi4_i32_12F1_cast, align 4
+  br label %bb_12F9
+
+bb_12F9:                                              ; preds = %bb_12F1
+  br label %bb_1288
+
+bb_140D:                                              ; preds = %bb_12DA
+  %rax_140D = getelementptr inbounds i8, i8* %rsi_12DA, i64 0
+  br label %bb_11C6_setup4
+
+bb_11C6_setup4:                                       ; preds = %bb_140D
+  %rcx_11C6_setup4 = add i64 3, 1
+  br label %bb_11C6_join
+
+bb_1143:                                              ; preds = %bb_1135
+  %ptr_m16 = getelementptr inbounds i8, i8* %rax_10F3, i64 -16
+  %ptr_m16_i32 = bitcast i8* %ptr_m16 to i32*
+  %r8d_m16 = load i32, i32* %ptr_m16_i32, align 4
+  %cmp_1147 = icmp sle i32 %r8d_m16, %edx_10F3
+  br i1 %cmp_1147, label %bb_12FB, label %bb_1150
+
+bb_12FB:                                              ; preds = %bb_1143
+  %rax_12FB = getelementptr inbounds i8, i8* %rsi_10F3, i64 -12
+  %rsi_12FB = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_1150:                                              ; preds = %bb_1143
+  %ptr_m12_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -12
+  %ptr_m12_dst_i32 = bitcast i8* %ptr_m12_dst to i32*
+  store i32 %r8d_m16, i32* %ptr_m12_dst_i32, align 4
+  %cmp4 = icmp eq i64 %rcx_10F3, 4
+  br i1 %cmp4, label %bb_1307, label %bb_115E
+
+bb_1307:                                              ; preds = %bb_1150
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_1307 = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_1307 = bitcast i8* %p_rdi8_1307 to i32*
+  %edx_1307 = load i32, i32* %p_rdi8_i32_1307, align 4
+  %rsi_1307 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_1307 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_1307 = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_1307 = load i32, i32* %ecxptr_1307, align 4
+  %cmp_1316 = icmp sge i32 %edx_1307, %ecxval_1307
+  br i1 %cmp_1316, label %bb_13E6, label %bb_131E
+
+bb_131E:                                              ; preds = %bb_1307
+  %p_rdi4_i32_131E = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_131E_cast = bitcast i8* %p_rdi4_i32_131E to i32*
+  store i32 %ecxval_1307, i32* %p_rdi4_i32_131E_cast, align 4
+  br label %bb_1326
+
+bb_1326:                                              ; preds = %bb_131E
+  br label %bb_1288
+
+bb_13E6:                                              ; preds = %bb_1307
+  %rax_13E6 = getelementptr inbounds i8, i8* %rsi_1307, i64 0
+  br label %bb_11C6_setup5
+
+bb_11C6_setup5:                                       ; preds = %bb_13E6
+  %rcx_11C6_setup5 = add i64 4, 1
+  br label %bb_11C6_join
+
+bb_115E:                                              ; preds = %bb_1150
+  %ptr_m20 = getelementptr inbounds i8, i8* %rax_10F3, i64 -20
+  %ptr_m20_i32 = bitcast i8* %ptr_m20 to i32*
+  %r8d_m20 = load i32, i32* %ptr_m20_i32, align 4
+  %cmp_1162 = icmp sle i32 %r8d_m20, %edx_10F3
+  br i1 %cmp_1162, label %bb_132B, label %bb_116B
+
+bb_132B:                                              ; preds = %bb_115E
+  %rax_132B = getelementptr inbounds i8, i8* %rsi_10F3, i64 -16
+  %rsi_132B = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_116B:                                              ; preds = %bb_115E
+  %ptr_m16_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -16
+  %ptr_m16_dst_i32 = bitcast i8* %ptr_m16_dst to i32*
+  store i32 %r8d_m20, i32* %ptr_m16_dst_i32, align 4
+  %cmp5 = icmp eq i64 %rcx_10F3, 5
+  br i1 %cmp5, label %bb_1337, label %bb_1179
+
+bb_1337:                                              ; preds = %bb_116B
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_1337 = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_1337 = bitcast i8* %p_rdi8_1337 to i32*
+  %edx_1337 = load i32, i32* %p_rdi8_i32_1337, align 4
+  %rsi_1337 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_1337 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_1337 = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_1337 = load i32, i32* %ecxptr_1337, align 4
+  %cmp_1346 = icmp sge i32 %edx_1337, %ecxval_1337
+  br i1 %cmp_1346, label %bb_13F3, label %bb_134E
+
+bb_134E:                                              ; preds = %bb_1337
+  %p_rdi4_i32_134E = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_134E_cast = bitcast i8* %p_rdi4_i32_134E to i32*
+  store i32 %ecxval_1337, i32* %p_rdi4_i32_134E_cast, align 4
+  br label %bb_1356
+
+bb_1356:                                              ; preds = %bb_134E
+  br label %bb_1288
+
+bb_13F3:                                              ; preds = %bb_1337
+  %rax_13F3 = getelementptr inbounds i8, i8* %rsi_1337, i64 0
+  br label %bb_11C6_setup6
+
+bb_11C6_setup6:                                       ; preds = %bb_13F3
+  %rcx_11C6_setup6 = add i64 5, 1
+  br label %bb_11C6_join
+
+bb_1179:                                              ; preds = %bb_116B
+  %ptr_m24 = getelementptr inbounds i8, i8* %rax_10F3, i64 -24
+  %ptr_m24_i32 = bitcast i8* %ptr_m24 to i32*
+  %r8d_m24 = load i32, i32* %ptr_m24_i32, align 4
+  %cmp_117D = icmp sle i32 %r8d_m24, %edx_10F3
+  br i1 %cmp_117D, label %bb_135B, label %bb_1186
+
+bb_135B:                                              ; preds = %bb_1179
+  %rax_135B = getelementptr inbounds i8, i8* %rsi_10F3, i64 -20
+  %rsi_135B = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_1186:                                              ; preds = %bb_1179
+  %ptr_m20_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -20
+  %ptr_m20_dst_i32 = bitcast i8* %ptr_m20_dst to i32*
+  store i32 %r8d_m24, i32* %ptr_m20_dst_i32, align 4
+  %cmp6 = icmp eq i64 %rcx_10F3, 6
+  br i1 %cmp6, label %bb_1367, label %bb_1194
+
+bb_1367:                                              ; preds = %bb_1186
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_1367 = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_1367 = bitcast i8* %p_rdi8_1367 to i32*
+  %edx_1367 = load i32, i32* %p_rdi8_i32_1367, align 4
+  %rsi_1367 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_1367 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_1367 = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_1367 = load i32, i32* %ecxptr_1367, align 4
+  %cmp_1376 = icmp sge i32 %edx_1367, %ecxval_1367
+  br i1 %cmp_1376, label %bb_13D9, label %bb_137A
+
+bb_137A:                                              ; preds = %bb_1367
+  %p_rdi4_i32_137A = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_137A_cast = bitcast i8* %p_rdi4_i32_137A to i32*
+  store i32 %ecxval_1367, i32* %p_rdi4_i32_137A_cast, align 4
+  br label %bb_1382
+
+bb_1382:                                              ; preds = %bb_137A
+  br label %bb_1288
+
+bb_13D9:                                              ; preds = %bb_1367
+  %rax_13D9 = getelementptr inbounds i8, i8* %rsi_1367, i64 0
+  br label %bb_11C6_setup7
+
+bb_11C6_setup7:                                       ; preds = %bb_13D9
+  %rcx_11C6_setup7 = add i64 6, 1
+  br label %bb_11C6_join
+
+bb_1194:                                              ; preds = %bb_1186
+  %ptr_m28 = getelementptr inbounds i8, i8* %rax_10F3, i64 -28
+  %ptr_m28_i32 = bitcast i8* %ptr_m28 to i32*
+  %r8d_m28 = load i32, i32* %ptr_m28_i32, align 4
+  %cmp_1198 = icmp sle i32 %r8d_m28, %edx_10F3
+  br i1 %cmp_1198, label %bb_1387, label %bb_11A1
+
+bb_1387:                                              ; preds = %bb_1194
+  %rax_1387 = getelementptr inbounds i8, i8* %rsi_10F3, i64 -24
+  %rsi_1387 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_11A1:                                              ; preds = %bb_1194
+  %ptr_m24_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -24
+  %ptr_m24_dst_i32 = bitcast i8* %ptr_m24_dst to i32*
+  store i32 %r8d_m28, i32* %ptr_m24_dst_i32, align 4
+  %cmp7 = icmp eq i64 %rcx_10F3, 7
+  br i1 %cmp7, label %bb_1393, label %bb_11AF
+
+bb_1393:                                              ; preds = %bb_11A1
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %p_rdi8_1393 = getelementptr inbounds i8, i8* %rdi_10F3, i64 8
+  %p_rdi8_i32_1393 = bitcast i8* %p_rdi8_1393 to i32*
+  %edx_1393 = load i32, i32* %p_rdi8_i32_1393, align 4
+  %rsi_1393 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %rax_1393 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %ecxptr_1393 = bitcast i8* %rdi_10F3 to i32*
+  %ecxval_1393 = load i32, i32* %ecxptr_1393, align 4
+  %cmp_13A4 = icmp sge i32 %edx_1393, %ecxval_1393
+  br i1 %cmp_13A4, label %bb_141A, label %bb_13A6
+
+bb_13A6:                                              ; preds = %bb_1393
+  %p_rdi4_i32_13A6 = getelementptr inbounds i8, i8* %rdi_10F3, i64 4
+  %p_rdi4_i32_13A6_cast = bitcast i8* %p_rdi4_i32_13A6 to i32*
+  store i32 %ecxval_1393, i32* %p_rdi4_i32_13A6_cast, align 4
+  br label %bb_13AE
+
+bb_13AE:                                              ; preds = %bb_13A6
+  br label %bb_1288
+
+bb_141A:                                              ; preds = %bb_1393
+  %rax_141A = getelementptr inbounds i8, i8* %rsi_1393, i64 0
+  br label %bb_11C6_setup8
+
+bb_11C6_setup8:                                       ; preds = %bb_141A
+  %rcx_11C6_setup8 = add i64 7, 1
+  br label %bb_11C6_join
+
+bb_11AF:                                              ; preds = %bb_11A1
+  %ptr_m32 = getelementptr inbounds i8, i8* %rax_10F3, i64 -32
+  %ptr_m32_i32 = bitcast i8* %ptr_m32 to i32*
+  %r8d_m32 = load i32, i32* %ptr_m32_i32, align 4
+  %cmp_11B3 = icmp sle i32 %r8d_m32, %edx_10F3
+  br i1 %cmp_11B3, label %bb_13B3, label %bb_11BC
+
+bb_13B3:                                              ; preds = %bb_11AF
+  %rax_13B3 = getelementptr inbounds i8, i8* %rsi_10F3, i64 -28
+  %rsi_13B3 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  br label %bb_11C6
+
+bb_11BC:                                              ; preds = %bb_11AF
+  %ptr_m28_dst = getelementptr inbounds i8, i8* %rax_10F3, i64 -28
+  %ptr_m28_dst_i32 = bitcast i8* %ptr_m28_dst to i32*
+  store i32 %r8d_m32, i32* %ptr_m28_dst_i32, align 4
+  %rsi_11C0 = getelementptr inbounds i8, i8* %rdi_10F3, i64 0
+  %rax_11C3 = getelementptr inbounds i8, i8* %base, i64 0
+  br label %bb_11C6_from11BC
+
+bb_11C6_from11BC:                                     ; preds = %bb_11BC
+  %rcx_inc_11BC = add i64 %rcx_10F3, 1
+  store i32 %edx_10F3, i32* %base_i32p, align 4
+  %cmp_11D0_11BC = icmp ne i64 %rcx_inc_11BC, 9
+  br i1 %cmp_11D0_11BC, label %bb_10D0, label %bb_11D6
+
+bb_1288:                                              ; preds = %bb_13AE, %bb_1382, %bb_1356, %bb_1326, %bb_12F9, %bb_12C1, %bb_1282, %bb_1251
+  %rsi_in_1288 = phi i8* [ %rsi_1234, %bb_1251 ], [ %rsi_1263, %bb_1282 ], [ %rsi_12A2, %bb_12C1 ], [ %rsi_12DA, %bb_12F9 ], [ %rsi_1307, %bb_1326 ], [ %rsi_1337, %bb_1356 ], [ %rsi_1367, %bb_1382 ], [ %rsi_1393, %bb_13AE ]
+  %rdi_in_1288 = phi i8* [ %rdi_10D0, %bb_1251 ], [ %rdi_10F3, %bb_1282 ], [ %rdi_10F3, %bb_12C1 ], [ %rdi_10F3, %bb_12F9 ], [ %rdi_10F3, %bb_1326 ], [ %rdi_10F3, %bb_1356 ], [ %rdi_10F3, %bb_1382 ], [ %rdi_10F3, %bb_13AE ]
+  %rax_1288 = phi i8* [ %rax_1234, %bb_1251 ], [ %rax_1263, %bb_1282 ], [ %rax_12A2, %bb_12C1 ], [ %rax_12DA, %bb_12F9 ], [ %rax_1307, %bb_1326 ], [ %rax_1337, %bb_1356 ], [ %rax_1367, %bb_1382 ], [ %rax_1393, %bb_13AE ]
+  %rcx_1288 = phi i64 [ 1, %bb_1251 ], [ 2, %bb_1282 ], [ 3, %bb_12C1 ], [ 4, %bb_12F9 ], [ 5, %bb_1326 ], [ 6, %bb_1356 ], [ 7, %bb_1382 ], [ 8, %bb_13AE ]
+  %edx_1288 = phi i32 [ %edx_1234, %bb_1251 ], [ %edx_1263, %bb_1282 ], [ %edx_12A2, %bb_12C1 ], [ %edx_12DA, %bb_12F9 ], [ %edx_1307, %bb_1326 ], [ %edx_1337, %bb_1356 ], [ %edx_1367, %bb_1382 ], [ %edx_1393, %bb_13AE ]
+  %r8_tmp = getelementptr inbounds i8, i8* %rsi_in_1288, i64 0
+  %rsi_out_1288 = getelementptr inbounds i8, i8* %rdi_in_1288, i64 0
+  %rdi_out_1288 = getelementptr inbounds i8, i8* %r8_tmp, i64 0
+  br label %bb_10F3
+
+bb_11C6_join:                                         ; preds = %bb_11C6_setup8, %bb_11C6_setup7, %bb_11C6_setup6, %bb_11C6_setup5, %bb_11C6_setup4, %bb_11C6_setup3, %bb_11C6_setup2, %bb_11C6_setup1
+  %rax_11C6_join = phi i8* [ %rax_141A, %bb_11C6_setup8 ], [ %rax_13D9, %bb_11C6_setup7 ], [ %rax_13F3, %bb_11C6_setup6 ], [ %rax_13E6, %bb_11C6_setup5 ], [ %rax_140D, %bb_11C6_setup4 ], [ %rax_1400, %bb_11C6_setup3 ], [ %rax_13BF, %bb_11C6_setup2 ], [ %rax_13CC, %bb_11C6_setup1 ]
+  %rcx_11C6_join = phi i64 [ %rcx_11C6_setup8, %bb_11C6_setup8 ], [ %rcx_11C6_setup7, %bb_11C6_setup7 ], [ %rcx_11C6_setup6, %bb_11C6_setup6 ], [ %rcx_11C6_setup5, %bb_11C6_setup5 ], [ %rcx_11C6_setup4, %bb_11C6_setup4 ], [ %rcx_11C6_setup3, %bb_11C6_setup3 ], [ %rcx_11C6_setup2, %bb_11C6_setup2 ], [ %rcx_11C6_setup1, %bb_11C6_setup1 ]
+  %edx_11C6_join = phi i32 [ %edx_1393, %bb_11C6_setup8 ], [ %edx_1367, %bb_11C6_setup7 ], [ %edx_1337, %bb_11C6_setup6 ], [ %edx_1307, %bb_11C6_setup5 ], [ %edx_12DA, %bb_11C6_setup4 ], [ %edx_12A2, %bb_11C6_setup3 ], [ %edx_1263, %bb_11C6_setup2 ], [ %edx_1234, %bb_11C6_setup1 ]
+  %rsi_11C6_join = phi i8* [ %rsi_1393, %bb_11C6_setup8 ], [ %rsi_1367, %bb_11C6_setup7 ], [ %rsi_1337, %bb_11C6_setup6 ], [ %rsi_1307, %bb_11C6_setup5 ], [ %rsi_12DA, %bb_11C6_setup4 ], [ %rsi_12A2, %bb_11C6_setup3 ], [ %rsi_1263, %bb_11C6_setup2 ], [ %rsi_1234, %bb_11C6_setup1 ]
+  br label %bb_11C6
+
+bb_11C6:                                              ; preds = %bb_13B3, %bb_1387, %bb_135B, %bb_132B, %bb_12FB, %bb_12CE, %bb_1296, %bb_125B, %bb_12C3, %bb_11C6_join
+  %rax_11C6 = phi i8* [ %rax_11C6_join, %bb_11C6_join ], [ %rax_12C3, %bb_12C3 ], [ %rax_125B, %bb_125B ], [ %rax_1296, %bb_1296 ], [ %rax_12CE, %bb_12CE ], [ %rax_12FB, %bb_12FB ], [ %rax_132B, %bb_132B ], [ %rax_135B, %bb_135B ], [ %rax_1387, %bb_1387 ], [ %rax_13B3, %bb_13B3 ]
+  %rcx_in_11C6 = phi i64 [ %rcx_11C6_join, %bb_11C6_join ], [ %rcx_10D0, %bb_12C3 ], [ %rcx_10F3, %bb_125B ], [ %rcx_10F3, %bb_1296 ], [ %rcx_10F3, %bb_12CE ], [ %rcx_10F3, %bb_12FB ], [ %rcx_10F3, %bb_132B ], [ %rcx_10F3, %bb_135B ], [ %rcx_10F3, %bb_1387 ], [ %rcx_10F3, %bb_13B3 ]
+  %edx_in_11C6 = phi i32 [ %edx_11C6_join, %bb_11C6_join ], [ %edx_10D0, %bb_12C3 ], [ %edx_10F3, %bb_125B ], [ %edx_10F3, %bb_1296 ], [ %edx_10F3, %bb_12CE ], [ %edx_10F3, %bb_12FB ], [ %edx_10F3, %bb_132B ], [ %edx_10F3, %bb_135B ], [ %edx_10F3, %bb_1387 ], [ %edx_10F3, %bb_13B3 ]
+  %rsi_next_11C6 = phi i8* [ %rsi_11C6_join, %bb_11C6_join ], [ %rsi_12C3, %bb_12C3 ], [ %rsi_125B, %bb_125B ], [ %rsi_1296, %bb_1296 ], [ %rsi_12CE, %bb_12CE ], [ %rsi_12FB, %bb_12FB ], [ %rsi_132B, %bb_132B ], [ %rsi_135B, %bb_135B ], [ %rsi_1387, %bb_1387 ], [ %rsi_13B3, %bb_13B3 ]
+  %rcx_inc_11C6 = add i64 %rcx_in_11C6, 1
+  %rax_i32p_11C6 = bitcast i8* %rax_11C6 to i32*
+  store i32 %edx_in_11C6, i32* %rax_i32p_11C6, align 4
+  %cmp_11D0 = icmp ne i64 %rcx_inc_11C6, 9
+  br i1 %cmp_11D0, label %bb_10D0, label %bb_11D6
+
+bb_11D6:                                              ; preds = %bb_11C6, %bb_11C6_from11BC
+  %endptr = getelementptr inbounds i8, i8* %base, i64 40
+  %r12_fmt = getelementptr inbounds i8, i8* @unk_2004, i64 0
+  br label %bb_11E8
+
+bb_11E8:                                              ; preds = %bb_1200, %bb_11D6
+  %rbx_cur = phi i8* [ %base, %bb_11D6 ], [ %rbx_next, %bb_1200 ]
+  %val_i32p = bitcast i8* %rbx_cur to i32*
+  %val = load i32, i32* %val_i32p, align 4
+  %call_pr = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %r12_fmt, i32 %val)
+  %rbx_next = getelementptr inbounds i8, i8* %rbx_cur, i64 4
+  br label %bb_1200
+
+bb_1200:                                              ; preds = %bb_11E8
+  %cond = icmp ne i8* %endptr, %rbx_next
+  br i1 %cond, label %bb_11E8, label %bb_1202
+
+bb_1202:                                              ; preds = %bb_1200
+  %fmt_nl = getelementptr inbounds i8, i8* @unk_2008, i64 0
+  %call_nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt_nl)
+  %guard_saved = load i64, i64* %saved_guard, align 8
+  %guard_now = load i64, i64* @__stack_chk_guard
+  %chk = icmp ne i64 %guard_saved, %guard_now
+  br i1 %chk, label %bb_1427, label %bb_1229
+
+bb_1229:                                              ; preds = %bb_1202
+  ret i32 0
+
+bb_1427:                                              ; preds = %bb_1202
+  call void @__stack_chk_fail()
+  unreachable
+}

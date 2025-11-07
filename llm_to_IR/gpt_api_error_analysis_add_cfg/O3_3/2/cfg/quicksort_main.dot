@@ -1,0 +1,20 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5f05c9d811d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loc_1080:\l|  %buf = alloca [48 x i8], align 16\l  %buf.base.i8 = getelementptr inbounds [48 x i8], ptr %buf, i64 0, i64 0\l  %guard0 = load i64, ptr @__stack_chk_guard, align 8\l  %end.ptr = getelementptr inbounds i8, ptr %buf.base.i8, i64 36\l  %slot.ptr = bitcast ptr %end.ptr to ptr\l  store i64 %guard0, ptr %slot.ptr, align 8\l  %vec0 = load \<4 x i32\>, ptr @xmmword_2010, align 16\l  %ptr.vec0 = bitcast ptr %buf.base.i8 to ptr\l  store \<4 x i32\> %vec0, ptr %ptr.vec0, align 16\l  %ptr.vec1.i8 = getelementptr inbounds i8, ptr %buf.base.i8, i64 16\l  %ptr.vec1 = bitcast ptr %ptr.vec1.i8 to ptr\l  %vec1 = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %vec1, ptr %ptr.vec1, align 16\l  %base.i32 = bitcast ptr %buf.base.i8 to ptr\l  %idx8 = getelementptr inbounds i32, ptr %base.i32, i64 8\l  store i32 4, ptr %idx8, align 4\l  %q.base = bitcast ptr %buf.base.i8 to ptr\l  call void @quick_sort(ptr noundef %q.base, i32 noundef 0, i32 noundef 9)\l  br label %loc_10DC\l}"];
+	Node0x5f05c9d811d0 -> Node0x5f05c9d830a0[tooltip="loc_1080 -> loc_10DC\nProbability 100.00%" ];
+	Node0x5f05c9d830a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loc_10DC:\l|  br label %loc_10E0\l}"];
+	Node0x5f05c9d830a0 -> Node0x5f05c9d83160[tooltip="loc_10DC -> loc_10E0\nProbability 100.00%" ];
+	Node0x5f05c9d83160 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_10E0:\l|  %rbx.cur = phi ptr [ %buf.base.i8, %loc_10DC ], [ %rbx.next.2, %loc_10F5 ]\l  %rbx.cur.i32p = bitcast ptr %rbx.cur to ptr\l  %val = load i32, ptr %rbx.cur.i32p, align 4\l  %rbx.next = getelementptr inbounds i8, ptr %rbx.cur, i64 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @unk_2004, i64 0, i64 0\l  %call1 = call i32 (i32, ptr, ...) @___printf_chk(i32 noundef 2, ptr noundef\l... %fmt.ptr, i32 noundef %val)\l  br label %loc_10F5\l}"];
+	Node0x5f05c9d83160 -> Node0x5f05c9d832b0[tooltip="loc_10E0 -> loc_10F5\nProbability 100.00%" ];
+	Node0x5f05c9d832b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loc_10F5:\l|  %rbx.next.2 = phi ptr [ %rbx.next, %loc_10E0 ]\l  %cmp = icmp ne ptr %end.ptr, %rbx.next.2\l  br i1 %cmp, label %loc_10E0, label %loc_10FA\l|{<s0>T|<s1>F}}"];
+	Node0x5f05c9d832b0:s0 -> Node0x5f05c9d83160[tooltip="loc_10F5 -> loc_10E0\nProbability 96.88%" ];
+	Node0x5f05c9d832b0:s1 -> Node0x5f05c9d83bd0[tooltip="loc_10F5 -> loc_10FA\nProbability 3.12%" ];
+	Node0x5f05c9d83bd0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loc_10FA:\l|  %nl.ptr = getelementptr inbounds [2 x i8], ptr @unk_2008, i64 0, i64 0\l  %call2 = call i32 (i32, ptr, ...) @___printf_chk(i32 noundef 2, ptr noundef\l... %nl.ptr)\l  br label %loc_110D\l}"];
+	Node0x5f05c9d83bd0 -> Node0x5f05c9d83ee0[tooltip="loc_10FA -> loc_110D\nProbability 100.00%" ];
+	Node0x5f05c9d83ee0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loc_110D:\l|  %saved = load i64, ptr %slot.ptr, align 8\l  %guard1 = load i64, ptr @__stack_chk_guard, align 8\l  %ok = icmp eq i64 %saved, %guard1\l  br i1 %ok, label %loc_111D, label %loc_1128\l|{<s0>T|<s1>F}}"];
+	Node0x5f05c9d83ee0:s0 -> Node0x5f05c9d84190[tooltip="loc_110D -> loc_111D\nProbability 100.00%" ];
+	Node0x5f05c9d83ee0:s1 -> Node0x5f05c9d841e0[tooltip="loc_110D -> loc_1128\nProbability 0.00%" ];
+	Node0x5f05c9d84190 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{loc_111D:\l|  ret i32 0\l}"];
+	Node0x5f05c9d841e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e5d8d170" fontname="Courier",label="{loc_1128:\l|  call void @___stack_chk_fail()\l  unreachable\l}"];
+}

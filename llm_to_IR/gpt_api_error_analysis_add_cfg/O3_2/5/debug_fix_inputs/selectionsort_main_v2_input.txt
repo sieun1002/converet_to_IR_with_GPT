@@ -1,0 +1,64 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_2/5/selectionsort_main1.ll:35:14: error: expected instruction opcode
+;   br label %0x10E0
+;              ^
+; === ERROR LOG END ===
+
+; ModuleID = 'main_module'
+target triple = "x86_64-pc-linux-gnu"
+
+@xmmword_2020 = external global <4 x i32>, align 16
+@__stack_chk_guard = external thread_local global i64
+
+@.str = private unnamed_addr constant [4 x i8] c"%d \00", align 1
+@.str.sorted = private unnamed_addr constant [15 x i8] c"Sorted array: \00", align 1
+
+declare void @selection_sort(i32*, i32)
+declare i32 @___printf_chk(i32, i8*, ...)
+declare void @___stack_chk_fail() noreturn
+
+define i32 @main() {
+0x1080:
+  %arr = alloca [5 x i32], align 16
+  %saved_canary = alloca i64, align 8
+
+  %vec = load <4 x i32>, <4 x i32>* @xmmword_2020, align 16
+  %base = getelementptr inbounds [5 x i32], [5 x i32]* %arr, i64 0, i64 0
+  %vecptr = bitcast i32* %base to <4 x i32>*
+  store <4 x i32> %vec, <4 x i32>* %vecptr, align 16
+  %fifth = getelementptr inbounds i32, i32* %base, i64 4
+  store i32 13, i32* %fifth, align 4
+
+  %canary = load i64, i64* @__stack_chk_guard
+  store i64 %canary, i64* %saved_canary, align 8
+
+  %end = getelementptr inbounds i32, i32* %base, i64 5
+
+  call void @selection_sort(i32* %base, i32 5)
+
+  %hfmt = getelementptr inbounds [15 x i8], [15 x i8]* @.str.sorted, i64 0, i64 0
+  %hdr = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %hfmt)
+  br label %0x10E0
+
+0x10E0:
+  %cur = phi i32* [ %base, %0x1080 ], [ %next, %0x10E0 ]
+  %val = load i32, i32* %cur, align 4
+  %fmt = getelementptr inbounds [4 x i8], [4 x i8]* @.str, i64 0, i64 0
+  %call = call i32 (i32, i8*, ...) @___printf_chk(i32 2, i8* %fmt, i32 %val)
+  %next = getelementptr inbounds i32, i32* %cur, i64 1
+  %cont = icmp ne i32* %next, %end
+  br i1 %cont, label %0x10E0, label %0x10FA
+
+0x10FA:
+  %cur_canary = load i64, i64* @__stack_chk_guard
+  %saved_val = load i64, i64* %saved_canary, align 8
+  %mismatch = icmp ne i64 %saved_val, %cur_canary
+  br i1 %mismatch, label %0x1115, label %ret
+
+ret:
+  ret i32 0
+
+0x1115:
+  call void @___stack_chk_fail()
+  unreachable
+}

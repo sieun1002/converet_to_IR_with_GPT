@@ -1,0 +1,332 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/5/DFS_main1.ll:72:28: error: use of undefined value '%rdi.next.1341'
+;   %rdi.ph.1208 = phi i64 [ %rdi.next.1341, %bb_1341 ], [ %rdi.pass.1412, %bb_1412 ]
+;                            ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered_main'
+target triple = "x86_64-pc-linux-gnu"
+
+@qword_2028 = external global i8*
+@__stack_chk_guard = external global i64
+@aDfsPreorderFro = constant [24 x i8] c"DFS preorder from %zu: \00"
+@asc_2022 = constant [2 x i8] c"\0A\00"
+@fmt_zus = constant [6 x i8] c"%zu%s\00"
+
+declare i8* @calloc(i64, i64)
+declare i8* @malloc(i64)
+declare void @free(i8*)
+declare i32 @__printf_chk(i32, i8*, ...)
+declare void @__stack_chk_fail()
+declare void @llvm.memset.p0i8.i64(i8*, i8, i64, i1 immarg)
+
+define i32 @main() local_unnamed_addr {
+bb_10e0:
+  %canary = alloca i64, align 8
+  %arrF = alloca [49 x i32], align 16
+  %outarr = alloca [64 x i64], align 16
+  %arrF_i8 = bitcast [49 x i32]* %arrF to i8*
+  call void @llvm.memset.p0i8.i64(i8* %arrF_i8, i8 0, i64 196, i1 false)
+  %guard.ld = load i64, i64* @__stack_chk_guard, align 8
+  store i64 %guard.ld, i64* %canary, align 8
+  %arrF.base = getelementptr inbounds [49 x i32], [49 x i32]* %arrF, i64 0, i64 0
+  %p7 = getelementptr inbounds i32, i32* %arrF.base, i64 7
+  store i32 1, i32* %p7, align 4
+  %p10 = getelementptr inbounds i32, i32* %arrF.base, i64 10
+  store i32 1, i32* %p10, align 4
+  %p14 = getelementptr inbounds i32, i32* %arrF.base, i64 14
+  store i32 1, i32* %p14, align 4
+  %p19 = getelementptr inbounds i32, i32* %arrF.base, i64 19
+  store i32 1, i32* %p19, align 4
+  %p22 = getelementptr inbounds i32, i32* %arrF.base, i64 22
+  store i32 1, i32* %p22, align 4
+  %p29 = getelementptr inbounds i32, i32* %arrF.base, i64 29
+  store i32 1, i32* %p29, align 4
+  %p33 = getelementptr inbounds i32, i32* %arrF.base, i64 33
+  store i32 1, i32* %p33, align 4
+  %p37 = getelementptr inbounds i32, i32* %arrF.base, i64 37
+  store i32 1, i32* %p37, align 4
+  %p39 = getelementptr inbounds i32, i32* %arrF.base, i64 39
+  store i32 1, i32* %p39, align 4
+  %p41 = getelementptr inbounds i32, i32* %arrF.base, i64 41
+  store i32 1, i32* %p41, align 4
+  %p47 = getelementptr inbounds i32, i32* %arrF.base, i64 47
+  store i32 1, i32* %p47, align 4
+  %v_calloc = call i8* @calloc(i64 28, i64 1)
+  %nxt_calloc = call i8* @calloc(i64 56, i64 1)
+  %stk_malloc = call i8* @malloc(i64 56)
+  %v_null = icmp eq i8* %v_calloc, null
+  %n_null = icmp eq i8* %nxt_calloc, null
+  %any_null = or i1 %v_null, %n_null
+  br i1 %any_null, label %bb_1455, label %bb_chk_r12
+
+bb_chk_r12:
+  %s_null = icmp eq i8* %stk_malloc, null
+  br i1 %s_null, label %bb_1455, label %bb_init
+
+bb_init:
+  %visited = bitcast i8* %v_calloc to i32*
+  %nxt = bitcast i8* %nxt_calloc to i64*
+  %stk = bitcast i8* %stk_malloc to i64*
+  store i64 0, i64* %stk, align 8
+  %out.base = getelementptr inbounds [64 x i64], [64 x i64]* %outarr, i64 0, i64 0
+  store i64 0, i64* %out.base, align 8
+  store i32 1, i32* %visited, align 4
+  br label %bb_120d
+
+bb_1208:
+  %rdi.ph.1208 = phi i64 [ %rdi.next.1341, %bb_1341 ], [ %rdi.pass.1412, %bb_1412 ]
+  %top.idx.addr = getelementptr inbounds i64, i64* %stk, i64 %rdi.ph.1208
+  %top.idx.ptr = getelementptr inbounds i64, i64* %top.idx.addr, i64 -1
+  %rdx.top = load i64, i64* %top.idx.ptr, align 8
+  br label %bb_120d
+
+bb_120d:
+  %rdx.ph = phi i64 [ 0, %bb_init ], [ %rdx.top, %bb_1208 ]
+  %rdi.cur = phi i64 [ 1, %bb_init ], [ %rdi.ph.1208, %bb_1208 ]
+  %rcx.mul8 = shl i64 %rdx.ph, 3
+  %nxt.ptr = getelementptr inbounds i64, i64* %nxt, i64 %rcx.mul8
+  %rax.idx = load i64, i64* %nxt.ptr, align 8
+  %cmp.le6 = icmp ugt i64 %rax.idx, 6
+  br i1 %cmp.le6, label %bb_1412, label %bb_120d.cont
+
+bb_120d.cont:
+  %rcx.sub = sub i64 %rcx.mul8, %rdx.ph
+  %rcx.add0 = add i64 %rcx.sub, %rax.idx
+  %a0.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add0
+  %a0 = load i32, i32* %a0.ptr, align 4
+  %a0.nz = icmp ne i32 %a0, 0
+  br i1 %a0.nz, label %bb_120d.vis0, label %bb_1248
+
+bb_120d.vis0:
+  %vis0.ptr = getelementptr inbounds i32, i32* %visited, i64 %rax.idx
+  %vis0 = load i32, i32* %vis0.ptr, align 4
+  %vis0.z = icmp eq i32 %vis0, 0
+  br i1 %vis0.z, label %bb_13ea, label %bb_1248
+
+bb_1248:
+  %rdx.c1 = add i64 %rax.idx, 1
+  %cmp.ax6 = icmp eq i64 %rax.idx, 6
+  br i1 %cmp.ax6, label %bb_133d, label %bb_1248.cont
+
+bb_1248.cont:
+  %rcx.add1 = add i64 %rcx.sub, %rdx.c1
+  %a1.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add1
+  %a1 = load i32, i32* %a1.ptr, align 4
+  %a1.nz = icmp ne i32 %a1, 0
+  br i1 %a1.nz, label %bb_1248.vis1, label %bb_1274
+
+bb_1248.vis1:
+  %vis1.ptr = getelementptr inbounds i32, i32* %visited, i64 %rdx.c1
+  %vis1 = load i32, i32* %vis1.ptr, align 4
+  %vis1.z = icmp eq i32 %vis1, 0
+  br i1 %vis1.z, label %bb_13f0.from1, label %bb_1274
+
+bb_1274:
+  %rdx.c2 = add i64 %rax.idx, 2
+  %cmp.ax5 = icmp eq i64 %rax.idx, 5
+  br i1 %cmp.ax5, label %bb_133d, label %bb_1274.cont
+
+bb_1274.cont:
+  %rcx.add2 = add i64 %rcx.sub, %rdx.c2
+  %a2.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add2
+  %a2 = load i32, i32* %a2.ptr, align 4
+  %a2.nz = icmp ne i32 %a2, 0
+  br i1 %a2.nz, label %bb_1274.vis2, label %bb_12a0
+
+bb_1274.vis2:
+  %vis2.ptr = getelementptr inbounds i32, i32* %visited, i64 %rdx.c2
+  %vis2 = load i32, i32* %vis2.ptr, align 4
+  %vis2.z = icmp eq i32 %vis2, 0
+  br i1 %vis2.z, label %bb_13f0.from2, label %bb_12a0
+
+bb_12a0:
+  %rdx.c3 = add i64 %rax.idx, 3
+  %cmp.ax4 = icmp eq i64 %rax.idx, 4
+  br i1 %cmp.ax4, label %bb_133d, label %bb_12a0.cont
+
+bb_12a0.cont:
+  %rcx.add3 = add i64 %rcx.sub, %rdx.c3
+  %a3.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add3
+  %a3 = load i32, i32* %a3.ptr, align 4
+  %a3.nz = icmp ne i32 %a3, 0
+  br i1 %a3.nz, label %bb_12a0.vis3, label %bb_12cc
+
+bb_12a0.vis3:
+  %vis3.ptr = getelementptr inbounds i32, i32* %visited, i64 %rdx.c3
+  %vis3 = load i32, i32* %vis3.ptr, align 4
+  %vis3.z = icmp eq i32 %vis3, 0
+  br i1 %vis3.z, label %bb_13f0.from3, label %bb_12cc
+
+bb_12cc:
+  %rdx.c4 = add i64 %rax.idx, 4
+  %cmp.ax3 = icmp eq i64 %rax.idx, 3
+  br i1 %cmp.ax3, label %bb_133d, label %bb_12cc.cont
+
+bb_12cc.cont:
+  %rcx.add4 = add i64 %rcx.sub, %rdx.c4
+  %a4.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add4
+  %a4 = load i32, i32* %a4.ptr, align 4
+  %a4.nz = icmp ne i32 %a4, 0
+  br i1 %a4.nz, label %bb_12cc.vis4, label %bb_12f4
+
+bb_12cc.vis4:
+  %vis4.ptr = getelementptr inbounds i32, i32* %visited, i64 %rdx.c4
+  %vis4 = load i32, i32* %vis4.ptr, align 4
+  %vis4.z = icmp eq i32 %vis4, 0
+  br i1 %vis4.z, label %bb_13f0.from4, label %bb_12f4
+
+bb_12f4:
+  %rdx.c5 = add i64 %rax.idx, 5
+  %cmp.ax2 = icmp eq i64 %rax.idx, 2
+  br i1 %cmp.ax2, label %bb_133d, label %bb_12f4.cont
+
+bb_12f4.cont:
+  %rcx.add5 = add i64 %rcx.sub, %rdx.c5
+  %a5.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add5
+  %a5 = load i32, i32* %a5.ptr, align 4
+  %a5.nz = icmp ne i32 %a5, 0
+  br i1 %a5.nz, label %bb_12f4.vis5, label %bb_131c
+
+bb_12f4.vis5:
+  %vis5.ptr = getelementptr inbounds i32, i32* %visited, i64 %rdx.c5
+  %vis5 = load i32, i32* %vis5.ptr, align 4
+  %vis5.z = icmp eq i32 %vis5, 0
+  br i1 %vis5.z, label %bb_13f0.from5, label %bb_131c
+
+bb_131c:
+  %rax.nz = icmp ne i64 %rax.idx, 0
+  br i1 %rax.nz, label %bb_133d, label %bb_131c.cont
+
+bb_131c.cont:
+  %rcx.add6 = add i64 %rcx.sub, 6
+  %a6.ptr = getelementptr inbounds i32, i32* %arrF.base, i64 %rcx.add6
+  %a6 = load i32, i32* %a6.ptr, align 4
+  %a6.nz = icmp ne i32 %a6, 0
+  br i1 %a6.nz, label %bb_131c.vis6, label %bb_133d
+
+bb_131c.vis6:
+  %vis6.ptr = getelementptr inbounds i32, i32* %visited, i64 6
+  %vis6 = load i32, i32* %vis6.ptr, align 4
+  %vis6.z = icmp eq i32 %vis6, 0
+  br i1 %vis6.z, label %bb_13f0.from6, label %bb_133d
+
+bb_133d:
+  %rdi.sub = sub i64 %rdi.cur, 1
+  br label %bb_1341
+
+bb_1341:
+  %rdi.ph.1341 = phi i64 [ %rdi.sub, %bb_133d ], [ %rdi.next.13f0, %bb_13f0 ], [ %rdi.cur, %bb_1412 ]
+  %rbp.ph.1341 = phi i64 [ %rbp.cur, %bb_133d ], [ %rbp.next.13f0, %bb_13f0 ], [ %rbp.cur, %bb_1412 ]
+  %rdi.nz = icmp ne i64 %rdi.ph.1341, 0
+  br i1 %rdi.nz, label %bb_1208, label %bb_after_loop
+
+bb_after_loop:
+  call void @free(i8* %v_calloc)
+  call void @free(i8* %nxt_calloc)
+  call void @free(i8* %stk_malloc)
+  br label %bb_print_preamble
+
+bb_print_preamble:
+  %zero64 = xor i64 0, 0
+  %fmt.pre = getelementptr inbounds [24 x i8], [24 x i8]* @aDfsPreorderFro, i64 0, i64 0
+  %call.pre = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.pre, i64 %zero64)
+  %rbp.count = phi i64 [ %rbp.ph.1341, %bb_after_loop ]
+  %has.any = icmp ne i64 %rbp.count, 0
+  br i1 %has.any, label %bb_nonempty, label %bb_13ae
+
+bb_nonempty:
+  %first = load i64, i64* %out.base, align 8
+  %fmt.zus.ptr = getelementptr inbounds [6 x i8], [6 x i8]* @fmt_zus, i64 0, i64 0
+  %rbp.isone = icmp ne i64 %rbp.count, 1
+  br i1 %rbp.isone, label %bb_1421, label %bb_1398
+
+bb_1398:
+  %empty.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @asc_2022, i64 0, i64 1
+  %_ = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.zus.ptr, i64 %first, i8* %empty.ptr)
+  br label %bb_13ae
+
+bb_13ae:
+  %nl.ptr = getelementptr inbounds [2 x i8], [2 x i8]* @asc_2022, i64 0, i64 0
+  %call.nl = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %nl.ptr)
+  %canary.end = load i64, i64* %canary, align 8
+  %guard.end = load i64, i64* @__stack_chk_guard, align 8
+  %chk = icmp eq i64 %canary.end, %guard.end
+  br i1 %chk, label %bb_ret, label %bb_1487
+
+bb_ret:
+  ret i32 0
+
+bb_13ea:
+  %rdx.from.rax = add i64 %rax.idx, 0
+  br label %bb_13f0
+
+bb_13f0.from1:
+  br label %bb_13f0
+
+bb_13f0.from2:
+  br label %bb_13f0
+
+bb_13f0.from3:
+  br label %bb_13f0
+
+bb_13f0.from4:
+  br label %bb_13f0
+
+bb_13f0.from5:
+  br label %bb_13f0
+
+bb_13f0.from6:
+  br label %bb_13f0
+
+bb_13f0:
+  %rsi.sel = phi i32* [ %vis0.ptr, %bb_13ea ], [ %vis1.ptr, %bb_13f0.from1 ], [ %vis2.ptr, %bb_13f0.from2 ], [ %vis3.ptr, %bb_13f0.from3 ], [ %vis4.ptr, %bb_13f0.from4 ], [ %vis5.ptr, %bb_13f0.from5 ], [ %vis6.ptr, %bb_13f0.from6 ]
+  %rdx.sel = phi i64 [ %rdx.from.rax, %bb_13ea ], [ %rdx.c1, %bb_13f0.from1 ], [ %rdx.c2, %bb_13f0.from2 ], [ %rdx.c3, %bb_13f0.from3 ], [ %rdx.c4, %bb_13f0.from4 ], [ %rdx.c5, %bb_13f0.from5 ], [ 6, %bb_13f0.from6 ]
+  %rbp.cur = phi i64 [ %rdi.cur, %bb_120d ], [ %rdi.cur, %bb_120d.cont ], [ %rdi.cur, %bb_120d.vis0 ], [ %rdi.cur, %bb_1248 ], [ %rdi.cur, %bb_1248.cont ], [ %rdi.cur, %bb_1248.vis1 ], [ %rdi.cur, %bb_1274 ], [ %rdi.cur, %bb_1274.cont ], [ %rdi.cur, %bb_1274.vis2 ], [ %rdi.cur, %bb_12a0 ], [ %rdi.cur, %bb_12a0.cont ], [ %rdi.cur, %bb_12a0.vis3 ], [ %rdi.cur, %bb_12cc ], [ %rdi.cur, %bb_12cc.cont ], [ %rdi.cur, %bb_12cc.vis4 ], [ %rdi.cur, %bb_12f4 ], [ %rdi.cur, %bb_12f4.cont ], [ %rdi.cur, %bb_12f4.vis5 ], [ %rdi.cur, %bb_131c ], [ %rdi.cur, %bb_131c.cont ], [ %rdi.cur, %bb_131c.vis6 ]
+  %out.slot = getelementptr inbounds i64, i64* %out.base, i64 %rbp.cur
+  store i64 %rdx.sel, i64* %out.slot, align 8
+  %rbp.next.13f0 = add i64 %rbp.cur, 1
+  %stk.slot = getelementptr inbounds i64, i64* %stk, i64 %rdi.cur
+  store i64 %rdx.sel, i64* %stk.slot, align 8
+  %rdi.next.13f0 = add i64 %rdi.cur, 1
+  %inc1 = add i64 %rdx.sel, 1
+  store i64 %inc1, i64* %nxt.ptr, align 8
+  store i32 1, i32* %rsi.sel, align 4
+  br label %bb_1341
+
+bb_1412:
+  %is7 = icmp eq i64 %rax.idx, 7
+  br i1 %is7, label %bb_133d, label %bb_1208
+
+bb_1421:
+  %rbx.it = phi i64 [ 1, %bb_nonempty ]
+  %sp.ptr = getelementptr inbounds [24 x i8], [24 x i8]* @aDfsPreorderFro, i64 0, i64 22
+  %rdx.load.it = getelementptr inbounds i64, i64* %out.base, i64 0
+  %val0 = load i64, i64* %rdx.load.it, align 8
+  %_head = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.zus.ptr, i64 %val0, i8* %sp.ptr)
+  br label %bb_1421.loop
+
+bb_1421.loop:
+  %i.ph = phi i64 [ 1, %bb_1421 ], [ %i.next, %bb_1430 ]
+  %cmp.i = icmp eq i64 %i.ph, %rbp.count
+  br i1 %cmp.i, label %bb_1398, label %bb_1430
+
+bb_1430:
+  %val.ptr = getelementptr inbounds i64, i64* %out.base, i64 %i.ph
+  %val = load i64, i64* %val.ptr, align 8
+  %_mid = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.zus.ptr, i64 %val, i8* %sp.ptr)
+  %i.next = add i64 %i.ph, 1
+  br label %bb_1421.loop
+
+bb_1455:
+  call void @free(i8* %v_calloc)
+  call void @free(i8* %nxt_calloc)
+  call void @free(i8* %stk_malloc)
+  %fmt.pre2 = getelementptr inbounds [24 x i8], [24 x i8]* @aDfsPreorderFro, i64 0, i64 0
+  %_pre2 = call i32 (i32, i8*, ...) @__printf_chk(i32 2, i8* %fmt.pre2, i64 0)
+  br label %bb_13ae
+
+bb_1487:
+  call void @__stack_chk_fail()
+  unreachable
+}

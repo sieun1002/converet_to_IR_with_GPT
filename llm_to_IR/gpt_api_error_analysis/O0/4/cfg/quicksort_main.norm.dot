@@ -1,0 +1,19 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5703dc36bfe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %retval = alloca i32, align 4\l  %a = alloca [10 x i32], align 16\l  %n = alloca i64, align 8\l  %k = alloca i64, align 8\l  store i32 0, ptr %retval, align 4\l  call void @llvm.dbg.declare(metadata ptr %a, metadata !17, metadata\l... !DIExpression()), !dbg !21\l  %0 = bitcast ptr %a to ptr, !dbg !21\l  call void @llvm.memcpy.p0.p0.i64(ptr align 16 %0, ptr align 16\l... @__const.main.a, i64 40, i1 false), !dbg !21\l  call void @llvm.dbg.declare(metadata ptr %n, metadata !22, metadata\l... !DIExpression()), !dbg !26\l  store i64 10, ptr %n, align 8, !dbg !26\l  %1 = load i64, ptr %n, align 8, !dbg !27\l  %cmp = icmp ugt i64 %1, 1, !dbg !29\l  br i1 %cmp, label %if.then, label %if.end, !dbg !30\l|{<s0>T|<s1>F}}"];
+	Node0x5703dc36bfe0:s0 -> Node0x5703dc372020[tooltip="entry -> if.then\nProbability 50.00%" ];
+	Node0x5703dc36bfe0:s1 -> Node0x5703dc3720d0[tooltip="entry -> if.end\nProbability 50.00%" ];
+	Node0x5703dc372020 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#dc5d4a70" fontname="Courier",label="{if.then:\l|  %arraydecay = getelementptr inbounds [10 x i32], ptr %a, i64 0, i64 0,\l... !dbg !31\l  %2 = load i64, ptr %n, align 8, !dbg !32\l  %sub = sub nsw i64 %2, 1, !dbg !33\l  call void @quick_sort(ptr noundef %arraydecay, i64 noundef 0, i64 noundef\l... %sub), !dbg !34\l  br label %if.end, !dbg !34\l}"];
+	Node0x5703dc372020 -> Node0x5703dc3720d0[tooltip="if.then -> if.end\nProbability 100.00%" ];
+	Node0x5703dc3720d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{if.end:\l|  call void @llvm.dbg.declare(metadata ptr %k, metadata !35, metadata\l... !DIExpression()), !dbg !37\l  store i64 0, ptr %k, align 8, !dbg !37\l  br label %for.cond, !dbg !38\l}"];
+	Node0x5703dc3720d0 -> Node0x5703dc373d40[tooltip="if.end -> for.cond\nProbability 100.00%" ];
+	Node0x5703dc373d40 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.cond:\l|  %3 = load i64, ptr %k, align 8, !dbg !39\l  %4 = load i64, ptr %n, align 8, !dbg !41\l  %cmp1 = icmp ult i64 %3, %4, !dbg !42\l  br i1 %cmp1, label %for.body, label %for.end, !dbg !43\l|{<s0>T|<s1>F}}"];
+	Node0x5703dc373d40:s0 -> Node0x5703dc374400[tooltip="for.cond -> for.body\nProbability 96.88%" ];
+	Node0x5703dc373d40:s1 -> Node0x5703dc3745f0[tooltip="for.cond -> for.end\nProbability 3.12%" ];
+	Node0x5703dc374400 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.body:\l|  %5 = load i64, ptr %k, align 8, !dbg !44\l  %arrayidx = getelementptr inbounds [10 x i32], ptr %a, i64 0, i64 %5, !dbg\l... !45\l  %6 = load i32, ptr %arrayidx, align 4, !dbg !45\l  %call = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %6), !dbg\l... !46\l  br label %for.inc, !dbg !46\l}"];
+	Node0x5703dc374400 -> Node0x5703dc375600[tooltip="for.body -> for.inc\nProbability 100.00%" ];
+	Node0x5703dc375600 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{for.inc:\l|  %7 = load i64, ptr %k, align 8, !dbg !47\l  %inc = add i64 %7, 1, !dbg !47\l  store i64 %inc, ptr %k, align 8, !dbg !47\l  br label %for.cond, !dbg !48, !llvm.loop !49\l}"];
+	Node0x5703dc375600 -> Node0x5703dc373d40[tooltip="for.inc -> for.cond\nProbability 100.00%" ];
+	Node0x5703dc3745f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{for.end:\l|  %call2 = call i32 (ptr, ...) @printf(ptr noundef @.str.1), !dbg !52\l  ret i32 0, !dbg !53\l}"];
+}

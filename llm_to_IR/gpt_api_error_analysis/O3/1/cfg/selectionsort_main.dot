@@ -1,0 +1,16 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5e47ad131680 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{entry:\l|  %canary.slot = alloca i64, align 8\l  %arr = alloca [5 x i32], align 16\l  %guard.load = load i64, ptr @__stack_chk_guard, align 8\l  store i64 %guard.load, ptr %canary.slot, align 8\l  %arr.vec.ptr = bitcast ptr %arr to ptr\l  %vec.init = load \<4 x i32\>, ptr @xmmword_2020, align 16\l  store \<4 x i32\> %vec.init, ptr %arr.vec.ptr, align 16\l  %last.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 4\l  store i32 13, ptr %last.ptr, align 4\l  %base.ptr = getelementptr inbounds [5 x i32], ptr %arr, i64 0, i64 0\l  call void @selection_sort(ptr noundef nonnull %base.ptr, i32 noundef 5)\l  %sorted.msg.ptr = getelementptr inbounds [15 x i8], ptr @.str.sorted, i64 0,\l... i64 0\l  %call.print.header = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr\l... %sorted.msg.ptr)\l  %end.ptr = getelementptr inbounds i32, ptr %base.ptr, i64 5\l  br label %loop\l}"];
+	Node0x5e47ad131680 -> Node0x5e47ad132d00[tooltip="entry -> loop\nProbability 100.00%" ];
+	Node0x5e47ad132d00 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop:\l|  %cur.ptr = phi ptr [ %base.ptr, %entry ], [ %next.ptr, %loop.body ]\l  %cmp.end = icmp eq ptr %cur.ptr, %end.ptr\l  br i1 %cmp.end, label %epilogue, label %loop.body\l|{<s0>T|<s1>F}}"];
+	Node0x5e47ad132d00:s0 -> Node0x5e47ad133170[tooltip="loop -> epilogue\nProbability 3.12%" ];
+	Node0x5e47ad132d00:s1 -> Node0x5e47ad132df0[tooltip="loop -> loop.body\nProbability 96.88%" ];
+	Node0x5e47ad132df0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.body:\l|  %val = load i32, ptr %cur.ptr, align 4\l  %fmt.ptr = getelementptr inbounds [4 x i8], ptr @.str.fmt, i64 0, i64 0\l  %call.print.elem = call i32 (i32, ptr, ...) @__printf_chk(i32 2, ptr\l... %fmt.ptr, i32 %val)\l  %next.ptr = getelementptr inbounds i32, ptr %cur.ptr, i64 1\l  br label %loop\l}"];
+	Node0x5e47ad132df0 -> Node0x5e47ad132d00[tooltip="loop.body -> loop\nProbability 100.00%" ];
+	Node0x5e47ad133170 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{epilogue:\l|  %guard.curr = load i64, ptr @__stack_chk_guard, align 8\l  %guard.saved = load i64, ptr %canary.slot, align 8\l  %canary.ok = icmp eq i64 %guard.saved, %guard.curr\l  br i1 %canary.ok, label %ret, label %stackfail\l|{<s0>T|<s1>F}}"];
+	Node0x5e47ad133170:s0 -> Node0x5e47ad1337a0[tooltip="epilogue -> ret\nProbability 100.00%" ];
+	Node0x5e47ad133170:s1 -> Node0x5e47ad133810[tooltip="epilogue -> stackfail\nProbability 0.00%" ];
+	Node0x5e47ad133810 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#abc8fd70" fontname="Courier",label="{stackfail:\l|  call void @__stack_chk_fail()\l  unreachable\l}"];
+	Node0x5e47ad1337a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{ret:\l|  ret i32 0\l}"];
+}

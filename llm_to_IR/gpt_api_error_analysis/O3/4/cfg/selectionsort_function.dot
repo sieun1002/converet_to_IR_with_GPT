@@ -1,0 +1,24 @@
+digraph "CFG for 'selection_sort' function" {
+	label="CFG for 'selection_sort' function";
+
+	Node0x55709cef1890 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{entry:\l|  %cmp0 = icmp sle i32 %n, 1\l  br i1 %cmp0, label %ret, label %outer.preheader\l|{<s0>T|<s1>F}}"];
+	Node0x55709cef1890:s0 -> Node0x55709cef0d10[tooltip="entry -> ret\nProbability 50.00%" ];
+	Node0x55709cef1890:s1 -> Node0x55709cef0b10[tooltip="entry -> outer.preheader\nProbability 50.00%" ];
+	Node0x55709cef0b10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#ec7f6370" fontname="Courier",label="{outer.preheader:\l|  %n_minus_1 = add nsw i32 %n, -1\l  br label %outer.loop\l}"];
+	Node0x55709cef0b10 -> Node0x55709cef0fe0[tooltip="outer.preheader -> outer.loop\nProbability 100.00%" ];
+	Node0x55709cef0fe0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.loop:\l|  %i = phi i32 [ 0, %outer.preheader ], [ %i.next, %outer.latch ]\l  %cmp_i_last = icmp sge i32 %i, %n_minus_1\l  br i1 %cmp_i_last, label %ret, label %inner.init\l|{<s0>T|<s1>F}}"];
+	Node0x55709cef0fe0:s0 -> Node0x55709cef0d10[tooltip="outer.loop -> ret\nProbability 3.12%" ];
+	Node0x55709cef0fe0:s1 -> Node0x55709cef3460[tooltip="outer.loop -> inner.init\nProbability 96.88%" ];
+	Node0x55709cef3460 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.init:\l|  %ptr_i = getelementptr inbounds i32, ptr %arr, i32 %i\l  %val_i = load i32, ptr %ptr_i, align 4\l  %j0 = add nsw i32 %i, 1\l  br label %inner.loop\l}"];
+	Node0x55709cef3460 -> Node0x55709cef3890[tooltip="inner.init -> inner.loop\nProbability 100.00%" ];
+	Node0x55709cef3890 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.loop:\l|  %j = phi i32 [ %j0, %inner.init ], [ %j.next, %inner.body ]\l  %cur_min_idx = phi i32 [ %i, %inner.init ], [ %cur_min_idx.next, %inner.body\l... ]\l  %cur_min_val = phi i32 [ %val_i, %inner.init ], [ %cur_min_val.next,\l... %inner.body ]\l  %cmp_j_end = icmp slt i32 %j, %n\l  br i1 %cmp_j_end, label %inner.body, label %inner.end\l|{<s0>T|<s1>F}}"];
+	Node0x55709cef3890:s0 -> Node0x55709cef39d0[tooltip="inner.loop -> inner.body\nProbability 96.88%" ];
+	Node0x55709cef3890:s1 -> Node0x55709cef3f60[tooltip="inner.loop -> inner.end\nProbability 3.12%" ];
+	Node0x55709cef39d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{inner.body:\l|  %ptr_j = getelementptr inbounds i32, ptr %arr, i32 %j\l  %val_j = load i32, ptr %ptr_j, align 4\l  %less = icmp slt i32 %val_j, %cur_min_val\l  %cur_min_idx.next = select i1 %less, i32 %j, i32 %cur_min_idx\l  %cur_min_val.next = select i1 %less, i32 %val_j, i32 %cur_min_val\l  %j.next = add nsw i32 %j, 1\l  br label %inner.loop\l}"];
+	Node0x55709cef39d0 -> Node0x55709cef3890[tooltip="inner.body -> inner.loop\nProbability 100.00%" ];
+	Node0x55709cef3f60 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{inner.end:\l|  store i32 %cur_min_val, ptr %ptr_i, align 4\l  %ptr_min = getelementptr inbounds i32, ptr %arr, i32 %cur_min_idx\l  store i32 %val_i, ptr %ptr_min, align 4\l  br label %outer.latch\l}"];
+	Node0x55709cef3f60 -> Node0x55709cef10c0[tooltip="inner.end -> outer.latch\nProbability 100.00%" ];
+	Node0x55709cef10c0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{outer.latch:\l|  %i.next = add nsw i32 %i, 1\l  br label %outer.loop\l}"];
+	Node0x55709cef10c0 -> Node0x55709cef0fe0[tooltip="outer.latch -> outer.loop\nProbability 100.00%" ];
+	Node0x55709cef0d10 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#e8765c70" fontname="Courier",label="{ret:\l|  ret void\l}"];
+}

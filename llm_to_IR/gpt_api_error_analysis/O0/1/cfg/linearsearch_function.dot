@@ -1,0 +1,16 @@
+digraph "CFG for 'linear_search' function" {
+	label="CFG for 'linear_search' function";
+
+	Node0x590bafacd990 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d0473d70" fontname="Courier",label="{entry:\l|  br label %loop.header\l}"];
+	Node0x590bafacd990 -> Node0x590bafacdc20[tooltip="entry -> loop.header\nProbability 100.00%" ];
+	Node0x590bafacdc20 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.header:\l|  %i = phi i32 [ 0, %entry ], [ %i.next, %loop.latch ]\l  %cmp.bound = icmp slt i32 %i, %len\l  br i1 %cmp.bound, label %loop.body, label %exit.notfound\l|{<s0>T|<s1>F}}"];
+	Node0x590bafacdc20:s0 -> Node0x590bafacdd90[tooltip="loop.header -> loop.body\nProbability 96.88%" ];
+	Node0x590bafacdc20:s1 -> Node0x590bafacf5d0[tooltip="loop.header -> exit.notfound\nProbability 3.12%" ];
+	Node0x590bafacdd90 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.body:\l|  %idx.ext = sext i32 %i to i64\l  %elem.ptr = getelementptr inbounds i32, ptr %arr, i64 %idx.ext\l  %elem.val = load i32, ptr %elem.ptr, align 4\l  %cmp.eq = icmp eq i32 %elem.val, %target\l  br i1 %cmp.eq, label %found, label %loop.latch\l|{<s0>T|<s1>F}}"];
+	Node0x590bafacdd90:s0 -> Node0x590bafacfa80[tooltip="loop.body -> found\nProbability 3.12%" ];
+	Node0x590bafacdd90:s1 -> Node0x590bafacd7e0[tooltip="loop.body -> loop.latch\nProbability 96.88%" ];
+	Node0x590bafacfa80 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{found:\l|  ret i32 %i\l}"];
+	Node0x590bafacd7e0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{loop.latch:\l|  %i.next = add nsw i32 %i, 1\l  br label %loop.header\l}"];
+	Node0x590bafacd7e0 -> Node0x590bafacdc20[tooltip="loop.latch -> loop.header\nProbability 100.00%" ];
+	Node0x590bafacf5d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#d6524470" fontname="Courier",label="{exit.notfound:\l|  ret i32 -1\l}"];
+}
