@@ -1,0 +1,107 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; [assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'
+; === ERROR LOG END ===
+
+0x111a: nop
+
+; Function Attrs: minsize nounwind optsize uwtable
+define dso_local i32 @main() local_unnamed_addr #0 {
+  %1 = alloca [10 x i32], align 16
+  call void @llvm.lifetime.start.p0(i64 40, ptr nonnull %1) #4
+  call void @llvm.memcpy.p0.p0.i64(ptr noundef nonnull align 16 dereferenceable(40) %1, ptr noundef nonnull align 16 dereferenceable(40) @__const.main.array, i64 40, i1 false)
+  call void @selection_sort(ptr noundef nonnull %1, i32 noundef 10) #5
+  %2 = tail call i32 (ptr, ...) @printf(ptr noundef nonnull dereferenceable(1) @.str) #5
+  br label %3
+
+3:                                                ; preds = %4, %0
+  %indvars.iv = phi i64 [ %indvars.iv.next, %4 ], [ 0, %0 ]
+  %exitcond.not = icmp eq i64 %indvars.iv, 10
+  br i1 %exitcond.not, label %8, label %4
+
+4:                                                ; preds = %3
+  %5 = getelementptr inbounds [10 x i32], ptr %1, i64 0, i64 %indvars.iv
+  %6 = load i32, ptr %5, align 4, !tbaa !5
+  %7 = tail call i32 (ptr, ...) @printf(ptr noundef nonnull dereferenceable(1) @.str.1, i32 noundef %6) #5
+  %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1
+  br label %3, !llvm.loop !9
+
+8:                                                ; preds = %3
+  call void @llvm.lifetime.end.p0(i64 40, ptr nonnull %1) #4
+  ret i32 0
+}
+
+; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #1
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #2
+
+; Function Attrs: minsize nounwind optsize uwtable
+define dso_local void @selection_sort(ptr nocapture noundef %0, i32 noundef %1) local_unnamed_addr #0 {
+  %3 = add nsw i32 %1, -1
+  %4 = sext i32 %3 to i64
+  %smax = tail call i32 @llvm.smax.i32(i32 %3, i32 0)
+  %wide.trip.count = zext i32 %smax to i64
+  br label %5
+
+5:                                                ; preds = %17, %2
+  %indvars.iv29 = phi i64 [ %indvars.iv.next30, %17 ], [ 0, %2 ]
+  %indvars.iv = phi i64 [ %indvars.iv.next, %17 ], [ 1, %2 ]
+  %exitcond.not = icmp eq i64 %indvars.iv29, %wide.trip.count
+  br i1 %exitcond.not, label %23, label %6
+
+6:                                                ; preds = %5
+  %7 = trunc i64 %indvars.iv29 to i32
+  br label %8
+
+8:                                                ; preds = %10, %6
+  %indvars.iv26 = phi i64 [ %indvars.iv.next27, %10 ], [ %indvars.iv, %6 ]
+  %.023 = phi i32 [ %spec.select, %10 ], [ %7, %6 ]
+  %9 = icmp slt i64 %indvars.iv26, %4
+  br i1 %9, label %10, label %17
+
+10:                                               ; preds = %8
+  %11 = getelementptr inbounds i32, ptr %0, i64 %indvars.iv26
+  %12 = load i32, ptr %11, align 4, !tbaa !5
+  %13 = sext i32 %.023 to i64
+  %14 = getelementptr inbounds i32, ptr %0, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !5
+  %.not = icmp sgt i32 %12, %15
+  %16 = trunc i64 %indvars.iv26 to i32
+  %spec.select = select i1 %.not, i32 %.023, i32 %16
+  %indvars.iv.next27 = add nuw nsw i64 %indvars.iv26, 1
+  br label %8, !llvm.loop !11
+
+17:                                               ; preds = %8
+  %indvars.iv.next30 = add nuw nsw i64 %indvars.iv29, 1
+  %18 = getelementptr inbounds i32, ptr %0, i64 %indvars.iv29
+  %19 = load i32, ptr %18, align 4, !tbaa !5
+  %20 = sext i32 %.023 to i64
+  %21 = getelementptr inbounds i32, ptr %0, i64 %20
+  %22 = load i32, ptr %21, align 4, !tbaa !5
+  store i32 %22, ptr %18, align 4, !tbaa !5
+  store i32 %19, ptr %21, align 4, !tbaa !5
+  %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1
+  br label %5, !llvm.loop !12
+
+23:                                               ; preds = %5
+  ret void
+}
+
+; Function Attrs: minsize nounwind optsize uwtable
+define dso_local i32 @printf(ptr noundef %0, ...) local_unnamed_addr #0 {
+  %2 = tail call i32 @__printf_chk(i32 noundef 1, ptr noundef %0) #6
+  ret i32 %2
+}
+
+; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #1
+
+; Function Attrs: minsize optsize
+declare i32 @__printf_chk(i32 noundef, ptr noundef) local_unnamed_addr #3
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare i32 @llvm.smax.i32(i32, i32) #4
+
+attributes #0 = { minsize nounwind optsize uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { noc

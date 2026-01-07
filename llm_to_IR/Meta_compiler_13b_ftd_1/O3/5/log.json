@@ -1,0 +1,5718 @@
+{
+  "meta": {
+    "round": 5,
+    "start_time": "2025-12-23T23:03:46",
+    "input_folder": "/root/workspace/converet_to_IR_with_GPT/ida_disassemble/linux/O3",
+    "output_dir": "/root/workspace/converet_to_IR_with_GPT/llm_to_IR/Meta_compiler_13b_ftd_1/O3/5",
+    "generate_model": "facebook/llm-compiler-13b-ftd",
+    "fix_model": "facebook/llm-compiler-13b-ftd",
+    "max_ir_versions": 10,
+    "max_fix_attempts": 9,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:03:46",
+      "end_time": "2025-12-23T23:06:00",
+      "elapsed_sec": 134.253774,
+      "usage": {
+        "input_tokens": 4299,
+        "output_tokens": 2048,
+        "total_tokens": 6347
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main1.ll",
+      "success": true,
+      "time": "2025-12-23T23:06:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main1.bc",
+      "start_time": "2025-12-23T23:06:00",
+      "end_time": "2025-12-23T23:06:00",
+      "elapsed_sec": 0.001475
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:06:00",
+      "end_time": "2025-12-23T23:07:59",
+      "elapsed_sec": 119.087666,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main2.ll",
+      "success": true,
+      "time": "2025-12-23T23:07:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main2.bc",
+      "start_time": "2025-12-23T23:07:59",
+      "end_time": "2025-12-23T23:07:59",
+      "elapsed_sec": 0.001472
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:07:59",
+      "end_time": "2025-12-23T23:09:58",
+      "elapsed_sec": 119.106726,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main3.ll",
+      "success": true,
+      "time": "2025-12-23T23:09:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main3.bc",
+      "start_time": "2025-12-23T23:09:58",
+      "end_time": "2025-12-23T23:09:58",
+      "elapsed_sec": 0.001476
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:09:58",
+      "end_time": "2025-12-23T23:11:58",
+      "elapsed_sec": 119.168198,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main4.ll",
+      "success": true,
+      "time": "2025-12-23T23:11:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main4.bc",
+      "start_time": "2025-12-23T23:11:58",
+      "end_time": "2025-12-23T23:11:58",
+      "elapsed_sec": 0.001462
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:11:58",
+      "end_time": "2025-12-23T23:13:57",
+      "elapsed_sec": 119.145928,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main5.ll",
+      "success": true,
+      "time": "2025-12-23T23:13:57"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main5.bc",
+      "start_time": "2025-12-23T23:13:57",
+      "end_time": "2025-12-23T23:13:57",
+      "elapsed_sec": 0.001553
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:13:57",
+      "end_time": "2025-12-23T23:15:56",
+      "elapsed_sec": 119.140292,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main6.ll",
+      "success": true,
+      "time": "2025-12-23T23:15:56"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main6.bc",
+      "start_time": "2025-12-23T23:15:56",
+      "end_time": "2025-12-23T23:15:56",
+      "elapsed_sec": 0.001452
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:15:56",
+      "end_time": "2025-12-23T23:17:55",
+      "elapsed_sec": 119.149862,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main7.ll",
+      "success": true,
+      "time": "2025-12-23T23:17:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main7.bc",
+      "start_time": "2025-12-23T23:17:55",
+      "end_time": "2025-12-23T23:17:55",
+      "elapsed_sec": 0.001474
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:17:55",
+      "end_time": "2025-12-23T23:19:54",
+      "elapsed_sec": 119.155452,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main8.ll",
+      "success": true,
+      "time": "2025-12-23T23:19:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main8.bc",
+      "start_time": "2025-12-23T23:19:54",
+      "end_time": "2025-12-23T23:19:54",
+      "elapsed_sec": 0.001457
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:19:54",
+      "end_time": "2025-12-23T23:21:53",
+      "elapsed_sec": 119.200411,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main9.ll",
+      "success": true,
+      "time": "2025-12-23T23:21:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main9.bc",
+      "start_time": "2025-12-23T23:21:53",
+      "end_time": "2025-12-23T23:21:53",
+      "elapsed_sec": 0.001464
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "BFS_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:21:53",
+      "end_time": "2025-12-23T23:23:53",
+      "elapsed_sec": 119.144031,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "BFS_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main10.ll",
+      "success": true,
+      "time": "2025-12-23T23:23:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "BFS_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/BFS_main10.bc",
+      "start_time": "2025-12-23T23:23:53",
+      "end_time": "2025-12-23T23:23:53",
+      "elapsed_sec": 0.001577
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "BFS_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-23T23:23:53"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:23:53",
+      "end_time": "2025-12-23T23:26:06",
+      "elapsed_sec": 133.596449,
+      "usage": {
+        "input_tokens": 4208,
+        "output_tokens": 2048,
+        "total_tokens": 6256
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main1.ll",
+      "success": true,
+      "time": "2025-12-23T23:26:06"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main1.bc",
+      "start_time": "2025-12-23T23:26:06",
+      "end_time": "2025-12-23T23:26:06",
+      "elapsed_sec": 0.001524
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:26:06",
+      "end_time": "2025-12-23T23:28:05",
+      "elapsed_sec": 119.169582,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main2.ll",
+      "success": true,
+      "time": "2025-12-23T23:28:05"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main2.bc",
+      "start_time": "2025-12-23T23:28:05",
+      "end_time": "2025-12-23T23:28:05",
+      "elapsed_sec": 0.001526
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:28:05",
+      "end_time": "2025-12-23T23:30:05",
+      "elapsed_sec": 119.180291,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main3.ll",
+      "success": true,
+      "time": "2025-12-23T23:30:05"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main3.bc",
+      "start_time": "2025-12-23T23:30:05",
+      "end_time": "2025-12-23T23:30:05",
+      "elapsed_sec": 0.001739
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:30:05",
+      "end_time": "2025-12-23T23:32:04",
+      "elapsed_sec": 119.143165,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main4.ll",
+      "success": true,
+      "time": "2025-12-23T23:32:04"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main4.bc",
+      "start_time": "2025-12-23T23:32:04",
+      "end_time": "2025-12-23T23:32:04",
+      "elapsed_sec": 0.001513
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:32:04",
+      "end_time": "2025-12-23T23:34:03",
+      "elapsed_sec": 119.148941,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main5.ll",
+      "success": true,
+      "time": "2025-12-23T23:34:03"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main5.bc",
+      "start_time": "2025-12-23T23:34:03",
+      "end_time": "2025-12-23T23:34:03",
+      "elapsed_sec": 0.001436
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:34:03",
+      "end_time": "2025-12-23T23:36:02",
+      "elapsed_sec": 119.098295,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main6.ll",
+      "success": true,
+      "time": "2025-12-23T23:36:02"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main6.bc",
+      "start_time": "2025-12-23T23:36:02",
+      "end_time": "2025-12-23T23:36:02",
+      "elapsed_sec": 0.001509
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:36:02",
+      "end_time": "2025-12-23T23:38:01",
+      "elapsed_sec": 119.109723,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main7.ll",
+      "success": true,
+      "time": "2025-12-23T23:38:01"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main7.bc",
+      "start_time": "2025-12-23T23:38:01",
+      "end_time": "2025-12-23T23:38:01",
+      "elapsed_sec": 0.001514
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:38:01",
+      "end_time": "2025-12-23T23:40:00",
+      "elapsed_sec": 119.071408,
+      "usage": {
+        "input_tokens": 2338,
+        "output_tokens": 2048,
+        "total_tokens": 4386
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main8.ll",
+      "success": true,
+      "time": "2025-12-23T23:40:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main8.bc",
+      "start_time": "2025-12-23T23:40:00",
+      "end_time": "2025-12-23T23:40:00",
+      "elapsed_sec": 0.001494
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:40:00",
+      "end_time": "2025-12-23T23:41:59",
+      "elapsed_sec": 119.086315,
+      "usage": {
+        "input_tokens": 2338,
+        "output_tokens": 2048,
+        "total_tokens": 4386
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main9.ll",
+      "success": true,
+      "time": "2025-12-23T23:41:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main9.bc",
+      "start_time": "2025-12-23T23:41:59",
+      "end_time": "2025-12-23T23:41:59",
+      "elapsed_sec": 0.001574
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "DFS_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:41:59",
+      "end_time": "2025-12-23T23:43:58",
+      "elapsed_sec": 119.073776,
+      "usage": {
+        "input_tokens": 2338,
+        "output_tokens": 2048,
+        "total_tokens": 4386
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "DFS_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main10.ll",
+      "success": true,
+      "time": "2025-12-23T23:43:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "DFS_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/DFS_main10.bc",
+      "start_time": "2025-12-23T23:43:58",
+      "end_time": "2025-12-23T23:43:58",
+      "elapsed_sec": 0.001482
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "DFS_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-23T23:43:58"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:43:58",
+      "end_time": "2025-12-23T23:45:50",
+      "elapsed_sec": 111.822927,
+      "usage": {
+        "input_tokens": 1399,
+        "output_tokens": 2048,
+        "total_tokens": 3447
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main1.ll",
+      "success": true,
+      "time": "2025-12-23T23:45:50"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main1.bc",
+      "start_time": "2025-12-23T23:45:50",
+      "end_time": "2025-12-23T23:45:50",
+      "elapsed_sec": 0.001495
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:45:50",
+      "end_time": "2025-12-23T23:47:49",
+      "elapsed_sec": 119.11146,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main2.ll",
+      "success": true,
+      "time": "2025-12-23T23:47:49"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main2.bc",
+      "start_time": "2025-12-23T23:47:49",
+      "end_time": "2025-12-23T23:47:49",
+      "elapsed_sec": 0.001517
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:47:49",
+      "end_time": "2025-12-23T23:49:48",
+      "elapsed_sec": 119.093969,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main3.ll",
+      "success": true,
+      "time": "2025-12-23T23:49:48"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main3.bc",
+      "start_time": "2025-12-23T23:49:48",
+      "end_time": "2025-12-23T23:49:48",
+      "elapsed_sec": 0.001503
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:49:48",
+      "end_time": "2025-12-23T23:51:48",
+      "elapsed_sec": 119.122698,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main4.ll",
+      "success": true,
+      "time": "2025-12-23T23:51:48"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main4.bc",
+      "start_time": "2025-12-23T23:51:48",
+      "end_time": "2025-12-23T23:51:48",
+      "elapsed_sec": 0.001483
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:51:48",
+      "end_time": "2025-12-23T23:53:47",
+      "elapsed_sec": 119.178138,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main5.ll",
+      "success": true,
+      "time": "2025-12-23T23:53:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main5.bc",
+      "start_time": "2025-12-23T23:53:47",
+      "end_time": "2025-12-23T23:53:47",
+      "elapsed_sec": 0.001429
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:53:47",
+      "end_time": "2025-12-23T23:55:46",
+      "elapsed_sec": 119.167929,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main6.ll",
+      "success": true,
+      "time": "2025-12-23T23:55:46"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main6.bc",
+      "start_time": "2025-12-23T23:55:46",
+      "end_time": "2025-12-23T23:55:46",
+      "elapsed_sec": 0.001498
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:55:46",
+      "end_time": "2025-12-23T23:57:45",
+      "elapsed_sec": 119.172933,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main7.ll",
+      "success": true,
+      "time": "2025-12-23T23:57:45"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main7.bc",
+      "start_time": "2025-12-23T23:57:45",
+      "end_time": "2025-12-23T23:57:45",
+      "elapsed_sec": 0.001542
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:57:45",
+      "end_time": "2025-12-23T23:59:44",
+      "elapsed_sec": 119.158559,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main8.ll",
+      "success": true,
+      "time": "2025-12-23T23:59:44"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main8.bc",
+      "start_time": "2025-12-23T23:59:44",
+      "end_time": "2025-12-23T23:59:44",
+      "elapsed_sec": 0.001445
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-23T23:59:44",
+      "end_time": "2025-12-24T00:01:43",
+      "elapsed_sec": 119.118254,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main9.ll",
+      "success": true,
+      "time": "2025-12-24T00:01:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main9.bc",
+      "start_time": "2025-12-24T00:01:43",
+      "end_time": "2025-12-24T00:01:43",
+      "elapsed_sec": 0.001465
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "binarysearch_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:01:43",
+      "end_time": "2025-12-24T00:03:42",
+      "elapsed_sec": 119.097587,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "binarysearch_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main10.ll",
+      "success": true,
+      "time": "2025-12-24T00:03:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "binarysearch_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/binarysearch_main10.bc",
+      "start_time": "2025-12-24T00:03:42",
+      "end_time": "2025-12-24T00:03:42",
+      "elapsed_sec": 0.001552
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "binarysearch_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T00:03:42"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:03:42",
+      "end_time": "2025-12-24T00:05:08",
+      "elapsed_sec": 85.387025,
+      "usage": {
+        "input_tokens": 1398,
+        "output_tokens": 1587,
+        "total_tokens": 2985
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main1.ll",
+      "success": true,
+      "time": "2025-12-24T00:05:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main1.bc",
+      "start_time": "2025-12-24T00:05:08",
+      "end_time": "2025-12-24T00:05:08",
+      "elapsed_sec": 0.001484
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:05:08",
+      "end_time": "2025-12-24T00:05:08",
+      "elapsed_sec": 0.553236,
+      "usage": {
+        "input_tokens": 1879,
+        "output_tokens": 1,
+        "total_tokens": 1880
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main2.ll",
+      "success": true,
+      "time": "2025-12-24T00:05:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main2.bc",
+      "start_time": "2025-12-24T00:05:08",
+      "end_time": "2025-12-24T00:05:08",
+      "elapsed_sec": 0.001486
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:05:08",
+      "end_time": "2025-12-24T00:06:37",
+      "elapsed_sec": 88.52622,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main3.ll",
+      "success": true,
+      "time": "2025-12-24T00:06:37"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main3.bc",
+      "start_time": "2025-12-24T00:06:37",
+      "end_time": "2025-12-24T00:06:37",
+      "elapsed_sec": 0.00165
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:06:37",
+      "end_time": "2025-12-24T00:06:38",
+      "elapsed_sec": 0.632109,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main4.ll",
+      "success": true,
+      "time": "2025-12-24T00:06:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main4.bc",
+      "start_time": "2025-12-24T00:06:38",
+      "end_time": "2025-12-24T00:06:38",
+      "elapsed_sec": 0.001566
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:06:38",
+      "end_time": "2025-12-24T00:08:06",
+      "elapsed_sec": 88.489312,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main5.ll",
+      "success": true,
+      "time": "2025-12-24T00:08:06"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main5.bc",
+      "start_time": "2025-12-24T00:08:06",
+      "end_time": "2025-12-24T00:08:06",
+      "elapsed_sec": 0.001556
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:08:06",
+      "end_time": "2025-12-24T00:08:07",
+      "elapsed_sec": 0.632574,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main6.ll",
+      "success": true,
+      "time": "2025-12-24T00:08:07"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main6.bc",
+      "start_time": "2025-12-24T00:08:07",
+      "end_time": "2025-12-24T00:08:07",
+      "elapsed_sec": 0.001416
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:08:07",
+      "end_time": "2025-12-24T00:09:35",
+      "elapsed_sec": 88.54186,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main7.ll",
+      "success": true,
+      "time": "2025-12-24T00:09:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main7.bc",
+      "start_time": "2025-12-24T00:09:35",
+      "end_time": "2025-12-24T00:09:35",
+      "elapsed_sec": 0.001546
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:09:35",
+      "end_time": "2025-12-24T00:09:36",
+      "elapsed_sec": 0.631957,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main8.ll",
+      "success": true,
+      "time": "2025-12-24T00:09:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main8.bc",
+      "start_time": "2025-12-24T00:09:36",
+      "end_time": "2025-12-24T00:09:36",
+      "elapsed_sec": 0.001389
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:09:36",
+      "end_time": "2025-12-24T00:11:04",
+      "elapsed_sec": 88.492208,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main9.ll",
+      "success": true,
+      "time": "2025-12-24T00:11:04"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main9.bc",
+      "start_time": "2025-12-24T00:11:04",
+      "end_time": "2025-12-24T00:11:04",
+      "elapsed_sec": 0.001498
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "bubblesort_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:11:04",
+      "end_time": "2025-12-24T00:11:05",
+      "elapsed_sec": 0.631855,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "bubblesort_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main10.ll",
+      "success": true,
+      "time": "2025-12-24T00:11:05"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "bubblesort_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/bubblesort_main10.bc",
+      "start_time": "2025-12-24T00:11:05",
+      "end_time": "2025-12-24T00:11:05",
+      "elapsed_sec": 0.001502
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "bubblesort_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T00:11:05"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:11:05",
+      "end_time": "2025-12-24T00:13:15",
+      "elapsed_sec": 129.99071,
+      "usage": {
+        "input_tokens": 3748,
+        "output_tokens": 2048,
+        "total_tokens": 5796
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function1.ll",
+      "success": true,
+      "time": "2025-12-24T00:13:15"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function1.bc",
+      "start_time": "2025-12-24T00:13:15",
+      "end_time": "2025-12-24T00:13:15",
+      "elapsed_sec": 0.001632
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:13:15",
+      "end_time": "2025-12-24T00:15:14",
+      "elapsed_sec": 119.121934,
+      "usage": {
+        "input_tokens": 2339,
+        "output_tokens": 2048,
+        "total_tokens": 4387
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function2.ll",
+      "success": true,
+      "time": "2025-12-24T00:15:14"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function2.bc",
+      "start_time": "2025-12-24T00:15:14",
+      "end_time": "2025-12-24T00:15:14",
+      "elapsed_sec": 0.001492
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:15:14",
+      "end_time": "2025-12-24T00:17:13",
+      "elapsed_sec": 119.126306,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function3.ll",
+      "success": true,
+      "time": "2025-12-24T00:17:13"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function3.bc",
+      "start_time": "2025-12-24T00:17:13",
+      "end_time": "2025-12-24T00:17:13",
+      "elapsed_sec": 0.001625
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:17:13",
+      "end_time": "2025-12-24T00:19:13",
+      "elapsed_sec": 119.170971,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function4.ll",
+      "success": true,
+      "time": "2025-12-24T00:19:13"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function4.bc",
+      "start_time": "2025-12-24T00:19:13",
+      "end_time": "2025-12-24T00:19:13",
+      "elapsed_sec": 0.001416
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:19:13",
+      "end_time": "2025-12-24T00:21:12",
+      "elapsed_sec": 119.158713,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function5.ll",
+      "success": true,
+      "time": "2025-12-24T00:21:12"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function5.bc",
+      "start_time": "2025-12-24T00:21:12",
+      "end_time": "2025-12-24T00:21:12",
+      "elapsed_sec": 0.00167
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:21:12",
+      "end_time": "2025-12-24T00:23:11",
+      "elapsed_sec": 119.173137,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function6.ll",
+      "success": true,
+      "time": "2025-12-24T00:23:11"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function6.bc",
+      "start_time": "2025-12-24T00:23:11",
+      "end_time": "2025-12-24T00:23:11",
+      "elapsed_sec": 0.001452
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:23:11",
+      "end_time": "2025-12-24T00:25:10",
+      "elapsed_sec": 119.123925,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function7.ll",
+      "success": true,
+      "time": "2025-12-24T00:25:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function7.bc",
+      "start_time": "2025-12-24T00:25:10",
+      "end_time": "2025-12-24T00:25:10",
+      "elapsed_sec": 0.001538
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:25:10",
+      "end_time": "2025-12-24T00:27:09",
+      "elapsed_sec": 119.142685,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function8.ll",
+      "success": true,
+      "time": "2025-12-24T00:27:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function8.bc",
+      "start_time": "2025-12-24T00:27:09",
+      "end_time": "2025-12-24T00:27:09",
+      "elapsed_sec": 0.001472
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:27:09",
+      "end_time": "2025-12-24T00:29:08",
+      "elapsed_sec": 119.118308,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function9.ll",
+      "success": true,
+      "time": "2025-12-24T00:29:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function9.bc",
+      "start_time": "2025-12-24T00:29:08",
+      "end_time": "2025-12-24T00:29:08",
+      "elapsed_sec": 0.001553
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_function.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:29:08",
+      "end_time": "2025-12-24T00:31:08",
+      "elapsed_sec": 119.154675,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_function.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function10.ll",
+      "success": true,
+      "time": "2025-12-24T00:31:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_function.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_function10.bc",
+      "start_time": "2025-12-24T00:31:08",
+      "end_time": "2025-12-24T00:31:08",
+      "elapsed_sec": 0.001451
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "heapsort_function.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T00:31:08"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:31:08",
+      "end_time": "2025-12-24T00:31:09",
+      "elapsed_sec": 1.352774,
+      "usage": {
+        "input_tokens": 1310,
+        "output_tokens": 20,
+        "total_tokens": 1330
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main1.ll",
+      "success": true,
+      "time": "2025-12-24T00:31:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main1.bc",
+      "start_time": "2025-12-24T00:31:09",
+      "end_time": "2025-12-24T00:31:09",
+      "elapsed_sec": 0.001504
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:31:09",
+      "end_time": "2025-12-24T00:31:31",
+      "elapsed_sec": 22.098054,
+      "usage": {
+        "input_tokens": 311,
+        "output_tokens": 464,
+        "total_tokens": 775
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main2.ll",
+      "success": true,
+      "time": "2025-12-24T00:31:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main2.bc",
+      "start_time": "2025-12-24T00:31:31",
+      "end_time": "2025-12-24T00:31:31",
+      "elapsed_sec": 0.00154
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:31:31",
+      "end_time": "2025-12-24T00:31:31",
+      "elapsed_sec": 0.216359,
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 1,
+        "total_tokens": 758
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main3.ll",
+      "success": true,
+      "time": "2025-12-24T00:31:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main3.bc",
+      "start_time": "2025-12-24T00:31:31",
+      "end_time": "2025-12-24T00:31:31",
+      "elapsed_sec": 0.001479
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:31:31",
+      "end_time": "2025-12-24T00:33:00",
+      "elapsed_sec": 88.510506,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main4.ll",
+      "success": true,
+      "time": "2025-12-24T00:33:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main4.bc",
+      "start_time": "2025-12-24T00:33:00",
+      "end_time": "2025-12-24T00:33:00",
+      "elapsed_sec": 0.001488
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:33:00",
+      "end_time": "2025-12-24T00:33:00",
+      "elapsed_sec": 0.632566,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main5.ll",
+      "success": true,
+      "time": "2025-12-24T00:33:00"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main5.bc",
+      "start_time": "2025-12-24T00:33:00",
+      "end_time": "2025-12-24T00:33:00",
+      "elapsed_sec": 0.001524
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:33:00",
+      "end_time": "2025-12-24T00:34:29",
+      "elapsed_sec": 88.532228,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main6.ll",
+      "success": true,
+      "time": "2025-12-24T00:34:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main6.bc",
+      "start_time": "2025-12-24T00:34:29",
+      "end_time": "2025-12-24T00:34:29",
+      "elapsed_sec": 0.001539
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:34:29",
+      "end_time": "2025-12-24T00:34:30",
+      "elapsed_sec": 0.633417,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main7.ll",
+      "success": true,
+      "time": "2025-12-24T00:34:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main7.bc",
+      "start_time": "2025-12-24T00:34:30",
+      "end_time": "2025-12-24T00:34:30",
+      "elapsed_sec": 0.001438
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:34:30",
+      "end_time": "2025-12-24T00:35:58",
+      "elapsed_sec": 88.506478,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main8.ll",
+      "success": true,
+      "time": "2025-12-24T00:35:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main8.bc",
+      "start_time": "2025-12-24T00:35:58",
+      "end_time": "2025-12-24T00:35:58",
+      "elapsed_sec": 0.001591
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:35:58",
+      "end_time": "2025-12-24T00:35:59",
+      "elapsed_sec": 0.635303,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main9.ll",
+      "success": true,
+      "time": "2025-12-24T00:35:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main9.bc",
+      "start_time": "2025-12-24T00:35:59",
+      "end_time": "2025-12-24T00:35:59",
+      "elapsed_sec": 0.001474
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "heapsort_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:35:59",
+      "end_time": "2025-12-24T00:37:27",
+      "elapsed_sec": 88.548641,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "heapsort_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main10.ll",
+      "success": true,
+      "time": "2025-12-24T00:37:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "heapsort_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/heapsort_main10.bc",
+      "start_time": "2025-12-24T00:37:27",
+      "end_time": "2025-12-24T00:37:27",
+      "elapsed_sec": 0.001642
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "heapsort_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T00:37:27"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:37:27",
+      "end_time": "2025-12-24T00:39:43",
+      "elapsed_sec": 135.306776,
+      "usage": {
+        "input_tokens": 4428,
+        "output_tokens": 2048,
+        "total_tokens": 6476
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main1.ll",
+      "success": true,
+      "time": "2025-12-24T00:39:43"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main1.bc",
+      "start_time": "2025-12-24T00:39:43",
+      "end_time": "2025-12-24T00:39:43",
+      "elapsed_sec": 0.001435
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:39:43",
+      "end_time": "2025-12-24T00:41:42",
+      "elapsed_sec": 119.181849,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main2.ll",
+      "success": true,
+      "time": "2025-12-24T00:41:42"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main2.bc",
+      "start_time": "2025-12-24T00:41:42",
+      "end_time": "2025-12-24T00:41:42",
+      "elapsed_sec": 0.001452
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:41:42",
+      "end_time": "2025-12-24T00:43:41",
+      "elapsed_sec": 119.1496,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main3.ll",
+      "success": true,
+      "time": "2025-12-24T00:43:41"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main3.bc",
+      "start_time": "2025-12-24T00:43:41",
+      "end_time": "2025-12-24T00:43:41",
+      "elapsed_sec": 0.001459
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:43:41",
+      "end_time": "2025-12-24T00:45:40",
+      "elapsed_sec": 119.155983,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main4.ll",
+      "success": true,
+      "time": "2025-12-24T00:45:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main4.bc",
+      "start_time": "2025-12-24T00:45:40",
+      "end_time": "2025-12-24T00:45:40",
+      "elapsed_sec": 0.00156
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:45:40",
+      "end_time": "2025-12-24T00:47:39",
+      "elapsed_sec": 119.098798,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main5.ll",
+      "success": true,
+      "time": "2025-12-24T00:47:39"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main5.bc",
+      "start_time": "2025-12-24T00:47:39",
+      "end_time": "2025-12-24T00:47:39",
+      "elapsed_sec": 0.001539
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:47:39",
+      "end_time": "2025-12-24T00:49:38",
+      "elapsed_sec": 119.097824,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main6.ll",
+      "success": true,
+      "time": "2025-12-24T00:49:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main6.bc",
+      "start_time": "2025-12-24T00:49:38",
+      "end_time": "2025-12-24T00:49:38",
+      "elapsed_sec": 0.001518
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:49:39",
+      "end_time": "2025-12-24T00:51:38",
+      "elapsed_sec": 119.127596,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main7.ll",
+      "success": true,
+      "time": "2025-12-24T00:51:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main7.bc",
+      "start_time": "2025-12-24T00:51:38",
+      "end_time": "2025-12-24T00:51:38",
+      "elapsed_sec": 0.00155
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:51:38",
+      "end_time": "2025-12-24T00:53:37",
+      "elapsed_sec": 119.141516,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main8.ll",
+      "success": true,
+      "time": "2025-12-24T00:53:37"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main8.bc",
+      "start_time": "2025-12-24T00:53:37",
+      "end_time": "2025-12-24T00:53:37",
+      "elapsed_sec": 0.001466
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:53:37",
+      "end_time": "2025-12-24T00:55:36",
+      "elapsed_sec": 119.119546,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main9.ll",
+      "success": true,
+      "time": "2025-12-24T00:55:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main9.bc",
+      "start_time": "2025-12-24T00:55:36",
+      "end_time": "2025-12-24T00:55:36",
+      "elapsed_sec": 0.001447
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "insertionsort_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:55:36",
+      "end_time": "2025-12-24T00:57:35",
+      "elapsed_sec": 119.100186,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "insertionsort_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main10.ll",
+      "success": true,
+      "time": "2025-12-24T00:57:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "insertionsort_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/insertionsort_main10.bc",
+      "start_time": "2025-12-24T00:57:35",
+      "end_time": "2025-12-24T00:57:35",
+      "elapsed_sec": 0.001641
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "insertionsort_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T00:57:35"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "linearsearch_function.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:57:35",
+      "end_time": "2025-12-24T00:59:20",
+      "elapsed_sec": 104.755215,
+      "usage": {
+        "input_tokens": 496,
+        "output_tokens": 2048,
+        "total_tokens": 2544
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function1.ll",
+      "success": true,
+      "time": "2025-12-24T00:59:20"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function1.bc",
+      "start_time": "2025-12-24T00:59:20",
+      "end_time": "2025-12-24T00:59:20",
+      "elapsed_sec": 0.001485
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:59:20",
+      "end_time": "2025-12-24T00:59:51",
+      "elapsed_sec": 30.949831,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 550,
+        "total_tokens": 2890
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function2.ll",
+      "success": true,
+      "time": "2025-12-24T00:59:51"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function2.bc",
+      "start_time": "2025-12-24T00:59:51",
+      "end_time": "2025-12-24T00:59:51",
+      "elapsed_sec": 0.001686
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:59:51",
+      "end_time": "2025-12-24T00:59:51",
+      "elapsed_sec": 0.264202,
+      "usage": {
+        "input_tokens": 843,
+        "output_tokens": 1,
+        "total_tokens": 844
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function3.ll",
+      "success": true,
+      "time": "2025-12-24T00:59:51"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function3.bc",
+      "start_time": "2025-12-24T00:59:51",
+      "end_time": "2025-12-24T00:59:51",
+      "elapsed_sec": 0.001365
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T00:59:51",
+      "end_time": "2025-12-24T01:01:20",
+      "elapsed_sec": 88.484332,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function4.ll",
+      "success": true,
+      "time": "2025-12-24T01:01:20"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function4.bc",
+      "start_time": "2025-12-24T01:01:20",
+      "end_time": "2025-12-24T01:01:20",
+      "elapsed_sec": 0.001504
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:01:20",
+      "end_time": "2025-12-24T01:01:20",
+      "elapsed_sec": 0.632994,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function5.ll",
+      "success": true,
+      "time": "2025-12-24T01:01:20"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function5.bc",
+      "start_time": "2025-12-24T01:01:20",
+      "end_time": "2025-12-24T01:01:20",
+      "elapsed_sec": 0.001431
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:01:20",
+      "end_time": "2025-12-24T01:02:49",
+      "elapsed_sec": 88.492937,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function6.ll",
+      "success": true,
+      "time": "2025-12-24T01:02:49"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function6.bc",
+      "start_time": "2025-12-24T01:02:49",
+      "end_time": "2025-12-24T01:02:49",
+      "elapsed_sec": 0.001672
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:02:49",
+      "end_time": "2025-12-24T01:02:49",
+      "elapsed_sec": 0.633285,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function7.ll",
+      "success": true,
+      "time": "2025-12-24T01:02:49"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function7.bc",
+      "start_time": "2025-12-24T01:02:49",
+      "end_time": "2025-12-24T01:02:49",
+      "elapsed_sec": 0.001391
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:02:49",
+      "end_time": "2025-12-24T01:04:18",
+      "elapsed_sec": 88.516424,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function8.ll",
+      "success": true,
+      "time": "2025-12-24T01:04:18"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function8.bc",
+      "start_time": "2025-12-24T01:04:18",
+      "end_time": "2025-12-24T01:04:18",
+      "elapsed_sec": 0.00146
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:04:18",
+      "end_time": "2025-12-24T01:04:19",
+      "elapsed_sec": 0.633456,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function9.ll",
+      "success": true,
+      "time": "2025-12-24T01:04:19"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function9.bc",
+      "start_time": "2025-12-24T01:04:19",
+      "end_time": "2025-12-24T01:04:19",
+      "elapsed_sec": 0.001518
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_function.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:04:19",
+      "end_time": "2025-12-24T01:05:47",
+      "elapsed_sec": 88.526959,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_function.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function10.ll",
+      "success": true,
+      "time": "2025-12-24T01:05:47"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_function.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_function10.bc",
+      "start_time": "2025-12-24T01:05:47",
+      "end_time": "2025-12-24T01:05:47",
+      "elapsed_sec": 0.001505
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "linearsearch_function.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T01:05:47"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "linearsearch_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:05:47",
+      "end_time": "2025-12-24T01:07:31",
+      "elapsed_sec": 104.097094,
+      "usage": {
+        "input_tokens": 400,
+        "output_tokens": 2048,
+        "total_tokens": 2448
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main1.ll",
+      "success": true,
+      "time": "2025-12-24T01:07:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main1.bc",
+      "start_time": "2025-12-24T01:07:31",
+      "end_time": "2025-12-24T01:07:31",
+      "elapsed_sec": 0.001548
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:07:31",
+      "end_time": "2025-12-24T01:09:30",
+      "elapsed_sec": 119.147245,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main2.ll",
+      "success": true,
+      "time": "2025-12-24T01:09:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main2.bc",
+      "start_time": "2025-12-24T01:09:30",
+      "end_time": "2025-12-24T01:09:30",
+      "elapsed_sec": 0.001455
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:09:30",
+      "end_time": "2025-12-24T01:11:30",
+      "elapsed_sec": 119.167197,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main3.ll",
+      "success": true,
+      "time": "2025-12-24T01:11:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main3.bc",
+      "start_time": "2025-12-24T01:11:30",
+      "end_time": "2025-12-24T01:11:30",
+      "elapsed_sec": 0.001576
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:11:30",
+      "end_time": "2025-12-24T01:13:29",
+      "elapsed_sec": 119.145417,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main4.ll",
+      "success": true,
+      "time": "2025-12-24T01:13:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main4.bc",
+      "start_time": "2025-12-24T01:13:29",
+      "end_time": "2025-12-24T01:13:29",
+      "elapsed_sec": 0.001449
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:13:29",
+      "end_time": "2025-12-24T01:15:28",
+      "elapsed_sec": 119.113289,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main5.ll",
+      "success": true,
+      "time": "2025-12-24T01:15:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main5.bc",
+      "start_time": "2025-12-24T01:15:28",
+      "end_time": "2025-12-24T01:15:28",
+      "elapsed_sec": 0.001537
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:15:28",
+      "end_time": "2025-12-24T01:17:27",
+      "elapsed_sec": 119.13221,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main6.ll",
+      "success": true,
+      "time": "2025-12-24T01:17:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main6.bc",
+      "start_time": "2025-12-24T01:17:27",
+      "end_time": "2025-12-24T01:17:27",
+      "elapsed_sec": 0.001438
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:17:27",
+      "end_time": "2025-12-24T01:19:26",
+      "elapsed_sec": 119.105592,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main7.ll",
+      "success": true,
+      "time": "2025-12-24T01:19:26"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main7.bc",
+      "start_time": "2025-12-24T01:19:26",
+      "end_time": "2025-12-24T01:19:26",
+      "elapsed_sec": 0.00159
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:19:26",
+      "end_time": "2025-12-24T01:21:25",
+      "elapsed_sec": 119.112519,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main8.ll",
+      "success": true,
+      "time": "2025-12-24T01:21:25"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main8.bc",
+      "start_time": "2025-12-24T01:21:25",
+      "end_time": "2025-12-24T01:21:25",
+      "elapsed_sec": 0.001573
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:21:25",
+      "end_time": "2025-12-24T01:23:25",
+      "elapsed_sec": 119.08892,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main9.ll",
+      "success": true,
+      "time": "2025-12-24T01:23:25"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main9.bc",
+      "start_time": "2025-12-24T01:23:25",
+      "end_time": "2025-12-24T01:23:25",
+      "elapsed_sec": 0.001459
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "linearsearch_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:23:25",
+      "end_time": "2025-12-24T01:25:24",
+      "elapsed_sec": 119.115643,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "linearsearch_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main10.ll",
+      "success": true,
+      "time": "2025-12-24T01:25:24"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "linearsearch_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/linearsearch_main10.bc",
+      "start_time": "2025-12-24T01:25:24",
+      "end_time": "2025-12-24T01:25:24",
+      "elapsed_sec": 0.001597
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "linearsearch_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T01:25:24"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:25:24",
+      "end_time": "2025-12-24T01:27:38",
+      "elapsed_sec": 134.362284,
+      "usage": {
+        "input_tokens": 4316,
+        "output_tokens": 2048,
+        "total_tokens": 6364
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main1.ll",
+      "success": true,
+      "time": "2025-12-24T01:27:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main1.bc",
+      "start_time": "2025-12-24T01:27:38",
+      "end_time": "2025-12-24T01:27:38",
+      "elapsed_sec": 0.001544
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:27:38",
+      "end_time": "2025-12-24T01:29:37",
+      "elapsed_sec": 119.113657,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main2.ll",
+      "success": true,
+      "time": "2025-12-24T01:29:37"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main2.bc",
+      "start_time": "2025-12-24T01:29:37",
+      "end_time": "2025-12-24T01:29:37",
+      "elapsed_sec": 0.001762
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:29:37",
+      "end_time": "2025-12-24T01:31:36",
+      "elapsed_sec": 119.106946,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main3.ll",
+      "success": true,
+      "time": "2025-12-24T01:31:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main3.bc",
+      "start_time": "2025-12-24T01:31:36",
+      "end_time": "2025-12-24T01:31:36",
+      "elapsed_sec": 0.001447
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:31:36",
+      "end_time": "2025-12-24T01:33:35",
+      "elapsed_sec": 119.090079,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main4.ll",
+      "success": true,
+      "time": "2025-12-24T01:33:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main4.bc",
+      "start_time": "2025-12-24T01:33:35",
+      "end_time": "2025-12-24T01:33:35",
+      "elapsed_sec": 0.001513
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:33:35",
+      "end_time": "2025-12-24T01:35:35",
+      "elapsed_sec": 119.089142,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main5.ll",
+      "success": true,
+      "time": "2025-12-24T01:35:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main5.bc",
+      "start_time": "2025-12-24T01:35:35",
+      "end_time": "2025-12-24T01:35:35",
+      "elapsed_sec": 0.001623
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:35:35",
+      "end_time": "2025-12-24T01:37:34",
+      "elapsed_sec": 119.10928,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main6.ll",
+      "success": true,
+      "time": "2025-12-24T01:37:34"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main6.bc",
+      "start_time": "2025-12-24T01:37:34",
+      "end_time": "2025-12-24T01:37:34",
+      "elapsed_sec": 0.001442
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:37:34",
+      "end_time": "2025-12-24T01:39:33",
+      "elapsed_sec": 119.088395,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main7.ll",
+      "success": true,
+      "time": "2025-12-24T01:39:33"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main7.bc",
+      "start_time": "2025-12-24T01:39:33",
+      "end_time": "2025-12-24T01:39:33",
+      "elapsed_sec": 0.001519
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:39:33",
+      "end_time": "2025-12-24T01:41:32",
+      "elapsed_sec": 119.074473,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main8.ll",
+      "success": true,
+      "time": "2025-12-24T01:41:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main8.bc",
+      "start_time": "2025-12-24T01:41:32",
+      "end_time": "2025-12-24T01:41:32",
+      "elapsed_sec": 0.001518
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:41:32",
+      "end_time": "2025-12-24T01:43:31",
+      "elapsed_sec": 119.082476,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main9.ll",
+      "success": true,
+      "time": "2025-12-24T01:43:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main9.bc",
+      "start_time": "2025-12-24T01:43:31",
+      "end_time": "2025-12-24T01:43:31",
+      "elapsed_sec": 0.001462
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "mergesort_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:43:31",
+      "end_time": "2025-12-24T01:45:30",
+      "elapsed_sec": 119.131715,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "mergesort_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main10.ll",
+      "success": true,
+      "time": "2025-12-24T01:45:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "mergesort_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/mergesort_main10.bc",
+      "start_time": "2025-12-24T01:45:30",
+      "end_time": "2025-12-24T01:45:30",
+      "elapsed_sec": 0.001497
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "mergesort_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T01:45:30"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:45:30",
+      "end_time": "2025-12-24T01:45:49",
+      "elapsed_sec": 18.278384,
+      "usage": {
+        "input_tokens": 1559,
+        "output_tokens": 344,
+        "total_tokens": 1903
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function1.ll",
+      "success": true,
+      "time": "2025-12-24T01:45:49"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function1.bc",
+      "start_time": "2025-12-24T01:45:49",
+      "end_time": "2025-12-24T01:45:49",
+      "elapsed_sec": 0.001494
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:45:49",
+      "end_time": "2025-12-24T01:47:34",
+      "elapsed_sec": 105.832776,
+      "usage": {
+        "input_tokens": 635,
+        "output_tokens": 2048,
+        "total_tokens": 2683
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function2.ll",
+      "success": true,
+      "time": "2025-12-24T01:47:34"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function2.bc",
+      "start_time": "2025-12-24T01:47:34",
+      "end_time": "2025-12-24T01:47:34",
+      "elapsed_sec": 0.00147
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:47:34",
+      "end_time": "2025-12-24T01:49:33",
+      "elapsed_sec": 119.104454,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function3.ll",
+      "success": true,
+      "time": "2025-12-24T01:49:34"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function3.bc",
+      "start_time": "2025-12-24T01:49:34",
+      "end_time": "2025-12-24T01:49:34",
+      "elapsed_sec": 0.001591
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:49:34",
+      "end_time": "2025-12-24T01:51:33",
+      "elapsed_sec": 119.106206,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function4.ll",
+      "success": true,
+      "time": "2025-12-24T01:51:33"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function4.bc",
+      "start_time": "2025-12-24T01:51:33",
+      "end_time": "2025-12-24T01:51:33",
+      "elapsed_sec": 0.00155
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:51:33",
+      "end_time": "2025-12-24T01:53:32",
+      "elapsed_sec": 119.080767,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function5.ll",
+      "success": true,
+      "time": "2025-12-24T01:53:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function5.bc",
+      "start_time": "2025-12-24T01:53:32",
+      "end_time": "2025-12-24T01:53:32",
+      "elapsed_sec": 0.001469
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:53:32",
+      "end_time": "2025-12-24T01:55:31",
+      "elapsed_sec": 119.10257,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function6.ll",
+      "success": true,
+      "time": "2025-12-24T01:55:31"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function6.bc",
+      "start_time": "2025-12-24T01:55:31",
+      "end_time": "2025-12-24T01:55:31",
+      "elapsed_sec": 0.001491
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:55:31",
+      "end_time": "2025-12-24T01:57:30",
+      "elapsed_sec": 119.109222,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function7.ll",
+      "success": true,
+      "time": "2025-12-24T01:57:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function7.bc",
+      "start_time": "2025-12-24T01:57:30",
+      "end_time": "2025-12-24T01:57:30",
+      "elapsed_sec": 0.001569
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:57:30",
+      "end_time": "2025-12-24T01:59:29",
+      "elapsed_sec": 119.085111,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function8.ll",
+      "success": true,
+      "time": "2025-12-24T01:59:29"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function8.bc",
+      "start_time": "2025-12-24T01:59:29",
+      "end_time": "2025-12-24T01:59:29",
+      "elapsed_sec": 0.001466
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T01:59:29",
+      "end_time": "2025-12-24T02:01:28",
+      "elapsed_sec": 119.107335,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function9.ll",
+      "success": true,
+      "time": "2025-12-24T02:01:28"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function9.bc",
+      "start_time": "2025-12-24T02:01:28",
+      "end_time": "2025-12-24T02:01:28",
+      "elapsed_sec": 0.00147
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_function.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:01:28",
+      "end_time": "2025-12-24T02:03:27",
+      "elapsed_sec": 119.100696,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_function.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function10.ll",
+      "success": true,
+      "time": "2025-12-24T02:03:27"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_function.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_function10.bc",
+      "start_time": "2025-12-24T02:03:27",
+      "end_time": "2025-12-24T02:03:27",
+      "elapsed_sec": 0.001599
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "quicksort_function.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T02:03:27"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "quicksort_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:03:27",
+      "end_time": "2025-12-24T02:05:16",
+      "elapsed_sec": 108.645435,
+      "usage": {
+        "input_tokens": 992,
+        "output_tokens": 2048,
+        "total_tokens": 3040
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main1.ll",
+      "success": true,
+      "time": "2025-12-24T02:05:16"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main1.bc",
+      "start_time": "2025-12-24T02:05:16",
+      "end_time": "2025-12-24T02:05:16",
+      "elapsed_sec": 0.00161
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:05:16",
+      "end_time": "2025-12-24T02:07:15",
+      "elapsed_sec": 119.100647,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main2.ll",
+      "success": true,
+      "time": "2025-12-24T02:07:15"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main2.bc",
+      "start_time": "2025-12-24T02:07:15",
+      "end_time": "2025-12-24T02:07:15",
+      "elapsed_sec": 0.001473
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:07:15",
+      "end_time": "2025-12-24T02:09:14",
+      "elapsed_sec": 119.093381,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main3.ll",
+      "success": true,
+      "time": "2025-12-24T02:09:14"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main3.bc",
+      "start_time": "2025-12-24T02:09:14",
+      "end_time": "2025-12-24T02:09:14",
+      "elapsed_sec": 0.00155
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:09:14",
+      "end_time": "2025-12-24T02:11:14",
+      "elapsed_sec": 119.122546,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main4.ll",
+      "success": true,
+      "time": "2025-12-24T02:11:14"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main4.bc",
+      "start_time": "2025-12-24T02:11:14",
+      "end_time": "2025-12-24T02:11:14",
+      "elapsed_sec": 0.001487
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:11:14",
+      "end_time": "2025-12-24T02:13:13",
+      "elapsed_sec": 119.101186,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main5.ll",
+      "success": true,
+      "time": "2025-12-24T02:13:13"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main5.bc",
+      "start_time": "2025-12-24T02:13:13",
+      "end_time": "2025-12-24T02:13:13",
+      "elapsed_sec": 0.001476
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:13:13",
+      "end_time": "2025-12-24T02:15:12",
+      "elapsed_sec": 119.128871,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main6.ll",
+      "success": true,
+      "time": "2025-12-24T02:15:12"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main6.bc",
+      "start_time": "2025-12-24T02:15:12",
+      "end_time": "2025-12-24T02:15:12",
+      "elapsed_sec": 0.00142
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:15:12",
+      "end_time": "2025-12-24T02:17:11",
+      "elapsed_sec": 119.153263,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main7.ll",
+      "success": true,
+      "time": "2025-12-24T02:17:11"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main7.bc",
+      "start_time": "2025-12-24T02:17:11",
+      "end_time": "2025-12-24T02:17:11",
+      "elapsed_sec": 0.001519
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:17:11",
+      "end_time": "2025-12-24T02:19:10",
+      "elapsed_sec": 119.174778,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main8.ll",
+      "success": true,
+      "time": "2025-12-24T02:19:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main8.bc",
+      "start_time": "2025-12-24T02:19:10",
+      "end_time": "2025-12-24T02:19:10",
+      "elapsed_sec": 0.001696
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:19:10",
+      "end_time": "2025-12-24T02:21:09",
+      "elapsed_sec": 119.14934,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main9.ll",
+      "success": true,
+      "time": "2025-12-24T02:21:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main9.bc",
+      "start_time": "2025-12-24T02:21:09",
+      "end_time": "2025-12-24T02:21:09",
+      "elapsed_sec": 0.001661
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "quicksort_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:21:09",
+      "end_time": "2025-12-24T02:23:09",
+      "elapsed_sec": 119.143379,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "quicksort_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main10.ll",
+      "success": true,
+      "time": "2025-12-24T02:23:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "quicksort_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/quicksort_main10.bc",
+      "start_time": "2025-12-24T02:23:09",
+      "end_time": "2025-12-24T02:23:09",
+      "elapsed_sec": 0.001517
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "quicksort_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T02:23:09"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:23:09",
+      "end_time": "2025-12-24T02:24:59",
+      "elapsed_sec": 110.28483,
+      "usage": {
+        "input_tokens": 1196,
+        "output_tokens": 2048,
+        "total_tokens": 3244
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function1.ll",
+      "success": true,
+      "time": "2025-12-24T02:24:59"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function1.bc",
+      "start_time": "2025-12-24T02:24:59",
+      "end_time": "2025-12-24T02:24:59",
+      "elapsed_sec": 0.001552
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:24:59",
+      "end_time": "2025-12-24T02:26:58",
+      "elapsed_sec": 119.15866,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 2048,
+        "total_tokens": 4389
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function2.ll",
+      "success": true,
+      "time": "2025-12-24T02:26:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function2.bc",
+      "start_time": "2025-12-24T02:26:58",
+      "end_time": "2025-12-24T02:26:58",
+      "elapsed_sec": 0.001448
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:26:58",
+      "end_time": "2025-12-24T02:28:57",
+      "elapsed_sec": 119.139543,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function3.ll",
+      "success": true,
+      "time": "2025-12-24T02:28:57"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function3.bc",
+      "start_time": "2025-12-24T02:28:57",
+      "end_time": "2025-12-24T02:28:57",
+      "elapsed_sec": 0.001618
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:28:57",
+      "end_time": "2025-12-24T02:30:56",
+      "elapsed_sec": 119.15272,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function4.ll",
+      "success": true,
+      "time": "2025-12-24T02:30:56"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function4.bc",
+      "start_time": "2025-12-24T02:30:56",
+      "end_time": "2025-12-24T02:30:56",
+      "elapsed_sec": 0.001516
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:30:56",
+      "end_time": "2025-12-24T02:32:56",
+      "elapsed_sec": 119.129721,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function5.ll",
+      "success": true,
+      "time": "2025-12-24T02:32:56"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function5.bc",
+      "start_time": "2025-12-24T02:32:56",
+      "end_time": "2025-12-24T02:32:56",
+      "elapsed_sec": 0.001503
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:32:56",
+      "end_time": "2025-12-24T02:34:55",
+      "elapsed_sec": 119.125496,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function6.ll",
+      "success": true,
+      "time": "2025-12-24T02:34:55"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function6.bc",
+      "start_time": "2025-12-24T02:34:55",
+      "end_time": "2025-12-24T02:34:55",
+      "elapsed_sec": 0.001464
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:34:55",
+      "end_time": "2025-12-24T02:36:54",
+      "elapsed_sec": 119.162661,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function7.ll",
+      "success": true,
+      "time": "2025-12-24T02:36:54"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function7.bc",
+      "start_time": "2025-12-24T02:36:54",
+      "end_time": "2025-12-24T02:36:54",
+      "elapsed_sec": 0.001687
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:36:54",
+      "end_time": "2025-12-24T02:38:53",
+      "elapsed_sec": 119.161378,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function8.ll",
+      "success": true,
+      "time": "2025-12-24T02:38:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function8.bc",
+      "start_time": "2025-12-24T02:38:53",
+      "end_time": "2025-12-24T02:38:53",
+      "elapsed_sec": 0.001435
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:38:53",
+      "end_time": "2025-12-24T02:40:52",
+      "elapsed_sec": 119.153946,
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 2048,
+        "total_tokens": 4390
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function9.ll",
+      "success": true,
+      "time": "2025-12-24T02:40:52"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function9.bc",
+      "start_time": "2025-12-24T02:40:52",
+      "end_time": "2025-12-24T02:40:52",
+      "elapsed_sec": 0.001498
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_function.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:40:52",
+      "end_time": "2025-12-24T02:42:52",
+      "elapsed_sec": 119.113966,
+      "usage": {
+        "input_tokens": 2340,
+        "output_tokens": 2048,
+        "total_tokens": 4388
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_function.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function10.ll",
+      "success": true,
+      "time": "2025-12-24T02:42:52"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_function.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_function10.bc",
+      "start_time": "2025-12-24T02:42:52",
+      "end_time": "2025-12-24T02:42:52",
+      "elapsed_sec": 0.001409
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "selectionsort_function.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T02:42:52"
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:42:52",
+      "end_time": "2025-12-24T02:44:40",
+      "elapsed_sec": 108.092173,
+      "usage": {
+        "input_tokens": 915,
+        "output_tokens": 2048,
+        "total_tokens": 2963
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main1.ll",
+      "success": true,
+      "time": "2025-12-24T02:44:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main1.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main1.bc",
+      "start_time": "2025-12-24T02:44:40",
+      "end_time": "2025-12-24T02:44:40",
+      "elapsed_sec": 0.001474
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:44:40",
+      "end_time": "2025-12-24T02:45:10",
+      "elapsed_sec": 30.411026,
+      "usage": {
+        "input_tokens": 2341,
+        "output_tokens": 540,
+        "total_tokens": 2881
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main2.ll",
+      "success": true,
+      "time": "2025-12-24T02:45:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 2,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main2.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main2.bc",
+      "start_time": "2025-12-24T02:45:10",
+      "end_time": "2025-12-24T02:45:10",
+      "elapsed_sec": 0.00154
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 3,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:45:10",
+      "end_time": "2025-12-24T02:45:10",
+      "elapsed_sec": 0.262916,
+      "usage": {
+        "input_tokens": 833,
+        "output_tokens": 1,
+        "total_tokens": 834
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 3,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main3.ll",
+      "success": true,
+      "time": "2025-12-24T02:45:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 3,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main3.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main3.bc",
+      "start_time": "2025-12-24T02:45:10",
+      "end_time": "2025-12-24T02:45:10",
+      "elapsed_sec": 0.001561
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 4,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:45:10",
+      "end_time": "2025-12-24T02:46:39",
+      "elapsed_sec": 88.540407,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 4,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main4.ll",
+      "success": true,
+      "time": "2025-12-24T02:46:39"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 4,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main4.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main4.bc",
+      "start_time": "2025-12-24T02:46:39",
+      "end_time": "2025-12-24T02:46:39",
+      "elapsed_sec": 0.001435
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 5,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:46:39",
+      "end_time": "2025-12-24T02:46:40",
+      "elapsed_sec": 0.635262,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 5,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main5.ll",
+      "success": true,
+      "time": "2025-12-24T02:46:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 5,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main5.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main5.bc",
+      "start_time": "2025-12-24T02:46:40",
+      "end_time": "2025-12-24T02:46:40",
+      "elapsed_sec": 0.001538
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 6,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:46:40",
+      "end_time": "2025-12-24T02:48:08",
+      "elapsed_sec": 88.567984,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 6,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main6.ll",
+      "success": true,
+      "time": "2025-12-24T02:48:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 6,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main6.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main6.bc",
+      "start_time": "2025-12-24T02:48:08",
+      "end_time": "2025-12-24T02:48:08",
+      "elapsed_sec": 0.001461
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 7,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:48:08",
+      "end_time": "2025-12-24T02:48:09",
+      "elapsed_sec": 0.633226,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 7,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main7.ll",
+      "success": true,
+      "time": "2025-12-24T02:48:09"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 7,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main7.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main7.bc",
+      "start_time": "2025-12-24T02:48:09",
+      "end_time": "2025-12-24T02:48:09",
+      "elapsed_sec": 0.001521
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 8,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:48:09",
+      "end_time": "2025-12-24T02:49:37",
+      "elapsed_sec": 88.521738,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 8,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main8.ll",
+      "success": true,
+      "time": "2025-12-24T02:49:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 8,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main8.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main8.bc",
+      "start_time": "2025-12-24T02:49:38",
+      "end_time": "2025-12-24T02:49:38",
+      "elapsed_sec": 0.001531
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 9,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:49:38",
+      "end_time": "2025-12-24T02:49:38",
+      "elapsed_sec": 0.6338,
+      "usage": {
+        "input_tokens": 2067,
+        "output_tokens": 1,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 9,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main9.ll",
+      "success": true,
+      "time": "2025-12-24T02:49:38"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 9,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main9.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main9.bc",
+      "start_time": "2025-12-24T02:49:38",
+      "end_time": "2025-12-24T02:49:38",
+      "elapsed_sec": 0.001489
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "selectionsort_main.txt",
+      "version": 10,
+      "request_id": null,
+      "model": "facebook/llm-compiler-13b-ftd",
+      "start_time": "2025-12-24T02:49:38",
+      "end_time": "2025-12-24T02:51:07",
+      "elapsed_sec": 88.593857,
+      "usage": {
+        "input_tokens": 294,
+        "output_tokens": 1774,
+        "total_tokens": 2068
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "selectionsort_main.txt",
+      "version": 10,
+      "ll_path": "../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main10.ll",
+      "success": true,
+      "time": "2025-12-24T02:51:07"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "selectionsort_main.txt",
+      "version": 10,
+      "success": false,
+      "stdout": "",
+      "stderr": "[assemble exception] [Errno 2] No such file or directory: 'llvm-as-14'",
+      "returncode": null,
+      "cmd": "llvm-as-14 ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main10.ll -o ../../../llm_to_IR/Meta_compiler_13b_ftd_1/O3/5/selectionsort_main10.bc",
+      "start_time": "2025-12-24T02:51:07",
+      "end_time": "2025-12-24T02:51:07",
+      "elapsed_sec": 0.001714
+    },
+    {
+      "phase": "file_limits_reached",
+      "filename": "selectionsort_main.txt",
+      "last_version": 10,
+      "fix_attempts": 9,
+      "time": "2025-12-24T02:51:07"
+    },
+    {
+      "phase": "round_complete",
+      "round": 5,
+      "end_time": "2025-12-24T02:51:07"
+    }
+  ]
+}

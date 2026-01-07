@@ -5,7 +5,7 @@ from openai import OpenAI
 # OpenAI 클라이언트 초기화
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", ""))
 
-def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_list/gpt/linux_O3.json"):
+def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_list/gpt/window_O0_obfuscation_bubblesort.json"):
     results = {}
 
     for filename in os.listdir(folder_path):
@@ -39,19 +39,6 @@ def run_gpt_on_txt_files(folder_path, system_prompt, output_json="../function_li
     print(f"\n✅ 모든 결과가 {output_json} 파일에 저장되었습니다.")
 
 if __name__ == "__main__":
-    folder = "..//function_list/ida/linux/O3"
-    system_prompt = """"Role
-Receive an IDA function list and select only the minimal set of internal functions required to emit IR. The output must be a JSON array of function names only—no extra text.
-
-Rules
-- The input is always an obfuscated binary, and function names are typically meaningless (e.g., sub_401000, loc_1234AB).
-- Include only internal (.text) functions reachable from the target (entrypoints).
-- Exclude functions that only wrap external API calls without additional logic.
-- Exclude CRT/startup/teardown routines, PLT/import stubs, and trivial logging wrappers.
-- Do not include external library calls (they will be IR declares).
-- Include internally defined callbacks passed as function pointers if reachable.
-= Do not invent names not present in the input.
-
-Output format
-["fnA","fnB","fnC"]"""  # 원하는 시스템 프롬프트
+    folder = "/root/workspace/converet_to_IR_with_GPT/function_list/ida/window/O0/Obfuscation/bubblesort"
+    system_prompt = "root/workspace/converet_to_IR_with_GPT/python_code/systemprompt/function_list_obfuscation_non_option.txt" 
     run_gpt_on_txt_files(folder, system_prompt)

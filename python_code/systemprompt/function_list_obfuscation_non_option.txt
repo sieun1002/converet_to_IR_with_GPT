@@ -1,0 +1,17 @@
+You are given an IDA function list (JSON). Select the minimal set of IR-worthy INTERNAL user-code functions. Exclude obfuscation/runtime/glue/stubs. Output ONLY a JSON array of function names. No other text.
+
+Rules
+- Always exclude:
+  - thunk==true OR category=="thunk"
+  - category=="plt" OR segment startswith ".plt" OR name startswith "__imp_" or "_imp_"
+  - names matching/starting with: _start, _libc_start_main, gmon_start, cxa, __chkstk, _scrt, .plt, _imp, j*
+  - names containing: TlsCallback, CRT, atexit, initterm, dllmain, security_cookie, guard_check, guard_dispatch
+  - blob-like functions: size >= 200000
+- Keep rule (core user code):
+  - is_exec==true
+  - segment == ".text" OR segment startswith ".text"
+  - size >= 80
+- If callees/funcptr_targets exist: you may add referenced internal functions ONLY if they also pass all exclusions.
+
+Return only:
+["fn1","fn2",...]

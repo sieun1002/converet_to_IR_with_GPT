@@ -16,5 +16,5 @@ def rename_files_in_folder(folder_path):
                 print(f"Renamed: {filename} -> {new_name}")
 
 if __name__ == "__main__":
-    folder = r"/home/sieun/workspace/converet_to_IR_with_GPT/llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3/5"  # 수정해서 사용하세요
+    folder = r"/root/workspace/converet_to_IR_with_GPT/llm_to_IR/Meta_compiler_13b_ftd_1/O3/5"  # 수정해서 사용하세요
     rename_files_in_folder(folder)

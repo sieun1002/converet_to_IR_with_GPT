@@ -1,0 +1,157 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../../llm_to_IR/Meta_compiler_13b_ftd_json/1/_tmp/119_O0_v1.ll:1:1: error: expected top-level entity
+; <func1>:
+; ^
+; === ERROR LOG END ===
+
+<func1>:
+endbr64
+push   %rbp
+mov     %rsp,%rbp
+sub     $0x30,%rsp
+mov     %rdi,-0x28(%rbp)
+mov     %rsi,-0x30(%rbp)
+movl   $0x0,-0x14(%rbp)
+mov     -0x28(%rbp),%rax
+mov     %rax,%rdi
+call   1070 <strlen@plt>
+mov     %rax,-0x8(%rbp)
+mov     -0x30(%rbp),%rax
+mov     %rax,%rdi
+call   1070 <strlen@plt>
+mov     %rax,-0x4(%rbp)
+movl   $0x1,-0xc(%rbp)
+movl   $0x0,-0x10(%rbp)
+jmp    1213 <func1+0x8a>
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x28(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x28,%al
+jne    11ea <func1+0x61>
+addl   $0x1,-0x14(%rbp)
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x28(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x29,%al
+jne    1202 <func1+0x79>
+subl   $0x1,-0x14(%rbp)
+cmpl   $0x0,-0x14(%rbp)
+jns    120f <func1+0x86>
+movl   $0x0,-0xc(%rbp)
+addl   $0x1,-0x10(%rbp)
+mov     -0x10(%rbp),%eax
+cmp     -0x8(%rbp),%eax
+jl     11d2 <func1+0x49>
+movl   $0x0,-0x10(%rbp)
+jmp    1265 <func1+0xdc>
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x30(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x28,%al
+jne    123c <func1+0xb3>
+addl   $0x1,-0x14(%rbp)
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x30(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x29,%al
+jne    1254 <func1+0xcb>
+subl   $0x1,-0x14(%rbp)
+cmpl   $0x0,-0x14(%rbp)
+jns    1261 <func1+0xd8>
+movl   $0x0,-0xc(%rbp)
+addl   $0x1,-0x10(%rbp)
+mov     -0x10(%rbp),%eax
+cmp     -0x4(%rbp),%eax
+jl     1224 <func1+0x9b>
+cmpl   $0x0,-0x14(%rbp)
+jne    1285 <func1+0xfc>
+cmpl   $0x0,-0xc(%rbp)
+je     1285 <func1+0xfc>
+lea    0xd88(%rip),%rax
+jmp    1353 <func1+0x1ca>
+movl   $0x0,-0x14(%rbp)
+movl   $0x1,-0xc(%rbp)
+movl   $0x0,-0x10(%rbp)
+jmp    12dd <func1+0x154>
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x30(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x28,%al
+jne    12b4 <func1+0x12b>
+addl   $0x1,-0x14(%rbp)
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x30(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x29,%al
+jne    12cc <func1+0x143>
+subl   $0x1,-0x14(%rbp)
+cmpl   $0x0,-0x14(%rbp)
+jns    12d9 <func1+0x150>
+movl   $0x0,-0xc(%rbp)
+addl   $0x1,-0x10(%rbp)
+mov     -0x10(%rbp),%eax
+cmp     -0x4(%rbp),%eax
+jl     129c <func1+0x113>
+movl   $0x0,-0x10(%rbp)
+jmp    132f <func1+0x1a6>
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x28(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x28,%al
+jne    1306 <func1+0x17d>
+addl   $0x1,-0x14(%rbp)
+mov     -0x10(%rbp),%eax
+movslq %eax,%rdx
+mov     -0x28(%rbp),%rax
+add     %rdx,%rax
+movzbl (%rax),%eax
+cmp     $0x29,%al
+jne    131e <func1+0x195>
+subl   $0x1,-0x14(%rbp)
+cmpl   $0x0,-0x14(%rbp)
+jns    132b <func1+0x1a2>
+movl   $0x0,-0xc(%rbp)
+addl   $0x1,-0x10(%rbp)
+mov     -0x10(%rbp),%eax
+cmp     -0x8(%rbp),%eax
+jl     12ee <func1+0x165>
+cmpl   $0x0,-0x14(%rbp)
+jne    134c <func1+0x1c3>
+cmpl   $0x0,-0xc(%rbp)
+je     134c <func1+0x1c3>
+lea    0xcbe(%rip),%rax
+jmp    1353 <func1+0x1ca>
+lea    0xcb9(%rip),%rax
+leave
+ret
+
+<func2>:
+endbr64
+push   %rbp
+mov     %rsp,%rbp
+sub     $0x30,%rsp
+mov     %rdi,-0x28(%rbp)
+mov     %rsi,-0x30(%rbp)
+movl   $0x0,-0x14(%rbp)
+mov     -0x28(%rbp),%rax
+mov     %rax,%rdi
+call   1070 <strlen@plt>
+mov     %rax,-0x8(%rbp)
+mov     -0x30(%rbp),%rax
+mov     %rax,%rdi
+call   1070 <strlen@plt>
+mov     %rax,-0
