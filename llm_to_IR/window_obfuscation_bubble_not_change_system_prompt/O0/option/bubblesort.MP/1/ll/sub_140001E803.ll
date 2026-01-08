@@ -1,0 +1,55 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.Node = type { i32, i32, void (i8*)*, %struct.Node* }
+
+@unk_140007100 = external global i8
+@qword_1400070E0 = external global %struct.Node*
+@qword_140008258 = external global void (i8*)*
+@qword_140008260 = external global i32 ()*
+@qword_140008270 = external global void (i8*)*
+@qword_140008288 = external global i8* (i32)*
+
+define void @sub_140001E80() {
+entry:
+  %0 = load void (i8*)*, void (i8*)** @qword_140008258, align 8
+  call void %0(i8* @unk_140007100)
+  %1 = load %struct.Node*, %struct.Node** @qword_1400070E0, align 8
+  %2 = icmp eq %struct.Node* %1, null
+  br i1 %2, label %tail, label %preheader
+
+preheader:
+  %3 = load i8* (i32)*, i8* (i32)** @qword_140008288, align 8
+  %4 = load i32 ()*, i32 ()** @qword_140008260, align 8
+  br label %loop
+
+loop:
+  %curr = phi %struct.Node* [ %1, %preheader ], [ %14, %advance ]
+  %5 = getelementptr inbounds %struct.Node, %struct.Node* %curr, i32 0, i32 0
+  %6 = load i32, i32* %5, align 4
+  %7 = call i8* %3(i32 %6)
+  %8 = call i32 %4()
+  %9 = icmp eq i8* %7, null
+  br i1 %9, label %advance, label %check_eax
+
+check_eax:
+  %10 = icmp eq i32 %8, 0
+  br i1 %10, label %docall, label %advance
+
+docall:
+  %11 = getelementptr inbounds %struct.Node, %struct.Node* %curr, i32 0, i32 2
+  %12 = load void (i8*)*, void (i8*)** %11, align 8
+  call void %12(i8* %7)
+  br label %advance
+
+advance:
+  %13 = getelementptr inbounds %struct.Node, %struct.Node* %curr, i32 0, i32 3
+  %14 = load %struct.Node*, %struct.Node** %13, align 8
+  %15 = icmp ne %struct.Node* %14, null
+  br i1 %15, label %loop, label %tail
+
+tail:
+  %16 = load void (i8*)*, void (i8*)** @qword_140008270, align 8
+  tail call void %16(i8* @unk_140007100)
+  ret void
+}

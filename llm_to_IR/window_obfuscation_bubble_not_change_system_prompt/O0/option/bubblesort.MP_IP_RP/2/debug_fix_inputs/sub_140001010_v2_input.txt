@@ -1,0 +1,63 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/2/sub_1400010101.ll:1:1: error: expected top-level entity
+; I can’t generate correct, type-checked LLVM 14 IR for sub_140001010 from this snippet alone because key parts of the function body are missing and a few call targets lack proper symbols/prototypes. Emitting IR now would either reference undefined values (violating rule 7), invent symbols (violating rule 1), or mis-type globals/externs (violating rule 5).
+; === ERROR LOG END ===
+
+I can’t generate correct, type-checked LLVM 14 IR for sub_140001010 from this snippet alone because key parts of the function body are missing and a few call targets lack proper symbols/prototypes. Emitting IR now would either reference undefined values (violating rule 7), invent symbols (violating rule 1), or mis-type globals/externs (violating rule 5).
+
+What I need to proceed:
+
+1) Full, contiguous disassembly for sub_140001010
+- The region between 0x1400011E3 and 0x1400012C8 is missing but later blocks (0x12C8..0x1306..0x1347..) use r12/r13/r15/rsi that must be defined/initialized in the missing span. Without these, I would have to introduce undef or invented logic, which is disallowed.
+- The function epilogue/return is also not shown (function end at 0x1400013D2), so I don’t know the return type or how control leaves the function.
+
+2) A resolvable symbol for “call near ptr loc_140002775+3”
+- LLVM IR cannot directly express a call to a label plus an immediate offset inside another function.
+- Please provide the proper symbol name (e.g., a real function symbol at that address) and its prototype. If it’s an exported helper function with a canonical symbol (even if it lands at loc_140002775+3), I can declare it and call it directly.
+- Alternatively, provide guidance to model it as an extern function with a given name and prototype (e.g., void @sub_140002778(i32) or similar).
+
+3) Confirm or provide types for external globals/functions
+Based on usage, here’s my current best-guess typing (I will not lock these in without your confirmation):
+- Globals (extern):
+  - @off_140004470: i64*       ; loaded then used as a pointer to a qword lock (cmpxchg/xchg on [rbx])
+  - @qword_140008280: i8*      ; function pointer (likely void (i32)*), used via indirect call with ecx=1000
+  - @off_140004480: i32*       ; pointer to a dword status flag (read/write [rbp])
+  - @dword_140007004: i32      ; written 1
+  - @off_1400043F0: i8*        ; pointer to a pointer to a function; double-dereferenced then called with (rcx=0, rdx=2, r8=0)
+  - @qword_140007010: i8*      ; stored into [rax] after sub_140002660
+  - @dword_140007020: i32      ; moved into ecx before sub_140002880
+  - @qword_140007018: i8*      ; moved into rdx before sub_140002880; later assigned from r13
+  - @off_140004460: i8*        ; [rdx] = rax result of sub_14000AA1D
+  - @off_140004430: i32*       ; [*] = 1
+  - @off_140004440: i32*       ; [*] = 1
+  - @off_140004450: i32*       ; [*] = 1
+  - @off_1400043C0: i8*        ; image base pointer; parsed as PE (MZ/PE headers)
+  - @dword_140007008: i32      ; written from ecx after PE parse
+  - @off_140004420: i32*       ; read to r8d and tested
+  - @off_1400044A0: i8*        ; argument to sub_140002780
+  - @off_140004490: i8*        ; argument to sub_140002780
+- Functions (extern, please confirm prototypes if known):
+  - declare i8*  @sub_140002660()                         ; returns a pointer; [ret] is written with qword
+  - declare void @sub_140002880(i32, i8*, i8*)            ; called with (ecx, rdx, r8)
+  - declare void @sub_1400018D0()                         ; no args observed
+  - declare i8*  @sub_14000AA1D(i8*)                      ; rcx = &sub_140001CB0, returns rax stored into [off_140004460]
+  - declare void @sub_140002790()                         ; no args observed
+  - declare void @sub_140002120()                         ; no args observed
+  - declare void @sub_140002670(i32)                      ; called with 0x1F and 8
+  - declare void @sub_140002700(i8*)                      ; takes rcx = pointer; returns rax used, then rcx=rdi passed to sub_1400027F8 (see below)
+  - declare i8*  @sub_1400027F8(i8*)                      ; returns a pointer stored into [r13+...]
+  - declare void @sub_1400027B8(i8*, i8*, i8*)            ; called with rcx=rax(ret of sub_140002720), rdx=[r15+...], r8=rdi
+  - declare void @sub_140002780(i8*, i8*)                 ; called with rcx=@off_140004490, rdx=@off_1400044A0
+  - declare i8*  @sub_140002720()                         ; ret used as rcx for sub_1400027B8
+  - declare void @nullsub_1()                             ; its address is passed to sub_14000AA1D
+  - declare void @sub_140001CB0()                         ; address loaded into rcx before sub_14000AA1D
+  - For qword_140008280 function pointer: likely void (i32)* (e.g., Sleep), but confirm.
+
+4) Return type for sub_140001010
+- The snippet does not show a return, so I need to know whether sub_140001010 returns void, i32, or something else.
+
+Once you provide:
+- the missing basic blocks (0x1400011E3..0x1400012C8 and epilogue),
+- a canonical symbol and prototype for the target of “call near ptr loc_140002775+3,”
+- confirmations or corrections for the extern types above,
+I will generate a complete, well-typed LLVM 14 IR definition for sub_140001010 with target triple x86_64-pc-windows-msvc, proper extern declarations, correct atomic cmpxchg/xchg for the spinlock, and without introducing any undefined values or invented symbols.

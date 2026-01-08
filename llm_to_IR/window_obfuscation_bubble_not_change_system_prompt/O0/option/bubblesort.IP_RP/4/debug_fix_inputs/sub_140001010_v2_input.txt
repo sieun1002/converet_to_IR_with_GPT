@@ -1,0 +1,388 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/4/sub_1400010101.ll:5:34: warning: ptr type is only supported in -opaque-pointers mode
+; @off_140004470 = external global ptr
+;                                  ^
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/4/sub_1400010101.ll:5:34: error: expected type
+; @off_140004470 = external global ptr
+;                                  ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+source_filename = "recovered.ll"
+target triple = "x86_64-pc-windows-msvc"
+
+@off_140004470 = external global ptr
+@qword_140008280 = external global ptr
+@off_140004480 = external global ptr
+@dword_140007004 = external global i32
+@off_1400043F0 = external global ptr
+@qword_140007010 = external global ptr
+@qword_140007018 = external global ptr
+@dword_140007020 = external global i32
+@off_140004430 = external global ptr
+@off_140004440 = external global ptr
+@off_140004450 = external global ptr
+@off_1400043C0 = external global ptr
+@dword_140007008 = external global i32
+@off_140004420 = external global ptr
+@off_1400044F0 = external global ptr
+@off_1400044D0 = external global ptr
+@off_1400043A0 = external global ptr
+@off_140004400 = external global ptr
+@off_1400044C0 = external global ptr
+@off_1400044B0 = external global ptr
+@off_140004520 = external global ptr
+@off_1400044E0 = external global ptr
+@off_1400044A0 = external global ptr
+@off_140004490 = external global ptr
+@off_140004460 = external global ptr
+
+declare void @sub_140002670(i32)
+declare ptr @sub_140002660()
+declare void @sub_140002880(i32, ptr)
+declare void @sub_1400018D0()
+declare ptr @loc_140017DB5(...)
+declare void @sub_140002790()
+declare void @sub_140002120()
+declare void @loc_140002778(i32)
+declare ptr @sub_140002720()
+declare ptr @sub_140002718()
+declare i32 @sub_140001540()
+declare i32 @sub_140002788(ptr, ptr)
+declare i32 @sub_1400026A0(ptr, ptr, ptr, i32, ptr)
+declare ptr @sub_1400027F8(i64)
+declare void @sub_1400027B8(ptr, ptr, i64)
+declare i64 @sub_140002700(ptr)
+declare void @sub_140001520()
+declare void @sub_1400027D0(i32)
+declare void @sub_140001CA0(ptr)
+declare void @sub_140001600()
+declare void @sub_140001CB0()
+declare void @nullsub_1()
+
+define void @sub_140001010() {
+entry:
+  ; rsi <- [gs:0x30]+8
+  %teb = call ptr asm "movq %gs:0x30, $0", "=r"()
+  %teb_plus8 = getelementptr i8, ptr %teb, i64 8
+  %rsi_val = load ptr, ptr %teb_plus8, align 8
+
+  ; rbx <- *off_140004470 (address of the lock variable)
+  %lock_ptrptr = load ptr, ptr @off_140004470, align 8
+
+  ; rdi <- qword_140008280 (function pointer, e.g., Sleep)
+  %sleep_fp_g = load ptr, ptr @qword_140008280, align 8
+
+  br label %spin_try
+
+spin_try:                                             ; corresponds to 0x140001050
+  ; attempt lock: cmpxchg [rbx], 0 -> rsi
+  %cmpx = cmpxchg ptr %lock_ptrptr, ptr null, ptr %rsi_val seq_cst seq_cst
+  %prev = extractvalue { ptr, i1 } %cmpx, 0
+  %acq = extractvalue { ptr, i1 } %cmpx, 1
+  br i1 %acq, label %after_lock, label %cmpfail
+
+cmpfail:                                              ; corresponds to 0x140001040
+  ; if previous value == rsi, recursive acquisition
+  %owned = icmp eq ptr %prev, %rsi_val
+  br i1 %owned, label %owned_path, label %sleep_path
+
+sleep_path:
+  ; call rdi(1000)
+  %sleep_fp = bitcast ptr %sleep_fp_g to void (i32)*
+  call void %sleep_fp(i32 1000)
+  br label %spin_try
+
+owned_path:                                           ; corresponds to 0x140001100
+  br label %after_lock
+
+after_lock:
+  ; r14d flag: 0 for freshly acquired, 1 for recursive
+  %r14_phi = phi i32 [ 0, %spin_try ], [ 1, %owned_path ]
+
+  ; rbp <- *off_140004480
+  %rbp_ptr = load ptr, ptr @off_140004480, align 8
+  ; eax <- [rbp]
+  %rbp_val0 = load i32, ptr %rbp_ptr, align 4
+  ; if ([rbp]==1) call sub_140002670(31)
+  %is_one = icmp eq i32 %rbp_val0, 1
+  br i1 %is_one, label %call_31_then_cont, label %check_zero
+
+call_31_then_cont:                                    ; loc_1400013C8
+  call void @sub_140002670(i32 31)
+  br label %check_zero
+
+check_zero:                                           ; 0x14000106F region
+  %rbp_val1 = load i32, ptr %rbp_ptr, align 4
+  %is_zero = icmp eq i32 %rbp_val1, 0
+  br i1 %is_zero, label %init_path, label %set_dword_7004
+
+init_path:                                            ; 0x140001110
+  store i32 1, ptr %rbp_ptr, align 4
+  call void @sub_1400018D0()
+  ; rax from previous call used as 5th arg via push in asm; here we pass only rcx
+  ; rcx <- &sub_140001CB0
+  %cb_ptr = ptr @sub_140001CB0
+  %ret_init = call ptr (ptr, ...) @loc_140017DB5(ptr %cb_ptr)
+  ; [off_140004460] <- rax
+  %off_4460 = load ptr, ptr @off_140004460, align 8
+  store ptr %ret_init, ptr %off_4460, align 8
+  call void @sub_140002790()
+  call void @sub_140002120()
+  ; *off_140004430 = 1
+  %p430 = load ptr, ptr @off_140004430, align 8
+  store i32 1, ptr %p430, align 4
+  ; *off_140004440 = 1
+  %p440 = load ptr, ptr @off_140004440, align 8
+  store i32 1, ptr %p440, align 4
+  ; *off_140004450 = 1
+  %p450 = load ptr, ptr @off_140004450, align 8
+  store i32 1, ptr %p450, align 4
+
+  ; PE header checks to set ecx flag -> dword_140007008
+  %imgptrptr = load ptr, ptr @off_1400043C0, align 8
+  %mz = load i16, ptr %imgptrptr, align 2
+  %mz_ok = icmp eq i16 %mz, 23117            ; 0x5A4D
+  br i1 %mz_ok, label %nt_check, label %pe_flag_store
+
+nt_check:
+  ; NT headers pointer
+  %pe_off_ptr = getelementptr i8, ptr %imgptrptr, i64 60
+  %pe_off32 = load i32, ptr %pe_off_ptr, align 4
+  %pe_off64 = sext i32 %pe_off32 to i64
+  %nthdr = getelementptr i8, ptr %imgptrptr, i64 %pe_off64
+  %sig = load i32, ptr %nthdr, align 4
+  %sig_ok = icmp eq i32 %sig, 17744          ; 0x00004550
+  br i1 %sig_ok, label %opt_magic, label %pe_flag_store
+
+opt_magic:
+  %opt_magic_ptr = getelementptr i8, ptr %nthdr, i64 24
+  %opt_magic16 = load i16, ptr %opt_magic_ptr, align 2
+  %is_pe32 = icmp eq i16 %opt_magic16, 267   ; 0x10B
+  br i1 %is_pe32, label %pe32_path, label %check_pe64
+
+check_pe64:
+  %is_pe64 = icmp eq i16 %opt_magic16, 523   ; 0x20B
+  br i1 %is_pe64, label %pe64_path, label %pe_flag_store
+
+pe64_path:                                           ; 0x1400011A0..1B5
+  %sz64_ptr = getelementptr i8, ptr %nthdr, i64 132   ; +0x84
+  %sz64 = load i32, ptr %sz64_ptr, align 4
+  %sz64_gt = icmp ugt i32 %sz64, 14
+  br i1 %sz64_gt, label %pe64_field, label %pe_flag_store
+
+pe64_field:
+  %f64_ptr = getelementptr i8, ptr %nthdr, i64 248    ; +0xF8
+  %f64 = load i32, ptr %f64_ptr, align 4
+  %f64_nz = icmp ne i32 %f64, 0
+  %cl_pe64 = zext i1 %f64_nz to i32
+  br label %pe_flag_store
+
+pe32_path:                                           ; 0x1400013AA..3C3
+  %sz32_ptr = getelementptr i8, ptr %nthdr, i64 116   ; +0x74
+  %sz32 = load i32, ptr %sz32_ptr, align 4
+  %sz32_gt = icmp ugt i32 %sz32, 14
+  br i1 %sz32_gt, label %pe32_field, label %pe_flag_store
+
+pe32_field:
+  %f32_ptr = getelementptr i8, ptr %nthdr, i64 232    ; +0xE8
+  %f32 = load i32, ptr %f32_ptr, align 4
+  %f32_nz = icmp ne i32 %f32, 0
+  %cl_pe32 = zext i1 %f32_nz to i32
+  br label %pe_flag_store
+
+pe_flag_store:
+  ; select cl from the two paths or default 0
+  %cl_merge = phi i32 [ 0, %check_zero ], [ 0, %nt_check ], [ 0, %opt_magic ], [ 0, %check_pe64 ], [ %cl_pe64, %pe64_field ], [ %cl_pe32, %pe32_field ]
+  store i32 %cl_merge, ptr @dword_140007008, align 4
+
+  ; r8d <- *off_140004420
+  %p4420 = load ptr, ptr @off_140004420, align 8
+  %r8d_val = load i32, ptr %p4420, align 4
+  %r8d_nz = icmp ne i32 %r8d_val, 0
+  br i1 %r8d_nz, label %call_2778_two, label %call_2778_one
+
+call_2778_one:
+  call void @loc_140002778(i32 1)
+  br label %cont_after_2778
+
+call_2778_two:
+  call void @loc_140002778(i32 2)
+  br label %cont_after_2778
+
+cont_after_2778:                                     ; 0x1400011E3
+  ; rax <- sub_140002720(); *rax = *(*off_1400044F0)
+  %pA = call ptr @sub_140002720()
+  %p4F0 = load ptr, ptr @off_1400044F0, align 8
+  %v4F0 = load i32, ptr %p4F0, align 4
+  store i32 %v4F0, ptr %pA, align 4
+  ; rax <- sub_140002718(); *rax = *(*off_1400044D0)
+  %pB = call ptr @sub_140002718()
+  %p4D0 = load ptr, ptr @off_1400044D0, align 8
+  %v4D0 = load i32, ptr %p4D0, align 4
+  store i32 %v4D0, ptr %pB, align 4
+  ; eax <- sub_140001540()
+  %ret1540 = call i32 @sub_140001540()
+  %neg1540 = icmp slt i32 %ret1540, 0
+  br i1 %neg1540, label %error_gs8, label %chk_43A0
+
+chk_43A0:
+  %p43A0 = load ptr, ptr @off_1400043A0, align 8
+  %v43A0 = load i32, ptr %p43A0, align 4
+  %is1_43A0 = icmp eq i32 %v43A0, 1
+  br i1 %is1_43A0, label %call_1CA0, label %chk_4400
+
+call_1CA0:                                          ; 0x140001399
+  call void @sub_140001CA0(ptr @sub_140001600)
+  br label %after_1CA0
+
+chk_4400:
+  %p4400 = load ptr, ptr @off_140004400, align 8
+  %v4400 = load i32, ptr %p4400, align 4
+  %is_m1_4400 = icmp eq i32 %v4400, -1
+  br i1 %is_m1_4400, label %call_27D0, label %cont_main
+
+call_27D0:                                          ; 0x14000138A
+  call void @sub_1400027D0(i32 -1)
+  br label %cont_main
+
+after_1CA0:
+  br label %cont_main
+
+cont_main:                                          ; 0x140001220.. onward
+  ; eax <- sub_140002788(off_4B0, off_4C0)
+  %p4B0 = load ptr, ptr @off_1400044B0, align 8
+  %p4C0 = load ptr, ptr @off_1400044C0, align 8
+  %ret2788 = call i32 @sub_140002788(ptr %p4B0, ptr %p4C0)
+  %nz2788 = icmp ne i32 %ret2788, 0
+  br i1 %nz2788, label %early_ret_ff, label %prep_26A0
+
+early_ret_ff:                                       ; 0x140001380 -> return
+  br label %epilogue
+
+prep_26A0:
+  ; prepare args for sub_1400026A0
+  %p4520 = load ptr, ptr @off_140004520, align 8
+  %v4520 = load i32, ptr %p4520, align 4
+  ; local copy
+  %var54 = alloca i32, align 4
+  store i32 %v4520, ptr %var54, align 4
+  %p44E0 = load ptr, ptr @off_1400044E0, align 8
+  %v44E0 = load i32, ptr %p44E0, align 4
+  ; rcx=&dword_140007020, rdx=&qword_140007018, r8=&qword_140007010, r9d=v44E0, 5th=&var54
+  %r = call i32 @sub_1400026A0(ptr @dword_140007020, ptr @qword_140007018, ptr @qword_140007010, i32 %v44E0, ptr %var54)
+  %neg26A0 = icmp slt i32 %r, 0
+  br i1 %neg26A0, label %error_gs8, label %alloc_vec
+
+alloc_vec:
+  ; r12 <- dword_140007020
+  %cnt32 = load i32, ptr @dword_140007020, align 4
+  %cnt64 = sext i32 %cnt32 to i64
+  ; allocate (cnt+1)*8 bytes
+  %cntp1 = add i64 %cnt64, 1
+  %bytes = shl i64 %cntp1, 3
+  %vec = call ptr @sub_1400027F8(i64 %bytes)
+  %r13 = ptr %vec
+  %vec_is_null = icmp eq ptr %r13, null
+  br i1 %vec_is_null, label %error_gs8, label %check_cnt
+
+check_cnt:
+  %cnt_pos = icmp sgt i32 %cnt32, 0
+  br i1 %cnt_pos, label %loop_prep, label %write_term_and_commit
+
+loop_prep:
+  %src_arr = load ptr, ptr @qword_140007018, align 8
+  br label %loop_head
+
+loop_head:
+  ; i from 0 to cnt32-1 (matches [r15 + rsi*8 - 8] with rsi starting at 1)
+  %i = phi i32 [ 0, %loop_prep ], [ %i.next, %loop_body ]
+  %i_done = icmp sge i32 %i, %cnt32
+  br i1 %i_done, label %write_term_and_commit, label %loop_body
+
+loop_body:
+  ; src = src_arr[i]
+  %i64 = sext i32 %i to i64
+  %src_e_ptr = getelementptr ptr, ptr %src_arr, i64 %i64
+  %src_e = load ptr, ptr %src_e_ptr, align 8
+  ; len = sub_140002700(src)
+  %len = call i64 @sub_140002700(ptr %src_e)
+  ; rdi = len + 1
+  %lenp1 = add i64 %len, 1
+  ; dst = sub_1400027F8(len+1)
+  %dst = call ptr @sub_1400027F8(i64 %lenp1)
+  ; store into r13[i]
+  %dst_e_ptr = getelementptr ptr, ptr %r13, i64 %i64
+  store ptr %dst, ptr %dst_e_ptr, align 8
+  ; if dst == NULL -> error
+  %dst_is_null = icmp eq ptr %dst, null
+  br i1 %dst_is_null, label %error_gs8, label %do_copy
+
+do_copy:
+  ; sub_1400027B8(dst, src, len+1)
+  call void @sub_1400027B8(ptr %dst, ptr %src_e, i64 %lenp1)
+  ; i++
+  %i.next = add i32 %i, 1
+  br label %loop_head
+
+write_term_and_commit:                               ; 0x14000134C + commit sequence
+  ; r13[cnt] = NULL
+  %cnt64_for_term = sext i32 %cnt32 to i64
+  %term_ptr = getelementptr ptr, ptr %r13, i64 %cnt64_for_term
+  store ptr null, ptr %term_ptr, align 8
+  ; cs:qword_140007018 = r13
+  store ptr %r13, ptr @qword_140007018, align 8
+  ; call sub_140002780(off_140004490, off_1400044A0)
+  %p4490 = load ptr, ptr @off_140004490, align 8
+  %p44A0 = load ptr, ptr @off_1400044A0, align 8
+  call void @sub_140002780(ptr %p4490, ptr %p44A0)
+  call void @sub_140001520()
+  ; [rbp] = 2
+  store i32 2, ptr %rbp_ptr, align 4
+  br label %set_dword_7004_cont
+
+error_gs8:                                           ; 0x140001301
+  call void @sub_140002670(i32 8)
+  ; release lock if we acquired it (r14==0)
+  %r14_is0_a = icmp eq i32 %r14_phi, 0
+  br i1 %r14_is0_a, label %release_then_tail, label %tail
+
+set_dword_7004:                                      ; 0x14000107A
+  store i32 1, ptr @dword_140007004, align 4
+  br label %set_dword_7004_cont
+
+set_dword_7004_cont:
+  ; if r14==0 -> release lock before tail
+  %r14_is0 = icmp eq i32 %r14_phi, 0
+  br i1 %r14_is0, label %release_then_tail, label %tail
+
+release_then_tail:                                   ; 0x140001328
+  ; atomic xchg [rbx] <- 0
+  %_old = atomicrmw xchg ptr %lock_ptrptr, ptr null seq_cst
+  br label %tail
+
+tail:                                                ; 0x14000108D..0x1400010C4 then return
+  ; rax <- *off_1400043F0; rax <- [rax]; if rax != 0 call rax(0,2,0)
+  %pfpp = load ptr, ptr @off_1400043F0, align 8
+  %pf = load ptr, ptr %pfpp, align 8
+  %pf_nz = icmp ne ptr %pf, null
+  br i1 %pf_nz, label %call_pf, label %after_pf
+
+call_pf:
+  call void %pf(i32 0, i32 2, i64 0) ; varargs-style indirect
+  br label %after_pf
+
+after_pf:
+  ; rax <- sub_140002660(); [rax] = qword_140007010
+  %ret2660 = call ptr @sub_140002660()
+  %val7010 = load ptr, ptr @qword_140007010, align 8
+  store ptr %val7010, ptr %ret2660, align 8
+  ; ecx <- dword_140007020, rdx <- qword_140007018 ; call sub_140002880(ecx, rdx)
+  %cnt_final = load i32, ptr @dword_140007020, align 4
+  %arr_final = load ptr, ptr @qword_140007018, align 8
+  call void @sub_140002880(i32 %cnt_final, ptr %arr_final)
+  br label %epilogue
+
+epilogue:                                            ; 0x1400010E5 and 0x140001380 path
+  ret void
+}

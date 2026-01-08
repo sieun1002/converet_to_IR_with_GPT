@@ -1,0 +1,28 @@
+; Function: sub_140001EF0
+; Start: 0x140001ef0, End: 0x140001f7e
+
+0x140001ef0: sub     rsp, 38h
+0x140001ef4: mov     eax, cs:dword_1400070E8
+0x140001efa: mov     r9d, ecx
+0x140001efd: test    eax, eax
+0x140001eff: jnz     short loc_140001F10
+0x140001f01: xor     eax, eax
+0x140001f03: add     rsp, 38h
+0x140001f07: retn
+0x140001f10: mov     [rsp+38h+arg_8], rdx
+0x140001f15: mov     ecx, 1
+0x140001f1a: mov     edx, 18h
+0x140001f1f: mov     [rsp+38h+arg_0], r9d
+0x140001f24: call    sub_1400027E8
+0x140001f29: test    rax, rax
+0x140001f2c: jz      short loc_140001F77
+0x140001f2e: mov     r9d, [rsp+38h+arg_0]
+0x140001f33: mov     r8, [rsp+38h+arg_8]
+0x140001f38: mov     [rsp+38h+var_10], rax
+0x140001f3d: lea     rcx, unk_140007100
+0x140001f44: mov     [rax], r9d
+0x140001f47: mov     [rax+8], r8
+0x140001f4b: call    loc_140023D27
+0x140001f50: retn
+0x140001f77: mov     eax, 0FFFFFFFFh
+0x140001f7c: jmp     short loc_140001F03

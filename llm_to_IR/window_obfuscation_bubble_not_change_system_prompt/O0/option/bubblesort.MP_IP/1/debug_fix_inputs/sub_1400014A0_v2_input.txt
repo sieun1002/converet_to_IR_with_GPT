@@ -1,0 +1,74 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400014A01.ll:60:3: error: instruction expected to be numbered '%18'
+;   %19 = getelementptr inbounds i64, i64* %15, i64 -1
+;   ^
+; === ERROR LOG END ===
+
+; target
+target triple = "x86_64-pc-windows-msvc"
+
+; extern globals
+@off_1400043B0 = external global i64*
+
+; extern functions
+declare void @loc_140001420(i8*)
+declare void @sub_140001450()
+
+; definition
+define void @sub_1400014A0() {
+entry:
+  %0 = load i64*, i64** @off_1400043B0, align 8
+  %1 = load i64, i64* %0, align 8
+  %2 = trunc i64 %1 to i32
+  %3 = icmp eq i32 %2, -1
+  br i1 %3, label %scan, label %test_from_entry
+
+scan:
+  br label %scan_loop
+
+scan_loop:
+  %4 = phi i64 [ 1, %scan ], [ %8, %scan_cont ]
+  %5 = getelementptr inbounds i64, i64* %0, i64 %4
+  %6 = load i64, i64* %5, align 8
+  %7 = icmp ne i64 %6, 0
+  br i1 %7, label %scan_cont, label %scan_done
+
+scan_cont:
+  %8 = add i64 %4, 1
+  br label %scan_loop
+
+scan_done:
+  %9 = sub i64 %4, 1
+  %10 = trunc i64 %9 to i32
+  br label %test
+
+test_from_entry:
+  br label %test
+
+test:
+  %11 = phi i32 [ %2, %test_from_entry ], [ %10, %scan_done ]
+  %12 = icmp eq i32 %11, 0
+  br i1 %12, label %tail, label %loop_prep
+
+loop_prep:
+  %13 = zext i32 %11 to i64
+  %14 = getelementptr inbounds i64, i64* %0, i64 %13
+  br label %loop_header
+
+loop_header:
+  %15 = phi i64* [ %14, %loop_prep ], [ %19, %loop_body ]
+  br label %loop_body
+
+loop_body:
+  %16 = load i64, i64* %15, align 8
+  %17 = inttoptr i64 %16 to void ()*
+  call void %17()
+  %19 = getelementptr inbounds i64, i64* %15, i64 -1
+  %20 = icmp eq i64* %19, %0
+  br i1 %20, label %tail, label %loop_header
+
+tail:
+  %21 = bitcast void ()* @sub_140001450 to i8*
+  tail call void @loc_140001420(i8* %21)
+  ret void
+}

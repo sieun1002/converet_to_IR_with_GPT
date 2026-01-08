@@ -1,0 +1,21 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/1/sub_1400010101.ll:1:1: error: expected top-level entity
+; I can’t safely generate correct LLVM IR for sub_140001010 with the current snippet because key instruction ranges and targets are missing. In particular:
+; === ERROR LOG END ===
+
+I can’t safely generate correct LLVM IR for sub_140001010 with the current snippet because key instruction ranges and targets are missing. In particular:
+
+- The block from 0x1400011E3 to 0x1400012C8 is omitted. Later code (e.g., at 0x1400012C8+) uses r15, r13, r12, rsi that are almost certainly initialized in that missing range. Emitting IR would violate “never reference undefined values.”
+- The function epilogue (after 0x1400013CD) is not shown; I need the full control flow to produce correct PHI nodes and consistent SSA.
+- There are direct calls to “near ptr loc_140002775+3”. That is a raw address inside another function, not a symbol. Please provide the symbol that corresponds to that target (or the exact label/body around 0x140002775), so I can emit a proper declare and call without inventing a function.
+
+Please provide:
+- The complete instruction listing for sub_140001010 from 0x140001010 through its ret (including 0x1400011E3–0x1400012C8 and the tail after 0x1400013CD up to 0x1400013D2).
+- The symbol name that should be used for the call target currently shown as “near ptr loc_140002775+3” (or the surrounding function’s symbol so I can reference an actual symbol rather than an internal offset label).
+
+With that, I’ll emit:
+- define for sub_140001010 with target triple x86_64-pc-windows-msvc
+- External declarations only for the referenced symbols present in the assembly (e.g., sub_140002660, sub_140002880, sub_1400018D0, sub_14000AA1D, sub_140002790, sub_140002120, sub_140002720, sub_1400027B8, sub_140002700, sub_1400027F8, sub_140002670, sub_140002780, nullsub_1, sub_140001CB0, and the function at loc_140002775+3 once named)
+- Extern declarations for the referenced globals (off_140004470, off_140004480, off_1400043F0, dword_140007004, qword_140007010, dword_140007020, qword_140007018, off_140004460, off_140004430, off_140004440, off_140004450, off_1400043C0, dword_140007008, off_140004420, off_1400044A0, off_140004490, qword_140008280)
+
+I won’t introduce any additional logic or symbols beyond those present in the provided assembly.

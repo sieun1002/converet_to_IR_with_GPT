@@ -1,0 +1,72 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+declare void @sub_140001520()
+declare void @sub_1400025A0(i8*, i32)
+
+@xmmword_140004010 = external constant <4 x i32>, align 16
+@xmmword_140004020 = external constant <4 x i32>, align 16
+@unk_140004000 = external global i8, align 1
+
+define void @sub_140002880() {
+entry:
+  %arr = alloca [10 x i32], align 16
+  %arr.base = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 0
+  call void @sub_140001520()
+  %v0 = load <4 x i32>, <4 x i32>* @xmmword_140004010, align 1
+  %arr.v0.ptr = bitcast i32* %arr.base to <4 x i32>*
+  store <4 x i32> %v0, <4 x i32>* %arr.v0.ptr, align 1
+  %v1 = load <4 x i32>, <4 x i32>* @xmmword_140004020, align 1
+  %arr.el4 = getelementptr inbounds i32, i32* %arr.base, i64 4
+  %arr.v1.ptr = bitcast i32* %arr.el4 to <4 x i32>*
+  store <4 x i32> %v1, <4 x i32>* %arr.v1.ptr, align 1
+  %arr.el8 = getelementptr inbounds i32, i32* %arr.base, i64 8
+  store i32 4, i32* %arr.el8, align 4
+  br label %outer.header
+
+outer.header:
+  %bound = phi i64 [ 10, %entry ], [ %last.fin, %outer.update ]
+  br label %inner.header
+
+inner.header:
+  %i = phi i64 [ 1, %outer.header ], [ %i.next, %inner.latch ]
+  %last = phi i64 [ 0, %outer.header ], [ %last.next, %inner.latch ]
+  %i.minus1 = add i64 %i, -1
+  %p.cur = getelementptr inbounds i32, i32* %arr.base, i64 %i.minus1
+  %a = load i32, i32* %p.cur, align 4
+  %p.next = getelementptr inbounds i32, i32* %p.cur, i64 1
+  %b = load i32, i32* %p.next, align 4
+  %cmp.ge = icmp sge i32 %b, %a
+  br i1 %cmp.ge, label %noswap, label %doswap
+
+doswap:
+  store i32 %b, i32* %p.cur, align 4
+  store i32 %a, i32* %p.next, align 4
+  br label %cont
+
+noswap:
+  br label %cont
+
+cont:
+  %last.cand = phi i64 [ %i, %doswap ], [ %last, %noswap ]
+  br label %inner.latch
+
+inner.latch:
+  %last.next = phi i64 [ %last.cand, %cont ]
+  %i.next = add i64 %i, 1
+  %cond.cont = icmp ne i64 %i.next, %bound
+  br i1 %cond.cont, label %inner.header, label %inner.exit
+
+inner.exit:
+  %last.fin = phi i64 [ %last.next, %inner.latch ]
+  br label %outer.update
+
+outer.update:
+  %last.le1 = icmp ule i64 %last.fin, 1
+  br i1 %last.le1, label %print, label %outer.header
+
+print:
+  %first = load i32, i32* %arr.base, align 4
+  call void @sub_1400025A0(i8* @unk_140004000, i32 %first)
+  ret void
+}

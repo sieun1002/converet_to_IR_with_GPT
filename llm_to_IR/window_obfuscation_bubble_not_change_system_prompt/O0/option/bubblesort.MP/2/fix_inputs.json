@@ -1,0 +1,85 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 232,
+      "ir_len": 13367,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400010101.ll:77:3: error: Expected ordering on atomic instruction\n  %old = extractvalue { i64, i1 } %cmpx_old_succ, 0\n  ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64* @sub_140002660()\ndeclare void @sub_140002880(i64*, i64)\ndeclare void @sub_140002790(i8*)\ndeclare void @sub_140002120()\nd",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400010101.ll"
+    },
+    {
+      "filename": "sub_1400014A0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 202,
+      "ir_len": 2267,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400014A01.ll:27:14: error: expected instruction opcode\n  %ecx.cur = %eax.phi\n             ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_1400043B0 = external global i64*\n\ndeclare void @sub_140001420(i8*)\ndeclare void @sub_140001450()\n\ndefine void @sub_1400014A0() {",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400014A01.ll"
+    },
+    {
+      "filename": "sub_1400014A0.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 169,
+      "ir_len": 2221,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\ncannot guarantee tail call due to mismatched parameter counts\n  musttail call void @sub_140001420(i8* %arg)\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_1400043B0 = external global i64*\n\ndeclare void @sub_140001420(i8*)\ndeclare void @sub_140001450()\n\ndefine void @sub_1400014A0() {",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400014A02.ll"
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 256,
+      "ir_len": 14445,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400018D01.ll:179:1: error: expected instruction opcode\nbb_1a90:                                          ; preds = %bb_1a80, %bb_1a07, %bb_1b51\n^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i32 @sub_1400022D0()\ndeclare i64 @sub_140002520()\ndeclare void @sub_140001760(i8*)\ndeclare void @sub_1400027B8(i8*, i8*, i32)",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400018D01.ll"
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 269,
+      "ir_len": 14405,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400018D02.ll:330:13: error: '@sub_140001700' defined with type 'void (i8*, ...)*' but expected 'void (i8*)*'\n  call void @sub_140001700(i8* %s1)\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i32 @sub_1400022D0()\ndeclare i64 @sub_140002520()\ndeclare void @sub_140001760(i8*)\ndeclare void @sub_1400027B8(i8*, i8*, i32)",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400018D02.ll"
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 735,
+      "ir_len": 14400,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %rbx_sel = phi i8* [ %rbx0, %bb_after7 ], [ %rbx_add12_c17, %bb_1c17 ]\nlabel %bb_1c17\nlabel %bb_1c22\nInstruction does not dominate all uses!\n  %rbx_add12_c17 = getelementptr inbounds i8, i8* %r",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i32 @sub_1400022D0()\ndeclare i64 @sub_140002520()\ndeclare void @sub_140001760(i8*)\ndeclare void @sub_1400027B8(i8*, i8*, i32)",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_1400018D03.ll"
+    },
+    {
+      "filename": "sub_140001E80.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 432,
+      "ir_len": 1979,
+      "error_preview": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_140001E801.ll:40:6: warning: ptr type is only supported in -opaque-pointers mode\n  %17ptr = bitcast i8* %16 to i8**\n     ^\nllvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O",
+      "ir_preview": "; ModuleID = 'sub_140001E80.ll'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@qword_140008258 = external global i8*\n@qword_1400070E0 = external global i8*\n@qword_140008288 = external global i8*\n@qword_14",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_140001E801.ll"
+    },
+    {
+      "filename": "sub_140001E80.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 221,
+      "ir_len": 1979,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_140001E802.ll:41:3: error: instruction expected to be numbered '%17'\n  %18 = load i8*, i8** %ptr17, align 8\n  ^\n",
+      "ir_preview": "; ModuleID = 'sub_140001E80.ll'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@qword_140008258 = external global i8*\n@qword_1400070E0 = external global i8*\n@qword_140008288 = external global i8*\n@qword_14",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/2/sub_140001E802.ll"
+    }
+  ]
+}

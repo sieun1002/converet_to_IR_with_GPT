@@ -1,0 +1,159 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_140001CB01.ll:15:28: error: floating point constant invalid for type
+;   %masked = and i32 %code, 0x20FFFFFF
+;                            ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@qword_1400070D0 = external global i32 (i8*)*
+
+declare i64 @sub_1400027A8(i32, i32)
+declare void @sub_140002120()
+
+define i32 @sub_140001CB0(i8* %rcx_arg) local_unnamed_addr {
+entry:
+  %p_ptrptr = bitcast i8* %rcx_arg to i8**
+  %rdx_ptr = load i8*, i8** %p_ptrptr, align 8
+  %code_ptr = bitcast i8* %rdx_ptr to i32*
+  %code = load i32, i32* %code_ptr, align 4
+  %masked = and i32 %code, 0x20FFFFFF
+  %cmp_magic = icmp eq i32 %masked, 0x20474343
+  br i1 %cmp_magic, label %check_flag, label %range_check
+
+check_flag:
+  %byteptr = getelementptr inbounds i8, i8* %rdx_ptr, i64 4
+  %byte = load i8, i8* %byteptr, align 1
+  %and1 = and i8 %byte, 1
+  %cond = icmp ne i8 %and1, 0
+  br i1 %cond, label %range_check, label %ret_m1
+
+range_check:
+  %cmp_ja = icmp ugt i32 %code, 0xC0000096
+  br i1 %cmp_ja, label %handler_fallback, label %cmp_jbe
+
+cmp_jbe:
+  %cmp_le = icmp ule i32 %code, 0xC000008B
+  br i1 %cmp_le, label %block_D40, label %switch_cases
+
+switch_cases:
+  switch i32 %code, label %ret_m1 [
+    i32 0xC000008D, label %case_d00
+    i32 0xC000008E, label %case_d00
+    i32 0xC000008F, label %case_d00
+    i32 0xC0000090, label %case_d00
+    i32 0xC0000091, label %case_d00
+    i32 0xC0000093, label %case_d00
+    i32 0xC0000094, label %case_dc0
+    i32 0xC0000096, label %case_d8e
+  ]
+
+case_d00:
+  %r1 = call i64 @sub_1400027A8(i32 8, i32 0)
+  %is1 = icmp eq i64 %r1, 1
+  br i1 %is1, label %block_e54, label %d16_test
+
+d16_test:
+  %iszero = icmp eq i64 %r1, 0
+  br i1 %iszero, label %handler_fallback, label %block_e20
+
+block_e20:
+  %fp1 = inttoptr i64 %r1 to void (i32)*
+  call void %fp1(i32 8)
+  br label %ret_m1
+
+case_dc0:
+  %r2 = call i64 @sub_1400027A8(i32 8, i32 0)
+  %is1b = icmp eq i64 %r2, 1
+  br i1 %is1b, label %after_dc0_call1, label %dc0_to_d16
+
+dc0_to_d16:
+  %iszero2 = icmp eq i64 %r2, 0
+  br i1 %iszero2, label %handler_fallback, label %block_e20_dc0
+
+block_e20_dc0:
+  %fp2 = inttoptr i64 %r2 to void (i32)*
+  call void %fp2(i32 8)
+  br label %ret_m1
+
+after_dc0_call1:
+  %r3 = call i64 @sub_1400027A8(i32 8, i32 1)
+  br label %ret_m1
+
+case_d8e:
+  %r4 = call i64 @sub_1400027A8(i32 4, i32 0)
+  %is1c = icmp eq i64 %r4, 1
+  br i1 %is1c, label %block_e40, label %d8e_test
+
+d8e_test:
+  %iszero3 = icmp eq i64 %r4, 0
+  br i1 %iszero3, label %handler_fallback, label %block_call_r4_4
+
+block_call_r4_4:
+  %fp3 = inttoptr i64 %r4 to void (i32)*
+  call void %fp3(i32 4)
+  br label %ret_m1
+
+block_D40:
+  %eq_av = icmp eq i32 %code, 0xC0000005
+  br i1 %eq_av, label %case_df0, label %d40_else
+
+d40_else:
+  %cmp_ja2 = icmp ugt i32 %code, 0xC0000005
+  br i1 %cmp_ja2, label %block_D80, label %d40_low
+
+d40_low:
+  %eq_info = icmp eq i32 %code, 0x80000002
+  br i1 %eq_info, label %ret_m1, label %handler_fallback
+
+block_D80:
+  %eq_inval_handle = icmp eq i32 %code, 0xC0000008
+  br i1 %eq_inval_handle, label %ret_m1, label %d80_cmp2
+
+d80_cmp2:
+  %eq_illegal_instr = icmp eq i32 %code, 0xC000001D
+  br i1 %eq_illegal_instr, label %case_d8e, label %handler_fallback
+
+case_df0:
+  %r5 = call i64 @sub_1400027A8(i32 11, i32 0)
+  %is1d = icmp eq i64 %r5, 1
+  br i1 %is1d, label %block_e2c, label %df0_test
+
+df0_test:
+  %iszero4 = icmp eq i64 %r5, 0
+  br i1 %iszero4, label %handler_fallback, label %call_r5_b
+
+call_r5_b:
+  %fp4 = inttoptr i64 %r5 to void (i32)*
+  call void %fp4(i32 11)
+  br label %ret_m1
+
+block_e54:
+  %r6 = call i64 @sub_1400027A8(i32 8, i32 1)
+  call void @sub_140002120()
+  br label %ret_m1
+
+block_e40:
+  %r7 = call i64 @sub_1400027A8(i32 4, i32 1)
+  br label %ret_m1
+
+block_e2c:
+  %r8 = call i64 @sub_1400027A8(i32 11, i32 1)
+  br label %ret_m1
+
+handler_fallback:
+  %fp_ptr = load i32 (i8*)*, i32 (i8*)** @qword_1400070D0, align 8
+  %isnullfp = icmp eq i32 (i8*)* %fp_ptr, null
+  br i1 %isnullfp, label %ret_zero, label %tailcall
+
+ret_zero:
+  ret i32 0
+
+tailcall:
+  %res = call i32 %fp_ptr(i8* %rcx_arg)
+  ret i32 %res
+
+ret_m1:
+  ret i32 -1
+}

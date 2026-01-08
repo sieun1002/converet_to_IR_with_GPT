@@ -1,0 +1,121 @@
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043C0 = external global i8*
+
+define i8* @sub_140002460(i32 %ecx) {
+entry:
+  %baseptr.load = load i8*, i8** @off_1400043C0
+  %baseptr.i16 = bitcast i8* %baseptr.load to i16*
+  %mz = load i16, i16* %baseptr.i16
+  %is_mz = icmp eq i16 %mz, 23117
+  br i1 %is_mz, label %check_pe, label %ret_null
+
+check_pe:
+  %e_lfanew.ptr = getelementptr i8, i8* %baseptr.load, i64 60
+  %e_lfanew.ptr.i32 = bitcast i8* %e_lfanew.ptr to i32*
+  %e_lfanew.i32 = load i32, i32* %e_lfanew.ptr.i32
+  %e_lfanew = sext i32 %e_lfanew.i32 to i64
+  %nt = getelementptr i8, i8* %baseptr.load, i64 %e_lfanew
+  %pe.sig.ptr = bitcast i8* %nt to i32*
+  %pe.sig = load i32, i32* %pe.sig.ptr
+  %is_pe = icmp eq i32 %pe.sig, 17744
+  br i1 %is_pe, label %check_optmagic, label %ret_null
+
+check_optmagic:
+  %opt.magic.ptr = getelementptr i8, i8* %nt, i64 24
+  %opt.magic.ptr.i16 = bitcast i8* %opt.magic.ptr to i16*
+  %opt.magic = load i16, i16* %opt.magic.ptr.i16
+  %is_pe32plus = icmp eq i16 %opt.magic, 523
+  br i1 %is_pe32plus, label %load_importdir, label %ret_null
+
+load_importdir:
+  %idirva.ptr = getelementptr i8, i8* %nt, i64 144
+  %idirva.ptr.i32 = bitcast i8* %idirva.ptr to i32*
+  %idirva = load i32, i32* %idirva.ptr.i32
+  %idirva.nonzero = icmp ne i32 %idirva, 0
+  br i1 %idirva.nonzero, label %check_numsects, label %ret_null
+
+check_numsects:
+  %numsects.ptr = getelementptr i8, i8* %nt, i64 6
+  %numsects.ptr.i16 = bitcast i8* %numsects.ptr to i16*
+  %numsects = load i16, i16* %numsects.ptr.i16
+  %hassects = icmp ne i16 %numsects, 0
+  br i1 %hassects, label %prep_sections, label %ret_null
+
+prep_sections:
+  %szopt.ptr = getelementptr i8, i8* %nt, i64 20
+  %szopt.ptr.i16 = bitcast i8* %szopt.ptr to i16*
+  %szopt.i16 = load i16, i16* %szopt.ptr.i16
+  %szopt = zext i16 %szopt.i16 to i64
+  %sect.start.off = add i64 %szopt, 24
+  %sect.start = getelementptr i8, i8* %nt, i64 %sect.start.off
+  %numsects.z64 = zext i16 %numsects to i64
+  %n.mul40 = mul i64 %numsects.z64, 40
+  %sect.end = getelementptr i8, i8* %sect.start, i64 %n.mul40
+  br label %sect.loop
+
+sect.loop:
+  %sect.cur = phi i8* [ %sect.start, %prep_sections ], [ %sect.next, %sect.nextblk ]
+  %sec.va.ptr = getelementptr i8, i8* %sect.cur, i64 12
+  %sec.va.ptr.i32 = bitcast i8* %sec.va.ptr to i32*
+  %sec.va = load i32, i32* %sec.va.ptr.i32
+  %idirva.z64 = zext i32 %idirva to i64
+  %sec.va.z64 = zext i32 %sec.va to i64
+  %before = icmp ult i64 %idirva.z64, %sec.va.z64
+  br i1 %before, label %sect.nextblk, label %check_in_section
+
+check_in_section:
+  %sec.vsize.ptr = getelementptr i8, i8* %sect.cur, i64 8
+  %sec.vsize.ptr.i32 = bitcast i8* %sec.vsize.ptr to i32*
+  %sec.vsize = load i32, i32* %sec.vsize.ptr.i32
+  %end.rva.u32 = add i32 %sec.va, %sec.vsize
+  %end.rva.z64 = zext i32 %end.rva.u32 to i64
+  %in.sec = icmp ult i64 %idirva.z64, %end.rva.z64
+  br i1 %in.sec, label %found.section, label %sect.nextblk
+
+sect.nextblk:
+  %sect.next = getelementptr i8, i8* %sect.cur, i64 40
+  %cont = icmp ne i8* %sect.next, %sect.end
+  br i1 %cont, label %sect.loop, label %ret_null
+
+found.section:
+  %idir.off.z64 = zext i32 %idirva to i64
+  %idir.ptr = getelementptr i8, i8* %baseptr.load, i64 %idir.off.z64
+  br label %imp.loop
+
+imp.loop:
+  %desc.ptr = phi i8* [ %idir.ptr, %found.section ], [ %desc.next, %imp.cont ]
+  %ts.ptr = getelementptr i8, i8* %desc.ptr, i64 4
+  %ts.ptr.i32 = bitcast i8* %ts.ptr to i32*
+  %ts = load i32, i32* %ts.ptr.i32
+  %ts.nz = icmp ne i32 %ts, 0
+  br i1 %ts.nz, label %imp.checkcount, label %imp.checknamezero
+
+imp.checknamezero:
+  %name0.ptr = getelementptr i8, i8* %desc.ptr, i64 12
+  %name0.ptr.i32 = bitcast i8* %name0.ptr to i32*
+  %name0 = load i32, i32* %name0.ptr.i32
+  %name0.nz = icmp ne i32 %name0, 0
+  br i1 %name0.nz, label %imp.checkcount, label %ret_null
+
+imp.checkcount:
+  %ecx.gt0 = icmp sgt i32 %ecx, 0
+  br i1 %ecx.gt0, label %imp.cont, label %imp.finish
+
+imp.cont:
+  %ecx.dec = add i32 %ecx, -1
+  %desc.next = getelementptr i8, i8* %desc.ptr, i64 20
+  %ecx = phi i32 [ %ecx.dec, %imp.cont ], [ %ecx, %imp.checkcount ]
+  br label %imp.loop
+
+imp.finish:
+  %name.ptr = getelementptr i8, i8* %desc.ptr, i64 12
+  %name.ptr.i32 = bitcast i8* %name.ptr to i32*
+  %name.rva = load i32, i32* %name.ptr.i32
+  %name.rva.z64 = zext i32 %name.rva to i64
+  %name.va = getelementptr i8, i8* %baseptr.load, i64 %name.rva.z64
+  ret i8* %name.va
+
+ret_null:
+  ret i8* null
+}

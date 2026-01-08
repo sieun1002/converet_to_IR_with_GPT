@@ -1,0 +1,45 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+%struct.Node = type { i32, i8*, %struct.Node* }
+%struct._RTL_CRITICAL_SECTION = type opaque
+
+@dword_1400070E8 = external global i32
+@Block = external global %struct.Node*
+@CriticalSection = external global %struct._RTL_CRITICAL_SECTION
+
+declare dllimport noalias i8* @calloc(i64, i64)
+declare dllimport void @EnterCriticalSection(%struct._RTL_CRITICAL_SECTION*)
+declare dllimport void @LeaveCriticalSection(%struct._RTL_CRITICAL_SECTION*)
+
+define i32 @sub_140001EF0(i32 %arg0, i8* %arg1) local_unnamed_addr {
+entry:
+  %flag = load i32, i32* @dword_1400070E8, align 4
+  %tst = icmp ne i32 %flag, 0
+  br i1 %tst, label %alloc, label %ret_zero
+
+ret_zero:
+  ret i32 0
+
+alloc:
+  %call = call noalias i8* @calloc(i64 1, i64 24)
+  %isnull = icmp eq i8* %call, null
+  br i1 %isnull, label %fail, label %init
+
+fail:
+  ret i32 -1
+
+init:
+  %node = bitcast i8* %call to %struct.Node*
+  %field0.ptr = getelementptr inbounds %struct.Node, %struct.Node* %node, i32 0, i32 0
+  store i32 %arg0, i32* %field0.ptr, align 4
+  %field1.ptr = getelementptr inbounds %struct.Node, %struct.Node* %node, i32 0, i32 1
+  store i8* %arg1, i8** %field1.ptr, align 8
+  call void @EnterCriticalSection(%struct._RTL_CRITICAL_SECTION* @CriticalSection)
+  %old = load %struct.Node*, %struct.Node** @Block, align 8
+  %field2.ptr = getelementptr inbounds %struct.Node, %struct.Node* %node, i32 0, i32 2
+  store %struct.Node* %old, %struct.Node** %field2.ptr, align 8
+  store %struct.Node* %node, %struct.Node** @Block, align 8
+  call void @LeaveCriticalSection(%struct._RTL_CRITICAL_SECTION* @CriticalSection)
+  ret i32 0
+}

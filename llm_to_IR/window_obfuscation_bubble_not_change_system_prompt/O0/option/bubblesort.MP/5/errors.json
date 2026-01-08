@@ -1,0 +1,47 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010101.ll:61:27: error: '%thrIdPtr' defined with type 'i8*' but expected 'i64*'\n  %thrId = load i64, i64* %thrIdPtr, align 8\n                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010101.bc",
+      "start_time": "2026-01-08T07:29:53",
+      "end_time": "2026-01-08T07:29:53",
+      "elapsed_sec": 0.017134
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010102.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010102.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010102.ll:65:27: error: '@qword_140007018' defined with type 'i8***' but expected 'i8**'\n  %pArrVar = bitcast i8** @qword_140007018 to i8***\n                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010102.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_1400010102.bc",
+      "start_time": "2026-01-08T07:31:48",
+      "end_time": "2026-01-08T07:31:48",
+      "elapsed_sec": 0.019703
+    },
+    {
+      "filename": "sub_140001CB0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_140001CB01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_140001CB01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_140001CB01.ll:15:28: error: floating point constant invalid for type\n  %masked = and i32 %code, 0x20FFFFFF\n                           ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_140001CB01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/5/sub_140001CB01.bc",
+      "start_time": "2026-01-08T07:44:24",
+      "end_time": "2026-01-08T07:44:24",
+      "elapsed_sec": 0.018858
+    }
+  ]
+}

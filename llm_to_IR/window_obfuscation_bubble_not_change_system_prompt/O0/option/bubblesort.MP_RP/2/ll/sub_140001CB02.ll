@@ -1,0 +1,160 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@qword_1400070D0 = external global i32 (i8*)*
+
+declare i64 @sub_1400027A8(i32, i32)
+declare i64 @sub_140002120()
+
+define i32 @sub_140001CB0(i8** %rcx) local_unnamed_addr {
+entry:
+  %rdx = load i8*, i8** %rcx, align 8
+  %rdx_i32 = bitcast i8* %rdx to i32*
+  %eax = load i32, i32* %rdx_i32, align 4
+  %masked = and i32 %eax, 553648127
+  %cmpSig = icmp eq i32 %masked, 541541187
+  br i1 %cmpSig, label %sigmatch, label %L_cd1
+
+sigmatch:
+  %p4 = getelementptr i8, i8* %rdx, i64 4
+  %byte = load i8, i8* %p4, align 1
+  %b1 = and i8 %byte, 1
+  %tst = icmp ne i8 %b1, 0
+  br i1 %tst, label %L_cd1, label %ret_minus1
+
+L_cd1:
+  %cmpHi = icmp ugt i32 %eax, 3221225622
+  br i1 %cmpHi, label %fallback, label %L_d40
+
+L_d40:
+  %cmpLE8B_val = icmp ule i32 %eax, 3221225611
+  br i1 %cmpLE8B_val, label %lowRange, label %switchCalc
+
+lowRange:
+  %isAV = icmp eq i32 %eax, 3221225477
+  br i1 %isAV, label %caseAV, label %cmpGTAV
+
+cmpGTAV:
+  %gtAV = icmp ugt i32 %eax, 3221225477
+  br i1 %gtAV, label %c0000008or001D, label %check80000002
+
+check80000002:
+  %eq80000002 = icmp eq i32 %eax, 2147483650
+  br i1 %eq80000002, label %ret_minus1, label %fallback
+
+c0000008or001D:
+  %iseq0008 = icmp eq i32 %eax, 3221225480
+  br i1 %iseq0008, label %ret_minus1, label %check001D
+
+check001D:
+  %iseq001D = icmp eq i32 %eax, 3221225501
+  br i1 %iseq001D, label %group4_entry, label %fallback
+
+switchCalc:
+  %idx = add i32 %eax, 1073741683
+  %inrng = icmp ule i32 %idx, 9
+  br i1 %inrng, label %switchIn, label %ret_minus1
+
+switchIn:
+  switch i32 %idx, label %ret_minus1 [
+    i32 0, label %group8_entry
+    i32 1, label %group8_entry
+    i32 2, label %group8_entry
+    i32 3, label %group8_entry
+    i32 4, label %group8_entry
+    i32 5, label %ret_minus1
+    i32 6, label %group8_entry
+    i32 7, label %group8_alt
+    i32 8, label %ret_minus1
+    i32 9, label %group4_entry
+  ]
+
+group8_entry:
+  %r8_0 = call i64 @sub_1400027A8(i32 8, i32 0)
+  %is1_8 = icmp eq i64 %r8_0, 1
+  br i1 %is1_8, label %E54, label %group8_test
+
+group8_test:
+  %nz8 = icmp ne i64 %r8_0, 0
+  br i1 %nz8, label %call_ptr_ecx8, label %fallback
+
+group8_alt:
+  %r8a_0 = call i64 @sub_1400027A8(i32 8, i32 0)
+  %is1_8a = icmp eq i64 %r8a_0, 1
+  br i1 %is1_8a, label %E_afterEnable8, label %group8_alt_test
+
+group8_alt_test:
+  %nz8a = icmp ne i64 %r8a_0, 0
+  br i1 %nz8a, label %call_ptr_ecx8_alt, label %fallback
+
+group4_entry:
+  %r4_0 = call i64 @sub_1400027A8(i32 4, i32 0)
+  %is1_4 = icmp eq i64 %r4_0, 1
+  br i1 %is1_4, label %E40, label %group4_test
+
+group4_test:
+  %nz4 = icmp ne i64 %r4_0, 0
+  br i1 %nz4, label %call_ptr_ecx4, label %fallback
+
+caseAV:
+  %rB_0 = call i64 @sub_1400027A8(i32 11, i32 0)
+  %is1_B = icmp eq i64 %rB_0, 1
+  br i1 %is1_B, label %E2C, label %groupB_test
+
+groupB_test:
+  %nzB = icmp ne i64 %rB_0, 0
+  br i1 %nzB, label %call_ptr_ecxB, label %fallback
+
+E54:
+  %r8_en = call i64 @sub_1400027A8(i32 8, i32 1)
+  %r_any = call i64 @sub_140002120()
+  br label %ret_minus1
+
+E_afterEnable8:
+  %r8_en2 = call i64 @sub_1400027A8(i32 8, i32 1)
+  br label %ret_minus1
+
+E40:
+  %r4_en = call i64 @sub_1400027A8(i32 4, i32 1)
+  br label %ret_minus1
+
+E2C:
+  %rB_en = call i64 @sub_1400027A8(i32 11, i32 1)
+  br label %ret_minus1
+
+call_ptr_ecx8:
+  %fp8 = inttoptr i64 %r8_0 to void (i32)*
+  call void %fp8(i32 8)
+  br label %ret_minus1
+
+call_ptr_ecx8_alt:
+  %fp8a = inttoptr i64 %r8a_0 to void (i32)*
+  call void %fp8a(i32 8)
+  br label %ret_minus1
+
+call_ptr_ecx4:
+  %fp4 = inttoptr i64 %r4_0 to void (i32)*
+  call void %fp4(i32 4)
+  br label %ret_minus1
+
+call_ptr_ecxB:
+  %fpB = inttoptr i64 %rB_0 to void (i32)*
+  call void %fpB(i32 11)
+  br label %ret_minus1
+
+fallback:
+  %fpglob = load i32 (i8*)*, i32 (i8*)** @qword_1400070D0, align 8
+  %isnull = icmp eq i32 (i8*)* %fpglob, null
+  br i1 %isnull, label %ret0, label %callglob
+
+ret0:
+  ret i32 0
+
+callglob:
+  %argcast = bitcast i8** %rcx to i8*
+  %res = call i32 %fpglob(i8* %argcast)
+  ret i32 %res
+
+ret_minus1:
+  ret i32 -1
+}

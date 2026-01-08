@@ -1,0 +1,82 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i64*, align 8
+
+declare void @loc_140001420(i8*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() local_unnamed_addr {
+entry:
+  %tblptr = load i64*, i64** @off_1400043B0, align 8
+  %first_ptr = getelementptr inbounds i64, i64* %tblptr, i64 0
+  %first_val = load i64, i64* %first_ptr, align 8
+  %first_low32 = trunc i64 %first_val to i32
+  %is_minus1 = icmp eq i32 %first_low32, -1
+  br i1 %is_minus1, label %scan_init, label %not_minus1
+
+not_minus1:                                      ; fallthrough when count is not -1
+  %base_i8 = bitcast i64* %tblptr to i8*
+  %has_count = icmp ne i32 %first_low32, 0
+  br i1 %has_count, label %have_count, label %after_calls
+
+have_count:
+  %count64 = zext i32 %first_low32 to i64
+  %offset_bytes = mul i64 %count64, 8
+  %rbx_init = getelementptr i8, i8* %base_i8, i64 %offset_bytes
+  br label %call_loop
+
+call_loop:
+  %rbx_cur = phi i8* [ %rbx_init, %have_count ], [ %rbx_next, %call_loop ]
+  %rbx_i64p = bitcast i8* %rbx_cur to i64*
+  %fn_qword = load i64, i64* %rbx_i64p, align 8
+  %fn_ptr = inttoptr i64 %fn_qword to void (...)* 
+  call void (...) %fn_ptr()
+  %rbx_next = getelementptr i8, i8* %rbx_cur, i64 -8
+  %more = icmp ne i8* %rbx_next, %base_i8
+  br i1 %more, label %call_loop, label %after_calls
+
+scan_init:                                       ; path when first entry is -1 (sentinel)
+  %base_i8_scan = bitcast i64* %tblptr to i8*
+  br label %scan_loop
+
+scan_loop:
+  %idx = phi i64 [ 0, %scan_init ], [ %next_idx, %scan_iter ]
+  %r8 = add i64 %idx, 1
+  %off = mul i64 %r8, 8
+  %addr_i8 = getelementptr i8, i8* %base_i8_scan, i64 %off
+  %addr_i64p = bitcast i8* %addr_i8 to i64*
+  %val = load i64, i64* %addr_i64p, align 8
+  %nz = icmp ne i64 %val, 0
+  br i1 %nz, label %scan_iter, label %scan_end
+
+scan_iter:
+  %next_idx = add i64 %idx, 1
+  br label %scan_loop
+
+scan_end:
+  %ecx_from_scan = trunc i64 %idx to i32
+  %has_count2 = icmp ne i32 %ecx_from_scan, 0
+  br i1 %has_count2, label %have_count_from_scan, label %after_calls
+
+have_count_from_scan:
+  %count64_s = zext i32 %ecx_from_scan to i64
+  %offset_bytes_s = mul i64 %count64_s, 8
+  %rbx_init_s = getelementptr i8, i8* %base_i8_scan, i64 %offset_bytes_s
+  br label %call_loop_s
+
+call_loop_s:
+  %rbx_cur_s = phi i8* [ %rbx_init_s, %have_count_from_scan ], [ %rbx_next_s, %call_loop_s ]
+  %rbx_i64p_s = bitcast i8* %rbx_cur_s to i64*
+  %fn_qword_s = load i64, i64* %rbx_i64p_s, align 8
+  %fn_ptr_s = inttoptr i64 %fn_qword_s to void (...)* 
+  call void (...) %fn_ptr_s()
+  %rbx_next_s = getelementptr i8, i8* %rbx_cur_s, i64 -8
+  %more_s = icmp ne i8* %rbx_next_s, %base_i8_scan
+  br i1 %more_s, label %call_loop_s, label %after_calls
+
+after_calls:
+  %cb = bitcast void ()* @sub_140001450 to i8*
+  call void @loc_140001420(i8* %cb)
+  ret void
+}

@@ -1,0 +1,34 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/2/sub_1400010101.ll:1:1: error: expected top-level entity
+; I can’t safely emit correct LLVM 14 IR for sub_140001010 from this snippet alone. The disassembly is incomplete and several critical details needed to produce type-correct, dominator-safe IR are missing or ambiguous. In particular:
+; === ERROR LOG END ===
+
+I can’t safely emit correct LLVM 14 IR for sub_140001010 from this snippet alone. The disassembly is incomplete and several critical details needed to produce type-correct, dominator-safe IR are missing or ambiguous. In particular:
+
+- The body is truncated: there’s a large gap between 0x1400011de and 0x1400012c8 where live registers (r15, r13, r12, rsi, rdi) are expected to be initialized before use in the later blocks. Without those instructions, I cannot build a correct CFG or PHI nodes.
+- There are calls to “near ptr loc_1400027B5+3” and “near ptr loc_14000274D+3”, which reference non-symbol local labels inside other functions. In IR, I cannot legally name or call those addresses without inventing symbols (disallowed), and IR cannot “call by absolute address” without a symbol.
+- Multiple external symbol types are unknown (e.g., qword_140008280 callable type, function pointer loaded via off_1400043F0, and many sub_14000… callees). To satisfy strict type matching (rule 5), I need exact prototypes.
+- The return type of sub_140001010 is not derivable from the snippet (EAX is live, but that doesn’t prove the function’s return type). Emitting the wrong return type would violate rule 5.
+- The gs:[0x30] access and the lock cmpxchg on [rbx] depend on the exact pointee types of off_140004470 and related globals (off_140004470 appears to hold a pointer to a qword lock), which must be declared precisely.
+
+If you can provide the following, I can generate correct IR that adheres to all constraints:
+
+- The complete disassembly for sub_140001010 (all bytes/blocks between 0x140001010 and 0x1400013da, including the missing region around 0x1400011de–0x1400012c8).
+- Exact prototypes (return and parameter types, calling convention) for:
+  - sub_140002660, sub_140002880, sub_140002790, sub_140002120, sub_140002778, sub_140002700, sub_1400027F8, sub_140002670, sub_140002780, sub_140001520, sub_1400018D0, sub_140504827, sub_1400027A0, and the two targets currently referenced as loc_1400027B5+3 and loc_14000274D+3.
+  - nullsub_1 and sub_140001CB0 (only used as addresses, but I still need their types).
+  - qword_140008280 (callable type).
+- Precise global declarations (types of the pointees) for:
+  - off_140004470 (appears to be i64** or i8** pointing to a qword lock),
+  - off_140004480 (pointer to a dword state),
+  - dword_140007004, dword_140007008, dword_140007020,
+  - qword_140007010, qword_140007018,
+  - off_1400043F0 (pointer to a function pointer),
+  - off_140004430, off_140004440, off_140004450 (pointers to dwords set to 1),
+  - off_1400043C0 (pointer to PE image base bytes),
+  - off_140004420 (pointer to a dword),
+  - off_140004460, off_140004490, off_1400044A0.
+- Whether stack protector is disabled (/GS-). If not, I must also declare __security_cookie and __security_check_cookie and match their use.
+- Confirmation of the target triple x86_64-pc-windows-msvc (rule 11).
+
+With those, I’ll emit a single define for @sub_140001010, correct extern globals, and declare-only the external/undefined functions, strictly matching the assembly without inventing logic.

@@ -1,0 +1,41 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/2/sub_1400018D01.ll:4:29: error: expected 'global' or 'constant'
+; @dword_1400070A0 = external dword
+;                             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_1400018D0_module'
+target triple = "x86_64-pc-windows-msvc"
+
+@dword_1400070A0 = external dword
+@dword_1400070A4 = external dword
+@qword_1400070A8 = external i8*
+
+declare i32 @sub_1400022D0()
+declare i64 @sub_140002520(i64 noundef)
+
+define void @sub_1400018D0() {
+entry:
+  %initflag.ptr = bitcast dword* @dword_1400070A0 to i32*
+  %initflag.load = load i32, i32* %initflag.ptr, align 4
+  %initflag.cmp = icmp ne i32 %initflag.load, 0
+  br i1 %initflag.cmp, label %retblk, label %initblk
+
+initblk:
+  store i32 1, i32* %initflag.ptr, align 4
+  %cnt.call = call i32 @sub_1400022D0()
+  %cnt.sext = sext i32 %cnt.call to i64
+  %mul5 = mul i64 %cnt.sext, 5
+  %mul40 = mul i64 %mul5, 8
+  %add15 = add i64 %mul40, 15
+  %align16 = and i64 %add15, -16
+  %probed = call i64 @sub_140002520(i64 noundef %align16)
+  %buf = alloca i8, i64 %probed, align 16
+  %zero = add i32 0, 0
+  store i32 %zero, i32* bitcast (dword* @dword_1400070A4 to i32*), align 4
+  store i8* %buf, i8** @qword_1400070A8, align 8
+  br label %retblk
+
+retblk:
+  ret void
+}

@@ -1,0 +1,85 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 194,
+      "ir_len": 15647,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400010101.ll:311:10: error: expected instruction opcode\n  %r13 = %newarr\n         ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\n@off_140004470 = external global i8*\n@qword_140008280 = external global i8*\n@off_14000",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400010101.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 312,
+      "ir_len": 13736,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400010102.ll:369:45: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg_old = atomicrmw xchg i8** %lockptr, i8* null monotonic\n                                  ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\n@off_140004470 = external global i8*\n@qword_140008280 = external global i8*\n@off_14000",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400010102.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 316,
+      "ir_len": 13774,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %i = phi i64 [ 1, %loop_init ], [ %i.next, %loop_body ]\nlabel %loop_body\nlabel %incr\nInstruction does not dominate all uses!\n  %i.next = add i64 %i, 1\n  %i = phi i64 [ 1, %loop_init ], [ %i.nex",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\n@off_140004470 = external global i8*\n@qword_140008280 = external global i8*\n@off_14000",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400010103.ll"
+    },
+    {
+      "filename": "sub_140001760.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 332,
+      "ir_len": 6582,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400017601.ll:34:70: error: invalid use of function-local name\n  %cur_ptr = getelementptr inbounds i8, i8* %arr_start, i64 mul (i64 %cur_off64, i64 40)\n                                       ",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = external global i32\n@qword_1400070A8 = external global i8*\n@qword_140008298 = external global i64 (i8*, i8*, i64)*",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400017601.ll"
+    },
+    {
+      "filename": "sub_140001760.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 288,
+      "ir_len": 6572,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400017602.ll:141:13: error: '@sub_140001700' defined with type 'void (i8*, ...)*' but expected 'void (i8*, i32)*'\n  call void @sub_140001700(i8* %fmt_vp, i32 %gle)\n            ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = external global i32\n@qword_1400070A8 = external global i8*\n@qword_140008298 = external global i64 (i8*, i8*, i64)*",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400017602.ll"
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 287,
+      "ir_len": 20736,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400018D01.ll:167:43: error: invalid use of function-local name\n  %r12d_val = load i32, i32* bitcast (i8* %r12d_ptr to i32*), align 4\n                                          ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A0 = external dso_local global i32\n@dword_1400070A4 = external dso_local global i32\n@qword_1400070A8 = external dso_loc",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_1400018D01.ll"
+    },
+    {
+      "filename": "sub_140001CB0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 241,
+      "ir_len": 4325,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_140001CB01.ll:14:26: error: floating point constant invalid for type\n  %mask = and i32 %eax0, 0x20FFFFFF\n                         ^\n",
+      "ir_preview": "; ModuleID = 'sub_140001CB0'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@qword_1400070D0 = external global i32 (i8**)*, align 8\n\ndeclare i64 @sub_1400027A8(i32, i32)\ndeclare void @sub_140002120()\n\ndefi",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_140001CB01.ll"
+    },
+    {
+      "filename": "sub_140001E80.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 206,
+      "ir_len": 1670,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_140001E801.ll:34:3: error: instruction expected to be numbered '%12'\n  %13 = and i1 %10, %11\n  ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n%struct.Node = type { i32, i32, void (i8*)*, %struct.Node* }\n\n@unk_140007100 = external global i8\n@qword_140008258 = external global ",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/4/sub_140001E801.ll"
+    }
+  ]
+}

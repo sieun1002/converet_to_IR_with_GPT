@@ -1,0 +1,71 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i64*
+
+declare void @sub_140001420(i8*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() {
+entry:
+  %0 = load i64*, i64** @off_1400043B0, align 8
+  %1 = getelementptr inbounds i64, i64* %0, i64 0
+  %2 = load i64, i64* %1, align 8
+  %3 = trunc i64 %2 to i32
+  %4 = icmp eq i32 %3, -1
+  br i1 %4, label %scan, label %check_zero
+
+check_zero:                                       ; preds = %entry
+  %5 = icmp eq i32 %3, 0
+  br i1 %5, label %after_calls, label %prep_loop
+
+prep_loop:                                        ; preds = %check_zero
+  %6 = sext i32 %3 to i64
+  %7 = getelementptr inbounds i64, i64* %0, i64 %6
+  br label %call_loop
+
+call_loop:                                        ; preds = %call_loop, %prep_loop
+  %8 = phi i64* [ %7, %prep_loop ], [ %12, %call_loop ]
+  %9 = load i64, i64* %8, align 8
+  %10 = inttoptr i64 %9 to void ()*
+  call void %10()
+  %12 = getelementptr inbounds i64, i64* %8, i64 -1
+  %13 = icmp eq i64* %12, %0
+  br i1 %13, label %after_calls, label %call_loop
+
+after_calls:                                      ; preds = %call_loop, %check_zero, %call_loop2, %scan_exit
+  %14 = bitcast void ()* @sub_140001450 to i8*
+  tail call void @sub_140001420(i8* %14)
+  ret void
+
+scan:                                             ; preds = %entry
+  br label %scan_loop
+
+scan_loop:                                        ; preds = %scan_loop, %scan
+  %15 = phi i64 [ 0, %scan ], [ %18, %scan_loop ]
+  %16 = phi i32 [ 0, %scan ], [ %17, %scan_loop ]
+  %17 = trunc i64 %15 to i32
+  %18 = add i64 %15, 1
+  %19 = getelementptr inbounds i64, i64* %0, i64 %18
+  %20 = load i64, i64* %19, align 8
+  %21 = icmp ne i64 %20, 0
+  br i1 %21, label %scan_loop, label %scan_exit
+
+scan_exit:                                        ; preds = %scan_loop
+  %22 = icmp eq i32 %16, 0
+  br i1 %22, label %after_calls, label %prep_loop2
+
+prep_loop2:                                       ; preds = %scan_exit
+  %23 = sext i32 %16 to i64
+  %24 = getelementptr inbounds i64, i64* %0, i64 %23
+  br label %call_loop2
+
+call_loop2:                                       ; preds = %call_loop2, %prep_loop2
+  %25 = phi i64* [ %24, %prep_loop2 ], [ %29, %call_loop2 ]
+  %26 = load i64, i64* %25, align 8
+  %27 = inttoptr i64 %26 to void ()*
+  call void %27()
+  %29 = getelementptr inbounds i64, i64* %25, i64 -1
+  %30 = icmp eq i64* %29, %0
+  br i1 %30, label %after_calls, label %call_loop2
+}

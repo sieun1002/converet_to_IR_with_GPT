@@ -1,0 +1,59 @@
+; Function: sub_140002460
+; Start: 0x140002460, End: 0x140002516
+
+0x140002460: mov     r11, cs:off_1400043C0
+0x140002467: xor     r8d, r8d
+0x14000246a: cmp     word ptr [r11], 5A4Dh
+0x140002470: jnz     short loc_140002481
+0x140002472: movsxd  rdx, dword ptr [r11+3Ch]
+0x140002476: add     rdx, r11
+0x140002479: cmp     dword ptr [rdx], 4550h
+0x14000247f: jz      short loc_140002488
+0x140002481: mov     rax, r8
+0x140002484: retn
+0x140002485: align 8
+0x140002488: cmp     word ptr [rdx+18h], 20Bh
+0x14000248e: jnz     short loc_140002481
+0x140002490: mov     eax, [rdx+90h]
+0x140002496: test    eax, eax
+0x140002498: jz      short loc_140002481
+0x14000249a: movzx   r9d, word ptr [rdx+6]
+0x14000249f: test    r9w, r9w
+0x1400024a3: jz      short loc_140002481
+0x1400024a5: movzx   r8d, word ptr [rdx+14h]
+0x1400024aa: lea     rdx, [rdx+r8+18h]
+0x1400024af: lea     r8d, [r9-1]
+0x1400024b3: lea     r8, [r8+r8*4]
+0x1400024b7: lea     r10, [rdx+r8*8+28h]
+0x1400024bc: nop     dword ptr [rax+00h]
+0x1400024c0: mov     r9d, [rdx+0Ch]
+0x1400024c4: mov     r8, r9
+0x1400024c7: cmp     rax, r9
+0x1400024ca: jb      short loc_1400024D5
+0x1400024cc: add     r8d, [rdx+8]
+0x1400024d0: cmp     rax, r8
+0x1400024d3: jb      short loc_1400024E8
+0x1400024d5: add     rdx, 28h ; '('
+0x1400024d9: cmp     r10, rdx
+0x1400024dc: jnz     short loc_1400024C0
+0x1400024de: xor     r8d, r8d
+0x1400024e1: mov     rax, r8
+0x1400024e4: retn
+0x1400024e5: align 8
+0x1400024e8: add     rax, r11
+0x1400024eb: jmp     short loc_1400024F7
+0x1400024ed: align 10h
+0x1400024f0: sub     ecx, 1
+0x1400024f3: add     rax, 14h
+0x1400024f7: mov     r8d, [rax+4]
+0x1400024fb: test    r8d, r8d
+0x1400024fe: jnz     short loc_140002507
+0x140002500: mov     edx, [rax+0Ch]
+0x140002503: test    edx, edx
+0x140002505: jz      short loc_1400024DE
+0x140002507: test    ecx, ecx
+0x140002509: jg      short loc_1400024F0
+0x14000250b: mov     r8d, [rax+0Ch]
+0x14000250f: add     r8, r11
+0x140002512: mov     rax, r8
+0x140002515: retn

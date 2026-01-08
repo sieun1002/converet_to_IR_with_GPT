@@ -1,0 +1,71 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/1/sub_140001F801.ll:42:21: error: expected instruction opcode
+;   %curr_from_body = %curr
+;                     ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_140001F80'
+target triple = "x86_64-pc-windows-msvc"
+
+@dword_1400070E8 = external global i32
+@qword_1400070E0 = external global i8*
+@unk_140007100 = external global [0 x i8]
+
+declare i8* @"sub_140015A7A"(i8*)
+declare void @"sub_140027826"(i8*)
+declare void @"loc_1400027ED+3"(i8*)
+
+define void @"sub_140001F80"(i32 %ecx_in, i32 %edx_in) {
+entry:
+  %g = load i32, i32* @dword_1400070E8, align 4
+  %cmp0 = icmp eq i32 %g, 0
+  br i1 %cmp0, label %ret, label %cont
+
+ret:
+  ret void
+
+cont:
+  %lockptr = bitcast [0 x i8]* @unk_140007100 to i8*
+  %head = call i8* @"sub_140015A7A"(i8* %lockptr)
+  br label %loop_check
+
+loop_check:
+  %curr = phi i8* [ %head, %cont ], [ %next, %loop_iter ]
+  %prev = phi i8* [ null, %cont ], [ %curr_from_body, %loop_iter ]
+  %isnull = icmp eq i8* %curr, null
+  br i1 %isnull, label %unlock, label %loop_body
+
+loop_body:
+  %keyptr = bitcast i8* %curr to i32*
+  %key = load i32, i32* %keyptr, align 4
+  %cmp_key = icmp eq i32 %key, %edx_in
+  %next_gepi8 = getelementptr i8, i8* %curr, i64 16
+  %next_ptr = bitcast i8* %next_gepi8 to i8**
+  %next = load i8*, i8** %next_ptr, align 8
+  br i1 %cmp_key, label %found, label %loop_iter
+
+loop_iter:
+  %curr_from_body = %curr
+  br label %loop_check
+
+found:
+  %isPrevNull = icmp eq i8* %prev, null
+  br i1 %isPrevNull, label %head_case, label %remove_middle
+
+head_case:
+  store i8* %next, i8** @qword_1400070E0, align 8
+  call void @"loc_1400027ED+3"(i8* %curr)
+  br label %unlock
+
+remove_middle:
+  %prevoff = getelementptr i8, i8* %prev, i64 16
+  %prevnextptr = bitcast i8* %prevoff to i8**
+  store i8* %next, i8** %prevnextptr, align 8
+  call void @"loc_1400027ED+3"(i8* %curr)
+  br label %unlock
+
+unlock:
+  %lockptr2 = bitcast [0 x i8]* @unk_140007100 to i8*
+  call void @"sub_140027826"(i8* %lockptr2)
+  ret void
+}

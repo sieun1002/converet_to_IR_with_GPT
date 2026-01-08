@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400010101.ll:319:68: error: invalid use of function-local name\n  %term.slot = phi i8** [ %last.ptr, %last_slot ], [ inttoptr (i64 %r13 to i8**), %maybe_loop ]\n                                                                   ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400010101.bc",
+      "start_time": "2026-01-08T02:38:07",
+      "end_time": "2026-01-08T02:38:07",
+      "elapsed_sec": 0.018889
+    },
+    {
+      "filename": "sub_140001600.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400016001.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400016001.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400016001.ll:76:20: error: '@sub_140002600' defined with type 'i32 (i8*, i8*, i8*, i8*, ...)*' but expected 'i32 (i8*, i8*, i8*, i8*, double, double, double)*'\n  %call = call i32 @sub_140002600(i8* noundef %ctx, i8* noundef @aMatherrSInSGGR, i8* noundef %desc, i8* noundef %func, double %d1, double %d2, double %d3)\n                   ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400016001.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400016001.bc",
+      "start_time": "2026-01-08T02:44:30",
+      "end_time": "2026-01-08T02:44:30",
+      "elapsed_sec": 0.016773
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D01.ll:23:21: warning: ptr type is only supported in -opaque-pointers mode\n  %init = load i32, ptr @dword_1400070A0, align 4\n                    ^\nllvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D01.ll:23:21: error: expected type\n  %init = load i32, ptr @dword_1400070A0, align 4\n                    ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D01.bc",
+      "start_time": "2026-01-08T02:58:41",
+      "end_time": "2026-01-08T02:58:41",
+      "elapsed_sec": 0.019139
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %rbx_hdr = phi i8* [ %rbx_ptr0, %check_B_le_0xB ], [ %rbx_inc, %path_1C17_loop ]\n  %rbx_after_hdr = getelementptr i8, i8* %rbx_hdr, i64 12\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_1400018D02.bc",
+      "start_time": "2026-01-08T03:00:59",
+      "end_time": "2026-01-08T03:00:59",
+      "elapsed_sec": 0.018163
+    },
+    {
+      "filename": "sub_140001CB0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_140001CB01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_140001CB01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_140001CB01.ll:4:36: warning: ptr type is only supported in -opaque-pointers mode\n@qword_1400070D0 = external global ptr\n                                   ^\nllvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_140001CB01.ll:4:36: error: expected type\n@qword_1400070D0 = external global ptr\n                                   ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_140001CB01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/1/sub_140001CB01.bc",
+      "start_time": "2026-01-08T03:05:25",
+      "end_time": "2026-01-08T03:05:25",
+      "elapsed_sec": 0.019714
+    }
+  ]
+}

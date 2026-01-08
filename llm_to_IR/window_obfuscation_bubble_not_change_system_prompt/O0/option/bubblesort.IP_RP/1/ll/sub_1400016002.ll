@@ -1,0 +1,78 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+declare dso_local i8* @sub_140002710(i32)
+declare dso_local void @sub_140002600(i8*, i8*, i8*, i8*, double, double, double)
+
+@aArgumentSingul = external global i8
+@aArgumentDomain = external global i8
+@aPartialLossOfS = external global i8
+@aOverflowRangeE = external global i8
+@aTheResultIsToo = external global i8
+@aTotalLossOfSig = external global i8
+@aUnknownError = external global i8
+@aMatherrSInSGGR = external global i8
+
+define dso_local void @sub_140001600(i8* %rcx) {
+entry:
+  %type.ptr = bitcast i8* %rcx to i32*
+  %type = load i32, i32* %type.ptr, align 4
+  switch i32 %type, label %sw.default [
+    i32 1, label %sw.case1
+    i32 2, label %sw.case2
+    i32 3, label %sw.case3
+    i32 4, label %sw.case4
+    i32 5, label %sw.case5
+    i32 6, label %sw.case6
+  ]
+
+sw.case1:
+  br label %join
+
+sw.case2:
+  br label %join
+
+sw.case3:
+  br label %join
+
+sw.case4:
+  br label %join
+
+sw.case5:
+  br label %join
+
+sw.case6:
+  br label %join
+
+sw.default:
+  br label %join
+
+join:
+  %msg = phi i8* [ @aArgumentDomain, %sw.case1 ],
+                 [ @aArgumentSingul, %sw.case2 ],
+                 [ @aOverflowRangeE, %sw.case3 ],
+                 [ @aTheResultIsToo, %sw.case4 ],
+                 [ @aTotalLossOfSig, %sw.case5 ],
+                 [ @aPartialLossOfS, %sw.case6 ],
+                 [ @aUnknownError, %sw.default ]
+
+  %name.ptr.i8 = getelementptr inbounds i8, i8* %rcx, i64 8
+  %name.pp = bitcast i8* %name.ptr.i8 to i8**
+  %name = load i8*, i8** %name.pp, align 8
+
+  %arg1.ptr.i8 = getelementptr inbounds i8, i8* %rcx, i64 16
+  %arg1.ptr = bitcast i8* %arg1.ptr.i8 to double*
+  %arg1 = load double, double* %arg1.ptr, align 8
+
+  %arg2.ptr.i8 = getelementptr inbounds i8, i8* %rcx, i64 24
+  %arg2.ptr = bitcast i8* %arg2.ptr.i8 to double*
+  %arg2 = load double, double* %arg2.ptr, align 8
+
+  %retval.ptr.i8 = getelementptr inbounds i8, i8* %rcx, i64 32
+  %retval.ptr = bitcast i8* %retval.ptr.i8 to double*
+  %retval = load double, double* %retval.ptr, align 8
+
+  %cat = call i8* @sub_140002710(i32 2)
+  call void @sub_140002600(i8* %cat, i8* @aMatherrSInSGGR, i8* %msg, i8* %name, double %arg1, double %arg2, double %retval)
+  ret void
+}

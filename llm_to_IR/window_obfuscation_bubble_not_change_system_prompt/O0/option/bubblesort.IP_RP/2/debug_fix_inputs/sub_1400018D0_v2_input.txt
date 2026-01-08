@@ -1,0 +1,275 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D01.ll:217:13: error: '@sub_140001700' defined with type 'void (i8*, ...)*' but expected 'void (i8*)*'
+;   call void @sub_140001700(i8* %fmt_unk_bits_gep)
+;             ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@dword_1400070A0 = external global i32
+@dword_1400070A4 = external global i32
+@qword_1400070A8 = external global i8*
+@off_1400043D0 = external global i8*
+@off_1400043E0 = external global i8*
+@off_1400043C0 = external global i8*
+
+@aUnknownPseudoR = external global [0 x i8]
+@aDBitPseudoRelo = external global [0 x i8]
+@aUnknownPseudoR_0 = external global [0 x i8]
+
+declare i32 @sub_1400022D0()
+declare void @sub_140002520()
+declare void @sub_140001760(i8*)
+declare void @sub_1400027B8(i8*, i8*, i32)
+declare void @sub_140001700(i8*, ...)
+
+define dso_local void @sub_1400018D0() local_unnamed_addr {
+entry:
+  %var48 = alloca i64, align 8
+  %var60 = alloca i64, align 8
+  %buf = alloca [1024 x i8], align 16
+  %t0 = load i32, i32* @dword_1400070A0, align 4
+  %t1 = icmp ne i32 %t0, 0
+  br i1 %t1, label %ret, label %init
+
+init:                                             ; preds = %entry
+  store i32 1, i32* @dword_1400070A0, align 4
+  %t2 = call i32 @sub_1400022D0()
+  %t3 = sext i32 %t2 to i64
+  %t4 = mul i64 %t3, 5
+  %t5 = shl i64 %t4, 3
+  %t6 = add i64 %t5, 15
+  %t7 = and i64 %t6, -16
+  call void @sub_140002520()
+  %endptr = load i8*, i8** @off_1400043D0, align 8
+  %startptr = load i8*, i8** @off_1400043E0, align 8
+  store i32 0, i32* @dword_1400070A4, align 4
+  %bufp = getelementptr inbounds [1024 x i8], [1024 x i8]* %buf, i64 0, i64 0
+  store i8* %bufp, i8** @qword_1400070A8, align 8
+  %endi = ptrtoint i8* %endptr to i64
+  %starti = ptrtoint i8* %startptr to i64
+  %diff = sub i64 %endi, %starti
+  %cmp_le7 = icmp sle i64 %diff, 7
+  br i1 %cmp_le7, label %ret, label %check_v
+
+check_v:                                          ; preds = %init
+  %cmp_gt11 = icmp sgt i64 %diff, 11
+  br i1 %cmp_gt11, label %v2_entry, label %v1_header
+
+v1_header:                                        ; preds = %check_v
+  %rbx0 = bitcast i8* %startptr to i32*
+  %h0 = load i32, i32* %rbx0, align 4
+  %h0nz = icmp ne i32 %h0, 0
+  br i1 %h0nz, label %v2_entry, label %v1_h1
+
+v1_h1:                                            ; preds = %v1_header
+  %rbx1p = getelementptr i8, i8* %startptr, i64 4
+  %rbx1 = bitcast i8* %rbx1p to i32*
+  %h1 = load i32, i32* %rbx1, align 4
+  %h1nz = icmp ne i32 %h1, 0
+  br i1 %h1nz, label %v2_entry, label %v1_h2
+
+v1_h2:                                            ; preds = %v1_h1
+  %rbx2p = getelementptr i8, i8* %startptr, i64 8
+  %rbx2 = bitcast i8* %rbx2p to i32*
+  %h2 = load i32, i32* %rbx2, align 4
+  %h2eq1 = icmp eq i32 %h2, 1
+  br i1 %h2eq1, label %v1_init, label %unknown_proto
+
+v1_init:                                          ; preds = %v1_h2
+  %rbx_after_hdr = getelementptr i8, i8* %startptr, i64 12
+  %r14_base = load i8*, i8** @off_1400043C0, align 8
+  %r12ptr = bitcast i64* %var48 to i8*
+  %rbxlt = icmp ult i8* %rbx_after_hdr, %endptr
+  br i1 %rbxlt, label %v1_loop, label %ret
+
+v1_loop:                                          ; preds = %v1_init, %v1_next
+  %rbx_cur = phi i8* [ %rbx_after_hdr, %v1_init ], [ %rbx_inc, %v1_next ]
+  %off0p = bitcast i8* %rbx_cur to i32*
+  %off0 = load i32, i32* %off0p, align 4
+  %off1p = getelementptr i8, i8* %rbx_cur, i64 4
+  %off1pi = bitcast i8* %off1p to i32*
+  %off1 = load i32, i32* %off1pi, align 4
+  %flagsp = getelementptr i8, i8* %rbx_cur, i64 8
+  %flagspi = bitcast i8* %flagsp to i32*
+  %flags = load i32, i32* %flagspi, align 4
+  %off0z = zext i32 %off0 to i64
+  %r8ptr = getelementptr i8, i8* %r14_base, i64 %off0z
+  %cl = trunc i32 %flags to i8
+  %edx = zext i8 %cl to i32
+  %r9qptr = bitcast i8* %r8ptr to i64*
+  %r9val = load i64, i64* %r9qptr, align 8
+  %off1z = zext i32 %off1 to i64
+  %r15ptr = getelementptr i8, i8* %r14_base, i64 %off1z
+  %is32 = icmp eq i32 %edx, 32
+  br i1 %is32, label %case32, label %edx_le_32
+
+edx_le_32:                                        ; preds = %v1_loop
+  %le32 = icmp ule i32 %edx, 32
+  br i1 %le32, label %edx_subcases, label %chk_64
+
+edx_subcases:                                     ; preds = %edx_le_32
+  %is8 = icmp eq i32 %edx, 8
+  br i1 %is8, label %case8, label %maybe16
+
+maybe16:                                          ; preds = %edx_subcases
+  %is16 = icmp eq i32 %edx, 16
+  br i1 %is16, label %case16, label %unknown_bitsize
+
+chk_64:                                           ; preds = %edx_le_32
+  %is64 = icmp eq i32 %edx, 64
+  br i1 %is64, label %case64, label %unknown_bitsize
+
+case16:                                           ; preds = %maybe16
+  %r15wptr = bitcast i8* %r15ptr to i16*
+  %w = load i16, i16* %r15wptr, align 2
+  %w32 = sext i16 %w to i32
+  %w64 = sext i32 %w32 to i64
+  %r8i = ptrtoint i8* %r8ptr to i64
+  %t16a = sub i64 %w64, %r8i
+  %t16b = add i64 %t16a, %r9val
+  %mask16 = and i32 %flags, 192
+  store i64 %t16b, i64* %var48, align 8
+  %mask16z = icmp ne i32 %mask16, 0
+  br i1 %mask16z, label %apply16, label %rng16
+
+rng16:                                            ; preds = %case16
+  %gtFFFF = icmp sgt i64 %t16b, 65535
+  br i1 %gtFFFF, label %range_error, label %rng16b
+
+rng16b:                                           ; preds = %rng16
+  %ltMin16 = icmp slt i64 %t16b, -32768
+  br i1 %ltMin16, label %range_error, label %apply16
+
+apply16:                                          ; preds = %rng16b, %case16
+  call void @sub_140001760(i8* %r15ptr)
+  call void @sub_1400027B8(i8* %r15ptr, i8* %r12ptr, i32 2)
+  br label %v1_next
+
+case64:                                           ; preds = %chk_64
+  %r15qptr = bitcast i8* %r15ptr to i64*
+  %q = load i64, i64* %r15qptr, align 8
+  %r8i64 = ptrtoint i8* %r8ptr to i64
+  %t64a = sub i64 %q, %r8i64
+  %t64b = add i64 %t64a, %r9val
+  %mask64 = and i32 %flags, 192
+  store i64 %t64b, i64* %var48, align 8
+  %mask64z = icmp ne i32 %mask64, 0
+  br i1 %mask64z, label %apply64, label %rng64
+
+rng64:                                            ; preds = %case64
+  %ge0 = icmp sge i64 %t64b, 0
+  br i1 %ge0, label %range_error, label %apply64
+
+apply64:                                          ; preds = %rng64, %case64
+  call void @sub_140001760(i8* %r15ptr)
+  call void @sub_1400027B8(i8* %r15ptr, i8* %r12ptr, i32 8)
+  br label %v1_next
+
+case32:                                           ; preds = %v1_loop
+  %r15dptr = bitcast i8* %r15ptr to i32*
+  %d = load i32, i32* %r15dptr, align 4
+  %d64 = sext i32 %d to i64
+  %r8i2 = ptrtoint i8* %r8ptr to i64
+  %t32a = sub i64 %d64, %r8i2
+  %t32b = add i64 %t32a, %r9val
+  %mask32 = and i32 %flags, 192
+  store i64 %t32b, i64* %var48, align 8
+  %mask32z = icmp ne i32 %mask32, 0
+  br i1 %mask32z, label %apply32, label %rng32
+
+rng32:                                            ; preds = %case32
+  %gtm1 = icmp sgt i64 %t32b, -1
+  br i1 %gtm1, label %range_error, label %rng32b
+
+rng32b:                                           ; preds = %rng32
+  %ltmin32 = icmp slt i64 %t32b, -2147483648
+  br i1 %ltmin32, label %range_error, label %apply32
+
+apply32:                                          ; preds = %rng32b, %case32
+  call void @sub_140001760(i8* %r15ptr)
+  call void @sub_1400027B8(i8* %r15ptr, i8* %r12ptr, i32 4)
+  br label %v1_next
+
+case8:                                            ; preds = %edx_subcases
+  %r15bptr = bitcast i8* %r15ptr to i8*
+  %b = load i8, i8* %r15bptr, align 1
+  %b64 = sext i8 %b to i64
+  %r8i3 = ptrtoint i8* %r8ptr to i64
+  %t8a = sub i64 %b64, %r8i3
+  %t8b = add i64 %t8a, %r9val
+  %mask8 = and i32 %flags, 192
+  store i64 %t8b, i64* %var48, align 8
+  %mask8z = icmp ne i32 %mask8, 0
+  br i1 %mask8z, label %apply8, label %rng8
+
+rng8:                                             ; preds = %case8
+  %gt255 = icmp sgt i64 %t8b, 255
+  br i1 %gt255, label %range_error, label %rng8b
+
+rng8b:                                            ; preds = %rng8
+  %ltm128 = icmp slt i64 %t8b, -128
+  br i1 %ltm128, label %range_error, label %apply8
+
+apply8:                                           ; preds = %rng8b, %case8
+  call void @sub_140001760(i8* %r15ptr)
+  call void @sub_1400027B8(i8* %r15ptr, i8* %r12ptr, i32 1)
+  br label %v1_next
+
+unknown_bitsize:                                  ; preds = %maybe16, %chk_64
+  %fmt_unk_bits_gep = getelementptr inbounds [0 x i8], [0 x i8]* @aUnknownPseudoR, i64 0, i64 0
+  store i64 0, i64* %var48, align 8
+  call void @sub_140001700(i8* %fmt_unk_bits_gep)
+  br label %ret
+
+range_error:                                      ; preds = %rng8b, %rng32b, %rng64, %rng16
+  %errv = phi i64 [ %t8b, %rng8b ], [ %t32b, %rng32b ], [ %t64b, %rng64 ], [ %t16b, %rng16 ]
+  store i64 %errv, i64* %var60, align 8
+  %fmt_range_gep = getelementptr inbounds [0 x i8], [0 x i8]* @aDBitPseudoRelo, i64 0, i64 0
+  call void @sub_140001700(i8* %fmt_range_gep)
+  br label %ret
+
+v1_next:                                          ; preds = %apply8, %apply32, %apply64, %apply16
+  %rbx_inc = getelementptr i8, i8* %rbx_cur, i64 12
+  %cont = icmp ult i8* %rbx_inc, %endptr
+  br i1 %cont, label %v1_loop, label %ret
+
+v2_entry:                                         ; preds = %v1_h1, %v1_header, %check_v
+  %rbxv2 = phi i8* [ %startptr, %v1_header ], [ %startptr, %v1_h1 ], [ %startptr, %check_v ]
+  %cmpv2 = icmp uge i8* %rbxv2, %endptr
+  br i1 %cmpv2, label %ret, label %v2_init
+
+v2_init:                                          ; preds = %v2_entry
+  %r14b = load i8*, i8** @off_1400043C0, align 8
+  %r13p = bitcast i64* %var48 to i8*
+  br label %v2_loop
+
+v2_loop:                                          ; preds = %v2_init, %v2_loop
+  %rbx_it = phi i8* [ %rbxv2, %v2_init ], [ %rbx_next, %v2_loop ]
+  %offd_ptr = getelementptr i8, i8* %rbx_it, i64 4
+  %offd_i32p = bitcast i8* %offd_ptr to i32*
+  %offd = load i32, i32* %offd_i32p, align 4
+  %offa_i32p = bitcast i8* %rbx_it to i32*
+  %offa = load i32, i32* %offa_i32p, align 4
+  %rbx_next = getelementptr i8, i8* %rbx_it, i64 8
+  %offd_z = zext i32 %offd to i64
+  %addr_ptr = getelementptr i8, i8* %r14b, i64 %offd_z
+  %dword_at = bitcast i8* %addr_ptr to i32*
+  %val_at = load i32, i32* %dword_at, align 4
+  %sum = add i32 %offa, %val_at
+  %sum64 = sext i32 %sum to i64
+  store i64 %sum64, i64* %var48, align 8
+  call void @sub_140001760(i8* %addr_ptr)
+  call void @sub_1400027B8(i8* %addr_ptr, i8* %r13p, i32 4)
+  %more = icmp ult i8* %rbx_next, %endptr
+  br i1 %more, label %v2_loop, label %ret
+
+unknown_proto:                                    ; preds = %v1_h2
+  %fmt_unk_proto_gep = getelementptr inbounds [0 x i8], [0 x i8]* @aUnknownPseudoR_0, i64 0, i64 0
+  call void @sub_140001700(i8* %fmt_unk_proto_gep)
+  br label %ret
+
+ret:                                              ; preds = %v2_loop, %v2_entry, %v1_next, %range_error, %unknown_bitsize, %v1_init, %check_v, %init, %entry
+  ret void
+}

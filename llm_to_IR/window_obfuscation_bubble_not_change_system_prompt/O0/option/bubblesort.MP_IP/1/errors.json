@@ -1,0 +1,47 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400010101.ll:1:1: error: expected top-level entity\nI can’t safely generate LLVM IR that satisfies your rules from this snippet, because the disassembly is incomplete and contains IDA-style pseudo-operands that don’t map 1:1 to real instructions.\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400010101.bc",
+      "start_time": "2026-01-08T02:34:20",
+      "end_time": "2026-01-08T02:34:20",
+      "elapsed_sec": 0.016355
+    },
+    {
+      "filename": "sub_1400014A0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400014A01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400014A01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400014A01.ll:60:3: error: instruction expected to be numbered '%18'\n  %19 = getelementptr inbounds i64, i64* %15, i64 -1\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400014A01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400014A01.bc",
+      "start_time": "2026-01-08T02:37:11",
+      "end_time": "2026-01-08T02:37:11",
+      "elapsed_sec": 0.01664
+    },
+    {
+      "filename": "sub_1400021B0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400021B01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400021B01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %29 = phi i8* [ %28, %setup_loop ], [ %35, %loop ]\nlabel %loop\nlabel %iter\nInstruction does not dominate all uses!\n  %35 = getelementptr i8, i8* %29, i64 40\n  %29 = phi i8* [ %28, %setup_loop ], [ %35, %loop ]\nInstruction does not dominate all uses!\n  %33 = add i32 %30, 1\n  %30 = phi i32 [ 0, %setup_loop ], [ %33, %loop ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400021B01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/1/sub_1400021B01.bc",
+      "start_time": "2026-01-08T03:04:00",
+      "end_time": "2026-01-08T03:04:00",
+      "elapsed_sec": 0.018036
+    }
+  ]
+}

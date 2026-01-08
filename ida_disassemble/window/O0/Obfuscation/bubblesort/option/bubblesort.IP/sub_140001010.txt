@@ -1,0 +1,94 @@
+; Function: sub_140001010
+; Start: 0x140001010, End: 0x1400013da
+
+0x140001010: push    r15
+0x140001012: push    r14
+0x140001014: push    r13
+0x140001016: push    r12
+0x140001018: push    rbp
+0x140001019: push    rdi
+0x14000101a: push    rsi
+0x14000101b: push    rbx
+0x14000101c: sub     rsp, 58h
+0x140001020: mov     eax, 30h ; '0'
+0x140001025: mov     rax, gs:[eax]
+0x14000102a: mov     rsi, [rax+8]
+0x14000102e: mov     rbx, cs:off_140004470
+0x140001035: mov     rdi, cs:qword_140008280
+0x14000103c: jmp     short loc_140001050
+0x14000103e: align 20h
+0x140001040: cmp     rsi, rax
+0x140001043: jz      loc_140001100
+0x140001049: mov     ecx, 3E8h
+0x14000104e: call    rdi ; qword_140008280
+0x140001050: xor     eax, eax
+0x140001052: lock cmpxchg [rbx], rsi
+0x140001057: jnz     short loc_140001040
+0x140001059: xor     r14d, r14d
+0x14000105c: mov     rbp, cs:off_140004480
+0x140001063: mov     eax, [rbp+0]
+0x140001066: cmp     eax, 1
+0x140001069: jz      loc_1400013C8
+0x14000106f: mov     eax, [rbp+0]
+0x140001072: test    eax, eax
+0x140001074: jz      loc_140001110
+0x14000107a: mov     cs:dword_140007004, 1
+0x140001084: test    r14d, r14d
+0x140001087: jz      loc_140001328
+0x14000108d: mov     rax, cs:off_1400043F0
+0x140001094: mov     rax, [rax]
+0x140001097: test    rax, rax
+0x14000109a: jz      short loc_1400010A8
+0x14000109c: xor     r8d, r8d
+0x14000109f: mov     edx, 2
+0x1400010a4: xor     ecx, ecx
+0x1400010a6: call    rax
+0x1400010a8: call    sub_140002660
+0x1400010ad: mov     r8, cs:qword_140007010
+0x1400010b4: mov     ecx, cs:dword_140007020
+0x1400010ba: mov     [rax], r8
+0x1400010bd: mov     rdx, cs:qword_140007018
+0x1400010c4: call    sub_140002880
+0x1400010c9: mov     ecx, cs:dword_140007008
+0x1400010cf: test    ecx, ecx
+0x1400010d1: jz      loc_1400013D2
+0x1400010d7: mov     edx, cs:dword_140007004
+0x1400010dd: test    edx, edx
+0x1400010df: jz      loc_140001310
+0x1400010e5: add     rsp, 58h
+0x1400010e9: pop     rbx
+0x1400010ea: pop     rsi
+0x1400010eb: pop     rdi
+0x1400010ec: pop     rbp
+0x1400010ed: pop     r12
+0x1400010ef: pop     r13
+0x1400010f1: pop     r14
+0x1400010f3: pop     r15
+0x1400010f5: retn
+0x1400010f6: align 20h
+0x140001100: mov     r14d, 1
+0x140001106: jmp     loc_14000105C
+0x14000110b: align 10h
+0x140001110: mov     dword ptr [rbp+0], 1
+0x140001117: call    sub_1400018D0
+0x14000111c: lea     rcx, sub_140001CB0
+0x140001123: call    sub_14000ED64
+0x140001128: imul    ecx, [rax-75h], 15h
+0x14000112c: xor     [rbx], dh
+0x14000112e: dw 0
+0x140001130: dq 48FFFFFEC90D8D48h, 0E800001651E80289h, 0E5058B4800000FDCh
+0x140001310: mov     [rsp+98h+var_5C], eax
+0x140001314: call    sub_140002750
+0x140001319: mov     eax, [rsp+98h+var_5C]
+0x14000131d: jmp     loc_1400010E5
+0x140001322: align 8
+0x140001328: xor     eax, eax
+0x14000132a: xchg    rax, [rbx]
+0x14000132d: jmp     loc_14000108D
+0x140001332: align 8
+0x140001338: dq 1436E800000002B9h, 4BFFFFFE9CE90000h, 0C74800E5448Dh
+0x1400013c8: mov     ecx, 1Fh
+0x1400013cd: call    sub_140002670
+0x1400013d2: mov     ecx, eax
+0x1400013d4: call    sub_1400027A0
+0x1400013d9: nop

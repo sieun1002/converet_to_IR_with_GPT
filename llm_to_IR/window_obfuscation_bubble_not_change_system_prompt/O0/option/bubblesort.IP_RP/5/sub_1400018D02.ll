@@ -1,0 +1,399 @@
+; ModuleID = 'sub_1400018D0'
+source_filename = "sub_1400018D0"
+target triple = "x86_64-pc-windows-msvc"
+
+declare i32 @sub_1400022D0()
+declare void @sub_140002520(i64)
+declare void @sub_140001760(i8*)
+declare void @sub_1400027B8(i8*, i8*, i32)
+declare void @sub_140001700(i8*, ...)
+
+@dword_1400070A0 = external global i32
+@dword_1400070A4 = external global i32
+@qword_1400070A8 = external global i8*
+@off_1400043D0 = external global i8*
+@off_1400043E0 = external global i8*
+@off_1400043C0 = external global i8*
+@aUnknownPseudoR = external global i8
+@aDBitPseudoRelo = external global i8
+@aUnknownPseudoR_0 = external global i8
+
+define dso_local void @sub_1400018D0() {
+entry:
+  %esi.slot = alloca i32, align 4
+  %rbx.slot = alloca i8*, align 8
+  %rdi.slot = alloca i8*, align 8
+  %r14.slot = alloca i8*, align 8
+  %r15.slot = alloca i8*, align 8
+  %r12.slot = alloca i8*, align 8
+  %r13.slot = alloca i8*, align 8
+  %var48.slot = alloca i64, align 8
+  %var60.slot = alloca i64, align 8
+
+  %esi.init = load i32, i32* @dword_1400070A0
+  store i32 %esi.init, i32* %esi.slot
+  %esi.zero = icmp eq i32 %esi.init, 0
+  br i1 %esi.zero, label %loc_140001900, label %loc_1400018EF
+
+loc_1400018EF:                                         ; return path
+  ret void
+
+loc_140001900:
+  store i32 1, i32* @dword_1400070A0
+  %call.sub_1400022D0 = call i32 @sub_1400022D0()
+  %n64 = sext i32 %call.sub_1400022D0 to i64
+  %mul5 = mul i64 %n64, 5
+  %mul40 = mul i64 %mul5, 8
+  %add15 = add i64 %mul40, 15
+  %align16 = and i64 %add15, -16
+  call void @sub_140002520(i64 %align16)
+  %dyn = alloca i8, i64 %align16, align 16
+  %endptr = load i8*, i8** @off_1400043D0
+  store i8* %endptr, i8** %rdi.slot
+  %startptr = load i8*, i8** @off_1400043E0
+  store i8* %startptr, i8** %rbx.slot
+  store i32 0, i32* @dword_1400070A4
+  %dyn.base = getelementptr i8, i8* %dyn, i64 0
+  store i8* %dyn.base, i8** @qword_1400070A8
+  %rdi.ld = load i8*, i8** %rdi.slot
+  %rbx.ld = load i8*, i8** %rbx.slot
+  %rdi.int = ptrtoint i8* %rdi.ld to i64
+  %rbx.int = ptrtoint i8* %rbx.ld to i64
+  %diff = sub i64 %rdi.int, %rbx.int
+  %cmp.le7 = icmp sle i64 %diff, 7
+  br i1 %cmp.le7, label %loc_1400018EF, label %cmp.gt11
+
+cmp.gt11:
+  %cmp.g11 = icmp sgt i64 %diff, 11
+  br i1 %cmp.g11, label %loc_140001AE8, label %loc_140001963
+
+; small protocol header checks
+loc_140001963:
+  %rbx.s1 = load i8*, i8** %rbx.slot
+  %p32.rbx = bitcast i8* %rbx.s1 to i32*
+  %edx.head = load i32, i32* %p32.rbx
+  %tst1 = icmp ne i32 %edx.head, 0
+  br i1 %tst1, label %loc_140001AFD, label %sp.chk2
+
+sp.chk2:
+  %rbx.plus4 = getelementptr i8, i8* %rbx.s1, i64 4
+  %p32.rbx4 = bitcast i8* %rbx.plus4 to i32*
+  %eax.head = load i32, i32* %p32.rbx4
+  %tst2 = icmp ne i32 %eax.head, 0
+  br i1 %tst2, label %loc_140001AFD, label %sp.chk3
+
+sp.chk3:
+  %rbx.plus8 = getelementptr i8, i8* %rbx.s1, i64 8
+  %p32.rbx8 = bitcast i8* %rbx.plus8 to i32*
+  %edx.ver = load i32, i32* %p32.rbx8
+  %ver.ne1 = icmp ne i32 %edx.ver, 1
+  br i1 %ver.ne1, label %loc_140001C53, label %sp.init
+
+; unknown pseudo relocation protocol version
+loc_140001C53:
+  %msg.proto = bitcast i8* @aUnknownPseudoR_0 to i8*
+  call void (i8*, ...) @sub_140001700(i8* %msg.proto)
+  br label %loc_1400018EF
+
+sp.init:
+  %rbx.afterHdr = getelementptr i8, i8* %rbx.s1, i64 12
+  store i8* %rbx.afterHdr, i8** %rbx.slot
+  %base.load = load i8*, i8** @off_1400043C0
+  store i8* %base.load, i8** %r14.slot
+  %var48.as.i8 = bitcast i64* %var48.slot to i8*
+  store i8* %var48.as.i8, i8** %r12.slot
+  %rdi.cur = load i8*, i8** %rdi.slot
+  %rbx.cur = load i8*, i8** %rbx.slot
+  %cmp.jb = icmp ult i8* %rbx.cur, %rdi.cur
+  br i1 %cmp.jb, label %loc_140001A14, label %loc_1400018EF
+
+; small protocol per-record
+loc_140001A14:
+  %rbx.rec = load i8*, i8** %rbx.slot
+  %p32.rbx0 = bitcast i8* %rbx.rec to i32*
+  %r8d = load i32, i32* %p32.rbx0
+  %rbx.rec.plus8 = getelementptr i8, i8* %rbx.rec, i64 8
+  %p32.rbx8r = bitcast i8* %rbx.rec.plus8 to i32*
+  %ecx.bits = load i32, i32* %p32.rbx8r
+  %rbx.rec.plus4 = getelementptr i8, i8* %rbx.rec, i64 4
+  %p32.rbx4r = bitcast i8* %rbx.rec.plus4 to i32*
+  %r15d = load i32, i32* %p32.rbx4r
+  %r14.base = load i8*, i8** %r14.slot
+  %r8.sext = sext i32 %r8d to i64
+  %r8.ptr = getelementptr i8, i8* %r14.base, i64 %r8.sext
+  %cl.tr = trunc i32 %ecx.bits to i8
+  %edx.z = zext i8 %cl.tr to i32
+  %r9.ptr64 = bitcast i8* %r8.ptr to i64*
+  %r9.val = load i64, i64* %r9.ptr64
+  %r15.sext = sext i32 %r15d to i64
+  %r15.ptr = getelementptr i8, i8* %r14.base, i64 %r15.sext
+  store i8* %r15.ptr, i8** %r15.slot
+  %cmp.eq32 = icmp eq i32 %edx.z, 32
+  br i1 %cmp.eq32, label %loc_140001B60, label %after32
+
+after32:
+  %cmp.le32 = icmp ule i32 %edx.z, 32
+  br i1 %cmp.le32, label %loc_1400019A0, label %check64
+
+check64:
+  %cmp.eq64 = icmp eq i32 %edx.z, 64
+  br i1 %cmp.eq64, label %loc_140001A42, label %loc_140001C2B
+
+; dispatch for <=32
+loc_1400019A0:
+  %is8 = icmp eq i32 %edx.z, 8
+  br i1 %is8, label %loc_140001BC8, label %chk16
+
+chk16:
+  %is16 = icmp eq i32 %edx.z, 16
+  br i1 %is16, label %loc_1400019B2, label %loc_140001C2B
+
+; 16-bit case
+loc_1400019B2:
+  %r15.p = load i8*, i8** %r15.slot
+  %p16.r15 = bitcast i8* %r15.p to i16*
+  %w16 = load i16, i16* %p16.r15
+  %w64 = sext i16 %w16 to i64
+  %r8.int = ptrtoint i8* %r8.ptr to i64
+  %t.sub = sub i64 %w64, %r8.int
+  %rax.new = add i64 %t.sub, %r9.val
+  %mask = and i32 %ecx.bits, 192
+  store i64 %rax.new, i64* %var48.slot
+  %mask.nz = icmp ne i32 %mask, 0
+  br i1 %mask.nz, label %loc_1400019EB, label %loc_1400019D3
+
+loc_1400019D3:
+  %gtFFFF = icmp sgt i64 %rax.new, 65535
+  %ltMIN = icmp slt i64 %rax.new, -32768
+  %o.chk = or i1 %gtFFFF, %ltMIN
+  br i1 %o.chk, label %store_rax_16, label %loc_1400019EB
+
+store_rax_16:
+  store i64 %rax.new, i64* %var60.slot
+  br label %loc_140001C3F
+
+loc_1400019EB:
+  %r15.p1 = load i8*, i8** %r15.slot
+  call void @sub_140001760(i8* %r15.p1)
+  %r12.p = load i8*, i8** %r12.slot
+  call void @sub_1400027B8(i8* %r15.p1, i8* %r12.p, i32 2)
+  br label %loc_140001AB0
+
+; 64-bit case
+loc_140001A42:
+  %r15.p2 = load i8*, i8** %r15.slot
+  %p64.r15 = bitcast i8* %r15.p2 to i64*
+  %q64 = load i64, i64* %p64.r15
+  %r8.int2 = ptrtoint i8* %r8.ptr to i64
+  %t.sub2 = sub i64 %q64, %r8.int2
+  %rax64 = add i64 %t.sub2, %r9.val
+  %mask2 = and i32 %ecx.bits, 192
+  store i64 %rax64, i64* %var48.slot
+  %mask2.nz = icmp ne i32 %mask2, 0
+  br i1 %mask2.nz, label %loc_140001A60, label %loc_140001A57
+
+loc_140001A57:
+  %nonneg = icmp sge i64 %rax64, 0
+  br i1 %nonneg, label %store_rax_64, label %loc_140001A60
+
+store_rax_64:
+  store i64 %rax64, i64* %var60.slot
+  br label %loc_140001C3F
+
+loc_140001A60:
+  %rbx.cur2 = load i8*, i8** %rbx.slot
+  %rbx.nxt = getelementptr i8, i8* %rbx.cur2, i64 12
+  store i8* %rbx.nxt, i8** %rbx.slot
+  %r15.p3 = load i8*, i8** %r15.slot
+  call void @sub_140001760(i8* %r15.p3)
+  %r12.p2 = load i8*, i8** %r12.slot
+  call void @sub_1400027B8(i8* %r15.p3, i8* %r12.p2, i32 8)
+  br label %loc_140001AB0
+
+; 32-bit case
+loc_140001B60:
+  %r15.p4 = load i8*, i8** %r15.slot
+  %p32.r15 = bitcast i8* %r15.p4 to i32*
+  %d32 = load i32, i32* %p32.r15
+  %d64 = sext i32 %d32 to i64
+  %r8.int3 = ptrtoint i8* %r8.ptr to i64
+  %t.sub3 = sub i64 %d64, %r8.int3
+  %rax32 = add i64 %t.sub3, %r9.val
+  %mask3 = and i32 %ecx.bits, 192
+  store i64 %rax32, i64* %var48.slot
+  %mask3.nz = icmp ne i32 %mask3, 0
+  br i1 %mask3.nz, label %loc_140001BA0, label %loc_140001B86
+
+loc_140001B86:
+  %gtMax = icmp sgt i64 %rax32, 4294967295
+  %ltMin = icmp slt i64 %rax32, -2147483648
+  %o.chk2 = or i1 %gtMax, %ltMin
+  br i1 %o.chk2, label %store_rax_32, label %loc_140001BA0
+
+store_rax_32:
+  store i64 %rax32, i64* %var60.slot
+  br label %loc_140001C3F
+
+loc_140001BA0:
+  %r15.p5 = load i8*, i8** %r15.slot
+  call void @sub_140001760(i8* %r15.p5)
+  %r12.p3 = load i8*, i8** %r12.slot
+  call void @sub_1400027B8(i8* %r15.p5, i8* %r12.p3, i32 4)
+  br label %loc_140001AB0
+
+; 8-bit case
+loc_140001BC8:
+  %r15.p6 = load i8*, i8** %r15.slot
+  %b8 = load i8, i8* %r15.p6
+  %b64 = sext i8 %b8 to i64
+  %r8.int4 = ptrtoint i8* %r8.ptr to i64
+  %t.sub4 = sub i64 %b64, %r8.int4
+  %rax8 = add i64 %t.sub4, %r9.val
+  %mask4 = and i32 %ecx.bits, 192
+  store i64 %rax8, i64* %var48.slot
+  %mask4.nz = icmp ne i32 %mask4, 0
+  br i1 %mask4.nz, label %loc_140001BF6, label %loc_140001BE8
+
+loc_140001BE8:
+  %gtFF = icmp sgt i64 %rax8, 255
+  %ltN80 = icmp slt i64 %rax8, -128
+  %o.chk3 = or i1 %gtFF, %ltN80
+  br i1 %o.chk3, label %store_rax_8, label %loc_140001BF6
+
+store_rax_8:
+  store i64 %rax8, i64* %var60.slot
+  br label %loc_140001C3F
+
+loc_140001BF6:
+  %r15.p7 = load i8*, i8** %r15.slot
+  call void @sub_140001760(i8* %r15.p7)
+  %r12.p4 = load i8*, i8** %r12.slot
+  call void @sub_1400027B8(i8* %r15.p7, i8* %r12.p4, i32 1)
+  br label %loc_140001AB0
+
+; unknown pseudo relocation bit size
+loc_140001C2B:
+  %msg.bits = bitcast i8* @aUnknownPseudoR to i8*
+  store i64 0, i64* %var48.slot
+  call void (i8*, ...) @sub_140001700(i8* %msg.bits)
+  br label %loc_1400018EF
+
+; callback loop
+loc_140001AB0:
+  %r12.cur = load i8*, i8** %r12.slot
+  store i8* %r12.cur, i8** %r13.slot
+  %base.ptr = load i8*, i8** @qword_1400070A8
+  %rbx.cur3 = load i8*, i8** %rbx.slot
+  %rbx.off = ptrtoint i8* %rbx.cur3 to i64
+  %ax.ptr = getelementptr i8, i8* %base.ptr, i64 %rbx.off
+  %p.flag = bitcast i8* %ax.ptr to i32*
+  %flag = load i32, i32* %p.flag
+  %flag.zero = icmp eq i32 %flag, 0
+  br i1 %flag.zero, label %loc_140001ACF, label %loc_140001AC2
+
+loc_140001AC2:
+  %p.rcx = getelementptr i8, i8* %ax.ptr, i64 8
+  %rcx.p = bitcast i8* %p.rcx to i8**
+  %rcx.arg = load i8*, i8** %rcx.p
+  %p.rdx = getelementptr i8, i8* %ax.ptr, i64 16
+  %rdx.p = bitcast i8* %p.rdx to i8**
+  %rdx.arg = load i8*, i8** %rdx.p
+  %rdi.funptr = load i8*, i8** %rdi.slot
+  %fun = bitcast i8* %rdi.funptr to void (i8*, i8*, i32, i8*)*
+  %r13.cur = load i8*, i8** %r13.slot
+  call void %fun(i8* %rcx.arg, i8* %rdx.arg, i32 %flag, i8* %r13.cur)
+  br label %loc_140001ACF
+
+loc_140001ACF:
+  %esi.l = load i32, i32* %esi.slot
+  %esi.inc = add i32 %esi.l, 1
+  store i32 %esi.inc, i32* %esi.slot
+  %rbx.cur4 = load i8*, i8** %rbx.slot
+  %rbx.nxt28 = getelementptr i8, i8* %rbx.cur4, i64 40
+  store i8* %rbx.nxt28, i8** %rbx.slot
+  %limit.es = load i32, i32* @dword_1400070A4
+  %cmp.es = icmp slt i32 %esi.inc, %limit.es
+  br i1 %cmp.es, label %loc_140001AB0, label %loc_1400018EF
+
+; large protocol entry
+loc_140001AE8:
+  %rbx.lp = load i8*, i8** %rbx.slot
+  %p32.rbx.lp = bitcast i8* %rbx.lp to i32*
+  %r9d.h = load i32, i32* %p32.rbx.lp
+  %r9d.nz = icmp ne i32 %r9d.h, 0
+  br i1 %r9d.nz, label %loc_140001AFD, label %loc_140001AF0
+
+loc_140001AF0:
+  %rbx.lp.plus4 = getelementptr i8, i8* %rbx.lp, i64 4
+  %p32.rbx.lp4 = bitcast i8* %rbx.lp.plus4 to i32*
+  %r8d.h = load i32, i32* %p32.rbx.lp4
+  %r8d.nz = icmp ne i32 %r8d.h, 0
+  br i1 %r8d.nz, label %loc_140001AFD, label %loc_140001C17
+
+loc_140001AFD:
+  %rbx.c = load i8*, i8** %rbx.slot
+  %rdi.c = load i8*, i8** %rdi.slot
+  %jnb = icmp uge i8* %rbx.c, %rdi.c
+  br i1 %jnb, label %loc_1400018EF, label %loc_140001B06
+
+loc_140001B06:
+  %base.l = load i8*, i8** @off_1400043C0
+  store i8* %base.l, i8** %r14.slot
+  %var48.i8 = bitcast i64* %var48.slot to i8*
+  store i8* %var48.i8, i8** %r13.slot
+  br label %loc_140001B20
+
+loc_140001B20:
+  %rbx.loop = load i8*, i8** %rbx.slot
+  %p32.rbx.l4 = getelementptr i8, i8* %rbx.loop, i64 4
+  %p32.rbx.l4.cast = bitcast i8* %p32.rbx.l4 to i32*
+  %r12d.v = load i32, i32* %p32.rbx.l4.cast
+  %rbx.loop.cast = bitcast i8* %rbx.loop to i32*
+  %eax.v = load i32, i32* %rbx.loop.cast
+  %rbx.loop.nxt = getelementptr i8, i8* %rbx.loop, i64 8
+  store i8* %rbx.loop.nxt, i8** %rbx.slot
+  %r14.b = load i8*, i8** %r14.slot
+  %r12.se = sext i32 %r12d.v to i64
+  %mem.ptr = getelementptr i8, i8* %r14.b, i64 %r12.se
+  %mem.i32p = bitcast i8* %mem.ptr to i32*
+  %mem.v = load i32, i32* %mem.i32p
+  %sum.v = add i32 %eax.v, %mem.v
+  %sum64.v = sext i32 %sum.v to i64
+  store i64 %sum64.v, i64* %var48.slot
+  call void @sub_140001760(i8* %mem.ptr)
+  %r13.p = load i8*, i8** %r13.slot
+  call void @sub_1400027B8(i8* %mem.ptr, i8* %r13.p, i32 4)
+  %rbx.loop.cur = load i8*, i8** %rbx.slot
+  %rdi.loop.cur = load i8*, i8** %rdi.slot
+  %cont = icmp ult i8* %rbx.loop.cur, %rdi.loop.cur
+  br i1 %cont, label %loc_140001B20, label %loc_1400018EF
+
+loc_140001C17:
+  %rbx.c2 = load i8*, i8** %rbx.slot
+  %rbx.c2.plus8 = getelementptr i8, i8* %rbx.c2, i64 8
+  %p32.rbx.c2.p8 = bitcast i8* %rbx.c2.plus8 to i32*
+  %ecx.c2 = load i32, i32* %p32.rbx.c2.p8
+  %ecx.nz = icmp ne i32 %ecx.c2, 0
+  br i1 %ecx.nz, label %loc_140001978, label %loc_140001C22
+
+loc_140001C22:
+  %rbx.addC = getelementptr i8, i8* %rbx.c2, i64 12
+  store i8* %rbx.addC, i8** %rbx.slot
+  br label %loc_140001963
+
+loc_140001978:
+  %rbx.p3 = load i8*, i8** %rbx.slot
+  %rbx.p3.plus8 = getelementptr i8, i8* %rbx.p3, i64 8
+  %p32.rbx.p3.p8 = bitcast i8* %rbx.p3.plus8 to i32*
+  %edx.v3 = load i32, i32* %p32.rbx.p3.p8
+  %edx.v3.ne1 = icmp ne i32 %edx.v3, 1
+  br i1 %edx.v3.ne1, label %loc_140001C53, label %sp.init
+
+; out-of-range error reporting
+loc_140001C3F:
+  %err.val = load i64, i64* %var60.slot
+  %r15.err = load i8*, i8** %r15.slot
+  %msg.range = bitcast i8* @aDBitPseudoRelo to i8*
+  call void (i8*, ...) @sub_140001700(i8* %msg.range, i64 %err.val, i8* %r15.err)
+  br label %loc_1400018EF
+}

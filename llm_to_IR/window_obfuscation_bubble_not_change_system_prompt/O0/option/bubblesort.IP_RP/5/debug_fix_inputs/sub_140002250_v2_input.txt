@@ -1,0 +1,87 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/5/sub_1400022501.ll:16:47: error: invalid use of function-local name
+;   %e_lfanew_i32 = load i32, i32* bitcast (i8* %base_plus_3c to i32*), align 1
+;                                               ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_140002250'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043C0 = external dso_local global i8*, align 8
+
+define dso_local i32 @sub_140002250(i8* %arg) local_unnamed_addr {
+entry:
+  %base_ptr = load i8*, i8** @off_1400043C0, align 8
+  %base_i16ptr = bitcast i8* %base_ptr to i16*
+  %mz = load i16, i16* %base_i16ptr, align 1
+  %cmp_mz = icmp eq i16 %mz, 23117
+  br i1 %cmp_mz, label %check_pe, label %ret0
+
+check_pe:
+  %base_plus_3c = getelementptr i8, i8* %base_ptr, i64 60
+  %e_lfanew_i32 = load i32, i32* bitcast (i8* %base_plus_3c to i32*), align 1
+  %e_lfanew_i64 = sext i32 %e_lfanew_i32 to i64
+  %pe_hdr = getelementptr i8, i8* %base_ptr, i64 %e_lfanew_i64
+  %pe_sig_ptr = bitcast i8* %pe_hdr to i32*
+  %pe_sig = load i32, i32* %pe_sig_ptr, align 1
+  %is_pe = icmp eq i32 %pe_sig, 17744
+  br i1 %is_pe, label %check_opt, label %ret0
+
+check_opt:
+  %opt_magic_ptr_i8 = getelementptr i8, i8* %pe_hdr, i64 24
+  %opt_magic_ptr = bitcast i8* %opt_magic_ptr_i8 to i16*
+  %opt_magic = load i16, i16* %opt_magic_ptr, align 1
+  %is_pe32plus = icmp eq i16 %opt_magic, 523
+  br i1 %is_pe32plus, label %load_sections, label %ret0
+
+load_sections:
+  %numsec_ptr_i8 = getelementptr i8, i8* %pe_hdr, i64 6
+  %numsec_ptr = bitcast i8* %numsec_ptr_i8 to i16*
+  %numsec = load i16, i16* %numsec_ptr, align 1
+  %numsec_zero = icmp eq i16 %numsec, 0
+  br i1 %numsec_zero, label %ret0, label %cont1
+
+cont1:
+  %opthdr_size_ptr_i8 = getelementptr i8, i8* %pe_hdr, i64 20
+  %opthdr_size_ptr = bitcast i8* %opthdr_size_ptr_i8 to i16*
+  %opthdr_size16 = load i16, i16* %opthdr_size_ptr, align 1
+  %arg_int = ptrtoint i8* %arg to i64
+  %base_int = ptrtoint i8* %base_ptr to i64
+  %rva = sub i64 %arg_int, %base_int
+  %n64 = zext i16 %numsec to i64
+  %opthdr_zext = zext i16 %opthdr_size16 to i64
+  %sect0_off = add i64 %opthdr_zext, 24
+  %sect0_ptr = getelementptr i8, i8* %pe_hdr, i64 %sect0_off
+  %n_mul_40 = mul i64 %n64, 40
+  %end_ptr = getelementptr i8, i8* %sect0_ptr, i64 %n_mul_40
+  br label %loop
+
+loop:
+  %cur_phi = phi i8* [ %sect0_ptr, %cont1 ], [ %next_ptr, %advance ]
+  %va_ptr_i8 = getelementptr i8, i8* %cur_phi, i64 12
+  %va_ptr = bitcast i8* %va_ptr_i8 to i32*
+  %va32 = load i32, i32* %va_ptr, align 1
+  %va64 = zext i32 %va32 to i64
+  %rva_lt_va = icmp ult i64 %rva, %va64
+  br i1 %rva_lt_va, label %advance, label %check_in
+
+check_in:
+  %vsize_ptr_i8 = getelementptr i8, i8* %cur_phi, i64 8
+  %vsize_ptr = bitcast i8* %vsize_ptr_i8 to i32*
+  %vsize32 = load i32, i32* %vsize_ptr, align 1
+  %end_va32 = add i32 %va32, %vsize32
+  %end_va64 = zext i32 %end_va32 to i64
+  %in_section = icmp ult i64 %rva, %end_va64
+  br i1 %in_section, label %ret0, label %advance
+
+advance:
+  %next_ptr = getelementptr i8, i8* %cur_phi, i64 40
+  %done = icmp eq i8* %next_ptr, %end_ptr
+  br i1 %done, label %final, label %loop
+
+final:
+  br label %ret0
+
+ret0:
+  ret i32 0
+}

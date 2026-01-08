@@ -1,0 +1,364 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+declare i8* @_set_invalid_parameter_handler(i8*)
+declare void @sub_140002120()
+declare void @_set_app_type(i32)
+declare i32* @__p__fmode()
+declare i32* @__p__commode()
+declare i32 @sub_140001540()
+declare i32 @_initterm_e(i8**, i8**)
+declare i32 @sub_1400026A0(i32*, i8***, i8**, i32, i32*)
+declare i8* @malloc(i64)
+declare i8* @memcpy(i8*, i8*, i64)
+declare i64 @strlen(i8*)
+declare i32 @sub_140002670(i32)
+declare void @_cexit()
+declare i32 @_configthreadlocale(i32)
+declare void @sub_140001CA0(i8*)
+declare void @_initterm(i8**, i8**)
+declare void @sub_140001520()
+declare void @exit(i32) noreturn
+declare void @sub_1400018D0()
+declare i32 @sub_140002880(i32, i8**)
+declare i8** @sub_140002660()
+declare void @sub_140001600()
+declare i32 @TopLevelExceptionFilter(i8*)
+declare void @Handler()
+
+@__imp_Sleep = external dllimport global void (i32)*
+@__imp_SetUnhandledExceptionFilter = external dllimport global i8* (i8*)*
+
+@off_140004470 = external global i8**
+@off_140004480 = external global i32*
+@dword_140007004 = external global i32
+@off_1400043F0 = external global i8**
+@qword_140007010 = external global i8*
+@qword_140007018 = external global i8**
+@dword_140007020 = external global i32
+@dword_140007008 = external global i32
+@off_140004420 = external global i32*
+@off_140004460 = external global i8**
+@off_140004430 = external global i32*
+@off_140004440 = external global i32*
+@off_140004450 = external global i32*
+@off_1400043C0 = external global i8*
+@off_140004400 = external global i32*
+@First = external global i8**
+@Last = external global i8**
+@off_140004520 = external global i32*
+@off_1400044E0 = external global i32*
+@off_1400044F0 = external global i32*
+@off_1400044D0 = external global i32*
+@off_1400044A0 = external global i8**
+@off_140004490 = external global i8**
+@off_1400043A0 = external global i32*
+
+define void @sub_140001010() {
+entry:
+  %tebval = call i64 asm sideeffect "movq %gs:0x30, %rax; movq 8(%rax), %rax", "={rax}"()
+  %owner = inttoptr i64 %tebval to i8*
+  %lockslot = load i8**, i8*** @off_140004470
+  %sleep_fp = load void (i32)*, void (i32)** @__imp_Sleep
+  br label %lock_try
+
+lock_fail:                                         ; preds = %lock_try
+  %oldval = phi i8* [ %oldloaded, %lock_try ]
+  %eq = icmp eq i8* %oldval, %owner
+  br i1 %eq, label %owner_path, label %sleep_then
+
+sleep_then:                                        ; preds = %lock_fail
+  call void %sleep_fp(i32 1000)
+  br label %lock_try
+
+lock_try:                                          ; preds = %sleep_then, %entry
+  %cmpx = cmpxchg i8** %lockslot, i8* null, i8* %owner seq_cst seq_cst
+  %oldloaded = extractvalue { i8*, i1 } %cmpx, 0
+  %success = extractvalue { i8*, i1 } %cmpx, 1
+  br i1 %success, label %after_lock, label %lock_fail
+
+owner_path:                                        ; preds = %lock_fail
+  br label %after_lock_with_r14
+
+after_lock:                                        ; preds = %lock_try
+  br label %after_lock_with_r14
+
+after_lock_with_r14:                               ; preds = %after_lock, %owner_path
+  %r14 = phi i32 [ 1, %owner_path ], [ 0, %after_lock ]
+  %rbp_ptr = load i32*, i32** @off_140004480
+  %state0 = load i32, i32* %rbp_ptr
+  %is1 = icmp eq i32 %state0, 1
+  br i1 %is1, label %loc_13C8, label %cont1
+
+loc_13C8:                                          ; preds = %after_lock_with_r14
+  %ec1 = call i32 @sub_140002670(i32 31)
+  call void @exit(i32 %ec1)
+  unreachable
+
+cont1:                                             ; preds = %after_lock_with_r14
+  %state1 = load i32, i32* %rbp_ptr
+  %is0 = icmp eq i32 %state1, 0
+  br i1 %is0, label %loc_1110, label %after_init_check
+
+loc_1110:                                          ; preds = %cont1
+  store i32 1, i32* %rbp_ptr
+  call void @sub_1400018D0()
+  %seh_imp = load i8* (i8*)*, i8* (i8*)** @__imp_SetUnhandledExceptionFilter
+  %tlev_fn = bitcast i32 (i8*)* @TopLevelExceptionFilter to i8*
+  %prev = call i8* %seh_imp(i8* %tlev_fn)
+  %prev_store_ptrptr = load i8**, i8*** @off_140004460
+  store i8* %prev, i8** %prev_store_ptrptr
+  %hndlr = bitcast void ()* @Handler to i8*
+  %oldh = call i8* @_set_invalid_parameter_handler(i8* %hndlr)
+  call void @sub_140002120()
+  %p1p = load i32*, i32** @off_140004430
+  store i32 1, i32* %p1p
+  %p2p = load i32*, i32** @off_140004440
+  store i32 1, i32* %p2p
+  %p3p = load i32*, i32** @off_140004450
+  store i32 1, i32* %p3p
+  %pebase = load i8*, i8** @off_1400043C0
+  %ecx0 = add i32 0, 0
+  %mzptr = bitcast i8* %pebase to i16*
+  %mz = load i16, i16* %mzptr
+  %is_mz = icmp eq i16 %mz, 23117
+  br i1 %is_mz, label %check_pe_sig, label %loc_1C0_pre
+
+check_pe_sig:                                      ; preds = %loc_1110
+  %p3c = getelementptr i8, i8* %pebase, i64 60
+  %e_lfanew_ptr = bitcast i8* %p3c to i32*
+  %e_lfanew = load i32, i32* %e_lfanew_ptr
+  %pehdr = getelementptr i8, i8* %pebase, i32 %e_lfanew
+  %sigptr = bitcast i8* %pehdr to i32*
+  %sig = load i32, i32* %sigptr
+  %is_pe = icmp eq i32 %sig, 17744
+  br i1 %is_pe, label %check_magic, label %loc_1C0_pre
+
+check_magic:                                       ; preds = %check_pe_sig
+  %p18 = getelementptr i8, i8* %pehdr, i64 24
+  %magicptr = bitcast i8* %p18 to i16*
+  %magic = load i16, i16* %magicptr
+  %is_10b = icmp eq i16 %magic, 267
+  br i1 %is_10b, label %case_10b, label %not_10b
+
+not_10b:                                           ; preds = %check_magic
+  %is_20b = icmp eq i16 %magic, 523
+  br i1 %is_20b, label %case_20b, label %loc_1C0_pre
+
+case_20b:                                          ; preds = %not_10b
+  %p84 = getelementptr i8, i8* %pehdr, i64 132
+  %off84ptr = bitcast i8* %p84 to i32*
+  %v84 = load i32, i32* %off84ptr
+  %gt14 = icmp ugt i32 %v84, 14
+  br i1 %gt14, label %read_20b_field, label %loc_1C0_pre
+
+read_20b_field:                                    ; preds = %case_20b
+  %pf8 = getelementptr i8, i8* %pehdr, i64 248
+  %f8ptr = bitcast i8* %pf8 to i32*
+  %r9d = load i32, i32* %f8ptr
+  %nz = icmp ne i32 %r9d, 0
+  %ecx_20b = zext i1 %nz to i32
+  br label %loc_1C0
+
+case_10b:                                          ; preds = %check_magic
+  %p74 = getelementptr i8, i8* %pehdr, i64 116
+  %off74ptr = bitcast i8* %p74 to i32*
+  %v74 = load i32, i32* %off74ptr
+  %gt14_32 = icmp ugt i32 %v74, 14
+  br i1 %gt14_32, label %read_10b_field, label %loc_1C0_pre
+
+read_10b_field:                                    ; preds = %case_10b
+  %pe8 = getelementptr i8, i8* %pehdr, i64 232
+  %e8ptr = bitcast i8* %pe8 to i32*
+  %r10d = load i32, i32* %e8ptr
+  %nz10 = icmp ne i32 %r10d, 0
+  %ecx_10b = zext i1 %nz10 to i32
+  br label %loc_1C0
+
+loc_1C0_pre:                                       ; preds = %case_20b, %not_10b, %check_pe_sig, %loc_1110, %case_10b
+  br label %loc_1C0
+
+loc_1C0:                                           ; preds = %read_10b_field, %read_20b_field, %loc_1C0_pre
+  %ecx_val = phi i32 [ %ecx0, %loc_1C0_pre ], [ %ecx_20b, %read_20b_field ], [ %ecx_10b, %read_10b_field ]
+  store i32 %ecx_val, i32* @dword_140007008, align 4
+  %pp = load i32*, i32** @off_140004420
+  %r8d_val = load i32, i32* %pp
+  %r8_nz = icmp ne i32 %r8d_val, 0
+  br i1 %r8_nz, label %loc_1338, label %loc_1D9
+
+loc_1338:                                          ; preds = %loc_1C0
+  call void @_set_app_type(i32 2)
+  br label %loc_1E3
+
+loc_1D9:                                           ; preds = %loc_1C0
+  call void @_set_app_type(i32 1)
+  br label %loc_1E3
+
+loc_1E3:                                           ; preds = %loc_1D9, %loc_1338
+  %pfmode = call i32* @__p__fmode()
+  %pfm_srcp = load i32*, i32** @off_1400044F0
+  %fmv = load i32, i32* %pfm_srcp
+  store i32 %fmv, i32* %pfmode
+  %pcommode = call i32* @__p__commode()
+  %pcm_srcp = load i32*, i32** @off_1400044D0
+  %cmv = load i32, i32* %pcm_srcp
+  store i32 %cmv, i32* %pcommode
+  %ret1540 = call i32 @sub_140001540()
+  %neg = icmp slt i32 %ret1540, 0
+  br i1 %neg, label %loc_1301, label %loc_1210
+
+loc_1210:                                          ; preds = %loc_1E3
+  %p3a0 = load i32*, i32** @off_1400043A0
+  %val3a0 = load i32, i32* %p3a0
+  %eq1 = icmp eq i32 %val3a0, 1
+  br i1 %eq1, label %loc_1399, label %loc_1220
+
+loc_1399:                                          ; preds = %loc_1210
+  %fn1600 = bitcast void ()* @sub_140001600 to i8*
+  call void @sub_140001CA0(i8* %fn1600)
+  br label %loc_1220
+
+loc_1220:                                          ; preds = %loc_1399, %loc_1210
+  %p0400 = load i32*, i32** @off_140004400
+  %v0400 = load i32, i32* %p0400
+  %is_m1 = icmp eq i32 %v0400, -1
+  br i1 %is_m1, label %loc_138A, label %loc_1230
+
+loc_138A:                                          ; preds = %loc_1220
+  %ct = call i32 @_configthreadlocale(i32 -1)
+  br label %loc_1230
+
+loc_1230:                                          ; preds = %loc_138A, %loc_1220
+  %Lastp = load i8**, i8*** @Last
+  %Firstp = load i8**, i8*** @First
+  %ret_ite = call i32 @_initterm_e(i8** %Firstp, i8** %Lastp)
+  %nz_ite = icmp ne i32 %ret_ite, 0
+  br i1 %nz_ite, label %loc_1380, label %loc_124b
+
+loc_1380:                                          ; preds = %loc_1230
+  ret void
+
+loc_124b:                                          ; preds = %loc_1230
+  %p0520 = load i32*, i32** @off_140004520
+  %val52 = load i32, i32* %p0520
+  %var4C = alloca i32, align 4
+  store i32 %val52, i32* %var4C
+  %p04E0 = load i32*, i32** @off_1400044E0
+  %r9 = load i32, i32* %p04E0
+  %addr_q18 = getelementptr i8**, i8*** @qword_140007018, i64 0
+  %addr_d20 = getelementptr i32, i32* @dword_140007020, i64 0
+  %addr_q10 = getelementptr i8*, i8** @qword_140007010, i64 0
+  %ret26A0 = call i32 @sub_1400026A0(i32* %addr_d20, i8*** %addr_q18, i8** %addr_q10, i32 %r9, i32* %var4C)
+  %neg26 = icmp slt i32 %ret26A0, 0
+  br i1 %neg26, label %loc_1301, label %loc_28a
+
+loc_28a:                                          ; preds = %loc_124b
+  %count = load i32, i32* @dword_140007020
+  %r12 = sext i32 %count to i64
+  %r12p1 = add i64 %r12, 1
+  %size = shl i64 %r12p1, 3
+  %arr = call i8* @malloc(i64 %size)
+  %r13 = bitcast i8* %arr to i8**
+  %nullarr = icmp eq i8* %arr, null
+  br i1 %nullarr, label %loc_1301, label %after_alloc
+
+after_alloc:                                       ; preds = %loc_28a
+  %r12le0 = icmp sle i32 %count, 0
+  br i1 %r12le0, label %loc_134c, label %init_loop
+
+init_loop:                                         ; preds = %copy_done, %after_alloc
+  %i = phi i64 [ 1, %after_alloc ], [ %i_next, %copy_done ]
+  %r15 = load i8**, i8*** @qword_140007018
+  %idxm1 = sub i64 %i, 1
+  %srcptrptr = getelementptr i8*, i8** %r15, i64 %idxm1
+  %srcptr = load i8*, i8** %srcptrptr
+  %len = call i64 @strlen(i8* %srcptr)
+  %di = add i64 %len, 1
+  %dest = call i8* @malloc(i64 %di)
+  %dstptrptr = getelementptr i8*, i8** %r13, i64 %idxm1
+  store i8* %dest, i8** %dstptrptr
+  %dest_null = icmp eq i8* %dest, null
+  br i1 %dest_null, label %loc_1301, label %copy
+
+copy:                                              ; preds = %init_loop
+  %ignored = call i8* @memcpy(i8* %dest, i8* %srcptr, i64 %di)
+  %i64count = sext i32 %count to i64
+  %is_last = icmp eq i64 %i64count, %i
+  br i1 %is_last, label %loc_1347, label %copy_done
+
+copy_done:                                         ; preds = %copy
+  %i_next = add i64 %i, 1
+  br label %init_loop
+
+loc_1347:                                          ; preds = %copy
+  %endptrptr = getelementptr i8*, i8** %r13, i64 %i64count
+  br label %loc_134c
+
+loc_134c:                                          ; preds = %after_alloc, %loc_1347
+  %endptrphi = phi i8** [ %endptrptr, %loc_1347 ], [ %r13, %after_alloc ]
+  store i8* null, i8** %endptrphi
+  %lastarrp = load i8**, i8*** @off_1400044A0
+  %firstarrp = load i8**, i8*** @off_140004490
+  store i8** %r13, i8*** @qword_140007018
+  call void @_initterm(i8** %firstarrp, i8** %lastarrp)
+  call void @sub_140001520()
+  store i32 2, i32* %rbp_ptr
+  br label %loc_1084
+
+loc_1084:                                          ; preds = %loc_134c
+  %r14_is_zero = icmp eq i32 %r14, 0
+  br i1 %r14_is_zero, label %loc_1328, label %loc_108d
+
+loc_1328:                                          ; preds = %loc_1084
+  store atomic i8* null, i8** %lockslot release, align 8
+  br label %loc_108d
+
+loc_108d:                                          ; preds = %loc_1328, %loc_1084
+  %p043F0 = load i8**, i8*** @off_1400043F0
+  %fnptr = load i8*, i8** %p043F0
+  %fn_is_null = icmp eq i8* %fnptr, null
+  br i1 %fn_is_null, label %call_2660, label %call_cb
+
+call_cb:                                           ; preds = %loc_108d
+  %cb = bitcast i8* %fnptr to void (i32, i32, i32)*
+  call void %cb(i32 0, i32 2, i32 0)
+  br label %call_2660
+
+call_2660:                                         ; preds = %call_cb, %loc_108d
+  %box = call i8** @sub_140002660()
+  %val010 = load i8*, i8** @qword_140007010
+  store i8* %val010, i8** %box
+  %ecount = load i32, i32* @dword_140007020
+  %vec = load i8**, i8*** @qword_140007018
+  %ret2880 = call i32 @sub_140002880(i32 %ecount, i8** %vec)
+  %flag = load i32, i32* @dword_140007008
+  %flag_zero = icmp eq i32 %flag, 0
+  br i1 %flag_zero, label %loc_13D2, label %loc_10d7
+
+loc_13D2:                                          ; preds = %call_2660
+  call void @exit(i32 %ret2880)
+  unreachable
+
+loc_10d7:                                          ; preds = %call_2660
+  %edxv = load i32, i32* @dword_140007004
+  %iszero = icmp eq i32 %edxv, 0
+  br i1 %iszero, label %loc_1310, label %retpath
+
+loc_1310:                                          ; preds = %loc_10d7
+  %ecxcode = call i32 @sub_140002670(i32 8)
+  %var5C = alloca i32, align 4
+  store i32 %ecxcode, i32* %var5C
+  call void @_cexit()
+  %rv = load i32, i32* %var5C
+  br label %retpath
+
+after_init_check:                                  ; preds = %cont1
+  store i32 1, i32* @dword_140007004
+  br label %loc_1084
+
+loc_1301:                                          ; preds = %after_alloc, %loc_28a, %loc_124b, %loc_1E3
+  br label %retpath
+
+retpath:                                           ; preds = %loc_1310, %loc_10d7, %loc_1301
+  ret void
+}

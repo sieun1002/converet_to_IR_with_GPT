@@ -1,0 +1,46 @@
+; Function: sub_140002880
+; Start: 0x140002880, End: 0x140002952
+
+0x140002880: push    rsi
+0x140002881: push    rbx
+0x140002882: sub     rsp, 58h
+0x140002886: call    sub_140001520
+0x14000288b: movdqu  xmm0, cs:xmmword_140004010
+0x140002893: mov     [rsp+68h+var_28], 4
+0x14000289c: mov     r9d, 0Ah
+0x1400028a2: movups  [rsp+68h+var_48], xmm0
+0x1400028a7: movdqu  xmm0, cs:xmmword_140004020
+0x1400028af: movups  [rsp+68h+var_38], xmm0
+0x1400028b4: nop
+0x1400028b5: nop     word ptr [rax+rax+00000000h]
+0x1400028c0: lea     rbx, [rsp+68h+var_48]
+0x1400028c5: xor     r10d, r10d
+0x1400028c8: mov     eax, 1
+0x1400028cd: mov     rdx, rbx
+0x1400028d0: nop     dword ptr [rax+00h]
+0x1400028d4: nop     word ptr [rax+rax+00000000h]
+0x1400028df: nop     word ptr [rax+rax+00000000h]
+0x1400028ea: nop     word ptr [rax+rax+00000000h]
+0x1400028f5: nop     word ptr [rax+rax+00000000h]
+0x140002900: movq    xmm0, qword ptr [rdx]
+0x140002904: pshufd  xmm1, xmm0, 0E5h
+0x140002909: movd    ecx, xmm0
+0x14000290d: movd    r8d, xmm1
+0x140002912: cmp     r8d, ecx
+0x140002915: jge     short loc_140002923
+0x140002917: pshufd  xmm0, xmm0, 0E1h
+0x14000291c: mov     r10, rax
+0x14000291f: movq    qword ptr [rdx], xmm0
+0x140002923: add     rax, 1
+0x140002927: add     rdx, 4
+0x14000292b: cmp     rax, r9
+0x14000292e: jnz     short loc_140002900
+0x140002930: cmp     r10, 1
+0x140002934: jbe     short loc_14000293B
+0x140002936: mov     r9, r10
+0x140002939: jmp     short loc_1400028C0
+0x14000293b: lea     rsi, [rsp+68h+var_20]
+0x140002940: mov     edx, [rbx]
+0x140002942: lea     rcx, unk_140004000
+0x140002949: add     rbx, 4
+0x14000294d: call    sub_1400025A0

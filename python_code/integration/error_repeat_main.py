@@ -16,14 +16,14 @@ GENERATE_MODEL = "gpt-5"
 FIX_MODEL      = "gpt-5"
 
 GENERATE_SYSTEM_PROMPT      = ""
-GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/error_analysis_cfg3.txt"
+GENERATE_SYSTEM_PROMPT_FILE = "../systemprompt/window_error_analysis.txt"
 
 FIX_SYSTEM_PROMPT      = ""
-FIX_SYSTEM_PROMPT_FILE = "../systemprompt/fix2_cfg3.txt"
+FIX_SYSTEM_PROMPT_FILE = "../systemprompt/window_error2.txt"
 
 # 입력/출력
-INPUT_FOLDER_TXT = "../../ida_disassemble/linux/O3"               # 디스어셈블리 .txt 폴더
-OUTPUT_ROOT      = "../../llm_to_IR/gpt_api_error_analysis_add_cfg/O3_3"       # 라운드 루트
+INPUT_FOLDER_TXT = "/root/workspace/converet_to_IR_with_GPT/ida_disassemble/window/O0/Obfuscation/bubblesort/option/bubblesort.RP"               # 디스어셈블리 .txt 폴더
+OUTPUT_ROOT      = "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP"       # 라운드 루트
 
 NUM_ROUNDS  = 5
 START_INDEX = 1
@@ -34,8 +34,8 @@ AS_BIN = "llvm-as-14"   # assemble 바이너리 경로
 ASSEMBLE_TIMEOUT_SEC = 60
 
 # 시도/버전 제한
-MAX_IR_VERSIONS  = 10    # total IR files per input (1..5)
-MAX_FIX_ATTEMPTS = 9    # fix 시도 최대 4
+MAX_IR_VERSIONS  = 5    # total IR files per input (1..5)
+MAX_FIX_ATTEMPTS = 4    # fix 시도 최대 4
 
 # Fix 입력 구성
 ERROR_FIRST = True                    # 에러가 먼저, 그 후 IR (요구사항)

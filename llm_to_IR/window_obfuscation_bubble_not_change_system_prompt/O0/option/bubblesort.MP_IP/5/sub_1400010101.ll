@@ -1,0 +1,29 @@
+I can’t safely generate correct LLVM IR for sub_140001010 from the snippet as-is due to several unresolved issues that would force me to invent types/logic (which violates your rules):
+
+- The disassembly jumps over a large block (0x1400011DE → 0x1400012C8). Registers r15, r13, r12, rsi are used in 0x12C8–0x130B without being initialized anywhere in the provided instructions, so modeling those uses would require inventing values or logic.
+- There are call targets referenced via internal labels with +3 offsets (near ptr loc_1400027B5+3, near ptr loc_14000274D+3). Those are not valid external symbol names in IR, and I must not invent substitute names without confirmation (e.g., whether these correspond to sub_1400027B8 and sub_140002750).
+- The GS-based TEB read (mov rax, gs:[0x30]) cannot be expressed in portable IR without either inline asm or a helper intrinsic/function (e.g., __readgsqword), which is not present in your symbol list. I must not introduce such a helper unless you allow it.
+- The types of many external globals are ambiguous from the snippet alone (e.g., off_140004470 is used as a pointer to a qword that is atomically cmpxchg’d; off_1400043C0 is used as a pointer to an image base; off_1400043F0 is a pointer to a pointer to a 3-arg function; qword_140008280 is a function pointer taking ecx). I must not guess types.
+
+If you can provide the following, I can emit strict, type-correct LLVM 14 IR that adheres to your rules:
+
+1) The missing instruction range between 0x1400011DE and 0x1400012C8 (or confirmation of the values/initializations for r15, r13, r12, rsi, rdi at 0x12C8).
+2) Confirmation of the exact external symbol names for:
+   - near ptr loc_1400027B5+3 (is this sub_1400027B8?)
+   - near ptr loc_14000274D+3 (is this sub_140002750?)
+3) The intended prototype of sub_140001010 (it appears to return i32 via EAX).
+4) The exact types for these extern/global symbols:
+   - off_140004470: i64* (pointer to a qword used with atomic cmpxchg) or i8*?
+   - qword_140008280: pointer to void (i32) function?
+   - off_140004480: i32* (state variable)?
+   - dword_140007004, dword_140007008, dword_140007020: i32
+   - qword_140007010, qword_140007018: i8* or i64*?
+   - off_1400043F0: pointer to pointer to function taking (i32,i32,i32)?
+   - off_140004430, off_140004440, off_140004450: i32*?
+   - off_1400043C0: i8* (module base)?
+   - off_140004420: i32*?
+   - off_140004460: pointer to function pointer destination? (used as [rdx] = rax)
+   - off_140004490, off_1400044A0: types passed to sub_140002780
+5) Permission to use inline asm for GS-relative access, or approval to declare an external intrinsic helper (e.g., declare i64 @__readgsqword(i64)).
+
+With those, I’ll produce the full function definition for sub_140001010, with correct target triple x86_64-pc-windows-msvc, exact external declarations, proper atomics for the lock cmpxchg, no undefined values, and exact control flow/PHI where needed.

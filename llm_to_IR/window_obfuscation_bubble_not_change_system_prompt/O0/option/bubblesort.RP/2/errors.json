@@ -1,0 +1,75 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400010101.ll:61:21: error: expected type\n  %token = ptrtoint (i64** @off_140004470 to i64)\n                    ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400010101.bc",
+      "start_time": "2026-01-08T04:15:36",
+      "end_time": "2026-01-08T04:15:36",
+      "elapsed_sec": 0.019846
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D01.ll:96:56: error: expected type\n  %r8_ptr = getelementptr inbounds i8, i8* %base, i64 (sext i32 %ent0 to i64)\n                                                       ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D01.bc",
+      "start_time": "2026-01-08T04:32:25",
+      "end_time": "2026-01-08T04:32:25",
+      "elapsed_sec": 0.019134
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D02.ll:315:13: error: '@sub_140001700' defined with type 'void (i8*, ...)*' but expected 'void (i8*)*'\n  call void @sub_140001700(i8* %fmt_unk_bits_gep)\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D02.bc",
+      "start_time": "2026-01-08T04:35:06",
+      "end_time": "2026-01-08T04:35:06",
+      "elapsed_sec": 0.016079
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D03.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D03.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %rbx0 = phi i8* [ %startptr, %check11 ], [ %rbx_ext2, %p2_adv_hdr ]\n  %hdr2_ptr = getelementptr inbounds i8, i8* %rbx0, i64 8\nInstruction does not dominate all uses!\n  %rbx0 = phi i8* [ %startptr, %check11 ], [ %rbx_ext2, %p2_adv_hdr ]\n  %rbx_afterhdr = getelementptr inbounds i8, i8* %rbx0, i64 12\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rbx_chk = phi i8* [ %rbx0, %p1_hdr_next ], [ %rbx_ext, %proto2_check ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D03.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_1400018D03.bc",
+      "start_time": "2026-01-08T04:36:50",
+      "end_time": "2026-01-08T04:36:50",
+      "elapsed_sec": 0.018446
+    },
+    {
+      "filename": "sub_140001F80.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_140001F801.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_140001F801.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_140001F801.ll:55:8: error: expected type\n  call dllimport void @free(i8* %curr)\n       ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_140001F801.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.RP/2/sub_140001F801.bc",
+      "start_time": "2026-01-08T04:43:49",
+      "end_time": "2026-01-08T04:43:49",
+      "elapsed_sec": 0.015623
+    }
+  ]
+}

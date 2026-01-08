@@ -1,0 +1,103 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/2/sub_1400017601.ll:39:6: error: expected '=' after instruction id
+;   %16a = getelementptr i8, i8* %15, i64 8
+;      ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_140001760'
+target triple = "x86_64-pc-windows-msvc"
+
+@dword_1400070A4 = external global i32
+@qword_1400070A8 = external global i8*
+@aAddressPHasNoI = private unnamed_addr constant [32 x i8] c"Address %p has no image-section\00"
+
+declare i8* @sub_140002250(i8*)
+declare i8* @sub_140002390()
+declare void @sub_140612B3A(i8*, i8*, i32)
+declare void @sub_140001700(i8*, i8*)
+
+define void @sub_140001760(i8* %0) {
+entry:
+  %1 = alloca [72 x i8], align 1
+  %2 = load i32, i32* @dword_1400070A4, align 4
+  %3 = icmp sgt i32 %2, 0
+  br i1 %3, label %loop.init, label %no_entries
+
+loop.init:                                        ; preds = %entry
+  %4 = load i8*, i8** @qword_1400070A8, align 8
+  %5 = getelementptr i8, i8* %4, i64 24
+  br label %loop.header
+
+loop.header:                                      ; preds = %loop.inc, %loop.init
+  %6 = phi i8* [ %5, %loop.init ], [ %17, %loop.inc ]
+  %7 = phi i32 [ 0, %loop.init ], [ %16, %loop.inc ]
+  %8 = bitcast i8* %6 to i8**
+  %9 = load i8*, i8** %8, align 8
+  %10 = ptrtoint i8* %0 to i64
+  %11 = ptrtoint i8* %9 to i64
+  %12 = icmp ult i64 %10, %11
+  br i1 %12, label %loop.inc, label %check.range
+
+check.range:                                      ; preds = %loop.header
+  %13 = getelementptr i8, i8* %6, i64 8
+  %14 = bitcast i8* %13 to i8**
+  %15 = load i8*, i8** %14, align 8
+  %16a = getelementptr i8, i8* %15, i64 8
+  %17a = bitcast i8* %16a to i32*
+  %18 = load i32, i32* %17a, align 4
+  %19 = zext i32 %18 to i64
+  %20 = add i64 %11, %19
+  %21 = icmp ult i64 %10, %20
+  br i1 %21, label %ret.early, label %loop.inc
+
+loop.inc:                                         ; preds = %check.range, %loop.header
+  %16 = add i32 %7, 1
+  %17 = getelementptr i8, i8* %6, i64 40
+  %18b = icmp ne i32 %16, %2
+  br i1 %18b, label %loop.header, label %call_path_from_loop
+
+call_path_from_loop:                              ; preds = %loop.inc
+  br label %call_path
+
+no_entries:                                       ; preds = %entry
+  br label %call_path
+
+call_path:                                        ; preds = %no_entries, %call_path_from_loop
+  %storeIndex.sel = phi i32 [ 0, %no_entries ], [ %2, %call_path_from_loop ]
+  %22 = call i8* @sub_140002250(i8* %0)
+  %23 = icmp eq i8* %22, null
+  br i1 %23, label %error, label %success
+
+success:                                          ; preds = %call_path
+  %24 = load i8*, i8** @qword_1400070A8, align 8
+  %25 = sext i32 %storeIndex.sel to i64
+  %26 = mul i64 %25, 40
+  %27 = getelementptr i8, i8* %24, i64 %26
+  %28 = getelementptr i8, i8* %27, i64 32
+  %29 = bitcast i8* %28 to i8**
+  store i8* %22, i8** %29, align 8
+  %30 = bitcast i8* %27 to i32*
+  store i32 0, i32* %30, align 4
+  %31 = call i8* @sub_140002390()
+  %32 = getelementptr i8, i8* %22, i64 12
+  %33 = bitcast i8* %32 to i32*
+  %34 = load i32, i32* %33, align 4
+  %35 = zext i32 %34 to i64
+  %36 = getelementptr i8, i8* %31, i64 %35
+  %37 = load i8*, i8** @qword_1400070A8, align 8
+  %38 = getelementptr i8, i8* %37, i64 %26
+  %39 = getelementptr i8, i8* %38, i64 24
+  %40 = bitcast i8* %39 to i8**
+  store i8* %36, i8** %40, align 8
+  %41 = getelementptr [72 x i8], [72 x i8]* %1, i64 0, i64 0
+  call void @sub_140612B3A(i8* %36, i8* %41, i32 48)
+  ret void
+
+error:                                            ; preds = %call_path
+  %42 = getelementptr [32 x i8], [32 x i8]* @aAddressPHasNoI, i64 0, i64 0
+  call void @sub_140001700(i8* %42, i8* %0)
+  ret void
+
+ret.early:                                        ; preds = %check.range
+  ret void
+}

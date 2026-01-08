@@ -1,0 +1,55 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 289,
+      "ir_len": 15465,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_1400010101.ll:303:30: error: '@qword_140007018' defined with type 'i8***' but expected 'i8**'\n  %ptr_arrptr = bitcast i8** @qword_140007018 to i8***\n                             ^\n",
+      "ir_preview": "; ModuleID = 'sub_140001010'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i8* @sub_140002660()\ndeclare i32 @sub_140002880(i32, i8**, i8*)\ndeclare void @sub_140002790(void ()*)\ndeclare void @sub_1",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_1400010101.ll"
+    },
+    {
+      "filename": "sub_140001760.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 286,
+      "ir_len": 7830,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_1400017601.ll:87:42: error: invalid use of function-local name\n  %edx.val = load i32, i32* bitcast (i8* %rdi.plus12 to i32*), align 4\n                                         ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = external global i32, align 4\n@qword_1400070A8 = external global i8*, align 8\n@qword_140008298 = external global i8",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_1400017601.ll"
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 265,
+      "ir_len": 13258,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nInstruction does not dominate all uses!\n  %rbx1 = load i8*, i8** %rbx.slot, align 8\n  %rbx_after_hdr = getelementptr i8, i8* %rbx1, i64 12\nTerminator found in the middle of a basic block!\nlabel %blk_1978\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i32 @sub_1400022D0()\ndeclare void @sub_140002520()\ndeclare void @sub_140001760(i8*)\ndeclare void @sub_1400027B8(i8*, i8*, i32",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_1400018D01.ll"
+    },
+    {
+      "filename": "sub_140001E80.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 207,
+      "ir_len": 1757,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_140001E801.ll:36:6: error: expected '=' after instruction id\n  %10cond = icmp eq i32 %8, 0\n     ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n%struct.Node = type { i32, i32, void (i8*)*, %struct.Node* }\n\n@unk_140007100 = external global i8\n@qword_1400070E0 = external global ",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_140001E801.ll"
+    },
+    {
+      "filename": "sub_140001E80.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 261,
+      "ir_len": 1753,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_140001E802.ll:40:3: error: instruction expected to be numbered '%10'\n  %11 = getelementptr inbounds %struct.Node, %struct.Node* %curr, i32 0, i32 2\n  ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n%struct.Node = type { i32, i32, void (i8*)*, %struct.Node* }\n\n@unk_140007100 = external global i8\n@qword_1400070E0 = external global ",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_140001E802.ll"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010101.ll:26:9: error: invalid function return type\ndeclare void () @nullsub_3()\n        ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010101.bc",
+      "start_time": "2026-01-08T05:59:09",
+      "end_time": "2026-01-08T05:59:09",
+      "elapsed_sec": 0.018229
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010102.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010102.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %i = phi i64 [ 1, %L2B3 ], [ %i.next, %L2C8 ]\nlabel %L2B3\nlabel %L2DD\nInstruction does not dominate all uses!\n  %i.next = add i64 %i, 1\n  %i = phi i64 [ 1, %L2B3 ], [ %i.next, %L2C8 ]\nPHI nodes not grouped at top of basic block!\n  %slotptr = phi i8** [ %slotend, %L1347 ], [ %arrptr3, %L2AA ]\nlabel %L134C\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010102.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400010102.bc",
+      "start_time": "2026-01-08T06:02:23",
+      "end_time": "2026-01-08T06:02:23",
+      "elapsed_sec": 0.01863
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D01.ll:80:10: error: expected instruction opcode\n  %r12 = %var48_i8\n         ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D01.bc",
+      "start_time": "2026-01-08T06:21:51",
+      "end_time": "2026-01-08T06:21:51",
+      "elapsed_sec": 0.01848
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %rbx_it = phi i8* [ %rbxv, %ver2_loop_entry ], [ %rbx_it_next, %ver2_loop ]\nlabel %ver2_loop\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/4/sub_1400018D02.bc",
+      "start_time": "2026-01-08T06:24:20",
+      "end_time": "2026-01-08T06:24:20",
+      "elapsed_sec": 0.016418
+    }
+  ]
+}

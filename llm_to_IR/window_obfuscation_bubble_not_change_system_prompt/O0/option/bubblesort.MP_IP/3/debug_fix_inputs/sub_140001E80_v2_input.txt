@@ -1,0 +1,31 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/3/sub_140001E801.ll:14:3: error: instruction expected to be numbered '%0'
+;   %1 = load i8*, i8** @qword_1400070E0, align 8
+;   ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_140001E80.ll'
+target triple = "x86_64-pc-windows-msvc"
+
+@qword_1400070E0 = external global i8*
+@unk_140007100 = external global i8
+
+declare void @loc_140029C96(i8*)
+declare void @sub_1405A8911()
+declare void @sub_1405F5A24(i8*)
+
+define void @sub_140001E80() {
+entry:
+  call void @loc_140029C96(i8* @unk_140007100)
+  %1 = load i8*, i8** @qword_1400070E0, align 8
+  %2 = icmp eq i8* %1, null
+  br i1 %2, label %bb_zero, label %bb_nonzero
+
+bb_nonzero:
+  call void @sub_1405A8911()
+  ret void
+
+bb_zero:
+  call void @sub_1405F5A24(i8* @unk_140007100)
+  ret void
+}

@@ -1,0 +1,56 @@
+; ModuleID = 'sub_1400014A0'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global void ()*, align 8
+
+declare void @sub_140001420(i8*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() {
+entry:
+  %base = bitcast void ()** @off_1400043B0 to void ()**
+  %first.ptr = load void ()*, void ()** @off_1400043B0, align 8
+  %first.int64 = ptrtoint void ()* %first.ptr to i64
+  %first.int32 = trunc i64 %first.int64 to i32
+  %is.neg1 = icmp eq i32 %first.int32, -1
+  br i1 %is.neg1, label %sentinel.init, label %non.sentinel
+
+sentinel.init:
+  br label %sentinel.loop
+
+sentinel.loop:
+  %eax.phi = phi i64 [ 0, %sentinel.init ], [ %eax.next, %sentinel.loop ]
+  %r8 = add i64 %eax.phi, 1
+  %ecx.from.eax = trunc i64 %eax.phi to i32
+  %ptr.idx = getelementptr inbounds void ()*, void ()** @off_1400043B0, i64 %r8
+  %val = load void ()*, void ()** %ptr.idx, align 8
+  %is.nonnull = icmp ne void ()* %val, null
+  %eax.next = add i64 %eax.phi, 1
+  br i1 %is.nonnull, label %sentinel.loop, label %join
+
+non.sentinel:
+  br label %join
+
+join:
+  %count = phi i32 [ %first.int32, %non.sentinel ], [ %ecx.from.eax, %sentinel.loop ]
+  %is.zero = icmp eq i32 %count, 0
+  br i1 %is.zero, label %tailcall, label %loop.setup
+
+loop.setup:
+  %count.zext = zext i32 %count to i64
+  %curr = getelementptr inbounds void ()*, void ()** @off_1400043B0, i64 %count.zext
+  br label %call.loop
+
+call.loop:
+  %curr.phi = phi void ()** [ %curr, %loop.setup ], [ %next, %call.loop ]
+  %fn = load void ()*, void ()** %curr.phi, align 8
+  call void %fn()
+  %next = getelementptr inbounds void ()*, void ()** %curr.phi, i64 -1
+  %cont = icmp ne void ()** %next, @off_1400043B0
+  br i1 %cont, label %call.loop, label %tailcall
+
+tailcall:
+  %fn.addr = bitcast void ()* @sub_140001450 to i8*
+  tail call void @sub_140001420(i8* %fn.addr)
+  ret void
+}

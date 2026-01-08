@@ -1,0 +1,69 @@
+; ModuleID = 'sub_1400014A0.ll'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i64*
+
+declare i32 @sub_140001420(i8*)
+declare void @sub_140001450()
+
+define i32 @sub_1400014A0() {
+entry:
+  %base.ptr.ptr = load i64*, i64** @off_1400043B0, align 8
+  %count64 = load i64, i64* %base.ptr.ptr, align 8
+  %count32 = trunc i64 %count64 to i32
+  %is_m1 = icmp eq i32 %count32, -1
+  br i1 %is_m1, label %scan, label %after_cmp
+
+scan:
+  %idx0 = add i64 0, 1
+  br label %scan.loop
+
+scan.loop:
+  %idx = phi i64 [ %idx0, %scan ], [ %idx.next, %scan.loop.cont ]
+  %prev = phi i64 [ 0, %scan ], [ %idx, %scan.loop.cont ]
+  %elem_ptr_i64 = getelementptr i64, i64* %base.ptr.ptr, i64 %idx
+  %elem_ptr_i8p = bitcast i64* %elem_ptr_i64 to i8**
+  %val = load i8*, i8** %elem_ptr_i8p, align 8
+  %is_nonzero = icmp ne i8* %val, null
+  br i1 %is_nonzero, label %scan.loop.cont, label %after_scan
+
+scan.loop.cont:
+  %idx.next = add i64 %idx, 1
+  br label %scan.loop
+
+after_scan:
+  %ecx_from_scan = trunc i64 %prev to i32
+  br label %test
+
+after_cmp:
+  %ecx_from_count = add i32 %count32, 0
+  br label %test
+
+test:
+  %ecx.phi = phi i32 [ %ecx_from_count, %after_cmp ], [ %ecx_from_scan, %after_scan ]
+  %is_zero = icmp eq i32 %ecx.phi, 0
+  br i1 %is_zero, label %tailcall, label %loop.setup
+
+loop.setup:
+  %idx64 = zext i32 %ecx.phi to i64
+  %rbx.start = getelementptr i64, i64* %base.ptr.ptr, i64 %idx64
+  br label %loop
+
+loop:
+  %rbx.cur = phi i64* [ %rbx.start, %loop.setup ], [ %rbx.prev2, %loop.next ]
+  %rbx_i8pp = bitcast i64* %rbx.cur to void ()**
+  %funcptr = load void ()*, void ()** %rbx_i8pp, align 8
+  call void %funcptr()
+  %rbx.minus1 = getelementptr i64, i64* %rbx.cur, i64 -1
+  %done = icmp eq i64* %rbx.minus1, %base.ptr.ptr
+  br i1 %done, label %tailcall, label %loop.next
+
+loop.next:
+  %rbx.prev2 = getelementptr i64, i64* %rbx.minus1, i64 0
+  br label %loop
+
+tailcall:
+  %fp = bitcast void ()* @sub_140001450 to i8*
+  %ret = call i32 @sub_140001420(i8* %fp)
+  ret i32 %ret
+}

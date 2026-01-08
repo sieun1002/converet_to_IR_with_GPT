@@ -1,0 +1,89 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010101.ll:33:3: error: Expected ordering on atomic instruction\n  %old = extractvalue { i8*, i1 } %cmp, 0\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010101.bc",
+      "start_time": "2026-01-08T02:25:09",
+      "end_time": "2026-01-08T02:25:09",
+      "elapsed_sec": 0.044355
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010102.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010102.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010102.ll:80:45: error: atomicrmw xchg operand must be an integer or floating point type\n  %xchg_old = atomicrmw xchg i8** %lockptr, i8* null seq_cst\n                                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010102.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010102.bc",
+      "start_time": "2026-01-08T02:25:45",
+      "end_time": "2026-01-08T02:25:45",
+      "elapsed_sec": 0.019542
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 3,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010103.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010103.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010103.ll:125:3: error: expected instruction opcode\n  return i32 %retv\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010103.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010103.bc",
+      "start_time": "2026-01-08T02:26:50",
+      "end_time": "2026-01-08T02:26:50",
+      "elapsed_sec": 0.017941
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D01.ll:59:43: error: invalid use of function-local name\n  %edx0_i32 = load i32, i32* bitcast (i8* %edx0_ptr to i32*), align 4\n                                          ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D01.bc",
+      "start_time": "2026-01-08T02:42:15",
+      "end_time": "2026-01-08T02:42:15",
+      "elapsed_sec": 0.018354
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %err_val = phi i64 [ %val16, %rng16 ], [ %val32, %rng32_lo ], [ %val64, %rng64 ], [ %val8, %rng8_lo ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400018D02.bc",
+      "start_time": "2026-01-08T02:44:50",
+      "end_time": "2026-01-08T02:44:50",
+      "elapsed_sec": 0.020233
+    },
+    {
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400028801.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400028801.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400028801.ll:84:16: error: expected instruction opcode\n  %new_limit = %final_lastswap\n               ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400028801.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400028801.bc",
+      "start_time": "2026-01-08T03:07:27",
+      "end_time": "2026-01-08T03:07:27",
+      "elapsed_sec": 0.021206
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400010101.ll:172:40: error: invalid use of function-local name\n  %soh32 = load i32, i32* bitcast (i8* %soh32_ptr to i32*), align 1\n                                       ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400010101.bc",
+      "start_time": "2026-01-08T03:18:56",
+      "end_time": "2026-01-08T03:18:56",
+      "elapsed_sec": 0.015915
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D01.ll:217:13: error: '@sub_140001700' defined with type 'void (i8*, ...)*' but expected 'void (i8*)*'\n  call void @sub_140001700(i8* %fmt_unk_bits_gep)\n            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D01.bc",
+      "start_time": "2026-01-08T03:39:57",
+      "end_time": "2026-01-08T03:39:57",
+      "elapsed_sec": 0.018482
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %errv = phi i64 [ %t8b, %rng8b ], [ %t32b, %rng32b ], [ %t64b, %rng64 ], [ %t16b, %rng16 ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP_RP/2/sub_1400018D02.bc",
+      "start_time": "2026-01-08T03:41:18",
+      "end_time": "2026-01-08T03:41:18",
+      "elapsed_sec": 0.016113
+    }
+  ]
+}

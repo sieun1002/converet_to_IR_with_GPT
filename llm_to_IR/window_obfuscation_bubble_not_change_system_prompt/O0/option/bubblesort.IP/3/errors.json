@@ -1,0 +1,61 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001760.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017601.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017601.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017601.ll:40:6: warning: ptr type is only supported in -opaque-pointers mode\n  %11ptr = load i8*, i8** %10, align 8\n     ^\nllvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017601.ll:40:6: error: expected '=' after instruction id\n  %11ptr = load i8*, i8** %10, align 8\n     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017601.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017601.bc",
+      "start_time": "2026-01-08T04:08:44",
+      "end_time": "2026-01-08T04:08:44",
+      "elapsed_sec": 0.019126
+    },
+    {
+      "filename": "sub_140001760.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017602.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017602.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017602.ll:42:3: error: instruction expected to be numbered '%11'\n  %13 = bitcast i8* %ptr_plus8 to i32*\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017602.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400017602.bc",
+      "start_time": "2026-01-08T04:11:02",
+      "end_time": "2026-01-08T04:11:02",
+      "elapsed_sec": 0.018082
+    },
+    {
+      "filename": "sub_1400021B0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400021B01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400021B01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400021B01.ll:65:3: error: instruction expected to be numbered '%34'\n  %35 = getelementptr i8, i8* %31, i64 40\n  ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400021B01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400021B01.bc",
+      "start_time": "2026-01-08T04:27:43",
+      "end_time": "2026-01-08T04:27:43",
+      "elapsed_sec": 0.017978
+    },
+    {
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400028801.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400028801.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %r10.phi = phi i64 [ 0, %outer.loop ], [ %r10.update, %inner.after.swap ]\nlabel %inner.after.swap\nlabel %inner.latch\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400028801.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/3/sub_1400028801.bc",
+      "start_time": "2026-01-08T04:36:47",
+      "end_time": "2026-01-08T04:36:47",
+      "elapsed_sec": 0.017833
+    }
+  ]
+}

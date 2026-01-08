@@ -1,0 +1,422 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+; External data symbols
+@off_140004470 = external global i8***
+@qword_140008280 = external global i8**
+@off_140004480 = external global i8**
+@dword_140007004 = external global i32
+@off_1400043F0 = external global i8**
+@qword_140007010 = external global i8**
+@qword_140007018 = external global i8**
+@dword_140007020 = external global i32
+@dword_140007008 = external global i32
+@qword_140008278 = external global i8**
+@off_140004460 = external global i8**
+@off_140004430 = external global i8**
+@off_140004440 = external global i8**
+@off_140004450 = external global i8**
+@off_1400043C0 = external global i8**
+@off_140004420 = external global i8**
+@off_1400044F0 = external global i8**
+@off_1400044D0 = external global i8**
+@off_1400043A0 = external global i8**
+@off_140004400 = external global i8**
+@off_1400044C0 = external global i8**
+@off_1400044B0 = external global i8**
+@off_140004520 = external global i8**
+@off_1400044E0 = external global i8**
+@off_1400044A0 = external global i8**
+@off_140004490 = external global i8**
+
+; External/undefined functions
+declare i8** @sub_140002660()
+declare void @sub_140002880(i32, i8*, i8*)
+declare i32 @sub_140002670(i32)
+declare void @sub_140002750()
+declare void @sub_140002790()
+declare void @sub_140002120()
+declare i32* @sub_140002720()
+declare i32* @sub_140002718()
+declare i32 @sub_140001540()
+declare void @sub_140001520()
+declare i8* @sub_1400027F8(i64)
+declare i64 @sub_140002700(i8*)
+declare void @sub_1400027B8(i8*, i8*, i64)
+declare void @sub_140002780(i8*, i8*)
+declare void @sub_1400027D0(i32)
+declare i32 @sub_140002788(i8*, i8*)
+declare void @sub_1400018D0()
+declare void @sub_140001CA0(void ()*)
+declare void @sub_140002778(i32)
+declare void @sub_1400027A0(i32)
+declare void @sub_140001600()
+declare void @sub_140001CB0()
+declare void @nullsub_3()
+declare i32 @sub_1400026A0(i32*, i8**, i8**, i32, i32*)
+
+define i32 @sub_140001010() {
+entry:
+  %var_4C = alloca i32, align 4
+  %var_5C = alloca i32, align 4
+  %var_78 = alloca i8*, align 8
+
+  %owner_val = call i64 asm sideeffect "movl $$0x30, %eax; movq %gs:(%rax), %rax; movq 8(%rax), %rax", "={rax}"()
+  %lock_pp = load i8**, i8*** @off_140004470
+  %lock_ptr_g = load i8*, i8** %lock_pp
+  %lock_ptr = bitcast i8* %lock_ptr_g to i64*
+  %sleep_fp_g = load i8*, i8** @qword_140008280
+  br label %spin_try
+
+spin_try:
+  %expected = phi i64 [ 0, %entry ], [ 0, %sleep_back ]
+  %cmpx = cmpxchg i64* %lock_ptr, i64 %expected, i64 %owner_val seq_cst seq_cst
+  %old = extractvalue { i64, i1 } %cmpx, 0
+  %exchg = extractvalue { i64, i1 } %cmpx, 1
+  %not_exchg = xor i1 %exchg, true
+  br i1 %not_exchg, label %contended, label %got_lock
+
+contended:
+  %same_owner = icmp eq i64 %old, %owner_val
+  br i1 %same_owner, label %reentrant, label %sleep_path
+
+sleep_path:
+  %sleep_fn = bitcast i8* %sleep_fp_g to void (i32)*
+  call void %sleep_fn(i32 1000)
+  br label %sleep_back
+
+sleep_back:
+  br label %spin_try
+
+reentrant:
+  br label %state_check_from_reentrant
+
+got_lock:
+  br label %state_check_from_lock
+
+state_check_from_lock:
+  %r14_lock = phi i32 [ 0, %got_lock ]
+  %state_ptr_g0 = load i8*, i8** @off_140004480
+  %state_ptr0 = bitcast i8* %state_ptr_g0 to i32*
+  %state0 = load i32, i32* %state_ptr0
+  %is_one0 = icmp eq i32 %state0, 1
+  br i1 %is_one0, label %state_one, label %state_check_zero
+
+state_check_from_reentrant:
+  %r14_reent = phi i32 [ 1, %reentrant ]
+  %state_ptr_g1 = load i8*, i8** @off_140004480
+  %state_ptr1 = bitcast i8* %state_ptr_g1 to i32*
+  %state1 = load i32, i32* %state_ptr1
+  %is_one1 = icmp eq i32 %state1, 1
+  br i1 %is_one1, label %state_one, label %state_check_zero2
+
+state_check_zero:
+  %state0_is_zero = icmp eq i32 %state0, 0
+  br i1 %state0_is_zero, label %init_path, label %after_state_nonzero
+
+state_check_zero2:
+  %state1_is_zero = icmp eq i32 %state1, 0
+  br i1 %state1_is_zero, label %init_path, label %after_state_nonzero2
+
+state_one:
+  %t31 = call i32 @sub_140002670(i32 31)
+  call void @sub_1400027A0(i32 %t31)
+  br label %ret_zero
+
+init_path:
+  %state_ptr_g2 = load i8*, i8** @off_140004480
+  %state_ptr2 = bitcast i8* %state_ptr_g2 to i32*
+  store i32 1, i32* %state_ptr2
+  call void @sub_1400018D0()
+  %cb_reg_ptr = bitcast void ()* @sub_140001CB0 to i8*
+  %fp_init_g = load i8*, i8** @qword_140008278
+  %fp_init = bitcast i8* %fp_init_g to i8* (i8*)*
+  %fp_init_ret = call i8* %fp_init(i8* %cb_reg_ptr)
+  %off_4460 = load i8*, i8** @off_140004460
+  %off_4460_ptr = bitcast i8* %off_4460 to i8**
+  store i8* %fp_init_ret, i8** %off_4460_ptr
+  call void @sub_140002790()
+  call void @sub_140002120()
+  %p430_g = load i8*, i8** @off_140004430
+  %p430 = bitcast i8* %p430_g to i32*
+  store i32 1, i32* %p430
+  %p440_g = load i8*, i8** @off_140004440
+  %p440 = bitcast i8* %p440_g to i32*
+  store i32 1, i32* %p440
+  %p450_g = load i8*, i8** @off_140004450
+  %p450 = bitcast i8* %p450_g to i32*
+  store i32 1, i32* %p450
+  %base_g = load i8*, i8** @off_1400043C0
+  %mz_ptr = bitcast i8* %base_g to i16*
+  %mz = load i16, i16* %mz_ptr
+  %is_mz = icmp eq i16 %mz, 23117
+  br i1 %is_mz, label %pe_parse, label %pe_done_zero
+
+pe_parse:
+  %e_lfanew_ptr = getelementptr i8, i8* %base_g, i64 60
+  %e_lfanew_p32 = bitcast i8* %e_lfanew_ptr to i32*
+  %e_lfanew = load i32, i32* %e_lfanew_p32
+  %e_lfanew_sext = sext i32 %e_lfanew to i64
+  %pehdr = getelementptr i8, i8* %base_g, i64 %e_lfanew_sext
+  %pesig_p = bitcast i8* %pehdr to i32*
+  %pesig = load i32, i32* %pesig_p
+  %is_pe = icmp eq i32 %pesig, 17744
+  br i1 %is_pe, label %opt_magic, label %pe_done_zero
+
+opt_magic:
+  %opt_magic_ptr = getelementptr i8, i8* %pehdr, i64 24
+  %opt_magic_p16 = bitcast i8* %opt_magic_ptr to i16*
+  %opt_magic_val = load i16, i16* %opt_magic_p16
+  %is_32 = icmp eq i16 %opt_magic_val, 267
+  br i1 %is_32, label %pe32_path, label %chk_64
+
+chk_64:
+  %is_64 = icmp eq i16 %opt_magic_val, 523
+  br i1 %is_64, label %pe64_more, label %pe_done_zero
+
+pe64_more:
+  %off84 = getelementptr i8, i8* %pehdr, i64 132
+  %off84_p = bitcast i8* %off84 to i32*
+  %val84 = load i32, i32* %off84_p
+  %gtE = icmp ugt i32 %val84, 14
+  br i1 %gtE, label %pe64_flag, label %pe_done_zero
+
+pe64_flag:
+  %offF8 = getelementptr i8, i8* %pehdr, i64 248
+  %offF8_p = bitcast i8* %offF8 to i32*
+  %valF8 = load i32, i32* %offF8_p
+  %nzF8 = icmp ne i32 %valF8, 0
+  %ecx_flag64 = zext i1 %nzF8 to i32
+  br label %pe_done_store
+
+pe32_path:
+  %off74 = getelementptr i8, i8* %pehdr, i64 116
+  %off74_p = bitcast i8* %off74 to i32*
+  %val74 = load i32, i32* %off74_p
+  %gtE32 = icmp ugt i32 %val74, 14
+  br i1 %gtE32, label %pe32_flag, label %pe_done_zero
+
+pe32_flag:
+  %offE8 = getelementptr i8, i8* %pehdr, i64 232
+  %offE8_p = bitcast i8* %offE8 to i32*
+  %valE8 = load i32, i32* %offE8_p
+  %nzE8 = icmp ne i32 %valE8, 0
+  %ecx_flag32 = zext i1 %nzE8 to i32
+  br label %pe_done_store
+
+pe_done_zero:
+  br label %pe_done_store
+
+pe_done_store:
+  %ecx_final = phi i32 [ %ecx_flag32, %pe32_flag ], [ %ecx_flag64, %pe64_flag ], [ 0, %pe_done_zero ]
+  store i32 %ecx_final, i32* @dword_140007008
+  %p420_g = load i8*, i8** @off_140004420
+  %p420 = bitcast i8* %p420_g to i32*
+  %r8d_val = load i32, i32* %p420
+  %r8d_is_nz = icmp ne i32 %r8d_val, 0
+  br i1 %r8d_is_nz, label %call_2778_2, label %setup_cfg
+
+call_2778_2:
+  call void @sub_140002778(i32 2)
+  br label %cfg_common
+
+setup_cfg:
+  call void @sub_140002778(i32 1)
+  br label %cfg_common
+
+cfg_common:
+  %dst1 = call i32* @sub_140002720()
+  %off4F0 = load i8*, i8** @off_1400044F0
+  %off4F0_p = bitcast i8* %off4F0 to i32*
+  %val4F0 = load i32, i32* %off4F0_p
+  store i32 %val4F0, i32* %dst1
+  %dst2 = call i32* @sub_140002718()
+  %off4D0 = load i8*, i8** @off_1400044D0
+  %off4D0_p = bitcast i8* %off4D0 to i32*
+  %val4D0 = load i32, i32* %off4D0_p
+  store i32 %val4D0, i32* %dst2
+  %st = call i32 @sub_140001540()
+  %st_neg = icmp slt i32 %st, 0
+  br i1 %st_neg, label %err_cleanup, label %post_cfg
+
+post_cfg:
+  %p3A0_g = load i8*, i8** @off_1400043A0
+  %p3A0 = bitcast i8* %p3A0_g to i32*
+  %v3A0 = load i32, i32* %p3A0
+  %is1 = icmp eq i32 %v3A0, 1
+  br i1 %is1, label %call_CA0, label %chk_400
+
+call_CA0:
+  call void @sub_140001CA0(void ()* @sub_140001600)
+  br label %chk_400
+
+chk_400:
+  %p400_g = load i8*, i8** @off_140004400
+  %p400 = bitcast i8* %p400_g to i32*
+  %v400 = load i32, i32* %p400
+  %is_m1 = icmp eq i32 %v400, -1
+  br i1 %is_m1, label %call_27D0, label %call_2788
+
+call_27D0:
+  call void @sub_1400027D0(i32 -1)
+  br label %call_2788
+
+call_2788:
+  %p4C0_g = load i8*, i8** @off_1400044C0
+  %p4B0_g = load i8*, i8** @off_1400044B0
+  %res2788 = call i32 @sub_140002788(i8* %p4B0_g, i8* %p4C0_g)
+  %ok2788 = icmp eq i32 %res2788, 0
+  br i1 %ok2788, label %call_26A0_prep, label %ret_ff
+
+call_26A0_prep:
+  %p520_g = load i8*, i8** @off_140004520
+  %p520 = bitcast i8* %p520_g to i32*
+  %val520 = load i32, i32* %p520
+  store i32 %val520, i32* %var_4C
+  %p4E0_g = load i8*, i8** @off_1400044E0
+  %p4E0 = bitcast i8* %p4E0_g to i32*
+  %val4E0 = load i32, i32* %p4E0
+  %addr_var4C = bitcast i32* %var_4C to i8*
+  store i8* %addr_var4C, i8** %var_78
+  %r9_val = add i32 %val4E0, 0
+  %ret26A0 = call i32 @sub_1400026A0(i32* @dword_140007020, i8** @qword_140007018, i8** @qword_140007010, i32 %r9_val, i32* %var_4C)
+  %ret26A0_neg = icmp slt i32 %ret26A0, 0
+  br i1 %ret26A0_neg, label %err_cleanup, label %alloc_list
+
+alloc_list:
+  %cnt32 = load i32, i32* @dword_140007020
+  %cnt64 = sext i32 %cnt32 to i64
+  %cntp1 = add i64 %cnt64, 1
+  %size_bytes = shl i64 %cntp1, 3
+  %buf = call i8* @sub_1400027F8(i64 %size_bytes)
+  %buf_is_null = icmp eq i8* %buf, null
+  br i1 %buf_is_null, label %err_cleanup, label %loop_prep
+
+loop_prep:
+  %cnt_is_pos = icmp sgt i32 %cnt32, 0
+  br i1 %cnt_is_pos, label %loop_body_init, label %after_loop
+
+loop_body_init:
+  %src_arr_g = load i8*, i8** @qword_140007018
+  %idx0 = phi i64 [ 1, %loop_prep ], [ %idx_next, %loop_iter_next ]
+  %mul_idx0_8 = mul i64 %idx0, 8
+  %src_elem_ptr = getelementptr i8, i8* %src_arr_g, i64 %mul_idx0_8
+  %adj_off = add i64 %mul_idx0_8, -8
+  %src_elem_ptr_adj = getelementptr i8, i8* %src_arr_g, i64 %adj_off
+  %src_elem_p64 = bitcast i8* %src_elem_ptr_adj to i8**
+  %src_elem = load i8*, i8** %src_elem_p64
+  %len = call i64 @sub_140002700(i8* %src_elem)
+  %lenp1 = add i64 %len, 1
+  %dst = call i8* @sub_1400027F8(i64 %lenp1)
+  %dst_off = add i64 %mul_idx0_8, -8
+  %dst_arr_slot_ptr = getelementptr i8, i8* %buf, i64 %dst_off
+  %dst_arr_slot = bitcast i8* %dst_arr_slot_ptr to i8**
+  store i8* %dst, i8** %dst_arr_slot
+  %dst_is_null = icmp eq i8* %dst, null
+  br i1 %dst_is_null, label %err_cleanup, label %copy_and_next
+
+copy_and_next:
+  call void @sub_1400027B8(i8* %dst, i8* %src_elem, i64 %lenp1)
+  %idx0_i64 = sext i32 %cnt32 to i64
+  %is_last = icmp eq i64 %cnt64, %idx0
+  br i1 %is_last, label %after_loop_setnull, label %loop_iter_next
+
+loop_iter_next:
+  %idx_next = add i64 %idx0, 1
+  br label %loop_body_init
+
+after_loop_setnull:
+  %last_mul = mul i64 %cnt64, 8
+  %last_slot = getelementptr i8, i8* %buf, i64 %last_mul
+  %last_slot_p = bitcast i8* %last_slot to i8**
+  store i8* null, i8** %last_slot_p
+  br label %after_loop
+
+after_loop:
+  store i8* %buf, i8** @qword_140007018
+  %p4A0_g = load i8*, i8** @off_1400044A0
+  %p490_g = load i8*, i8** @off_140004490
+  call void @sub_140002780(i8* %p490_g, i8* %p4A0_g)
+  call void @sub_140001520()
+  %state_ptr_g3 = load i8*, i8** @off_140004480
+  %state_ptr3 = bitcast i8* %state_ptr_g3 to i32*
+  store i32 2, i32* %state_ptr3
+  br label %post_lock_work
+
+after_state_nonzero:
+  store i32 1, i32* @dword_140007004
+  br label %test_r14
+
+after_state_nonzero2:
+  store i32 1, i32* @dword_140007004
+  br label %test_r14
+
+post_lock_work:
+  br label %test_r14
+
+test_r14:
+  %r14_val = phi i32 [ 0, %after_state_nonzero ], [ 0, %after_state_nonzero2 ], [ 1, %post_lock_work ]
+  %r14_is_zero = icmp eq i32 %r14_val, 0
+  br i1 %r14_is_zero, label %unlock_and_cont, label %call_hooks
+
+unlock_and_cont:
+  %ex_old = atomicrmw xchg i64* %lock_ptr, i64 0 seq_cst
+  br label %call_hooks
+
+call_hooks:
+  %p3F0_g = load i8*, i8** @off_1400043F0
+  %p3F0 = bitcast i8* %p3F0_g to i8**
+  %fp_ptr = load i8*, i8** %p3F0
+  %has_fp = icmp ne i8* %fp_ptr, null
+  br i1 %has_fp, label %call_fp, label %after_fp
+
+call_fp:
+  %fp_type = bitcast i8* %fp_ptr to void (i64, i64, i64)*
+  call void %fp_type(i64 0, i64 2, i64 0)
+  br label %after_fp
+
+after_fp:
+  %dstpp = call i8** @sub_140002660()
+  %v7010 = load i8*, i8** @qword_140007010
+  store i8* %v7010, i8** %dstpp
+  %arr_ptr = load i8*, i8** @qword_140007018
+  %cntd = load i32, i32* @dword_140007020
+  call void @sub_140002880(i32 %cntd, i8* %arr_ptr, i8* %v7010)
+  %flag = load i32, i32* @dword_140007008
+  %flag_zero = icmp eq i32 %flag, 0
+  br i1 %flag_zero, label %call_27A0, label %check_dword7004
+
+call_27A0:
+  call void @sub_1400027A0(i32 0)
+  br label %ret_zero
+
+check_dword7004:
+  %dw7004 = load i32, i32* @dword_140007004
+  %dw7004_zero = icmp eq i32 %dw7004, 0
+  br i1 %dw7004_zero, label %err_cleanup, label %ret_zero
+
+err_cleanup:
+  %t8 = call i32 @sub_140002670(i32 8)
+  store i32 %t8, i32* %var_5C
+  call void @sub_140002750()
+  %rv = load i32, i32* %var_5C
+  br label %ret_with
+
+ret_ff:
+  br label %ret_255
+
+ret_255:
+  br label %ret_with_255
+
+ret_zero:
+  br label %ret_with_zero
+
+ret_with_255:
+  ret i32 255
+
+ret_with_zero:
+  ret i32 0
+
+ret_with:
+  ret i32 %rv
+}

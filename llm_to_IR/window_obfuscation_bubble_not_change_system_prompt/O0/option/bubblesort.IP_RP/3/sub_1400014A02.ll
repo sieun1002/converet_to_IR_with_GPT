@@ -1,0 +1,70 @@
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i8*
+
+declare void @loc_140001420(i8*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() {
+entry:
+  %base_ptrptr = load i8*, i8** @off_1400043B0, align 8
+  %base_i64ptr = bitcast i8* %base_ptrptr to i64*
+  %first64 = load i64, i64* %base_i64ptr, align 8
+  %first32 = trunc i64 %first64 to i32
+  %isneg1 = icmp eq i32 %first32, -1
+  br i1 %isneg1, label %count_scan, label %count_direct
+
+count_direct:
+  %count_cd = add i32 %first32, 0
+  br label %after_count
+
+count_scan:
+  br label %scan_loop
+
+scan_loop:
+  %idx_phi = phi i64 [ 1, %count_scan ], [ %idx_next, %scan_body ]
+  %prev_phi = phi i32 [ 0, %count_scan ], [ %prev_next, %scan_body ]
+  %base_pp = bitcast i8* %base_ptrptr to i8**
+  %elem_ptr = getelementptr inbounds i8*, i8** %base_pp, i64 %idx_phi
+  %elem = load i8*, i8** %elem_ptr, align 8
+  %isnonzero = icmp ne i8* %elem, null
+  br i1 %isnonzero, label %scan_body, label %scan_done
+
+scan_body:
+  %idx_trunc32 = trunc i64 %idx_phi to i32
+  %prev_next = add i32 %idx_trunc32, 0
+  %idx_next = add i64 %idx_phi, 1
+  br label %scan_loop
+
+scan_done:
+  %count_sc = add i32 %prev_phi, 0
+  br label %after_count
+
+after_count:
+  %count = phi i32 [ %count_cd, %count_direct ], [ %count_sc, %scan_done ]
+  %iszero = icmp eq i32 %count, 0
+  br i1 %iszero, label %after_calls, label %call_loop_entry
+
+call_loop_entry:
+  %base_pp2 = bitcast i8* %base_ptrptr to i8**
+  %count64 = zext i32 %count to i64
+  br label %call_loop
+
+call_loop:
+  %i_phi = phi i64 [ %count64, %call_loop_entry ], [ %i_dec, %call_loop ]
+  %elem_ptr2 = getelementptr inbounds i8*, i8** %base_pp2, i64 %i_phi
+  %fn_ptr_i8 = load i8*, i8** %elem_ptr2, align 8
+  %fn_ptr = bitcast i8* %fn_ptr_i8 to void ()*
+  call void %fn_ptr()
+  %i_dec = add i64 %i_phi, -1
+  %cont_cond = icmp ne i64 %i_dec, 0
+  br i1 %cont_cond, label %call_loop, label %call_continue
+
+call_continue:
+  br label %after_calls
+
+after_calls:
+  %arg = bitcast void ()* @sub_140001450 to i8*
+  tail call void @loc_140001420(i8* %arg)
+  ret void
+}

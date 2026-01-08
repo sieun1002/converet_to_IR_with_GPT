@@ -1,0 +1,148 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+declare i8* @sub_1400027A8(i32, i32)
+declare i8* @sub_140002120()
+
+@qword_1400070D0 = external global i32 (i8**)*
+
+define i32 @sub_140001CB0(i8** %rcx) {
+entry:
+  %rdx.ptr = load i8*, i8** %rcx, align 8
+  %status.ptr = bitcast i8* %rdx.ptr to i32*
+  %eax.val = load i32, i32* %status.ptr, align 4
+  %mask = and i32 %eax.val, 0x20FFFFFF
+  %cmp.magic = icmp eq i32 %mask, 0x20474343
+  br i1 %cmp.magic, label %loc_140001D60, label %loc_140001CD1
+
+loc_140001D60:                                 ; preds = %entry
+  %byte.ptr = getelementptr i8, i8* %rdx.ptr, i64 4
+  %flag.byte = load i8, i8* %byte.ptr, align 1
+  %flag.and = and i8 %flag.byte, 1
+  %flag.nz = icmp ne i8 %flag.and, 0
+  br i1 %flag.nz, label %loc_140001CD1, label %ret_m1
+
+loc_140001CD1:                                 ; preds = %entry, %loc_140001D60
+  %cmp_ja = icmp ugt i32 %eax.val, 0xC0000096
+  br i1 %cmp_ja, label %loc_140001D1F, label %cd1_next
+
+cd1_next:                                      ; preds = %loc_140001CD1
+  %cmp_jbe = icmp ule i32 %eax.val, 0xC000008B
+  br i1 %cmp_jbe, label %loc_140001D40, label %switch_disp
+
+switch_disp:                                   ; preds = %cd1_next
+  switch i32 %eax.val, label %ret_m1 [
+    i32 0xC000008D, label %loc_140001D00
+    i32 0xC000008E, label %loc_140001D00
+    i32 0xC000008F, label %loc_140001D00
+    i32 0xC0000090, label %loc_140001D00
+    i32 0xC0000091, label %loc_140001D00
+    i32 0xC0000093, label %loc_140001D00
+    i32 0xC0000094, label %loc_140001DC0
+    i32 0xC0000096, label %loc_140001D8E
+  ]
+
+loc_140001D40:                                 ; preds = %cd1_next
+  %cmp_eq_5 = icmp eq i32 %eax.val, 0xC0000005
+  br i1 %cmp_eq_5, label %loc_140001DF0, label %d40_cont
+
+d40_cont:                                      ; preds = %loc_140001D40
+  %ja_d80 = icmp ugt i32 %eax.val, 0xC0000005
+  br i1 %ja_d80, label %loc_140001D80, label %d40_low
+
+d40_low:                                       ; preds = %d40_cont
+  %cmp_eq_80000002 = icmp eq i32 %eax.val, 0x80000002
+  br i1 %cmp_eq_80000002, label %ret_m1, label %loc_140001D1F
+
+loc_140001D80:                                 ; preds = %d40_cont
+  %cmp_eq_8 = icmp eq i32 %eax.val, 0xC0000008
+  br i1 %cmp_eq_8, label %ret_m1, label %d80_next
+
+d80_next:                                      ; preds = %loc_140001D80
+  %cmp_eq_1D = icmp eq i32 %eax.val, 0xC000001D
+  br i1 %cmp_eq_1D, label %loc_140001D8E, label %loc_140001D1F
+
+loc_140001D00:                                 ; preds = %switch_disp, %switch_disp, %switch_disp, %switch_disp, %switch_disp, %switch_disp
+  %call_d00 = call i8* @sub_1400027A8(i32 8, i32 0)
+  %is_one_d00 = icmp eq i8* %call_d00, inttoptr (i64 1 to i8*)
+  br i1 %is_one_d00, label %loc_140001E54, label %d00_after_one
+
+d00_after_one:                                 ; preds = %loc_140001D00
+  %is_null_d00 = icmp eq i8* %call_d00, null
+  br i1 %is_null_d00, label %loc_140001D1F, label %loc_140001E20
+
+loc_140001DC0:                                 ; preds = %switch_disp
+  %call_dc0 = call i8* @sub_1400027A8(i32 8, i32 0)
+  %is_one_dc0 = icmp eq i8* %call_dc0, inttoptr (i64 1 to i8*)
+  br i1 %is_one_dc0, label %loc_140001DD6, label %dc0_after
+
+dc0_after:                                     ; preds = %loc_140001DC0
+  %is_null_dc0 = icmp eq i8* %call_dc0, null
+  br i1 %is_null_dc0, label %loc_140001D1F, label %loc_140001E20
+
+loc_140001D8E:                                 ; preds = %switch_disp, %loc_140001D80
+  %call_d8e = call i8* @sub_1400027A8(i32 4, i32 0)
+  %is_one_d8e = icmp eq i8* %call_d8e, inttoptr (i64 1 to i8*)
+  br i1 %is_one_d8e, label %loc_140001E40, label %d8e_after
+
+d8e_after:                                     ; preds = %loc_140001D8E
+  %is_null_d8e = icmp eq i8* %call_d8e, null
+  br i1 %is_null_d8e, label %loc_140001D1F, label %call_rax_d8e
+
+call_rax_d8e:                                  ; preds = %d8e_after
+  %fn_d8e = bitcast i8* %call_d8e to i8* (i32)*
+  %retptr_d8e = call i8* %fn_d8e(i32 4)
+  br label %ret_m1
+
+loc_140001DF0:                                 ; preds = %loc_140001D40
+  %call_df0 = call i8* @sub_1400027A8(i32 11, i32 0)
+  %is_one_df0 = icmp eq i8* %call_df0, inttoptr (i64 1 to i8*)
+  br i1 %is_one_df0, label %loc_140001E2C, label %df0_after_one
+
+df0_after_one:                                 ; preds = %loc_140001DF0
+  %is_null_df0 = icmp eq i8* %call_df0, null
+  br i1 %is_null_df0, label %loc_140001D1F, label %call_rax_df0
+
+call_rax_df0:                                  ; preds = %df0_after_one
+  %fn_df0 = bitcast i8* %call_df0 to i8* (i32)*
+  %retptr_df0 = call i8* %fn_df0(i32 11)
+  br label %ret_m1
+
+loc_140001E20:                                 ; preds = %d00_after_one, %dc0_after
+  %callp_e20.sel = phi i8* [ %call_d00, %d00_after_one ], [ %call_dc0, %dc0_after ]
+  %fn_e20 = bitcast i8* %callp_e20.sel to i8* (i32)*
+  %retptr_e20 = call i8* %fn_e20(i32 8)
+  br label %ret_m1
+
+loc_140001E54:                                 ; preds = %loc_140001D00
+  %commit1 = call i8* @sub_1400027A8(i32 8, i32 1)
+  %cont1 = call i8* @sub_140002120()
+  br label %ret_m1
+
+loc_140001DD6:                                 ; preds = %loc_140001DC0
+  %commit2 = call i8* @sub_1400027A8(i32 8, i32 1)
+  br label %ret_m1
+
+loc_140001E2C:                                 ; preds = %loc_140001DF0
+  %commit3 = call i8* @sub_1400027A8(i32 11, i32 1)
+  br label %ret_m1
+
+loc_140001E40:                                 ; preds = %loc_140001D8E
+  %commit4 = call i8* @sub_1400027A8(i32 4, i32 1)
+  br label %ret_m1
+
+loc_140001D1F:                                 ; preds = %loc_140001CD1, %d40_low, %d80_next, %d8e_after, %df0_after_one, %d00_after_one, %dc0_after
+  %fp = load i32 (i8**)*, i32 (i8**)** @qword_1400070D0, align 8
+  %isnull_fp = icmp eq i32 (i8**)* %fp, null
+  br i1 %isnull_fp, label %ret_0, label %tailcall
+
+tailcall:                                      ; preds = %loc_140001D1F
+  %res = call i32 %fp(i8** %rcx)
+  ret i32 %res
+
+ret_0:                                         ; preds = %loc_140001D1F
+  ret i32 0
+
+ret_m1:                                        ; preds = %loc_140001E40, %loc_140001E2C, %loc_140001DD6, %loc_140001E54, %loc_140001E20, %call_rax_df0, %call_rax_d8e, %loc_140001D60, %switch_disp, %d40_low, %loc_140001D80
+  ret i32 -1
+}

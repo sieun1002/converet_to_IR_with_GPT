@@ -1,0 +1,381 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/1/sub_1400010101.ll:303:30: error: '@qword_140007018' defined with type 'i8***' but expected 'i8**'
+;   %ptr_arrptr = bitcast i8** @qword_140007018 to i8***
+;                              ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_140001010'
+target triple = "x86_64-pc-windows-msvc"
+
+declare i8* @sub_140002660()
+declare i32 @sub_140002880(i32, i8**, i8*)
+declare void @sub_140002790(void ()*)
+declare void @sub_140002120()
+declare void @sub_140002778(i32)
+declare i8* @sub_140002720()
+declare i8* @sub_140002718()
+declare i32 @sub_140001540()
+declare i32 @sub_140002788(i8*, i8*)
+declare i32 @sub_1400026A0(i32*, i8***, i8**, i32, i32*)
+declare i8* @sub_1400027F8(i64)
+declare void @sub_1400027B8(i8*, i8*, i64)
+declare i64 @sub_140002700(i8*)
+declare i32 @sub_140002670(i32)
+declare void @sub_140002750()
+declare void @sub_1400027D0(i32)
+declare void @sub_140001CA0(void ()*)
+declare void @sub_1400018D0()
+declare void @sub_140001520()
+declare void @sub_140002780(i8*, i8*)
+declare void @sub_1400027A0(i32) noreturn
+declare void @sub_140001600()
+declare void @sub_140001CB0()
+declare void @nullsub_1()
+
+@off_140004470 = external global i64*
+@qword_140008280 = external global void (i32)*
+@off_140004480 = external global i32*
+@dword_140007004 = external global i32
+@off_1400043F0 = external global i8**
+@qword_140007010 = external global i8*
+@dword_140007020 = external global i32
+@qword_140007018 = external global i8**
+@dword_140007008 = external global i32
+@off_140004430 = external global i32*
+@off_140004440 = external global i32*
+@off_140004450 = external global i32*
+@off_1400043C0 = external global i8*
+@off_140004420 = external global i32*
+@off_1400044F0 = external global i32*
+@off_1400044D0 = external global i32*
+@off_1400043A0 = external global i32*
+@off_140004400 = external global i32*
+@off_1400044C0 = external global i8*
+@off_1400044B0 = external global i8*
+@off_140004520 = external global i32*
+@off_1400044E0 = external global i32*
+@off_1400044A0 = external global i8*
+@off_140004490 = external global i8*
+@qword_140008278 = external global i8* (i8*)*
+@off_140004460 = external global i8**
+
+define i32 @sub_140001010() local_unnamed_addr {
+entry:
+  %teb = call i8* asm sideeffect "mov $0, qword ptr gs:0x30", "=r"()
+  %teb_plus8 = getelementptr i8, i8* %teb, i64 8
+  %curthr_ptr = bitcast i8* %teb_plus8 to i8**
+  %curthr = load i8*, i8** %curthr_ptr, align 8
+  %curint = ptrtoint i8* %curthr to i64
+  %lockpp = load i64*, i64** @off_140004470, align 8
+  %sleepfn = load void (i32)*, void (i32)** @qword_140008280, align 8
+  br label %lock_try
+
+lock_try:                                         ; preds = %sleep_and_retry, %entry
+  %oldpair = cmpxchg i64* %lockpp, i64 0, i64 %curint seq_cst seq_cst
+  %old = extractvalue { i64, i1 } %oldpair, 0
+  %success = extractvalue { i64, i1 } %oldpair, 1
+  br i1 %success, label %lock_acquired, label %lock_busy
+
+lock_busy:                                        ; preds = %lock_try
+  %oldsame = icmp eq i64 %old, %curint
+  br i1 %oldsame, label %recursed_case, label %sleep_and_retry
+
+sleep_and_retry:                                  ; preds = %lock_busy
+  call void %sleepfn(i32 1000)
+  br label %lock_try
+
+recursed_case:                                    ; preds = %lock_busy
+  br label %after_lock
+
+lock_acquired:                                    ; preds = %lock_try
+  br label %after_lock
+
+after_lock:                                       ; preds = %lock_acquired, %recursed_case
+  %r14flag = phi i32 [ 1, %recursed_case ], [ 0, %lock_acquired ]
+  %stateptrp = load i32*, i32** @off_140004480, align 8
+  %state = load i32, i32* %stateptrp, align 4
+  %is1 = icmp eq i32 %state, 1
+  br i1 %is1, label %state_is_1, label %state_not_1
+
+state_is_1:                                       ; preds = %after_lock
+  %e1 = call i32 @sub_140002670(i32 31)
+  call void @sub_1400027A0(i32 %e1)
+  unreachable
+
+state_not_1:                                      ; preds = %after_lock
+  %is0 = icmp eq i32 %state, 0
+  br i1 %is0, label %init_block, label %set_flag_and_continue
+
+init_block:                                       ; preds = %state_not_1
+  store i32 1, i32* %stateptrp, align 4
+  call void @sub_1400018D0()
+  %fp_init_loader = load i8* (i8*)*, i8* (i8*)** @qword_140008278, align 8
+  %cb = bitcast void ()* @sub_140001CB0 to i8*
+  %raxret = call i8* %fp_init_loader(i8* %cb)
+  %off460p = load i8**, i8*** @off_140004460, align 8
+  store i8* %raxret, i8** %off460p, align 8
+  call void @sub_140002790(void ()* @nullsub_1)
+  call void @sub_140002120()
+  %p430 = load i32*, i32** @off_140004430, align 8
+  store i32 1, i32* %p430, align 4
+  %p440 = load i32*, i32** @off_140004440, align 8
+  store i32 1, i32* %p440, align 4
+  %p450 = load i32*, i32** @off_140004450, align 8
+  store i32 1, i32* %p450, align 4
+  br label %pe_check_start
+
+set_flag_and_continue:                            ; preds = %state_not_1
+  store i32 1, i32* @dword_140007004, align 4
+  br label %after_setflag
+
+after_setflag:                                    ; preds = %update_globals, %set_flag_and_continue
+  %r14_is_zero = icmp eq i32 %r14flag, 0
+  br i1 %r14_is_zero, label %release_lock_then_continue, label %after_release
+
+release_lock_then_continue:                       ; preds = %after_setflag
+  %xchg_old = atomicrmw xchg i64* %lockpp, i64 0 seq_cst
+  br label %after_release
+
+after_release:                                    ; preds = %release_lock_then_continue, %after_setflag
+  %ppf = load i8**, i8*** @off_1400043F0, align 8
+  %fptr_raw = load i8*, i8** %ppf, align 8
+  %isnull = icmp eq i8* %fptr_raw, null
+  br i1 %isnull, label %after_callback, label %do_callback
+
+do_callback:                                      ; preds = %after_release
+  %fptr = bitcast i8* %fptr_raw to void (i8*, i32, i8*)*
+  call void %fptr(i8* null, i32 2, i8* null)
+  br label %after_callback
+
+after_callback:                                   ; preds = %do_callback, %after_release
+  %buf = call i8* @sub_140002660()
+  %pval = load i8*, i8** @qword_140007010, align 8
+  %count = load i32, i32* @dword_140007020, align 4
+  %buf64p = bitcast i8* %buf to i8**
+  store i8* %pval, i8** %buf64p, align 8
+  %arr = load i8**, i8*** @qword_140007018, align 8
+  %res1 = call i32 @sub_140002880(i32 %count, i8** %arr, i8* %pval)
+  %flag_val = load i32, i32* @dword_140007008, align 4
+  %flag_zero = icmp eq i32 %flag_val, 0
+  br i1 %flag_zero, label %fatal_exit_with_res1, label %check_dword_7004
+
+fatal_exit_with_res1:                             ; preds = %after_callback
+  call void @sub_1400027A0(i32 %res1)
+  unreachable
+
+check_dword_7004:                                 ; preds = %after_callback
+  %d7004 = load i32, i32* @dword_140007004, align 4
+  %iszero7004 = icmp eq i32 %d7004, 0
+  br i1 %iszero7004, label %finalize_and_return_with_res1, label %return_res1
+
+finalize_and_return_with_res1:                    ; preds = %check_dword_7004
+  call void @sub_140002750()
+  ret i32 %res1
+
+return_res1:                                      ; preds = %check_dword_7004
+  ret i32 %res1
+
+pe_check_start:                                   ; preds = %init_block
+  %base = load i8*, i8** @off_1400043C0, align 8
+  %mzptr = bitcast i8* %base to i16*
+  %mz = load i16, i16* %mzptr, align 2
+  %ismz = icmp eq i16 %mz, 23117
+  br i1 %ismz, label %check_pe_sig, label %pe_done_zero
+
+check_pe_sig:                                     ; preds = %pe_check_start
+  %peoff_ptr = getelementptr i8, i8* %base, i64 60
+  %peoff_i32p = bitcast i8* %peoff_ptr to i32*
+  %peoff = load i32, i32* %peoff_i32p, align 4
+  %peoff64 = sext i32 %peoff to i64
+  %nt_hdr = getelementptr i8, i8* %base, i64 %peoff64
+  %sigp = bitcast i8* %nt_hdr to i32*
+  %sig = load i32, i32* %sigp, align 4
+  %issig = icmp eq i32 %sig, 17744
+  br i1 %issig, label %check_magic, label %pe_done_zero
+
+check_magic:                                      ; preds = %check_pe_sig
+  %magic_ptr = getelementptr i8, i8* %nt_hdr, i64 24
+  %magic_p16 = bitcast i8* %magic_ptr to i16*
+  %magic = load i16, i16* %magic_p16, align 2
+  %is32 = icmp eq i16 %magic, 267
+  %is64 = icmp eq i16 %magic, 523
+  br i1 %is32, label %pe32_path, label %check_64_else
+
+check_64_else:                                    ; preds = %check_magic
+  br i1 %is64, label %pe64_path, label %pe_done_zero
+
+pe32_path:                                        ; preds = %check_magic
+  %sz32_ptr = getelementptr i8, i8* %nt_hdr, i64 116
+  %sz32_p = bitcast i8* %sz32_ptr to i32*
+  %sz32 = load i32, i32* %sz32_p, align 4
+  %ok32 = icmp ugt i32 %sz32, 14
+  br i1 %ok32, label %read_pe32_flag, label %pe_done_zero
+
+read_pe32_flag:                                   ; preds = %pe32_path
+  %fld32_ptr = getelementptr i8, i8* %nt_hdr, i64 232
+  %fld32_p = bitcast i8* %fld32_ptr to i32*
+  %fld32 = load i32, i32* %fld32_p, align 4
+  %nonzero32 = icmp ne i32 %fld32, 0
+  %ecx_val1 = select i1 %nonzero32, i32 1, i32 0
+  br label %pe_done
+
+pe64_path:                                        ; preds = %check_64_else
+  %sz64_ptr = getelementptr i8, i8* %nt_hdr, i64 132
+  %sz64_p = bitcast i8* %sz64_ptr to i32*
+  %sz64 = load i32, i32* %sz64_p, align 4
+  %ok64 = icmp ugt i32 %sz64, 14
+  br i1 %ok64, label %read_pe64_flag, label %pe_done_zero
+
+read_pe64_flag:                                   ; preds = %pe64_path
+  %fld64_ptr = getelementptr i8, i8* %nt_hdr, i64 248
+  %fld64_p = bitcast i8* %fld64_ptr to i32*
+  %fld64 = load i32, i32* %fld64_p, align 4
+  %nonzero64 = icmp ne i32 %fld64, 0
+  %ecx_val2 = select i1 %nonzero64, i32 1, i32 0
+  br label %pe_done
+
+pe_done_zero:                                     ; preds = %pe64_path, %pe32_path, %check_64_else, %check_pe_sig, %pe_check_start
+  br label %pe_done
+
+pe_done:                                          ; preds = %pe_done_zero, %read_pe64_flag, %read_pe32_flag
+  %ecx_pe = phi i32 [ 0, %pe_done_zero ], [ %ecx_val1, %read_pe32_flag ], [ %ecx_val2, %read_pe64_flag ]
+  store i32 %ecx_pe, i32* @dword_140007008, align 4
+  %p420 = load i32*, i32** @off_140004420, align 8
+  %v420 = load i32, i32* %p420, align 4
+  %v420_nz = icmp ne i32 %v420, 0
+  br i1 %v420_nz, label %call_2778_2, label %call_2778_1
+
+call_2778_1:                                      ; preds = %pe_done
+  call void @sub_140002778(i32 1)
+  br label %after_2778
+
+call_2778_2:                                      ; preds = %pe_done
+  call void @sub_140002778(i32 2)
+  br label %after_2778
+
+after_2778:                                       ; preds = %call_2778_2, %call_2778_1
+  %pA = call i8* @sub_140002720()
+  %p4F0 = load i32*, i32** @off_1400044F0, align 8
+  %v4F0 = load i32, i32* %p4F0, align 4
+  %pAi32 = bitcast i8* %pA to i32*
+  store i32 %v4F0, i32* %pAi32, align 4
+  %pB = call i8* @sub_140002718()
+  %p4D0 = load i32*, i32** @off_1400044D0, align 8
+  %v4D0 = load i32, i32* %p4D0, align 4
+  %pBi32 = bitcast i8* %pB to i32*
+  store i32 %v4D0, i32* %pBi32, align 4
+  %rc = call i32 @sub_140001540()
+  %neg = icmp slt i32 %rc, 0
+  br i1 %neg, label %error_1301, label %check_3A0
+
+check_3A0:                                        ; preds = %after_2778
+  %p3A0 = load i32*, i32** @off_1400043A0, align 8
+  %v3A0 = load i32, i32* %p3A0, align 4
+  %is1_3A0 = icmp eq i32 %v3A0, 1
+  br i1 %is1_3A0, label %call_1CA0, label %after_1CA0
+
+call_1CA0:                                        ; preds = %check_3A0
+  call void @sub_140001CA0(void ()* @sub_140001600)
+  br label %after_1CA0
+
+after_1CA0:                                       ; preds = %call_1CA0, %check_3A0
+  %p400 = load i32*, i32** @off_140004400, align 8
+  %v400 = load i32, i32* %p400, align 4
+  %isneg1 = icmp eq i32 %v400, -1
+  br i1 %isneg1, label %call_27D0, label %cont_after_27D0
+
+call_27D0:                                        ; preds = %after_1CA0
+  call void @sub_1400027D0(i32 -1)
+  br label %cont_after_27D0
+
+cont_after_27D0:                                  ; preds = %call_27D0, %after_1CA0
+  %p4B0 = load i8*, i8** @off_1400044B0, align 8
+  %p4C0 = load i8*, i8** @off_1400044C0, align 8
+  %chk = call i32 @sub_140002788(i8* %p4B0, i8* %p4C0)
+  %nonzero = icmp ne i32 %chk, 0
+  br i1 %nonzero, label %ret_255, label %cont_after_788
+
+ret_255:                                          ; preds = %cont_after_27D0
+  ret i32 255
+
+cont_after_788:                                   ; preds = %cont_after_27D0
+  %p520 = load i32*, i32** @off_140004520, align 8
+  %v520 = load i32, i32* %p520, align 4
+  %p4E0 = load i32*, i32** @off_1400044E0, align 8
+  %v4E0 = load i32, i32* %p4E0, align 4
+  %var4C = alloca i32, align 4
+  store i32 %v520, i32* %var4C, align 4
+  %ptr_count = bitcast i32* @dword_140007020 to i32*
+  %ptr_arrptr = bitcast i8** @qword_140007018 to i8***
+  %ptr_valptr = bitcast i8** @qword_140007010 to i8**
+  %rc_26A0 = call i32 @sub_1400026A0(i32* %ptr_count, i8*** %ptr_arrptr, i8** %ptr_valptr, i32 %v4E0, i32* %var4C)
+  %neg2 = icmp slt i32 %rc_26A0, 0
+  br i1 %neg2, label %error_1301, label %alloc_array
+
+alloc_array:                                      ; preds = %cont_after_788
+  %cnt = load i32, i32* @dword_140007020, align 4
+  %cnt64 = sext i32 %cnt to i64
+  %cntp1 = add i64 %cnt64, 1
+  %size_bytes = shl i64 %cntp1, 3
+  %newarr = call i8* @sub_1400027F8(i64 %size_bytes)
+  %isnull_newarr = icmp eq i8* %newarr, null
+  br i1 %isnull_newarr, label %error_1301, label %check_cnt_positive
+
+check_cnt_positive:                               ; preds = %alloc_array
+  %cntpos = icmp sgt i32 %cnt, 0
+  br i1 %cntpos, label %loop_prep, label %set_term_and_update
+
+loop_prep:                                        ; preds = %check_cnt_positive
+  %r15 = load i8**, i8*** @qword_140007018, align 8
+  br label %loop_header
+
+loop_header:                                      ; preds = %loop_next, %loop_prep
+  %i = phi i64 [ 1, %loop_prep ], [ %i_next, %loop_next ]
+  %idx0 = sub i64 %i, 1
+  %srcptraddr = getelementptr i8*, i8** %r15, i64 %idx0
+  %src = load i8*, i8** %srcptraddr, align 8
+  %len = call i64 @sub_140002700(i8* %src)
+  %rdi = add i64 %len, 1
+  %dest = call i8* @sub_1400027F8(i64 %rdi)
+  %newarrp = bitcast i8* %newarr to i8**
+  %dstslot = getelementptr i8*, i8** %newarrp, i64 %idx0
+  store i8* %dest, i8** %dstslot, align 8
+  %dest_is_null = icmp eq i8* %dest, null
+  br i1 %dest_is_null, label %error_1301, label %loop_copy
+
+loop_copy:                                        ; preds = %loop_header
+  call void @sub_1400027B8(i8* %dest, i8* %src, i64 %rdi)
+  %i32 = trunc i64 %i to i32
+  %eq_last = icmp eq i32 %cnt, %i32
+  br i1 %eq_last, label %place_terminator, label %loop_next
+
+loop_next:                                        ; preds = %loop_copy
+  %i_next = add i64 %i, 1
+  br label %loop_header
+
+place_terminator:                                 ; preds = %loop_copy
+  %newarrp2 = bitcast i8* %newarr to i8**
+  %lastslot = getelementptr i8*, i8** %newarrp2, i64 %cnt64
+  store i8* null, i8** %lastslot, align 8
+  br label %update_globals
+
+set_term_and_update:                              ; preds = %check_cnt_positive
+  %newarrp3 = bitcast i8* %newarr to i8**
+  %lastslot2 = getelementptr i8*, i8** %newarrp3, i64 %cnt64
+  store i8* null, i8** %lastslot2, align 8
+  br label %update_globals
+
+update_globals:                                   ; preds = %set_term_and_update, %place_terminator
+  %p4A0 = load i8*, i8** @off_1400044A0, align 8
+  %p490 = load i8*, i8** @off_140004490, align 8
+  store i8* %newarr, i8** @qword_140007018, align 8
+  call void @sub_140002780(i8* %p490, i8* %p4A0)
+  call void @sub_140001520()
+  store i32 2, i32* %stateptrp, align 4
+  br label %after_setflag
+
+error_1301:                                       ; preds = %loop_header, %alloc_array, %cont_after_788, %after_2778
+  %e8 = call i32 @sub_140002670(i32 8)
+  call void @sub_140002750()
+  ret i32 %e8
+}

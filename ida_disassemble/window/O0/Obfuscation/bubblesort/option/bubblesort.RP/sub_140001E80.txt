@@ -1,0 +1,37 @@
+; Function: sub_140001E80
+; Start: 0x140001e80, End: 0x140001eea
+
+0x140001e80: push    rbp
+0x140001e81: push    rdi
+0x140001e82: push    rsi
+0x140001e83: push    rbx
+0x140001e84: sub     rsp, 28h
+0x140001e88: lea     rcx, CriticalSection; lpCriticalSection
+0x140001e8f: call    cs:__imp_EnterCriticalSection
+0x140001e95: mov     rbx, cs:Block
+0x140001e9c: test    rbx, rbx
+0x140001e9f: jz      short loc_140001ED4
+0x140001ea1: mov     rbp, cs:__imp_TlsGetValue
+0x140001ea8: mov     rdi, cs:__imp_GetLastError
+0x140001eaf: nop
+0x140001eb0: mov     ecx, [rbx]; dwTlsIndex
+0x140001eb2: call    rbp ; __imp_TlsGetValue
+0x140001eb4: mov     rsi, rax
+0x140001eb7: call    rdi ; __imp_GetLastError
+0x140001eb9: test    rsi, rsi
+0x140001ebc: jz      short loc_140001ECB
+0x140001ebe: test    eax, eax
+0x140001ec0: jnz     short loc_140001ECB
+0x140001ec2: mov     rax, [rbx+8]
+0x140001ec6: mov     rcx, rsi
+0x140001ec9: call    rax
+0x140001ecb: mov     rbx, [rbx+10h]
+0x140001ecf: test    rbx, rbx
+0x140001ed2: jnz     short loc_140001EB0
+0x140001ed4: lea     rcx, CriticalSection
+0x140001edb: add     rsp, 28h
+0x140001edf: pop     rbx
+0x140001ee0: pop     rsi
+0x140001ee1: pop     rdi
+0x140001ee2: pop     rbp
+0x140001ee3: jmp     cs:__imp_LeaveCriticalSection

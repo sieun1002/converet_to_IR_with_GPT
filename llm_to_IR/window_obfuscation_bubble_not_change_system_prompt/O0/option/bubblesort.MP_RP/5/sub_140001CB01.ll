@@ -1,0 +1,222 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@qword_1400070D0 = external global ptr, align 8
+
+declare ptr @sub_1400027A8(i32, i32)
+declare ptr @sub_140002120()
+
+define i64 @sub_140001CB0(ptr %rcx) local_unnamed_addr {
+entry:
+  %default.addr = blockaddress(@sub_140001CB0, %ret_minus1)
+  %p_obj = load ptr, ptr %rcx, align 8
+  %p_i32 = bitcast ptr %p_obj to ptr i32
+  %status = load i32, ptr %p_i32, align 4
+  %masked = and i32 %status, 553648127
+  %is_cgc = icmp eq i32 %masked, 541729731
+  br i1 %is_cgc, label %cgc_test, label %cmp_range
+
+cgc_test:                                         ; 0x140001D60
+  %p_i8 = bitcast ptr %p_obj to ptr i8
+  %off4 = getelementptr inbounds i8, ptr %p_i8, i64 4
+  %b4 = load i8, ptr %off4, align 1
+  %b4_and1 = and i8 %b4, 1
+  %b4_nz = icmp ne i8 %b4_and1, 0
+  br i1 %b4_nz, label %cmp_range, label %dispatch_from_cgcdef
+
+cmp_range:                                        ; 0x140001CD1
+  %cmp_gt_96 = icmp ugt i32 %status, 3221225622
+  br i1 %cmp_gt_96, label %loc_d1f, label %cmp_le_8B
+
+cmp_le_8B:
+  %cmp_le_8B.v = icmp ule i32 %status, 3221225611
+  br i1 %cmp_le_8B.v, label %loc_d40, label %switch_jt
+
+switch_jt:
+  switch i32 %status, label %dispatch_unmapped [
+    i32 3221225613, label %case_d00        ; 0xC000008D
+    i32 3221225614, label %case_d00        ; 0xC000008E
+    i32 3221225615, label %case_d00        ; 0xC000008F
+    i32 3221225616, label %case_d00        ; 0xC0000090
+    i32 3221225617, label %case_d00        ; 0xC0000091
+    i32 3221225618, label %ret_minus1      ; 0xC0000092 (default case)
+    i32 3221225619, label %case_d00        ; 0xC0000093
+    i32 3221225620, label %case_dc0        ; 0xC0000094
+    i32 3221225621, label %ret_minus1      ; 0xC0000095 (default case)
+    i32 3221225622, label %case_d8e        ; 0xC0000096
+  ]
+
+; -------- dispatch sources that emulate 'jmp def_140001CF7' --------
+
+dispatch_from_cgcdef:
+  br label %dispatch
+
+dispatch_unmapped:
+  br label %dispatch
+
+; -------- case blocks from jump table --------
+
+case_d00:                                         ; 0x140001D00
+  %call_7A8_d00 = call ptr @sub_1400027A8(i32 8, i32 0)
+  %call_7A8_d00_i = ptrtoint ptr %call_7A8_d00 to i64
+  %is_one_d00 = icmp eq i64 %call_7A8_d00_i, 1
+  br i1 %is_one_d00, label %loc_e54, label %d00_test_nz
+
+d00_test_nz:
+  %is_null_d00 = icmp eq ptr %call_7A8_d00, null
+  br i1 %is_null_d00, label %loc_d1f, label %loc_e20_from_d00
+
+loc_e20_from_d00:                                 ; 0x140001E20 path
+  %fp_d00 = bitcast ptr %call_7A8_d00 to ptr (i32)*
+  %retptr_d00 = call ptr %fp_d00(i32 8)
+  br label %dispatch_with_ret_d00
+
+case_dc0:                                         ; 0x140001DC0
+  %call_7A8_dc0 = call ptr @sub_1400027A8(i32 8, i32 0)
+  %call_7A8_dc0_i = ptrtoint ptr %call_7A8_dc0 to i64
+  %is_one_dc0 = icmp eq i64 %call_7A8_dc0_i, 1
+  br i1 %is_one_dc0, label %dc0_then_eq1, label %loc_d16
+
+dc0_then_eq1:
+  %call_7A8_dc0_2 = call ptr @sub_1400027A8(i32 8, i32 1)
+  br label %dispatch_with_call_dc0_2
+
+loc_d16:                                          ; 0x140001D16
+  %is_null_dc0 = icmp eq ptr %call_7A8_dc0, null
+  br i1 %is_null_dc0, label %loc_d1f, label %loc_e20_from_dc0
+
+loc_e20_from_dc0:                                 ; 0x140001E20 path
+  %fp_dc0 = bitcast ptr %call_7A8_dc0 to ptr (i32)*
+  %retptr_dc0 = call ptr %fp_dc0(i32 8)
+  br label %dispatch_with_ret_dc0
+
+case_d8e:                                         ; 0x140001D8E
+  %call_7A8_d8e = call ptr @sub_1400027A8(i32 4, i32 0)
+  %call_7A8_d8e_i = ptrtoint ptr %call_7A8_d8e to i64
+  %is_one_d8e = icmp eq i64 %call_7A8_d8e_i, 1
+  br i1 %is_one_d8e, label %loc_e40, label %d8e_test_nz
+
+d8e_test_nz:
+  %is_null_d8e = icmp eq ptr %call_7A8_d8e, null
+  br i1 %is_null_d8e, label %loc_d1f, label %loc_e20_from_d8e
+
+loc_e20_from_d8e:                                 ; call through rax with ecx=4
+  %fp_d8e = bitcast ptr %call_7A8_d8e to ptr (i32)*
+  %retptr_d8e = call ptr %fp_d8e(i32 4)
+  br label %dispatch_with_ret_d8e
+
+; -------- non-jumptable comparator path blocks --------
+
+loc_d40:                                          ; 0x140001D40
+  %is_av = icmp eq i32 %status, 3221225477          ; 0xC0000005
+  br i1 %is_av, label %loc_df0, label %d40_after_av
+
+d40_after_av:
+  %ugt_av = icmp ugt i32 %status, 3221225477
+  br i1 %ugt_av, label %loc_d80, label %d40_le_av
+
+d40_le_av:
+  %is_80000002 = icmp eq i32 %status, 2147483650    ; 0x80000002
+  br i1 %is_80000002, label %ret_minus1, label %loc_d1f
+
+loc_d80:                                          ; 0x140001D80
+  %is_c0000008 = icmp eq i32 %status, 3221225480    ; 0xC0000008
+  br i1 %is_c0000008, label %dispatch_unmapped, label %d80_check_001D
+
+d80_check_001D:
+  %is_c000001D = icmp eq i32 %status, 3221225501    ; 0xC000001D
+  br i1 %is_c000001D, label %case_d8e, label %loc_d1f
+
+loc_df0:                                          ; 0x140001DF0
+  %call_7A8_df0 = call ptr @sub_1400027A8(i32 11, i32 0)
+  %call_7A8_df0_i = ptrtoint ptr %call_7A8_df0 to i64
+  %is_one_df0 = icmp eq i64 %call_7A8_df0_i, 1
+  br i1 %is_one_df0, label %loc_e2c, label %df0_test_nz
+
+df0_test_nz:
+  %is_null_df0 = icmp eq ptr %call_7A8_df0, null
+  br i1 %is_null_df0, label %loc_d1f, label %loc_e20_from_df0
+
+loc_e20_from_df0:                                 ; call through rax with ecx=0xB
+  %fp_df0 = bitcast ptr %call_7A8_df0 to ptr (i32)*
+  %retptr_df0 = call ptr %fp_df0(i32 11)
+  br label %dispatch_with_ret_df0
+
+; -------- E* helper blocks that produce next dispatch target --------
+
+loc_e20:                                          ; not directly used (handled by specific from_* blocks)
+
+loc_e2c:                                          ; 0x140001E2C
+  %call_7A8_e2c = call ptr @sub_1400027A8(i32 11, i32 1)
+  br label %dispatch_with_call_e2c
+
+loc_e40:                                          ; 0x140001E40
+  %call_7A8_e40 = call ptr @sub_1400027A8(i32 4, i32 1)
+  br label %dispatch_with_call_e40
+
+loc_e54:                                          ; 0x140001E54
+  %call_7A8_e54 = call ptr @sub_1400027A8(i32 8, i32 1)
+  %call_2120 = call ptr @sub_140002120()
+  br label %dispatch_with_call_2120
+
+; -------- unified dispatch implementing 'jmp rax' --------
+
+dispatch:                                         ; 0x140001CF7 semantic
+  %addr = phi ptr [ %default.addr, %dispatch_from_cgcdef ],
+                 [ %default.addr, %dispatch_unmapped ],
+                 [ %retptr_d00, %dispatch_with_ret_d00 ],
+                 [ %retptr_dc0, %dispatch_with_ret_dc0 ],
+                 [ %call_7A8_dc0_2, %dispatch_with_call_dc0_2 ],
+                 [ %retptr_d8e, %dispatch_with_ret_d8e ],
+                 [ %call_7A8_e40, %dispatch_with_call_e40 ],
+                 [ %retptr_df0, %dispatch_with_ret_df0 ],
+                 [ %call_7A8_e2c, %dispatch_with_call_e2c ],
+                 [ %call_2120, %dispatch_with_call_2120 ]
+  indirectbr ptr %addr, [ label %case_d00, label %case_dc0, label %case_d8e, label %ret_minus1 ]
+
+; -------- small trampoline blocks to feed dispatch PHI --------
+
+dispatch_with_ret_d00:
+  br label %dispatch
+
+dispatch_with_ret_dc0:
+  br label %dispatch
+
+dispatch_with_call_dc0_2:
+  br label %dispatch
+
+dispatch_with_ret_d8e:
+  br label %dispatch
+
+dispatch_with_call_e40:
+  br label %dispatch
+
+dispatch_with_ret_df0:
+  br label %dispatch
+
+dispatch_with_call_e2c:
+  br label %dispatch
+
+dispatch_with_call_2120:
+  br label %dispatch
+
+; -------- tailcall fallback --------
+
+loc_d1f:                                          ; 0x140001D1F
+  %fp_global = load ptr, ptr @qword_1400070D0, align 8
+  %isnull_fp = icmp eq ptr %fp_global, null
+  br i1 %isnull_fp, label %ret_zero, label %tailcall_fp
+
+tailcall_fp:
+  %callee = bitcast ptr %fp_global to ptr (ptr)*
+  %res = musttail call i64 %callee(ptr %rcx)
+  ret i64 %res
+
+; -------- returns --------
+
+ret_minus1:                                       ; 0x140001D54
+  ret i64 -1
+
+ret_zero:                                         ; 0x140001D70
+  ret i64 0
+}

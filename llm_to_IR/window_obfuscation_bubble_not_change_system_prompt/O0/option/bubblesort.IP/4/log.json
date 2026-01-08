@@ -1,0 +1,780 @@
+{
+  "meta": {
+    "round": 4,
+    "start_time": "2026-01-08T04:37:48",
+    "input_folder": "/root/workspace/converet_to_IR_with_GPT/ida_disassemble/window/O0/Obfuscation/bubblesort/option/bubblesort.IP",
+    "output_dir": "/root/workspace/converet_to_IR_with_GPT/llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4",
+    "generate_model": "gpt-5",
+    "fix_model": "gpt-5",
+    "max_ir_versions": 5,
+    "max_fix_attempts": 4,
+    "error_first": true
+  },
+  "entries": [
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "request_id": "resp_0d4244109aa7056c00695f349c3350819d9c157c5261032e15",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:37:48",
+      "end_time": "2026-01-08T04:41:40",
+      "elapsed_sec": 232.353428,
+      "usage": {
+        "input_tokens": 1772,
+        "output_tokens": 12104,
+        "total_tokens": 13876
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400010101.ll",
+      "success": true,
+      "time": "2026-01-08T04:41:40"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400010101.bc",
+      "start_time": "2026-01-08T04:41:40",
+      "end_time": "2026-01-08T04:41:40",
+      "elapsed_sec": 0.016285
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400014A0.txt",
+      "version": 1,
+      "request_id": "resp_00d54d1e91c4755100695f3584989481a2932147787edb7fea",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:41:40",
+      "end_time": "2026-01-08T04:44:32",
+      "elapsed_sec": 171.786419,
+      "usage": {
+        "input_tokens": 910,
+        "output_tokens": 10013,
+        "total_tokens": 10923
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400014A0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A01.ll",
+      "success": true,
+      "time": "2026-01-08T04:44:32"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400014A0.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A01.ll:39:16: error: expected instruction opcode\n  %count_s64 = %rax_phi\n               ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A01.bc",
+      "start_time": "2026-01-08T04:44:32",
+      "end_time": "2026-01-08T04:44:32",
+      "elapsed_sec": 0.018344
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_1400014A0.txt",
+      "version": 2,
+      "request_id": "resp_0826b5d386b3c0a700695f3630629881a0b11222b5f5815143",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:44:32",
+      "end_time": "2026-01-08T04:45:36",
+      "elapsed_sec": 64.256237,
+      "usage": {
+        "input_tokens": 1126,
+        "output_tokens": 4001,
+        "total_tokens": 5127
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400014A0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A02.ll",
+      "success": true,
+      "time": "2026-01-08T04:45:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400014A0.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400014A02.bc",
+      "start_time": "2026-01-08T04:45:36",
+      "end_time": "2026-01-08T04:45:36",
+      "elapsed_sec": 0.016887
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001600.txt",
+      "version": 1,
+      "request_id": "resp_00637f38625e133200695f3670a980819da73dd0f662a5d7de",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:45:36",
+      "end_time": "2026-01-08T04:46:41",
+      "elapsed_sec": 65.28845,
+      "usage": {
+        "input_tokens": 1396,
+        "output_tokens": 4705,
+        "total_tokens": 6101
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001600.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400016001.ll",
+      "success": true,
+      "time": "2026-01-08T04:46:41"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001600.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %errstr = phi i8* [ @aArgumentDomain, %sw.bb1 ], [ @aArgumentSingul, %sw.bb2 ], [ @aOverflowRangeE, %sw.bb3 ], [ @aTheResultIsToo, %sw.bb4 ], [ @aTotalLossOfSig, %sw.bb5 ], [ @aPartialLossOfS, %sw.bb6 ], [ @aUnknownError, %sw.default ], [ @aUnknownError, %entry ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400016001.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400016001.bc",
+      "start_time": "2026-01-08T04:46:41",
+      "end_time": "2026-01-08T04:46:41",
+      "elapsed_sec": 0.017849
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_140001600.txt",
+      "version": 2,
+      "request_id": "resp_061b931d08c69a8f00695f36b1f6dc819d8405b710d40b5d24",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:46:41",
+      "end_time": "2026-01-08T04:47:12",
+      "elapsed_sec": 31.133505,
+      "usage": {
+        "input_tokens": 1394,
+        "output_tokens": 2455,
+        "total_tokens": 3849
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001600.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400016002.ll",
+      "success": true,
+      "time": "2026-01-08T04:47:12"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001600.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400016002.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400016002.bc",
+      "start_time": "2026-01-08T04:47:12",
+      "end_time": "2026-01-08T04:47:12",
+      "elapsed_sec": 0.017061
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001700.txt",
+      "version": 1,
+      "request_id": "resp_044f5977c8c67f9e00695f36d12030819cb5a5eab95980be55",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:47:12",
+      "end_time": "2026-01-08T04:48:53",
+      "elapsed_sec": 100.342599,
+      "usage": {
+        "input_tokens": 698,
+        "output_tokens": 5915,
+        "total_tokens": 6613
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001700.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400017001.ll",
+      "success": true,
+      "time": "2026-01-08T04:48:53"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001700.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400017001.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400017001.bc",
+      "start_time": "2026-01-08T04:48:53",
+      "end_time": "2026-01-08T04:48:53",
+      "elapsed_sec": 0.020377
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001760.txt",
+      "version": 1,
+      "request_id": "resp_0c23bb942a8cd2f500695f373577c88196b545e8c91b4e3fb5",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:48:53",
+      "end_time": "2026-01-08T04:53:08",
+      "elapsed_sec": 254.998012,
+      "usage": {
+        "input_tokens": 1747,
+        "output_tokens": 12780,
+        "total_tokens": 14527
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001760.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400017601.ll",
+      "success": true,
+      "time": "2026-01-08T04:53:08"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001760.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400017601.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400017601.bc",
+      "start_time": "2026-01-08T04:53:08",
+      "end_time": "2026-01-08T04:53:08",
+      "elapsed_sec": 0.01583
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "request_id": "resp_0f1a803fe8133fbc00695f3834810081a3b372acad6b97be3b",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:53:08",
+      "end_time": "2026-01-08T04:58:33",
+      "elapsed_sec": 324.904905,
+      "usage": {
+        "input_tokens": 4138,
+        "output_tokens": 16552,
+        "total_tokens": 20690
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400018D01.ll",
+      "success": true,
+      "time": "2026-01-08T04:58:33"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400018D01.bc",
+      "start_time": "2026-01-08T04:58:33",
+      "end_time": "2026-01-08T04:58:33",
+      "elapsed_sec": 0.015642
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001CB0.txt",
+      "version": 1,
+      "request_id": "resp_07b4c91bd6b2b4d300695f39797304819fb2a088213d508e40",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T04:58:33",
+      "end_time": "2026-01-08T05:03:30",
+      "elapsed_sec": 296.873168,
+      "usage": {
+        "input_tokens": 2379,
+        "output_tokens": 15705,
+        "total_tokens": 18084
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001CB0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB01.ll",
+      "success": true,
+      "time": "2026-01-08T05:03:30"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001CB0.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB01.ll:14:29: error: floating point constant invalid for type\n  %mask = and i32 %eax.val, 0x20FFFFFF\n                            ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB01.bc",
+      "start_time": "2026-01-08T05:03:30",
+      "end_time": "2026-01-08T05:03:30",
+      "elapsed_sec": 0.021119
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_140001CB0.txt",
+      "version": 2,
+      "request_id": "resp_091aa6de0f292dd900695f3aa254e88191963d676ce00ca1d1",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:03:30",
+      "end_time": "2026-01-08T05:05:35",
+      "elapsed_sec": 125.557381,
+      "usage": {
+        "input_tokens": 2859,
+        "output_tokens": 5945,
+        "total_tokens": 8804
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001CB0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB02.ll",
+      "success": true,
+      "time": "2026-01-08T05:05:35"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001CB0.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001CB02.bc",
+      "start_time": "2026-01-08T05:05:35",
+      "end_time": "2026-01-08T05:05:35",
+      "elapsed_sec": 0.018174
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001E80.txt",
+      "version": 1,
+      "request_id": "resp_02b5da7a2546fdbc00695f3b1fed388191be8dc54a01bac7ac",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:05:35",
+      "end_time": "2026-01-08T05:08:22",
+      "elapsed_sec": 166.991058,
+      "usage": {
+        "input_tokens": 897,
+        "output_tokens": 7401,
+        "total_tokens": 8298
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001E80.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001E801.ll",
+      "success": true,
+      "time": "2026-01-08T05:08:22"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001E80.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001E801.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001E801.bc",
+      "start_time": "2026-01-08T05:08:22",
+      "end_time": "2026-01-08T05:08:22",
+      "elapsed_sec": 0.016516
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001EF0.txt",
+      "version": 1,
+      "request_id": "resp_0bf147b9e4b9897400695f3bc6ea4881929d19e50929381f95",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:08:22",
+      "end_time": "2026-01-08T05:10:23",
+      "elapsed_sec": 120.518171,
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 5414,
+        "total_tokens": 6335
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001EF0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001EF01.ll",
+      "success": true,
+      "time": "2026-01-08T05:10:23"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001EF0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001EF01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001EF01.bc",
+      "start_time": "2026-01-08T05:10:23",
+      "end_time": "2026-01-08T05:10:23",
+      "elapsed_sec": 0.018882
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140001F80.txt",
+      "version": 1,
+      "request_id": "resp_0690879c886ccd4100695f3c3f760481a2848815870d0c3e20",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:10:23",
+      "end_time": "2026-01-08T05:13:03",
+      "elapsed_sec": 159.697046,
+      "usage": {
+        "input_tokens": 955,
+        "output_tokens": 7505,
+        "total_tokens": 8460
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140001F80.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001F801.ll",
+      "success": true,
+      "time": "2026-01-08T05:13:03"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140001F80.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001F801.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_140001F801.bc",
+      "start_time": "2026-01-08T05:13:03",
+      "end_time": "2026-01-08T05:13:03",
+      "elapsed_sec": 0.015892
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002010.txt",
+      "version": 1,
+      "request_id": "resp_0d8ab8dff32e5c2700695f3cdf2acc8195aa5bbd151bb13802",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:13:03",
+      "end_time": "2026-01-08T05:15:15",
+      "elapsed_sec": 132.00595,
+      "usage": {
+        "input_tokens": 1263,
+        "output_tokens": 7628,
+        "total_tokens": 8891
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400020101.ll",
+      "success": true,
+      "time": "2026-01-08T05:15:15"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002010.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400020101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400020101.bc",
+      "start_time": "2026-01-08T05:15:15",
+      "end_time": "2026-01-08T05:15:15",
+      "elapsed_sec": 0.023798
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400021B0.txt",
+      "version": 1,
+      "request_id": "resp_041a06cf70edf3df00695f3d633438819490bc46b175ab6843",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:15:15",
+      "end_time": "2026-01-08T05:18:48",
+      "elapsed_sec": 213.099472,
+      "usage": {
+        "input_tokens": 1073,
+        "output_tokens": 8361,
+        "total_tokens": 9434
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400021B0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400021B01.ll",
+      "success": true,
+      "time": "2026-01-08T05:18:48"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400021B0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400021B01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400021B01.bc",
+      "start_time": "2026-01-08T05:18:48",
+      "end_time": "2026-01-08T05:18:48",
+      "elapsed_sec": 0.017181
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002250.txt",
+      "version": 1,
+      "request_id": "resp_0aa451ef302232f300695f3e3853f08190b14235b09fb13f47",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:18:48",
+      "end_time": "2026-01-08T05:21:58",
+      "elapsed_sec": 190.752229,
+      "usage": {
+        "input_tokens": 916,
+        "output_tokens": 9573,
+        "total_tokens": 10489
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002250.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400022501.ll",
+      "success": true,
+      "time": "2026-01-08T05:21:58"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002250.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400022501.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400022501.bc",
+      "start_time": "2026-01-08T05:21:58",
+      "end_time": "2026-01-08T05:21:58",
+      "elapsed_sec": 0.016618
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_1400025A0.txt",
+      "version": 1,
+      "request_id": "resp_0d3ef4486132161400695f3ef71e0c819183605db5e6f27e2f",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:21:58",
+      "end_time": "2026-01-08T05:24:10",
+      "elapsed_sec": 131.190205,
+      "usage": {
+        "input_tokens": 739,
+        "output_tokens": 5778,
+        "total_tokens": 6517
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_1400025A0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400025A01.ll",
+      "success": true,
+      "time": "2026-01-08T05:24:10"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_1400025A0.txt",
+      "version": 1,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400025A01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400025A01.bc",
+      "start_time": "2026-01-08T05:24:10",
+      "end_time": "2026-01-08T05:24:10",
+      "elapsed_sec": 0.016979
+    },
+    {
+      "phase": "gpt_call",
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "request_id": "resp_0392a7d36788523500695f3f7a5764819eba9dd3b6f6f420d2",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:24:10",
+      "end_time": "2026-01-08T05:29:36",
+      "elapsed_sec": 326.724653,
+      "usage": {
+        "input_tokens": 12402,
+        "output_tokens": 1721,
+        "total_tokens": 14123
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400028801.ll",
+      "success": true,
+      "time": "2026-01-08T05:29:36"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002880.txt",
+      "version": 1,
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %cur0 = phi i8* [ %base.i8, %end.pass ]\nlabel %print.init\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400028801.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400028801.bc",
+      "start_time": "2026-01-08T05:29:36",
+      "end_time": "2026-01-08T05:29:36",
+      "elapsed_sec": 0.017901
+    },
+    {
+      "phase": "gpt_fix_call",
+      "filename": "sub_140002880.txt",
+      "version": 2,
+      "request_id": "resp_03cb64b37c1fb0f700695f40c1123081979af0a643e676df22",
+      "model": "gpt-5",
+      "start_time": "2026-01-08T05:29:36",
+      "end_time": "2026-01-08T05:30:17",
+      "elapsed_sec": 40.392532,
+      "usage": {
+        "input_tokens": 1531,
+        "output_tokens": 2428,
+        "total_tokens": 3959
+      },
+      "attempt": 1,
+      "retries": 0,
+      "error": null,
+      "success": true
+    },
+    {
+      "phase": "ir_saved",
+      "filename": "sub_140002880.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400028802.ll",
+      "success": true,
+      "time": "2026-01-08T05:30:17"
+    },
+    {
+      "phase": "assemble_attempt",
+      "filename": "sub_140002880.txt",
+      "version": 2,
+      "success": true,
+      "stdout": "",
+      "stderr": "",
+      "returncode": 0,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400028802.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/4/sub_1400028802.bc",
+      "start_time": "2026-01-08T05:30:17",
+      "end_time": "2026-01-08T05:30:17",
+      "elapsed_sec": 0.018065
+    },
+    {
+      "phase": "round_complete",
+      "round": 4,
+      "end_time": "2026-01-08T05:30:17"
+    }
+  ]
+}

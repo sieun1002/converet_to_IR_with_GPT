@@ -1,0 +1,59 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP/2/sub_1400014A01.ll:28:19: error: expected instruction opcode
+;   %ecx.from.eax = %eax32
+;                   ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external dso_local global i8*, align 8
+
+declare dso_local void @loc_140001420(void ()*)
+declare dso_local void @sub_140001450()
+
+define dso_local void @sub_1400014A0() local_unnamed_addr {
+entry:
+  %base.ptr = load i8*, i8** @off_1400043B0, align 8
+  %base.i64 = bitcast i8* %base.ptr to i64*
+  %firstq = load i64, i64* %base.i64, align 8
+  %eax32 = trunc i64 %firstq to i32
+  %is_m1 = icmp eq i32 %eax32, -1
+  br i1 %is_m1, label %scan_loop, label %have_count
+
+scan_loop:                                         ; preds = %scan_loop, %entry
+  %rax.phi = phi i64 [ 0, %entry ], [ %r8.next, %scan_loop ]
+  %r8.next = add nuw i64 %rax.phi, 1
+  %addr = getelementptr inbounds i64, i64* %base.i64, i64 %r8.next
+  %val = load i64, i64* %addr, align 8
+  %ecx.curr = trunc i64 %rax.phi to i32
+  %nonzero = icmp ne i64 %val, 0
+  br i1 %nonzero, label %scan_loop, label %merge_count
+
+have_count:                                        ; preds = %entry
+  %ecx.from.eax = %eax32
+  br label %merge_count
+
+merge_count:                                       ; preds = %have_count, %scan_loop
+  %count32 = phi i32 [ %ecx.from.eax, %have_count ], [ %ecx.curr, %scan_loop ]
+  %is_zero = icmp eq i32 %count32, 0
+  br i1 %is_zero, label %after_calls, label %prep_calls
+
+prep_calls:                                        ; preds = %merge_count
+  %base.funcpp = bitcast i8* %base.ptr to void ()**
+  %count64 = zext i32 %count32 to i64
+  %rbx.init = getelementptr inbounds void ()*, void ()** %base.funcpp, i64 %count64
+  br label %call_loop
+
+call_loop:                                         ; preds = %call_loop, %prep_calls
+  %slot.p = phi void ()** [ %rbx.init, %prep_calls ], [ %slot.dec, %call_loop ]
+  %fp = load void ()*, void ()** %slot.p, align 8
+  call void %fp()
+  %slot.dec = getelementptr inbounds void ()*, void ()** %slot.p, i64 -1
+  %cont = icmp ne void ()** %slot.dec, %base.funcpp
+  br i1 %cont, label %call_loop, label %after_calls
+
+after_calls:                                       ; preds = %call_loop, %merge_count
+  tail call void @loc_140001420(void ()* @sub_140001450)
+  ret void
+}

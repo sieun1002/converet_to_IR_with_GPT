@@ -1,0 +1,92 @@
+; ModuleID = 'sub_140002880.ll'
+target triple = "x86_64-pc-windows-msvc"
+
+@xmmword_140004010 = external constant [16 x i8], align 16
+@xmmword_140004020 = external constant [16 x i8], align 16
+@Format = external constant [4 x i8], align 1
+
+declare void @sub_140001520()
+declare i32 @sub_1400025A0(i8*, i32)
+declare i32 @putchar(i32)
+
+define dso_local i32 @sub_140002880() local_unnamed_addr {
+entry:
+  %arr = alloca [10 x i32], align 16
+  call void @sub_140001520()
+  %g1ptr = bitcast [16 x i8]* @xmmword_140004010 to i128*
+  %val1 = load i128, i128* %g1ptr, align 16
+  %arr_i128_0 = bitcast [10 x i32]* %arr to i128*
+  store i128 %val1, i128* %arr_i128_0, align 16
+  %g2ptr = bitcast [16 x i8]* @xmmword_140004020 to i128*
+  %val2 = load i128, i128* %g2ptr, align 16
+  %arr_idx4 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 4
+  %arr_i128_1 = bitcast i32* %arr_idx4 to i128*
+  store i128 %val2, i128* %arr_i128_1, align 16
+  %idx8 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 8
+  store i32 4, i32* %idx8, align 4
+  br label %outer.loop
+
+outer.loop:
+  %bound = phi i32 [ 10, %entry ], [ %newBound, %outer.cont ]
+  br label %inner.init
+
+inner.init:
+  br label %inner.loop
+
+inner.loop:
+  %i = phi i32 [ 1, %inner.init ], [ %i.next, %inner.after ]
+  %last = phi i32 [ 0, %inner.init ], [ %last.after, %inner.after ]
+  %cmp.i.bound = icmp ult i32 %i, %bound
+  br i1 %cmp.i.bound, label %inner.body, label %inner.exit
+
+inner.body:
+  %i.minus1 = add i32 %i, -1
+  %i.minus1.z = zext i32 %i.minus1 to i64
+  %i.z = zext i32 %i to i64
+  %p0 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 %i.minus1.z
+  %p1 = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 %i.z
+  %v0 = load i32, i32* %p0, align 4
+  %v1 = load i32, i32* %p1, align 4
+  %need.swap = icmp slt i32 %v1, %v0
+  br i1 %need.swap, label %swapped, label %notswapped
+
+swapped:
+  store i32 %v1, i32* %p0, align 4
+  store i32 %v0, i32* %p1, align 4
+  br label %inner.after
+
+notswapped:
+  br label %inner.after
+
+inner.after:
+  %last.after = phi i32 [ %i, %swapped ], [ %last, %notswapped ]
+  %i.next = add i32 %i, 1
+  br label %inner.loop
+
+inner.exit:
+  %last.out = phi i32 [ %last, %inner.loop ]
+  %check = icmp ugt i32 %last.out, 1
+  br i1 %check, label %outer.cont, label %print.init
+
+outer.cont:
+  %newBound = %last.out
+  br label %outer.loop
+
+print.init:
+  %base = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 0
+  %end = getelementptr inbounds [10 x i32], [10 x i32]* %arr, i64 0, i64 10
+  br label %print.loop
+
+print.loop:
+  %p = phi i32* [ %base, %print.init ], [ %p.next, %print.loop ]
+  %val = load i32, i32* %p, align 4
+  %fmt.ptr = getelementptr inbounds [4 x i8], [4 x i8]* @Format, i64 0, i64 0
+  %call1 = call i32 @sub_1400025A0(i8* %fmt.ptr, i32 %val)
+  %p.next = getelementptr inbounds i32, i32* %p, i64 1
+  %done = icmp eq i32* %p.next, %end
+  br i1 %done, label %print.exit, label %print.loop
+
+print.exit:
+  %ch = call i32 @putchar(i32 10)
+  ret i32 0
+}

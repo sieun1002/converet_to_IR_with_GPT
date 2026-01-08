@@ -1,0 +1,322 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@dword_1400070A0 = external global i32
+@dword_1400070A4 = external global i32
+@qword_1400070A8 = external global i8*
+@off_1400043D0 = external global i8*
+@off_1400043E0 = external global i8*
+@off_1400043C0 = external global i8*
+@aUnknownPseudoR = external constant i8
+@aDBitPseudoRelo = external constant i8
+@aUnknownPseudoR_0 = external constant i8
+
+declare i32 @sub_1400022D0()
+declare void @sub_140002520()
+declare void @sub_140001760(i8*)
+declare void @sub_1400027B8(i8*, i8*, i32)
+declare i32 @sub_1404E27D2()
+declare void @sub_140001700(i8*, ...)
+
+define dso_local void @sub_1400018D0() local_unnamed_addr {
+entry:
+  %initflag.ptr = load i32, i32* @dword_1400070A0, align 4
+  %initflag.iszero = icmp eq i32 %initflag.ptr, 0
+  br i1 %initflag.iszero, label %init_path, label %ret
+
+init_path:
+  store i32 1, i32* @dword_1400070A0, align 4
+  %t32 = call i32 @sub_1400022D0()
+  %t64 = sext i32 %t32 to i64
+  %mul4 = shl i64 %t64, 2
+  %mul5 = add i64 %mul4, %t64
+  %mul40 = shl i64 %mul5, 3
+  %add15 = add i64 %mul40, 15
+  %align = and i64 %add15, -16
+  call void @sub_140002520()
+  %endptr = load i8*, i8** @off_1400043D0, align 8
+  %startptr = load i8*, i8** @off_1400043E0, align 8
+  %buf = alloca i8, i64 %align, align 16
+  store i32 0, i32* @dword_1400070A4, align 4
+  store i8* %buf, i8** @qword_1400070A8, align 8
+  %endint = ptrtoint i8* %endptr to i64
+  %startint = ptrtoint i8* %startptr to i64
+  %diff = sub i64 %endint, %startint
+  %cmp_le7 = icmp sle i64 %diff, 7
+  br i1 %cmp_le7, label %ret, label %check_proto
+
+check_proto:
+  %cmp_gt11 = icmp sgt i64 %diff, 11
+  br i1 %cmp_gt11, label %proto2_check, label %proto1_header
+
+proto1_header:
+  %hdr0.ptr = bitcast i8* %startptr to i32*
+  %hdr0 = load i32, i32* %hdr0.ptr, align 4
+  %hdr0.nz = icmp ne i32 %hdr0, 0
+  br i1 %hdr0.nz, label %proto2_init, label %proto1_hdr1
+
+proto1_hdr1:
+  %hdr1.ptr = getelementptr inbounds i8, i8* %startptr, i64 4
+  %hdr1.i32p = bitcast i8* %hdr1.ptr to i32*
+  %hdr1 = load i32, i32* %hdr1.i32p, align 4
+  %hdr1.nz = icmp ne i32 %hdr1, 0
+  br i1 %hdr1.nz, label %proto2_init, label %proto1_hdr2
+
+proto1_hdr2:
+  %hdr2.ptr = getelementptr inbounds i8, i8* %startptr, i64 8
+  %hdr2.i32p = bitcast i8* %hdr2.ptr to i32*
+  %hdr2 = load i32, i32* %hdr2.i32p, align 4
+  %hdr2.eq1 = icmp eq i32 %hdr2, 1
+  br i1 %hdr2.eq1, label %proto1_begin, label %unknown_proto
+
+unknown_proto:
+  %fmt.unknownproto = getelementptr inbounds i8, i8* @aUnknownPseudoR_0, i64 0
+  call void (i8*, ...) @sub_140001700(i8* nonnull %fmt.unknownproto)
+  br label %ret
+
+proto1_begin:
+  %rbx.init = getelementptr inbounds i8, i8* %startptr, i64 12
+  %baseimg = load i8*, i8** @off_1400043C0, align 8
+  %valbuf = alloca i64, align 8
+  %valbuf.i8 = bitcast i64* %valbuf to i8*
+  br label %loop_proto1
+
+loop_proto1:
+  %rbx.cur = phi i8* [ %rbx.init, %proto1_begin ], [ %rbx.next, %after_write1 ], [ %rbx.next2, %after_write1b ], [ %rbx.next3, %after_write1c ], [ %rbx.next64, %after_write1d ]
+  %cmp_continue = icmp ult i8* %rbx.cur, %endptr
+  br i1 %cmp_continue, label %read_entry1, label %after_proto_loops
+
+read_entry1:
+  %e_off.ptr = bitcast i8* %rbx.cur to i32*
+  %e_off = load i32, i32* %e_off.ptr, align 4
+  %tgt_off.ptr = getelementptr inbounds i8, i8* %rbx.cur, i64 4
+  %tgt_off.i32p = bitcast i8* %tgt_off.ptr to i32*
+  %tgt_off = load i32, i32* %tgt_off.i32p, align 4
+  %flags.ptr = getelementptr inbounds i8, i8* %rbx.cur, i64 8
+  %flags.i32p = bitcast i8* %flags.ptr to i32*
+  %flags = load i32, i32* %flags.i32p, align 4
+  %e_off.sext = sext i32 %e_off to i64
+  %e_ptr = getelementptr inbounds i8, i8* %baseimg, i64 %e_off.sext
+  %r9p.i64p = bitcast i8* %e_ptr to i64*
+  %r9val = load i64, i64* %r9p.i64p, align 8
+  %tgt_off.sext = sext i32 %tgt_off to i64
+  %tgt_ptr = getelementptr inbounds i8, i8* %baseimg, i64 %tgt_off.sext
+  %cl = trunc i32 %flags to i8
+  %cl.z = zext i8 %cl to i32
+  %is_0x20 = icmp eq i32 %cl.z, 32
+  br i1 %is_0x20, label %case32, label %check_small
+
+check_small:
+  %le_0x20 = icmp ule i32 %cl.z, 32
+  br i1 %le_0x20, label %check_8_16, label %check_0x40
+
+check_8_16:
+  %is_8 = icmp eq i32 %cl.z, 8
+  br i1 %is_8, label %case8, label %check_0x10
+
+check_0x10:
+  %is_16 = icmp eq i32 %cl.z, 16
+  br i1 %is_16, label %case16, label %unknown_bitsize
+
+check_0x40:
+  %is_64 = icmp eq i32 %cl.z, 64
+  br i1 %is_64, label %case64, label %unknown_bitsize
+
+case32:
+  %v32.ptr = bitcast i8* %tgt_ptr to i32*
+  %v32 = load i32, i32* %v32.ptr, align 4
+  %v32.sext = sext i32 %v32 to i64
+  %e_ptr.int = ptrtoint i8* %e_ptr to i64
+  %adj32.sub = sub i64 %v32.sext, %e_ptr.int
+  %adj32 = add i64 %adj32.sub, %r9val
+  %flags.and32 = and i32 %flags, 192
+  %flags.nz32 = icmp ne i32 %flags.and32, 0
+  store i64 %adj32, i64* %valbuf, align 8
+  br i1 %flags.nz32, label %write32, label %range32
+
+range32:
+  %too_big32 = icmp sgt i64 %adj32, 4294967295
+  br i1 %too_big32, label %error_range, label %range32_low
+
+range32_low:
+  %too_small32 = icmp slt i64 %adj32, -2147483648
+  br i1 %too_small32, label %error_range, label %write32
+
+write32:
+  call void @sub_140001760(i8* %tgt_ptr)
+  call void @sub_1400027B8(i8* %tgt_ptr, i8* %valbuf.i8, i32 4)
+  %rbx.next = getelementptr inbounds i8, i8* %rbx.cur, i64 12
+  br label %after_write1
+
+after_write1:
+  %cmp.cont1 = icmp ult i8* %rbx.next, %endptr
+  br i1 %cmp.cont1, label %loop_proto1, label %after_proto_loops
+
+case16:
+  %v16.ptr = bitcast i8* %tgt_ptr to i16*
+  %v16 = load i16, i16* %v16.ptr, align 2
+  %v16.sext = sext i16 %v16 to i64
+  %e_ptr.int16 = ptrtoint i8* %e_ptr to i64
+  %adj16.sub = sub i64 %v16.sext, %e_ptr.int16
+  %adj16 = add i64 %adj16.sub, %r9val
+  %flags.and16 = and i32 %flags, 192
+  %flags.nz16 = icmp ne i32 %flags.and16, 0
+  store i64 %adj16, i64* %valbuf, align 8
+  br i1 %flags.nz16, label %write16, label %range16
+
+range16:
+  %too_big16 = icmp sgt i64 %adj16, 65535
+  br i1 %too_big16, label %error_range, label %range16_low
+
+range16_low:
+  %too_small16 = icmp slt i64 %adj16, -32768
+  br i1 %too_small16, label %error_range, label %write16
+
+write16:
+  call void @sub_140001760(i8* %tgt_ptr)
+  call void @sub_1400027B8(i8* %tgt_ptr, i8* %valbuf.i8, i32 2)
+  %rbx.next2 = getelementptr inbounds i8, i8* %rbx.cur, i64 12
+  br label %after_write1b
+
+after_write1b:
+  %cmp.cont1b = icmp ult i8* %rbx.next2, %endptr
+  br i1 %cmp.cont1b, label %loop_proto1, label %after_proto_loops
+
+case8:
+  %v8.ptr = bitcast i8* %tgt_ptr to i8*
+  %v8 = load i8, i8* %v8.ptr, align 1
+  %v8.sext = sext i8 %v8 to i64
+  %e_ptr.int8 = ptrtoint i8* %e_ptr to i64
+  %adj8.sub = sub i64 %v8.sext, %e_ptr.int8
+  %adj8 = add i64 %adj8.sub, %r9val
+  %flags.and8 = and i32 %flags, 192
+  %flags.nz8 = icmp ne i32 %flags.and8, 0
+  store i64 %adj8, i64* %valbuf, align 8
+  br i1 %flags.nz8, label %write8, label %range8
+
+range8:
+  %too_big8 = icmp sgt i64 %adj8, 255
+  br i1 %too_big8, label %error_range, label %range8_low
+
+range8_low:
+  %too_small8 = icmp slt i64 %adj8, -128
+  br i1 %too_small8, label %error_range, label %write8
+
+write8:
+  call void @sub_140001760(i8* %tgt_ptr)
+  call void @sub_1400027B8(i8* %tgt_ptr, i8* %valbuf.i8, i32 1)
+  %rbx.next3 = getelementptr inbounds i8, i8* %rbx.cur, i64 12
+  br label %after_write1c
+
+after_write1c:
+  %cmp.cont1c = icmp ult i8* %rbx.next3, %endptr
+  br i1 %cmp.cont1c, label %loop_proto1, label %after_proto_loops
+
+case64:
+  %v64.ptr = bitcast i8* %tgt_ptr to i64*
+  %v64 = load i64, i64* %v64.ptr, align 8
+  %e_ptr.int64 = ptrtoint i8* %e_ptr to i64
+  %adj64.sub = sub i64 %v64, %e_ptr.int64
+  %adj64 = add i64 %adj64.sub, %r9val
+  %flags.and64 = and i32 %flags, 192
+  %flags.nz64 = icmp ne i32 %flags.and64, 0
+  store i64 %adj64, i64* %valbuf, align 8
+  br i1 %flags.nz64, label %write64, label %range64
+
+range64:
+  %nonneg64 = icmp sge i64 %adj64, 0
+  br i1 %nonneg64, label %error_range, label %write64
+
+write64:
+  call void @sub_140001760(i8* %tgt_ptr)
+  call void @sub_1400027B8(i8* %tgt_ptr, i8* %valbuf.i8, i32 8)
+  %rbx.next64 = getelementptr inbounds i8, i8* %rbx.cur, i64 12
+  br label %after_write1d
+
+after_write1d:
+  %cmp.cont1d = icmp ult i8* %rbx.next64, %endptr
+  br i1 %cmp.cont1d, label %loop_proto1, label %after_proto_loops
+
+unknown_bitsize:
+  %fmt.unknownbits = getelementptr inbounds i8, i8* @aUnknownPseudoR, i64 0
+  store i64 0, i64* %valbuf, align 8
+  call void (i8*, ...) @sub_140001700(i8* nonnull %fmt.unknownbits)
+  br label %error_range
+
+error_range:
+  %val.err = load i64, i64* %valbuf, align 8
+  %fmt.range = getelementptr inbounds i8, i8* @aDBitPseudoRelo, i64 0
+  call void (i8*, ...) @sub_140001700(i8* nonnull %fmt.range, i64 %val.err, i8* %tgt_ptr)
+  br label %ret
+
+after_proto_loops:
+  %count = load i32, i32* @dword_1400070A4, align 4
+  %count.pos = icmp sgt i32 %count, 0
+  br i1 %count.pos, label %ret, label %ret
+
+proto2_check:
+  %r9d.ptr = bitcast i8* %startptr to i32*
+  %r9d.val = load i32, i32* %r9d.ptr, align 4
+  %r9d.nz = icmp ne i32 %r9d.val, 0
+  br i1 %r9d.nz, label %proto2_init, label %proto2_check2
+
+proto2_check2:
+  %r8d.ptr = getelementptr inbounds i8, i8* %startptr, i64 4
+  %r8d.i32p = bitcast i8* %r8d.ptr to i32*
+  %r8d.val = load i32, i32* %r8d.i32p, align 4
+  %r8d.nz = icmp ne i32 %r8d.val, 0
+  br i1 %r8d.nz, label %proto2_init, label %proto2_fallback
+
+proto2_fallback:
+  %ecx.ptr = getelementptr inbounds i8, i8* %startptr, i64 8
+  %ecx.i32p = bitcast i8* %ecx.ptr to i32*
+  %ecx.val = load i32, i32* %ecx.i32p, align 4
+  %ecx.nz = icmp ne i32 %ecx.val, 0
+  br i1 %ecx.nz, label %proto1_hdr2, label %proto2_skiphdr
+
+proto2_skiphdr:
+  %rbx.afterhdr = getelementptr inbounds i8, i8* %startptr, i64 12
+  br label %proto1_header
+
+proto2_init:
+  %rbx.init2 = phi i8* [ %startptr, %proto1_header ], [ %startptr, %proto1_hdr1 ], [ %startptr, %proto2_check ], [ %startptr, %proto2_check2 ]
+  %baseimg2 = load i8*, i8** @off_1400043C0, align 8
+  %valbuf2 = alloca i64, align 8
+  %valbuf2.i8 = bitcast i64* %valbuf2 to i8*
+  br label %loop_proto2
+
+loop_proto2:
+  %rbx.cur2 = phi i8* [ %rbx.init2, %proto2_init ], [ %rbx.next2loop, %loop2_cont ]
+  %atend2 = icmp uge i8* %rbx.cur2, %endptr
+  br i1 %atend2, label %after_proto2, label %read2
+
+read2:
+  %r12off.ptr = getelementptr inbounds i8, i8* %rbx.cur2, i64 4
+  %r12off.i32p = bitcast i8* %r12off.ptr to i32*
+  %r12off = load i32, i32* %r12off.i32p, align 4
+  %e0.i32p = bitcast i8* %rbx.cur2 to i32*
+  %e0 = load i32, i32* %e0.i32p, align 4
+  %rbx.next2loop = getelementptr inbounds i8, i8* %rbx.cur2, i64 8
+  %r12off.sext = sext i32 %r12off to i64
+  %addr.ptr = getelementptr inbounds i8, i8* %baseimg2, i64 %r12off.sext
+  %cur32.ptr = bitcast i8* %addr.ptr to i32*
+  %cur32 = load i32, i32* %cur32.ptr, align 4
+  %sum32 = add i32 %cur32, %e0
+  %sum32.sext = sext i32 %sum32 to i64
+  store i64 %sum32.sext, i64* %valbuf2, align 8
+  call void @sub_140001760(i8* %addr.ptr)
+  call void @sub_1400027B8(i8* %addr.ptr, i8* %valbuf2.i8, i32 4)
+  %cont2 = icmp ult i8* %rbx.next2loop, %endptr
+  br i1 %cont2, label %loop2_cont, label %after_proto2
+
+loop2_cont:
+  br label %loop_proto2
+
+after_proto2:
+  %cnt2 = load i32, i32* @dword_1400070A4, align 4
+  %cnt2pos = icmp sgt i32 %cnt2, 0
+  br i1 %cnt2pos, label %ret, label %ret
+
+ret:
+  ret void
+}

@@ -1,0 +1,48 @@
+; Function: sub_1400021B0
+; Start: 0x1400021b0, End: 0x140002246
+
+0x1400021b0: push    rbp
+0x1400021b1: push    rdi
+0x1400021b2: push    rsi
+0x1400021b3: push    rbx
+0x1400021b4: sub     rsp, 28h
+0x1400021b8: mov     rdi, rcx
+0x1400021bb: call    sub_140002700
+0x1400021c0: cmp     rax, 8
+0x1400021c4: ja      short loc_1400021D4
+0x1400021c6: mov     rax, cs:off_1400043C0
+0x1400021cd: cmp     word ptr [rax], 5A4Dh
+0x1400021d2: jz      short loc_1400021E8
+0x1400021d4: xor     ebx, ebx
+0x1400021d6: mov     rax, rbx
+0x1400021d9: add     rsp, 28h
+0x1400021dd: pop     rbx
+0x1400021de: pop     rsi
+0x1400021df: pop     rdi
+0x1400021e0: pop     rbp
+0x1400021e1: retn
+0x1400021e8: movsxd  rbp, dword ptr [rax+3Ch]
+0x1400021ec: add     rbp, rax
+0x1400021ef: cmp     dword ptr [rbp+0], 4550h
+0x1400021f6: jnz     short loc_1400021D4
+0x1400021f8: cmp     word ptr [rbp+18h], 20Bh
+0x1400021fe: jnz     short loc_1400021D4
+0x140002200: cmp     word ptr [rbp+6], 0
+0x140002205: jz      short loc_1400021D4
+0x140002207: movzx   eax, word ptr [rbp+14h]
+0x14000220b: xor     esi, esi
+0x14000220d: lea     rbx, [rbp+rax+18h]
+0x140002212: nop     dword ptr [rax]
+0x140002215: nop     word ptr [rax+rax+00000000h]
+0x140002220: mov     r8d, 8
+0x140002226: mov     rdx, rdi
+0x140002229: mov     rcx, rbx
+0x14000222c: call    sub_140002708
+0x140002231: test    eax, eax
+0x140002233: jz      short loc_1400021D6
+0x140002235: movzx   eax, word ptr [rbp+6]
+0x140002239: add     esi, 1
+0x14000223c: add     rbx, 28h ; '('
+0x140002240: cmp     esi, eax
+0x140002242: jb      short loc_140002220
+0x140002244: jmp     short loc_1400021D4

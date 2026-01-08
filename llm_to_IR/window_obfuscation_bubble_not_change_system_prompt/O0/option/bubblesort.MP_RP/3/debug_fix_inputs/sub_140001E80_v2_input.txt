@@ -1,0 +1,70 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/3/sub_140001E801.ll:4:36: warning: ptr type is only supported in -opaque-pointers mode
+; @qword_140008258 = external global ptr
+;                                    ^
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_RP/3/sub_140001E801.ll:4:36: error: expected type
+; @qword_140008258 = external global ptr
+;                                    ^
+; === ERROR LOG END ===
+
+; ModuleID = 'sub_140001E80'
+target triple = "x86_64-pc-windows-msvc"
+
+@qword_140008258 = external global ptr
+@qword_1400070E0 = external global ptr
+@qword_140008288 = external global ptr
+@qword_140008260 = external global ptr
+@qword_140008270 = external global ptr
+@unk_140007100 = external global i8
+
+define void @sub_140001E80() {
+entry:
+  %fp_acquire_p = load ptr, ptr @qword_140008258
+  %fp_acquire = bitcast ptr %fp_acquire_p to void (ptr)*
+  call void %fp_acquire(ptr @unk_140007100)
+
+  %head = load ptr, ptr @qword_1400070E0
+  %head_is_null = icmp eq ptr %head, null
+  br i1 %head_is_null, label %release, label %init
+
+init:
+  %fp_fnA_p = load ptr, ptr @qword_140008288
+  %fp_fnA = bitcast ptr %fp_fnA_p to ptr (i32)*
+  %fp_fnB_p = load ptr, ptr @qword_140008260
+  %fp_fnB = bitcast ptr %fp_fnB_p to i32 ()*
+  br label %loop
+
+loop:
+  %node = phi ptr [ %head, %init ], [ %next, %cont ]
+
+  %val32 = load i32, ptr %node, align 4
+  %rsi_val = call ptr %fp_fnA(i32 %val32)
+  %eax_val = call i32 %fp_fnB()
+
+  %rsi_nonnull = icmp ne ptr %rsi_val, null
+  %eax_zero = icmp eq i32 %eax_val, 0
+  %do_invoke = and i1 %rsi_nonnull, %eax_zero
+  br i1 %do_invoke, label %invoke, label %after_invoke
+
+invoke:
+  %fp_node_call_loc = getelementptr i8, ptr %node, i64 8
+  %fp_node_call_p = load ptr, ptr %fp_node_call_loc, align 8
+  %fp_node_call = bitcast ptr %fp_node_call_p to void (ptr)*
+  call void %fp_node_call(ptr %rsi_val)
+  br label %after_invoke
+
+after_invoke:
+  %next_loc = getelementptr i8, ptr %node, i64 16
+  %next = load ptr, ptr %next_loc, align 8
+  %has_next = icmp ne ptr %next, null
+  br i1 %has_next, label %cont, label %release
+
+cont:
+  br label %loop
+
+release:
+  %fp_release_p = load ptr, ptr @qword_140008270
+  %fp_release = bitcast ptr %fp_release_p to void (ptr)*
+  call void %fp_release(ptr @unk_140007100)
+  ret void
+}

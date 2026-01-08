@@ -1,0 +1,76 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043C0 = external global i8*, align 8
+
+declare i64 @sub_140002700(i8* noundef)
+declare i32 @sub_140002708(i8* noundef, i8* noundef, i32 noundef)
+
+define i8* @sub_1400021B0(i8* noundef %0) local_unnamed_addr {
+entry:
+  %1 = call i64 @sub_140002700(i8* %0)
+  %2 = icmp ugt i64 %1, 8
+  br i1 %2, label %fail, label %check_mz
+
+check_mz:                                            ; preds = %entry
+  %3 = load i8*, i8** @off_1400043C0, align 8
+  %4 = bitcast i8* %3 to i16*
+  %5 = load i16, i16* %4, align 1
+  %6 = icmp eq i16 %5, 23117
+  br i1 %6, label %pe_header, label %fail
+
+pe_header:                                           ; preds = %check_mz
+  %7 = getelementptr i8, i8* %3, i64 60
+  %8 = bitcast i8* %7 to i32*
+  %9 = load i32, i32* %8, align 1
+  %10 = sext i32 %9 to i64
+  %11 = getelementptr i8, i8* %3, i64 %10
+  %12 = bitcast i8* %11 to i32*
+  %13 = load i32, i32* %12, align 1
+  %14 = icmp eq i32 %13, 17744
+  br i1 %14, label %check_optmagic, label %fail
+
+check_optmagic:                                      ; preds = %pe_header
+  %15 = getelementptr i8, i8* %11, i64 24
+  %16 = bitcast i8* %15 to i16*
+  %17 = load i16, i16* %16, align 1
+  %18 = icmp eq i16 %17, 523
+  br i1 %18, label %check_sections_nonzero, label %fail
+
+check_sections_nonzero:                              ; preds = %check_optmagic
+  %19 = getelementptr i8, i8* %11, i64 6
+  %20 = bitcast i8* %19 to i16*
+  %21 = load i16, i16* %20, align 1
+  %22 = icmp eq i16 %21, 0
+  br i1 %22, label %fail, label %setup_loop
+
+setup_loop:                                          ; preds = %check_sections_nonzero
+  %23 = getelementptr i8, i8* %11, i64 20
+  %24 = bitcast i8* %23 to i16*
+  %25 = load i16, i16* %24, align 1
+  %26 = zext i16 %25 to i64
+  %27 = getelementptr i8, i8* %11, i64 24
+  %28 = getelementptr i8, i8* %27, i64 %26
+  br label %loop
+
+loop:                                                ; preds = %iter, %setup_loop
+  %29 = phi i8* [ %28, %setup_loop ], [ %35, %iter ]
+  %30 = phi i32 [ 0, %setup_loop ], [ %33, %iter ]
+  %31 = call i32 @sub_140002708(i8* %29, i8* %0, i32 8)
+  %32 = icmp eq i32 %31, 0
+  br i1 %32, label %success, label %iter
+
+iter:                                                ; preds = %loop
+  %33 = add i32 %30, 1
+  %34 = load i16, i16* %20, align 1
+  %35 = getelementptr i8, i8* %29, i64 40
+  %36 = zext i16 %34 to i32
+  %37 = icmp ult i32 %33, %36
+  br i1 %37, label %loop, label %fail
+
+success:                                             ; preds = %loop
+  ret i8* %29
+
+fail:                                                ; preds = %iter, %check_sections_nonzero, %check_optmagic, %pe_header, %check_mz, %entry
+  ret i8* null
+}

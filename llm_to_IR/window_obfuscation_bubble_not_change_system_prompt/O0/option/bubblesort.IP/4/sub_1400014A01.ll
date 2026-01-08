@@ -1,0 +1,59 @@
+; ModuleID = 'sub_1400014A0'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i64, align 8
+
+declare void @sub_140001420(void ()*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() local_unnamed_addr {
+entry:
+  %first64 = load i64, i64* @off_1400043B0, align 8
+  %first32 = trunc i64 %first64 to i32
+  %is_sentinel = icmp eq i32 %first32, -1
+  br i1 %is_sentinel, label %sentinel, label %non_sentinel
+
+non_sentinel:                                      ; preds = %entry
+  %count_ns_zero = icmp eq i32 %first32, 0
+  br i1 %count_ns_zero, label %after_calls, label %prepare_ns
+
+prepare_ns:                                        ; preds = %non_sentinel
+  %count_ns64 = zext i32 %first32 to i64
+  br label %call_loop
+
+sentinel:                                          ; preds = %entry
+  br label %scan_loop
+
+scan_loop:                                         ; preds = %sentinel, %scan_iter
+  %rax_phi = phi i64 [ 0, %sentinel ], [ %i_next, %scan_iter ]
+  %i_next = add nuw nsw i64 %rax_phi, 1
+  %ptr_i = getelementptr i64, i64* @off_1400043B0, i64 %i_next
+  %val_i = load i64, i64* %ptr_i, align 8
+  %nz = icmp ne i64 %val_i, 0
+  br i1 %nz, label %scan_iter, label %scan_exit
+
+scan_iter:                                         ; preds = %scan_loop
+  br label %scan_loop
+
+scan_exit:                                         ; preds = %scan_loop
+  %count_s64 = %rax_phi
+  %is_zero_s = icmp eq i64 %count_s64, 0
+  br i1 %is_zero_s, label %after_calls, label %prepare_s
+
+prepare_s:                                         ; preds = %scan_exit
+  br label %call_loop
+
+call_loop:                                         ; preds = %prepare_ns, %prepare_s, %call_loop
+  %count_phi64 = phi i64 [ %count_ns64, %prepare_ns ], [ %count_s64, %prepare_s ], [ %next, %call_loop ]
+  %elem_ptr = getelementptr i64, i64* @off_1400043B0, i64 %count_phi64
+  %fp_i64 = load i64, i64* %elem_ptr, align 8
+  %fp_ptr = inttoptr i64 %fp_i64 to void ()*
+  call void %fp_ptr()
+  %next = add nsw i64 %count_phi64, -1
+  %cont = icmp ne i64 %next, 0
+  br i1 %cont, label %call_loop, label %after_calls
+
+after_calls:                                       ; preds = %scan_exit, %non_sentinel, %call_loop
+  musttail call void @sub_140001420(void ()* @sub_140001450)
+  ret void
+}

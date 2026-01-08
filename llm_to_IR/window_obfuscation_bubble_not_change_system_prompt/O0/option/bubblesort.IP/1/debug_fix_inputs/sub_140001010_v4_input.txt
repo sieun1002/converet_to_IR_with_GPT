@@ -1,0 +1,132 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.IP/1/sub_1400010103.ll:125:3: error: expected instruction opcode
+;   return i32 %retv
+;   ^
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+declare i8* @sub_140002660()
+declare i32 @sub_140002880(i32, i64)
+declare void @sub_140002750()
+declare i32 @sub_140002670(i32)
+declare void @sub_1400027A0(i32) noreturn
+declare void @sub_1400018D0()
+declare i8* @sub_14000ED64(i8*)
+declare void @sub_140001CB0()
+
+@off_140004470 = external global i8*
+@qword_140008280 = external global void (i32)*
+@off_140004480 = external global i32*
+@dword_140007004 = external global i32
+@off_1400043F0 = external global i8*
+@qword_140007010 = external global i8*
+@dword_140007020 = external global i32
+@qword_140007018 = external global i64
+@dword_140007008 = external global i32
+
+define i32 @sub_140001010() {
+entry:
+  %teb_peb8 = call i8* asm sideeffect inteldialect "mov rax, qword ptr gs:[0x30]; mov $0, qword ptr [rax+8]", "=r"()
+  %rbx_addr = load i8*, i8** @off_140004470
+  %lockptr = bitcast i8* %rbx_addr to i8**
+  %sleep_fp = load void (i32)*, void (i32)** @qword_140008280
+  br label %try
+
+try:                                              ; preds = %sleep, %entry
+  %cmp = cmpxchg i8** %lockptr, i8* null, i8* %teb_peb8 seq_cst acquire
+  %old = extractvalue { i8*, i1 } %cmp, 0
+  %succ = extractvalue { i8*, i1 } %cmp, 1
+  br i1 %succ, label %acquired, label %fail
+
+fail:                                             ; preds = %try
+  %eq = icmp eq i8* %old, %teb_peb8
+  br i1 %eq, label %contended, label %sleep
+
+sleep:                                            ; preds = %fail
+  call void %sleep_fp(i32 1000)
+  br label %try
+
+contended:                                        ; preds = %fail
+  br label %after_lock
+
+acquired:                                         ; preds = %try
+  br label %after_lock
+
+after_lock:                                       ; preds = %acquired, %contended
+  %hadWait = phi i1 [ true, %contended ], [ false, %acquired ]
+  %rbp_ptr = load i32*, i32** @off_140004480
+  %v0 = load i32, i32* %rbp_ptr, align 4
+  %is1 = icmp eq i32 %v0, 1
+  br i1 %is1, label %loc_13c8, label %checkzero
+
+loc_13c8:                                         ; preds = %after_lock
+  %res670 = call i32 @sub_140002670(i32 31)
+  call void @sub_1400027A0(i32 %res670)
+  unreachable
+
+checkzero:                                        ; preds = %after_lock
+  %v1 = load i32, i32* %rbp_ptr, align 4
+  %is0 = icmp eq i32 %v1, 0
+  br i1 %is0, label %loc_1110, label %after110
+
+loc_1110:                                         ; preds = %checkzero
+  store i32 1, i32* %rbp_ptr, align 4
+  call void @sub_1400018D0()
+  %cb_ptr = bitcast void ()* @sub_140001CB0 to i8*
+  %retp = call i8* @sub_14000ED64(i8* %cb_ptr)
+  unreachable
+
+after110:                                         ; preds = %checkzero
+  store i32 1, i32* @dword_140007004, align 4
+  br i1 %hadWait, label %loc_108d, label %loc_1328
+
+loc_1328:                                         ; preds = %after110
+  %lock_i64 = bitcast i8** %lockptr to i64*
+  %xchg_old_i64 = atomicrmw xchg i64* %lock_i64, i64 0 seq_cst
+  br label %loc_108d
+
+loc_108d:                                         ; preds = %loc_1328, %after110
+  %p_to_fp = load i8*, i8** @off_1400043F0
+  %fp_ptr = bitcast i8* %p_to_fp to void (i32, i32, i32)**
+  %fp = load void (i32, i32, i32)*, void (i32, i32, i32)** %fp_ptr
+  %notnull = icmp ne void (i32, i32, i32)* %fp, null
+  br i1 %notnull, label %call_fp, label %after_fp
+
+call_fp:                                          ; preds = %loc_108d
+  call void %fp(i32 0, i32 2, i32 0)
+  br label %after_fp
+
+after_fp:                                         ; preds = %call_fp, %loc_108d
+  %p = call i8* @sub_140002660()
+  %p_store = bitcast i8* %p to i8**
+  %v_qw = load i8*, i8** @qword_140007010
+  store i8* %v_qw, i8** %p_store, align 8
+  %ecx2 = load i32, i32* @dword_140007020, align 4
+  %rdx2 = load i64, i64* @qword_140007018, align 8
+  %eax2 = call i32 @sub_140002880(i32 %ecx2, i64 %rdx2)
+  %c = load i32, i32* @dword_140007008, align 4
+  %czero = icmp eq i32 %c, 0
+  br i1 %czero, label %loc_13d2, label %check_edx
+
+loc_13d2:                                         ; preds = %after_fp
+  call void @sub_1400027A0(i32 %eax2)
+  unreachable
+
+check_edx:                                        ; preds = %after_fp
+  %edxv = load i32, i32* @dword_140007004, align 4
+  %edxzero = icmp eq i32 %edxv, 0
+  br i1 %edxzero, label %loc_1310, label %ret
+
+loc_1310:                                         ; preds = %check_edx
+  %saved = alloca i32, align 4
+  store i32 %eax2, i32* %saved, align 4
+  call void @sub_140002750()
+  %eax3 = load i32, i32* %saved, align 4
+  br label %ret
+
+ret:                                              ; preds = %loc_1310, %check_edx
+  %retv = phi i32 [ %eax2, %check_edx ], [ %eax3, %loc_1310 ]
+  return i32 %retv
+}

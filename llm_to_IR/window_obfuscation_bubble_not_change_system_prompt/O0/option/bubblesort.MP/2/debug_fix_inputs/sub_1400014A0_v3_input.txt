@@ -1,0 +1,66 @@
+; === ERROR LOG BEGIN [llvm-as] ===
+; llvm-as-14: assembly parsed, but does not verify as correct!
+; cannot guarantee tail call due to mismatched parameter counts
+;   musttail call void @sub_140001420(i8* %arg)
+; === ERROR LOG END ===
+
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i64*
+
+declare void @sub_140001420(i8*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() {
+entry:
+  %base.ptr.ptr = load i64*, i64** @off_1400043B0
+  %first.q = load i64, i64* %base.ptr.ptr
+  %first.i32 = trunc i64 %first.q to i32
+  %is.neg1 = icmp eq i32 %first.i32, -1
+  br i1 %is.neg1, label %scan.init, label %use.count
+
+use.count:                                           ; preds = %entry
+  %count64 = sext i32 %first.i32 to i64
+  br label %decide
+
+scan.init:                                           ; preds = %entry
+  br label %scan.loop
+
+scan.loop:                                           ; preds = %scan.loop, %scan.init
+  %eax.phi = phi i64 [ 0, %scan.init ], [ %r8.cur, %scan.loop ]
+  %r8.cur = add i64 %eax.phi, 1
+  %elem.ptr = getelementptr i64, i64* %base.ptr.ptr, i64 %r8.cur
+  %elem.val = load i64, i64* %elem.ptr
+  %nz = icmp ne i64 %elem.val, 0
+  br i1 %nz, label %scan.loop, label %scan.done
+
+scan.done:                                           ; preds = %scan.loop
+  br label %decide
+
+decide:                                              ; preds = %scan.done, %use.count
+  %ecx.sel = phi i64 [ %count64, %use.count ], [ %eax.phi, %scan.done ]
+  %is.zero = icmp eq i64 %ecx.sel, 0
+  br i1 %is.zero, label %tailcall, label %prep.loop
+
+prep.loop:                                           ; preds = %decide
+  %rbx.init = getelementptr i64, i64* %base.ptr.ptr, i64 %ecx.sel
+  br label %loop
+
+loop:                                                ; preds = %loop.next, %prep.loop
+  %rbx.phi = phi i64* [ %rbx.init, %prep.loop ], [ %rbx.next, %loop.next ]
+  %fn.addr.int = load i64, i64* %rbx.phi
+  %fn.ptr = inttoptr i64 %fn.addr.int to void ()*
+  call void %fn.ptr()
+  %rbx.next = getelementptr i64, i64* %rbx.phi, i64 -1
+  %done = icmp eq i64* %rbx.next, %base.ptr.ptr
+  br i1 %done, label %tailcall, label %loop.next
+
+loop.next:                                           ; preds = %loop
+  br label %loop
+
+tailcall:                                            ; preds = %loop, %decide
+  %arg = bitcast void ()* @sub_140001450 to i8*
+  musttail call void @sub_140001420(i8* %arg)
+  ret void
+}

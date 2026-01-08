@@ -1,0 +1,70 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043B0 = external global i8*, align 8
+
+declare void @sub_140001420(i8*)
+declare void @sub_140001450()
+
+define void @sub_1400014A0() {
+entry:
+  %base.ptr = load i8*, i8** @off_1400043B0, align 8
+  %base.as.i64ptr = bitcast i8* %base.ptr to i64*
+  %count64 = load i64, i64* %base.as.i64ptr, align 8
+  %count32 = trunc i64 %count64 to i32
+  %cmp_m1 = icmp eq i32 %count32, -1
+  br i1 %cmp_m1, label %scan_init, label %have_count
+
+have_count:
+  %is_zero = icmp eq i32 %count32, 0
+  br i1 %is_zero, label %tail, label %loop_prep
+
+scan_init:
+  %table = bitcast i8* %base.ptr to i8**
+  br label %scan_loop
+
+scan_loop:
+  %prev = phi i64 [ 0, %scan_init ], [ %next, %scan_body ]
+  %next = add i64 %prev, 1
+  %elem.ptr = getelementptr inbounds i8*, i8** %table, i64 %next
+  %elem.val = load i8*, i8** %elem.ptr, align 8
+  %is_nonzero = icmp ne i8* %elem.val, null
+  br i1 %is_nonzero, label %scan_body, label %scan_done
+
+scan_body:
+  br label %scan_loop
+
+scan_done:
+  %count32_scanned = trunc i64 %prev to i32
+  %is_zero2 = icmp eq i32 %count32_scanned, 0
+  br i1 %is_zero2, label %tail, label %loop_from_scanned
+
+loop_prep:
+  %table2 = bitcast i8* %base.ptr to i8**
+  %countZ = zext i32 %count32 to i64
+  br label %call_loop
+
+loop_from_scanned:
+  %table3 = bitcast i8* %base.ptr to i8**
+  %countZ3 = zext i32 %count32_scanned to i64
+  br label %call_loop
+
+call_loop:
+  %i = phi i64 [ %countZ, %loop_prep ], [ %countZ3, %loop_from_scanned ], [ %i.dec, %call_iter ]
+  %table.phi = phi i8** [ %table2, %loop_prep ], [ %table3, %loop_from_scanned ], [ %table.phi, %call_iter ]
+  %elem.ptr2 = getelementptr inbounds i8*, i8** %table.phi, i64 %i
+  %fn.raw = load i8*, i8** %elem.ptr2, align 8
+  %fn = bitcast i8* %fn.raw to void ()*
+  call void %fn()
+  %i.dec = add i64 %i, -1
+  %cont = icmp ne i64 %i.dec, 0
+  br i1 %cont, label %call_iter, label %tail
+
+call_iter:
+  br label %call_loop
+
+tail:
+  %funcptr = bitcast void ()* @sub_140001450 to i8*
+  tail call void @sub_140001420(i8* %funcptr)
+  ret void
+}

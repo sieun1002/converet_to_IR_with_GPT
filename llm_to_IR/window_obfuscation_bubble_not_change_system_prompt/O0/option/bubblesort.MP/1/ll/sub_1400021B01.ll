@@ -1,0 +1,75 @@
+target triple = "x86_64-pc-windows-msvc"
+
+@off_1400043C0 = external global i8*
+
+declare i64 @sub_140002700(i8*)
+declare i32 @sub_140002708(i8*, i8*, i32)
+
+define i8* @sub_1400021B0(i8* %0) {
+entry:
+  %1 = call i64 @sub_140002700(i8* %0)
+  %2 = icmp ugt i64 %1, 8
+  br i1 %2, label %ret_zero, label %check_mz
+
+check_mz:
+  %3 = load i8*, i8** @off_1400043C0, align 8
+  %4 = bitcast i8* %3 to i16*
+  %5 = load i16, i16* %4, align 1
+  %6 = icmp eq i16 %5, 23117
+  br i1 %6, label %pe_calc, label %ret_zero
+
+pe_calc:
+  %7 = getelementptr inbounds i8, i8* %3, i64 60
+  %8 = bitcast i8* %7 to i32*
+  %9 = load i32, i32* %8, align 1
+  %10 = sext i32 %9 to i64
+  %11 = getelementptr inbounds i8, i8* %3, i64 %10
+  %12 = bitcast i8* %11 to i32*
+  %13 = load i32, i32* %12, align 1
+  %14 = icmp eq i32 %13, 17744
+  br i1 %14, label %check_magic, label %ret_zero
+
+check_magic:
+  %15 = getelementptr inbounds i8, i8* %11, i64 24
+  %16 = bitcast i8* %15 to i16*
+  %17 = load i16, i16* %16, align 1
+  %18 = icmp eq i16 %17, 523
+  br i1 %18, label %check_numsects, label %ret_zero
+
+check_numsects:
+  %19 = getelementptr inbounds i8, i8* %11, i64 6
+  %20 = bitcast i8* %19 to i16*
+  %21 = load i16, i16* %20, align 1
+  %22 = icmp eq i16 %21, 0
+  br i1 %22, label %ret_zero, label %prep_loop
+
+prep_loop:
+  %23 = getelementptr inbounds i8, i8* %11, i64 20
+  %24 = bitcast i8* %23 to i16*
+  %25 = load i16, i16* %24, align 1
+  %26 = zext i16 %25 to i64
+  %27 = getelementptr inbounds i8, i8* %11, i64 24
+  %28 = getelementptr inbounds i8, i8* %27, i64 %26
+  br label %loop
+
+loop:
+  %cur = phi i8* [ %28, %prep_loop ], [ %cur_next, %iter ]
+  %i = phi i32 [ 0, %prep_loop ], [ %i_next, %iter ]
+  %29 = call i32 @sub_140002708(i8* %cur, i8* %0, i32 8)
+  %30 = icmp eq i32 %29, 0
+  br i1 %30, label %ret_ptr, label %iter
+
+iter:
+  %31 = load i16, i16* %20, align 1
+  %i_next = add i32 %i, 1
+  %cur_next = getelementptr inbounds i8, i8* %cur, i64 40
+  %32 = zext i16 %31 to i32
+  %33 = icmp ult i32 %i_next, %32
+  br i1 %33, label %loop, label %ret_zero
+
+ret_ptr:
+  ret i8* %cur
+
+ret_zero:
+  ret i8* null
+}

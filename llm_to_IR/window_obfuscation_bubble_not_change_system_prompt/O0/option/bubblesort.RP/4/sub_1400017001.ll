@@ -1,0 +1,28 @@
+; ModuleID = 'recovered'
+target triple = "x86_64-pc-windows-msvc"
+
+@aMingwW64Runtim = internal constant [28 x i8] c"Mingw-w64 runtime failure:\0A\00", align 1
+
+declare ptr @__acrt_iob_func(i32 noundef)
+declare void @sub_140002600(ptr noundef, ptr noundef)
+declare void @sub_140002560(ptr noundef, ptr noundef, ptr noundef)
+declare void @abort() noreturn
+
+define void @sub_140001700(ptr noundef %format, i64 noundef %arg1, i64 noundef %arg2, i64 noundef %arg3) local_unnamed_addr {
+entry:
+  %arr = alloca [3 x i64], align 8
+  %arr0 = getelementptr inbounds [3 x i64], ptr %arr, i64 0, i64 0
+  store i64 %arg1, ptr %arr0, align 8
+  %arr1 = getelementptr inbounds i64, ptr %arr0, i64 1
+  store i64 %arg2, ptr %arr1, align 8
+  %arr2 = getelementptr inbounds i64, ptr %arr1, i64 1
+  store i64 %arg3, ptr %arr2, align 8
+  %stream1 = call ptr @__acrt_iob_func(i32 noundef 2)
+  %msgptr = getelementptr inbounds [28 x i8], ptr @aMingwW64Runtim, i64 0, i64 0
+  call void @sub_140002600(ptr noundef %stream1, ptr noundef %msgptr)
+  %stream2 = call ptr @__acrt_iob_func(i32 noundef 2)
+  %arglist_ptr = bitcast ptr %arr0 to ptr
+  call void @sub_140002560(ptr noundef %stream2, ptr noundef %format, ptr noundef %arglist_ptr)
+  call void @abort()
+  unreachable
+}

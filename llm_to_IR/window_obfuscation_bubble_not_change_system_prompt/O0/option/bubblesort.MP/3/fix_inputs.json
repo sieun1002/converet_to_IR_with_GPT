@@ -1,0 +1,105 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 454,
+      "ir_len": 16116,
+      "error_preview": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010101.ll:7:29: warning: ptr type is only supported in -opaque-pointers mode\ndeclare void @sub_140002790(ptr)\n                            ^\nllvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_c",
+      "ir_preview": "; ModuleID = 'sub_140001010_module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\ndeclare void @sub_1400018D0()\ndeclare void @sub_140002790(ptr)\ndeclare void",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010101.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 3,
+      "payload_order": "error_first_then_ir",
+      "error_len": 289,
+      "ir_len": 17193,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010102.ll:74:36: error: '@off_140004470' defined with type 'i8****' but expected 'i8***'\n  %rbx_base_ptr = load i8**, i8*** @off_140004470\n                                   ^\n",
+      "ir_preview": "; ModuleID = 'sub_140001010_module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\ndeclare void @sub_1400018D0()\ndeclare void @sub_140002790(i8*)\ndeclare void",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010102.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 4,
+      "payload_order": "error_first_then_ir",
+      "error_len": 303,
+      "ir_len": 17232,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010103.ll:74:42: error: '@off_140004470' defined with type 'i8*****' but expected 'i8****'\n  %rbx_base_ptr_ptr = load i8***, i8**** @off_140004470\n                                        ",
+      "ir_preview": "; ModuleID = 'sub_140001010_module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\ndeclare void @sub_1400018D0()\ndeclare void @sub_140002790(i8*)\ndeclare void",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010103.ll"
+    },
+    {
+      "filename": "sub_140001010.txt",
+      "version": 5,
+      "payload_order": "error_first_then_ir",
+      "error_len": 317,
+      "ir_len": 17302,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010104.ll:74:48: error: '@off_140004470' defined with type 'i8******' but expected 'i8*****'\n  %rbx_base_ptr_ptr_ptr = load i8****, i8***** @off_140004470\n                                ",
+      "ir_preview": "; ModuleID = 'sub_140001010_module'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\ndeclare i64 @llvm.read_register.i64(metadata)\n\ndeclare void @sub_1400018D0()\ndeclare void @sub_140002790(i8*)\ndeclare void",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400010104.ll"
+    },
+    {
+      "filename": "sub_1400014A0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 173,
+      "ir_len": 1840,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\ncannot guarantee tail call due to mismatched parameter counts\n  musttail call void @sub_140001420(i8* %fn.addr)\n",
+      "ir_preview": "; ModuleID = 'sub_1400014A0'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@off_1400043B0 = external global void ()*, align 8\n\ndeclare void @sub_140001420(i8*)\ndeclare void @sub_140001450()\n\ndefine void @",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400014A01.ll"
+    },
+    {
+      "filename": "sub_140001760.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 211,
+      "ir_len": 6166,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI nodes not grouped at top of basic block!\n  %rdx.arg = phi i8* [ %rbx.sel, %callSub ], [ %rbx.sel, %no.image ], [ null, %vq.fail ]\nlabel %no.image\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A4 = external global i32\n@qword_1400070A8 = external global i8*\n\n@qword_140008298 = external global i64 (i8*, i8*, i64)",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400017601.ll"
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 312,
+      "ir_len": 11142,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400018D01.ll:130:58: error: invalid use of function-local name\n  call void @sub_1400027B8(i8* %t_ptr, i8* bitcast (i64* %var48 to i8*), i32 2)\n                                               ",
+      "ir_preview": "; ModuleID = 'sub_1400018D0.ll'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070A0 = external global i32\n@off_1400043D0 = external global i8*\n@off_1400043E0 = external global i8*\n@dword_140007",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400018D01.ll"
+    },
+    {
+      "filename": "sub_140001CB0.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 249,
+      "ir_len": 4199,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_140001CB01.ll:15:30: error: floating point constant invalid for type\n  %mask_and = and i32 %eax0, 0x20FFFFFF\n                             ^\n",
+      "ir_preview": "; ModuleID = 'recovered'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@qword_1400070D0 = external dso_local global i32 (i8*)*\n\ndeclare dso_local i64 @sub_1400027A8(i32 noundef, i32 noundef)\ndeclare dso_l",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_140001CB01.ll"
+    },
+    {
+      "filename": "sub_140002010.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 264,
+      "ir_len": 2654,
+      "error_preview": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400020101.ll:77:26: error: '%next_ptr' defined with type 'i8*' but expected 'i8**'\n  %next = load i8*, i8** %next_ptr, align 8\n                         ^\n",
+      "ir_preview": "; ModuleID = 'sub_140002010'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@dword_1400070E8 = external global i32, align 4\n@qword_1400070E0 = external global i8*, align 8\n@unk_140007100 = external global ",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400020101.ll"
+    },
+    {
+      "filename": "sub_140002880.txt",
+      "version": 2,
+      "payload_order": "error_first_then_ir",
+      "error_len": 919,
+      "ir_len": 3005,
+      "error_preview": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHI node entries do not match predecessors!\n  %limit = phi i64 [ 10, %entry ], [ %newlimit, %outer_latch ]\nlabel %outer_latch\nlabel %outer_continue\nInstruction does not dominate all uses!\n  %newlimit = add i64 %lastSwap.final, 0\n  %limit =",
+      "ir_preview": "; ModuleID = 'translated'\ntarget triple = \"x86_64-pc-windows-msvc\"\n\n@xmmword_140004010 = external global <4 x i32>, align 16\n@xmmword_140004020 = external global <4 x i32>, align 16\n@unk_140004000 = e",
+      "prev_ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP/3/sub_1400028801.ll"
+    }
+  ]
+}

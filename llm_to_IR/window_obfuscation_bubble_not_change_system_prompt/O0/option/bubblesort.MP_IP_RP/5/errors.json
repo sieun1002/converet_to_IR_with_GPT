@@ -1,0 +1,61 @@
+{
+  "meta": {},
+  "entries": [
+    {
+      "filename": "sub_140001010.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400010101.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400010101.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400010101.ll:1:1: error: expected top-level entity\nI’m missing a critical block of instructions for sub_140001010 between 0x1400011e3 and 0x1400012c8. That region appears to set up values later used in the argv-processing loop (r15, r12, r13, rsi, rdi, and the value in rax passed to sub_1400027B8). Without it, I cannot produce valid LLVM IR that respects SSA and “no undefined values” (rules 3 and 7), nor can I construct correct PHI nodes (rule 4).\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400010101.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400010101.bc",
+      "start_time": "2026-01-08T05:19:02",
+      "end_time": "2026-01-08T05:19:02",
+      "elapsed_sec": 0.017966
+    },
+    {
+      "filename": "sub_1400014A0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400014A01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400014A01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400014A01.ll:20:14: error: expected instruction opcode\n  %ecx_val = %first_low32\n             ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400014A01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400014A01.bc",
+      "start_time": "2026-01-08T05:22:27",
+      "end_time": "2026-01-08T05:22:27",
+      "elapsed_sec": 0.019806
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 1,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D01.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D01.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D01.ll:265:22: error: '%cb' defined with type 'i32 (i8*, i8*, i32, i8*)**' but expected 'i32 (i8*, i8*, i32, i8*)*'\n  %ret_cb = call i32 %cb(i8* %rcx_val, i8* %rdx_val, i32 %r8d_val, i8* %r9_arg)\n                     ^\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D01.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D01.bc",
+      "start_time": "2026-01-08T05:38:14",
+      "end_time": "2026-01-08T05:38:14",
+      "elapsed_sec": 0.018886
+    },
+    {
+      "filename": "sub_1400018D0.txt",
+      "version": 2,
+      "ll_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D02.ll",
+      "bc_path": "../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D02.bc",
+      "success": false,
+      "stdout": "",
+      "stderr": "llvm-as-14: assembly parsed, but does not verify as correct!\nPHINode should have one entry for each predecessor of its parent basic block!\n  %cur = phi i8* [ %rbx_next0, %v1_setup_loop_entry ], [ %rbx_inc2, %after_case_common2 ], [ %rbx_after32, %case32_do ], [ %rbx_after8, %case8_do ], [ %rbx_after16, %case16_do ], [ %rbx_after64, %case64_do ]\nPHINode should have one entry for each predecessor of its parent basic block!\n  %rbx2 = phi i8* [ %startp0, %check_gt11 ], [ %rbx2_next, %p2_loop ]\n",
+      "returncode": 1,
+      "cmd": "llvm-as-14 ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D02.ll -o ../../llm_to_IR/window_obfuscation_bubble_not_change_system_prompt/O0/option/bubblesort.MP_IP_RP/5/sub_1400018D02.bc",
+      "start_time": "2026-01-08T05:40:10",
+      "end_time": "2026-01-08T05:40:10",
+      "elapsed_sec": 0.020109
+    }
+  ]
+}
